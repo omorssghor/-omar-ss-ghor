@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ওমর এস এস ঘর</title>
+
+  <meta name="description"
+        content="ওমর এস এস ঘর — SS গেট, গ্রিল, দরজা, রেলিং ও গ্লাসের কাজ।">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Noto Sans Bengali",
+        "Noto Sans",
+        Arial,
+        sans-serif;
+      background: #f0f2f5;
+      color: #1c1e21;
+    }
+
+    /* HEADER */
+    header {
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #ddd;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: auto;
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 15px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #111;
+    }
+
+    .logo {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #ddd;
+      border: 1px solid #ddd;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .brand-subtitle {
+      font-size: 12px;
+      color: #65676b;
+      margin-top: 2px;
+    }
+
+    .login-btn {
+      border: 0;
+      background: #1877f2;
+      color: white;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* MAIN */
+    main {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 12px;
+    }
+
+    /* WELCOME */
+    .welcome {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.12);
+    }
+
+    .welcome h1 {
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    .welcome p {
+      color: #65676b;
+      line-height: 1.7;
+    }
+
+    .contact {
+      margin-top: 13px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .contact a {
+      text-decoration: none;
+      background: #e7f3ff;
+      color: #1877f2;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* CREATE POST */
+    .create-post {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.12);
+    }
+
+    .post-input {
+      width: 100%;
+      min-height: 90px;
+      resize: vertical;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .post-input:focus {
+      border-color: #1877f2;
+    }
+
+    .post-tools {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      gap: 10px;
+    }
+
+    .photo-label {
+      cursor: pointer;
+      background: #f0f2f5;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    #photoInput {
+      display: none;
+    }
+
+    .publish-btn {
+      border: 0;
+      background: #1877f2;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* POST */
+    .post {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.12);
+      overflow: hidden;
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px;
+    }
+
+    .avatar {
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      background: #1877f2;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      overflow: hidden;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .post-author {
+      font-weight: 700;
+    }
+
+    .post-time {
+      color: #65676b;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .post-text {
+      padding: 0 15px 15px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    .post-image {
+      width: 100%;
+      max-height: 650px;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+    }
+
+    .post-stats {
+      padding: 10px 15px;
+      display: flex;
+      justify-content: space-between;
+      color: #65676b;
+      font-size: 14px;
+    }
+
+    .post-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    .post-actions button {
+      border: 0;
+      background: white;
+      padding: 12px 5px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      color: #65676b;
+    }
+
+    .post-actions button:hover {
+      background: #f0f2f5;
+    }
+
+    .post-actions button.liked {
+      color: #1877f2;
+    }
+
+    /* COMMENTS */
+    .comments {
+      padding: 12px 15px;
+    }
+
+    .comment {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .comment-avatar {
+      width: 32px;
+      height: 32px;
+      flex: 0 0 32px;
+      border-radius: 50%;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .comment-body {
+      background: #f0f2f5;
+      border-radius: 12px;
+      padding: 8px 11px;
+      flex: 1;
+    }
+
+    .comment-name {
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .comment-text {
+      font-size: 14px;
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+
+    .reply {
+      margin-left: 40px;
+    }
+
+    .comment-form {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .comment-form input {
+      flex: 1;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      padding: 9px 13px;
+      outline: none;
+    }
+
+    .comment-form button {
+      border: 0;
+      background: #1877f2;
+      color: white;
+      border-radius: 20px;
+      padding: 0 15px;
+      cursor: pointer;
+    }
+
+    /* SERVICES */
+    .section-title {
+      font-size: 20px;
+      margin: 22px 0 12px;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .service {
+      background: white;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.10);
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      color: #65676b;
+      padding: 25px 10px;
+      font-size: 13px;
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 15px;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 11px;
+      border: 0;
+      border-radius: 8px;
+      background: #1877f2;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      .brand-name {
+        font-size: 17px;
+      }
+
+      .brand-subtitle {
+        font-size: 10px;
+      }
+
+      .login-btn {
+        padding: 8px 11px;
+      }
+
+      main {
+        margin-top: 10px;
+      }
+
+      .welcome h1 {
+        font-size: 21px;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .post-image {
+        max-height: 500px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a href="#" class="brand">
+      <div class="avatar">
+        ও
+      </div>
+
+      <div>
+        <div class="brand-name">ওমর এস এস ঘর</div>
+        <div class="brand-subtitle">SS ও গ্লাসের সকল ধরনের কাজ</div>
+      </div>
+    </a>
+
+    <button class="login-btn" onclick="openLogin()">
+      লগইন
+    </button>
+
+  </div>
+</header>
+
+
+<main>
+
+  <!-- WELCOME -->
+  <section class="welcome">
+
+    <h1>স্বাগতম 👋</h1>
+
+    <p>
+      <b>ওমর এস এস ঘর</b> —
+      SS গেট, গ্রিল, দরজা, রেলিং ও গ্লাসের কাজের বিশ্বস্ত প্রতিষ্ঠান।
+    </p>
+
+    <p style="margin-top:8px;">
+      📍 কলেজ বাজার পেট্রোল পাম্পের সামনে,
+      বিরামপুর, দিনাজপুর।
+    </p>
+
+    <div class="contact">
+
+      <a href="tel:01341241433">
+        📞 ফোন
+      </a>
+
+      <a href="https://wa.me/8801816845577" target="_blank">
+        💬 WhatsApp
+      </a>
+
+      <a href="mailto:omorssghor@gmail.com">
+        ✉️ ই-মেইল
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- CREATE POST -->
+  <section class="create-post">
+
+    <textarea
+      id="postText"
+      class="post-input"
+      placeholder="আপনার কী মনে হচ্ছে?"
+    ></textarea>
+
+    <div class="post-tools">
+
+      <label class="photo-label">
+        📷 ছবি যোগ করুন
+        <input
+          id="photoInput"
+          type="file"
+          accept="image/*"
+        >
+      </label>
+
+      <button
+        class="publish-btn"
+        onclick="createPost()">
+        পোস্ট করুন
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- SERVICES -->
+  <h2 class="section-title">আমাদের কাজ</h2>
+
+  <section class="services">
+
+    <div class="service">
+      🚪 SS গেট, গ্রিল ও দরজা
+    </div>
+
+    <div class="service">
+      🪜 SS রেলিং ও সিঁড়ির হ্যান্ডরেল
+    </div>
+
+    <div class="service">
+      🏠 বারান্দার রেলিং
+    </div>
+
+    <div class="service">
+      🪟 গ্লাস রেলিং ও পার্টিশন
+    </div>
+
+    <div class="service">
+      🔩 SS পাইপ ও বিভিন্ন ফিটিংস
+    </div>
+
+    <div class="service">
+      ✨ কাস্টম ডিজাইন ও ফিটিংস
+    </div>
+
+  </section>
+
+
+  <!-- POSTS -->
+  <div id="posts">
+
+    <!-- DEMO POST -->
+    <article class="post">
+
+      <div class="post-header">
+
+        <div class="avatar">
+          ও
+        </div>
+
+        <div>
+          <div class="post-author">
+            ওমর এস এস ঘর
+          </div>
+
+          <div class="post-time">
+            এখনই
+          </div>
+        </div>
+
+      </div>
+
+      <div class="post-text">
+        আমাদের তৈরি SS গেট, গ্রিল ও দরজার বিভিন্ন ডিজাইন দেখতে আমাদের সাথে থাকুন। ❤️
+      </div>
+
+      <div class="post-stats">
+        <span class="like-count">👍 0</span>
+        <span>💬 0 মন্তব্য</span>
+      </div>
+
+      <div class="post-actions">
+
+        <button onclick="likePost(this)">
+          👍 লাইক
+        </button>
+
+        <button onclick="focusComment(this)">
+          💬 মন্তব্য
+        </button>
+
+        <button onclick="sharePost()">
+          📤 শেয়ার
+        </button>
+
+      </div>
+
+      <div class="comments">
+
+        <div class="comment-form">
+
+          <input
+            type="text"
+            placeholder="একটি মন্তব্য লিখুন..."
+            onkeydown="commentEnter(event,this)"
+          >
+
+          <button onclick="addComment(this)">
+            পাঠান
+          </button>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</main>
+
+
+<footer>
+
+  <div>
+    © <span id="year"></span> ওমর এস এস ঘর
+  </div>
+
+  <div style="margin-top:5px;">
+    SS ও গ্লাসের সকল ধরনের কাজ
+  </div>
+
+</footer>
+
+
+<!-- LOGIN MODAL -->
+
+<div id="loginModal" class="modal">
+
+  <div class="modal-content">
+
+    <span class="close" onclick="closeLogin()">×</span>
+
+    <h2>লগইন করুন</h2>
+
+    <input
+      type="text"
+      id="loginName"
+      placeholder="আপনার নাম"
+    >
+
+    <input
+      type="password"
+      id="loginPassword"
+      placeholder="পাসওয়ার্ড"
+    >
+
+    <button onclick="login()">
+      লগইন
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  /* YEAR */
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+
+  /* LOGIN */
+
+  function openLogin() {
+    document
+      .getElementById("loginModal")
+      .classList.add("active");
+  }
+
+  function closeLogin() {
+    document
+      .getElementById("loginModal")
+      .classList.remove("active");
+  }
+
+  function login() {
+
+    const name =
+      document.getElementById("loginName").value.trim();
+
+    if (!name) {
+      alert("দয়া করে আপনার নাম লিখুন।");
+      return;
+    }
+
+    localStorage.setItem("userName", name);
+
+    alert(
+      "স্বাগতম " + name + " ❤️"
+    );
+
+    closeLogin();
+
+    updateUser();
+  }
+
+
+  function updateUser() {
+
+    const name =
+      localStorage.getItem("userName");
+
+    if (!name) return;
+
+    document
+      .querySelectorAll(".post-author")
+      .forEach(function(el) {
+
+        if (el.textContent.trim() === "ওমর এস এস ঘর") {
+          return;
+        }
+
+      });
+
+  }
+
+
+  /* LIKE */
+
+  function likePost(button) {
+
+    const post =
+      button.closest(".post");
+
+    const count =
+      post.querySelector(".like-count");
+
+    let number =
+      parseInt(
+        count.textContent.replace(/\D/g, "")
+      ) || 0;
+
+    if (button.classList.contains("liked")) {
+
+      number--;
+
+      button.classList.remove("liked");
+
+    } else {
+
+      number++;
+
+      button.classList.add("liked");
+
+    }
+
+    count.textContent =
+      "👍 " + number;
+  }
+
+
+  /* COMMENT */
+
+  function addComment(button) {
+
+    const form =
+      button.closest(".comment-form");
+
+    const input =
+      form.querySelector("input");
+
+    const text =
+      input.value.trim();
+
+    if (!text) return;
+
+    const comments =
+      form.parentElement;
+
+    const comment =
+      document.createElement("div");
+
+    comment.className =
+      "comment";
+
+    comment.innerHTML = `
+      <div class="comment-avatar">আ</div>
+
+      <div class="comment-body">
+
+        <div class="comment-name">
+          অতিথি
+        </div>
+
+        <div class="comment-text">
+          ${escapeHtml(text)}
+        </div>
+
+      </div>
+    `;
+
+    comments.insertBefore(
+      comment,
+      form
+    );
+
+    input.value = "";
+
+    const post =
+      button.closest(".post");
+
+    const stats =
+      post.querySelector(".post-stats span:last-child");
+
+    const total =
+      post.querySelectorAll(".comment:not(.comment-form)").length;
+
+    stats.textContent =
+      "💬 " + total + " মন্তব্য";
+  }
+
+
+  function commentEnter(event, input) {
+
+    if (event.key === "Enter") {
+
+      event.preventDefault();
+
+      const button =
+        input.parentElement.querySelector("button");
+
+      addComment(button);
+    }
+  }
+
+
+  function focusComment(button) {
+
+    const post =
+      button.closest(".post");
+
+    const input =
+      post.querySelector(".comment-form input");
+
+    input.focus();
+  }
+
+
+  /* SHARE */
+
+  async function sharePost() {
+
+    const data = {
+      title: "ওমর এস এস ঘর",
+      text: "ওমর এস এস ঘর-এর পোস্ট দেখুন।",
+      url: window.location.href
+    };
+
+    if (navigator.share) {
+
+      try {
+        await navigator.share(data);
+      } catch (error) {
+        // User cancelled share
+      }
+
+    } else {
+
+      try {
+
+        await navigator.clipboard.writeText(
+          window.location.href
+        );
+
+        alert(
+          "ওয়েবসাইটের লিংক কপি হয়েছে।"
+        );
+
+      } catch (error) {
+
+        alert(
+          "শেয়ার করতে লিংকটি কপি করুন।"
+        );
+
+      }
+
+    }
+  }
+
+
+  /* CREATE POST */
+
+  function createPost() {
+
+    const text =
+      document.getElementById("postText")
+        .value.trim();
+
+    const file =
+      document.getElementById("photoInput")
+        .files[0];
+
+    if (!text && !file) {
+
+      alert(
+        "পোস্টে লেখা অথবা ছবি দিন।"
+      );
+
+      return;
+    }
+
+    const posts =
+      document.getElementById("posts");
+
+    const article =
+      document.createElement("article");
+
+    article.className =
+      "post";
+
+    const name =
+      localStorage.getItem("userName")
+      || "অতিথি";
+
+    let imageHTML = "";
+
+    if (file) {
+
+      const imageURL =
+        URL.createObjectURL(file);
+
+      imageHTML = `
+        <img
+          class="post-image"
+          src="${imageURL}"
+          alt="পোস্টের ছবি"
+          onclick="openImage('${imageURL}')"
+        >
+      `;
+    }
+
+    article.innerHTML = `
+
+      <div class="post-header">
+
+        <div class="avatar">
+          ${escapeHtml(name.charAt(0))}
+        </div>
+
+        <div>
+
+          <div class="post-author">
+            ${escapeHtml(name)}
+          </div>
+
+          <div class="post-time">
+            এখনই
+          </div>
+
+        </div>
+
+      </div>
+
+      ${
+        text
+        ? `<div class="post-text">
+             ${escapeHtml(text)}
+           </div>`
+        : ""
+      }
+
+      ${imageHTML}
+
+      <div class="post-stats">
+
+        <span class="like-count">
+          👍 0
+        </span>
+
+        <span>
+          💬 0 মন্তব্য
+        </span>
+
+      </div>
+
+      <div class="post-actions">
+
+        <button onclick="likePost(this)">
+          👍 লাইক
+        </button>
+
+        <button onclick="focusComment(this)">
+          💬 মন্তব্য
+        </button>
+
+        <button onclick="sharePost()">
+          📤 শেয়ার
+        </button>
+
+      </div>
+
+      <div class="comments">
+
+        <div class="comment-form">
+
+          <input
+            type="text"
+            placeholder="একটি মন্তব্য লিখুন..."
+            onkeydown="commentEnter(event,this)"
+          >
+
+          <button onclick="addComment(this)">
+            পাঠান
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    posts.prepend(article);
+
+    document.getElementById("postText")
+      .value = "";
+
+    document.getElementById("photoInput")
+      .value = "";
+  }
+
+
+  /* IMAGE */
+
+  function openImage(url) {
+
+    const modal =
+      document.createElement("div");
+
+    modal.className = "modal active";
+
+    modal.innerHTML = `
+
+      <div style="
+        width:100%;
+        max-width:900px;
+        text-align:center;
+      ">
+
+        <span
+          onclick="this.parentElement.parentElement.remove()"
+          style="
+            position:fixed;
+            right:20px;
+            top:10px;
+            color:white;
+            font-size:35px;
+            cursor:pointer;
+          "
+        >
+          ×
+        </span>
+
+        <img
+          src="${url}"
+          style="
+            max-width:100%;
+            max-height:90vh;
+            object-fit:contain;
+            border-radius:8px;
+          "
+        >
+
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+  }
+
+
+  /* SECURITY */
+
+  function escapeHtml(text) {
+
+    const div =
+      document.createElement("div");
+
+    div.textContent =
+      text;
+
+    return div.innerHTML;
+  }
+
+
+  /* CLOSE MODAL */
+
+  document
+    .getElementById("loginModal")
+    .addEventListener("click", function(event) {
+
+      if (event.target === this) {
+        closeLogin();
+      }
+
+    });
+
+</script>
+
+</body>
+</html>
