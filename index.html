@@ -2,565 +2,189 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ওমর এস এস ঘর</title>
-
-<meta name="description"
-content="ওমর এস এস ঘর — SS গেট, গ্রিল, দরজা, রেলিং ও গ্লাসের কাজ।">
+<meta name="description" content="ওমর এস এস ঘর — সামাজিক যোগাযোগ, পোস্ট, ছবি, লাইক ও কমেন্ট।">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
+*{box-sizing:border-box}
 body{
-  font-family:-apple-system,BlinkMacSystemFont,
-  "Noto Sans Bengali","Noto Sans",Arial,sans-serif;
+  margin:0;
   background:#f0f2f5;
-  color:#1c1e21;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  color:#222
 }
-
-button,
-input,
-textarea{
-  font-family:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-/* HEADER */
-
 header{
-  background:#fff;
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:20;
+  background:#fff;
   border-bottom:1px solid #ddd;
-  box-shadow:0 1px 4px rgba(0,0,0,.08);
-}
-
-.header-inner{
-  max-width:900px;
-  margin:auto;
-  min-height:64px;
-  padding:8px 14px;
+  padding:12px 16px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:10px;
-}
-
-.brand{
-  display:flex;
   align-items:center;
-  gap:10px;
-  color:#111;
-  text-decoration:none;
+  box-shadow:0 1px 4px #0001
 }
-
 .logo{
-  width:46px;
-  height:46px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#1877f2;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
   font-size:22px;
-  font-weight:bold;
+  font-weight:bold
 }
-
-.brand-name{
-  font-size:19px;
-  font-weight:700;
-}
-
-.brand-subtitle{
-  color:#65676b;
-  font-size:11px;
-  margin-top:2px;
-}
-
-.header-buttons{
+.user-area{
   display:flex;
-  gap:7px;
-}
-
-.top-btn{
-  border:0;
-  border-radius:8px;
-  padding:9px 13px;
-  font-weight:600;
-}
-
-.login-btn{
-  background:#1877f2;
-  color:white;
-}
-
-.signup-btn{
-  background:#42b72a;
-  color:white;
-}
-
-.logout-btn{
-  background:#e4e6eb;
-  color:#1c1e21;
-}
-
-/* MAIN */
-
-main{
-  max-width:900px;
-  margin:18px auto;
-  padding:0 12px;
-}
-
-/* WELCOME */
-
-.welcome{
-  background:#fff;
-  border-radius:12px;
-  padding:20px;
-  margin-bottom:15px;
-  box-shadow:0 1px 3px rgba(0,0,0,.12);
-}
-
-.welcome h1{
-  font-size:25px;
-  margin-bottom:8px;
-}
-
-.welcome p{
-  color:#65676b;
-  line-height:1.7;
-}
-
-.contact{
-  display:flex;
-  flex-wrap:wrap;
   gap:8px;
-  margin-top:13px;
+  align-items:center
 }
-
-.contact a{
-  text-decoration:none;
-  background:#e7f3ff;
-  color:#1877f2;
-  padding:8px 12px;
-  border-radius:8px;
-  font-size:14px;
-  font-weight:600;
-}
-
-/* USER AREA */
-
-.user-card{
-  display:none;
-  background:#fff;
-  border-radius:12px;
-  padding:15px;
-  margin-bottom:15px;
-  box-shadow:0 1px 3px rgba(0,0,0,.12);
-}
-
-.user-card.show{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.user-info{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.user-avatar{
-  width:45px;
-  height:45px;
-  border-radius:50%;
-  background:#1877f2;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:20px;
-  font-weight:bold;
-}
-
-.user-email{
-  color:#65676b;
-  font-size:12px;
-  margin-top:2px;
-}
-
-/* CREATE POST */
-
-.create-post{
-  background:#fff;
-  border-radius:12px;
-  padding:15px;
-  margin-bottom:15px;
-  box-shadow:0 1px 3px rgba(0,0,0,.12);
-}
-
-.create-post h3{
-  margin-bottom:10px;
-  font-size:17px;
-}
-
-.post-input{
-  width:100%;
-  min-height:90px;
-  resize:vertical;
-  border:1px solid #ddd;
-  border-radius:10px;
-  padding:13px;
-  font-size:16px;
-  outline:none;
-}
-
-.post-input:focus{
-  border-color:#1877f2;
-}
-
-.post-tools{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-top:10px;
-}
-
-.photo-label{
-  background:#f0f2f5;
-  padding:9px 12px;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:14px;
-}
-
-#photoInput{
-  display:none;
-}
-
-.publish-btn{
+button{
   border:0;
-  background:#1877f2;
-  color:#fff;
-  padding:10px 20px;
   border-radius:8px;
-  font-weight:bold;
-}
-
-/* SERVICES */
-
-.section-title{
-  font-size:20px;
-  margin:20px 0 12px;
-}
-
-.services{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin-bottom:20px;
-}
-
-.service{
-  background:#fff;
-  border-radius:10px;
-  padding:16px;
-  box-shadow:0 1px 3px rgba(0,0,0,.10);
-  font-weight:600;
-  line-height:1.5;
-}
-
-/* POSTS */
-
-.post{
-  background:#fff;
-  border-radius:12px;
-  margin-bottom:15px;
-  box-shadow:0 1px 3px rgba(0,0,0,.12);
-  overflow:hidden;
-}
-
-.post-header{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:15px;
-}
-
-.avatar{
-  width:43px;
-  height:43px;
-  border-radius:50%;
-  background:#1877f2;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-}
-
-.post-author{
-  font-weight:700;
-}
-
-.post-time{
-  color:#65676b;
-  font-size:12px;
-  margin-top:2px;
-}
-
-.post-text{
-  padding:0 15px 15px;
-  line-height:1.7;
-  white-space:pre-wrap;
-}
-
-.post-image{
-  width:100%;
-  max-height:650px;
-  object-fit:cover;
-  display:block;
-}
-
-.post-stats{
   padding:10px 15px;
+  cursor:pointer;
+  font-size:15px
+}
+.primary{background:#1877f2;color:white}
+.gray{background:#e4e6eb}
+.danger{background:#e41e3f;color:white}
+
+.container{
+  max-width:700px;
+  margin:20px auto;
+  padding:0 10px
+}
+.card{
+  background:white;
+  border-radius:12px;
+  margin-bottom:16px;
+  box-shadow:0 1px 4px #0001;
+  overflow:hidden
+}
+.card-body{padding:15px}
+.profile{
   display:flex;
-  justify-content:space-between;
-  color:#65676b;
-  font-size:14px;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px
 }
-
-.post-actions{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  border-top:1px solid #eee;
-  border-bottom:1px solid #eee;
-}
-
-.post-actions button{
-  border:0;
-  background:#fff;
-  padding:12px 5px;
-  font-size:14px;
-  font-weight:600;
-  color:#65676b;
-}
-
-.post-actions button:hover{
-  background:#f0f2f5;
-}
-
-.post-actions button.liked{
-  color:#1877f2;
-}
-
-/* COMMENTS */
-
-.comments{
-  padding:12px 15px;
-}
-
-.comment{
-  display:flex;
-  gap:8px;
-  margin-bottom:10px;
-}
-
-.comment-avatar{
-  width:32px;
-  height:32px;
-  flex:0 0 32px;
+.avatar{
+  width:42px;
+  height:42px;
   border-radius:50%;
-  background:#ddd;
+  background:#1877f2;
+  color:white;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:13px;
-  font-weight:bold;
+  font-weight:bold
 }
-
-.comment-body{
-  background:#f0f2f5;
-  border-radius:12px;
-  padding:8px 11px;
-  flex:1;
+.name{font-weight:bold}
+.date{
+  color:#777;
+  font-size:12px;
+  margin-top:3px
 }
-
-.comment-name{
-  font-size:13px;
-  font-weight:bold;
+textarea,input{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccd0d5;
+  border-radius:8px;
+  font-size:15px;
+  margin-bottom:10px
 }
-
-.comment-text{
-  font-size:14px;
-  margin-top:3px;
-  line-height:1.5;
+textarea{min-height:90px;resize:vertical}
+.preview{
+  width:100%;
+  max-height:500px;
+  object-fit:cover;
+  border-radius:8px;
+  margin-top:5px
 }
-
-.comment-form{
+.actions{
   display:flex;
-  gap:8px;
-  margin-top:10px;
+  gap:6px;
+  border-top:1px solid #eee;
+  margin-top:12px;
+  padding-top:8px
 }
-
-.comment-form input{
+.actions button{
   flex:1;
-  border:1px solid #ddd;
-  border-radius:20px;
-  padding:9px 13px;
-  outline:none;
+  background:white
 }
+.actions button:hover{background:#f0f2f5}
+.like-on{color:#1877f2;font-weight:bold}
 
-.comment-form button{
-  border:0;
-  background:#1877f2;
-  color:#fff;
-  border-radius:20px;
-  padding:0 15px;
+.stats{
+  display:flex;
+  justify-content:space-between;
+  color:#777;
+  font-size:13px;
+  padding-bottom:5px
 }
-
-/* MODAL */
-
+.comment{
+  background:#f0f2f5;
+  border-radius:15px;
+  padding:9px 12px;
+  margin-top:8px
+}
+.reply{
+  margin-left:35px
+}
+.comment-name{font-weight:bold;font-size:14px}
+.comment-text{margin-top:3px}
+.comment-box{
+  display:flex;
+  gap:6px;
+  margin-top:10px
+}
+.comment-box input{margin:0}
+.small{
+  font-size:12px;
+  color:#1877f2;
+  cursor:pointer;
+  margin-left:8px
+}
+.empty{
+  text-align:center;
+  color:#777;
+  padding:30px
+}
 .modal{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.65);
-  z-index:500;
+  background:#0008;
+  z-index:50;
   align-items:center;
   justify-content:center;
-  padding:15px;
+  padding:15px
 }
-
-.modal.show{
-  display:flex;
-}
-
 .modal-box{
-  background:#fff;
+  background:white;
   width:100%;
   max-width:420px;
   border-radius:14px;
-  padding:22px;
-  position:relative;
+  padding:20px
 }
-
-.modal-box h2{
-  margin-bottom:15px;
-}
-
+.modal-box h2{margin-top:0}
 .close{
-  position:absolute;
-  right:15px;
-  top:8px;
-  font-size:28px;
-  cursor:pointer;
-  color:#65676b;
+  float:right;
+  font-size:25px;
+  cursor:pointer
 }
-
-.form-input{
-  width:100%;
-  border:1px solid #ddd;
-  border-radius:8px;
-  padding:12px;
-  margin-bottom:10px;
-  font-size:15px;
-  outline:none;
-}
-
-.form-button{
-  width:100%;
-  border:0;
-  border-radius:8px;
-  background:#1877f2;
-  color:#fff;
-  padding:12px;
-  font-size:16px;
-  font-weight:bold;
-}
-
-.switch{
-  text-align:center;
-  margin-top:13px;
-  color:#1877f2;
-  cursor:pointer;
-  font-size:14px;
-}
-
-.message{
-  display:none;
-  background:#fff3cd;
-  color:#664d03;
+.status{
   padding:10px;
   border-radius:8px;
+  background:#f0f2f5;
   margin-bottom:10px;
-  font-size:14px;
-  line-height:1.5;
+  font-size:14px
 }
-
-.message.show{
-  display:block;
-}
-
-/* FOOTER */
-
-footer{
-  text-align:center;
-  color:#65676b;
-  padding:25px 10px;
-  font-size:13px;
-}
-
-/* MOBILE */
+#loading{text-align:center;padding:25px;color:#666}
 
 @media(max-width:600px){
-
-  .brand-name{
-    font-size:16px;
-  }
-
-  .brand-subtitle{
-    display:none;
-  }
-
-  .top-btn{
-    padding:8px 9px;
-    font-size:12px;
-  }
-
-  main{
-    margin-top:10px;
-  }
-
-  .welcome h1{
-    font-size:21px;
-  }
-
-  .services{
-    grid-template-columns:1fr;
-  }
-
-  .post-image{
-    max-height:500px;
-  }
-
+  header{padding:10px}
+  .logo{font-size:18px}
+  .container{margin-top:10px}
 }
 </style>
 </head>
@@ -568,1235 +192,915 @@ footer{
 <body>
 
 <header>
+  <div class="logo">🏪 ওমর এস এস ঘর</div>
 
-  <div class="header-inner">
-
-    <a href="#" class="brand">
-
-      <div class="logo">ও</div>
-
-      <div>
-        <div class="brand-name">
-          ওমর এস এস ঘর
-        </div>
-
-        <div class="brand-subtitle">
-          SS ও গ্লাসের সকল ধরনের কাজ
-        </div>
-      </div>
-
-    </a>
-
-    <div class="header-buttons" id="guestButtons">
-
-      <button class="top-btn login-btn"
-              onclick="openLogin()">
-        লগইন
-      </button>
-
-      <button class="top-btn signup-btn"
-              onclick="openSignup()">
-        রেজিস্ট্রেশন
-      </button>
-
-    </div>
-
-    <div class="header-buttons"
-         id="loggedButtons"
-         style="display:none">
-
-      <button class="top-btn logout-btn"
-              onclick="logout()">
-        লগআউট
-      </button>
-
-    </div>
-
+  <div class="user-area">
+    <span id="headerUser"></span>
+    <button id="loginBtn" class="primary" onclick="openLogin()">লগইন</button>
+    <button id="logoutBtn" class="danger" onclick="logout()" style="display:none">লগআউট</button>
   </div>
-
 </header>
 
+<div class="container">
 
-<main>
+  <!-- পোস্ট তৈরি -->
+  <div class="card">
+    <div class="card-body">
 
-  <!-- WELCOME -->
-
-  <section class="welcome">
-
-    <h1>স্বাগতম 👋</h1>
-
-    <p>
-      <b>ওমর এস এস ঘর</b> —
-      SS গেট, গ্রিল, দরজা, রেলিং ও গ্লাসের
-      কাজের বিশ্বস্ত প্রতিষ্ঠান।
-    </p>
-
-    <p style="margin-top:8px">
-      📍 কলেজ বাজার পেট্রোল পাম্পের সামনে,
-      বিরামপুর, দিনাজপুর।
-    </p>
-
-    <div class="contact">
-
-      <a href="tel:01341241433">
-        📞 ফোন
-      </a>
-
-      <a href="https://wa.me/8801816845577"
-         target="_blank">
-        💬 WhatsApp
-      </a>
-
-      <a href="mailto:omorssghor@gmail.com">
-        ✉️ ই-মেইল
-      </a>
-
-    </div>
-
-  </section>
-
-
-  <!-- USER -->
-
-  <section class="user-card" id="userCard">
-
-    <div class="user-info">
-
-      <div class="user-avatar"
-           id="userAvatar">
-        আ
+      <div id="guestMessage" class="status">
+        পোস্ট করতে আগে লগইন করুন।
       </div>
 
-      <div>
-
-        <div id="userName"
-             style="font-weight:700">
-          ব্যবহারকারী
-        </div>
-
-        <div class="user-email"
-             id="userEmail">
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- CREATE POST -->
-
-  <section class="create-post">
-
-    <h3>
-      📝 নতুন পোস্ট
-    </h3>
-
-    <textarea
-      id="postText"
-      class="post-input"
-      placeholder="আপনার কী মনে হচ্ছে?"
-    ></textarea>
-
-    <div class="post-tools">
-
-      <label class="photo-label">
-
-        📷 ছবি যোগ করুন
+      <div id="postCreator" style="display:none">
+        <textarea id="postText" placeholder="আপনার মনের কথা লিখুন..."></textarea>
 
         <input
-          id="photoInput"
           type="file"
+          id="postImage"
           accept="image/*"
+          onchange="previewImage(event)"
         >
 
-      </label>
+        <img id="imagePreview" class="preview" style="display:none">
 
-      <button
-        class="publish-btn"
-        onclick="createPost()">
-
-        পোস্ট করুন
-
-      </button>
+        <button class="primary" style="width:100%;margin-top:8px" onclick="createPost()">
+          পোস্ট করুন
+        </button>
+      </div>
 
     </div>
+  </div>
 
-  </section>
+  <!-- পোস্ট -->
+  <div id="loading">পোস্ট লোড হচ্ছে...</div>
+  <div id="posts"></div>
+
+</div>
+
+<!-- লগইন / রেজিস্ট্রেশন -->
+<div class="modal" id="authModal">
+  <div class="modal-box">
+
+    <span class="close" onclick="closeLogin()">×</span>
+
+    <h2 id="authTitle">লগইন</h2>
+
+    <input id="authName" placeholder="আপনার নাম" style="display:none">
+
+    <input id="authEmail" type="email" placeholder="ইমেইল">
+
+    <input id="authPassword" type="password" placeholder="পাসওয়ার্ড">
+
+    <button class="primary" style="width:100%" onclick="submitAuth()">
+      <span id="authButtonText">লগইন</span>
+    </button>
+
+    <p style="text-align:center;margin-bottom:0">
+      <span id="switchText">নতুন সদস্য?</span>
+      <span class="small" onclick="switchAuth()">রেজিস্ট্রেশন করুন</span>
+    </p>
+
+    <div id="authMessage" class="status" style="display:none"></div>
+
+  </div>
+</div>
+
+<script>
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+"https://gzujcqjpxypcoiqhpvvu.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
+
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 
-  <!-- SERVICES -->
+/* =========================
+   VARIABLES
+========================= */
 
-  <h2 class="section-title">
-    আমাদের কাজ
-  </h2>
-
-  <section class="services">
-
-    <div class="service">
-      🚪 SS গেট, গ্রিল ও দরজা
-    </div>
-
-    <div class="service">
-      🪜 SS রেলিং ও সিঁড়ির হ্যান্ডরেল
-    </div>
-
-    <div class="service">
-      🏠 বারান্দার রেলিং
-    </div>
-
-    <div class="service">
-      🪟 গ্লাস রেলিং ও পার্টিশন
-    </div>
-
-    <div class="service">
-      🔩 SS পাইপ ও বিভিন্ন ফিটিংস
-    </div>
-
-    <div class="service">
-      ✨ কাস্টম ডিজাইন ও ফিটিংস
-    </div>
-
-  </section>
+let currentUser = null;
+let isRegister = false;
 
 
-  <!-- POSTS -->
+/* =========================
+   AUTH
+========================= */
 
-  <div id="posts">
+async function loadUser(){
 
-    <article class="post">
+  const {data,error} =
+    await supabaseClient.auth.getUser();
 
-      <div class="post-header">
+  if(error){
+    console.log(error);
+  }
 
-        <div class="avatar">
-          ও
+  currentUser = data?.user || null;
+
+  updateUI();
+}
+
+
+function updateUI(){
+
+  const loginBtn =
+    document.getElementById("loginBtn");
+
+  const logoutBtn =
+    document.getElementById("logoutBtn");
+
+  const headerUser =
+    document.getElementById("headerUser");
+
+  const guest =
+    document.getElementById("guestMessage");
+
+  const creator =
+    document.getElementById("postCreator");
+
+  if(currentUser){
+
+    const name =
+      currentUser.user_metadata?.full_name ||
+      currentUser.email?.split("@")[0] ||
+      "ব্যবহারকারী";
+
+    headerUser.textContent = name;
+
+    loginBtn.style.display="none";
+    logoutBtn.style.display="block";
+
+    guest.style.display="none";
+    creator.style.display="block";
+
+  }else{
+
+    headerUser.textContent="";
+
+    loginBtn.style.display="block";
+    logoutBtn.style.display="none";
+
+    guest.style.display="block";
+    creator.style.display="none";
+  }
+}
+
+
+function openLogin(){
+
+  isRegister=false;
+
+  document.getElementById("authModal")
+    .style.display="flex";
+
+  updateAuthMode();
+}
+
+
+function closeLogin(){
+
+  document.getElementById("authModal")
+    .style.display="none";
+}
+
+
+function switchAuth(){
+
+  isRegister=!isRegister;
+
+  updateAuthMode();
+}
+
+
+function updateAuthMode(){
+
+  document.getElementById("authTitle").textContent =
+    isRegister ? "নতুন অ্যাকাউন্ট" : "লগইন";
+
+  document.getElementById("authButtonText").textContent =
+    isRegister ? "রেজিস্ট্রেশন করুন" : "লগইন";
+
+  document.getElementById("authName").style.display =
+    isRegister ? "block" : "none";
+
+  document.getElementById("switchText").textContent =
+    isRegister ? "আগে থেকেই অ্যাকাউন্ট আছে?" : "নতুন সদস্য?";
+
+  document.querySelector(".small").textContent =
+    isRegister ? "লগইন করুন" : "রেজিস্ট্রেশন করুন";
+
+  document.getElementById("authMessage").style.display="none";
+}
+
+
+async function submitAuth(){
+
+  const name =
+    document.getElementById("authName").value.trim();
+
+  const email =
+    document.getElementById("authEmail").value.trim();
+
+  const password =
+    document.getElementById("authPassword").value;
+
+  const message =
+    document.getElementById("authMessage");
+
+  message.style.display="block";
+
+  if(!email || !password){
+
+    message.textContent =
+      "ইমেইল ও পাসওয়ার্ড দিন।";
+
+    return;
+  }
+
+  if(isRegister){
+
+    if(!name){
+
+      message.textContent =
+        "আপনার নাম লিখুন।";
+
+      return;
+    }
+
+    const {data,error} =
+      await supabaseClient.auth.signUp({
+
+        email:email,
+        password:password,
+
+        options:{
+          data:{
+            full_name:name
+          }
+        }
+
+      });
+
+    if(error){
+
+      message.textContent =
+        "রেজিস্ট্রেশন হয়নি: "+error.message;
+
+      return;
+    }
+
+    message.textContent =
+      "রেজিস্ট্রেশন সফল হয়েছে। ইমেইল যাচাই করতে হতে পারে।";
+
+  }else{
+
+    const {data,error} =
+      await supabaseClient.auth.signInWithPassword({
+
+        email:email,
+        password:password
+
+      });
+
+    if(error){
+
+      message.textContent =
+        "লগইন হয়নি: "+error.message;
+
+      return;
+    }
+
+    currentUser=data.user;
+
+    closeLogin();
+
+    updateUI();
+
+    loadPosts();
+  }
+}
+
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  currentUser=null;
+
+  updateUI();
+
+  loadPosts();
+}
+
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+function previewImage(event){
+
+  const file =
+    event.target.files[0];
+
+  const preview =
+    document.getElementById("imagePreview");
+
+  if(!file){
+
+    preview.style.display="none";
+    return;
+  }
+
+  const reader =
+    new FileReader();
+
+  reader.onload=function(e){
+
+    preview.src=e.target.result;
+
+    preview.style.display="block";
+  };
+
+  reader.readAsDataURL(file);
+}
+
+
+/* =========================
+   CREATE POST
+========================= */
+
+async function createPost(){
+
+  if(!currentUser){
+
+    openLogin();
+    return;
+  }
+
+  const text =
+    document.getElementById("postText")
+      .value.trim();
+
+  const file =
+    document.getElementById("postImage")
+      .files[0];
+
+  if(!text && !file){
+
+    alert("পোস্টে লেখা অথবা ছবি দিন।");
+    return;
+  }
+
+  /*
+    আপাতত ছবি সরাসরি posts.image_url-এ
+    রাখা হচ্ছে না।
+    
+    ছবি Storage যুক্ত করার পর
+    এখানে স্বয়ংক্রিয় আপলোড যোগ করা যাবে।
+  */
+
+  const {error} =
+    await supabaseClient
+      .from("posts")
+      .insert({
+
+        user_id:currentUser.id,
+
+        content:text,
+
+        image_url:null
+      });
+
+  if(error){
+
+    alert("পোস্ট করা যায়নি: "+error.message);
+
+    return;
+  }
+
+  document.getElementById("postText").value="";
+  document.getElementById("postImage").value="";
+  document.getElementById("imagePreview").style.display="none";
+
+  loadPosts();
+}
+
+
+/* =========================
+   LOAD POSTS
+========================= */
+
+async function loadPosts(){
+
+  const loading =
+    document.getElementById("loading");
+
+  const postsBox =
+    document.getElementById("posts");
+
+  loading.style.display="block";
+
+  postsBox.innerHTML="";
+
+  const {data:posts,error} =
+    await supabaseClient
+      .from("posts")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+  loading.style.display="none";
+
+  if(error){
+
+    postsBox.innerHTML =
+      `<div class="card">
+        <div class="card-body">
+          পোস্ট লোড করতে সমস্যা হয়েছে।
         </div>
+      </div>`;
+
+    console.log(error);
+
+    return;
+  }
+
+  if(!posts || posts.length===0){
+
+    postsBox.innerHTML =
+      `<div class="card">
+        <div class="empty">
+          এখনো কোনো পোস্ট নেই।
+        </div>
+      </div>`;
+
+    return;
+  }
+
+  for(const post of posts){
+
+    await renderPost(post);
+  }
+}
+
+
+/* =========================
+   RENDER POST
+========================= */
+
+async function renderPost(post){
+
+  const postsBox =
+    document.getElementById("posts");
+
+  const name =
+    "ব্যবহারকারী";
+
+  const card =
+    document.createElement("div");
+
+  card.className="card";
+
+  let imageHTML="";
+
+  if(post.image_url){
+
+    imageHTML =
+      `<img class="preview"
+        src="${escapeHTML(post.image_url)}"
+        alt="ছবি">`;
+  }
+
+  const {count:likeCount} =
+    await supabaseClient
+      .from("post_likes")
+      .select("*",{count:"exact",head:true})
+      .eq("post_id",post.id);
+
+  let liked=false;
+
+  if(currentUser){
+
+    const {data:myLike} =
+      await supabaseClient
+        .from("post_likes")
+        .select("post_id")
+        .eq("post_id",post.id)
+        .eq("user_id",currentUser.id)
+        .maybeSingle();
+
+    liked=!!myLike;
+  }
+
+  const {data:comments} =
+    await supabaseClient
+      .from("post_comments")
+      .select("*")
+      .eq("post_id",post.id)
+      .order("created_at",{ascending:true});
+
+  card.innerHTML=`
+
+    <div class="card-body">
+
+      <div class="profile">
+
+        <div class="avatar">👤</div>
 
         <div>
+          <div class="name">${name}</div>
 
-          <div class="post-author">
-            ওমর এস এস ঘর
+          <div class="date">
+            ${formatDate(post.created_at)}
           </div>
-
-          <div class="post-time">
-            স্বাগতম
-          </div>
-
         </div>
 
       </div>
 
-      <div class="post-text">
-        আমাদের তৈরি SS গেট, গ্রিল ও দরজার
-        বিভিন্ন ডিজাইন দেখতে আমাদের সাথে থাকুন। ❤️
+      ${
+        post.content
+        ? `<div style="white-space:pre-wrap;margin-bottom:10px">
+            ${escapeHTML(post.content)}
+           </div>`
+        : ""
+      }
+
+      ${imageHTML}
+
+      <div class="stats">
+        <span>❤️ ${likeCount || 0} লাইক</span>
+        <span>${comments?.length || 0} কমেন্ট</span>
       </div>
 
-      <div class="post-stats">
+      <div class="actions">
 
-        <span class="like-count">
-          👍 0
-        </span>
-
-        <span>
-          💬 0 মন্তব্য
-        </span>
-
-      </div>
-
-      <div class="post-actions">
-
-        <button onclick="likePost(this)">
-          👍 লাইক
+        <button
+          class="${liked ? "like-on":""}"
+          onclick="toggleLike('${post.id}',this)">
+          ❤️ লাইক
         </button>
 
-        <button onclick="focusComment(this)">
-          💬 মন্তব্য
+        <button onclick="focusComment('${post.id}')">
+          💬 কমেন্ট
         </button>
 
-        <button onclick="sharePost()">
+        <button onclick="sharePost('${post.id}')">
           📤 শেয়ার
         </button>
 
       </div>
 
-      <div class="comments">
+      <div id="comments-${post.id}">
+        ${renderComments(comments || [])}
+      </div>
 
-        <div class="comment-form">
+      ${
+        currentUser
+        ? `
+        <div class="comment-box">
 
           <input
-            type="text"
-            placeholder="একটি মন্তব্য লিখুন..."
-            onkeydown="commentEnter(event,this)"
-          >
+            id="comment-${post.id}"
+            placeholder="কমেন্ট লিখুন...">
 
-          <button onclick="addComment(this)">
+          <button
+            class="primary"
+            onclick="addComment('${post.id}')">
             পাঠান
           </button>
 
         </div>
+        `
+        : `
+        <div style="text-align:center;color:#777;margin-top:12px">
+          কমেন্ট করতে লগইন করুন।
+        </div>
+        `
+      }
+
+    </div>
+  `;
+
+  postsBox.appendChild(card);
+}
+
+
+/* =========================
+   COMMENTS
+========================= */
+
+function renderComments(comments){
+
+  if(!comments.length) return "";
+
+  const top =
+    comments.filter(c=>!c.parent_id);
+
+  return top.map(c=>{
+
+    const replies =
+      comments.filter(r=>r.parent_id===c.id);
+
+    return `
+
+      <div class="comment">
+
+        <div class="comment-name">
+          👤 ব্যবহারকারী
+        </div>
+
+        <div class="comment-text">
+          ${escapeHTML(c.content)}
+        </div>
+
+        ${
+          currentUser
+          ? `<span
+              class="small"
+              onclick="replyTo('${c.post_id}','${c.id}')">
+              রিপ্লাই
+             </span>`
+          : ""
+        }
+
+        ${replies.map(r=>`
+
+          <div class="comment reply">
+
+            <div class="comment-name">
+              👤 ব্যবহারকারী
+            </div>
+
+            <div class="comment-text">
+              ${escapeHTML(r.content)}
+            </div>
+
+          </div>
+
+        `).join("")}
 
       </div>
 
-    </article>
+    `;
 
-  </div>
-
-</main>
-
-
-<footer>
-
-  <div>
-    © <span id="year"></span> ওমর এস এস ঘর
-  </div>
-
-  <div style="margin-top:5px">
-    SS ও গ্লাসের সকল ধরনের কাজ
-  </div>
-
-</footer>
-
-
-<!-- LOGIN -->
-
-<div class="modal" id="loginModal">
-
-  <div class="modal-box">
-
-    <span class="close"
-          onclick="closeModal('loginModal')">
-      ×
-    </span>
-
-    <h2>
-      🔐 লগইন করুন
-    </h2>
-
-    <div class="message"
-         id="loginMessage">
-    </div>
-
-    <input
-      id="loginEmail"
-      class="form-input"
-      type="email"
-      placeholder="ই-মেইল"
-    >
-
-    <input
-      id="loginPassword"
-      class="form-input"
-      type="password"
-      placeholder="পাসওয়ার্ড"
-    >
-
-    <button
-      class="form-button"
-      onclick="login()">
-
-      লগইন
-
-    </button>
-
-    <div class="switch"
-         onclick="switchToSignup()">
-
-      নতুন অ্যাকাউন্ট তৈরি করুন
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- SIGNUP -->
-
-<div class="modal" id="signupModal">
-
-  <div class="modal-box">
-
-    <span class="close"
-          onclick="closeModal('signupModal')">
-      ×
-    </span>
-
-    <h2>
-      👤 নতুন অ্যাকাউন্ট
-    </h2>
-
-    <div class="message"
-         id="signupMessage">
-    </div>
-
-    <input
-      id="signupName"
-      class="form-input"
-      type="text"
-      placeholder="আপনার নাম"
-    >
-
-    <input
-      id="signupEmail"
-      class="form-input"
-      type="email"
-      placeholder="ই-মেইল"
-    >
-
-    <input
-      id="signupPassword"
-      class="form-input"
-      type="password"
-      placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)"
-    >
-
-    <button
-      class="form-button"
-      onclick="signup()">
-
-      অ্যাকাউন্ট তৈরি করুন
-
-    </button>
-
-    <div class="switch"
-         onclick="switchToLogin()">
-
-      আগে থেকেই অ্যাকাউন্ট আছে? লগইন করুন
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<script>
-
-/* =====================================================
-   SUPABASE CONNECTION
-   ===================================================== */
-
-const SUPABASE_URL =
-  "https://gzujcqjpxypcoiqhpvvu.supabase.co";
-
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
-
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
-
-
-/* YEAR */
-
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-
-/* =====================================================
-   MODALS
-   ===================================================== */
-
-function openLogin(){
-
-  document
-    .getElementById("loginModal")
-    .classList.add("show");
-
-}
-
-function openSignup(){
-
-  document
-    .getElementById("signupModal")
-    .classList.add("show");
-
-}
-
-function closeModal(id){
-
-  document
-    .getElementById(id)
-    .classList.remove("show");
-
-}
-
-function switchToSignup(){
-
-  closeModal("loginModal");
-  openSignup();
-
-}
-
-function switchToLogin(){
-
-  closeModal("signupModal");
-  openLogin();
-
+  }).join("");
 }
 
 
-/* =====================================================
-   MESSAGE
-   ===================================================== */
+async function addComment(postId){
 
-function showMessage(id,text){
+  if(!currentUser){
 
-  const box =
-    document.getElementById(id);
-
-  box.textContent = text;
-  box.classList.add("show");
-
-}
-
-function hideMessage(id){
-
-  document
-    .getElementById(id)
-    .classList.remove("show");
-
-}
-
-
-/* =====================================================
-   REGISTRATION
-   ===================================================== */
-
-async function signup(){
-
-  hideMessage("signupMessage");
-
-  const name =
-    document
-      .getElementById("signupName")
-      .value
-      .trim();
-
-  const email =
-    document
-      .getElementById("signupEmail")
-      .value
-      .trim();
-
-  const password =
-    document
-      .getElementById("signupPassword")
-      .value;
-
-  if(!name){
-
-    showMessage(
-      "signupMessage",
-      "দয়া করে আপনার নাম লিখুন।"
-    );
-
+    openLogin();
     return;
   }
-
-  if(!email){
-
-    showMessage(
-      "signupMessage",
-      "দয়া করে ই-মেইল লিখুন।"
-    );
-
-    return;
-  }
-
-  if(password.length < 6){
-
-    showMessage(
-      "signupMessage",
-      "পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।"
-    );
-
-    return;
-  }
-
-
-  const {data,error} =
-    await supabaseClient.auth.signUp({
-
-      email:email,
-
-      password:password,
-
-      options:{
-        data:{
-          full_name:name
-        }
-      }
-
-    });
-
-
-  if(error){
-
-    showMessage(
-      "signupMessage",
-      "অ্যাকাউন্ট তৈরি করা যায়নি: "
-      + error.message
-    );
-
-    return;
-  }
-
-
-  /*
-    Supabase-এর Email Confirmation চালু থাকলে
-    এখানে confirmation email পাঠানো হবে।
-  */
-
-  if(data.session){
-
-    showMessage(
-      "signupMessage",
-      "অ্যাকাউন্ট তৈরি হয়েছে। আপনাকে লগইন করা হয়েছে।"
-    );
-
-    setTimeout(function(){
-
-      closeModal("signupModal");
-
-    },1200);
-
-  }else{
-
-    showMessage(
-      "signupMessage",
-      "অ্যাকাউন্ট তৈরি হয়েছে। আপনার ই-মেইলে পাঠানো লিংক থেকে অ্যাকাউন্ট নিশ্চিত করুন।"
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   LOGIN
-   ===================================================== */
-
-async function login(){
-
-  hideMessage("loginMessage");
-
-  const email =
-    document
-      .getElementById("loginEmail")
-      .value
-      .trim();
-
-  const password =
-    document
-      .getElementById("loginPassword")
-      .value;
-
-
-  if(!email || !password){
-
-    showMessage(
-      "loginMessage",
-      "ই-মেইল ও পাসওয়ার্ড দুটোই লিখুন।"
-    );
-
-    return;
-  }
-
-
-  const {data,error} =
-    await supabaseClient.auth.signInWithPassword({
-
-      email:email,
-
-      password:password
-
-    });
-
-
-  if(error){
-
-    showMessage(
-      "loginMessage",
-      "লগইন হয়নি: " + error.message
-    );
-
-    return;
-  }
-
-
-  closeModal("loginModal");
-
-  updateUserInterface(data.user);
-
-}
-
-
-/* =====================================================
-   LOGOUT
-   ===================================================== */
-
-async function logout(){
-
-  const {error} =
-    await supabaseClient.auth.signOut();
-
-  if(error){
-
-    alert(
-      "লগআউট করা যায়নি।"
-    );
-
-    return;
-  }
-
-  updateUserInterface(null);
-
-}
-
-
-/* =====================================================
-   USER INTERFACE
-   ===================================================== */
-
-function updateUserInterface(user){
-
-  const guestButtons =
-    document.getElementById("guestButtons");
-
-  const loggedButtons =
-    document.getElementById("loggedButtons");
-
-  const userCard =
-    document.getElementById("userCard");
-
-
-  if(user){
-
-    guestButtons.style.display =
-      "none";
-
-    loggedButtons.style.display =
-      "flex";
-
-    userCard.classList.add("show");
-
-
-    const metadata =
-      user.user_metadata || {};
-
-    const name =
-      metadata.full_name ||
-      user.email?.split("@")[0] ||
-      "ব্যবহারকারী";
-
-
-    document.getElementById("userName")
-      .textContent = name;
-
-    document.getElementById("userEmail")
-      .textContent =
-        user.email || "";
-
-
-    document.getElementById("userAvatar")
-      .textContent =
-        name.charAt(0);
-
-
-  }else{
-
-    guestButtons.style.display =
-      "flex";
-
-    loggedButtons.style.display =
-      "none";
-
-    userCard.classList.remove("show");
-
-  }
-
-}
-
-
-/* =====================================================
-   CHECK CURRENT USER
-   ===================================================== */
-
-async function checkUser(){
-
-  const {data} =
-    await supabaseClient.auth.getUser();
-
-  updateUserInterface(
-    data.user || null
-  );
-
-}
-
-
-checkUser();
-
-
-/* =====================================================
-   AUTH STATE
-   ===================================================== */
-
-supabaseClient.auth.onAuthStateChange(
-  function(event,session){
-
-    updateUserInterface(
-      session?.user || null
-    );
-
-  }
-);
-
-
-/* =====================================================
-   LIKE
-   ===================================================== */
-
-function likePost(button){
-
-  const post =
-    button.closest(".post");
-
-  const count =
-    post.querySelector(".like-count");
-
-  let number =
-    parseInt(
-      count.textContent.replace(/\D/g,"")
-    ) || 0;
-
-
-  if(button.classList.contains("liked")){
-
-    number--;
-
-    button.classList.remove("liked");
-
-  }else{
-
-    number++;
-
-    button.classList.add("liked");
-
-  }
-
-
-  count.textContent =
-    "👍 " + number;
-
-}
-
-
-/* =====================================================
-   COMMENT
-   ===================================================== */
-
-function addComment(button){
-
-  const form =
-    button.closest(".comment-form");
 
   const input =
-    form.querySelector("input");
+    document.getElementById("comment-"+postId);
 
   const text =
     input.value.trim();
 
-  if(!text){
+  if(!text) return;
+
+  const {error} =
+    await supabaseClient
+      .from("post_comments")
+      .insert({
+
+        post_id:postId,
+
+        user_id:currentUser.id,
+
+        content:text,
+
+        parent_id:null
+      });
+
+  if(error){
+
+    alert("কমেন্ট করা যায়নি: "+error.message);
 
     return;
   }
 
+  input.value="";
 
-  const comments =
-    form.parentElement;
-
-  const comment =
-    document.createElement("div");
-
-  comment.className =
-    "comment";
-
-
-  const name =
-    getCurrentUserName();
-
-
-  comment.innerHTML = `
-
-    <div class="comment-avatar">
-      ${escapeHtml(name.charAt(0))}
-    </div>
-
-    <div class="comment-body">
-
-      <div class="comment-name">
-        ${escapeHtml(name)}
-      </div>
-
-      <div class="comment-text">
-        ${escapeHtml(text)}
-      </div>
-
-    </div>
-
-  `;
-
-
-  comments.insertBefore(
-    comment,
-    form
-  );
-
-
-  input.value = "";
-
-
-  const post =
-    button.closest(".post");
-
-  const stats =
-    post.querySelector(
-      ".post-stats span:last-child"
-    );
-
-  const total =
-    post.querySelectorAll(
-      ".comment:not(.comment-form)"
-    ).length;
-
-
-  stats.textContent =
-    "💬 " + total + " মন্তব্য";
-
+  loadPosts();
 }
 
 
-function commentEnter(event,input){
+async function replyTo(postId,parentId){
 
-  if(event.key === "Enter"){
+  if(!currentUser){
 
-    event.preventDefault();
-
-    const button =
-      input.parentElement
-      .querySelector("button");
-
-    addComment(button);
-
+    openLogin();
+    return;
   }
 
+  const text =
+    prompt("রিপ্লাই লিখুন:");
+
+  if(!text || !text.trim()) return;
+
+  const {error} =
+    await supabaseClient
+      .from("post_comments")
+      .insert({
+
+        post_id:postId,
+
+        user_id:currentUser.id,
+
+        content:text.trim(),
+
+        parent_id:parentId
+      });
+
+  if(error){
+
+    alert("রিপ্লাই করা যায়নি: "+error.message);
+
+    return;
+  }
+
+  loadPosts();
 }
 
 
-function focusComment(button){
+/* =========================
+   LIKE
+========================= */
 
-  const post =
-    button.closest(".post");
+async function toggleLike(postId,button){
 
-  const input =
-    post.querySelector(
-      ".comment-form input"
-    );
+  if(!currentUser){
 
-  input.focus();
+    openLogin();
+    return;
+  }
 
+  const {data:existing} =
+    await supabaseClient
+      .from("post_likes")
+      .select("*")
+      .eq("post_id",postId)
+      .eq("user_id",currentUser.id)
+      .maybeSingle();
+
+  if(existing){
+
+    await supabaseClient
+      .from("post_likes")
+      .delete()
+      .eq("post_id",postId)
+      .eq("user_id",currentUser.id);
+
+  }else{
+
+    await supabaseClient
+      .from("post_likes")
+      .insert({
+
+        post_id:postId,
+
+        user_id:currentUser.id
+      });
+  }
+
+  loadPosts();
 }
 
 
-/* =====================================================
-   USER NAME
-   ===================================================== */
-
-function getCurrentUserName(){
-
-  const user =
-    supabaseClient.auth
-      .getUser;
-
-  const local =
-    document
-      .getElementById("userName")
-      .textContent;
-
-  return local || "অতিথি";
-
-}
-
-
-/* =====================================================
+/* =========================
    SHARE
-   ===================================================== */
+========================= */
 
-async function sharePost(){
+async function sharePost(postId){
 
-  const data = {
-
-    title:"ওমর এস এস ঘর",
-
-    text:"ওমর এস এস ঘর-এর ওয়েবসাইট দেখুন।",
-
-    url:window.location.href
-
-  };
-
+  const url =
+    window.location.origin +
+    window.location.pathname +
+    "?post=" +
+    postId;
 
   if(navigator.share){
 
     try{
 
-      await navigator.share(data);
+      await navigator.share({
 
-    }catch(error){
+        title:"ওমর এস এস ঘর",
 
-      // ব্যবহারকারী শেয়ার বাতিল করলে কিছু করার নেই
+        text:"এই পোস্টটি দেখুন",
 
-    }
+        url:url
+      });
+
+    }catch(e){}
 
   }else{
 
     try{
 
-      await navigator.clipboard.writeText(
-        window.location.href
-      );
+      await navigator.clipboard.writeText(url);
 
-      alert(
-        "ওয়েবসাইটের লিংক কপি হয়েছে।"
-      );
+      alert("পোস্টের লিংক কপি হয়েছে।");
 
-    }catch(error){
+    }catch(e){
 
-      alert(
-        "লিংক কপি করা যায়নি।"
-      );
-
+      prompt("এই লিংকটি কপি করুন:",url);
     }
-
   }
-
 }
 
 
-/* =====================================================
-   CREATE POST
-   ===================================================== */
+/* =========================
+   HELPERS
+========================= */
 
-function createPost(){
+function focusComment(postId){
 
-  const text =
-    document
-      .getElementById("postText")
-      .value
-      .trim();
+  const input =
+    document.getElementById("comment-"+postId);
 
-  const file =
-    document
-      .getElementById("photoInput")
-      .files[0];
+  if(input){
 
+    input.focus();
 
-  if(!text && !file){
+    input.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
 
-    alert(
-      "পোস্টে লেখা অথবা ছবি দিন।"
-    );
+  }else{
 
-    return;
+    openLogin();
   }
-
-
-  const user =
-    getCurrentUserName();
-
-
-  let imageHTML = "";
-
-
-  if(file){
-
-    const imageURL =
-      URL.createObjectURL(file);
-
-    imageHTML = `
-
-      <img
-        class="post-image"
-        src="${imageURL}"
-        alt="পোস্টের ছবি"
-      >
-
-    `;
-
-  }
-
-
-  const article =
-    document.createElement("article");
-
-  article.className =
-    "post";
-
-
-  article.innerHTML = `
-
-    <div class="post-header">
-
-      <div class="avatar">
-        ${escapeHtml(user.charAt(0))}
-      </div>
-
-      <div>
-
-        <div class="post-author">
-          ${escapeHtml(user)}
-        </div>
-
-        <div class="post-time">
-          এখনই
-        </div>
-
-      </div>
-
-    </div>
-
-    ${
-      text
-      ? `
-        <div class="post-text">
-          ${escapeHtml(text)}
-        </div>
-      `
-      : ""
-    }
-
-    ${imageHTML}
-
-    <div class="post-stats">
-
-      <span class="like-count">
-        👍 0
-      </span>
-
-      <span>
-        💬 0 মন্তব্য
-      </span>
-
-    </div>
-
-    <div class="post-actions">
-
-      <button onclick="likePost(this)">
-        👍 লাইক
-      </button>
-
-      <button onclick="focusComment(this)">
-        💬 মন্তব্য
-      </button>
-
-      <button onclick="sharePost()">
-        📤 শেয়ার
-      </button>
-
-    </div>
-
-    <div class="comments">
-
-      <div class="comment-form">
-
-        <input
-          type="text"
-          placeholder="একটি মন্তব্য লিখুন..."
-          onkeydown="commentEnter(event,this)"
-        >
-
-        <button onclick="addComment(this)">
-          পাঠান
-        </button>
-
-      </div>
-
-    </div>
-
-  `;
-
-
-  document
-    .getElementById("posts")
-    .prepend(article);
-
-
-  document
-    .getElementById("postText")
-    .value = "";
-
-  document
-    .getElementById("photoInput")
-    .value = "";
-
 }
 
 
-/* =====================================================
-   SECURITY
-   ===================================================== */
+function formatDate(date){
 
-function escapeHtml(text){
-
-  const div =
-    document.createElement("div");
-
-  div.textContent =
-    text;
-
-  return div.innerHTML;
-
+  return new Date(date)
+    .toLocaleString("bn-BD",{
+      dateStyle:"medium",
+      timeStyle:"short"
+    });
 }
 
 
-/* =====================================================
-   CLOSE MODAL BY OUTSIDE CLICK
-   ===================================================== */
+function escapeHTML(value){
 
-document
-  .getElementById("loginModal")
-  .addEventListener(
-    "click",
-    function(event){
+  if(value===null || value===undefined)
+    return "";
 
-      if(event.target === this){
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
 
-        closeModal("loginModal");
 
+/* =========================
+   START
+========================= */
+
+supabaseClient.auth
+  .onAuthStateChange(
+    async (event,session)=>{
+
+      currentUser =
+        session?.user || null;
+
+      updateUI();
+
+      if(event==="SIGNED_IN" ||
+         event==="SIGNED_OUT"){
+
+        loadPosts();
       }
-
     }
   );
 
 
-document
-  .getElementById("signupModal")
-  .addEventListener(
-    "click",
-    function(event){
+(async function(){
 
-      if(event.target === this){
+  await loadUser();
 
-        closeModal("signupModal");
+  await loadPosts();
 
-      }
-
-    }
-  );
-
+})();
 </script>
 
 </body>
