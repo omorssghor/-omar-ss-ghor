@@ -2,189 +2,153 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ওমর এস এস ঘর</title>
-<meta name="description" content="ওমর এস এস ঘর — সামাজিক যোগাযোগ, পোস্ট, ছবি, লাইক ও কমেন্ট।">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box}
 body{
-  margin:0;
-  background:#f0f2f5;
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
-  color:#222
+ margin:0;
+ background:#f0f2f5;
+ font-family:Arial,"Noto Sans Bengali",sans-serif;
+ color:#222
 }
 header{
-  position:sticky;
-  top:0;
-  z-index:20;
-  background:#fff;
-  border-bottom:1px solid #ddd;
-  padding:12px 16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 1px 4px #0001
+ position:sticky;
+ top:0;
+ z-index:10;
+ background:#fff;
+ padding:12px 15px;
+ border-bottom:1px solid #ddd;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ box-shadow:0 1px 5px #0001
 }
-.logo{
-  font-size:22px;
-  font-weight:bold
-}
-.user-area{
-  display:flex;
-  gap:8px;
-  align-items:center
-}
-button{
-  border:0;
-  border-radius:8px;
-  padding:10px 15px;
-  cursor:pointer;
-  font-size:15px
-}
-.primary{background:#1877f2;color:white}
-.gray{background:#e4e6eb}
-.danger{background:#e41e3f;color:white}
-
-.container{
-  max-width:700px;
-  margin:20px auto;
-  padding:0 10px
-}
+.logo{font-size:20px;font-weight:bold}
+.container{max-width:700px;margin:15px auto;padding:0 10px}
 .card{
-  background:white;
-  border-radius:12px;
-  margin-bottom:16px;
-  box-shadow:0 1px 4px #0001;
-  overflow:hidden
+ background:#fff;
+ border-radius:12px;
+ margin-bottom:15px;
+ padding:15px;
+ box-shadow:0 1px 5px #0001
 }
-.card-body{padding:15px}
-.profile{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:12px
-}
+.profile{display:flex;gap:10px;align-items:center}
 .avatar{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  background:#1877f2;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold
+ width:42px;height:42px;border-radius:50%;
+ background:#1877f2;color:white;
+ display:flex;align-items:center;justify-content:center;
+ font-weight:bold
 }
 .name{font-weight:bold}
-.date{
-  color:#777;
-  font-size:12px;
-  margin-top:3px
-}
+.date{font-size:12px;color:#777;margin-top:3px}
 textarea,input{
-  width:100%;
-  padding:12px;
-  border:1px solid #ccd0d5;
-  border-radius:8px;
-  font-size:15px;
-  margin-bottom:10px
+ width:100%;
+ border:1px solid #ccd0d5;
+ border-radius:9px;
+ padding:12px;
+ font-size:15px;
+ margin-bottom:10px
 }
-textarea{min-height:90px;resize:vertical}
-.preview{
-  width:100%;
-  max-height:500px;
-  object-fit:cover;
-  border-radius:8px;
-  margin-top:5px
+textarea{min-height:85px;resize:vertical}
+button{
+ border:0;
+ border-radius:8px;
+ padding:10px 15px;
+ font-size:15px;
+ cursor:pointer
+}
+.primary{background:#1877f2;color:#fff}
+.danger{background:#e41e3f;color:#fff}
+.gray{background:#e4e6eb}
+.post-image{
+ width:100%;
+ max-height:600px;
+ object-fit:cover;
+ border-radius:9px;
+ margin-top:8px
 }
 .actions{
-  display:flex;
-  gap:6px;
-  border-top:1px solid #eee;
-  margin-top:12px;
-  padding-top:8px
+ display:flex;
+ gap:5px;
+ border-top:1px solid #eee;
+ margin-top:12px;
+ padding-top:8px
 }
-.actions button{
-  flex:1;
-  background:white
-}
+.actions button{flex:1;background:#fff}
 .actions button:hover{background:#f0f2f5}
-.like-on{color:#1877f2;font-weight:bold}
-
+.liked{color:#1877f2;font-weight:bold}
 .stats{
-  display:flex;
-  justify-content:space-between;
-  color:#777;
-  font-size:13px;
-  padding-bottom:5px
+ display:flex;
+ justify-content:space-between;
+ color:#777;
+ font-size:13px;
+ margin-top:10px
 }
 .comment{
-  background:#f0f2f5;
-  border-radius:15px;
-  padding:9px 12px;
-  margin-top:8px
+ background:#f0f2f5;
+ border-radius:15px;
+ padding:9px 12px;
+ margin-top:8px
 }
-.reply{
-  margin-left:35px
-}
+.reply{margin-left:30px}
 .comment-name{font-weight:bold;font-size:14px}
-.comment-text{margin-top:3px}
-.comment-box{
-  display:flex;
-  gap:6px;
-  margin-top:10px
+.comment-text{margin-top:3px;word-break:break-word}
+.comment-form{
+ display:flex;
+ gap:6px;
+ margin-top:10px
 }
-.comment-box input{margin:0}
+.comment-form input{margin:0}
 .small{
-  font-size:12px;
-  color:#1877f2;
-  cursor:pointer;
-  margin-left:8px
-}
-.empty{
-  text-align:center;
-  color:#777;
-  padding:30px
+ color:#1877f2;
+ font-size:12px;
+ cursor:pointer;
+ margin-left:8px
 }
 .modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#0008;
-  z-index:50;
-  align-items:center;
-  justify-content:center;
-  padding:15px
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#0008;
+ z-index:50;
+ align-items:center;
+ justify-content:center;
+ padding:15px
 }
 .modal-box{
-  background:white;
-  width:100%;
-  max-width:420px;
-  border-radius:14px;
-  padding:20px
+ background:white;
+ width:100%;
+ max-width:420px;
+ border-radius:14px;
+ padding:20px
 }
-.modal-box h2{margin-top:0}
 .close{
-  float:right;
-  font-size:25px;
-  cursor:pointer
+ float:right;
+ font-size:25px;
+ cursor:pointer
 }
 .status{
-  padding:10px;
-  border-radius:8px;
-  background:#f0f2f5;
-  margin-bottom:10px;
-  font-size:14px
+ background:#f0f2f5;
+ padding:10px;
+ border-radius:8px;
+ margin-bottom:10px;
+ font-size:14px
 }
-#loading{text-align:center;padding:25px;color:#666}
-
+.loading{text-align:center;padding:25px;color:#666}
+.preview{
+ width:100%;
+ max-height:350px;
+ object-fit:cover;
+ border-radius:9px;
+ margin-bottom:10px
+}
 @media(max-width:600px){
-  header{padding:10px}
-  .logo{font-size:18px}
-  .container{margin-top:10px}
+ .logo{font-size:17px}
+ header{padding:10px}
 }
 </style>
 </head>
@@ -192,83 +156,116 @@ textarea{min-height:90px;resize:vertical}
 <body>
 
 <header>
-  <div class="logo">🏪 ওমর এস এস ঘর</div>
+ <div class="logo">🏪 ওমর এস এস ঘর</div>
 
-  <div class="user-area">
-    <span id="headerUser"></span>
-    <button id="loginBtn" class="primary" onclick="openLogin()">লগইন</button>
-    <button id="logoutBtn" class="danger" onclick="logout()" style="display:none">লগআউট</button>
-  </div>
+ <div>
+   <span id="userName" style="margin-right:6px"></span>
+
+   <button id="loginBtn" class="primary" onclick="openAuth()">
+     লগইন
+   </button>
+
+   <button id="logoutBtn" class="danger"
+           onclick="logout()" style="display:none">
+     লগআউট
+   </button>
+ </div>
 </header>
 
 <div class="container">
 
-  <!-- পোস্ট তৈরি -->
-  <div class="card">
-    <div class="card-body">
+ <!-- পোস্ট তৈরি -->
+ <div class="card">
 
-      <div id="guestMessage" class="status">
-        পোস্ট করতে আগে লগইন করুন।
-      </div>
+   <div id="loginNotice" class="status">
+     পোস্ট করতে লগইন করুন।
+   </div>
 
-      <div id="postCreator" style="display:none">
-        <textarea id="postText" placeholder="আপনার মনের কথা লিখুন..."></textarea>
+   <div id="postCreator" style="display:none">
 
-        <input
-          type="file"
-          id="postImage"
-          accept="image/*"
-          onchange="previewImage(event)"
-        >
+     <textarea id="postText"
+       placeholder="আপনার মনের কথা লিখুন..."></textarea>
 
-        <img id="imagePreview" class="preview" style="display:none">
+     <input
+       type="file"
+       id="postImage"
+       accept="image/*"
+       onchange="showPreview(event)">
 
-        <button class="primary" style="width:100%;margin-top:8px" onclick="createPost()">
-          পোস্ট করুন
-        </button>
-      </div>
+     <img id="preview"
+          class="preview"
+          style="display:none">
 
-    </div>
-  </div>
+     <button class="primary"
+             style="width:100%"
+             onclick="createPost()">
+       📤 পোস্ট করুন
+     </button>
 
-  <!-- পোস্ট -->
-  <div id="loading">পোস্ট লোড হচ্ছে...</div>
-  <div id="posts"></div>
+   </div>
+
+ </div>
+
+ <div id="loading" class="loading">
+   পোস্ট লোড হচ্ছে...
+ </div>
+
+ <div id="posts"></div>
 
 </div>
+
 
 <!-- লগইন / রেজিস্ট্রেশন -->
+
 <div class="modal" id="authModal">
-  <div class="modal-box">
 
-    <span class="close" onclick="closeLogin()">×</span>
+ <div class="modal-box">
 
-    <h2 id="authTitle">লগইন</h2>
+   <span class="close" onclick="closeAuth()">×</span>
 
-    <input id="authName" placeholder="আপনার নাম" style="display:none">
+   <h2 id="authTitle">লগইন</h2>
 
-    <input id="authEmail" type="email" placeholder="ইমেইল">
+   <input id="authName"
+          placeholder="আপনার নাম"
+          style="display:none">
 
-    <input id="authPassword" type="password" placeholder="পাসওয়ার্ড">
+   <input id="authEmail"
+          type="email"
+          placeholder="ইমেইল">
 
-    <button class="primary" style="width:100%" onclick="submitAuth()">
-      <span id="authButtonText">লগইন</span>
-    </button>
+   <input id="authPassword"
+          type="password"
+          placeholder="পাসওয়ার্ড">
 
-    <p style="text-align:center;margin-bottom:0">
-      <span id="switchText">নতুন সদস্য?</span>
-      <span class="small" onclick="switchAuth()">রেজিস্ট্রেশন করুন</span>
-    </p>
+   <button class="primary"
+           style="width:100%"
+           onclick="submitAuth()">
+     <span id="authButton">লগইন</span>
+   </button>
 
-    <div id="authMessage" class="status" style="display:none"></div>
+   <p style="text-align:center">
+     <span id="switchLabel">নতুন সদস্য?</span>
+     <span class="small"
+           onclick="switchAuth()"
+           id="switchButton">
+       রেজিস্ট্রেশন করুন
+     </span>
+   </p>
 
-  </div>
+   <div id="authMessage"
+        class="status"
+        style="display:none">
+   </div>
+
+ </div>
 </div>
 
+
 <script>
-/* =========================
+
+/* ================================
    SUPABASE
-========================= */
+================================ */
 
 const SUPABASE_URL =
 "https://gzujcqjpxypcoiqhpvvu.supabase.co";
@@ -278,829 +275,1057 @@ const SUPABASE_KEY =
 
 const supabaseClient =
 window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
+ SUPABASE_URL,
+ SUPABASE_KEY
 );
 
 
-/* =========================
-   VARIABLES
-========================= */
+/*
+  গুরুত্বপূর্ণ:
+  এই নামেই Supabase Storage Bucket
+  তৈরি থাকতে হবে।
+*/
+const IMAGE_BUCKET = "post-images";
+
 
 let currentUser = null;
-let isRegister = false;
+let registerMode = false;
 
 
-/* =========================
+/* ================================
    AUTH
-========================= */
+================================ */
 
 async function loadUser(){
 
-  const {data,error} =
-    await supabaseClient.auth.getUser();
+ const {data} =
+   await supabaseClient.auth.getUser();
 
-  if(error){
-    console.log(error);
-  }
+ currentUser = data?.user || null;
 
-  currentUser = data?.user || null;
-
-  updateUI();
+ updateUI();
 }
 
 
 function updateUI(){
 
-  const loginBtn =
-    document.getElementById("loginBtn");
+ const userName =
+   document.getElementById("userName");
 
-  const logoutBtn =
-    document.getElementById("logoutBtn");
+ const loginBtn =
+   document.getElementById("loginBtn");
 
-  const headerUser =
-    document.getElementById("headerUser");
+ const logoutBtn =
+   document.getElementById("logoutBtn");
 
-  const guest =
-    document.getElementById("guestMessage");
+ const notice =
+   document.getElementById("loginNotice");
 
-  const creator =
-    document.getElementById("postCreator");
+ const creator =
+   document.getElementById("postCreator");
 
-  if(currentUser){
 
-    const name =
-      currentUser.user_metadata?.full_name ||
-      currentUser.email?.split("@")[0] ||
-      "ব্যবহারকারী";
+ if(currentUser){
 
-    headerUser.textContent = name;
+   const name =
+     currentUser.user_metadata?.full_name ||
+     currentUser.email?.split("@")[0] ||
+     "ব্যবহারকারী";
 
-    loginBtn.style.display="none";
-    logoutBtn.style.display="block";
+   userName.textContent = name;
 
-    guest.style.display="none";
-    creator.style.display="block";
+   loginBtn.style.display="none";
+   logoutBtn.style.display="inline-block";
 
-  }else{
+   notice.style.display="none";
+   creator.style.display="block";
 
-    headerUser.textContent="";
+ }else{
 
-    loginBtn.style.display="block";
-    logoutBtn.style.display="none";
+   userName.textContent="";
 
-    guest.style.display="block";
-    creator.style.display="none";
-  }
+   loginBtn.style.display="inline-block";
+   logoutBtn.style.display="none";
+
+   notice.style.display="block";
+   creator.style.display="none";
+ }
 }
 
 
-function openLogin(){
+function openAuth(){
 
-  isRegister=false;
+ registerMode=false;
 
-  document.getElementById("authModal")
-    .style.display="flex";
+ document.getElementById("authModal")
+   .style.display="flex";
 
-  updateAuthMode();
+ updateAuth();
 }
 
 
-function closeLogin(){
+function closeAuth(){
 
-  document.getElementById("authModal")
-    .style.display="none";
+ document.getElementById("authModal")
+   .style.display="none";
 }
 
 
 function switchAuth(){
 
-  isRegister=!isRegister;
+ registerMode=!registerMode;
 
-  updateAuthMode();
+ updateAuth();
 }
 
 
-function updateAuthMode(){
+function updateAuth(){
 
-  document.getElementById("authTitle").textContent =
-    isRegister ? "নতুন অ্যাকাউন্ট" : "লগইন";
+ document.getElementById("authTitle").textContent =
+   registerMode
+   ? "নতুন অ্যাকাউন্ট"
+   : "লগইন";
 
-  document.getElementById("authButtonText").textContent =
-    isRegister ? "রেজিস্ট্রেশন করুন" : "লগইন";
+ document.getElementById("authButton").textContent =
+   registerMode
+   ? "রেজিস্ট্রেশন করুন"
+   : "লগইন";
 
-  document.getElementById("authName").style.display =
-    isRegister ? "block" : "none";
+ document.getElementById("authName").style.display =
+   registerMode
+   ? "block"
+   : "none";
 
-  document.getElementById("switchText").textContent =
-    isRegister ? "আগে থেকেই অ্যাকাউন্ট আছে?" : "নতুন সদস্য?";
+ document.getElementById("switchLabel").textContent =
+   registerMode
+   ? "আগে থেকেই অ্যাকাউন্ট আছে?"
+   : "নতুন সদস্য?";
 
-  document.querySelector(".small").textContent =
-    isRegister ? "লগইন করুন" : "রেজিস্ট্রেশন করুন";
-
-  document.getElementById("authMessage").style.display="none";
+ document.getElementById("switchButton").textContent =
+   registerMode
+   ? "লগইন করুন"
+   : "রেজিস্ট্রেশন করুন";
 }
 
 
 async function submitAuth(){
 
-  const name =
-    document.getElementById("authName").value.trim();
+ const name =
+   document.getElementById("authName").value.trim();
 
-  const email =
-    document.getElementById("authEmail").value.trim();
+ const email =
+   document.getElementById("authEmail").value.trim();
 
-  const password =
-    document.getElementById("authPassword").value;
+ const password =
+   document.getElementById("authPassword").value;
 
-  const message =
-    document.getElementById("authMessage");
+ const msg =
+   document.getElementById("authMessage");
 
-  message.style.display="block";
+ msg.style.display="block";
 
-  if(!email || !password){
 
-    message.textContent =
-      "ইমেইল ও পাসওয়ার্ড দিন।";
+ if(!email || !password){
 
-    return;
-  }
+   msg.textContent =
+     "ইমেইল ও পাসওয়ার্ড দিন।";
 
-  if(isRegister){
+   return;
+ }
 
-    if(!name){
 
-      message.textContent =
-        "আপনার নাম লিখুন।";
+ if(registerMode){
 
-      return;
-    }
+   if(!name){
 
-    const {data,error} =
-      await supabaseClient.auth.signUp({
+     msg.textContent =
+       "আপনার নাম লিখুন।";
 
-        email:email,
-        password:password,
+     return;
+   }
 
-        options:{
-          data:{
-            full_name:name
-          }
-        }
 
-      });
+   const {error} =
+     await supabaseClient.auth.signUp({
 
-    if(error){
+       email:email,
+       password:password,
 
-      message.textContent =
-        "রেজিস্ট্রেশন হয়নি: "+error.message;
+       options:{
+         data:{
+           full_name:name
+         }
+       }
 
-      return;
-    }
+     });
 
-    message.textContent =
-      "রেজিস্ট্রেশন সফল হয়েছে। ইমেইল যাচাই করতে হতে পারে।";
 
-  }else{
+   if(error){
 
-    const {data,error} =
-      await supabaseClient.auth.signInWithPassword({
+     msg.textContent =
+       "রেজিস্ট্রেশন হয়নি: "+error.message;
 
-        email:email,
-        password:password
+     return;
+   }
 
-      });
 
-    if(error){
+   msg.textContent =
+     "রেজিস্ট্রেশন সফল হয়েছে। ইমেইল যাচাই করতে হতে পারে।";
 
-      message.textContent =
-        "লগইন হয়নি: "+error.message;
 
-      return;
-    }
+ }else{
 
-    currentUser=data.user;
+   const {data,error} =
+     await supabaseClient.auth.signInWithPassword({
 
-    closeLogin();
+       email:email,
+       password:password
 
-    updateUI();
+     });
 
-    loadPosts();
-  }
+
+   if(error){
+
+     msg.textContent =
+       "লগইন হয়নি: "+error.message;
+
+     return;
+   }
+
+
+   currentUser=data.user;
+
+   closeAuth();
+
+   updateUI();
+
+   loadPosts();
+ }
 }
 
 
 async function logout(){
 
-  await supabaseClient.auth.signOut();
+ await supabaseClient.auth.signOut();
 
-  currentUser=null;
+ currentUser=null;
 
-  updateUI();
+ updateUI();
 
-  loadPosts();
+ loadPosts();
 }
 
 
-/* =========================
+/* ================================
    IMAGE PREVIEW
-========================= */
+================================ */
 
-function previewImage(event){
+function showPreview(event){
 
-  const file =
-    event.target.files[0];
+ const file =
+   event.target.files[0];
 
-  const preview =
-    document.getElementById("imagePreview");
+ const preview =
+   document.getElementById("preview");
 
-  if(!file){
 
-    preview.style.display="none";
-    return;
-  }
+ if(!file){
 
-  const reader =
-    new FileReader();
+   preview.style.display="none";
 
-  reader.onload=function(e){
+   return;
+ }
 
-    preview.src=e.target.result;
 
-    preview.style.display="block";
-  };
+ if(!file.type.startsWith("image/")){
 
-  reader.readAsDataURL(file);
+   alert("শুধু ছবি নির্বাচন করুন।");
+
+   event.target.value="";
+
+   return;
+ }
+
+
+ if(file.size > 6 * 1024 * 1024){
+
+   alert("ছবির আকার ৬ MB-এর মধ্যে রাখুন।");
+
+   event.target.value="";
+
+   return;
+ }
+
+
+ const reader =
+   new FileReader();
+
+
+ reader.onload=function(e){
+
+   preview.src=e.target.result;
+
+   preview.style.display="block";
+ };
+
+
+ reader.readAsDataURL(file);
 }
 
 
-/* =========================
+/* ================================
    CREATE POST
-========================= */
+================================ */
 
 async function createPost(){
 
-  if(!currentUser){
+ if(!currentUser){
 
-    openLogin();
-    return;
-  }
+   openAuth();
 
-  const text =
-    document.getElementById("postText")
-      .value.trim();
+   return;
+ }
 
-  const file =
-    document.getElementById("postImage")
-      .files[0];
 
-  if(!text && !file){
+ const text =
+   document.getElementById("postText")
+   .value.trim();
 
-    alert("পোস্টে লেখা অথবা ছবি দিন।");
-    return;
-  }
+ const file =
+   document.getElementById("postImage")
+   .files[0];
 
-  /*
-    আপাতত ছবি সরাসরি posts.image_url-এ
-    রাখা হচ্ছে না।
-    
-    ছবি Storage যুক্ত করার পর
-    এখানে স্বয়ংক্রিয় আপলোড যোগ করা যাবে।
-  */
 
-  const {error} =
-    await supabaseClient
-      .from("posts")
-      .insert({
+ if(!text && !file){
 
-        user_id:currentUser.id,
+   alert("লেখা অথবা ছবি দিন।");
 
-        content:text,
+   return;
+ }
 
-        image_url:null
-      });
 
-  if(error){
+ let imageURL=null;
 
-    alert("পোস্ট করা যায়নি: "+error.message);
 
-    return;
-  }
+ /* ছবি আপলোড */
 
-  document.getElementById("postText").value="";
-  document.getElementById("postImage").value="";
-  document.getElementById("imagePreview").style.display="none";
+ if(file){
 
-  loadPosts();
+   const extension =
+     file.name.split(".").pop()
+     .toLowerCase();
+
+   const fileName =
+     currentUser.id +
+     "/" +
+     crypto.randomUUID() +
+     "." +
+     extension;
+
+
+   const {data,error} =
+     await supabaseClient.storage
+       .from(IMAGE_BUCKET)
+       .upload(
+         fileName,
+         file,
+         {
+           contentType:file.type,
+           upsert:false
+         }
+       );
+
+
+   if(error){
+
+     alert(
+       "ছবি আপলোড হয়নি।\n\n"+
+       error.message+
+       "\n\nSupabase Storage-এ "+
+       "'post-images' নামে bucket আছে কি না দেখুন।"
+     );
+
+     return;
+   }
+
+
+   const publicURL =
+     supabaseClient.storage
+       .from(IMAGE_BUCKET)
+       .getPublicUrl(data.path);
+
+
+   imageURL =
+     publicURL.data.publicUrl;
+ }
+
+
+ /* পোস্ট ডাটাবেজে */
+
+ const {error} =
+   await supabaseClient
+     .from("posts")
+     .insert({
+
+       user_id:currentUser.id,
+
+       content:text,
+
+       image_url:imageURL
+
+     });
+
+
+ if(error){
+
+   alert(
+     "পোস্ট করা যায়নি: "+
+     error.message
+   );
+
+   return;
+ }
+
+
+ document.getElementById("postText")
+   .value="";
+
+ document.getElementById("postImage")
+   .value="";
+
+ document.getElementById("preview")
+   .style.display="none";
+
+
+ loadPosts();
 }
 
 
-/* =========================
+/* ================================
    LOAD POSTS
-========================= */
+================================ */
 
 async function loadPosts(){
 
-  const loading =
-    document.getElementById("loading");
+ const loading =
+   document.getElementById("loading");
 
-  const postsBox =
-    document.getElementById("posts");
+ const box =
+   document.getElementById("posts");
 
-  loading.style.display="block";
 
-  postsBox.innerHTML="";
+ loading.style.display="block";
 
-  const {data:posts,error} =
-    await supabaseClient
-      .from("posts")
-      .select("*")
-      .order("created_at",{ascending:false});
+ box.innerHTML="";
 
-  loading.style.display="none";
 
-  if(error){
+ const {data,error} =
+   await supabaseClient
+     .from("posts")
+     .select("*")
+     .order(
+       "created_at",
+       {ascending:false}
+     );
 
-    postsBox.innerHTML =
-      `<div class="card">
-        <div class="card-body">
-          পোস্ট লোড করতে সমস্যা হয়েছে।
-        </div>
-      </div>`;
 
-    console.log(error);
+ loading.style.display="none";
 
-    return;
-  }
 
-  if(!posts || posts.length===0){
+ if(error){
 
-    postsBox.innerHTML =
-      `<div class="card">
-        <div class="empty">
-          এখনো কোনো পোস্ট নেই।
-        </div>
-      </div>`;
+   box.innerHTML=
+     `<div class="card">
+       পোস্ট লোড করতে সমস্যা হয়েছে।
+     </div>`;
 
-    return;
-  }
+   console.log(error);
 
-  for(const post of posts){
+   return;
+ }
 
-    await renderPost(post);
-  }
+
+ if(!data || data.length===0){
+
+   box.innerHTML=
+     `<div class="card"
+           style="text-align:center;color:#777">
+       এখনো কোনো পোস্ট নেই।
+     </div>`;
+
+   return;
+ }
+
+
+ for(const post of data){
+
+   await renderPost(post);
+ }
 }
 
 
-/* =========================
+/* ================================
    RENDER POST
-========================= */
+================================ */
 
 async function renderPost(post){
 
-  const postsBox =
-    document.getElementById("posts");
+ const box =
+   document.getElementById("posts");
 
-  const name =
-    "ব্যবহারকারী";
 
-  const card =
-    document.createElement("div");
+ const card =
+   document.createElement("div");
 
-  card.className="card";
+ card.className="card";
 
-  let imageHTML="";
 
-  if(post.image_url){
+ const name =
+   "ব্যবহারকারী";
 
-    imageHTML =
-      `<img class="preview"
-        src="${escapeHTML(post.image_url)}"
-        alt="ছবি">`;
-  }
 
-  const {count:likeCount} =
-    await supabaseClient
-      .from("post_likes")
-      .select("*",{count:"exact",head:true})
-      .eq("post_id",post.id);
+ /* লাইক */
 
-  let liked=false;
+ const {count:likeCount} =
+   await supabaseClient
+     .from("post_likes")
+     .select("*",{count:"exact",head:true})
+     .eq("post_id",post.id);
 
-  if(currentUser){
 
-    const {data:myLike} =
-      await supabaseClient
-        .from("post_likes")
-        .select("post_id")
-        .eq("post_id",post.id)
-        .eq("user_id",currentUser.id)
-        .maybeSingle();
+ let liked=false;
 
-    liked=!!myLike;
-  }
 
-  const {data:comments} =
-    await supabaseClient
-      .from("post_comments")
-      .select("*")
-      .eq("post_id",post.id)
-      .order("created_at",{ascending:true});
+ if(currentUser){
 
-  card.innerHTML=`
+   const {data:like} =
+     await supabaseClient
+       .from("post_likes")
+       .select("post_id")
+       .eq("post_id",post.id)
+       .eq("user_id",currentUser.id)
+       .maybeSingle();
 
-    <div class="card-body">
+   liked=!!like;
+ }
 
-      <div class="profile">
 
-        <div class="avatar">👤</div>
+ /* কমেন্ট */
 
-        <div>
-          <div class="name">${name}</div>
+ const {data:comments} =
+   await supabaseClient
+     .from("post_comments")
+     .select("*")
+     .eq("post_id",post.id)
+     .order(
+       "created_at",
+       {ascending:true}
+     );
 
-          <div class="date">
-            ${formatDate(post.created_at)}
-          </div>
-        </div>
 
-      </div>
+ let imageHTML="";
 
-      ${
-        post.content
-        ? `<div style="white-space:pre-wrap;margin-bottom:10px">
-            ${escapeHTML(post.content)}
-           </div>`
-        : ""
-      }
 
-      ${imageHTML}
+ if(post.image_url){
 
-      <div class="stats">
-        <span>❤️ ${likeCount || 0} লাইক</span>
-        <span>${comments?.length || 0} কমেন্ট</span>
-      </div>
+   imageHTML=
+     `<img
+       class="post-image"
+       src="${escapeHTML(post.image_url)}"
+       alt="পোস্টের ছবি"
+       loading="lazy">`;
+ }
 
-      <div class="actions">
 
-        <button
-          class="${liked ? "like-on":""}"
-          onclick="toggleLike('${post.id}',this)">
-          ❤️ লাইক
-        </button>
+ card.innerHTML=`
 
-        <button onclick="focusComment('${post.id}')">
-          💬 কমেন্ট
-        </button>
+   <div class="profile">
 
-        <button onclick="sharePost('${post.id}')">
-          📤 শেয়ার
-        </button>
+     <div class="avatar">👤</div>
 
-      </div>
+     <div>
 
-      <div id="comments-${post.id}">
-        ${renderComments(comments || [])}
-      </div>
+       <div class="name">
+         ${name}
+       </div>
 
-      ${
-        currentUser
-        ? `
-        <div class="comment-box">
+       <div class="date">
+         ${formatDate(post.created_at)}
+       </div>
 
-          <input
-            id="comment-${post.id}"
-            placeholder="কমেন্ট লিখুন...">
+     </div>
 
-          <button
-            class="primary"
-            onclick="addComment('${post.id}')">
-            পাঠান
-          </button>
+   </div>
 
-        </div>
-        `
-        : `
-        <div style="text-align:center;color:#777;margin-top:12px">
-          কমেন্ট করতে লগইন করুন।
-        </div>
-        `
-      }
 
-    </div>
-  `;
+   ${
+     post.content
+     ?
+     `<div style="
+       margin-top:12px;
+       white-space:pre-wrap;
+       word-break:break-word">
+       ${escapeHTML(post.content)}
+      </div>`
+     :
+     ""
+   }
 
-  postsBox.appendChild(card);
+
+   ${imageHTML}
+
+
+   <div class="stats">
+
+     <span>
+       ❤️ ${likeCount || 0} লাইক
+     </span>
+
+     <span>
+       ${comments?.length || 0} কমেন্ট
+     </span>
+
+   </div>
+
+
+   <div class="actions">
+
+     <button
+       class="${liked ? "liked":""}"
+       onclick="toggleLike('${post.id}')">
+       ❤️ লাইক
+     </button>
+
+     <button
+       onclick="focusComment('${post.id}')">
+       💬 কমেন্ট
+     </button>
+
+     <button
+       onclick="sharePost('${post.id}')">
+       📤 শেয়ার
+     </button>
+
+   </div>
+
+
+   <div id="comments-${post.id}">
+     ${renderComments(comments || [])}
+   </div>
+
+
+   ${
+     currentUser
+     ?
+     `<div class="comment-form">
+
+       <input
+         id="comment-${post.id}"
+         placeholder="কমেন্ট লিখুন...">
+
+       <button
+         class="primary"
+         onclick="addComment('${post.id}')">
+         পাঠান
+       </button>
+
+      </div>`
+     :
+     `<div style="
+       text-align:center;
+       color:#777;
+       margin-top:12px">
+       কমেন্ট করতে লগইন করুন।
+      </div>`
+   }
+
+ `;
+
+
+ box.appendChild(card);
 }
 
 
-/* =========================
+/* ================================
    COMMENTS
-========================= */
+================================ */
 
 function renderComments(comments){
 
-  if(!comments.length) return "";
+ if(!comments.length)
+   return "";
 
-  const top =
-    comments.filter(c=>!c.parent_id);
 
-  return top.map(c=>{
+ const top =
+   comments.filter(c=>!c.parent_id);
 
-    const replies =
-      comments.filter(r=>r.parent_id===c.id);
 
-    return `
+ return top.map(comment=>{
 
-      <div class="comment">
+   const replies =
+     comments.filter(
+       r=>r.parent_id===comment.id
+     );
 
-        <div class="comment-name">
-          👤 ব্যবহারকারী
-        </div>
 
-        <div class="comment-text">
-          ${escapeHTML(c.content)}
-        </div>
+   return `
 
-        ${
-          currentUser
-          ? `<span
-              class="small"
-              onclick="replyTo('${c.post_id}','${c.id}')">
-              রিপ্লাই
-             </span>`
-          : ""
-        }
+     <div class="comment">
 
-        ${replies.map(r=>`
+       <div class="comment-name">
+         👤 ব্যবহারকারী
+       </div>
 
-          <div class="comment reply">
+       <div class="comment-text">
+         ${escapeHTML(comment.content)}
+       </div>
 
-            <div class="comment-name">
-              👤 ব্যবহারকারী
-            </div>
+       ${
+         currentUser
+         ?
+         `<span
+           class="small"
+           onclick="
+             replyTo(
+               '${comment.post_id}',
+               '${comment.id}'
+             )">
+           ↩️ রিপ্লাই
+          </span>`
+         :
+         ""
+       }
 
-            <div class="comment-text">
-              ${escapeHTML(r.content)}
-            </div>
 
-          </div>
+       ${
+         replies.map(reply=>`
 
-        `).join("")}
+           <div class="comment reply">
 
-      </div>
+             <div class="comment-name">
+               👤 ব্যবহারকারী
+             </div>
 
-    `;
+             <div class="comment-text">
+               ${escapeHTML(reply.content)}
+             </div>
 
-  }).join("");
+           </div>
+
+         `).join("")
+       }
+
+     </div>
+
+   `;
+
+ }).join("");
 }
 
+
+/* ================================
+   ADD COMMENT
+================================ */
 
 async function addComment(postId){
 
-  if(!currentUser){
+ if(!currentUser){
 
-    openLogin();
-    return;
-  }
+   openAuth();
 
-  const input =
-    document.getElementById("comment-"+postId);
+   return;
+ }
 
-  const text =
-    input.value.trim();
 
-  if(!text) return;
+ const input =
+   document.getElementById(
+     "comment-"+postId
+   );
 
-  const {error} =
-    await supabaseClient
-      .from("post_comments")
-      .insert({
 
-        post_id:postId,
+ const text =
+   input.value.trim();
 
-        user_id:currentUser.id,
 
-        content:text,
+ if(!text) return;
 
-        parent_id:null
-      });
 
-  if(error){
+ const {error} =
+   await supabaseClient
+     .from("post_comments")
+     .insert({
 
-    alert("কমেন্ট করা যায়নি: "+error.message);
+       post_id:postId,
 
-    return;
-  }
+       user_id:currentUser.id,
 
-  input.value="";
+       content:text,
 
-  loadPosts();
+       parent_id:null
+     });
+
+
+ if(error){
+
+   alert(
+     "কমেন্ট করা যায়নি: "+
+     error.message
+   );
+
+   return;
+ }
+
+
+ input.value="";
+
+ loadPosts();
 }
 
 
-async function replyTo(postId,parentId){
+/* ================================
+   REPLY
+================================ */
 
-  if(!currentUser){
+async function replyTo(
+ postId,
+ parentId
+){
 
-    openLogin();
-    return;
-  }
+ if(!currentUser){
 
-  const text =
-    prompt("রিপ্লাই লিখুন:");
+   openAuth();
 
-  if(!text || !text.trim()) return;
+   return;
+ }
 
-  const {error} =
-    await supabaseClient
-      .from("post_comments")
-      .insert({
 
-        post_id:postId,
+ const text =
+   prompt("রিপ্লাই লিখুন:");
 
-        user_id:currentUser.id,
 
-        content:text.trim(),
+ if(!text || !text.trim())
+   return;
 
-        parent_id:parentId
-      });
 
-  if(error){
+ const {error} =
+   await supabaseClient
+     .from("post_comments")
+     .insert({
 
-    alert("রিপ্লাই করা যায়নি: "+error.message);
+       post_id:postId,
 
-    return;
-  }
+       user_id:currentUser.id,
 
-  loadPosts();
+       content:text.trim(),
+
+       parent_id:parentId
+     });
+
+
+ if(error){
+
+   alert(
+     "রিপ্লাই করা যায়নি: "+
+     error.message
+   );
+
+   return;
+ }
+
+
+ loadPosts();
 }
 
 
-/* =========================
+/* ================================
    LIKE
-========================= */
+================================ */
 
-async function toggleLike(postId,button){
+async function toggleLike(postId){
 
-  if(!currentUser){
+ if(!currentUser){
 
-    openLogin();
-    return;
-  }
+   openAuth();
 
-  const {data:existing} =
-    await supabaseClient
-      .from("post_likes")
-      .select("*")
-      .eq("post_id",postId)
-      .eq("user_id",currentUser.id)
-      .maybeSingle();
+   return;
+ }
 
-  if(existing){
 
-    await supabaseClient
-      .from("post_likes")
-      .delete()
-      .eq("post_id",postId)
-      .eq("user_id",currentUser.id);
+ const {data:existing} =
+   await supabaseClient
+     .from("post_likes")
+     .select("post_id")
+     .eq("post_id",postId)
+     .eq("user_id",currentUser.id)
+     .maybeSingle();
 
-  }else{
 
-    await supabaseClient
-      .from("post_likes")
-      .insert({
+ if(existing){
 
-        post_id:postId,
+   await supabaseClient
+     .from("post_likes")
+     .delete()
+     .eq("post_id",postId)
+     .eq("user_id",currentUser.id);
 
-        user_id:currentUser.id
-      });
-  }
+ }else{
 
-  loadPosts();
+   await supabaseClient
+     .from("post_likes")
+     .insert({
+
+       post_id:postId,
+
+       user_id:currentUser.id
+     });
+ }
+
+
+ loadPosts();
 }
 
 
-/* =========================
+/* ================================
    SHARE
-========================= */
+================================ */
 
 async function sharePost(postId){
 
-  const url =
-    window.location.origin +
-    window.location.pathname +
-    "?post=" +
-    postId;
+ const url =
+   window.location.origin+
+   window.location.pathname+
+   "?post="+postId;
 
-  if(navigator.share){
 
-    try{
+ if(navigator.share){
 
-      await navigator.share({
+   try{
 
-        title:"ওমর এস এস ঘর",
+     await navigator.share({
 
-        text:"এই পোস্টটি দেখুন",
+       title:"ওমর এস এস ঘর",
 
-        url:url
-      });
+       text:"এই পোস্টটি দেখুন",
 
-    }catch(e){}
+       url:url
 
-  }else{
+     });
 
-    try{
+   }catch(e){}
 
-      await navigator.clipboard.writeText(url);
+ }else{
 
-      alert("পোস্টের লিংক কপি হয়েছে।");
+   try{
 
-    }catch(e){
+     await navigator.clipboard.writeText(url);
 
-      prompt("এই লিংকটি কপি করুন:",url);
-    }
-  }
+     alert(
+       "পোস্টের লিংক কপি হয়েছে।"
+     );
+
+   }catch(e){
+
+     prompt(
+       "লিংক কপি করুন:",
+       url
+     );
+   }
+ }
 }
 
 
-/* =========================
+/* ================================
    HELPERS
-========================= */
+================================ */
 
 function focusComment(postId){
 
-  const input =
-    document.getElementById("comment-"+postId);
+ const input =
+   document.getElementById(
+     "comment-"+postId
+   );
 
-  if(input){
 
-    input.focus();
+ if(input){
 
-    input.scrollIntoView({
-      behavior:"smooth",
-      block:"center"
-    });
+   input.focus();
 
-  }else{
+   input.scrollIntoView({
+     behavior:"smooth",
+     block:"center"
+   });
 
-    openLogin();
-  }
+ }else{
+
+   openAuth();
+ }
 }
 
 
 function formatDate(date){
 
-  return new Date(date)
-    .toLocaleString("bn-BD",{
-      dateStyle:"medium",
-      timeStyle:"short"
-    });
+ return new Date(date)
+   .toLocaleString(
+     "bn-BD",
+     {
+       dateStyle:"medium",
+       timeStyle:"short"
+     }
+   );
 }
 
 
 function escapeHTML(value){
 
-  if(value===null || value===undefined)
-    return "";
+ if(value===null ||
+    value===undefined)
+   return "";
 
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+ return String(value)
+   .replace(/&/g,"&amp;")
+   .replace(/</g,"&lt;")
+   .replace(/>/g,"&gt;")
+   .replace(/"/g,"&quot;")
+   .replace(/'/g,"&#039;");
 }
 
 
-/* =========================
-   START
-========================= */
+/* ================================
+   AUTH EVENT
+================================ */
 
 supabaseClient.auth
-  .onAuthStateChange(
-    async (event,session)=>{
+ .onAuthStateChange(
+   (event,session)=>{
 
-      currentUser =
-        session?.user || null;
+     currentUser =
+       session?.user || null;
 
-      updateUI();
+     updateUI();
 
-      if(event==="SIGNED_IN" ||
-         event==="SIGNED_OUT"){
+     if(
+       event==="SIGNED_IN" ||
+       event==="SIGNED_OUT"
+     ){
 
-        loadPosts();
-      }
-    }
-  );
+       loadPosts();
+     }
+   }
+ );
 
+
+/* ================================
+   START
+================================ */
 
 (async function(){
 
-  await loadUser();
+ await loadUser();
 
-  await loadPosts();
+ await loadPosts();
 
 })();
+
 </script>
 
 </body>
