@@ -8,394 +8,622 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html{scroll-behavior:smooth}
 
 body{
- margin:0;
- background:#f0f2f5;
- font-family:Arial,"Noto Sans Bengali",sans-serif;
- color:#222;
+  margin:0;
+  background:#eef2f5;
+  color:#17202a;
+  font-family:Arial,"Noto Sans Bengali","Hind Siliguri",sans-serif;
+  line-height:1.55;
 }
 
 header{
- position:sticky;
- top:0;
- z-index:20;
- background:#fff;
- padding:12px 15px;
- border-bottom:1px solid #ddd;
- display:flex;
- justify-content:space-between;
- align-items:center;
- box-shadow:0 1px 5px #0001;
+  position:sticky;
+  top:0;
+  z-index:100;
+  min-height:64px;
+  padding:10px 14px;
+  background:linear-gradient(135deg,#111827,#334155,#111827);
+  border-bottom:1px solid #56616d;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 4px 18px rgba(0,0,0,.20);
 }
 
 .logo{
- font-size:20px;
- font-weight:bold;
+  color:#fff;
+  font-size:20px;
+  font-weight:800;
+}
+
+#userName{
+  color:#e5e7eb;
+  font-size:13px;
+  margin-right:8px;
 }
 
 .container{
- max-width:900px;
- margin:15px auto;
- padding:0 10px;
+  width:100%;
+  max-width:1050px;
+  margin:auto;
+  padding:15px 11px 50px;
 }
 
 .card{
- background:#fff;
- border-radius:12px;
- margin-bottom:15px;
- padding:15px;
- box-shadow:0 1px 5px #0001;
+  background:#fff;
+  border:1px solid #e0e5ea;
+  border-radius:18px;
+  margin-bottom:14px;
+  padding:17px;
+  box-shadow:0 5px 18px rgba(15,23,42,.06);
 }
 
-h2,h3{
- margin-top:0;
+.card h2{
+  color:#111827;
+  font-size:21px;
+  margin:0 0 14px;
 }
 
-input,select,textarea{
- width:100%;
- border:1px solid #ccd0d5;
- border-radius:9px;
- padding:12px;
- font-size:15px;
- margin-bottom:10px;
- background:#fff;
+.card h3{
+  color:#1f2937;
+  font-size:17px;
+  margin:0 0 13px;
 }
 
-textarea{
- min-height:85px;
- resize:vertical;
+.menu{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
 }
 
 button{
- border:0;
- border-radius:8px;
- padding:10px 15px;
- font-size:15px;
- cursor:pointer;
- margin:3px;
+  border:0;
+  border-radius:11px;
+  padding:11px 15px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.15s;
 }
 
-.primary{background:#1877f2;color:white}
-.success{background:#16a34a;color:white}
-.danger{background:#e41e3f;color:white}
-.gray{background:#e4e6eb;color:#222}
-.orange{background:#f59e0b;color:white}
-.dark{background:#333;color:#fff}
-
-.menu{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:8px;
- margin-bottom:15px;
+button:active{
+  transform:scale(.97);
 }
 
 .menu button{
- margin:0;
- padding:13px 5px;
+  min-height:72px;
+  font-size:14px;
+  border:1px solid rgba(0,0,0,.06);
+  box-shadow:0 3px 9px rgba(0,0,0,.07);
 }
 
-.page{
- display:none;
+.primary{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:white;
 }
 
-.page.active{
- display:block;
+.success{
+  background:linear-gradient(135deg,#16a34a,#15803d);
+  color:white;
+}
+
+.danger{
+  background:linear-gradient(135deg,#ef4444,#dc2626);
+  color:white;
+}
+
+.orange{
+  background:linear-gradient(135deg,#f59e0b,#d97706);
+  color:white;
+}
+
+.gray{
+  background:#e9edf1;
+  color:#26313c;
+}
+
+.dark{
+  background:#202831;
+  color:#fff;
+}
+
+label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  color:#374151;
+  margin:5px 0 6px;
+}
+
+input,select,textarea{
+  width:100%;
+  border:1.5px solid #d7dce2;
+  border-radius:12px;
+  padding:12px 13px;
+  font-size:15px;
+  color:#17202a;
+  background:#fff;
+  outline:none;
+  margin-bottom:11px;
+  font-family:inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 3px rgba(37,99,235,.10);
+}
+
+textarea{
+  min-height:95px;
+  resize:vertical;
 }
 
 .row{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
 .row3{
- display:grid;
- grid-template-columns:1fr 1fr 1fr;
- gap:10px;
+  display:grid;
+  grid-template-columns:1fr 1fr auto;
+  gap:10px;
+  align-items:start;
 }
 
-.table-wrap{
- overflow-x:auto;
+.page{
+  display:none;
+  animation:pageIn .2s ease;
 }
 
-table{
- width:100%;
- border-collapse:collapse;
- margin-top:10px;
- min-width:600px;
+.page.active{
+  display:block;
 }
 
-th,td{
- border:1px solid #ddd;
- padding:9px;
- text-align:left;
-}
-
-th{
- background:#f0f2f5;
-}
-
-.total-box{
- background:#f0f2f5;
- border-radius:10px;
- padding:12px;
- margin-top:10px;
-}
-
-.total-line{
- display:flex;
- justify-content:space-between;
- padding:6px 0;
-}
-
-.big-total{
- font-size:20px;
- font-weight:bold;
-}
-
-.profit{
- color:#16803c;
- font-weight:bold;
-}
-
-.loss{
- color:#d00000;
- font-weight:bold;
-}
-
-.status{
- background:#f0f2f5;
- padding:10px;
- border-radius:8px;
- margin-bottom:10px;
-}
-
-.warning{
- background:#fff3cd;
- color:#856404;
- padding:12px;
- border-radius:9px;
- margin-bottom:12px;
-}
-
-.success-box{
- background:#dcfce7;
- color:#166534;
- padding:12px;
- border-radius:9px;
- margin-bottom:12px;
+@keyframes pageIn{
+  from{opacity:0;transform:translateY(5px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
 .customer-card{
- border:1px solid #ddd;
- border-radius:10px;
- padding:12px;
- margin-bottom:10px;
- background:#fff;
+  position:relative;
+  background:#fff;
+  border:1px solid #e0e5ea;
+  border-radius:18px;
+  padding:17px;
+  margin-bottom:12px;
+  box-shadow:0 5px 17px rgba(15,23,42,.055);
 }
 
 .customer-title{
- font-weight:bold;
- font-size:17px;
+  color:#111827;
+  font-size:18px;
+  font-weight:800;
+  padding-right:50px;
+  margin-bottom:7px;
 }
 
-.small{
- font-size:12px;
- color:#777;
+.customer-card hr{
+  border:0;
+  border-top:1px solid #edf0f3;
+  margin:12px 0;
+}
+
+.customer-card>div{
+  margin-bottom:4px;
+}
+
+.customer-card .primary{
+  width:100%;
+  margin-top:13px;
+  padding:13px;
+}
+
+.total-box{
+  background:linear-gradient(145deg,#f8fafc,#eef2f6);
+  border:1px solid #dce2e8;
+  border-radius:18px;
+  padding:16px;
+  margin-top:12px;
+}
+
+.total-line{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:8px 0;
+  border-bottom:1px dashed #d9dee4;
+}
+
+.total-line:last-child{
+  border-bottom:0;
+}
+
+.big-total{
+  font-size:20px;
+  font-weight:800;
+}
+
+.profit{
+  color:#15803d;
+  font-weight:800;
+}
+
+.loss{
+  color:#dc2626;
+  font-weight:800;
+}
+
+.status{
+  background:#f5f7f9;
+  border:1px solid #e1e6eb;
+  padding:13px;
+  border-radius:13px;
+  margin-bottom:11px;
+}
+
+.warning{
+  background:#fff8df;
+  border:1px solid #f2d27a;
+  color:#795b00;
+  padding:14px;
+  border-radius:13px;
+  margin-bottom:12px;
+}
+
+.success-box{
+  background:#ecfdf3;
+  border:1px solid #b7ebca;
+  color:#166534;
+  padding:14px;
+  border-radius:13px;
+  margin-bottom:12px;
+}
+
+.table-wrap{
+  overflow-x:auto;
+  border-radius:12px;
+  margin-top:12px;
+}
+
+table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  min-width:620px;
+  border:1px solid #e1e5e9;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+th,td{
+  padding:11px 10px;
+  text-align:left;
+  border-bottom:1px solid #edf0f2;
+}
+
+th{
+  background:#f3f5f7;
+  color:#374151;
+  font-size:13px;
+}
+
+td{
+  font-size:14px;
+  background:#fff;
 }
 
 .three-menu{
- position:relative;
- display:inline-block;
- float:right;
+  position:absolute;
+  right:10px;
+  top:10px;
+  z-index:30;
 }
 
 .three-button{
- background:#e4e6eb;
- font-size:23px;
- padding:5px 12px;
+  width:42px;
+  height:42px;
+  padding:0;
+  border-radius:12px;
+  background:#f0f2f4;
+  color:#252b32;
+  font-size:24px;
 }
 
 .dropdown{
- display:none;
- position:absolute;
- right:0;
- top:45px;
- width:230px;
- background:#fff;
- border:1px solid #ddd;
- border-radius:10px;
- box-shadow:0 4px 15px #0003;
- z-index:40;
- overflow:hidden;
+  display:none;
+  position:absolute;
+  right:0;
+  top:47px;
+  width:245px;
+  background:#fff;
+  border:1px solid #dfe4e8;
+  border-radius:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,.17);
+  z-index:1000;
+  overflow:hidden;
 }
 
 .dropdown button{
- display:block;
- width:100%;
- text-align:left;
- margin:0;
- border-radius:0;
- background:#fff;
- color:#222;
- border-bottom:1px solid #eee;
- padding:12px;
-}
-
-.dropdown button:hover{
- background:#f0f2f5;
+  display:block;
+  width:100%;
+  text-align:left;
+  margin:0;
+  border-radius:0;
+  background:#fff;
+  color:#222;
+  border-bottom:1px solid #edf0f2;
+  padding:13px 14px;
+  font-weight:600;
 }
 
 .modal{
- display:none;
- position:fixed;
- inset:0;
- background:#0008;
- z-index:50;
- align-items:center;
- justify-content:center;
- padding:15px;
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(7,12,18,.68);
+  backdrop-filter:blur(4px);
+  z-index:2000;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
 }
 
 .modal-box{
- background:white;
- width:100%;
- max-width:650px;
- max-height:90vh;
- overflow:auto;
- border-radius:14px;
- padding:20px;
+  background:#fff;
+  width:100%;
+  max-width:650px;
+  max-height:91vh;
+  overflow:auto;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.30);
 }
 
 .close{
- float:right;
- font-size:28px;
- cursor:pointer;
+  float:right;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#f0f2f4;
+  text-align:center;
+  line-height:35px;
+  font-size:27px;
+  cursor:pointer;
 }
 
-.post-image{
- width:100%;
- max-height:600px;
- object-fit:cover;
- border-radius:9px;
- margin-top:8px;
+#authModal .modal-box{
+  max-width:430px;
 }
 
 .profile{
- display:flex;
- gap:10px;
- align-items:center;
+  display:flex;
+  gap:11px;
+  align-items:center;
 }
 
 .avatar{
- width:42px;
- height:42px;
- border-radius:50%;
- background:#1877f2;
- color:white;
- display:flex;
- align-items:center;
- justify-content:center;
- font-weight:bold;
+  width:44px;
+  height:44px;
+  min-width:44px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#334155,#0f172a);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
 }
 
 .name{
- font-weight:bold;
+  font-weight:800;
 }
 
 .date{
- font-size:12px;
- color:#777;
- margin-top:3px;
+  font-size:12px;
+  color:#7a828b;
+}
+
+.post-image{
+  display:block;
+  width:100%;
+  max-height:650px;
+  object-fit:cover;
+  border-radius:15px;
+  margin-top:12px;
 }
 
 .actions{
- display:flex;
- gap:5px;
- border-top:1px solid #eee;
- margin-top:12px;
- padding-top:8px;
+  display:flex;
+  gap:6px;
+  border-top:1px solid #edf0f2;
+  margin-top:13px;
+  padding-top:8px;
 }
 
 .actions button{
- flex:1;
- background:#fff;
+  flex:1;
+  background:#fff;
+  color:#4b5563;
 }
 
 .comment{
- background:#f0f2f5;
- border-radius:15px;
- padding:9px 12px;
- margin-top:8px;
+  background:#f0f2f5;
+  border-radius:15px;
+  padding:10px 13px;
+  margin-top:8px;
 }
 
 .reply{
- margin-left:30px;
+  margin-left:28px;
+  background:#e8ebef;
 }
 
 .comment-name{
- font-weight:bold;
- font-size:14px;
+  font-weight:800;
+  font-size:13px;
 }
 
 .comment-text{
- margin-top:3px;
- word-break:break-word;
+  margin-top:3px;
+  word-break:break-word;
 }
 
 .comment-form{
- display:flex;
- gap:6px;
- margin-top:10px;
+  display:flex;
+  gap:7px;
+  margin-top:11px;
 }
 
 .comment-form input{
- margin:0;
+  margin:0;
 }
 
-.loading{
- text-align:center;
- padding:25px;
- color:#666;
+.comment-form button{
+  white-space:nowrap;
 }
 
 .center{
- text-align:center;
+  text-align:center;
 }
 
-.hidden{
- display:none!important;
+.loading{
+  text-align:center;
+  padding:30px 15px;
+  color:#68717b;
 }
 
-@media(max-width:600px){
+.small{
+  font-size:12px;
+  color:#737b85;
+}
 
- .logo{
-   font-size:16px;
- }
+.empty{
+  text-align:center;
+  padding:30px 15px;
+  color:#777;
+}
 
- header{
-   padding:10px;
- }
+.badge{
+  display:inline-block;
+  padding:4px 9px;
+  border-radius:20px;
+  background:#e8f0ff;
+  color:#1d4ed8;
+  font-size:12px;
+  font-weight:700;
+}
 
- .row,.row3{
-   grid-template-columns:1fr;
- }
+.search-box{
+  position:relative;
+}
 
- .menu{
-   grid-template-columns:repeat(2,1fr);
- }
+.search-box input{
+  padding-left:42px;
+}
 
- .customer-card button{
-   width:100%;
- }
+.search-icon{
+  position:absolute;
+  left:14px;
+  top:11px;
+  font-size:20px;
+}
 
- .three-menu{
-   position:absolute;
-   right:10px;
-   top:10px;
- }
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.info-item{
+  background:#f7f8fa;
+  border-radius:12px;
+  padding:11px;
+}
+
+.info-label{
+  font-size:12px;
+  color:#737b85;
+}
+
+.info-value{
+  font-size:15px;
+  font-weight:700;
+}
+
+@media(max-width:700px){
+  header{
+    min-height:60px;
+    padding:9px 10px;
+  }
+
+  .logo{
+    font-size:16px;
+  }
+
+  #userName{
+    display:none;
+  }
+
+  .container{
+    padding:10px 9px 40px;
+  }
+
+  .card{
+    padding:14px;
+    border-radius:16px;
+  }
+
+  .menu{
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+  }
+
+  .menu button{
+    min-height:68px;
+    font-size:13px;
+  }
+
+  .row,
+  .row3{
+    grid-template-columns:1fr;
+    gap:0;
+  }
+
+  .row3 button{
+    width:100%;
+  }
+
+  .customer-card{
+    padding:15px;
+  }
+
+  .dropdown{
+    width:225px;
+  }
+
+  .modal{
+    padding:8px;
+  }
+
+  .modal-box{
+    border-radius:17px;
+    padding:17px;
+    max-height:94vh;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -403,526 +631,399 @@ th{
 <body>
 
 <header>
+  <div class="logo">🏪 ওমর এস এস ঘর</div>
 
- <div class="logo">
-   🏪 ওমর এস এস ঘর
- </div>
-
- <div>
-   <span id="userName" style="margin-right:5px"></span>
-
-   <button id="loginBtn"
-           class="primary"
-           onclick="openAuth()">
-     লগইন
-   </button>
-
-   <button id="logoutBtn"
-           class="danger"
-           onclick="logout()"
-           style="display:none">
-     লগআউট
-   </button>
- </div>
-
+  <div>
+    <span id="userName"></span>
+    <button id="loginButton" class="primary" onclick="openAuth()">লগইন</button>
+    <button id="logoutButton" class="gray" onclick="logout()" style="display:none">লগআউট</button>
+  </div>
 </header>
 
 <div class="container">
 
-<!-- =====================================================
-     MAIN MENU
-===================================================== -->
+  <!-- MENU -->
+  <div class="card">
+    <div class="menu">
 
-<div class="card">
+      <button class="primary" onclick="openAccountingPage('customersPage')">
+        👥<br>কাস্টমার
+      </button>
 
- <div class="menu">
+      <button class="success" onclick="openNewCustomer()">
+        ➕<br>নতুন কাস্টমার
+      </button>
 
-   <button class="primary"
-           onclick="openAccountingPage()">
-     👥 কাস্টমার
-   </button>
+      <button class="orange" onclick="openAccountingPage('materialsPage')">
+        🧱<br>মালামাল
+      </button>
 
-   <button class="success"
-           onclick="openNewCustomer()">
-     ➕ নতুন কাস্টমার
-   </button>
+      <button class="dark" onclick="openAccountingPage('workersPage')">
+        👷<br>মিস্ত্রি
+      </button>
 
-   <button class="orange"
-           onclick="openAccountingPage('materialsPage')">
-     🔩 মালামাল
-   </button>
+      <button class="gray" onclick="openAccountingPage('settingsPage')">
+        ⚙️<br>সেটিংস
+      </button>
 
-   <button class="orange"
-           onclick="openAccountingPage('workersPage')">
-     👷 মিস্ত্রি
-   </button>
+      <button class="primary" onclick="showPage('postsPage');loadPosts()">
+        📰<br>পোস্ট
+      </button>
 
-   <button class="gray"
-           onclick="openAccountingPage('settingsPage')">
-     ⚙️ হিসাব সেটিং
-   </button>
+    </div>
+  </div>
 
-   <button class="gray"
-           onclick="showPage('postsPage')">
-     📰 পোস্ট
-   </button>
+  <!-- LOGIN NOTICE -->
+  <div id="accountingLoginNotice" class="card center">
 
- </div>
+    <h2>🔐 হিসাব ব্যবস্থায় প্রবেশ করুন</h2>
+
+    <p>
+      কাস্টমার, মালামাল, মিস্ত্রি ও লাভ-ক্ষতির হিসাব দেখতে
+      আগে লগইন করুন।
+    </p>
+
+    <button class="primary" onclick="openAuth()">
+      🔑 লগইন করুন
+    </button>
+
+  </div>
+
+  <!-- CUSTOMERS -->
+  <div id="customersPage" class="page">
+
+    <div class="card">
+
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:center">
+        <h2>👥 কাস্টমার তালিকা</h2>
+
+        <button class="success" onclick="openNewCustomer()">
+          ➕ নতুন
+        </button>
+      </div>
+
+      <div class="search-box">
+        <span class="search-icon">🔎</span>
+        <input
+          id="customerSearch"
+          placeholder="কাস্টমারের নাম / ফোন দিয়ে খুঁজুন"
+          oninput="loadCustomers()"
+        >
+      </div>
+
+      <div id="customersList"></div>
+
+    </div>
+
+  </div>
+
+  <!-- NEW CUSTOMER -->
+  <div id="newCustomerPage" class="page">
+
+    <div class="card">
+
+      <h2>➕ নতুন কাস্টমার</h2>
+
+      <label>কাস্টমারের নাম *</label>
+      <input id="newName" placeholder="যেমন: মোঃ রাজু">
+
+      <label>ফোন নম্বর *</label>
+      <input id="newPhone" placeholder="01XXXXXXXXX" inputmode="tel">
+
+      <label>ঠিকানা</label>
+      <textarea id="newAddress" placeholder="কাস্টমারের ঠিকানা"></textarea>
+
+      <label>কাজের বিবরণ</label>
+      <textarea id="newWork" placeholder="কী কাজ হবে লিখুন"></textarea>
+
+      <div class="row">
+
+        <div>
+          <label>চুক্তির মূল্য</label>
+          <input id="newContractPrice" type="number" placeholder="০">
+        </div>
+
+        <div>
+          <label>কাজ শুরুর তারিখ</label>
+          <input id="newStartDate" type="date">
+        </div>
+
+      </div>
+
+      <label>ডেলিভারি তারিখ</label>
+      <input id="newDeliveryDate" type="date">
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+
+        <button class="success" onclick="saveCustomer()">
+          💾 কাস্টমার সেভ করুন
+        </button>
+
+        <button class="gray" onclick="showPage('customersPage')">
+          ↩️ ফিরে যান
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- CUSTOMER DETAIL -->
+  <div id="customerDetailPage" class="page">
+
+    <div id="customerDetail"></div>
+
+  </div>
+
+  <!-- MATERIALS -->
+  <div id="materialsPage" class="page">
+
+    <div class="card">
+
+      <h2>🧱 মালামালের তালিকা</h2>
+
+      <div class="row">
+
+        <div>
+          <label>মালের নাম</label>
+          <input id="materialName" placeholder="যেমন: SS পাইপ">
+        </div>
+
+        <div>
+          <label>দাম</label>
+          <input id="materialPrice" type="number" placeholder="প্রতি ইউনিট দাম">
+        </div>
+
+      </div>
+
+      <button class="success" onclick="addMaterial()">
+        ➕ মাল যোগ করুন
+      </button>
+
+    </div>
+
+    <div class="card">
+
+      <div id="materialsList"></div>
+
+    </div>
+
+  </div>
+
+  <!-- WORKERS -->
+  <div id="workersPage" class="page">
+
+    <div class="card">
+
+      <h2>👷 মিস্ত্রির তালিকা</h2>
+
+      <div class="row">
+
+        <div>
+          <label>মিস্ত্রির নাম</label>
+          <input id="workerName" placeholder="মিস্ত্রির নাম">
+        </div>
+
+        <div>
+          <label>মাসিক বেতন</label>
+          <input id="workerSalary" type="number" placeholder="মাসিক বেতন">
+        </div>
+
+      </div>
+
+      <button class="success" onclick="addWorker()">
+        ➕ মিস্ত্রি যোগ করুন
+      </button>
+
+    </div>
+
+    <div class="card">
+
+      <div id="workersList"></div>
+
+    </div>
+
+  </div>
+
+  <!-- SETTINGS -->
+  <div id="settingsPage" class="page">
+
+    <div class="card">
+
+      <h2>⚙️ সেটিংস</h2>
+
+      <div class="status">
+
+        <b>🏪 ব্যবসার নাম</b><br>
+        ওমর এস এস ঘর
+
+      </div>
+
+      <div class="status">
+
+        <b>📍 ঠিকানা</b><br>
+        কলেজ বাজার পেট্রোল পাম্পের সামনে,
+        বিরামপুর, দিনাজপুর
+
+      </div>
+
+      <div class="status">
+
+        <b>📞 ফোন</b><br>
+        01341241433
+
+      </div>
+
+      <div class="status">
+
+        <b>💬 WhatsApp</b><br>
+        01816845577
+
+      </div>
+
+      <div class="status">
+
+        <b>📧 Email</b><br>
+        omorssghor@gmail.com
+
+      </div>
+
+      <button class="primary" onclick="downloadAllCustomers()">
+        📥 সব কাস্টমারের হিসাব Download
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- POSTS -->
+  <div id="postsPage" class="page">
+
+    <div class="card">
+
+      <h2>📰 পোস্ট</h2>
+
+      <textarea id="postContent"
+        placeholder="আপনার কাজ বা ব্যবসা সম্পর্কে কিছু লিখুন..."></textarea>
+
+      <label>ছবি</label>
+
+      <input
+        id="postImage"
+        type="file"
+        accept="image/*"
+      >
+
+      <button class="primary" onclick="createPost()">
+        📤 পোস্ট করুন
+      </button>
+
+    </div>
+
+    <div id="postsList"></div>
+
+  </div>
 
 </div>
 
+<!-- AUTH MODAL -->
+<div class="modal" id="authModal">
 
-<!-- =====================================================
-     ACCOUNTING LOGIN NOTICE
-===================================================== -->
+  <div class="modal-box">
 
-<div id="accountingLoginNotice"
-     class="card center">
+    <div class="close" onclick="closeAuth()">×</div>
 
- <h2>🔐 ব্যবসার হিসাব</h2>
+    <h2 id="authTitle">🔐 লগইন</h2>
 
- <p>
-   কাস্টমার, কাজের খরচ, পেমেন্ট ও লাভ-লোকসানের হিসাব দেখতে
-   আপনার অনুমোদিত অ্যাকাউন্ট দিয়ে লগইন করুন।
- </p>
+    <div id="registerFields" style="display:none">
 
- <button class="primary"
-         onclick="openAuth()">
-   🔐 লগইন করুন
- </button>
+      <label>আপনার নাম</label>
+      <input id="authName" placeholder="আপনার নাম">
 
-</div>
+    </div>
 
+    <label>Email</label>
+    <input id="authEmail" type="email" placeholder="আপনার Email">
 
-<!-- =====================================================
-     CUSTOMERS
-===================================================== -->
+    <label>Password</label>
+    <input id="authPassword" type="password" placeholder="Password">
 
-<div id="customersPage" class="page">
+    <button
+      id="authSubmitButton"
+      class="primary"
+      style="width:100%;padding:14px"
+      onclick="submitAuth()"
+    >
+      লগইন
+    </button>
 
- <div class="card">
+    <p class="center" style="margin-top:15px">
+      <span id="switchText">নতুন অ্যাকাউন্ট?</span>
+      <span
+        id="switchButton"
+        onclick="switchAuth()"
+        style="color:#2563eb;font-weight:bold;cursor:pointer"
+      >
+        অ্যাকাউন্ট তৈরি করুন
+      </span>
+    </p>
 
-   <h2>👥 সকল কাস্টমার</h2>
+    <div id="authMessage"></div>
 
-   <button class="success"
-           onclick="openNewCustomer()">
-     ➕ নতুন কাস্টমার যোগ করুন
-   </button>
-
-   <button class="primary"
-           onclick="downloadAllCustomers()">
-     📥 সব হিসাব ডাউনলোড
-   </button>
-
- </div>
-
- <div id="customerList"></div>
-
-</div>
-
-
-<!-- =====================================================
-     NEW CUSTOMER
-===================================================== -->
-
-<div id="newCustomerPage" class="page">
-
- <div class="card">
-
-   <button class="gray"
-           onclick="openAccountingPage()">
-     ← সকল কাস্টমার
-   </button>
-
-   <h2>➕ নতুন কাস্টমার</h2>
-
-   <div class="row">
-
-     <div>
-       <label>কাস্টমারের নাম</label>
-       <input id="customerName"
-              placeholder="যেমন: মোঃ রহিম">
-     </div>
-
-     <div>
-       <label>ফোন নম্বর</label>
-       <input id="customerPhone"
-              placeholder="01XXXXXXXXX">
-     </div>
-
-   </div>
-
-   <label>ঠিকানা</label>
-
-   <textarea id="customerAddress"
-             placeholder="কাস্টমারের ঠিকানা"></textarea>
-
-   <div class="row">
-
-     <div>
-       <label>কাজের নাম</label>
-       <input id="workName"
-              placeholder="যেমন: SS গেট">
-     </div>
-
-     <div>
-       <label>মোট চুক্তির দাম</label>
-       <input id="workPrice"
-              type="number"
-              min="0"
-              placeholder="০">
-     </div>
-
-   </div>
-
-   <div class="row">
-
-     <div>
-       <label>কাজ শুরুর তারিখ</label>
-       <input id="startDate"
-              type="date">
-     </div>
-
-     <div>
-       <label>ডেলিভারি তারিখ</label>
-       <input id="deliveryDate"
-              type="date">
-     </div>
-
-   </div>
-
-   <button class="success"
-           style="width:100%"
-           onclick="saveCustomer()">
-     💾 কাস্টমার সেভ করুন
-   </button>
-
- </div>
+  </div>
 
 </div>
 
+<!-- UPDATE CUSTOMER MODAL -->
+<div class="modal" id="updateCustomerModal">
 
-<!-- =====================================================
-     CUSTOMER DETAIL
-===================================================== -->
+  <div class="modal-box">
 
-<div id="customerDetailPage" class="page">
+    <div class="close" onclick="closeUpdateCustomer()">×</div>
 
- <div class="card">
+    <h2>✏️ কাস্টমার তথ্য পরিবর্তন</h2>
 
-   <button class="gray"
-           onclick="openAccountingPage()">
-     ← সকল কাস্টমার
-   </button>
+    <input id="editCustomerId" type="hidden">
 
-   <div id="customerDetail"></div>
+    <label>নাম</label>
+    <input id="editName">
 
- </div>
+    <label>ফোন</label>
+    <input id="editPhone">
 
-</div>
+    <label>ঠিকানা</label>
+    <textarea id="editAddress"></textarea>
 
+    <label>কাজের বিবরণ</label>
+    <textarea id="editWork"></textarea>
 
-<!-- =====================================================
-     MATERIALS
-===================================================== -->
+    <label>চুক্তির মূল্য</label>
+    <input id="editContractPrice" type="number">
 
-<div id="materialsPage" class="page">
+    <div class="row">
 
- <div class="card">
+      <div>
+        <label>শুরুর তারিখ</label>
+        <input id="editStartDate" type="date">
+      </div>
 
-   <h2>🔩 মালামালের তালিকা</h2>
+      <div>
+        <label>ডেলিভারি তারিখ</label>
+        <input id="editDeliveryDate" type="date">
+      </div>
 
-   <p class="small">
-     মালামালের নাম ও দাম একবার সেভ করলে পরে কাস্টমারের
-     কাজে মাল নির্বাচন করলে দাম অটো আসবে।
-   </p>
+    </div>
 
-   <input id="materialName"
-          placeholder="মালের নাম">
+    <button class="success" onclick="updateCustomer()">
+      💾 পরিবর্তন সেভ করুন
+    </button>
 
-   <input id="materialPrice"
-          type="number"
-          min="0"
-          placeholder="দাম">
-
-   <button class="success"
-           onclick="addMaterial()">
-     ➕ মাল যোগ করুন
-   </button>
-
- </div>
-
- <div class="card">
-
-   <div class="table-wrap">
-
-     <table>
-
-       <thead>
-         <tr>
-           <th>মালের নাম</th>
-           <th>দাম</th>
-           <th>কাজ</th>
-         </tr>
-       </thead>
-
-       <tbody id="materialsTable"></tbody>
-
-     </table>
-
-   </div>
-
- </div>
+  </div>
 
 </div>
-
-
-<!-- =====================================================
-     WORKERS
-===================================================== -->
-
-<div id="workersPage" class="page">
-
- <div class="card">
-
-   <h2>👷 মিস্ত্রির তালিকা</h2>
-
-   <p class="small">
-     মিস্ত্রির নাম ও মাসিক বেতন সেভ করুন।
-   </p>
-
-   <input id="workerName"
-          placeholder="মিস্ত্রির নাম">
-
-   <input id="workerSalary"
-          type="number"
-          min="0"
-          placeholder="মাসিক বেতন">
-
-   <button class="success"
-           onclick="addWorker()">
-     ➕ মিস্ত্রি যোগ করুন
-   </button>
-
- </div>
-
- <div class="card">
-
-   <div class="table-wrap">
-
-     <table>
-
-       <thead>
-         <tr>
-           <th>মিস্ত্রির নাম</th>
-           <th>মাসিক বেতন</th>
-           <th>কাজ</th>
-         </tr>
-       </thead>
-
-       <tbody id="workersTable"></tbody>
-
-     </table>
-
-   </div>
-
- </div>
-
-</div>
-
-
-<!-- =====================================================
-     SETTINGS
-===================================================== -->
-
-<div id="settingsPage" class="page">
-
- <div class="card">
-
-   <h2>⚙️ হিসাব সেটিং</h2>
-
-   <div class="status">
-     <b>হিসাবের নিরাপত্তা:</b><br>
-     এই হিসাব Supabase Login ও RLS-এর মাধ্যমে সুরক্ষিত।
-     অনুমোদিত অ্যাকাউন্ট ছাড়া ব্যবসার হিসাব দেখা যাবে না।
-   </div>
-
-   <div class="status">
-     🔩 মালামাল — আলাদা তালিকা<br>
-     👷 মিস্ত্রি — আলাদা তালিকা<br>
-     💸 অন্যান্য খরচ — প্রতিটি কাস্টমারের মধ্যে<br>
-     💰 পেমেন্ট — প্রতিটি কাস্টমারের মধ্যে
-   </div>
-
- </div>
-
-</div>
-
-
-<!-- =====================================================
-     POSTS
-===================================================== -->
-
-<div id="postsPage" class="page">
-
- <div class="card">
-
-   <h2>📰 পোস্ট</h2>
-
-   <div id="loginNotice"
-        class="status">
-     পোস্ট করতে লগইন করুন।
-   </div>
-
-   <div id="postCreator"
-        style="display:none">
-
-     <textarea id="postText"
-       placeholder="আপনার মনের কথা লিখুন..."></textarea>
-
-     <input type="file"
-            id="postImage"
-            accept="image/*">
-
-     <button class="primary"
-             style="width:100%"
-             onclick="createPost()">
-       📤 পোস্ট করুন
-     </button>
-
-   </div>
-
- </div>
-
- <div id="loading"
-      class="loading">
-   পোস্ট লোড হচ্ছে...
- </div>
-
- <div id="posts"></div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     AUTH MODAL
-===================================================== -->
-
-<div class="modal"
-     id="authModal">
-
- <div class="modal-box">
-
-   <span class="close"
-         onclick="closeAuth()">×</span>
-
-   <h2 id="authTitle">
-     লগইন
-   </h2>
-
-   <input id="authName"
-          placeholder="আপনার নাম"
-          style="display:none">
-
-   <input id="authEmail"
-          type="email"
-          placeholder="ইমেইল">
-
-   <input id="authPassword"
-          type="password"
-          placeholder="পাসওয়ার্ড">
-
-   <button class="primary"
-           style="width:100%"
-           onclick="submitAuth()">
-
-     <span id="authButton">
-       লগইন
-     </span>
-
-   </button>
-
-   <p style="text-align:center">
-
-     <span id="switchLabel">
-       নতুন সদস্য?
-     </span>
-
-     <span class="small"
-           onclick="switchAuth()"
-           id="switchButton">
-       রেজিস্ট্রেশন করুন
-     </span>
-
-   </p>
-
-   <div id="authMessage"
-        class="status"
-        style="display:none">
-   </div>
-
- </div>
-
-</div>
-
-
-<!-- =====================================================
-     UPDATE CUSTOMER MODAL
-===================================================== -->
-
-<div class="modal"
-     id="updateCustomerModal">
-
- <div class="modal-box">
-
-   <span class="close"
-         onclick="closeUpdateCustomer()">×</span>
-
-   <h2>✏️ কাস্টমারের তথ্য আপডেট</h2>
-
-   <input id="editCustomerName"
-          placeholder="কাস্টমারের নাম">
-
-   <input id="editCustomerPhone"
-          placeholder="ফোন নম্বর">
-
-   <textarea id="editCustomerAddress"
-             placeholder="ঠিকানা"></textarea>
-
-   <input id="editWorkName"
-          placeholder="কাজের নাম">
-
-   <input id="editWorkPrice"
-          type="number"
-          min="0"
-          placeholder="চুক্তির দাম">
-
-   <label>কাজ শুরুর তারিখ</label>
-   <input id="editStartDate"
-          type="date">
-
-   <label>ডেলিভারি তারিখ</label>
-   <input id="editDeliveryDate"
-          type="date">
-
-   <button class="success"
-           style="width:100%"
-           onclick="updateCustomer()">
-     💾 তথ্য আপডেট করুন
-   </button>
-
- </div>
-
-</div>
-
 
 <script>
-
-/* =====================================================
-   SUPABASE
-===================================================== */
 
 const SUPABASE_URL =
 "https://gzujcqjpxypcoiqhpvvu.supabase.co";
@@ -932,3332 +1033,3007 @@ const SUPABASE_KEY =
 
 const supabaseClient =
 window.supabase.createClient(
- SUPABASE_URL,
- SUPABASE_KEY
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
-const IMAGE_BUCKET="post-images";
+const IMAGE_BUCKET = "post-images";
 
-let currentUser=null;
-let accountingAllowed=false;
-let registerMode=false;
-let selectedCustomerId=null;
+let currentUser = null;
+let accountingAllowed = false;
+let registerMode = false;
+let selectedCustomerId = null;
 
-
-/* =====================================================
-   PAGE
-===================================================== */
+/* =========================
+   BASIC PAGE
+========================= */
 
 function showPage(pageId){
 
- document
-   .querySelectorAll(".page")
-   .forEach(p=>{
-     p.classList.remove("active");
-   });
+  document.querySelectorAll(".page")
+    .forEach(page => page.classList.remove("active"));
 
- const page=
-   document.getElementById(pageId);
+  const page = document.getElementById(pageId);
 
- if(page)
-   page.classList.add("active");
+  if(page){
+    page.classList.add("active");
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
 
- window.scrollTo({
-   top:0,
-   behavior:"smooth"
- });
 }
-
-
-/* =====================================================
-   AUTH USER
-===================================================== */
 
 async function loadUser(){
 
- const {data,error}=
-   await supabaseClient.auth.getUser();
+  const {data} =
+    await supabaseClient.auth.getUser();
 
- if(error){
-   currentUser=null;
- }else{
-   currentUser=data?.user || null;
- }
+  currentUser = data?.user || null;
 
- await updateUI();
+  await updateUI();
+
 }
-
-
-/* =====================================================
-   CHECK ACCOUNTING ADMIN
-===================================================== */
 
 async function checkAccountingAccess(){
 
- accountingAllowed=false;
+  accountingAllowed = false;
 
- if(!currentUser)
-   return false;
+  if(!currentUser) return;
 
- const {data,error}=
-   await supabaseClient
-     .from("accounting_admins")
-     .select("user_id")
-     .eq("user_id",currentUser.id)
-     .maybeSingle();
+  const {data,error} =
+    await supabaseClient
+      .from("accounting_admins")
+      .select("user_id")
+      .eq("user_id",currentUser.id)
+      .maybeSingle();
 
- if(!error && data){
-   accountingAllowed=true;
- }
+  if(!error && data){
+    accountingAllowed = true;
+  }
 
- return accountingAllowed;
 }
-
-
-/* =====================================================
-   UI
-===================================================== */
 
 async function updateUI(){
 
- const userName=
-   document.getElementById("userName");
+  await checkAccountingAccess();
 
- const loginBtn=
-   document.getElementById("loginBtn");
+  const loginButton =
+    document.getElementById("loginButton");
 
- const logoutBtn=
-   document.getElementById("logoutBtn");
+  const logoutButton =
+    document.getElementById("logoutButton");
 
- const notice=
-   document.getElementById("loginNotice");
+  const userName =
+    document.getElementById("userName");
 
- const creator=
-   document.getElementById("postCreator");
+  const notice =
+    document.getElementById("accountingLoginNotice");
 
- if(currentUser){
+  if(currentUser){
 
-   const name=
-     currentUser.user_metadata?.full_name ||
-     currentUser.email?.split("@")[0] ||
-     "ব্যবহারকারী";
+    loginButton.style.display="none";
+    logoutButton.style.display="inline-block";
 
-   userName.textContent=name;
+    const name =
+      currentUser.user_metadata?.full_name ||
+      currentUser.email?.split("@")[0] ||
+      "ব্যবহারকারী";
 
-   loginBtn.style.display="none";
-   logoutBtn.style.display="inline-block";
+    userName.textContent=name;
 
-   if(notice)
-     notice.style.display="none";
+  }else{
 
-   if(creator)
-     creator.style.display="block";
+    loginButton.style.display="inline-block";
+    logoutButton.style.display="none";
+    userName.textContent="";
 
-   await checkAccountingAccess();
+  }
 
- }else{
+  if(accountingAllowed){
 
-   userName.textContent="";
+    notice.style.display="none";
 
-   loginBtn.style.display="inline-block";
-   logoutBtn.style.display="none";
+    await loadCustomers();
+    await loadMaterials();
+    await loadWorkers();
 
-   if(notice)
-     notice.style.display="block";
+    showPage("customersPage");
 
-   if(creator)
-     creator.style.display="none";
+  }else{
 
-   accountingAllowed=false;
- }
+    notice.style.display="block";
 
- updateAccountingVisibility();
+    document.querySelectorAll(".page")
+      .forEach(p=>p.classList.remove("active"));
+
+  }
+
 }
-
 
 function updateAccountingVisibility(){
 
- const loginNotice=
-   document.getElementById(
-     "accountingLoginNotice"
-   );
+  const notice =
+    document.getElementById("accountingLoginNotice");
 
- if(!currentUser){
+  notice.style.display =
+    accountingAllowed ? "none" : "block";
 
-   loginNotice.style.display="block";
-
-   document
-     .querySelectorAll(
-       "#customersPage,#newCustomerPage,#customerDetailPage,#materialsPage,#workersPage,#settingsPage"
-     )
-     .forEach(p=>p.classList.remove("active"));
-
-   return;
- }
-
- if(!accountingAllowed){
-
-   loginNotice.style.display="block";
-
-   loginNotice.innerHTML=`
-     <h2>🔒 হিসাবের অনুমতি নেই</h2>
-     <p>
-       এই অ্যাকাউন্ট দিয়ে ব্যবসার ব্যক্তিগত হিসাব দেখার
-       অনুমতি নেই।
-     </p>
-     <p class="small">
-       শুধু অনুমোদিত অ্যাডমিন অ্যাকাউন্ট এই অংশ ব্যবহার করতে পারবেন।
-     </p>
-   `;
-
-   document
-     .querySelectorAll(
-       "#customersPage,#newCustomerPage,#customerDetailPage,#materialsPage,#workersPage,#settingsPage"
-     )
-     .forEach(p=>p.classList.remove("active"));
-
-   return;
- }
-
- loginNotice.style.display="none";
 }
-
-
-/* =====================================================
-   ACCOUNTING OPEN
-===================================================== */
 
 async function openAccountingPage(pageId="customersPage"){
 
- if(!currentUser){
+  if(!currentUser){
 
-   openAuth();
-   return;
- }
+    openAuth();
+    return;
 
- if(!accountingAllowed){
+  }
 
-   await checkAccountingAccess();
+  if(!accountingAllowed){
 
-   if(!accountingAllowed){
+    alert("আপনার হিসাবের অনুমতি নেই।");
+    return;
 
-     alert(
-       "এই অ্যাকাউন্টে ব্যবসার হিসাব দেখার অনুমতি নেই।"
-     );
+  }
 
-     return;
-   }
- }
+  showPage(pageId);
 
- showPage(pageId);
+  if(pageId==="customersPage")
+    await loadCustomers();
 
- if(pageId==="customersPage")
-   await loadCustomers();
+  if(pageId==="materialsPage")
+    await loadMaterials();
 
- if(pageId==="materialsPage")
-   await loadMaterials();
+  if(pageId==="workersPage")
+    await loadWorkers();
 
- if(pageId==="workersPage")
-   await loadWorkers();
 }
-
 
 async function openNewCustomer(){
 
- if(!currentUser){
+  if(!currentUser){
 
-   openAuth();
-   return;
- }
+    openAuth();
+    return;
 
- if(!accountingAllowed){
+  }
 
-   await checkAccountingAccess();
+  if(!accountingAllowed){
 
-   if(!accountingAllowed){
+    alert("আপনার হিসাবের অনুমতি নেই।");
+    return;
 
-     alert(
-       "এই অ্যাকাউন্টে হিসাব ব্যবহারের অনুমতি নেই।"
-     );
+  }
 
-     return;
-   }
- }
+  clearNewCustomerForm();
 
- showPage("newCustomerPage");
+  showPage("newCustomerPage");
+
 }
 
-
-/* =====================================================
-   CUSTOMER LOAD
-===================================================== */
+/* =========================
+   CUSTOMERS
+========================= */
 
 async function loadCustomers(){
 
- const box=
-   document.getElementById("customerList");
+  if(!accountingAllowed) return;
 
- box.innerHTML=`
-   <div class="card loading">
-     কাস্টমারের হিসাব লোড হচ্ছে...
-   </div>
- `;
+  const list =
+    document.getElementById("customersList");
 
- const {data,error}=
-   await supabaseClient
-     .from("customers")
-     .select("*")
-     .eq("admin_id",currentUser.id)
-     .order("created_at",{ascending:false});
+  list.innerHTML =
+    `<div class="loading">লোড হচ্ছে...</div>`;
 
- if(error){
+  const search =
+    document.getElementById("customerSearch")?.value
+      ?.trim() || "";
 
-   box.innerHTML=`
-     <div class="card warning">
-       কাস্টমারের হিসাব লোড হয়নি।<br>
-       ${escapeHTML(error.message)}
-     </div>
-   `;
+  let query =
+    supabaseClient
+      .from("customers")
+      .select("*")
+      .eq("admin_id",currentUser.id)
+      .order("created_at",{ascending:false});
 
-   return;
- }
+  if(search){
 
- if(!data || !data.length){
+    query = query.or(
+      `name.ilike.%${search}%,phone.ilike.%${search}%`
+    );
 
-   box.innerHTML=`
-     <div class="card center">
-       এখনো কোনো কাস্টমার যোগ করা হয়নি।
-     </div>
-   `;
+  }
 
-   return;
- }
+  const {data,error}=await query;
 
- box.innerHTML="";
+  if(error){
 
- for(const c of data){
+    list.innerHTML =
+      `<div class="warning">
+        কাস্টমার লোড করা যায়নি।
+        <br>${escapeHTML(error.message)}
+      </div>`;
 
-   const summary=
-     await getCustomerSummary(c.id,c.contract_price);
+    return;
 
-   const card=
-     document.createElement("div");
+  }
 
-   card.className="customer-card";
+  if(!data?.length){
 
-   card.innerHTML=`
+    list.innerHTML =
+      `<div class="empty">
+        এখনো কোনো কাস্টমার নেই।
+        <br><br>
+        <button class="success"
+          onclick="openNewCustomer()">
+          ➕ প্রথম কাস্টমার যোগ করুন
+        </button>
+      </div>`;
 
-     <div style="position:relative">
+    return;
 
-       <div class="three-menu">
+  }
 
-         <button class="three-button"
-                 onclick="toggleCustomerMenu('${c.id}')">
-           ⋮
-         </button>
+  let html="";
 
-         <div class="dropdown"
-              id="menu-${c.id}">
+  for(const c of data){
 
-           <button onclick="openCustomer('${c.id}')">
-             📋 পুরো হিসাব
-           </button>
+    const summary =
+      await getCustomerSummary(
+        c.id,
+        c.contract_price
+      );
 
-           <button onclick="openEditCustomer('${c.id}')">
-             ✏️ তথ্য আপডেট
-           </button>
+    html += `
+      <div class="customer-card">
 
-           <button onclick="openCustomer('${c.id}')">
-             📊 লাভ/লোকসান
-           </button>
+        <div class="three-menu">
 
-           <button onclick="printCustomer('${c.id}')">
-             🖨️ হিসাব প্রিন্ট
-           </button>
+          <button class="three-button"
+            onclick="toggleCustomerMenu('${c.id}')">
+            ⋮
+          </button>
 
-           <button onclick="downloadCustomer('${c.id}')">
-             📥 হিসাব ডাউনলোড
-           </button>
+          <div class="dropdown"
+            id="customerMenu-${c.id}">
 
-           <button onclick="deleteCustomer('${c.id}')"
-                   style="color:#d00000">
-             🗑️ কাস্টমার মুছুন
-           </button>
+            <button onclick="openEditCustomer('${c.id}')">
+              ✏️ তথ্য পরিবর্তন
+            </button>
 
-         </div>
+            <button onclick="openCustomer('${c.id}')">
+              📒 পূর্ণ হিসাব
+            </button>
 
-       </div>
+            <button onclick="printCustomer('${c.id}')">
+              🖨️ প্রিন্ট
+            </button>
 
-       <div class="customer-title">
-         👤 ${escapeHTML(c.name)}
-       </div>
+            <button onclick="downloadCustomer('${c.id}')">
+              📥 Download
+            </button>
 
-       <div>📞 ${escapeHTML(c.phone || "-")}</div>
+            <button onclick="deleteCustomer('${c.id}')"
+              style="color:#dc2626">
+              🗑️ কাস্টমার মুছুন
+            </button>
 
-       <div>
-         🔨 ${escapeHTML(c.work || "-")}
-       </div>
+          </div>
 
-       <div class="small">
-         ডেলিভারি:
-         ${formatDateOnly(c.delivery_date)}
-       </div>
+        </div>
 
-       <hr>
+        <div class="customer-title">
+          ${escapeHTML(c.name || "নাম নেই")}
+        </div>
 
-       <div>
-         চুক্তির দাম:
-         <b>${money(c.contract_price)}</b>
-       </div>
+        <div>📞 ${escapeHTML(c.phone || "-")}</div>
+        <div>📍 ${escapeHTML(c.address || "-")}</div>
 
-       <div>
-         মোট খরচ:
-         <b>${money(summary.totalCost)}</b>
-       </div>
+        <hr>
 
-       <div>
-         মোট পেয়েছেন:
-         <b>${money(summary.totalPaid)}</b>
-       </div>
+        <div>
+          💰 চুক্তির মূল্য:
+          <b>${money(c.contract_price)}</b>
+        </div>
 
-       <div>
-         বাকি:
-         <b>${money(summary.due)}</b>
-       </div>
+        <div>
+          💸 মোট খরচ:
+          <b>${money(summary.totalCost)}</b>
+        </div>
 
-       <div style="margin-top:8px">
+        <div>
+          📈 লাভ/ক্ষতি:
+          <b class="${summary.profit>=0?'profit':'loss'}">
+            ${money(summary.profit)}
+          </b>
+        </div>
 
-         ${
-           summary.profit>=0
-           ?
-           `<span class="profit">
-             লাভ: ${money(summary.profit)}
-            </span>`
-           :
-           `<span class="loss">
-             লোকসান: ${money(Math.abs(summary.profit))}
-            </span>`
-         }
+        <div>
+          💵 জমা:
+          <b>${money(summary.paid)}</b>
+        </div>
 
-       </div>
+        <div>
+          📌 বাকি:
+          <b>${money(summary.due)}</b>
+        </div>
 
-       <button class="primary"
-               onclick="openCustomer('${c.id}')">
-         📋 পুরো হিসাব দেখুন
-       </button>
+        <button class="primary"
+          onclick="openCustomer('${c.id}')">
+          📒 কাজের পূর্ণ হিসাব দেখুন
+        </button>
 
-     </div>
-   `;
+      </div>
+    `;
 
-   box.appendChild(card);
- }
+  }
+
+  list.innerHTML=html;
+
 }
-
-
-/* =====================================================
-   CUSTOMER SUMMARY
-===================================================== */
 
 async function getCustomerSummary(customerId,contractPrice){
 
- let materialCost=0;
- let workerCost=0;
- let otherCost=0;
- let totalPaid=0;
+  const materials =
+    await supabaseClient
+      .from("customer_materials")
+      .select("total")
+      .eq("customer_id",customerId)
+      .eq("admin_id",currentUser.id);
 
- const materialsResult=
-   await supabaseClient
-     .from("customer_materials")
-     .select("total")
-     .eq("customer_id",customerId);
+  const workers =
+    await supabaseClient
+      .from("customer_workers")
+      .select("total")
+      .eq("customer_id",customerId)
+      .eq("admin_id",currentUser.id);
 
- if(!materialsResult.error){
+  const expenses =
+    await supabaseClient
+      .from("customer_expenses")
+      .select("amount")
+      .eq("customer_id",customerId)
+      .eq("admin_id",currentUser.id);
 
-   materialCost=
-     (materialsResult.data||[])
-     .reduce(
-       (s,x)=>s+Number(x.total||0),
-       0
-     );
- }
+  const payments =
+    await supabaseClient
+      .from("customer_payments")
+      .select("amount")
+      .eq("customer_id",customerId)
+      .eq("admin_id",currentUser.id);
 
- const workersResult=
-   await supabaseClient
-     .from("customer_workers")
-     .select("total")
-     .eq("customer_id",customerId);
+  const materialCost =
+    (materials.data || [])
+      .reduce((s,x)=>s+Number(x.total||0),0);
 
- if(!workersResult.error){
+  const workerCost =
+    (workers.data || [])
+      .reduce((s,x)=>s+Number(x.total||0),0);
 
-   workerCost=
-     (workersResult.data||[])
-     .reduce(
-       (s,x)=>s+Number(x.total||0),
-       0
-     );
- }
+  const otherCost =
+    (expenses.data || [])
+      .reduce((s,x)=>s+Number(x.amount||0),0);
 
- const expensesResult=
-   await supabaseClient
-     .from("customer_expenses")
-     .select("amount")
-     .eq("customer_id",customerId);
+  const paid =
+    (payments.data || [])
+      .reduce((s,x)=>s+Number(x.amount||0),0);
 
- if(!expensesResult.error){
+  const totalCost =
+    materialCost + workerCost + otherCost;
 
-   otherCost=
-     (expensesResult.data||[])
-     .reduce(
-       (s,x)=>s+Number(x.amount||0),
-       0
-     );
- }
+  const contract =
+    Number(contractPrice||0);
 
- const paymentsResult=
-   await supabaseClient
-     .from("customer_payments")
-     .select("amount")
-     .eq("customer_id",customerId);
+  const profit =
+    contract-totalCost;
 
- if(!paymentsResult.error){
+  const due =
+    Math.max(0,contract-paid);
 
-   totalPaid=
-     (paymentsResult.data||[])
-     .reduce(
-       (s,x)=>s+Number(x.amount||0),
-       0
-     );
- }
+  return {
+    materialCost,
+    workerCost,
+    otherCost,
+    totalCost,
+    paid,
+    due,
+    profit
+  };
 
- const totalCost=
-   materialCost+
-   workerCost+
-   otherCost;
-
- const price=
-   Number(contractPrice||0);
-
- const profit=
-   price-totalCost;
-
- const due=
-   Math.max(0,price-totalPaid);
-
- return{
-   materialCost,
-   workerCost,
-   otherCost,
-   totalCost,
-   totalPaid,
-   due,
-   profit
- };
 }
-
-
-/* =====================================================
-   SAVE CUSTOMER
-===================================================== */
 
 async function saveCustomer(){
 
- if(!accountingAllowed){
-   alert("হিসাব ব্যবহারের অনুমতি নেই।");
-   return;
- }
+  if(!currentUser || !accountingAllowed){
 
- const name=
-   document.getElementById("customerName")
-   .value.trim();
+    alert("আগে লগইন করুন।");
+    return;
 
- const phone=
-   document.getElementById("customerPhone")
-   .value.trim();
+  }
 
- const address=
-   document.getElementById("customerAddress")
-   .value.trim();
+  const name =
+    document.getElementById("newName").value.trim();
 
- const work=
-   document.getElementById("workName")
-   .value.trim();
+  const phone =
+    document.getElementById("newPhone").value.trim();
 
- const price=
-   Number(
-     document.getElementById("workPrice").value
-   )||0;
+  const address =
+    document.getElementById("newAddress").value.trim();
 
- const start=
-   document.getElementById("startDate").value||null;
+  const work =
+    document.getElementById("newWork").value.trim();
 
- const delivery=
-   document.getElementById("deliveryDate").value||null;
+  const contract =
+    Number(
+      document.getElementById("newContractPrice").value || 0
+    );
 
- if(!name){
-   alert("কাস্টমারের নাম লিখুন।");
-   return;
- }
+  const startDate =
+    document.getElementById("newStartDate").value || null;
 
- if(!phone){
-   alert("ফোন নম্বর লিখুন।");
-   return;
- }
+  const deliveryDate =
+    document.getElementById("newDeliveryDate").value || null;
 
- const {error}=
-   await supabaseClient
-     .from("customers")
-     .insert({
-       admin_id:currentUser.id,
-       name:name,
-       phone:phone,
-       address:address,
-       work:work,
-       contract_price:price,
-       start_date:start,
-       delivery_date:delivery
-     });
+  if(!name){
 
- if(error){
+    alert("কাস্টমারের নাম লিখুন।");
+    return;
 
-   alert(
-     "কাস্টমার সেভ হয়নি:\n"+
-     error.message
-   );
+  }
 
-   return;
- }
+  if(!phone){
 
- alert("কাস্টমার সফলভাবে সেভ হয়েছে।");
+    alert("ফোন নম্বর লিখুন।");
+    return;
 
- clearNewCustomerForm();
+  }
 
- await openAccountingPage();
+  const {data,error} =
+    await supabaseClient
+      .from("customers")
+      .insert({
+
+        admin_id:currentUser.id,
+        name,
+        phone,
+        address,
+        work,
+        contract_price:contract,
+        start_date:startDate,
+        delivery_date:deliveryDate
+
+      })
+      .select()
+      .single();
+
+  if(error){
+
+    alert("কাস্টমার সেভ হয়নি:\n"+error.message);
+    return;
+
+  }
+
+  alert("✅ কাস্টমার সফলভাবে যোগ হয়েছে।");
+
+  clearNewCustomerForm();
+
+  await loadCustomers();
+
+  await openCustomer(data.id);
+
 }
-
 
 function clearNewCustomerForm(){
 
- document.getElementById("customerName").value="";
- document.getElementById("customerPhone").value="";
- document.getElementById("customerAddress").value="";
- document.getElementById("workName").value="";
- document.getElementById("workPrice").value="";
- document.getElementById("startDate").value="";
- document.getElementById("deliveryDate").value="";
+  [
+    "newName",
+    "newPhone",
+    "newAddress",
+    "newWork",
+    "newContractPrice",
+    "newStartDate",
+    "newDeliveryDate"
+  ].forEach(id=>{
+
+    const el=document.getElementById(id);
+
+    if(el) el.value="";
+
+  });
+
 }
 
-
-/* =====================================================
+/* =========================
    CUSTOMER DETAIL
-===================================================== */
+========================= */
 
 async function openCustomer(id){
 
- if(!accountingAllowed)
-   return;
+  if(!accountingAllowed) return;
 
- selectedCustomerId=id;
+  selectedCustomerId=id;
 
- showPage("customerDetailPage");
+  showPage("customerDetailPage");
 
- const box=
-   document.getElementById("customerDetail");
+  const box =
+    document.getElementById("customerDetail");
 
- box.innerHTML=`
-   <div class="loading">
-     কাস্টমারের সম্পূর্ণ হিসাব লোড হচ্ছে...
-   </div>
- `;
+  box.innerHTML =
+    `<div class="card loading">
+      হিসাব লোড হচ্ছে...
+    </div>`;
 
- const {data:c,error}=
-   await supabaseClient
-     .from("customers")
-     .select("*")
-     .eq("id",id)
-     .eq("admin_id",currentUser.id)
-     .single();
+  const {data:c,error} =
+    await supabaseClient
+      .from("customers")
+      .select("*")
+      .eq("id",id)
+      .eq("admin_id",currentUser.id)
+      .single();
 
- if(error || !c){
+  if(error){
 
-   box.innerHTML=`
-     <div class="warning">
-       কাস্টমারের হিসাব পাওয়া যায়নি।
-     </div>
-   `;
+    box.innerHTML =
+      `<div class="warning">
+        কাস্টমারের তথ্য পাওয়া যায়নি।
+      </div>`;
 
-   return;
- }
+    return;
 
- await renderCustomerDetail(c);
+  }
+
+  await renderCustomerDetail(c);
+
 }
-
 
 async function renderCustomerDetail(c){
 
- selectedCustomerId=c.id;
-
- const box=
-   document.getElementById("customerDetail");
+  const box =
+    document.getElementById("customerDetail");
 
- const summary=
-   await getCustomerSummary(
-     c.id,
-     c.contract_price
-   );
-
- const materialsResult=
-   await supabaseClient
-     .from("customer_materials")
-     .select("*")
-     .eq("customer_id",c.id)
-     .order("created_at",{ascending:true});
+  const summary =
+    await getCustomerSummary(
+      c.id,
+      c.contract_price
+    );
 
- const workersResult=
-   await supabaseClient
-     .from("customer_workers")
-     .select("*")
-     .eq("customer_id",c.id)
-     .order("created_at",{ascending:true});
+  const materials =
+    await supabaseClient
+      .from("customer_materials")
+      .select("*")
+      .eq("customer_id",c.id)
+      .eq("admin_id",currentUser.id)
+      .order("id",{ascending:false});
 
- const expensesResult=
-   await supabaseClient
-     .from("customer_expenses")
-     .select("*")
-     .eq("customer_id",c.id)
-     .order("created_at",{ascending:true});
+  const workers =
+    await supabaseClient
+      .from("customer_workers")
+      .select("*")
+      .eq("customer_id",c.id)
+      .eq("admin_id",currentUser.id)
+      .order("id",{ascending:false});
 
- const paymentsResult=
-   await supabaseClient
-     .from("customer_payments")
-     .select("*")
-     .eq("customer_id",c.id)
-     .order("payment_date",{ascending:true});
+  const expenses =
+    await supabaseClient
+      .from("customer_expenses")
+      .select("*")
+      .eq("customer_id",c.id)
+      .eq("admin_id",currentUser.id)
+      .order("id",{ascending:false});
 
- const customerMaterials=
-   materialsResult.data||[];
+  const payments =
+    await supabaseClient
+      .from("customer_payments")
+      .select("*")
+      .eq("customer_id",c.id)
+      .eq("admin_id",currentUser.id)
+      .order("payment_date",{ascending:false});
 
- const customerWorkers=
-   workersResult.data||[];
+  box.innerHTML=`
 
- const expenses=
-   expensesResult.data||[];
+    <div class="card">
 
- const payments=
-   paymentsResult.data||[];
+      <div style="display:flex;justify-content:space-between;gap:10px">
 
- const materials=
-   await getMaterials();
+        <div>
 
- const workers=
-   await getWorkers();
+          <h2>📒 ${escapeHTML(c.name)}</h2>
 
- box.innerHTML=`
+          <div class="small">
+            কাস্টমারের পূর্ণ কাজের হিসাব
+          </div>
 
- <div style="position:relative">
+        </div>
 
-   <div class="three-menu">
+        <div class="three-menu" style="position:relative;top:auto;right:auto">
 
-     <button class="three-button"
-             onclick="toggleDetailMenu()">
-       ⋮
-     </button>
+          <button class="three-button"
+            onclick="toggleDetailMenu()">
+            ⋮
+          </button>
 
-     <div class="dropdown"
-          id="detailMenu">
+          <div class="dropdown"
+            id="detailMenu">
 
-       <button onclick="openEditCustomer('${c.id}')">
-         ✏️ কাস্টমারের তথ্য আপডেট
-       </button>
+            <button onclick="openEditCustomer('${c.id}')">
+              ✏️ তথ্য পরিবর্তন
+            </button>
 
-       <button onclick="scrollToBox('materialBox')">
-         🔩 মালামালের হিসাব
-       </button>
+            <button onclick="addCustomerMaterial('${c.id}')">
+              🧱 মাল যোগ
+            </button>
+
+            <button onclick="addCustomerWorker('${c.id}')">
+              👷 মিস্ত্রি যোগ
+            </button>
+
+            <button onclick="addOtherExpense('${c.id}')">
+              💸 অন্যান্য খরচ
+            </button>
 
-       <button onclick="scrollToBox('workerBox')">
-         👷 মিস্ত্রির হিসাব
-       </button>
+            <button onclick="addPayment('${c.id}')">
+              💵 টাকা জমা
+            </button>
 
-       <button onclick="scrollToBox('expenseBox')">
-         💸 অন্যান্য খরচ
-       </button>
+            <button onclick="printCustomer('${c.id}')">
+              🖨️ প্রিন্ট
+            </button>
 
-       <button onclick="scrollToBox('paymentBox')">
-         💰 পেমেন্ট যোগ করুন
-       </button>
+            <button onclick="downloadCustomer('${c.id}')">
+              📥 Download
+            </button>
 
-       <button onclick="scrollToBox('summaryBox')">
-         📊 লাভ/লোকসান দেখুন
-       </button>
+          </div>
 
-       <button onclick="scrollToBox('deliveryBox')">
-         📅 ডেলিভারি তথ্য
-       </button>
+        </div>
 
-       <button onclick="downloadCustomer('${c.id}')">
-         📥 হিসাব ডাউনলোড
-       </button>
+      </div>
 
-       <button onclick="printCustomer('${c.id}')">
-         🖨️ হিসাব প্রিন্ট
-       </button>
+      <div class="info-grid">
 
-       <button onclick="deleteCustomer('${c.id}')"
-               style="color:#d00000">
-         🗑️ কাস্টমার মুছুন
-       </button>
+        <div class="info-item">
+          <div class="info-label">📞 ফোন</div>
+          <div class="info-value">${escapeHTML(c.phone||"-")}</div>
+        </div>
 
-     </div>
+        <div class="info-item">
+          <div class="info-label">📍 ঠিকানা</div>
+          <div class="info-value">${escapeHTML(c.address||"-")}</div>
+        </div>
 
-   </div>
+        <div class="info-item">
+          <div class="info-label">📅 কাজ শুরু</div>
+          <div class="info-value">${formatDateOnly(c.start_date)}</div>
+        </div>
 
-   <h2>
-     👤 ${escapeHTML(c.name)}
-   </h2>
+        <div class="info-item">
+          <div class="info-label">🚚 ডেলিভারি</div>
+          <div class="info-value">${formatDateOnly(c.delivery_date)}</div>
+        </div>
 
-   <div class="status">
+      </div>
 
-     <b>📞 ফোন:</b>
-     ${escapeHTML(c.phone||"-")}
-     <br>
+      <div class="status" style="margin-top:12px">
+        <b>🔨 কাজ:</b><br>
+        ${escapeHTML(c.work||"কাজের বিবরণ দেওয়া হয়নি")}
+      </div>
 
-     <b>📍 ঠিকানা:</b>
-     ${escapeHTML(c.address||"-")}
-     <br>
+    </div>
 
-     <b>🔨 কাজ:</b>
-     ${escapeHTML(c.work||"-")}
-     <br>
+    <div class="card">
 
-     <b>📅 কাজ শুরু:</b>
-     ${formatDateOnly(c.start_date)}
-     <br>
+      <h3>💰 হিসাবের সারাংশ</h3>
 
-     <span id="deliveryBox">
-       <b>🚚 ডেলিভারি:</b>
-       ${formatDateOnly(c.delivery_date)}
-     </span>
+      <div class="total-box">
 
-   </div>
+        <div class="total-line">
+          <span>চুক্তির মূল্য</span>
+          <b>${money(c.contract_price)}</b>
+        </div>
 
- </div>
+        <div class="total-line">
+          <span>🧱 মালামাল</span>
+          <b>${money(summary.materialCost)}</b>
+        </div>
 
+        <div class="total-line">
+          <span>👷 মিস্ত্রি</span>
+          <b>${money(summary.workerCost)}</b>
+        </div>
 
- <div class="total-box"
-      id="summaryBox">
+        <div class="total-line">
+          <span>💸 অন্যান্য খরচ</span>
+          <b>${money(summary.otherCost)}</b>
+        </div>
 
-   <h3>📊 সম্পূর্ণ হিসাব</h3>
+        <div class="total-line">
+          <span>💰 মোট খরচ</span>
+          <b class="big-total">${money(summary.totalCost)}</b>
+        </div>
 
-   <div class="total-line">
-     <span>কাজের মোট চুক্তির দাম</span>
-     <b>${money(c.contract_price)}</b>
-   </div>
+        <div class="total-line">
+          <span>📈 লাভ/ক্ষতি</span>
+          <b class="${summary.profit>=0?'profit':'loss'}">
+            ${money(summary.profit)}
+          </b>
+        </div>
 
-   <div class="total-line">
-     <span>🔩 মালের খরচ</span>
-     <b>${money(summary.materialCost)}</b>
-   </div>
+        <div class="total-line">
+          <span>💵 জমা টাকা</span>
+          <b>${money(summary.paid)}</b>
+        </div>
 
-   <div class="total-line">
-     <span>👷 মিস্ত্রির খরচ</span>
-     <b>${money(summary.workerCost)}</b>
-   </div>
+        <div class="total-line">
+          <span>📌 বাকি টাকা</span>
+          <b>${money(summary.due)}</b>
+        </div>
 
-   <div class="total-line">
-     <span>💸 অন্যান্য খরচ</span>
-     <b>${money(summary.otherCost)}</b>
-   </div>
+      </div>
 
-   <hr>
+    </div>
 
-   <div class="total-line big-total">
-     <span>মোট খরচ</span>
-     <span>${money(summary.totalCost)}</span>
-   </div>
+    <div class="card">
 
-   <div class="total-line">
-     <span>💰 মোট পেয়েছেন</span>
-     <b>${money(summary.totalPaid)}</b>
-   </div>
+      <h3>🧱 মালামালের হিসাব</h3>
 
-   <div class="total-line">
-     <span>💵 কাস্টমারের বাকি</span>
-     <b>${money(summary.due)}</b>
-   </div>
+      <button class="success"
+        onclick="addCustomerMaterial('${c.id}')">
+        ➕ মাল যোগ করুন
+      </button>
 
-   <hr>
+      <div class="table-wrap">
 
-   ${
-     summary.profit>=0
-     ?
-     `<div class="total-line big-total profit">
-       <span>আপনার লাভ</span>
-       <span>${money(summary.profit)}</span>
-      </div>`
-     :
-     `<div class="total-line big-total loss">
-       <span>আপনার লোকসান</span>
-       <span>${money(Math.abs(summary.profit))}</span>
-      </div>`
-   }
+        <table>
 
- </div>
+          <thead>
+            <tr>
+              <th>মাল</th>
+              <th>দাম</th>
+              <th>পরিমাণ</th>
+              <th>মোট</th>
+              <th>Action</th>
+            </tr>
+          </thead>
 
+          <tbody>
 
- <!-- MATERIAL -->
+            ${
+              (materials.data||[]).map(m=>`
 
- <div class="card"
-      id="materialBox">
+                <tr>
 
-   <h3>🔩 এই কাজে ব্যবহৃত মাল</h3>
+                  <td>${escapeHTML(m.name)}</td>
+                  <td>${money(m.price)}</td>
+                  <td>${m.qty}</td>
+                  <td>${money(m.total)}</td>
 
-   <div class="row3">
+                  <td>
+                    <button class="danger"
+                      onclick="removeCustomerMaterial('${m.id}')">
+                      মুছুন
+                    </button>
+                  </td>
 
-     <select id="detailMaterial">
-       <option value="">
-         মাল নির্বাচন করুন
-       </option>
+                </tr>
 
-       ${
-         materials.map(m=>`
-           <option value="${m.id}"
-                   data-price="${m.price}">
-             ${escapeHTML(m.name)}
-           </option>
-         `).join("")
-       }
+              `).join("")
+              ||
+              `<tr>
+                <td colspan="5">কোনো মাল যোগ করা হয়নি</td>
+              </tr>`
+            }
 
-     </select>
+          </tbody>
 
-     <input id="detailMaterialQty"
-            type="number"
-            min="0"
-            placeholder="পরিমাণ">
+        </table>
 
-     <button class="success"
-             onclick="addCustomerMaterial('${c.id}')">
-       ➕ যোগ
-     </button>
+      </div>
 
-   </div>
+    </div>
 
-   <div id="selectedMaterialPrice"
-        class="small">
-     মাল নির্বাচন করলে দাম দেখা যাবে।
-   </div>
+    <div class="card">
 
-   <div class="table-wrap">
+      <h3>👷 মিস্ত্রির হিসাব</h3>
 
-     <table>
+      <button class="success"
+        onclick="addCustomerWorker('${c.id}')">
+        ➕ মিস্ত্রি যোগ করুন
+      </button>
 
-       <thead>
-         <tr>
-           <th>মাল</th>
-           <th>পরিমাণ</th>
-           <th>একক দাম</th>
-           <th>মোট</th>
-           <th></th>
-         </tr>
-       </thead>
+      <div class="table-wrap">
 
-       <tbody>
+        <table>
 
-       ${
-         customerMaterials.map(item=>`
+          <thead>
+            <tr>
+              <th>মিস্ত্রি</th>
+              <th>বেতন</th>
+              <th>দিন</th>
+              <th>মোট</th>
+              <th>Action</th>
+            </tr>
+          </thead>
 
-           <tr>
+          <tbody>
 
-             <td>${escapeHTML(item.name)}</td>
+            ${
+              (workers.data||[]).map(w=>`
 
-             <td>${item.qty}</td>
+                <tr>
 
-             <td>${money(item.price)}</td>
+                  <td>${escapeHTML(w.name)}</td>
+                  <td>${money(w.salary)}</td>
+                  <td>${w.days}</td>
+                  <td>${money(w.total)}</td>
 
-             <td>${money(item.total)}</td>
+                  <td>
+                    <button class="danger"
+                      onclick="removeCustomerWorker('${w.id}')">
+                      মুছুন
+                    </button>
+                  </td>
 
-             <td>
-               <button class="danger"
-                       onclick="removeCustomerMaterial('${item.id}')">
-                 মুছুন
-               </button>
-             </td>
+                </tr>
 
-           </tr>
+              `).join("")
+              ||
+              `<tr>
+                <td colspan="5">কোনো মিস্ত্রি যোগ করা হয়নি</td>
+              </tr>`
+            }
 
-         `).join("")
-       }
+          </tbody>
 
-       </tbody>
+        </table>
 
-     </table>
+      </div>
 
-   </div>
+    </div>
 
- </div>
+    <div class="card">
 
+      <h3>💸 অন্যান্য খরচ</h3>
 
- <!-- WORKER -->
+      <button class="orange"
+        onclick="addOtherExpense('${c.id}')">
+        ➕ খরচ যোগ করুন
+      </button>
 
- <div class="card"
-      id="workerBox">
+      <div class="table-wrap">
 
-   <h3>👷 এই কাজে মিস্ত্রির হিসাব</h3>
+        <table>
 
-   <div class="row3">
+          <thead>
+            <tr>
+              <th>খরচের নাম</th>
+              <th>টাকা</th>
+              <th>Action</th>
+            </tr>
+          </thead>
 
-     <select id="detailWorker">
-       <option value="">
-         মিস্ত্রি নির্বাচন করুন
-       </option>
+          <tbody>
 
-       ${
-         workers.map(w=>`
-           <option value="${w.id}"
-                   data-salary="${w.monthly_salary}">
-             ${escapeHTML(w.name)}
-           </option>
-         `).join("")
-       }
+            ${
+              (expenses.data||[]).map(e=>`
 
-     </select>
+                <tr>
 
-     <input id="detailWorkerDays"
-            type="number"
-            min="0"
-            placeholder="কত দিন">
+                  <td>${escapeHTML(e.name)}</td>
+                  <td>${money(e.amount)}</td>
 
-     <button class="success"
-             onclick="addCustomerWorker('${c.id}')">
-       ➕ যোগ
-     </button>
+                  <td>
+                    <button class="danger"
+                      onclick="removeOtherExpense('${e.id}')">
+                      মুছুন
+                    </button>
+                  </td>
 
-   </div>
+                </tr>
 
-   <div id="selectedWorkerSalary"
-        class="small">
-     মিস্ত্রি নির্বাচন করলে মাসিক বেতন দেখা যাবে।
-   </div>
+              `).join("")
+              ||
+              `<tr>
+                <td colspan="3">কোনো অন্যান্য খরচ নেই</td>
+              </tr>`
+            }
 
-   <div class="table-wrap">
+          </tbody>
 
-     <table>
+        </table>
 
-       <thead>
-         <tr>
-           <th>মিস্ত্রি</th>
-           <th>মাসিক বেতন</th>
-           <th>দিন</th>
-           <th>হিসাব</th>
-           <th></th>
-         </tr>
-       </thead>
+      </div>
 
-       <tbody>
+    </div>
 
-       ${
-         customerWorkers.map(item=>`
+    <div class="card">
 
-           <tr>
+      <h3>💵 জমা টাকার হিসাব</h3>
 
-             <td>${escapeHTML(item.name)}</td>
+      <button class="success"
+        onclick="addPayment('${c.id}')">
+        ➕ টাকা জমা
+      </button>
 
-             <td>${money(item.salary)}</td>
+      <div class="table-wrap">
 
-             <td>${item.days}</td>
+        <table>
 
-             <td>${money(item.total)}</td>
+          <thead>
+            <tr>
+              <th>তারিখ</th>
+              <th>টাকা</th>
+              <th>নোট</th>
+              <th>Action</th>
+            </tr>
+          </thead>
 
-             <td>
-               <button class="danger"
-                       onclick="removeCustomerWorker('${item.id}')">
-                 মুছুন
-               </button>
-             </td>
+          <tbody>
 
-           </tr>
+            ${
+              (payments.data||[]).map(p=>`
 
-         `).join("")
-       }
+                <tr>
 
-       </tbody>
+                  <td>${formatDateOnly(p.payment_date)}</td>
+                  <td>${money(p.amount)}</td>
+                  <td>${escapeHTML(p.note||"-")}</td>
 
-     </table>
+                  <td>
+                    <button class="danger"
+                      onclick="removePayment('${p.id}')">
+                      মুছুন
+                    </button>
+                  </td>
 
-   </div>
+                </tr>
 
-   <p class="small">
-     দৈনিক মজুরি = মাসিক বেতন ÷ ৩০ × কাজের দিন।
-   </p>
+              `).join("")
+              ||
+              `<tr>
+                <td colspan="4">এখনো টাকা জমা দেওয়া হয়নি</td>
+              </tr>`
+            }
 
- </div>
+          </tbody>
 
+        </table>
 
- <!-- OTHER EXPENSE -->
+      </div>
 
- <div class="card"
-      id="expenseBox">
+    </div>
 
-   <h3>💸 হেলপার / অন্যান্য খরচ</h3>
+    <div class="card center">
 
-   <div class="row">
+      <button class="gray"
+        onclick="showPage('customersPage');loadCustomers()">
+        ↩️ কাস্টমার তালিকায় ফিরে যান
+      </button>
 
-     <input id="otherName"
-            placeholder="যেমন: হেলপার / পরিবহন / অন্যান্য">
+      <button class="primary"
+        onclick="printCustomer('${c.id}')">
+        🖨️ প্রিন্ট
+      </button>
 
-     <input id="otherAmount"
-            type="number"
-            min="0"
-            placeholder="টাকা">
+    </div>
 
-   </div>
+  `;
 
-   <button class="orange"
-           onclick="addOtherExpense('${c.id}')">
-     ➕ খরচ যোগ করুন
-   </button>
-
-   <div class="table-wrap">
-
-     <table>
-
-       <thead>
-         <tr>
-           <th>খরচ</th>
-           <th>টাকা</th>
-           <th></th>
-         </tr>
-       </thead>
-
-       <tbody>
-
-       ${
-         expenses.map(item=>`
-
-           <tr>
-
-             <td>${escapeHTML(item.name)}</td>
-
-             <td>${money(item.amount)}</td>
-
-             <td>
-               <button class="danger"
-                       onclick="removeOtherExpense('${item.id}')">
-                 মুছুন
-               </button>
-             </td>
-
-           </tr>
-
-         `).join("")
-       }
-
-       </tbody>
-
-     </table>
-
-   </div>
-
- </div>
-
-
- <!-- PAYMENT -->
-
- <div class="card"
-      id="paymentBox">
-
-   <h3>💰 কাস্টমারের পেমেন্ট</h3>
-
-   <div class="row">
-
-     <input id="paymentDate"
-            type="date">
-
-     <input id="paymentAmount"
-            type="number"
-            min="0"
-            placeholder="কত টাকা দিয়েছে">
-
-   </div>
-
-   <input id="paymentNote"
-          placeholder="যেমন: অগ্রিম / দ্বিতীয় কিস্তি">
-
-   <button class="success"
-           onclick="addPayment('${c.id}')">
-     💵 পেমেন্ট যোগ করুন
-   </button>
-
-   <div class="table-wrap">
-
-     <table>
-
-       <thead>
-         <tr>
-           <th>তারিখ</th>
-           <th>টাকা</th>
-           <th>বিবরণ</th>
-           <th></th>
-         </tr>
-       </thead>
-
-       <tbody>
-
-       ${
-         payments.map(p=>`
-
-           <tr>
-
-             <td>${formatDateOnly(p.payment_date)}</td>
-
-             <td>${money(p.amount)}</td>
-
-             <td>${escapeHTML(p.note||"")}</td>
-
-             <td>
-               <button class="danger"
-                       onclick="removePayment('${p.id}')">
-                 মুছুন
-               </button>
-             </td>
-
-           </tr>
-
-         `).join("")
-       }
-
-       </tbody>
-
-     </table>
-
-   </div>
-
- </div>
-
-
- <div class="card">
-
-   <button class="primary"
-           onclick="downloadCustomer('${c.id}')">
-     📥 এই কাস্টমারের হিসাব ডাউনলোড
-   </button>
-
-   <button class="dark"
-           onclick="printCustomer('${c.id}')">
-     🖨️ হিসাব প্রিন্ট
-   </button>
-
- </div>
-
- `;
-
-
- const materialSelect=
-   document.getElementById("detailMaterial");
-
- if(materialSelect){
-
-   materialSelect.onchange=function(){
-
-     const option=
-       this.options[this.selectedIndex];
-
-     const price=
-       option?.dataset?.price;
-
-     document.getElementById(
-       "selectedMaterialPrice"
-     ).textContent=
-       price
-       ?
-       "বর্তমান দাম: "+money(price)
-       :
-       "মাল নির্বাচন করলে দাম দেখা যাবে।";
-   };
- }
-
-
- const workerSelect=
-   document.getElementById("detailWorker");
-
- if(workerSelect){
-
-   workerSelect.onchange=function(){
-
-     const option=
-       this.options[this.selectedIndex];
-
-     const salary=
-       option?.dataset?.salary;
-
-     document.getElementById(
-       "selectedWorkerSalary"
-     ).textContent=
-       salary
-       ?
-       "মাসিক বেতন: "+money(salary)
-       :
-       "মিস্ত্রি নির্বাচন করলে মাসিক বেতন দেখা যাবে।";
-   };
- }
 }
-
-
-/* =====================================================
-   MATERIALS
-===================================================== */
 
 async function getMaterials(){
 
- const {data,error}=
-   await supabaseClient
-     .from("materials")
-     .select("*")
-     .eq("admin_id",currentUser.id)
-     .order("name");
+  const {data,error} =
+    await supabaseClient
+      .from("materials")
+      .select("*")
+      .eq("admin_id",currentUser.id)
+      .order("name");
 
- if(error)
-   return [];
+  if(error) return [];
 
- return data||[];
+  return data||[];
+
 }
-
 
 async function loadMaterials(){
 
- const materials=
-   await getMaterials();
+  const box =
+    document.getElementById("materialsList");
 
- const box=
-   document.getElementById("materialsTable");
+  box.innerHTML =
+    `<div class="loading">লোড হচ্ছে...</div>`;
 
- box.innerHTML=
- materials.map(m=>`
+  const materials =
+    await getMaterials();
 
-   <tr>
+  if(!materials.length){
 
-     <td>${escapeHTML(m.name)}</td>
+    box.innerHTML =
+      `<div class="empty">
+        এখনো কোনো মালামাল যোগ করা হয়নি।
+      </div>`;
 
-     <td>${money(m.price)}</td>
+    return;
 
-     <td>
+  }
 
-       <button class="danger"
-               onclick="deleteMaterial('${m.id}')">
-         মুছুন
-       </button>
+  box.innerHTML=`
 
-     </td>
+    <div class="table-wrap">
 
-   </tr>
+      <table>
 
- `).join("");
+        <thead>
+          <tr>
+            <th>মালের নাম</th>
+            <th>দাম</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          ${materials.map(m=>`
+
+            <tr>
+
+              <td>${escapeHTML(m.name)}</td>
+
+              <td>
+                ${money(m.price)}
+              </td>
+
+              <td>
+                <button class="danger"
+                  onclick="deleteMaterial('${m.id}')">
+                  মুছুন
+                </button>
+              </td>
+
+            </tr>
+
+          `).join("")}
+
+        </tbody>
+
+      </table>
+
+    </div>
+  `;
+
 }
-
 
 async function addMaterial(){
 
- const name=
-   document.getElementById("materialName")
-   .value.trim();
+  const name =
+    document.getElementById("materialName").value.trim();
 
- const price=
-   Number(
-     document.getElementById("materialPrice").value
-   )||0;
+  const price =
+    Number(
+      document.getElementById("materialPrice").value || 0
+    );
 
- if(!name){
-   alert("মালের নাম লিখুন।");
-   return;
- }
+  if(!name){
 
- if(price<=0){
-   alert("মালের দাম দিন।");
-   return;
- }
+    alert("মালের নাম লিখুন।");
+    return;
 
- const {error}=
-   await supabaseClient
-     .from("materials")
-     .insert({
-       admin_id:currentUser.id,
-       name:name,
-       price:price
-     });
+  }
 
- if(error){
+  if(price<=0){
 
-   alert(
-     "মাল যোগ হয়নি:\n"+
-     error.message
-   );
+    alert("সঠিক দাম লিখুন।");
+    return;
 
-   return;
- }
+  }
 
- document.getElementById("materialName").value="";
- document.getElementById("materialPrice").value="";
+  const {error} =
+    await supabaseClient
+      .from("materials")
+      .insert({
+        admin_id:currentUser.id,
+        name,
+        price
+      });
 
- await loadMaterials();
+  if(error){
+
+    alert(error.message);
+    return;
+
+  }
+
+  document.getElementById("materialName").value="";
+  document.getElementById("materialPrice").value="";
+
+  await loadMaterials();
+
+  alert("✅ মালামাল যোগ হয়েছে।");
+
 }
-
 
 async function deleteMaterial(id){
 
- if(!confirm("এই মালটি মুছবেন?"))
-   return;
+  if(!confirm("এই মালামাল মুছে ফেলবেন?"))
+    return;
 
- const {error}=
-   await supabaseClient
-     .from("materials")
-     .delete()
-     .eq("id",id)
-     .eq("admin_id",currentUser.id);
+  const {error} =
+    await supabaseClient
+      .from("materials")
+      .delete()
+      .eq("id",id)
+      .eq("admin_id",currentUser.id);
 
- if(error){
+  if(error){
 
-   alert(error.message);
-   return;
- }
+    alert(error.message);
+    return;
 
- await loadMaterials();
+  }
+
+  await loadMaterials();
+
 }
-
-
-/* =====================================================
-   CUSTOMER MATERIAL
-===================================================== */
 
 async function addCustomerMaterial(customerId){
 
- const materialId=
-   document.getElementById("detailMaterial").value;
+  const materials =
+    await getMaterials();
 
- const qty=
-   Number(
-     document.getElementById("detailMaterialQty").value
-   )||0;
+  let message =
+    "মালের নাম লিখুন:\n\n";
 
- if(!materialId || qty<=0){
+  if(materials.length){
 
-   alert("মাল ও পরিমাণ নির্বাচন করুন।");
-   return;
- }
+    message +=
+      materials
+        .map((m,i)=>
+          `${i+1}. ${m.name} — ${m.price} টাকা`
+        )
+        .join("\n");
 
- const materials=
-   await getMaterials();
+  }
 
- const material=
-   materials.find(x=>x.id===materialId);
+  const name =
+    prompt(
+      message +
+      "\n\nনতুন/সংরক্ষিত মালের নাম লিখুন:"
+    );
 
- if(!material)
-   return;
+  if(!name) return;
 
- const total=
-   Number(material.price)*qty;
+  const saved =
+    materials.find(
+      m=>m.name.toLowerCase()===name.toLowerCase()
+    );
 
- const {error}=
-   await supabaseClient
-     .from("customer_materials")
-     .insert({
-       admin_id:currentUser.id,
-       customer_id:customerId,
-       material_id:material.id,
-       name:material.name,
-       price:Number(material.price),
-       qty:qty,
-       total:total
-     });
+  let price =
+    saved ? Number(saved.price) : 0;
 
- if(error){
+  if(!saved){
 
-   alert(
-     "মাল যোগ হয়নি:\n"+
-     error.message
-   );
+    price =
+      Number(
+        prompt("এই মালের দাম লিখুন:") || 0
+      );
 
-   return;
- }
+  }
 
- await openCustomer(customerId);
+  if(price<=0){
+
+    alert("সঠিক দাম দিন।");
+    return;
+
+  }
+
+  const qty =
+    Number(
+      prompt("কত পরিমাণ?") || 1
+    );
+
+  if(qty<=0) return;
+
+  const total =
+    price*qty;
+
+  const {error} =
+    await supabaseClient
+      .from("customer_materials")
+      .insert({
+
+        admin_id:currentUser.id,
+        customer_id:customerId,
+        material_id:saved?.id || null,
+        name,
+        price,
+        qty,
+        total
+
+      });
+
+  if(error){
+
+    alert(error.message);
+    return;
+
+  }
+
+  await openCustomer(customerId);
+
 }
-
 
 async function removeCustomerMaterial(id){
 
- if(!confirm("এই মালটি হিসাব থেকে মুছবেন?"))
-   return;
+  if(!confirm("এই মালটি মুছে ফেলবেন?"))
+    return;
 
- const {error}=
-   await supabaseClient
-     .from("customer_materials")
-     .delete()
-     .eq("id",id)
-     .eq("admin_id",currentUser.id);
+  const {error} =
+    await supabaseClient
+      .from("customer_materials")
+      .delete()
+      .eq("id",id)
+      .eq("admin_id",currentUser.id);
 
- if(error){
+  if(error){
 
-   alert(error.message);
-   return;
- }
+    alert(error.message);
+    return;
 
- await openCustomer(selectedCustomerId);
+  }
+
+  await openCustomer(selectedCustomerId);
+
 }
 
-
-/* =====================================================
+/* =========================
    WORKERS
-===================================================== */
+========================= */
 
 async function getWorkers(){
 
- const {data,error}=
-   await supabaseClient
-     .from("workers")
-     .select("*")
-     .eq("admin_id",currentUser.id)
-     .order("name");
+  const {data,error} =
+    await supabaseClient
+      .from("workers")
+      .select("*")
+      .eq("admin_id",currentUser.id)
+      .order("name");
 
- if(error)
-   return [];
+  if(error) return [];
 
- return data||[];
+  return data||[];
+
 }
-
 
 async function loadWorkers(){
 
- const workers=
-   await getWorkers();
+  const box =
+    document.getElementById("workersList");
 
- const box=
-   document.getElementById("workersTable");
+  box.innerHTML =
+    `<div class="loading">লোড হচ্ছে...</div>`;
 
- box.innerHTML=
- workers.map(w=>`
+  const workers =
+    await getWorkers();
 
-   <tr>
+  if(!workers.length){
 
-     <td>${escapeHTML(w.name)}</td>
+    box.innerHTML =
+      `<div class="empty">
+        এখনো কোনো মিস্ত্রি যোগ করা হয়নি।
+      </div>`;
 
-     <td>${money(w.monthly_salary)}</td>
+    return;
 
-     <td>
+  }
 
-       <button class="danger"
-               onclick="deleteWorker('${w.id}')">
-         মুছুন
-       </button>
+  box.innerHTML=`
 
-     </td>
+    <div class="table-wrap">
 
-   </tr>
+      <table>
 
- `).join("");
+        <thead>
+          <tr>
+            <th>মিস্ত্রি</th>
+            <th>মাসিক বেতন</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          ${workers.map(w=>`
+
+            <tr>
+
+              <td>${escapeHTML(w.name)}</td>
+
+              <td>${money(w.monthly_salary)}</td>
+
+              <td>
+                <button class="danger"
+                  onclick="deleteWorker('${w.id}')">
+                  মুছুন
+                </button>
+              </td>
+
+            </tr>
+
+          `).join("")}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  `;
+
 }
-
 
 async function addWorker(){
 
- const name=
-   document.getElementById("workerName")
-   .value.trim();
+  const name =
+    document.getElementById("workerName").value.trim();
 
- const salary=
-   Number(
-     document.getElementById("workerSalary").value
-   )||0;
+  const salary =
+    Number(
+      document.getElementById("workerSalary").value || 0
+    );
 
- if(!name){
-   alert("মিস্ত্রির নাম লিখুন।");
-   return;
- }
+  if(!name){
 
- if(salary<=0){
-   alert("মাসিক বেতন দিন।");
-   return;
- }
+    alert("মিস্ত্রির নাম লিখুন।");
+    return;
 
- const {error}=
-   await supabaseClient
-     .from("workers")
-     .insert({
-       admin_id:currentUser.id,
-       name:name,
-       monthly_salary:salary
-     });
+  }
 
- if(error){
+  if(salary<=0){
 
-   alert(
-     "মিস্ত্রি যোগ হয়নি:\n"+
-     error.message
-   );
+    alert("মাসিক বেতন লিখুন।");
+    return;
 
-   return;
- }
+  }
 
- document.getElementById("workerName").value="";
- document.getElementById("workerSalary").value="";
+  const {error} =
+    await supabaseClient
+      .from("workers")
+      .insert({
 
- await loadWorkers();
+        admin_id:currentUser.id,
+        name,
+        monthly_salary:salary
+
+      });
+
+  if(error){
+
+    alert(error.message);
+    return;
+
+  }
+
+  document.getElementById("workerName").value="";
+  document.getElementById("workerSalary").value="";
+
+  await loadWorkers();
+
+  alert("✅ মিস্ত্রি যোগ হয়েছে।");
+
 }
-
 
 async function deleteWorker(id){
 
- if(!confirm("এই মিস্ত্রিকে মুছবেন?"))
-   return;
+  if(!confirm("এই মিস্ত্রিকে মুছে ফেলবেন?"))
+    return;
 
- const {error}=
-   await supabaseClient
-     .from("workers")
-     .delete()
-     .eq("id",id)
-     .eq("admin_id",currentUser.id);
+  const {error} =
+    await supabaseClient
+      .from("workers")
+      .delete()
+      .eq("id",id)
+      .eq("admin_id",currentUser.id);
 
- if(error){
+  if(error){
 
-   alert(error.message);
-   return;
- }
+    alert(error.message);
+    return;
 
- await loadWorkers();
+  }
+
+  await loadWorkers();
+
 }
-
-
-/* =====================================================
-   CUSTOMER WORKER
-===================================================== */
 
 async function addCustomerWorker(customerId){
 
- const workerId=
-   document.getElementById("detailWorker").value;
+  const workers =
+    await getWorkers();
 
- const days=
-   Number(
-     document.getElementById("detailWorkerDays").value
-   )||0;
+  if(!workers.length){
 
- if(!workerId || days<=0){
+    alert("আগে মিস্ত্রি তালিকায় মিস্ত্রি যোগ করুন।");
+    return;
 
-   alert("মিস্ত্রি ও কাজের দিন দিন।");
-   return;
- }
+  }
 
- const workers=
-   await getWorkers();
+  const list =
+    workers
+      .map((w,i)=>
+        `${i+1}. ${w.name} — মাসিক ${w.monthly_salary} টাকা`
+      )
+      .join("\n");
 
- const worker=
-   workers.find(x=>x.id===workerId);
+  const name =
+    prompt(
+      "মিস্ত্রির নাম লিখুন:\n\n"+list
+    );
 
- if(!worker)
-   return;
+  if(!name) return;
 
- const daily=
-   Number(worker.monthly_salary)/30;
+  const worker =
+    workers.find(
+      w=>w.name.toLowerCase()===name.toLowerCase()
+    );
 
- const total=
-   daily*days;
+  if(!worker){
 
- const {error}=
-   await supabaseClient
-     .from("customer_workers")
-     .insert({
-       admin_id:currentUser.id,
-       customer_id:customerId,
-       worker_id:worker.id,
-       name:worker.name,
-       salary:Number(worker.monthly_salary),
-       days:days,
-       total:total
-     });
+    alert("এই নামে মিস্ত্রি পাওয়া যায়নি।");
+    return;
 
- if(error){
+  }
 
-   alert(
-     "মিস্ত্রির হিসাব যোগ হয়নি:\n"+
-     error.message
-   );
+  const days =
+    Number(
+      prompt("কত দিন কাজ করেছেন?") || 0
+    );
 
-   return;
- }
+  if(days<=0) return;
 
- await openCustomer(customerId);
+  const daily =
+    Number(worker.monthly_salary)/30;
+
+  const total =
+    daily*days;
+
+  const {error} =
+    await supabaseClient
+      .from("customer_workers")
+      .insert({
+
+        admin_id:currentUser.id,
+        customer_id:customerId,
+        worker_id:worker.id,
+        name:worker.name,
+        salary:worker.monthly_salary,
+        days,
+        total
+
+      });
+
+  if(error){
+
+    alert(error.message);
+    return;
+
+  }
+
+  await openCustomer(customerId);
+
 }
-
 
 async function removeCustomerWorker(id){
 
- if(!confirm("এই মিস্ত্রির হিসাব মুছবেন?"))
-   return;
+  if(!confirm("এই মিস্ত্রির হিসাব মুছে ফেলবেন?"))
+    return;
 
- const {error}=
-   await supabaseClient
-     .from("customer_workers")
-     .delete()
-     .eq("id",id)
-     .eq("admin_id",currentUser.id);
+  const {error} =
+    await supabaseClient
+      .from("customer_workers")
+      .delete()
+      .eq("id",id)
+      .eq("admin_id",currentUser.id);
 
- if(error){
+  if(error){
 
-   alert(error.message);
-   return;
- }
+    alert(error.message);
+    return;
 
- await openCustomer(selectedCustomerId);
+  }
+
+  await openCustomer(selectedCustomerId);
+
 }
 
-
-/* =====================================================
+/* =========================
    OTHER EXPENSE
-===================================================== */
+========================= */
 
 async function addOtherExpense(customerId){
 
- const name=
-   document.getElementById("otherName")
-   .value.trim();
+  const name =
+    prompt("খরচের নাম লিখুন:");
 
- const amount=
-   Number(
-     document.getElementById("otherAmount").value
-   )||0;
+  if(!name) return;
 
- if(!name || amount<=0){
+  const amount =
+    Number(
+      prompt("কত টাকা খরচ হয়েছে?") || 0
+    );
 
-   alert("খরচের নাম ও টাকা দিন।");
-   return;
- }
+  if(amount<=0){
 
- const {error}=
-   await supabaseClient
-     .from("customer_expenses")
-     .insert({
-       admin_id:currentUser.id,
-       customer_id:customerId,
-       name:name,
-       amount:amount
-     });
+    alert("সঠিক টাকা দিন।");
+    return;
 
- if(error){
+  }
 
-   alert(
-     "খরচ যোগ হয়নি:\n"+
-     error.message
-   );
+  const {error} =
+    await supabaseClient
+      .from("customer_expenses")
+      .insert({
 
-   return;
- }
+        admin_id:currentUser.id,
+        customer_id:customerId,
+        name,
+        amount
 
- await openCustomer(customerId);
+      });
+
+  if(error){
+
+    alert(error.message);
+    return;
+
+  }
+
+  await openCustomer(customerId);
+
 }
-
 
 async function removeOtherExpense(id){
 
- if(!confirm("এই খরচটি মুছবেন?"))
-   return;
+  if(!confirm("এই খরচ মুছে ফেলবেন?"))
+    return;
 
- const {error}=
-   await supabaseClient
-     .from("customer_expenses")
-     .delete()
-     .eq("id",id)
-     .eq("admin_id",currentUser.id);
+  const {error} =
+    await supabaseClient
+      .from("customer_expenses")
+      .delete()
+      .eq("id",id)
+      .eq("admin_id",currentUser.id);
 
- if(error){
+  if(error){
 
-   alert(error.message);
-   return;
- }
+    alert(error.message);
+    return;
 
- await openCustomer(selectedCustomerId);
+  }
+
+  await openCustomer(selectedCustomerId);
+
 }
 
-
-/* =====================================================
-   PAYMENT
-===================================================== */
+/* =========================
+   PAYMENTS
+========================= */
 
 async function addPayment(customerId){
 
- const date=
-   document.getElementById("paymentDate").value;
+  const amount =
+    Number(
+      prompt("কত টাকা জমা নিয়েছেন?") || 0
+    );
 
- const amount=
-   Number(
-     document.getElementById("paymentAmount").value
-   )||0;
+  if(amount<=0){
 
- const note=
-   document.getElementById("paymentNote")
-   .value.trim();
+    alert("সঠিক টাকা দিন।");
+    return;
 
- if(!date || amount<=0){
+  }
 
-   alert("তারিখ ও টাকার পরিমাণ দিন।");
-   return;
- }
+  const note =
+    prompt("নোট লিখুন (চাইলে খালি রাখুন):") || "";
 
- const {error}=
-   await supabaseClient
-     .from("customer_payments")
-     .insert({
-       admin_id:currentUser.id,
-       customer_id:customerId,
-       payment_date:date,
-       amount:amount,
-       note:note
-     });
+  const {error} =
+    await supabaseClient
+      .from("customer_payments")
+      .insert({
 
- if(error){
+        admin_id:currentUser.id,
+        customer_id:customerId,
+        payment_date:new Date().toISOString().slice(0,10),
+        amount,
+        note
 
-   alert(
-     "পেমেন্ট যোগ হয়নি:\n"+
-     error.message
-   );
+      });
 
-   return;
- }
+  if(error){
 
- await openCustomer(customerId);
+    alert(error.message);
+    return;
+
+  }
+
+  await openCustomer(customerId);
+
 }
-
 
 async function removePayment(id){
 
- if(!confirm("এই পেমেন্টটি মুছবেন?"))
-   return;
+  if(!confirm("এই জমার হিসাব মুছে ফেলবেন?"))
+    return;
 
- const {error}=
-   await supabaseClient
-     .from("customer_payments")
-     .delete()
-     .eq("id",id)
-     .eq("admin_id",currentUser.id);
+  const {error} =
+    await supabaseClient
+      .from("customer_payments")
+      .delete()
+      .eq("id",id)
+      .eq("admin_id",currentUser.id);
 
- if(error){
+  if(error){
 
-   alert(error.message);
-   return;
- }
+    alert(error.message);
+    return;
 
- await openCustomer(selectedCustomerId);
+  }
+
+  await openCustomer(selectedCustomerId);
+
 }
 
-
-/* =====================================================
-   UPDATE CUSTOMER
-===================================================== */
+/* =========================
+   EDIT CUSTOMER
+========================= */
 
 async function openEditCustomer(id){
 
- const {data,error}=
-   await supabaseClient
-     .from("customers")
-     .select("*")
-     .eq("id",id)
-     .eq("admin_id",currentUser.id)
-     .single();
+  const {data,error} =
+    await supabaseClient
+      .from("customers")
+      .select("*")
+      .eq("id",id)
+      .eq("admin_id",currentUser.id)
+      .single();
 
- if(error || !data){
+  if(error){
 
-   alert("কাস্টমারের তথ্য পাওয়া যায়নি।");
-   return;
- }
+    alert(error.message);
+    return;
 
- selectedCustomerId=id;
+  }
 
- document.getElementById("editCustomerName").value=
-   data.name||"";
+  document.getElementById("editCustomerId").value=id;
+  document.getElementById("editName").value=data.name||"";
+  document.getElementById("editPhone").value=data.phone||"";
+  document.getElementById("editAddress").value=data.address||"";
+  document.getElementById("editWork").value=data.work||"";
+  document.getElementById("editContractPrice").value=data.contract_price||"";
+  document.getElementById("editStartDate").value=data.start_date||"";
+  document.getElementById("editDeliveryDate").value=data.delivery_date||"";
 
- document.getElementById("editCustomerPhone").value=
-   data.phone||"";
+  document.getElementById("updateCustomerModal").style.display="flex";
 
- document.getElementById("editCustomerAddress").value=
-   data.address||"";
-
- document.getElementById("editWorkName").value=
-   data.work||"";
-
- document.getElementById("editWorkPrice").value=
-   data.contract_price||0;
-
- document.getElementById("editStartDate").value=
-   data.start_date||"";
-
- document.getElementById("editDeliveryDate").value=
-   data.delivery_date||"";
-
- document.getElementById(
-   "updateCustomerModal"
- ).style.display="flex";
 }
-
 
 function closeUpdateCustomer(){
 
- document.getElementById(
-   "updateCustomerModal"
- ).style.display="none";
-}
+  document.getElementById("updateCustomerModal")
+    .style.display="none";
 
+}
 
 async function updateCustomer(){
 
- const id=selectedCustomerId;
+  const id =
+    document.getElementById("editCustomerId").value;
 
- const name=
-   document.getElementById("editCustomerName")
-   .value.trim();
+  const updateData={
 
- const phone=
-   document.getElementById("editCustomerPhone")
-   .value.trim();
+    name:
+      document.getElementById("editName").value.trim(),
 
- const address=
-   document.getElementById("editCustomerAddress")
-   .value.trim();
+    phone:
+      document.getElementById("editPhone").value.trim(),
 
- const work=
-   document.getElementById("editWorkName")
-   .value.trim();
+    address:
+      document.getElementById("editAddress").value.trim(),
 
- const price=
-   Number(
-     document.getElementById("editWorkPrice").value
-   )||0;
+    work:
+      document.getElementById("editWork").value.trim(),
 
- const start=
-   document.getElementById("editStartDate").value||null;
+    contract_price:
+      Number(
+        document.getElementById("editContractPrice").value || 0
+      ),
 
- const delivery=
-   document.getElementById("editDeliveryDate").value||null;
+    start_date:
+      document.getElementById("editStartDate").value || null,
 
- if(!name || !phone){
+    delivery_date:
+      document.getElementById("editDeliveryDate").value || null
 
-   alert("নাম ও ফোন নম্বর দিন।");
-   return;
- }
+  };
 
- const {error}=
-   await supabaseClient
-     .from("customers")
-     .update({
-       name:name,
-       phone:phone,
-       address:address,
-       work:work,
-       contract_price:price,
-       start_date:start,
-       delivery_date:delivery
-     })
-     .eq("id",id)
-     .eq("admin_id",currentUser.id);
+  if(!updateData.name){
 
- if(error){
+    alert("নাম লিখুন।");
+    return;
 
-   alert(
-     "তথ্য আপডেট হয়নি:\n"+
-     error.message
-   );
+  }
 
-   return;
- }
+  const {error} =
+    await supabaseClient
+      .from("customers")
+      .update(updateData)
+      .eq("id",id)
+      .eq("admin_id",currentUser.id);
 
- closeUpdateCustomer();
+  if(error){
 
- if(
-   document.getElementById(
-     "customerDetailPage"
-   ).classList.contains("active")
- ){
-   await openCustomer(id);
- }else{
-   await openAccountingPage();
- }
+    alert(error.message);
+    return;
+
+  }
+
+  closeUpdateCustomer();
+
+  if(selectedCustomerId===id){
+
+    await openCustomer(id);
+
+  }else{
+
+    await loadCustomers();
+
+  }
+
+  alert("✅ তথ্য পরিবর্তন হয়েছে।");
+
 }
-
-
-/* =====================================================
-   DELETE CUSTOMER
-===================================================== */
 
 async function deleteCustomer(id){
 
- if(!confirm(
-   "এই কাস্টমারের সম্পূর্ণ হিসাব মুছে ফেলবেন?"
- ))
-   return;
+  if(!confirm(
+    "এই কাস্টমার এবং তার হিসাব মুছে ফেলবেন?\n\nএটি পরে ফিরিয়ে আনা যাবে না।"
+  )) return;
 
- const {error}=
-   await supabaseClient
-     .from("customers")
-     .delete()
-     .eq("id",id)
-     .eq("admin_id",currentUser.id);
+  await supabaseClient
+    .from("customer_materials")
+    .delete()
+    .eq("customer_id",id)
+    .eq("admin_id",currentUser.id);
 
- if(error){
+  await supabaseClient
+    .from("customer_workers")
+    .delete()
+    .eq("customer_id",id)
+    .eq("admin_id",currentUser.id);
 
-   alert(
-     "কাস্টমার মুছতে সমস্যা:\n"+
-     error.message
-   );
+  await supabaseClient
+    .from("customer_expenses")
+    .delete()
+    .eq("customer_id",id)
+    .eq("admin_id",currentUser.id);
 
-   return;
- }
+  await supabaseClient
+    .from("customer_payments")
+    .delete()
+    .eq("customer_id",id)
+    .eq("admin_id",currentUser.id);
 
- alert("কাস্টমার মুছে ফেলা হয়েছে।");
+  const {error} =
+    await supabaseClient
+      .from("customers")
+      .delete()
+      .eq("id",id)
+      .eq("admin_id",currentUser.id);
 
- await openAccountingPage();
+  if(error){
+
+    alert(error.message);
+    return;
+
+  }
+
+  alert("✅ কাস্টমার মুছে ফেলা হয়েছে।");
+
+  await loadCustomers();
+
 }
 
-
-/* =====================================================
-   DOWNLOAD CUSTOMER
-===================================================== */
+/* =========================
+   DOWNLOAD
+========================= */
 
 async function downloadCustomer(id){
 
- const customerResult=
-   await supabaseClient
-     .from("customers")
-     .select("*")
-     .eq("id",id)
-     .eq("admin_id",currentUser.id)
-     .single();
+  const {data:c,error} =
+    await supabaseClient
+      .from("customers")
+      .select("*")
+      .eq("id",id)
+      .eq("admin_id",currentUser.id)
+      .single();
 
- if(customerResult.error){
+  if(error){
 
-   alert("কাস্টমারের তথ্য পাওয়া যায়নি।");
-   return;
- }
+    alert(error.message);
+    return;
 
- const c=customerResult.data;
+  }
 
- const materialsResult=
-   await supabaseClient
-     .from("customer_materials")
-     .select("*")
-     .eq("customer_id",id);
+  const summary =
+    await getCustomerSummary(
+      c.id,
+      c.contract_price
+    );
 
- const workersResult=
-   await supabaseClient
-     .from("customer_workers")
-     .select("*")
-     .eq("customer_id",id);
+  const csv=[
+    ["ওমর এস এস ঘর"],
+    ["কাস্টমারের নাম",c.name],
+    ["ফোন",c.phone],
+    ["ঠিকানা",c.address],
+    ["কাজ",c.work],
+    ["চুক্তির মূল্য",c.contract_price],
+    ["মাল খরচ",summary.materialCost],
+    ["মিস্ত্রি খরচ",summary.workerCost],
+    ["অন্যান্য খরচ",summary.otherCost],
+    ["মোট খরচ",summary.totalCost],
+    ["লাভ/ক্ষতি",summary.profit],
+    ["জমা",summary.paid],
+    ["বাকি",summary.due],
+    ["ডেলিভারি",c.delivery_date]
+  ];
 
- const expensesResult=
-   await supabaseClient
-     .from("customer_expenses")
-     .select("*")
-     .eq("customer_id",id);
+  const csvText =
+    csv.map(row=>
+      row.map(csvEscape).join(",")
+    ).join("\n");
 
- const paymentsResult=
-   await supabaseClient
-     .from("customer_payments")
-     .select("*")
-     .eq("customer_id",id);
+  downloadCSV(
+    csvText,
+    safeFileName(c.name)+"-hisab.csv"
+  );
 
- const materials=
-   materialsResult.data||[];
-
- const workers=
-   workersResult.data||[];
-
- const expenses=
-   expensesResult.data||[];
-
- const payments=
-   paymentsResult.data||[];
-
- const summary=
-   await getCustomerSummary(
-     id,
-     c.contract_price
-   );
-
- let csv=
- "ওমর এস এস ঘর - কাস্টমারের সম্পূর্ণ হিসাব\n\n";
-
- csv+=
- "কাস্টমার,ফোন,ঠিকানা,কাজ,চুক্তির দাম,মালের খরচ,মিস্ত্রির খরচ,অন্যান্য খরচ,মোট খরচ,লাভ/লোকসান,মোট পেয়েছেন,বাকি\n";
-
- csv+=
- [
-   c.name,
-   c.phone,
-   c.address,
-   c.work,
-   c.contract_price,
-   summary.materialCost,
-   summary.workerCost,
-   summary.otherCost,
-   summary.totalCost,
-   summary.profit,
-   summary.totalPaid,
-   summary.due
- ]
- .map(csvEscape)
- .join(",")+
- "\n";
-
-
- csv+="\nমালামাল\n";
- csv+="মাল,পরিমাণ,একক দাম,মোট\n";
-
- materials.forEach(x=>{
-
-   csv+=
-   [
-     x.name,
-     x.qty,
-     x.price,
-     x.total
-   ]
-   .map(csvEscape)
-   .join(",")+
-   "\n";
- });
-
-
- csv+="\nমিস্ত্রি\n";
- csv+="মিস্ত্রি,মাসিক বেতন,দিন,খরচ\n";
-
- workers.forEach(x=>{
-
-   csv+=
-   [
-     x.name,
-     x.salary,
-     x.days,
-     x.total
-   ]
-   .map(csvEscape)
-   .join(",")+
-   "\n";
- });
-
-
- csv+="\nঅন্যান্য খরচ\n";
- csv+="খরচের নাম,টাকা\n";
-
- expenses.forEach(x=>{
-
-   csv+=
-   [
-     x.name,
-     x.amount
-   ]
-   .map(csvEscape)
-   .join(",")+
-   "\n";
- });
-
-
- csv+="\nপেমেন্ট\n";
- csv+="তারিখ,টাকা,বিবরণ\n";
-
- payments.forEach(x=>{
-
-   csv+=
-   [
-     x.payment_date,
-     x.amount,
-     x.note
-   ]
-   .map(csvEscape)
-   .join(",")+
-   "\n";
- });
-
-
- downloadCSV(
-   csv,
-   "customer-"+safeFileName(c.name)+".csv"
- );
 }
-
 
 async function downloadAllCustomers(){
 
- const {data,error}=
-   await supabaseClient
-     .from("customers")
-     .select("*")
-     .eq("admin_id",currentUser.id)
-     .order("created_at",{ascending:false});
+  if(!accountingAllowed) return;
 
- if(error || !data?.length){
+  const {data,error} =
+    await supabaseClient
+      .from("customers")
+      .select("*")
+      .eq("admin_id",currentUser.id)
+      .order("created_at",{ascending:false});
 
-   alert("কোনো কাস্টমার নেই।");
-   return;
- }
+  if(error){
 
- let csv=
- "কাস্টমার,ফোন,কাজ,চুক্তির দাম,মোট খরচ,মোট পেয়েছেন,বাকি,লাভ/লোকসান\n";
+    alert(error.message);
+    return;
 
- for(const c of data){
+  }
 
-   const s=
-     await getCustomerSummary(
-       c.id,
-       c.contract_price
-     );
+  const rows=[
+    [
+      "নাম",
+      "ফোন",
+      "ঠিকানা",
+      "চুক্তির মূল্য",
+      "মোট খরচ",
+      "লাভ/ক্ষতি",
+      "জমা",
+      "বাকি",
+      "ডেলিভারি"
+    ]
+  ];
 
-   csv+=
-   [
-     c.name,
-     c.phone,
-     c.work,
-     c.contract_price,
-     s.totalCost,
-     s.totalPaid,
-     s.due,
-     s.profit
-   ]
-   .map(csvEscape)
-   .join(",")+
-   "\n";
- }
+  for(const c of data||[]){
 
- downloadCSV(
-   csv,
-   "omor-ss-ghor-customers.csv"
- );
+    const s =
+      await getCustomerSummary(
+        c.id,
+        c.contract_price
+      );
+
+    rows.push([
+      c.name,
+      c.phone,
+      c.address,
+      c.contract_price,
+      s.totalCost,
+      s.profit,
+      s.paid,
+      s.due,
+      c.delivery_date
+    ]);
+
+  }
+
+  const csv =
+    rows.map(r=>
+      r.map(csvEscape).join(",")
+    ).join("\n");
+
+  downloadCSV(
+    csv,
+    "omor-ss-ghor-all-customers.csv"
+  );
+
 }
-
 
 function downloadCSV(csv,fileName){
 
- const blob=
-   new Blob(
-     ["\uFEFF"+csv],
-     {
-       type:"text/csv;charset=utf-8;"
-     }
-   );
+  const blob =
+    new Blob(
+      ["\ufeff"+csv],
+      {type:"text/csv;charset=utf-8"}
+    );
 
- const url=
-   URL.createObjectURL(blob);
+  const url =
+    URL.createObjectURL(blob);
 
- const a=
-   document.createElement("a");
+  const a =
+    document.createElement("a");
 
- a.href=url;
- a.download=fileName;
+  a.href=url;
+  a.download=fileName;
 
- document.body.appendChild(a);
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
 
- a.click();
+  URL.revokeObjectURL(url);
 
- a.remove();
-
- URL.revokeObjectURL(url);
 }
-
 
 function csvEscape(value){
 
- const s=
-   String(value??"");
+  const text =
+    String(value??"");
 
- return `"${s.replace(/"/g,'""')}"`;
+  return `"${text.replace(/"/g,'""')}"`;
+
 }
-
 
 function safeFileName(name){
 
- return String(name)
-   .replace(/[\\/:*?"<>|]/g,"-")
-   .replace(/\s+/g,"-");
+  return String(name||"customer")
+    .replace(/[\\/:*?"<>|]/g,"-")
+    .replace(/\s+/g,"-");
+
 }
 
-
-/* =====================================================
-   PRINT CUSTOMER
-===================================================== */
+/* =========================
+   PRINT
+========================= */
 
 async function printCustomer(id){
 
- const {data:c,error}=
-   await supabaseClient
-     .from("customers")
-     .select("*")
-     .eq("id",id)
-     .eq("admin_id",currentUser.id)
-     .single();
+  const {data:c,error} =
+    await supabaseClient
+      .from("customers")
+      .select("*")
+      .eq("id",id)
+      .eq("admin_id",currentUser.id)
+      .single();
 
- if(error || !c){
+  if(error){
 
-   alert("কাস্টমারের তথ্য পাওয়া যায়নি।");
-   return;
- }
+    alert(error.message);
+    return;
 
- const summary=
-   await getCustomerSummary(
-     id,
-     c.contract_price
-   );
+  }
 
- const html=`
+  const s =
+    await getCustomerSummary(
+      c.id,
+      c.contract_price
+    );
 
- <!DOCTYPE html>
- <html lang="bn">
+  const win =
+    window.open("","_blank");
 
- <head>
+  win.document.write(`
 
- <meta charset="UTF-8">
+    <!DOCTYPE html>
+    <html lang="bn">
 
- <title>
-   ${escapeHTML(c.name)} - হিসাব
- </title>
+    <head>
 
- <style>
+      <meta charset="UTF-8">
 
- body{
-   font-family:Arial,"Noto Sans Bengali",sans-serif;
-   padding:25px;
-   color:#111;
- }
+      <title>
+        ${escapeHTML(c.name)} - ওমর এস এস ঘর
+      </title>
 
- h1,h2{
-   text-align:center;
- }
+      <style>
 
- table{
-   width:100%;
-   border-collapse:collapse;
-   margin-top:15px;
- }
+        body{
+          font-family:Arial,sans-serif;
+          padding:30px;
+          color:#111;
+        }
 
- th,td{
-   border:1px solid #999;
-   padding:8px;
- }
+        h1{
+          text-align:center;
+        }
 
- th{
-   background:#eee;
- }
+        table{
+          width:100%;
+          border-collapse:collapse;
+          margin-top:20px;
+        }
 
- .summary{
-   margin-top:20px;
-   padding:15px;
-   border:1px solid #ccc;
- }
+        th,td{
+          border:1px solid #999;
+          padding:10px;
+          text-align:left;
+        }
 
- </style>
+        th{
+          background:#eee;
+        }
 
- </head>
+        .profit{
+          color:green;
+          font-weight:bold;
+        }
 
- <body>
+        .loss{
+          color:red;
+          font-weight:bold;
+        }
 
- <h1>ওমর এস এস ঘর</h1>
+      </style>
 
- <h2>কাস্টমারের কাজের হিসাব</h2>
+    </head>
 
- <p>
-   <b>কাস্টমার:</b>
-   ${escapeHTML(c.name)}
- </p>
+    <body>
 
- <p>
-   <b>ফোন:</b>
-   ${escapeHTML(c.phone||"-")}
- </p>
+      <h1>🏪 ওমর এস এস ঘর</h1>
 
- <p>
-   <b>ঠিকানা:</b>
-   ${escapeHTML(c.address||"-")}
- </p>
+      <p style="text-align:center">
+        SS ও গ্লাসের সকল ধরনের কাজের বিশ্বস্ত প্রতিষ্ঠান
+      </p>
 
- <p>
-   <b>কাজ:</b>
-   ${escapeHTML(c.work||"-")}
- </p>
+      <hr>
 
- <div class="summary">
+      <h2>কাস্টমার: ${escapeHTML(c.name)}</h2>
 
- <p>
-   চুক্তির দাম:
-   <b>${money(c.contract_price)}</b>
- </p>
+      <p>ফোন: ${escapeHTML(c.phone||"-")}</p>
 
- <p>
-   মালের খরচ:
-   <b>${money(summary.materialCost)}</b>
- </p>
+      <p>ঠিকানা: ${escapeHTML(c.address||"-")}</p>
 
- <p>
-   মিস্ত্রির খরচ:
-   <b>${money(summary.workerCost)}</b>
- </p>
+      <p>কাজ: ${escapeHTML(c.work||"-")}</p>
 
- <p>
-   অন্যান্য খরচ:
-   <b>${money(summary.otherCost)}</b>
- </p>
+      <p>ডেলিভারি:
+        ${formatDateOnly(c.delivery_date)}
+      </p>
 
- <p>
-   মোট খরচ:
-   <b>${money(summary.totalCost)}</b>
- </p>
+      <table>
 
- <p>
-   মোট পেয়েছেন:
-   <b>${money(summary.totalPaid)}</b>
- </p>
+        <tr>
+          <th>হিসাব</th>
+          <th>টাকা</th>
+        </tr>
 
- <p>
-   বাকি:
-   <b>${money(summary.due)}</b>
- </p>
+        <tr>
+          <td>চুক্তির মূল্য</td>
+          <td>${money(c.contract_price)}</td>
+        </tr>
 
- <p>
-   লাভ/লোকসান:
-   <b>${money(summary.profit)}</b>
- </p>
+        <tr>
+          <td>মালামাল</td>
+          <td>${money(s.materialCost)}</td>
+        </tr>
 
- </div>
+        <tr>
+          <td>মিস্ত্রি</td>
+          <td>${money(s.workerCost)}</td>
+        </tr>
 
- <script>
- window.onload=function(){
-   window.print();
- };
- <\/script>
+        <tr>
+          <td>অন্যান্য খরচ</td>
+          <td>${money(s.otherCost)}</td>
+        </tr>
 
- </body>
+        <tr>
+          <td><b>মোট খরচ</b></td>
+          <td><b>${money(s.totalCost)}</b></td>
+        </tr>
 
- </html>
- `;
+        <tr>
+          <td><b>লাভ/ক্ষতি</b></td>
+          <td class="${s.profit>=0?'profit':'loss'}">
+            ${money(s.profit)}
+          </td>
+        </tr>
 
- const win=
-   window.open(
-     "",
-     "_blank"
-   );
+        <tr>
+          <td>জমা</td>
+          <td>${money(s.paid)}</td>
+        </tr>
 
- if(!win){
+        <tr>
+          <td>বাকি</td>
+          <td>${money(s.due)}</td>
+        </tr>
 
-   alert(
-     "প্রিন্ট করার জন্য Browser-এর popup অনুমতি দিন।"
-   );
+      </table>
 
-   return;
- }
+      <br><br>
 
- win.document.write(html);
- win.document.close();
+      <p>
+        ঠিকানা:
+        কলেজ বাজার পেট্রোল পাম্পের সামনে,
+        বিরামপুর, দিনাজপুর
+      </p>
+
+      <p>
+        ফোন: 01341241433
+        &nbsp;&nbsp;
+        WhatsApp: 01816845577
+      </p>
+
+      <script>
+        window.onload=function(){
+          window.print();
+        }
+      <\/script>
+
+    </body>
+
+    </html>
+
+  `);
+
+  win.document.close();
+
 }
 
-
-/* =====================================================
-   CUSTOMER MENU
-===================================================== */
+/* =========================
+   MENUS
+========================= */
 
 function toggleCustomerMenu(id){
 
- document
-   .querySelectorAll(".dropdown")
-   .forEach(x=>{
-     x.style.display="none";
-   });
+  document
+    .querySelectorAll(".dropdown")
+    .forEach(d=>d.style.display="none");
 
- const menu=
-   document.getElementById("menu-"+id);
+  const menu =
+    document.getElementById(
+      "customerMenu-"+id
+    );
 
- if(menu){
+  if(menu){
 
-   menu.style.display=
-     menu.style.display==="block"
-     ?"none"
-     :"block";
- }
+    menu.style.display =
+      menu.style.display==="block"
+        ? "none"
+        : "block";
+
+  }
+
 }
-
 
 function toggleDetailMenu(){
 
- const menu=
-   document.getElementById("detailMenu");
+  const menu =
+    document.getElementById("detailMenu");
 
- if(!menu)
-   return;
+  if(menu){
 
- menu.style.display=
-   menu.style.display==="block"
-   ?"none"
-   :"block";
+    menu.style.display =
+      menu.style.display==="block"
+        ? "none"
+        : "block";
+
+  }
+
 }
 
+document.addEventListener("click",function(e){
 
-function scrollToBox(id){
+  if(!e.target.closest(".three-menu")){
 
- const el=
-   document.getElementById(id);
+    document
+      .querySelectorAll(".dropdown")
+      .forEach(d=>d.style.display="none");
 
- if(el){
+  }
 
-   el.scrollIntoView({
-     behavior:"smooth",
-     block:"start"
-   });
- }
+});
 
- const menu=
-   document.getElementById("detailMenu");
-
- if(menu)
-   menu.style.display="none";
-}
-
-
-/* =====================================================
+/* =========================
    AUTH
-===================================================== */
+========================= */
 
 function openAuth(){
 
- registerMode=false;
+  document.getElementById("authModal")
+    .style.display="flex";
 
- document.getElementById("authModal")
-   .style.display="flex";
+  updateAuth();
 
- updateAuth();
 }
-
 
 function closeAuth(){
 
- document.getElementById("authModal")
-   .style.display="none";
-}
+  document.getElementById("authModal")
+    .style.display="none";
 
+}
 
 function switchAuth(){
 
- registerMode=!registerMode;
+  registerMode=!registerMode;
 
- updateAuth();
+  updateAuth();
+
 }
-
 
 function updateAuth(){
 
- document.getElementById("authTitle")
- .textContent=
-   registerMode
-   ?"নতুন অ্যাকাউন্ট"
-   :"লগইন";
+  const title =
+    document.getElementById("authTitle");
 
- document.getElementById("authButton")
- .textContent=
-   registerMode
-   ?"রেজিস্ট্রেশন করুন"
-   :"লগইন";
+  const fields =
+    document.getElementById("registerFields");
 
- document.getElementById("authName")
- .style.display=
-   registerMode
-   ?"block"
-   :"none";
+  const button =
+    document.getElementById("authSubmitButton");
 
- document.getElementById("switchLabel")
- .textContent=
-   registerMode
-   ?"আগে থেকেই অ্যাকাউন্ট আছে?"
-   :"নতুন সদস্য?";
+  const switchText =
+    document.getElementById("switchText");
 
- document.getElementById("switchButton")
- .textContent=
-   registerMode
-   ?"লগইন করুন"
-   :"রেজিস্ট্রেশন করুন";
+  const switchButton =
+    document.getElementById("switchButton");
+
+  if(registerMode){
+
+    title.textContent="📝 নতুন অ্যাকাউন্ট";
+
+    fields.style.display="block";
+
+    button.textContent="অ্যাকাউন্ট তৈরি করুন";
+
+    switchText.textContent="আগে থেকেই অ্যাকাউন্ট আছে?";
+
+    switchButton.textContent="লগইন করুন";
+
+  }else{
+
+    title.textContent="🔐 লগইন";
+
+    fields.style.display="none";
+
+    button.textContent="লগইন";
+
+    switchText.textContent="নতুন অ্যাকাউন্ট?";
+
+    switchButton.textContent="অ্যাকাউন্ট তৈরি করুন";
+
+  }
+
 }
-
 
 async function submitAuth(){
 
- const name=
-   document.getElementById("authName")
-   .value.trim();
+  const email =
+    document.getElementById("authEmail").value.trim();
 
- const email=
-   document.getElementById("authEmail")
-   .value.trim();
+  const password =
+    document.getElementById("authPassword").value;
 
- const password=
-   document.getElementById("authPassword")
-   .value;
+  const name =
+    document.getElementById("authName").value.trim();
 
- const msg=
-   document.getElementById("authMessage");
+  const message =
+    document.getElementById("authMessage");
 
- msg.style.display="block";
+  if(!email || !password){
 
- if(!email || !password){
+    message.innerHTML=
+      `<div class="warning">
+        Email এবং Password দিন।
+      </div>`;
 
-   msg.textContent=
-     "ইমেইল ও পাসওয়ার্ড দিন।";
+    return;
 
-   return;
- }
+  }
 
+  if(registerMode){
 
- if(registerMode){
+    if(!name){
 
-   if(!name){
+      message.innerHTML=
+        `<div class="warning">
+          আপনার নাম দিন।
+        </div>`;
 
-     msg.textContent=
-       "আপনার নাম লিখুন।";
+      return;
 
-     return;
-   }
+    }
 
-   const {error}=
-     await supabaseClient.auth.signUp({
+    const {data,error} =
+      await supabaseClient.auth.signUp({
 
-       email:email,
+        email,
+        password,
 
-       password:password,
+        options:{
+          data:{
+            full_name:name
+          }
+        }
 
-       options:{
-         data:{
-           full_name:name
-         }
-       }
+      });
 
-     });
+    if(error){
 
-   if(error){
+      message.innerHTML=
+        `<div class="warning">
+          ${escapeHTML(error.message)}
+        </div>`;
 
-     msg.textContent=
-       "রেজিস্ট্রেশন হয়নি: "+
-       error.message;
+      return;
 
-     return;
-   }
+    }
 
-   msg.textContent=
-     "রেজিস্ট্রেশন সফল হয়েছে। ইমেইল যাচাই করে লগইন করুন।";
+    message.innerHTML=
+      `<div class="success-box">
+        ✅ অ্যাকাউন্ট তৈরি হয়েছে।
+        যদি Email confirmation চায়,
+        আপনার Email থেকে Confirm করুন।
+      </div>`;
 
- }else{
+    registerMode=false;
+    updateAuth();
 
-   const {data,error}=
-     await supabaseClient.auth.signInWithPassword({
+  }else{
 
-       email:email,
+    const {data,error} =
+      await supabaseClient.auth.signInWithPassword({
 
-       password:password
+        email,
+        password
 
-     });
+      });
 
-   if(error){
+    if(error){
 
-     msg.textContent=
-       "লগইন হয়নি: "+
-       error.message;
+      message.innerHTML=
+        `<div class="warning">
+          Email অথবা Password সঠিক নয়।
+        </div>`;
 
-     return;
-   }
+      return;
 
-   currentUser=data.user;
+    }
 
-   await updateUI();
+    currentUser=data.user;
 
-   closeAuth();
- }
+    closeAuth();
+
+    await updateUI();
+
+  }
+
 }
-
 
 async function logout(){
 
- await supabaseClient.auth.signOut();
+  await supabaseClient.auth.signOut();
 
- currentUser=null;
- accountingAllowed=false;
+  currentUser=null;
+  accountingAllowed=false;
 
- document
-   .querySelectorAll(".page")
-   .forEach(p=>{
-     p.classList.remove("active");
-   });
+  showPage("customersPage");
 
- updateUI();
+  await updateUI();
 
- alert("লগআউট হয়েছে।");
 }
 
-
-/* =====================================================
+/* =========================
    POSTS
-===================================================== */
+========================= */
 
 async function createPost(){
 
- if(!currentUser){
+  if(!currentUser){
 
-   openAuth();
-   return;
- }
+    openAuth();
+    return;
 
- const text=
-   document.getElementById("postText")
-   .value.trim();
+  }
 
- const file=
-   document.getElementById("postImage")
-   .files[0];
+  const content =
+    document.getElementById("postContent")
+      .value.trim();
 
- if(!text && !file){
+  const file =
+    document.getElementById("postImage")
+      .files[0];
 
-   alert("লেখা অথবা ছবি দিন।");
-   return;
- }
+  if(!content && !file){
 
- let imageURL=null;
+    alert("লেখা অথবা ছবি দিন।");
+    return;
 
- if(file){
+  }
 
-   const extension=
-     file.name.split(".")
-     .pop()
-     .toLowerCase();
+  let imageUrl=null;
 
-   const fileName=
-     currentUser.id+
-     "/"+
-     crypto.randomUUID()+
-     "."+
-     extension;
+  if(file){
 
-   const {data,error}=
-     await supabaseClient.storage
-       .from(IMAGE_BUCKET)
-       .upload(
-         fileName,
-         file,
-         {
-           contentType:file.type,
-           upsert:false
-         }
-       );
+    if(file.size>6*1024*1024){
 
-   if(error){
+      alert("ছবির সাইজ ৬ MB-এর কম হতে হবে।");
+      return;
 
-     alert(
-       "ছবি আপলোড হয়নি:\n"+
-       error.message
-     );
+    }
 
-     return;
-   }
+    const ext =
+      file.name.split(".").pop();
 
-   const publicURL=
-     supabaseClient.storage
-       .from(IMAGE_BUCKET)
-       .getPublicUrl(data.path);
+    const path =
+      `${currentUser.id}/${Date.now()}.${ext}`;
 
-   imageURL=
-     publicURL.data.publicUrl;
- }
+    const {error:uploadError} =
+      await supabaseClient.storage
+        .from(IMAGE_BUCKET)
+        .upload(path,file);
 
- const {error}=
-   await supabaseClient
-     .from("posts")
-     .insert({
+    if(uploadError){
 
-       user_id:currentUser.id,
+      alert(
+        "ছবি Upload হয়নি:\n"+
+        uploadError.message
+      );
 
-       content:text,
+      return;
 
-       image_url:imageURL
+    }
 
-     });
+    const {data:urlData} =
+      supabaseClient.storage
+        .from(IMAGE_BUCKET)
+        .getPublicUrl(path);
 
- if(error){
+    imageUrl =
+      urlData.publicUrl;
 
-   alert(
-     "পোস্ট করা যায়নি:\n"+
-     error.message
-   );
+  }
 
-   return;
- }
+  const {error} =
+    await supabaseClient
+      .from("posts")
+      .insert({
 
- document.getElementById("postText").value="";
- document.getElementById("postImage").value="";
+        user_id:currentUser.id,
+        content,
+        image_url:imageUrl
 
- loadPosts();
+      });
+
+  if(error){
+
+    alert(
+      "পোস্ট তৈরি হয়নি:\n"+
+      error.message
+    );
+
+    return;
+
+  }
+
+  document.getElementById("postContent").value="";
+  document.getElementById("postImage").value="";
+
+  alert("✅ পোস্ট হয়েছে।");
+
+  await loadPosts();
+
 }
-
 
 async function loadPosts(){
 
- const loading=
-   document.getElementById("loading");
+  const list =
+    document.getElementById("postsList");
 
- const box=
-   document.getElementById("posts");
+  list.innerHTML =
+    `<div class="loading">পোস্ট লোড হচ্ছে...</div>`;
 
- if(!loading || !box)
-   return;
+  const {data,error} =
+    await supabaseClient
+      .from("posts")
+      .select("*")
+      .order("created_at",{ascending:false});
 
- loading.style.display="block";
- box.innerHTML="";
+  if(error){
 
- const {data,error}=
-   await supabaseClient
-     .from("posts")
-     .select("*")
-     .order(
-       "created_at",
-       {ascending:false}
-     );
-
- loading.style.display="none";
-
- if(error){
-
-   box.innerHTML=
-     `<div class="card">
-       পোস্ট লোড করতে সমস্যা হয়েছে।
+    list.innerHTML=
+      `<div class="warning">
+        পোস্ট লোড হয়নি:<br>
+        ${escapeHTML(error.message)}
       </div>`;
 
-   return;
- }
+    return;
 
- if(!data || !data.length){
+  }
 
-   box.innerHTML=
-     `<div class="card center">
-       এখনো কোনো পোস্ট নেই।
+  if(!data?.length){
+
+    list.innerHTML=
+      `<div class="card empty">
+        এখনো কোনো পোস্ট নেই।
       </div>`;
 
-   return;
- }
+    return;
 
- for(const post of data){
+  }
 
-   await renderPost(post);
- }
+  let html="";
+
+  for(const post of data){
+
+    html +=
+      await renderPost(post);
+
+  }
+
+  list.innerHTML=html;
+
 }
-
 
 async function renderPost(post){
 
- const box=
-   document.getElementById("posts");
+  const {data:likes} =
+    await supabaseClient
+      .from("post_likes")
+      .select("user_id")
+      .eq("post_id",post.id);
 
- const card=
-   document.createElement("div");
+  const {data:comments} =
+    await supabaseClient
+      .from("post_comments")
+      .select("*")
+      .eq("post_id",post.id)
+      .order("created_at",{ascending:true});
 
- card.className="card";
+  const liked =
+    currentUser &&
+    (likes||[]).some(
+      l=>l.user_id===currentUser.id
+    );
 
- const {count:likeCount}=
-   await supabaseClient
-     .from("post_likes")
-     .select("*",{
-       count:"exact",
-       head:true
-     })
-     .eq("post_id",post.id);
+  return `
 
- let liked=false;
+    <div class="card">
 
- if(currentUser){
+      <div class="profile">
 
-   const {data:like}=
-     await supabaseClient
-       .from("post_likes")
-       .select("post_id")
-       .eq("post_id",post.id)
-       .eq("user_id",currentUser.id)
-       .maybeSingle();
+        <div class="avatar">
+          ${escapeHTML(
+            (post.user_id||"U")
+              .slice(0,1)
+              .toUpperCase()
+          )}
+        </div>
 
-   liked=!!like;
- }
+        <div>
 
- const {data:comments}=
-   await supabaseClient
-     .from("post_comments")
-     .select("*")
-     .eq("post_id",post.id)
-     .order(
-       "created_at",
-       {ascending:true}
-     );
+          <div class="name">
+            ওমর এস এস ঘর
+          </div>
 
- let imageHTML="";
+          <div class="date">
+            ${formatDate(post.created_at)}
+          </div>
 
- if(post.image_url){
+        </div>
 
-   imageHTML=
-     `<img
-       class="post-image"
-       src="${escapeHTML(post.image_url)}"
-       alt="পোস্টের ছবি"
-       loading="lazy">`;
- }
+      </div>
 
- card.innerHTML=`
+      ${
+        post.content
+          ? `<div style="margin-top:12px;white-space:pre-wrap">
+              ${escapeHTML(post.content)}
+            </div>`
+          : ""
+      }
 
-   <div class="profile">
+      ${
+        post.image_url
+          ? `<img
+              class="post-image"
+              src="${escapeHTML(post.image_url)}"
+              alt="post image"
+            >`
+          : ""
+      }
 
-     <div class="avatar">
-       👤
-     </div>
+      <div class="actions">
 
-     <div>
+        <button
+          onclick="toggleLike('${post.id}')">
 
-       <div class="name">
-         ব্যবহারকারী
-       </div>
+          ${liked ? "❤️" : "🤍"}
+          ${likes?.length||0}
 
-       <div class="date">
-         ${formatDate(post.created_at)}
-       </div>
+        </button>
 
-     </div>
+        <button
+          onclick="focusComment('${post.id}')">
 
-   </div>
+          💬
+          ${comments?.length||0}
 
-   ${
-     post.content
-     ?
-     `<div style="
-       margin-top:12px;
-       white-space:pre-wrap;
-       word-break:break-word">
-       ${escapeHTML(post.content)}
-      </div>`
-     :
-     ""
-   }
+        </button>
 
-   ${imageHTML}
+        <button
+          onclick="sharePost('${post.id}')">
 
-   <div class="stats"
-        style="
-        display:flex;
-        justify-content:space-between;
-        color:#777;
-        font-size:13px;
-        margin-top:10px">
+          📤 শেয়ার
 
-     <span>
-       ❤️ ${likeCount||0} লাইক
-     </span>
+        </button>
 
-     <span>
-       ${comments?.length||0} কমেন্ট
-     </span>
+      </div>
 
-   </div>
+      <div id="comments-${post.id}">
 
-   <div class="actions">
+        ${renderComments(comments||[])}
 
-     <button
-       onclick="toggleLike('${post.id}')">
-       ❤️ লাইক
-     </button>
+      </div>
 
-     <button
-       onclick="focusComment('${post.id}')">
-       💬 কমেন্ট
-     </button>
+      <div class="comment-form">
 
-     <button
-       onclick="sharePost('${post.id}')">
-       📤 শেয়ার
-     </button>
+        <input
+          id="commentInput-${post.id}"
+          placeholder="মন্তব্য লিখুন..."
+        >
 
-   </div>
+        <button
+          class="primary"
+          onclick="addComment('${post.id}')">
 
-   <div id="comments-${post.id}">
-     ${renderComments(comments||[])}
-   </div>
+          পাঠান
 
-   ${
-     currentUser
-     ?
-     `<div class="comment-form">
+        </button>
 
-       <input
-         id="comment-${post.id}"
-         placeholder="কমেন্ট লিখুন...">
+      </div>
 
-       <button
-         class="primary"
-         onclick="addComment('${post.id}')">
-         পাঠান
-       </button>
+    </div>
 
-      </div>`
-     :
-     `<div style="
-       text-align:center;
-       color:#777;
-       margin-top:12px">
-       কমেন্ট করতে লগইন করুন।
-      </div>`
-   }
+  `;
 
- `;
-
- box.appendChild(card);
 }
-
 
 function renderComments(comments){
 
- if(!comments.length)
-   return "";
+  if(!comments.length)
+    return "";
 
- const top=
-   comments.filter(c=>!c.parent_id);
+  const parents =
+    comments.filter(c=>!c.parent_id);
 
- return top.map(comment=>{
+  let html="";
 
-   const replies=
-     comments.filter(
-       r=>r.parent_id===comment.id
-     );
+  parents.forEach(parent=>{
 
-   return `
+    html += `
 
-     <div class="comment">
+      <div class="comment">
 
-       <div class="comment-name">
-         👤 ব্যবহারকারী
-       </div>
+        <div class="comment-name">
+          ব্যবহারকারী
+        </div>
 
-       <div class="comment-text">
-         ${escapeHTML(comment.content)}
-       </div>
+        <div class="comment-text">
+          ${escapeHTML(parent.content)}
+        </div>
 
-       ${
-         currentUser
-         ?
-         `<span
-           class="small"
-           onclick="
-             replyTo(
-               '${comment.post_id}',
-               '${comment.id}'
-             )">
-           ↩️ রিপ্লাই
-          </span>`
-         :
-         ""
-       }
+        <button
+          class="gray"
+          style="margin-top:7px;padding:6px 10px;font-size:12px"
+          onclick="replyTo('${parent.post_id}','${parent.id}')">
 
-       ${
-         replies.map(reply=>`
+          ↩️ Reply
 
-           <div class="comment reply">
+        </button>
 
-             <div class="comment-name">
-               👤 ব্যবহারকারী
-             </div>
+      </div>
 
-             <div class="comment-text">
-               ${escapeHTML(reply.content)}
-             </div>
+    `;
 
-           </div>
+    const replies =
+      comments.filter(
+        c=>c.parent_id===parent.id
+      );
 
-         `).join("")
-       }
+    replies.forEach(reply=>{
 
-     </div>
+      html += `
 
-   `;
+        <div class="comment reply">
 
- }).join("");
+          <div class="comment-name">
+            ↳ উত্তর
+          </div>
+
+          <div class="comment-text">
+            ${escapeHTML(reply.content)}
+          </div>
+
+        </div>
+
+      `;
+
+    });
+
+  });
+
+  return html;
+
 }
-
 
 async function addComment(postId){
 
- if(!currentUser){
+  if(!currentUser){
 
-   openAuth();
-   return;
- }
+    openAuth();
+    return;
 
- const input=
-   document.getElementById(
-     "comment-"+postId
-   );
+  }
 
- const text=
-   input.value.trim();
+  const input =
+    document.getElementById(
+      "commentInput-"+postId
+    );
 
- if(!text)
-   return;
+  const content =
+    input.value.trim();
 
- const {error}=
-   await supabaseClient
-     .from("post_comments")
-     .insert({
+  if(!content) return;
 
-       post_id:postId,
+  const {error} =
+    await supabaseClient
+      .from("post_comments")
+      .insert({
 
-       user_id:currentUser.id,
+        post_id:postId,
+        user_id:currentUser.id,
+        content,
+        parent_id:null
 
-       content:text,
+      });
 
-       parent_id:null
+  if(error){
 
-     });
+    alert(error.message);
+    return;
 
- if(error){
+  }
 
-   alert(
-     "কমেন্ট করা যায়নি: "+
-     error.message
-   );
+  input.value="";
 
-   return;
- }
+  await loadPosts();
 
- input.value="";
-
- loadPosts();
 }
-
 
 async function replyTo(postId,parentId){
 
- if(!currentUser){
+  if(!currentUser){
 
-   openAuth();
-   return;
- }
+    openAuth();
+    return;
 
- const text=
-   prompt("রিপ্লাই লিখুন:");
+  }
 
- if(!text || !text.trim())
-   return;
+  const content =
+    prompt("আপনার উত্তর লিখুন:");
 
- const {error}=
-   await supabaseClient
-     .from("post_comments")
-     .insert({
+  if(!content) return;
 
-       post_id:postId,
+  const {error} =
+    await supabaseClient
+      .from("post_comments")
+      .insert({
 
-       user_id:currentUser.id,
+        post_id:postId,
+        user_id:currentUser.id,
+        content,
+        parent_id:parentId
 
-       content:text.trim(),
+      });
 
-       parent_id:parentId
+  if(error){
 
-     });
+    alert(error.message);
+    return;
 
- if(error){
+  }
 
-   alert(
-     "রিপ্লাই করা যায়নি: "+
-     error.message
-   );
+  await loadPosts();
 
-   return;
- }
-
- loadPosts();
 }
-
 
 async function toggleLike(postId){
 
- if(!currentUser){
+  if(!currentUser){
 
-   openAuth();
-   return;
- }
+    openAuth();
+    return;
 
- const {data:existing}=
-   await supabaseClient
-     .from("post_likes")
-     .select("post_id")
-     .eq("post_id",postId)
-     .eq("user_id",currentUser.id)
-     .maybeSingle();
+  }
 
- if(existing){
+  const {data} =
+    await supabaseClient
+      .from("post_likes")
+      .select("id")
+      .eq("post_id",postId)
+      .eq("user_id",currentUser.id)
+      .maybeSingle();
 
-   await supabaseClient
-     .from("post_likes")
-     .delete()
-     .eq("post_id",postId)
-     .eq("user_id",currentUser.id);
+  if(data){
 
- }else{
+    await supabaseClient
+      .from("post_likes")
+      .delete()
+      .eq("id",data.id);
 
-   await supabaseClient
-     .from("post_likes")
-     .insert({
+  }else{
 
-       post_id:postId,
+    await supabaseClient
+      .from("post_likes")
+      .insert({
 
-       user_id:currentUser.id
+        post_id:postId,
+        user_id:currentUser.id
 
-     });
- }
+      });
 
- loadPosts();
+  }
+
+  await loadPosts();
+
 }
-
 
 async function sharePost(postId){
 
- const url=
-   window.location.origin+
-   window.location.pathname+
-   "?post="+postId;
+  const url =
+    location.origin+
+    location.pathname+
+    "?post="+postId;
 
- if(navigator.share){
+  if(navigator.share){
 
-   try{
+    try{
 
-     await navigator.share({
+      await navigator.share({
 
-       title:"ওমর এস এস ঘর",
+        title:"ওমর এস এস ঘর",
+        text:"ওমর এস এস ঘরের পোস্ট",
+        url
 
-       text:"এই পোস্টটি দেখুন",
+      });
 
-       url:url
+    }catch(e){}
 
-     });
+  }else{
 
-   }catch(e){}
+    await navigator.clipboard.writeText(url);
 
- }else{
+    alert("✅ পোস্টের লিংক কপি হয়েছে।");
 
-   try{
+  }
 
-     await navigator.clipboard.writeText(url);
-
-     alert(
-       "পোস্টের লিংক কপি হয়েছে।"
-     );
-
-   }catch(e){
-
-     prompt(
-       "লিংক কপি করুন:",
-       url
-     );
-   }
- }
 }
-
 
 function focusComment(postId){
 
- const input=
-   document.getElementById(
-     "comment-"+postId
-   );
+  const input =
+    document.getElementById(
+      "commentInput-"+postId
+    );
 
- if(input){
+  if(input){
 
-   input.focus();
+    input.focus();
 
-   input.scrollIntoView({
-     behavior:"smooth",
-     block:"center"
-   });
+    input.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
 
- }else{
+  }
 
-   openAuth();
- }
 }
 
-
-/* =====================================================
+/* =========================
    HELPERS
-===================================================== */
+========================= */
 
 function money(number){
 
- return Number(number||0)
-   .toLocaleString("bn-BD",{
-     maximumFractionDigits:2
-   })+
-   " টাকা";
-}
+  const n =
+    Number(number||0);
 
+  return n.toLocaleString("bn-BD")+
+    " টাকা";
+
+}
 
 function formatDateOnly(date){
 
- if(!date)
-   return "-";
+  if(!date) return "-";
 
- return new Date(date+"T00:00:00")
-   .toLocaleDateString("bn-BD");
+  try{
+
+    return new Date(date+"T00:00:00")
+      .toLocaleDateString("bn-BD");
+
+  }catch(e){
+
+    return date;
+
+  }
+
 }
-
 
 function formatDate(date){
 
- if(!date)
-   return "";
+  if(!date) return "";
 
- return new Date(date)
-   .toLocaleString(
-     "bn-BD",
-     {
-       dateStyle:"medium",
-       timeStyle:"short"
-     }
-   );
+  try{
+
+    return new Date(date)
+      .toLocaleString("bn-BD");
+
+  }catch(e){
+
+    return date;
+
+  }
+
 }
-
 
 function escapeHTML(value){
 
- if(value===null ||
-    value===undefined)
-   return "";
+  return String(value??"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
- return String(value)
-   .replace(/&/g,"&amp;")
-   .replace(/</g,"&lt;")
-   .replace(/>/g,"&gt;")
-   .replace(/"/g,"&quot;")
-   .replace(/'/g,"&#039;");
 }
 
+/* =========================
+   AUTH STATE
+========================= */
 
-/* =====================================================
-   AUTH EVENT
-===================================================== */
+supabaseClient.auth.onAuthStateChange(
+  async(event,session)=>{
 
-supabaseClient.auth
- .onAuthStateChange(
-   async (event,session)=>{
+    currentUser =
+      session?.user || null;
 
-     currentUser=
-       session?.user||null;
+    await updateUI();
 
-     await updateUI();
+  }
+);
 
-   }
- );
-
-
-/* =====================================================
+/* =========================
    START
-===================================================== */
+========================= */
 
 (async function(){
 
- await loadUser();
+  await loadUser();
 
 })();
 
