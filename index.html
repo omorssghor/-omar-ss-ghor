@@ -19,7 +19,9 @@ body{
   color:#17202a;
 }
 
-/* ================= LOGIN PAGE ================= */
+button{
+  cursor:pointer;
+}
 
 #loginPage{
   min-height:100vh;
@@ -33,7 +35,7 @@ body{
 
 .login-box{
   width:100%;
-  max-width:430px;
+  max-width:460px;
   background:#fff;
   border-radius:25px;
   padding:30px 24px;
@@ -82,32 +84,26 @@ body{
   color:white;
   font-size:18px;
   font-weight:bold;
-  cursor:pointer;
   margin-top:4px;
 }
 
-.login-btn:active{
-  transform:scale(.98);
-}
-
-.create-btn{
+.create-btn,
+.forgot-btn{
   width:100%;
   border:0;
   background:none;
-  color:#0077ff;
-  font-size:16px;
-  font-weight:bold;
-  margin-top:20px;
-  cursor:pointer;
-}
-
-.forgot-btn{
-  border:0;
-  background:none;
-  color:#555;
   font-size:15px;
   margin-top:18px;
   cursor:pointer;
+}
+
+.create-btn{
+  color:#0077ff;
+  font-weight:bold;
+}
+
+.forgot-btn{
+  color:#555;
 }
 
 .login-message{
@@ -117,7 +113,42 @@ body{
   font-weight:bold;
 }
 
-/* ================= MAIN PAGE ================= */
+/* PUBLIC PORTAL */
+
+.public-box{
+  margin-top:25px;
+  padding-top:22px;
+  border-top:1px solid #e5e9ed;
+}
+
+.public-title{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:13px;
+}
+
+.public-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.public-btn{
+  border:0;
+  padding:15px 8px;
+  border-radius:14px;
+  background:#f0f6ff;
+  color:#0067d9;
+  font-weight:bold;
+  font-size:15px;
+}
+
+.public-btn.worker{
+  background:#eefaf6;
+  color:#087f5b;
+}
+
+/* MAIN */
 
 #mainPage{
   display:none;
@@ -211,7 +242,9 @@ body{
   gap:12px;
 }
 
-input,textarea,select{
+input,
+textarea,
+select{
   width:100%;
   padding:13px;
   border:1px solid #d8dee5;
@@ -232,7 +265,15 @@ textarea{
   padding:13px 18px;
   border-radius:11px;
   font-weight:bold;
-  cursor:pointer;
+}
+
+.success{
+  border:0;
+  background:#087f5b;
+  color:white;
+  padding:13px 18px;
+  border-radius:11px;
+  font-weight:bold;
 }
 
 .danger{
@@ -279,6 +320,17 @@ textarea{
   color:#66717c;
   font-size:14px;
   line-height:1.7;
+}
+
+.code-badge{
+  display:inline-block;
+  background:#17232f;
+  color:#fff;
+  padding:6px 12px;
+  border-radius:20px;
+  font-weight:bold;
+  letter-spacing:3px;
+  margin-top:7px;
 }
 
 .stats{
@@ -334,7 +386,28 @@ th{
   margin-bottom:10px;
 }
 
-/* ================= MODAL ================= */
+.section-title{
+  margin-top:25px;
+  margin-bottom:10px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.contact-box{
+  background:#f5f8fb;
+  padding:15px;
+  border-radius:14px;
+  margin-top:15px;
+  line-height:2;
+}
+
+.contact-box a{
+  color:#0067d9;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+/* MODAL */
 
 .modal{
   display:none;
@@ -350,8 +423,8 @@ th{
 .modal-box{
   background:#fff;
   width:100%;
-  max-width:480px;
-  max-height:90vh;
+  max-width:600px;
+  max-height:92vh;
   overflow:auto;
   border-radius:20px;
   padding:22px;
@@ -373,7 +446,50 @@ th{
   font-size:18px;
 }
 
-/* ================= MOBILE ================= */
+.portal-code-input{
+  text-align:center;
+  font-size:25px;
+  letter-spacing:10px;
+  font-weight:bold;
+}
+
+.public-result{
+  margin-top:18px;
+  text-align:left;
+}
+
+.public-header{
+  background:#17232f;
+  color:#fff;
+  padding:18px;
+  border-radius:15px;
+  margin-bottom:15px;
+}
+
+.public-stat{
+  background:#f4f7fa;
+  padding:14px;
+  border-radius:12px;
+  margin-bottom:9px;
+}
+
+.good{
+  color:#087f5b;
+}
+
+.bad{
+  color:#d93025;
+}
+
+.note{
+  background:#fff8e8;
+  padding:12px;
+  border-radius:11px;
+  margin-top:12px;
+  font-size:14px;
+}
+
+/* MOBILE */
 
 @media(max-width:650px){
 
@@ -404,6 +520,14 @@ th{
   .container{
     padding:12px;
   }
+
+  .customer-head{
+    flex-direction:column;
+  }
+
+  .public-buttons{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -411,7 +535,7 @@ th{
 <body>
 
 <!-- =====================================================
-     আলাদা LOGIN PAGE
+ LOGIN
 ===================================================== -->
 
 <section id="loginPage">
@@ -457,355 +581,410 @@ th{
 
     <div id="loginMessage" class="login-message"></div>
 
+
+    <!-- PUBLIC হিসাব -->
+
+    <div class="public-box">
+
+      <div class="public-title">
+        📋 হিসাব দেখতে Login লাগবে না
+      </div>
+
+      <div class="public-buttons">
+
+        <button
+          class="public-btn"
+          onclick="openPublicPortal('customer')">
+          👤 কাস্টমার হিসাব
+        </button>
+
+        <button
+          class="public-btn worker"
+          onclick="openPublicPortal('worker')">
+          👷 মিস্ত্রি হিসাব
+        </button>
+
+      </div>
+
+    </div>
+
   </div>
 
 </section>
 
 
 <!-- =====================================================
-     MAIN PAGE
+ MAIN PAGE
 ===================================================== -->
 
 <section id="mainPage">
 
-  <header class="topbar">
-    <div class="topbar-inner">
+<header class="topbar">
 
-      <div class="brand">
-        🏪 ওমর এস এস ঘর
-      </div>
+  <div class="topbar-inner">
 
-      <button class="logout-btn" onclick="logoutUser()">
-        Logout
-      </button>
-
+    <div class="brand">
+      🏪 ওমর এস এস ঘর
     </div>
-  </header>
 
-  <main class="container">
+    <button class="logout-btn" onclick="logoutUser()">
+      Logout
+    </button>
 
-    <nav class="menu">
+  </div>
 
-      <button class="active" onclick="showPage('homePage',this)">
-        🏠 Home
-      </button>
+</header>
 
-      <button onclick="showPage('customersPage',this)">
-        👤 Customers
-      </button>
 
-      <button onclick="showPage('newCustomerPage',this)">
-        ➕ New Customer
-      </button>
+<main class="container">
 
-      <button onclick="showPage('materialsPage',this)">
-        🔩 Materials
-      </button>
+<nav class="menu">
 
-      <button onclick="showPage('workersPage',this)">
-        👷 Workers
-      </button>
+  <button class="active"
+    onclick="showPage('homePage',this)">
+    🏠 Home
+  </button>
 
-      <button onclick="showPage('settingsPage',this)">
-        ⚙️ Settings
-      </button>
+  <button
+    onclick="showPage('customersPage',this)">
+    👤 Customers
+  </button>
 
-    </nav>
+  <button
+    onclick="showPage('newCustomerPage',this)">
+    ➕ New Customer
+  </button>
 
+  <button
+    onclick="showPage('materialsPage',this)">
+    🔩 Materials
+  </button>
 
-    <!-- HOME -->
+  <button
+    onclick="showPage('workersPage',this)">
+    👷 Workers
+  </button>
 
-    <section id="homePage" class="page active">
+  <button
+    onclick="showPage('settingsPage',this)">
+    ⚙️ Settings
+  </button>
 
-      <div class="card">
+</nav>
 
-        <h2>🏪 ওমর এস এস ঘর</h2>
 
-        <p class="small">
-          SS ও গ্লাসের সকল ধরনের কাজের বিশ্বস্ত প্রতিষ্ঠান।
-        </p>
+<!-- HOME -->
 
-        <div class="stats">
+<section id="homePage" class="page active">
 
-          <div class="stat">
-            Customers
-            <b id="homeCustomers">0</b>
-          </div>
+<div class="card">
 
-          <div class="stat">
-            Materials
-            <b id="homeMaterials">0</b>
-          </div>
+<h2>🏪 ওমর এস এস ঘর</h2>
 
-          <div class="stat">
-            Workers
-            <b id="homeWorkers">0</b>
-          </div>
+<p class="small">
+SS ও গ্লাসের সকল ধরনের কাজের বিশ্বস্ত প্রতিষ্ঠান।
+</p>
 
-          <div class="stat">
-            হিসাব
-            <b>✓</b>
-          </div>
+<div class="stats">
 
-        </div>
+<div class="stat">
+Customers
+<b id="homeCustomers">0</b>
+</div>
 
-      </div>
+<div class="stat">
+Materials
+<b id="homeMaterials">0</b>
+</div>
 
-    </section>
+<div class="stat">
+Workers
+<b id="homeWorkers">0</b>
+</div>
 
+<div class="stat">
+হিসাব
+<b>✓</b>
+</div>
 
-    <!-- CUSTOMERS -->
+</div>
 
-    <section id="customersPage" class="page">
-
-      <div class="card">
-
-        <h2>👤 সকল Customer</h2>
-
-        <div id="customerList"></div>
-
-      </div>
-
-    </section>
-
-
-    <!-- NEW CUSTOMER -->
-
-    <section id="newCustomerPage" class="page">
-
-      <div class="card">
-
-        <h2>➕ নতুন Customer</h2>
-
-        <div class="grid">
-
-          <div>
-            <label>Customer Name</label>
-            <input id="customerName" placeholder="Customer Name">
-          </div>
-
-          <div>
-            <label>Phone Number</label>
-            <input id="customerPhone" placeholder="Phone Number">
-          </div>
-
-          <div>
-            <label>Address</label>
-            <input id="customerAddress" placeholder="Address">
-          </div>
-
-          <div>
-            <label>কাজের ধরন</label>
-            <input id="customerWork" placeholder="যেমন: SS Gate">
-          </div>
-
-          <div>
-            <label>Contact Price</label>
-            <input id="contractPrice" type="number" placeholder="কাজের মোট চুক্তির দাম">
-          </div>
-
-          <div>
-            <label>Delivery Date</label>
-            <input id="deliveryDate" type="date">
-          </div>
-
-        </div>
-
-        <br>
-
-        <button class="primary" onclick="addCustomer()">
-          💾 Save Customer
-        </button>
-
-        <div id="customerMessage" class="login-message"></div>
-
-      </div>
-
-    </section>
-
-
-    <!-- MATERIALS -->
-
-    <section id="materialsPage" class="page">
-
-      <div class="card">
-
-        <h2>🔩 Materials</h2>
-
-        <div class="grid">
-
-          <input id="materialName" placeholder="Material Name">
-
-          <input id="materialPrice" type="number" placeholder="Price">
-
-        </div>
-
-        <br>
-
-        <button class="primary" onclick="addMaterial()">
-          ➕ Material Save
-        </button>
-
-        <div id="materialList"></div>
-
-      </div>
-
-    </section>
-
-
-    <!-- WORKERS -->
-
-    <section id="workersPage" class="page">
-
-      <div class="card">
-
-        <h2>👷 Workers / Mistri</h2>
-
-        <div class="grid">
-
-          <input id="workerName" placeholder="Mistri Name">
-
-          <input id="workerSalary" type="number" placeholder="Monthly Salary">
-
-        </div>
-
-        <br>
-
-        <button class="primary" onclick="addWorker()">
-          ➕ Mistri Save
-        </button>
-
-        <div id="workerList"></div>
-
-      </div>
-
-    </section>
-
-
-    <!-- SETTINGS -->
-
-    <section id="settingsPage" class="page">
-
-      <div class="card">
-
-        <h2>⚙️ Settings</h2>
-
-        <p class="small">
-          এখান থেকে আপনার ব্যবসার তথ্য পরিবর্তন করতে পারবেন।
-        </p>
-
-        <div class="grid">
-
-          <div>
-            <label>ব্যবসার নাম</label>
-            <input id="settingName">
-          </div>
-
-          <div>
-            <label>ফোন</label>
-            <input id="settingPhone">
-          </div>
-
-          <div>
-            <label>WhatsApp</label>
-            <input id="settingWhatsapp">
-          </div>
-
-          <div>
-            <label>Email</label>
-            <input id="settingEmail">
-          </div>
-
-        </div>
-
-        <br>
-
-        <label>ঠিকানা</label>
-        <input id="settingAddress">
-
-        <br><br>
-
-        <label>ব্যবসার বিবরণ</label>
-        <textarea id="settingDescription"></textarea>
-
-        <br>
-
-        <button class="primary" onclick="saveSettings()">
-          💾 Settings Save
-        </button>
-
-        <div id="settingsMessage" class="login-message"></div>
-
-      </div>
-
-    </section>
-
-  </main>
+</div>
 
 </section>
 
 
+<!-- CUSTOMERS -->
+
+<section id="customersPage" class="page">
+
+<div class="card">
+
+<h2>👤 সকল Customer</h2>
+
+<div id="customerList"></div>
+
+</div>
+
+</section>
+
+
+<!-- NEW CUSTOMER -->
+
+<section id="newCustomerPage" class="page">
+
+<div class="card">
+
+<h2>➕ নতুন Customer</h2>
+
+<div class="grid">
+
+<div>
+<label>Customer Name</label>
+<input id="customerName" placeholder="Customer Name">
+</div>
+
+<div>
+<label>Phone Number</label>
+<input id="customerPhone" placeholder="Phone Number">
+</div>
+
+<div>
+<label>Address</label>
+<input id="customerAddress" placeholder="Address">
+</div>
+
+<div>
+<label>কাজের ধরন</label>
+<input id="customerWork" placeholder="যেমন: SS Gate">
+</div>
+
+<div>
+<label>Contact Price</label>
+<input id="contractPrice" type="number" placeholder="মোট চুক্তির দাম">
+</div>
+
+<div>
+<label>Delivery Date</label>
+<input id="deliveryDate" type="date">
+</div>
+
+</div>
+
+<br>
+
+<button class="primary" onclick="addCustomer()">
+💾 Save Customer
+</button>
+
+<div id="customerMessage" class="login-message"></div>
+
+</div>
+
+</section>
+
+
+<!-- MATERIALS -->
+
+<section id="materialsPage" class="page">
+
+<div class="card">
+
+<h2>🔩 Materials</h2>
+
+<div class="grid">
+
+<input
+id="materialName"
+placeholder="Material Name">
+
+<input
+id="materialPrice"
+type="number"
+placeholder="Price">
+
+</div>
+
+<br>
+
+<button class="primary" onclick="addMaterial()">
+➕ Material Save
+</button>
+
+<div id="materialList"></div>
+
+</div>
+
+</section>
+
+
+<!-- WORKERS -->
+
+<section id="workersPage" class="page">
+
+<div class="card">
+
+<h2>👷 Workers / Mistri</h2>
+
+<div class="grid">
+
+<input
+id="workerName"
+placeholder="Mistri Name">
+
+<input
+id="workerSalary"
+type="number"
+placeholder="Monthly Salary">
+
+</div>
+
+<br>
+
+<button class="primary" onclick="addWorker()">
+➕ Mistri Save
+</button>
+
+<div id="workerList"></div>
+
+</div>
+
+</section>
+
+
+<!-- SETTINGS -->
+
+<section id="settingsPage" class="page">
+
+<div class="card">
+
+<h2>⚙️ Settings</h2>
+
+<div class="grid">
+
+<div>
+<label>ব্যবসার নাম</label>
+<input id="settingName">
+</div>
+
+<div>
+<label>ফোন</label>
+<input id="settingPhone">
+</div>
+
+<div>
+<label>WhatsApp</label>
+<input id="settingWhatsapp">
+</div>
+
+<div>
+<label>Email</label>
+<input id="settingEmail">
+</div>
+
+</div>
+
+<br>
+
+<label>ঠিকানা</label>
+<input id="settingAddress">
+
+<br><br>
+
+<label>ব্যবসার বিবরণ</label>
+<textarea id="settingDescription"></textarea>
+
+<br>
+
+<button class="primary" onclick="saveSettings()">
+💾 Settings Save
+</button>
+
+<div id="settingsMessage" class="login-message"></div>
+
+</div>
+
+</section>
+
+</main>
+</section>
+
+
 <!-- =====================================================
-     CREATE ACCOUNT MODAL
+ CREATE ACCOUNT MODAL
 ===================================================== -->
 
 <div id="createModal" class="modal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <button class="close" onclick="closeCreateAccount()">×</button>
+<button class="close"
+onclick="closeCreateAccount()">×</button>
 
-    <div class="modal-title">
-      🆕 New Account Created
-    </div>
+<div class="modal-title">
+🆕 New Account Created
+</div>
 
-    <input
-      id="registerName"
-      placeholder="Your Name"
-    >
+<input id="registerName"
+placeholder="Your Name">
 
-    <br><br>
+<br><br>
 
-    <input
-      id="registerEmail"
-      type="email"
-      placeholder="Your Email"
-    >
+<input id="registerEmail"
+type="email"
+placeholder="Your Email">
 
-    <br><br>
+<br><br>
 
-    <input
-      id="registerPassword"
-      type="password"
-      placeholder="Your Password"
-    >
+<input id="registerPassword"
+type="password"
+placeholder="Your Password">
 
-    <br><br>
+<br><br>
 
-    <button class="primary" onclick="createAccount()">
-      Create Account
-    </button>
+<button class="primary"
+onclick="createAccount()">
+Create Account
+</button>
 
-    <div id="registerMessage" class="login-message"></div>
+<div id="registerMessage"
+class="login-message"></div>
 
-  </div>
-
+</div>
 </div>
 
 
 <!-- =====================================================
-     CUSTOMER DETAIL MODAL
+ CUSTOMER DETAIL
 ===================================================== -->
 
 <div id="customerModal" class="modal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <button class="close" onclick="closeCustomerModal()">×</button>
+<button class="close"
+onclick="closeCustomerModal()">×</button>
 
-    <div id="customerDetail"></div>
+<div id="customerDetail"></div>
 
-  </div>
+</div>
+</div>
+
+
+<!-- =====================================================
+ PUBLIC PORTAL
+===================================================== -->
+
+<div id="publicModal" class="modal">
+
+<div class="modal-box">
+
+<button class="close"
+onclick="closePublicPortal()">×</button>
+
+<div id="publicPortalContent"></div>
+
+</div>
 
 </div>
 
@@ -813,7 +992,7 @@ th{
 <script>
 
 /* =====================================================
-   SUPABASE
+ SUPABASE
 ===================================================== */
 
 const SUPABASE_URL =
@@ -830,1103 +1009,2297 @@ window.supabase.createClient(
 
 
 /* =====================================================
-   DATA
+ DATA
 ===================================================== */
 
-let currentUser = null;
-let customers = [];
-let materials = [];
-let workers = [];
+let currentUser=null;
+let customers=[];
+let materials=[];
+let workers=[];
 
 
 /* =====================================================
-   START
+ START
 ===================================================== */
 
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener(
+"DOMContentLoaded",
+async()=>{
 
-  const result =
-    await supabaseClient.auth.getSession();
+const result=
+await supabaseClient.auth.getSession();
 
-  currentUser =
-    result.data.session?.user || null;
+currentUser=
+result.data.session?.user||null;
 
-  if(currentUser){
+if(currentUser){
 
-    await showMainPage();
+await showMainPage();
 
-  }else{
+}else{
 
-    showLoginPage();
+showLoginPage();
 
-  }
+}
 
 });
 
 
 /* =====================================================
-   LOGIN PAGE
+ LOGIN
 ===================================================== */
 
 function showLoginPage(){
 
-  document.getElementById("loginPage").style.display =
-    "flex";
+document.getElementById("loginPage").style.display="flex";
 
-  document.getElementById("mainPage").style.display =
-    "none";
+document.getElementById("mainPage").style.display="none";
 
 }
 
 
 async function loginUser(){
 
-  const email =
-    document.getElementById("loginEmail").value.trim();
+const email=
+document.getElementById("loginEmail").value.trim();
 
-  const password =
-    document.getElementById("loginPassword").value;
+const password=
+document.getElementById("loginPassword").value;
 
-  const message =
-    document.getElementById("loginMessage");
+const message=
+document.getElementById("loginMessage");
 
-  message.style.color="#d93025";
-  message.textContent="";
+message.style.color="#d93025";
 
-  if(!email || !password){
+if(!email||!password){
 
-    message.textContent =
-      "Email এবং Password দিন।";
+message.textContent=
+"Email এবং Password দিন।";
 
-    return;
-  }
+return;
+}
 
-  message.textContent =
-    "Login হচ্ছে...";
+message.style.color="#0077ff";
 
-  const {data,error} =
-    await supabaseClient.auth.signInWithPassword({
-      email:email,
-      password:password
-    });
+message.textContent="Login হচ্ছে...";
 
-  if(error){
+const {data,error}=
+await supabaseClient.auth.signInWithPassword({
 
-    message.textContent =
-      "Email অথবা Password সঠিক নয়।";
+email:email,
+password:password
 
-    return;
-  }
+});
 
-  currentUser=data.user;
+if(error){
 
-  await showMainPage();
+message.style.color="#d93025";
+
+message.textContent=
+"Email অথবা Password সঠিক নয়।";
+
+return;
+}
+
+currentUser=data.user;
+
+await showMainPage();
 
 }
 
 
 async function logoutUser(){
 
-  await supabaseClient.auth.signOut();
+await supabaseClient.auth.signOut();
 
-  currentUser=null;
+currentUser=null;
 
-  showLoginPage();
+showLoginPage();
 
 }
 
 
 /* =====================================================
-   CREATE ACCOUNT
+ CREATE ACCOUNT
 ===================================================== */
 
 function openCreateAccount(){
 
-  document.getElementById("createModal").style.display =
-    "flex";
+document.getElementById("createModal").style.display="flex";
 
 }
 
-
 function closeCreateAccount(){
 
-  document.getElementById("createModal").style.display =
-    "none";
+document.getElementById("createModal").style.display="none";
 
 }
 
 
 async function createAccount(){
 
-  const name =
-    document.getElementById("registerName").value.trim();
+const name=
+document.getElementById("registerName").value.trim();
 
-  const email =
-    document.getElementById("registerEmail").value.trim();
+const email=
+document.getElementById("registerEmail").value.trim();
 
-  const password =
-    document.getElementById("registerPassword").value;
+const password=
+document.getElementById("registerPassword").value;
 
-  const message =
-    document.getElementById("registerMessage");
+const message=
+document.getElementById("registerMessage");
 
-  message.style.color="#d93025";
+if(!name||!email||!password){
 
-  if(!name || !email || !password){
+message.style.color="#d93025";
 
-    message.textContent =
-      "সব তথ্য পূরণ করুন।";
+message.textContent=
+"সব তথ্য পূরণ করুন।";
 
-    return;
-  }
+return;
+}
 
-  if(password.length < 6){
+if(password.length<6){
 
-    message.textContent =
-      "Password কমপক্ষে ৬ অক্ষরের হতে হবে।";
+message.style.color="#d93025";
 
-    return;
-  }
+message.textContent=
+"Password কমপক্ষে ৬ অক্ষরের হতে হবে।";
 
-  message.textContent =
-    "Account তৈরি হচ্ছে...";
+return;
+}
 
-  const {data,error} =
-    await supabaseClient.auth.signUp({
+message.style.color="#0077ff";
 
-      email:email,
+message.textContent="Account তৈরি হচ্ছে...";
 
-      password:password,
+const {data,error}=
+await supabaseClient.auth.signUp({
 
-      options:{
-        data:{
-          full_name:name
-        }
-      }
+email:email,
+password:password,
 
-    });
+options:{
+data:{
+full_name:name
+}
+}
 
-  if(error){
+});
 
-    message.textContent =
-      error.message;
+if(error){
 
-    return;
-  }
+message.style.color="#d93025";
 
-  message.style.color="#087f5b";
+message.textContent=error.message;
 
-  message.textContent =
-    "Account তৈরি হয়েছে। এখন Login করুন।";
+return;
+}
 
-  document.getElementById("loginEmail").value =
-    email;
+message.style.color="#087f5b";
 
-  document.getElementById("loginPassword").value =
-    "";
+message.textContent=
+"Account তৈরি হয়েছে। এখন Login করুন।";
+
+document.getElementById("loginEmail").value=email;
+
+document.getElementById("loginPassword").value="";
 
 }
 
 
 /* =====================================================
-   FORGOT PASSWORD
+ FORGOT PASSWORD
 ===================================================== */
 
 async function forgotPassword(){
 
-  const email =
-    document.getElementById("loginEmail").value.trim();
+const email=
+document.getElementById("loginEmail").value.trim();
 
-  const message =
-    document.getElementById("loginMessage");
+const message=
+document.getElementById("loginMessage");
 
-  if(!email){
+if(!email){
 
-    message.style.color="#d93025";
+message.style.color="#d93025";
 
-    message.textContent =
-      "আগে Your Email ঘরে আপনার Email লিখুন।";
+message.textContent=
+"আগে Your Email ঘরে আপনার Email লিখুন।";
 
-    return;
-  }
+return;
+}
 
-  const {error} =
-    await supabaseClient.auth.resetPasswordForEmail(
-      email,
-      {
-        redirectTo:
-        window.location.origin +
-        window.location.pathname
-      }
-    );
+const {error}=
+await supabaseClient.auth.resetPasswordForEmail(
+email,
+{
+redirectTo:
+window.location.origin+
+window.location.pathname
+}
+);
 
-  if(error){
+if(error){
 
-    message.style.color="#d93025";
-    message.textContent=error.message;
+message.style.color="#d93025";
 
-  }else{
+message.textContent=error.message;
 
-    message.style.color="#087f5b";
+}else{
 
-    message.textContent =
-      "Password পরিবর্তনের জন্য আপনার Email দেখুন।";
+message.style.color="#087f5b";
 
-  }
+message.textContent=
+"Password পরিবর্তনের জন্য আপনার Email দেখুন।";
+
+}
 
 }
 
 
 /* =====================================================
-   MAIN PAGE
+ MAIN
 ===================================================== */
 
 async function showMainPage(){
 
-  document.getElementById("loginPage").style.display =
-    "none";
+document.getElementById("loginPage").style.display="none";
 
-  document.getElementById("mainPage").style.display =
-    "block";
+document.getElementById("mainPage").style.display="block";
 
-  await checkAccountingAccess();
+await checkAccountingAccess();
 
-  await loadAllData();
+await loadAllData();
 
-  loadSettings();
+loadSettings();
 
 }
 
 
 async function checkAccountingAccess(){
 
-  if(!currentUser) return;
+if(!currentUser)return;
 
-  const {data,error} =
-    await supabaseClient
-      .from("accounting_admins")
-      .select("user_id")
-      .eq("user_id",currentUser.id)
-      .maybeSingle();
+const {data,error}=
+await supabaseClient
+.from("accounting_admins")
+.select("user_id")
+.eq("user_id",currentUser.id)
+.maybeSingle();
 
-  if(error){
+if(error){
 
-    console.log(error);
+console.log(error);
 
-    return;
-  }
+return;
+}
 
-  if(!data){
+if(!data){
 
-    console.log(
-      "এই account accounting admin নয়।"
-    );
+console.log(
+"এই account accounting admin নয়।"
+);
 
-  }
+}
 
 }
 
 
 /* =====================================================
-   PAGE MENU
+ PAGE MENU
 ===================================================== */
 
 function showPage(id,button){
 
-  document.querySelectorAll(".page")
-    .forEach(page =>
-      page.classList.remove("active")
-    );
+document.querySelectorAll(".page")
+.forEach(page=>
+page.classList.remove("active"));
 
-  document.getElementById(id)
-    .classList.add("active");
+document.getElementById(id)
+.classList.add("active");
 
-  document.querySelectorAll(".menu button")
-    .forEach(btn =>
-      btn.classList.remove("active")
-    );
+document.querySelectorAll(".menu button")
+.forEach(btn=>
+btn.classList.remove("active"));
 
-  if(button){
+if(button){
 
-    button.classList.add("active");
+button.classList.add("active");
 
-  }
+}
 
 }
 
 
 /* =====================================================
-   LOAD ALL DATA
+ LOAD DATA
 ===================================================== */
 
 async function loadAllData(){
 
-  await loadCustomers();
+await loadCustomers();
 
-  await loadMaterials();
+await loadMaterials();
 
-  await loadWorkers();
+await loadWorkers();
 
 }
 
 
 /* =====================================================
-   CUSTOMERS
+ CUSTOMERS
 ===================================================== */
 
 async function loadCustomers(){
 
-  const {data,error} =
-    await supabaseClient
-      .from("customers")
-      .select("*")
-      .eq("admin_id",currentUser.id)
-      .order("created_at",{ascending:false});
+const {data,error}=
+await supabaseClient
+.from("customers")
+.select("*")
+.eq("admin_id",currentUser.id)
+.order("created_at",{ascending:false});
 
-  if(error){
+if(error){
 
-    console.log(error);
+console.log(error);
 
-    return;
-  }
+return;
+}
 
-  customers=data || [];
+customers=data||[];
 
-  renderCustomers();
+renderCustomers();
 
-  document.getElementById("homeCustomers")
-    .textContent=customers.length;
+document.getElementById("homeCustomers")
+.textContent=customers.length;
 
 }
 
 
 function renderCustomers(){
 
-  const box =
-    document.getElementById("customerList");
+const box=
+document.getElementById("customerList");
 
-  if(!customers.length){
+if(!customers.length){
 
-    box.innerHTML =
-      '<div class="empty">এখনও কোনো Customer নেই।</div>';
+box.innerHTML=
+'<div class="empty">এখনও কোনো Customer নেই।</div>';
 
-    return;
-  }
+return;
+}
 
-  box.innerHTML =
-    customers.map(customer => `
+box.innerHTML=
+customers.map(customer=>`
 
-      <div class="customer">
+<div class="customer">
 
-        <div class="customer-head">
+<div class="customer-head">
 
-          <div>
+<div>
 
-            <div class="customer-name">
-              ${escapeHtml(customer.name || "")}
-            </div>
+<div class="customer-name">
+${escapeHtml(customer.name||"")}
+</div>
 
-            <div class="small">
-              📞 ${escapeHtml(customer.phone || "")}<br>
-              📍 ${escapeHtml(customer.address || "")}
-            </div>
+<div class="small">
+📞 ${escapeHtml(customer.phone||"")}<br>
+📍 ${escapeHtml(customer.address||"")}<br>
+🔑 Customer Code:
+<span class="code-badge">
+${escapeHtml(customer.portal_code||"----")}
+</span>
+</div>
 
-          </div>
+</div>
 
-          <div class="amount">
-            ৳${Number(customer.contract_price || 0).toLocaleString()}
-          </div>
+<div class="amount">
+৳${Number(customer.contract_price||0).toLocaleString()}
+</div>
 
-        </div>
+</div>
 
-        <br>
+<br>
 
-        <div class="small">
-          🔧 ${escapeHtml(customer.work || "")}<br>
-          📅 Delivery:
-          ${escapeHtml(customer.delivery_date || "নির্ধারিত নয়")}
-        </div>
+<div class="small">
+🔧 ${escapeHtml(customer.work||"")}<br>
+📅 Delivery:
+${escapeHtml(customer.delivery_date||"নির্ধারিত নয়")}
+</div>
 
-        <br>
+<br>
 
-        <button
-          class="primary"
-          onclick="openCustomer(${customer.id})">
-          📂 হিসাব খুলুন
-        </button>
+<button
+class="primary"
+onclick='openCustomer(${JSON.stringify(customer.id)})'>
+📂 হিসাব খুলুন
+</button>
 
-      </div>
+</div>
 
-    `).join("");
+`).join("");
 
 }
 
 
 /* =====================================================
-   ADD CUSTOMER
+ ADD CUSTOMER
 ===================================================== */
 
 async function addCustomer(){
 
-  const name =
-    document.getElementById("customerName").value.trim();
+const name=
+document.getElementById("customerName").value.trim();
 
-  const phone =
-    document.getElementById("customerPhone").value.trim();
+const phone=
+document.getElementById("customerPhone").value.trim();
 
-  const address =
-    document.getElementById("customerAddress").value.trim();
+const address=
+document.getElementById("customerAddress").value.trim();
 
-  const work =
-    document.getElementById("customerWork").value.trim();
+const work=
+document.getElementById("customerWork").value.trim();
 
-  const contract =
-    Number(
-      document.getElementById("contractPrice").value || 0
-    );
+const contract=
+Number(
+document.getElementById("contractPrice").value||0
+);
 
-  const delivery =
-    document.getElementById("deliveryDate").value;
+const delivery=
+document.getElementById("deliveryDate").value;
 
-  const message =
-    document.getElementById("customerMessage");
+const message=
+document.getElementById("customerMessage");
 
-  if(!name || !phone || !address){
+if(!name||!phone||!address){
 
-    message.textContent =
-      "Customer Name, Phone এবং Address দিন।";
+message.style.color="#d93025";
 
-    return;
-  }
+message.textContent=
+"Customer Name, Phone এবং Address দিন।";
 
-  const {error} =
-    await supabaseClient
-      .from("customers")
-      .insert({
+return;
+}
 
-        admin_id:currentUser.id,
+const {data,error}=
+await supabaseClient
+.from("customers")
+.insert({
 
-        name:name,
+admin_id:currentUser.id,
+name:name,
+phone:phone,
+address:address,
+work:work,
+contract_price:contract,
+delivery_date:delivery||null
 
-        phone:phone,
+})
+.select()
+.single();
 
-        address:address,
+if(error){
 
-        work:work,
+message.style.color="#d93025";
 
-        contract_price:contract,
+message.textContent=error.message;
 
-        delivery_date:delivery || null
+return;
+}
 
-      });
+message.style.color="#087f5b";
 
-  if(error){
+message.textContent=
+"Customer Save হয়েছে। Customer Code: "+
+(data?.portal_code||"");
 
-    message.textContent=error.message;
+document.getElementById("customerName").value="";
+document.getElementById("customerPhone").value="";
+document.getElementById("customerAddress").value="";
+document.getElementById("customerWork").value="";
+document.getElementById("contractPrice").value="";
+document.getElementById("deliveryDate").value="";
 
-    return;
-  }
-
-  message.style.color="#087f5b";
-
-  message.textContent =
-    "Customer Save হয়েছে।";
-
-  document.getElementById("customerName").value="";
-  document.getElementById("customerPhone").value="";
-  document.getElementById("customerAddress").value="";
-  document.getElementById("customerWork").value="";
-  document.getElementById("contractPrice").value="";
-  document.getElementById("deliveryDate").value="";
-
-  await loadCustomers();
+await loadCustomers();
 
 }
 
 
 /* =====================================================
-   CUSTOMER DETAIL
+ CUSTOMER DETAIL
 ===================================================== */
 
 async function openCustomer(id){
 
-  const customer =
-    customers.find(c => c.id === id);
+const customer=
+customers.find(c=>String(c.id)===String(id));
 
-  if(!customer) return;
+if(!customer)return;
 
-  const detail =
-    document.getElementById("customerDetail");
+const detail=
+document.getElementById("customerDetail");
 
-  detail.innerHTML = `
+detail.innerHTML=`
 
-    <h2>👤 ${escapeHtml(customer.name || "")}</h2>
+<h2>👤 ${escapeHtml(customer.name||"")}</h2>
 
-    <div class="status">
-      📞 Phone:
-      <b>${escapeHtml(customer.phone || "")}</b>
-    </div>
+<div class="status">
+📞 Phone:
+<b>${escapeHtml(customer.phone||"")}</b>
+</div>
 
-    <div class="status">
-      📍 Address:
-      <b>${escapeHtml(customer.address || "")}</b>
-    </div>
+<div class="status">
+📍 Address:
+<b>${escapeHtml(customer.address||"")}</b>
+</div>
 
-    <div class="status">
-      🔧 Work:
-      <b>${escapeHtml(customer.work || "")}</b>
-    </div>
+<div class="status">
+🔧 Work:
+<b>${escapeHtml(customer.work||"")}</b>
+</div>
 
-    <div class="status">
-      💰 Contact Price:
-      <b>৳${Number(customer.contract_price || 0).toLocaleString()}</b>
-    </div>
+<div class="status">
+🔑 Customer Code:
+<br>
+<span class="code-badge">
+${escapeHtml(customer.portal_code||"----")}
+</span>
+</div>
 
-    <div class="status">
-      📅 Delivery:
-      <b>${escapeHtml(customer.delivery_date || "নির্ধারিত নয়")}</b>
-    </div>
+<div class="status">
+💰 Contact Price:
+<b>৳${Number(customer.contract_price||0).toLocaleString()}</b>
+</div>
 
-    <hr>
+<div class="status">
+📅 Delivery:
+<b>${escapeHtml(customer.delivery_date||"নির্ধারিত নয়")}</b>
+</div>
 
-    <h3>📊 কাজের হিসাব</h3>
+<hr>
 
-    <div class="stats">
+<h3>📊 কাজের হিসাব</h3>
 
-      <div class="stat">
-        মাল
-        <b id="detailMaterial">৳0</b>
-      </div>
+<div class="stats">
 
-      <div class="stat">
-        মিস্ত্রি
-        <b id="detailWorker">৳0</b>
-      </div>
+<div class="stat">
+মাল
+<b id="detailMaterial">৳0</b>
+</div>
 
-      <div class="stat">
-        অন্যান্য
-        <b id="detailOther">৳0</b>
-      </div>
+<div class="stat">
+মিস্ত্রি
+<b id="detailWorker">৳0</b>
+</div>
 
-      <div class="stat">
-        লাভ
-        <b id="detailProfit">৳0</b>
-      </div>
+<div class="stat">
+অন্যান্য
+<b id="detailOther">৳0</b>
+</div>
 
-    </div>
+<div class="stat">
+লাভ
+<b id="detailProfit">৳0</b>
+</div>
 
-  `;
+</div>
 
-  document.getElementById("customerModal").style.display =
-    "flex";
+<hr>
 
-  await calculateCustomer(id);
+<div class="section-title">
+🔩 Customer-এর মাল যোগ করুন
+</div>
+
+<div class="grid">
+
+<select id="customerMaterialSelect"
+onchange="fillMaterialPrice()">
+
+<option value="">Material নির্বাচন করুন</option>
+
+${materials.map(m=>`
+
+<option
+value="${escapeHtml(m.id)}"
+data-price="${Number(m.price||0)}">
+
+${escapeHtml(m.name)}
+</option>
+
+`).join("")}
+
+</select>
+
+<input
+id="customerMaterialQty"
+type="number"
+step="0.01"
+placeholder="পরিমাণ">
+
+</div>
+
+<br>
+
+<input
+id="customerMaterialPrice"
+type="number"
+placeholder="একক দাম">
+
+<br><br>
+
+<button
+class="primary"
+onclick='addCustomerMaterial(${JSON.stringify(customer.id)})'>
+➕ মাল যোগ করুন
+</button>
+
+<div id="customerMaterialMessage"
+class="login-message"></div>
+
+
+<div class="section-title">
+👷 Customer-এর কাজে মিস্ত্রি যোগ করুন
+</div>
+
+<div class="grid">
+
+<select id="customerWorkerSelect"
+onchange="fillWorkerSalary()">
+
+<option value="">
+মিস্ত্রি নির্বাচন করুন
+</option>
+
+${workers.map(w=>`
+
+<option
+value="${escapeHtml(w.id)}"
+data-salary="${Number(w.monthly_salary||0)}">
+
+${escapeHtml(w.name)}
+
+</option>
+
+`).join("")}
+
+</select>
+
+<input
+id="customerWorkerDays"
+type="number"
+step="0.5"
+placeholder="কত দিন">
+
+</div>
+
+<br>
+
+<input
+id="customerWorkerSalary"
+type="number"
+placeholder="মাসিক Salary">
+
+<br><br>
+
+<input
+id="customerWorkerDate"
+type="date">
+
+<br><br>
+
+<button
+class="primary"
+onclick='addCustomerWorker(${JSON.stringify(customer.id)})'>
+➕ মিস্ত্রির কাজ যোগ করুন
+</button>
+
+<div id="customerWorkerMessage"
+class="login-message"></div>
+
+
+<div class="section-title">
+🧾 অন্যান্য খরচ
+</div>
+
+<div class="grid">
+
+<input
+id="expenseName"
+placeholder="খরচের নাম">
+
+<input
+id="expenseAmount"
+type="number"
+placeholder="টাকা">
+
+</div>
+
+<br>
+
+<button
+class="primary"
+onclick='addCustomerExpense(${JSON.stringify(customer.id)})'>
+➕ খরচ যোগ করুন
+</button>
+
+
+<div class="section-title">
+💰 Customer-এর কাছ থেকে টাকা জমা
+</div>
+
+<div class="grid">
+
+<input
+id="customerPaymentDate"
+type="date">
+
+<input
+id="customerPaymentAmount"
+type="number"
+placeholder="কত টাকা জমা">
+
+</div>
+
+<br>
+
+<input
+id="customerPaymentNote"
+placeholder="নোট">
+
+<br><br>
+
+<button
+class="success"
+onclick='addCustomerPayment(${JSON.stringify(customer.id)})'>
+💰 টাকা জমা করুন
+</button>
+
+<div id="customerPaymentMessage"
+class="login-message"></div>
+
+
+<div class="section-title">
+📜 টাকা জমার ইতিহাস
+</div>
+
+<div id="customerPaymentHistory">
+লোড হচ্ছে...
+</div>
+
+
+<div class="section-title">
+🔩 মাল খরচের তালিকা
+</div>
+
+<div id="customerMaterialHistory">
+লোড হচ্ছে...
+</div>
+
+
+<div class="section-title">
+👷 মিস্ত্রির কাজের তালিকা
+</div>
+
+<div id="customerWorkerHistory">
+লোড হচ্ছে...
+</div>
+
+`;
+
+document.getElementById("customerModal")
+.style.display="flex";
+
+document.getElementById("customerPaymentDate")
+.value=new Date().toISOString().slice(0,10);
+
+document.getElementById("customerWorkerDate")
+.value=new Date().toISOString().slice(0,10);
+
+await calculateCustomer(id);
+
+await loadCustomerHistory(id);
+
+}
+
+
+function fillMaterialPrice(){
+
+const select=
+document.getElementById("customerMaterialSelect");
+
+const option=
+select.options[select.selectedIndex];
+
+if(!option)return;
+
+document.getElementById("customerMaterialPrice")
+.value=option.dataset.price||"";
+
+}
+
+
+function fillWorkerSalary(){
+
+const select=
+document.getElementById("customerWorkerSelect");
+
+const option=
+select.options[select.selectedIndex];
+
+if(!option)return;
+
+document.getElementById("customerWorkerSalary")
+.value=option.dataset.salary||"";
+
+}
+
+
+async function addCustomerMaterial(customerId){
+
+const materialId=
+document.getElementById("customerMaterialSelect").value;
+
+const qty=
+Number(
+document.getElementById("customerMaterialQty").value||0
+);
+
+const price=
+Number(
+document.getElementById("customerMaterialPrice").value||0
+);
+
+const message=
+document.getElementById("customerMaterialMessage");
+
+if(!materialId||qty<=0||price<=0){
+
+message.style.color="#d93025";
+
+message.textContent=
+"Material, পরিমাণ এবং দাম দিন।";
+
+return;
+}
+
+const option=
+document.getElementById("customerMaterialSelect")
+.options[
+document.getElementById("customerMaterialSelect").selectedIndex
+];
+
+const name=option.textContent.trim();
+
+const total=qty*price;
+
+const {error}=
+await supabaseClient
+.from("customer_materials")
+.insert({
+
+admin_id:currentUser.id,
+customer_id:customerId,
+material_id:materialId,
+name:name,
+price:price,
+qty:qty,
+total:total
+
+});
+
+if(error){
+
+message.style.color="#d93025";
+
+message.textContent=error.message;
+
+return;
+}
+
+message.style.color="#087f5b";
+
+message.textContent="মাল যোগ হয়েছে।";
+
+document.getElementById("customerMaterialQty").value="";
+
+await calculateCustomer(customerId);
+
+await loadCustomerHistory(customerId);
+
+}
+
+
+async function addCustomerWorker(customerId){
+
+const workerId=
+document.getElementById("customerWorkerSelect").value;
+
+const days=
+Number(
+document.getElementById("customerWorkerDays").value||0
+);
+
+const salary=
+Number(
+document.getElementById("customerWorkerSalary").value||0
+);
+
+const workDate=
+document.getElementById("customerWorkerDate").value;
+
+const message=
+document.getElementById("customerWorkerMessage");
+
+if(!workerId||days<=0||salary<=0){
+
+message.style.color="#d93025";
+
+message.textContent=
+"মিস্ত্রি, দিন এবং Salary দিন।";
+
+return;
+}
+
+const worker=
+workers.find(w=>
+String(w.id)===String(workerId));
+
+const total=
+(salary/30)*days;
+
+const {error}=
+await supabaseClient
+.from("customer_workers")
+.insert({
+
+admin_id:currentUser.id,
+customer_id:customerId,
+worker_id:workerId,
+name:worker?.name||"",
+salary:salary,
+days:days,
+total:total,
+work_date:workDate||null
+
+});
+
+if(error){
+
+message.style.color="#d93025";
+
+message.textContent=error.message;
+
+return;
+}
+
+message.style.color="#087f5b";
+
+message.textContent=
+"মিস্ত্রির কাজ যোগ হয়েছে।";
+
+document.getElementById("customerWorkerDays").value="";
+
+await calculateCustomer(customerId);
+
+await loadCustomerHistory(customerId);
+
+}
+
+
+async function addCustomerExpense(customerId){
+
+const name=
+document.getElementById("expenseName").value.trim();
+
+const amount=
+Number(
+document.getElementById("expenseAmount").value||0
+);
+
+if(!name||amount<=0){
+
+alert("খরচের নাম ও টাকা দিন।");
+
+return;
+}
+
+const {error}=
+await supabaseClient
+.from("customer_expenses")
+.insert({
+
+admin_id:currentUser.id,
+customer_id:customerId,
+name:name,
+amount:amount
+
+});
+
+if(error){
+
+alert(error.message);
+
+return;
+}
+
+document.getElementById("expenseName").value="";
+document.getElementById("expenseAmount").value="";
+
+await calculateCustomer(customerId);
+
+}
+
+
+async function addCustomerPayment(customerId){
+
+const paymentDate=
+document.getElementById("customerPaymentDate").value;
+
+const amount=
+Number(
+document.getElementById("customerPaymentAmount").value||0
+);
+
+const note=
+document.getElementById("customerPaymentNote").value.trim();
+
+const message=
+document.getElementById("customerPaymentMessage");
+
+if(!paymentDate||amount<=0){
+
+message.style.color="#d93025";
+
+message.textContent=
+"তারিখ এবং টাকার পরিমাণ দিন।";
+
+return;
+}
+
+const {error}=
+await supabaseClient
+.from("customer_payments")
+.insert({
+
+admin_id:currentUser.id,
+customer_id:customerId,
+payment_date:paymentDate,
+amount:amount,
+note:note
+
+});
+
+if(error){
+
+message.style.color="#d93025";
+
+message.textContent=error.message;
+
+return;
+}
+
+message.style.color="#087f5b";
+
+message.textContent=
+"Customer-এর টাকা জমা হয়েছে।";
+
+document.getElementById("customerPaymentAmount").value="";
+document.getElementById("customerPaymentNote").value="";
+
+await loadCustomerHistory(customerId);
+
+}
+
+
+async function loadCustomerHistory(customerId){
+
+const paymentBox=
+document.getElementById("customerPaymentHistory");
+
+const materialBox=
+document.getElementById("customerMaterialHistory");
+
+const workerBox=
+document.getElementById("customerWorkerHistory");
+
+
+const {data:payments}=
+await supabaseClient
+.from("customer_payments")
+.select("*")
+.eq("customer_id",customerId)
+.eq("admin_id",currentUser.id)
+.order("payment_date",{ascending:false});
+
+
+if(!payments||!payments.length){
+
+paymentBox.innerHTML=
+'<div class="empty">এখনও কোনো টাকা জমা নেই।</div>';
+
+}else{
+
+paymentBox.innerHTML=`
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>তারিখ</th>
+<th>টাকা</th>
+<th>নোট</th>
+</tr>
+
+${payments.map(p=>`
+
+<tr>
+<td>${escapeHtml(p.payment_date||"")}</td>
+<td>৳${Number(p.amount||0).toLocaleString()}</td>
+<td>${escapeHtml(p.note||"")}</td>
+</tr>
+
+`).join("")}
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+const {data:materialRows}=
+await supabaseClient
+.from("customer_materials")
+.select("*")
+.eq("customer_id",customerId)
+.eq("admin_id",currentUser.id)
+.order("id",{ascending:false});
+
+
+if(!materialRows||!materialRows.length){
+
+materialBox.innerHTML=
+'<div class="empty">কোনো মাল যোগ করা হয়নি।</div>';
+
+}else{
+
+materialBox.innerHTML=`
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>মাল</th>
+<th>পরিমাণ</th>
+<th>দাম</th>
+<th>মোট</th>
+</tr>
+
+${materialRows.map(m=>`
+
+<tr>
+
+<td>${escapeHtml(m.name||"")}</td>
+
+<td>${Number(m.qty||0)}</td>
+
+<td>৳${Number(m.price||0).toLocaleString()}</td>
+
+<td>৳${Number(m.total||0).toLocaleString()}</td>
+
+</tr>
+
+`).join("")}
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+const {data:workerRows}=
+await supabaseClient
+.from("customer_workers")
+.select("*")
+.eq("customer_id",customerId)
+.eq("admin_id",currentUser.id)
+.order("work_date",{ascending:false});
+
+
+if(!workerRows||!workerRows.length){
+
+workerBox.innerHTML=
+'<div class="empty">কোনো মিস্ত্রির কাজ যোগ করা হয়নি।</div>';
+
+}else{
+
+workerBox.innerHTML=`
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>তারিখ</th>
+<th>মিস্ত্রি</th>
+<th>দিন</th>
+<th>মোট</th>
+</tr>
+
+${workerRows.map(w=>`
+
+<tr>
+
+<td>${escapeHtml(w.work_date||"")}</td>
+
+<td>${escapeHtml(w.name||"")}</td>
+
+<td>${Number(w.days||0)}</td>
+
+<td>৳${Number(w.total||0).toLocaleString()}</td>
+
+</tr>
+
+`).join("")}
+
+</table>
+
+</div>
+
+`;
+
+}
 
 }
 
 
 async function calculateCustomer(customerId){
 
-  const customer =
-    customers.find(c => c.id === customerId);
+const customer=
+customers.find(c=>
+String(c.id)===String(customerId));
 
-  if(!customer) return;
+if(!customer)return;
 
-  const {data:materialsData} =
-    await supabaseClient
-      .from("customer_materials")
-      .select("total")
-      .eq("customer_id",customerId)
-      .eq("admin_id",currentUser.id);
+const {data:materialsData}=
+await supabaseClient
+.from("customer_materials")
+.select("total")
+.eq("customer_id",customerId)
+.eq("admin_id",currentUser.id);
 
-  const {data:workersData} =
-    await supabaseClient
-      .from("customer_workers")
-      .select("total")
-      .eq("customer_id",customerId)
-      .eq("admin_id",currentUser.id);
+const {data:workersData}=
+await supabaseClient
+.from("customer_workers")
+.select("total")
+.eq("customer_id",customerId)
+.eq("admin_id",currentUser.id);
 
-  const {data:expensesData} =
-    await supabaseClient
-      .from("customer_expenses")
-      .select("amount")
-      .eq("customer_id",customerId)
-      .eq("admin_id",currentUser.id);
+const {data:expensesData}=
+await supabaseClient
+.from("customer_expenses")
+.select("amount")
+.eq("customer_id",customerId)
+.eq("admin_id",currentUser.id);
 
-  const material =
-    (materialsData || [])
-      .reduce((sum,x)=>sum+Number(x.total||0),0);
+const material=
+(materialsData||[])
+.reduce(
+(sum,x)=>sum+Number(x.total||0),0
+);
 
-  const worker =
-    (workersData || [])
-      .reduce((sum,x)=>sum+Number(x.total||0),0);
+const worker=
+(workersData||[])
+.reduce(
+(sum,x)=>sum+Number(x.total||0),0
+);
 
-  const other =
-    (expensesData || [])
-      .reduce((sum,x)=>sum+Number(x.amount||0),0);
+const other=
+(expensesData||[])
+.reduce(
+(sum,x)=>sum+Number(x.amount||0),0
+);
 
-  const cost =
-    material + worker + other;
+const cost=
+material+worker+other;
 
-  const profit =
-    Number(customer.contract_price||0) - cost;
+const profit=
+Number(customer.contract_price||0)-cost;
 
-  document.getElementById("detailMaterial")
-    .textContent="৳"+material.toLocaleString();
+document.getElementById("detailMaterial")
+.textContent=
+"৳"+material.toLocaleString();
 
-  document.getElementById("detailWorker")
-    .textContent="৳"+worker.toLocaleString();
+document.getElementById("detailWorker")
+.textContent=
+"৳"+worker.toLocaleString();
 
-  document.getElementById("detailOther")
-    .textContent="৳"+other.toLocaleString();
+document.getElementById("detailOther")
+.textContent=
+"৳"+other.toLocaleString();
 
-  document.getElementById("detailProfit")
-    .textContent="৳"+profit.toLocaleString();
+document.getElementById("detailProfit")
+.textContent=
+"৳"+profit.toLocaleString();
 
 }
 
 
 function closeCustomerModal(){
 
-  document.getElementById("customerModal").style.display =
-    "none";
+document.getElementById("customerModal")
+.style.display="none";
 
 }
 
 
 /* =====================================================
-   MATERIALS
+ MATERIALS
 ===================================================== */
 
 async function loadMaterials(){
 
-  const {data,error} =
-    await supabaseClient
-      .from("materials")
-      .select("*")
-      .eq("admin_id",currentUser.id)
-      .order("name");
+const {data,error}=
+await supabaseClient
+.from("materials")
+.select("*")
+.eq("admin_id",currentUser.id)
+.order("name");
 
-  if(error){
+if(error){
 
-    console.log(error);
+console.log(error);
 
-    return;
-  }
+return;
+}
 
-  materials=data || [];
+materials=data||[];
 
-  renderMaterials();
+renderMaterials();
 
-  document.getElementById("homeMaterials")
-    .textContent=materials.length;
+document.getElementById("homeMaterials")
+.textContent=materials.length;
 
 }
 
 
 function renderMaterials(){
 
-  const box =
-    document.getElementById("materialList");
+const box=
+document.getElementById("materialList");
 
-  if(!materials.length){
+if(!materials.length){
 
-    box.innerHTML =
-      '<div class="empty">কোনো Material নেই।</div>';
+box.innerHTML=
+'<div class="empty">কোনো Material নেই।</div>';
 
-    return;
-  }
+return;
+}
 
-  box.innerHTML=`
+box.innerHTML=`
 
-    <div class="table-wrap">
+<div class="table-wrap">
 
-      <table>
+<table>
 
-        <tr>
-          <th>Material</th>
-          <th>Price</th>
-          <th>Action</th>
-        </tr>
+<tr>
+<th>Material</th>
+<th>Price</th>
+<th>Action</th>
+</tr>
 
-        ${materials.map(m=>`
+${materials.map(m=>`
 
-          <tr>
+<tr>
 
-            <td>${escapeHtml(m.name || "")}</td>
+<td>${escapeHtml(m.name||"")}</td>
 
-            <td>
-              ৳${Number(m.price||0).toLocaleString()}
-            </td>
+<td>
+৳${Number(m.price||0).toLocaleString()}
+</td>
 
-            <td>
+<td>
 
-              <button
-                class="danger"
-                onclick="deleteMaterial(${m.id})">
-                Delete
-              </button>
+<button
+class="danger"
+onclick='deleteMaterial(${JSON.stringify(m.id)})'>
+Delete
+</button>
 
-            </td>
+</td>
 
-          </tr>
+</tr>
 
-        `).join("")}
+`).join("")}
 
-      </table>
+</table>
 
-    </div>
+</div>
 
-  `;
+`;
 
 }
 
 
 async function addMaterial(){
 
-  const name =
-    document.getElementById("materialName").value.trim();
+const name=
+document.getElementById("materialName").value.trim();
 
-  const price =
-    Number(
-      document.getElementById("materialPrice").value || 0
-    );
+const price=
+Number(
+document.getElementById("materialPrice").value||0
+);
 
-  if(!name){
+if(!name){
 
-    alert("Material Name দিন।");
+alert("Material Name দিন।");
 
-    return;
-  }
+return;
+}
 
-  const {error} =
-    await supabaseClient
-      .from("materials")
-      .insert({
+const {error}=
+await supabaseClient
+.from("materials")
+.insert({
 
-        admin_id:currentUser.id,
+admin_id:currentUser.id,
+name:name,
+price:price
 
-        name:name,
+});
 
-        price:price
+if(error){
 
-      });
+alert(error.message);
 
-  if(error){
+return;
+}
 
-    alert(error.message);
+document.getElementById("materialName").value="";
+document.getElementById("materialPrice").value="";
 
-    return;
-  }
-
-  document.getElementById("materialName").value="";
-  document.getElementById("materialPrice").value="";
-
-  await loadMaterials();
+await loadMaterials();
 
 }
 
 
 async function deleteMaterial(id){
 
-  if(!confirm("এই Material মুছে ফেলবেন?")) return;
+if(!confirm("এই Material মুছে ফেলবেন?"))
+return;
 
-  await supabaseClient
-    .from("materials")
-    .delete()
-    .eq("id",id)
-    .eq("admin_id",currentUser.id);
+await supabaseClient
+.from("materials")
+.delete()
+.eq("id",id)
+.eq("admin_id",currentUser.id);
 
-  await loadMaterials();
+await loadMaterials();
 
 }
 
 
 /* =====================================================
-   WORKERS
+ WORKERS
 ===================================================== */
 
 async function loadWorkers(){
 
-  const {data,error} =
-    await supabaseClient
-      .from("workers")
-      .select("*")
-      .eq("admin_id",currentUser.id)
-      .order("name");
+const {data,error}=
+await supabaseClient
+.from("workers")
+.select("*")
+.eq("admin_id",currentUser.id)
+.order("name");
 
-  if(error){
+if(error){
 
-    console.log(error);
+console.log(error);
 
-    return;
-  }
+return;
+}
 
-  workers=data || [];
+workers=data||[];
 
-  renderWorkers();
+renderWorkers();
 
-  document.getElementById("homeWorkers")
-    .textContent=workers.length;
+document.getElementById("homeWorkers")
+.textContent=workers.length;
 
 }
 
 
 function renderWorkers(){
 
-  const box =
-    document.getElementById("workerList");
+const box=
+document.getElementById("workerList");
 
-  if(!workers.length){
+if(!workers.length){
 
-    box.innerHTML =
-      '<div class="empty">কোনো Mistri নেই।</div>';
+box.innerHTML=
+'<div class="empty">কোনো Mistri নেই।</div>';
 
-    return;
-  }
+return;
+}
 
-  box.innerHTML=`
+box.innerHTML=`
 
-    <div class="table-wrap">
+<div class="table-wrap">
 
-      <table>
+<table>
 
-        <tr>
-          <th>Mistri</th>
-          <th>Monthly Salary</th>
-          <th>Action</th>
-        </tr>
+<tr>
+<th>Mistri</th>
+<th>Salary</th>
+<th>Code</th>
+<th>Action</th>
+</tr>
 
-        ${workers.map(w=>`
+${workers.map(w=>`
 
-          <tr>
+<tr>
 
-            <td>${escapeHtml(w.name || "")}</td>
+<td>${escapeHtml(w.name||"")}</td>
 
-            <td>
-              ৳${Number(w.monthly_salary||0).toLocaleString()}
-            </td>
+<td>
+৳${Number(w.monthly_salary||0).toLocaleString()}
+</td>
 
-            <td>
+<td>
+<span class="code-badge">
+${escapeHtml(w.portal_code||"----")}
+</span>
+</td>
 
-              <button
-                class="danger"
-                onclick="deleteWorker(${w.id})">
-                Delete
-              </button>
+<td>
 
-            </td>
+<button
+class="danger"
+onclick='deleteWorker(${JSON.stringify(w.id)})'>
+Delete
+</button>
 
-          </tr>
+</td>
 
-        `).join("")}
+</tr>
 
-      </table>
+`).join("")}
 
-    </div>
+</table>
 
-  `;
+</div>
+
+`;
 
 }
 
 
 async function addWorker(){
 
-  const name =
-    document.getElementById("workerName").value.trim();
+const name=
+document.getElementById("workerName").value.trim();
 
-  const salary =
-    Number(
-      document.getElementById("workerSalary").value || 0
-    );
+const salary=
+Number(
+document.getElementById("workerSalary").value||0
+);
 
-  if(!name){
+if(!name){
 
-    alert("Mistri Name দিন।");
+alert("Mistri Name দিন।");
 
-    return;
-  }
+return;
+}
 
-  const {error} =
-    await supabaseClient
-      .from("workers")
-      .insert({
+const {data,error}=
+await supabaseClient
+.from("workers")
+.insert({
 
-        admin_id:currentUser.id,
+admin_id:currentUser.id,
+name:name,
+monthly_salary:salary
 
-        name:name,
+})
+.select()
+.single();
 
-        monthly_salary:salary
+if(error){
 
-      });
+alert(error.message);
 
-  if(error){
+return;
+}
 
-    alert(error.message);
+alert(
+"মিস্ত্রি Save হয়েছে।\n\nমিস্ত্রির ৪ সংখ্যার Code:\n"+
+(data?.portal_code||"----")
+);
 
-    return;
-  }
+document.getElementById("workerName").value="";
+document.getElementById("workerSalary").value="";
 
-  document.getElementById("workerName").value="";
-  document.getElementById("workerSalary").value="";
-
-  await loadWorkers();
+await loadWorkers();
 
 }
 
 
 async function deleteWorker(id){
 
-  if(!confirm("এই Mistri মুছে ফেলবেন?")) return;
+if(!confirm("এই Mistri মুছে ফেলবেন?"))
+return;
 
-  await supabaseClient
-    .from("workers")
-    .delete()
-    .eq("id",id)
-    .eq("admin_id",currentUser.id);
+await supabaseClient
+.from("workers")
+.delete()
+.eq("id",id)
+.eq("admin_id",currentUser.id);
 
-  await loadWorkers();
+await loadWorkers();
 
 }
 
 
 /* =====================================================
-   SETTINGS
+ SETTINGS
 ===================================================== */
 
 function loadSettings(){
 
-  const meta =
-    currentUser?.user_metadata || {};
+const meta=
+currentUser?.user_metadata||{};
 
-  document.getElementById("settingName").value =
-    meta.business_name ||
-    "ওমর এস এস ঘর";
+document.getElementById("settingName").value=
+meta.business_name||
+"ওমর এস এস ঘর";
 
-  document.getElementById("settingAddress").value =
-    meta.business_address ||
-    "কলেজ বাজার পেট্রোল পাম্পের সামনে, বিরামপুর, দিনাজপুর";
+document.getElementById("settingAddress").value=
+meta.business_address||
+"কলেজ বাজার পেট্রোল পাম্পের সামনে, বিরামপুর, দিনাজপুর";
 
-  document.getElementById("settingPhone").value =
-    meta.business_phone ||
-    "01341241433";
+document.getElementById("settingPhone").value=
+meta.business_phone||
+"01341241433";
 
-  document.getElementById("settingWhatsapp").value =
-    meta.business_whatsapp ||
-    "01816845577";
+document.getElementById("settingWhatsapp").value=
+meta.business_whatsapp||
+"01816845577";
 
-  document.getElementById("settingEmail").value =
-    meta.business_email ||
-    "omorssghor@gmail.com";
+document.getElementById("settingEmail").value=
+meta.business_email||
+"omorssghor@gmail.com";
 
-  document.getElementById("settingDescription").value =
-    meta.business_description ||
-    "SS ও গ্লাসের সকল ধরনের কাজের বিশ্বস্ত প্রতিষ্ঠান।";
+document.getElementById("settingDescription").value=
+meta.business_description||
+"SS ও গ্লাসের সকল ধরনের কাজের বিশ্বস্ত প্রতিষ্ঠান।";
 
 }
 
 
 async function saveSettings(){
 
-  const data = {
+const data={
 
-    ...(
-      currentUser.user_metadata || {}
-    ),
+...(currentUser.user_metadata||{}),
 
-    business_name:
-      document.getElementById("settingName").value.trim(),
+business_name:
+document.getElementById("settingName").value.trim(),
 
-    business_address:
-      document.getElementById("settingAddress").value.trim(),
+business_address:
+document.getElementById("settingAddress").value.trim(),
 
-    business_phone:
-      document.getElementById("settingPhone").value.trim(),
+business_phone:
+document.getElementById("settingPhone").value.trim(),
 
-    business_whatsapp:
-      document.getElementById("settingWhatsapp").value.trim(),
+business_whatsapp:
+document.getElementById("settingWhatsapp").value.trim(),
 
-    business_email:
-      document.getElementById("settingEmail").value.trim(),
+business_email:
+document.getElementById("settingEmail").value.trim(),
 
-    business_description:
-      document.getElementById("settingDescription").value.trim()
+business_description:
+document.getElementById("settingDescription").value.trim()
 
-  };
+};
 
-  const {data:result,error} =
-    await supabaseClient.auth.updateUser({
+const {data:result,error}=
+await supabaseClient.auth.updateUser({
 
-      data:data
+data:data
 
-    });
+});
 
-  const message =
-    document.getElementById("settingsMessage");
+const message=
+document.getElementById("settingsMessage");
 
-  if(error){
+if(error){
 
-    message.style.color="#d93025";
+message.style.color="#d93025";
 
-    message.textContent =
-      error.message;
+message.textContent=error.message;
 
-    return;
-  }
+return;
+}
 
-  currentUser=result.user;
+currentUser=result.user;
 
-  message.style.color="#087f5b";
+message.style.color="#087f5b";
 
-  message.textContent =
-    "✅ Settings সফলভাবে পরিবর্তন হয়েছে।";
+message.textContent=
+"✅ Settings সফলভাবে পরিবর্তন হয়েছে।";
 
 }
 
 
 /* =====================================================
-   SECURITY / HTML
+ PUBLIC CUSTOMER / WORKER PORTAL
+===================================================== */
+
+function openPublicPortal(type){
+
+const box=
+document.getElementById("publicPortalContent");
+
+const title=
+type==="customer"
+?
+"👤 কাস্টমার হিসাব"
+:
+"👷 মিস্ত্রি হিসাব";
+
+const description=
+type==="customer"
+?
+"আপনার ৪ সংখ্যার Customer Code দিন।"
+:
+"আপনার ৪ সংখ্যার Mistri Code দিন।";
+
+box.innerHTML=`
+
+<h2>${title}</h2>
+
+<p class="small">
+${description}
+</p>
+
+<input
+id="publicCode"
+class="portal-code-input"
+type="text"
+inputmode="numeric"
+maxlength="4"
+placeholder="0000"
+oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)">
+
+<br><br>
+
+<button
+class="primary"
+style="width:100%;"
+onclick='searchPublicPortal(${JSON.stringify(type)})'>
+🔍 হিসাব দেখুন
+</button>
+
+<div id="publicMessage"
+class="login-message"></div>
+
+<div class="contact-box">
+
+<b>📞 কোডের জন্য যোগাযোগ করুন</b><br>
+
+📱 Phone:
+<a href="tel:01341241433">
+01341241433
+</a><br>
+
+💬 WhatsApp:
+<a
+href="https://wa.me/8801816845577"
+target="_blank">
+01816845577
+</a><br>
+
+✉️ Email:
+<a href="mailto:omorssghor@gmail.com">
+omorssghor@gmail.com
+</a>
+
+</div>
+
+<div id="publicResult"
+class="public-result"></div>
+
+`;
+
+document.getElementById("publicModal")
+.style.display="flex";
+
+}
+
+
+function closePublicPortal(){
+
+document.getElementById("publicModal")
+.style.display="none";
+
+}
+
+
+async function searchPublicPortal(type){
+
+const code=
+document.getElementById("publicCode")
+.value.trim();
+
+const message=
+document.getElementById("publicMessage");
+
+const result=
+document.getElementById("publicResult");
+
+if(!/^\d{4}$/.test(code)){
+
+message.style.color="#d93025";
+
+message.textContent=
+"সঠিক ৪ সংখ্যার Code দিন।";
+
+return;
+}
+
+message.style.color="#0077ff";
+
+message.textContent=
+"হিসাব খোঁজা হচ্ছে...";
+
+result.innerHTML="";
+
+let data;
+let error;
+
+if(type==="customer"){
+
+const response=
+await supabaseClient.rpc(
+"customer_public_history",
+{
+p_code:code
+}
+);
+
+data=response.data;
+error=response.error;
+
+}else{
+
+const response=
+await supabaseClient.rpc(
+"worker_public_history",
+{
+p_code:code
+}
+);
+
+data=response.data;
+error=response.error;
+
+}
+
+if(error){
+
+message.style.color="#d93025";
+
+message.textContent=
+"এই Code পাওয়া যায়নি।";
+
+console.log(error);
+
+return;
+}
+
+if(!data){
+
+message.style.color="#d93025";
+
+message.textContent=
+"এই Code-এর কোনো হিসাব পাওয়া যায়নি।";
+
+return;
+}
+
+message.style.color="#087f5b";
+
+message.textContent=
+"হিসাব পাওয়া গেছে।";
+
+if(type==="customer"){
+
+renderPublicCustomer(data);
+
+}else{
+
+renderPublicWorker(data);
+
+}
+
+}
+
+
+function renderPublicCustomer(data){
+
+const result=
+document.getElementById("publicResult");
+
+const contract=
+Number(data.contract_price||0);
+
+const paid=
+Number(data.total_paid||0);
+
+const due=
+Math.max(contract-paid,0);
+
+const payments=
+Array.isArray(data.payments)
+?
+data.payments
+:
+[];
+
+result.innerHTML=`
+
+<div class="public-header">
+
+<h2>
+👤 ${escapeHtml(data.name||"Customer")}
+</h2>
+
+<div>
+🔧 ${escapeHtml(data.work||"")}
+</div>
+
+<div>
+📅 Delivery:
+${escapeHtml(data.delivery_date||"নির্ধারিত নয়")}
+</div>
+
+</div>
+
+<div class="public-stat">
+💰 মোট চুক্তির দাম
+<b>৳${contract.toLocaleString()}</b>
+</div>
+
+<div class="public-stat">
+✅ মোট জমা
+<b class="good">
+৳${paid.toLocaleString()}
+</b>
+</div>
+
+<div class="public-stat">
+⏳ বাকি
+<b class="${due>0?'bad':'good'}">
+৳${due.toLocaleString()}
+</b>
+</div>
+
+<h3>📜 টাকা জমার ইতিহাস</h3>
+
+${
+payments.length
+?
+`
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>তারিখ</th>
+<th>টাকা</th>
+<th>নোট</th>
+</tr>
+
+${payments.map(p=>`
+
+<tr>
+<td>${escapeHtml(p.payment_date||"")}</td>
+<td>৳${Number(p.amount||0).toLocaleString()}</td>
+<td>${escapeHtml(p.note||"")}</td>
+</tr>
+
+`).join("")}
+
+</table>
+
+</div>
+`
+:
+'<div class="empty">এখনও কোনো payment record নেই।</div>'
+}
+
+<div class="note">
+🔒 এই হিসাব শুধুমাত্র দেখার জন্য।
+আপনি এখান থেকে কোনো তথ্য পরিবর্তন করতে পারবেন না।
+</div>
+
+`;
+
+}
+
+
+function renderPublicWorker(data){
+
+const result=
+document.getElementById("publicResult");
+
+const earned=
+Number(data.total_earned||0);
+
+const paid=
+Number(data.total_paid||0);
+
+const due=
+Math.max(earned-paid,0);
+
+const workHistory=
+Array.isArray(data.work_history)
+?
+data.work_history
+:
+[];
+
+const payments=
+Array.isArray(data.payments)
+?
+data.payments
+:
+[];
+
+result.innerHTML=`
+
+<div class="public-header">
+
+<h2>
+👷 ${escapeHtml(data.name||"Mistri")}
+</h2>
+
+<div>
+💵 মাসিক Salary:
+৳${Number(data.monthly_salary||0).toLocaleString()}
+</div>
+
+</div>
+
+<div class="public-stat">
+👷 মোট কাজের টাকা
+<b>
+৳${earned.toLocaleString()}
+</b>
+</div>
+
+<div class="public-stat">
+💰 মোট নেওয়া টাকা
+<b class="good">
+৳${paid.toLocaleString()}
+</b>
+</div>
+
+<div class="public-stat">
+⏳ এখনও পাওনা
+<b class="${due>0?'bad':'good'}">
+৳${due.toLocaleString()}
+</b>
+</div>
+
+<h3>📅 কাজের ইতিহাস</h3>
+
+${
+workHistory.length
+?
+`
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>তারিখ</th>
+<th>Customer</th>
+<th>কাজ</th>
+<th>দিন</th>
+<th>টাকা</th>
+</tr>
+
+${workHistory.map(w=>`
+
+<tr>
+
+<td>${escapeHtml(w.date||"")}</td>
+
+<td>${escapeHtml(w.customer||"")}</td>
+
+<td>${escapeHtml(w.work||"")}</td>
+
+<td>${Number(w.days||0)}</td>
+
+<td>
+৳${Number(w.amount||0).toLocaleString()}
+</td>
+
+</tr>
+
+`).join("")}
+
+</table>
+
+</div>
+`
+:
+'<div class="empty">এখনও কোনো কাজের হিসাব নেই।</div>'
+}
+
+<h3>💰 টাকা নেওয়ার ইতিহাস</h3>
+
+${
+payments.length
+?
+`
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>তারিখ</th>
+<th>টাকা</th>
+<th>নোট</th>
+</tr>
+
+${payments.map(p=>`
+
+<tr>
+
+<td>${escapeHtml(p.payment_date||"")}</td>
+
+<td>
+৳${Number(p.amount||0).toLocaleString()}
+</td>
+
+<td>
+${escapeHtml(p.note||"")}
+</td>
+
+</tr>
+
+`).join("")}
+
+</table>
+
+</div>
+`
+:
+'<div class="empty">এখনও কোনো payment record নেই।</div>'
+}
+
+<div class="note">
+🔒 এই হিসাব শুধুমাত্র দেখার জন্য।
+আপনি এখান থেকে কোনো তথ্য পরিবর্তন করতে পারবেন না।
+</div>
+
+`;
+
+}
+
+
+/* =====================================================
+ SECURITY
 ===================================================== */
 
 function escapeHtml(value){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+return String(value??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
 }
 
 
 /* =====================================================
-   AUTH STATE
+ AUTH STATE
 ===================================================== */
 
 supabaseClient.auth.onAuthStateChange(
-  async (event,session)=>{
+async(event,session)=>{
 
-    if(session){
+if(session){
 
-      currentUser=session.user;
+currentUser=session.user;
 
-      if(event==="SIGNED_IN"){
+if(event==="SIGNED_IN"){
 
-        await showMainPage();
+await showMainPage();
 
-      }
+}
 
-    }else{
+}else{
 
-      currentUser=null;
+currentUser=null;
 
-      showLoginPage();
+showLoginPage();
 
-    }
+}
 
-  }
-);
+});
+
+
+/* =====================================================
+ MODAL OUTSIDE CLICK
+===================================================== */
+
+window.addEventListener(
+"click",
+function(event){
+
+const customerModal=
+document.getElementById("customerModal");
+
+const createModal=
+document.getElementById("createModal");
+
+const publicModal=
+document.getElementById("publicModal");
+
+if(event.target===customerModal){
+
+closeCustomerModal();
+
+}
+
+if(event.target===createModal){
+
+closeCreateAccount();
+
+}
+
+if(event.target===publicModal){
+
+closePublicPortal();
+
+}
+
+});
 
 </script>
 
