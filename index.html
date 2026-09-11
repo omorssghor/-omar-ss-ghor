@@ -14,7 +14,7 @@ body{
  margin:0;
  background:#f0f2f5;
  font-family:Arial,"Noto Sans Bengali",sans-serif;
- color:#222
+ color:#222;
 }
 
 header{
@@ -27,18 +27,18 @@ header{
  display:flex;
  justify-content:space-between;
  align-items:center;
- box-shadow:0 1px 5px #0001
+ box-shadow:0 1px 5px #0001;
 }
 
 .logo{
  font-size:20px;
- font-weight:bold
+ font-weight:bold;
 }
 
 .container{
- max-width:850px;
+ max-width:900px;
  margin:15px auto;
- padding:0 10px
+ padding:0 10px;
 }
 
 .card{
@@ -46,11 +46,11 @@ header{
  border-radius:12px;
  margin-bottom:15px;
  padding:15px;
- box-shadow:0 1px 5px #0001
+ box-shadow:0 1px 5px #0001;
 }
 
 h2,h3{
- margin-top:0
+ margin-top:0;
 }
 
 input,select,textarea{
@@ -60,12 +60,12 @@ input,select,textarea{
  padding:12px;
  font-size:15px;
  margin-bottom:10px;
- background:#fff
+ background:#fff;
 }
 
 textarea{
  min-height:85px;
- resize:vertical
+ resize:vertical;
 }
 
 button{
@@ -74,7 +74,7 @@ button{
  padding:10px 15px;
  font-size:15px;
  cursor:pointer;
- margin:3px
+ margin:3px;
 }
 
 .primary{background:#1877f2;color:white}
@@ -82,93 +82,110 @@ button{
 .danger{background:#e41e3f;color:white}
 .gray{background:#e4e6eb;color:#222}
 .orange{background:#f59e0b;color:white}
+.dark{background:#333;color:#fff}
 
 .menu{
  display:grid;
  grid-template-columns:repeat(3,1fr);
  gap:8px;
- margin-bottom:15px
+ margin-bottom:15px;
 }
 
 .menu button{
  margin:0;
- padding:13px 5px
+ padding:13px 5px;
 }
 
 .page{
- display:none
+ display:none;
 }
 
 .page.active{
- display:block
+ display:block;
 }
 
 .row{
  display:grid;
  grid-template-columns:1fr 1fr;
- gap:10px
+ gap:10px;
 }
 
 .row3{
  display:grid;
  grid-template-columns:1fr 1fr 1fr;
- gap:10px
+ gap:10px;
 }
 
 .table-wrap{
- overflow-x:auto
+ overflow-x:auto;
 }
 
 table{
  width:100%;
  border-collapse:collapse;
  margin-top:10px;
- min-width:600px
+ min-width:600px;
 }
 
 th,td{
  border:1px solid #ddd;
  padding:9px;
- text-align:left
+ text-align:left;
 }
 
 th{
- background:#f0f2f5
+ background:#f0f2f5;
 }
 
 .total-box{
  background:#f0f2f5;
  border-radius:10px;
  padding:12px;
- margin-top:10px
+ margin-top:10px;
 }
 
 .total-line{
  display:flex;
  justify-content:space-between;
- padding:5px 0
+ padding:6px 0;
 }
 
 .big-total{
  font-size:20px;
- font-weight:bold
+ font-weight:bold;
 }
 
 .profit{
  color:#16803c;
- font-weight:bold
+ font-weight:bold;
 }
 
 .loss{
  color:#d00000;
- font-weight:bold
+ font-weight:bold;
 }
 
 .status{
  background:#f0f2f5;
  padding:10px;
  border-radius:8px;
- margin-bottom:10px
+ margin-bottom:10px;
+}
+
+.warning{
+ background:#fff3cd;
+ color:#856404;
+ padding:12px;
+ border-radius:9px;
+ margin-bottom:12px;
+}
+
+.success-box{
+ background:#dcfce7;
+ color:#166534;
+ padding:12px;
+ border-radius:9px;
+ margin-bottom:12px;
 }
 
 .customer-card{
@@ -176,17 +193,59 @@ th{
  border-radius:10px;
  padding:12px;
  margin-bottom:10px;
- background:#fff
+ background:#fff;
 }
 
 .customer-title{
  font-weight:bold;
- font-size:17px
+ font-size:17px;
 }
 
 .small{
  font-size:12px;
- color:#777
+ color:#777;
+}
+
+.three-menu{
+ position:relative;
+ display:inline-block;
+ float:right;
+}
+
+.three-button{
+ background:#e4e6eb;
+ font-size:23px;
+ padding:5px 12px;
+}
+
+.dropdown{
+ display:none;
+ position:absolute;
+ right:0;
+ top:45px;
+ width:230px;
+ background:#fff;
+ border:1px solid #ddd;
+ border-radius:10px;
+ box-shadow:0 4px 15px #0003;
+ z-index:40;
+ overflow:hidden;
+}
+
+.dropdown button{
+ display:block;
+ width:100%;
+ text-align:left;
+ margin:0;
+ border-radius:0;
+ background:#fff;
+ color:#222;
+ border-bottom:1px solid #eee;
+ padding:12px;
+}
+
+.dropdown button:hover{
+ background:#f0f2f5;
 }
 
 .modal{
@@ -197,7 +256,7 @@ th{
  z-index:50;
  align-items:center;
  justify-content:center;
- padding:15px
+ padding:15px;
 }
 
 .modal-box{
@@ -207,13 +266,13 @@ th{
  max-height:90vh;
  overflow:auto;
  border-radius:14px;
- padding:20px
+ padding:20px;
 }
 
 .close{
  float:right;
  font-size:28px;
- cursor:pointer
+ cursor:pointer;
 }
 
 .post-image{
@@ -221,13 +280,13 @@ th{
  max-height:600px;
  object-fit:cover;
  border-radius:9px;
- margin-top:8px
+ margin-top:8px;
 }
 
 .profile{
  display:flex;
  gap:10px;
- align-items:center
+ align-items:center;
 }
 
 .avatar{
@@ -239,17 +298,17 @@ th{
  display:flex;
  align-items:center;
  justify-content:center;
- font-weight:bold
+ font-weight:bold;
 }
 
 .name{
- font-weight:bold
+ font-weight:bold;
 }
 
 .date{
  font-size:12px;
  color:#777;
- margin-top:3px
+ margin-top:3px;
 }
 
 .actions{
@@ -257,59 +316,85 @@ th{
  gap:5px;
  border-top:1px solid #eee;
  margin-top:12px;
- padding-top:8px
+ padding-top:8px;
 }
 
 .actions button{
  flex:1;
- background:#fff
+ background:#fff;
 }
 
 .comment{
  background:#f0f2f5;
  border-radius:15px;
  padding:9px 12px;
- margin-top:8px
+ margin-top:8px;
 }
 
 .reply{
- margin-left:30px
+ margin-left:30px;
 }
 
 .comment-name{
  font-weight:bold;
- font-size:14px
+ font-size:14px;
 }
 
 .comment-text{
  margin-top:3px;
- word-break:break-word
+ word-break:break-word;
 }
 
 .comment-form{
  display:flex;
  gap:6px;
- margin-top:10px
+ margin-top:10px;
 }
 
 .comment-form input{
- margin:0
+ margin:0;
 }
 
 .loading{
  text-align:center;
  padding:25px;
- color:#666
+ color:#666;
+}
+
+.center{
+ text-align:center;
+}
+
+.hidden{
+ display:none!important;
 }
 
 @media(max-width:600px){
- .logo{font-size:16px}
- header{padding:10px}
- .row,.row3{
-   grid-template-columns:1fr
+
+ .logo{
+   font-size:16px;
  }
+
+ header{
+   padding:10px;
+ }
+
+ .row,.row3{
+   grid-template-columns:1fr;
+ }
+
  .menu{
-   grid-template-columns:repeat(2,1fr)
+   grid-template-columns:repeat(2,1fr);
+ }
+
+ .customer-card button{
+   width:100%;
+ }
+
+ .three-menu{
+   position:absolute;
+   right:10px;
+   top:10px;
  }
 }
 </style>
@@ -342,39 +427,38 @@ th{
 
 </header>
 
-
 <div class="container">
 
-<!-- =========================
-     মূল মেনু
-========================= -->
+<!-- =====================================================
+     MAIN MENU
+===================================================== -->
 
 <div class="card">
 
  <div class="menu">
 
    <button class="primary"
-           onclick="showPage('customersPage')">
+           onclick="openAccountingPage()">
      👥 কাস্টমার
    </button>
 
    <button class="success"
-           onclick="showPage('newCustomerPage')">
+           onclick="openNewCustomer()">
      ➕ নতুন কাস্টমার
    </button>
 
    <button class="orange"
-           onclick="showPage('materialsPage')">
+           onclick="openAccountingPage('materialsPage')">
      🔩 মালামাল
    </button>
 
    <button class="orange"
-           onclick="showPage('workersPage')">
+           onclick="openAccountingPage('workersPage')">
      👷 মিস্ত্রি
    </button>
 
    <button class="gray"
-           onclick="showPage('settingsPage')">
+           onclick="openAccountingPage('settingsPage')">
      ⚙️ হিসাব সেটিং
    </button>
 
@@ -388,24 +472,46 @@ th{
 </div>
 
 
-<!-- =========================
-     CUSTOMER LIST
-========================= -->
+<!-- =====================================================
+     ACCOUNTING LOGIN NOTICE
+===================================================== -->
 
-<div id="customersPage" class="page active">
+<div id="accountingLoginNotice"
+     class="card center">
+
+ <h2>🔐 ব্যবসার হিসাব</h2>
+
+ <p>
+   কাস্টমার, কাজের খরচ, পেমেন্ট ও লাভ-লোকসানের হিসাব দেখতে
+   আপনার অনুমোদিত অ্যাকাউন্ট দিয়ে লগইন করুন।
+ </p>
+
+ <button class="primary"
+         onclick="openAuth()">
+   🔐 লগইন করুন
+ </button>
+
+</div>
+
+
+<!-- =====================================================
+     CUSTOMERS
+===================================================== -->
+
+<div id="customersPage" class="page">
 
  <div class="card">
 
    <h2>👥 সকল কাস্টমার</h2>
 
    <button class="success"
-           onclick="showPage('newCustomerPage')">
+           onclick="openNewCustomer()">
      ➕ নতুন কাস্টমার যোগ করুন
    </button>
 
    <button class="primary"
            onclick="downloadAllCustomers()">
-     📥 হিসাব ডাউনলোড
+     📥 সব হিসাব ডাউনলোড
    </button>
 
  </div>
@@ -415,13 +521,18 @@ th{
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      NEW CUSTOMER
-========================= -->
+===================================================== -->
 
 <div id="newCustomerPage" class="page">
 
  <div class="card">
+
+   <button class="gray"
+           onclick="openAccountingPage()">
+     ← সকল কাস্টমার
+   </button>
 
    <h2>➕ নতুন কাস্টমার</h2>
 
@@ -446,7 +557,6 @@ th{
    <textarea id="customerAddress"
              placeholder="কাস্টমারের ঠিকানা"></textarea>
 
-
    <div class="row">
 
      <div>
@@ -456,7 +566,7 @@ th{
      </div>
 
      <div>
-       <label>কাজের মোট চুক্তির দাম</label>
+       <label>মোট চুক্তির দাম</label>
        <input id="workPrice"
               type="number"
               min="0"
@@ -464,7 +574,6 @@ th{
      </div>
 
    </div>
-
 
    <div class="row">
 
@@ -482,7 +591,6 @@ th{
 
    </div>
 
-
    <button class="success"
            style="width:100%"
            onclick="saveCustomer()">
@@ -494,16 +602,16 @@ th{
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      CUSTOMER DETAIL
-========================= -->
+===================================================== -->
 
 <div id="customerDetailPage" class="page">
 
  <div class="card">
 
    <button class="gray"
-           onclick="showPage('customersPage')">
+           onclick="openAccountingPage()">
      ← সকল কাস্টমার
    </button>
 
@@ -514,9 +622,9 @@ th{
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      MATERIALS
-========================= -->
+===================================================== -->
 
 <div id="materialsPage" class="page">
 
@@ -525,8 +633,8 @@ th{
    <h2>🔩 মালামালের তালিকা</h2>
 
    <p class="small">
-     এখানে আপনি নিজে মালামালের নাম ও দাম বসাবেন।
-     পরে কাজের সময় মাল নির্বাচন করলেই দাম অটো আসবে।
+     মালামালের নাম ও দাম একবার সেভ করলে পরে কাস্টমারের
+     কাজে মাল নির্বাচন করলে দাম অটো আসবে।
    </p>
 
    <input id="materialName"
@@ -569,9 +677,9 @@ th{
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      WORKERS
-========================= -->
+===================================================== -->
 
 <div id="workersPage" class="page">
 
@@ -580,7 +688,7 @@ th{
    <h2>👷 মিস্ত্রির তালিকা</h2>
 
    <p class="small">
-     এখানে আপনি মিস্ত্রির নাম ও মাসিক বেতন নিজে বসাবেন।
+     মিস্ত্রির নাম ও মাসিক বেতন সেভ করুন।
    </p>
 
    <input id="workerName"
@@ -597,7 +705,6 @@ th{
    </button>
 
  </div>
-
 
  <div class="card">
 
@@ -624,9 +731,9 @@ th{
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      SETTINGS
-========================= -->
+===================================================== -->
 
 <div id="settingsPage" class="page">
 
@@ -634,13 +741,17 @@ th{
 
    <h2>⚙️ হিসাব সেটিং</h2>
 
-   <p>
-     এই অংশে ভবিষ্যতে আপনার অন্যান্য খরচের ধরন যোগ করতে পারবেন।
-   </p>
+   <div class="status">
+     <b>হিসাবের নিরাপত্তা:</b><br>
+     এই হিসাব Supabase Login ও RLS-এর মাধ্যমে সুরক্ষিত।
+     অনুমোদিত অ্যাকাউন্ট ছাড়া ব্যবসার হিসাব দেখা যাবে না।
+   </div>
 
    <div class="status">
-     মালামালের দাম এবং মিস্ত্রির বেতন
-     আপনি নিজেই উপরের দুইটি মেনু থেকে পরিবর্তন করতে পারবেন।
+     🔩 মালামাল — আলাদা তালিকা<br>
+     👷 মিস্ত্রি — আলাদা তালিকা<br>
+     💸 অন্যান্য খরচ — প্রতিটি কাস্টমারের মধ্যে<br>
+     💰 পেমেন্ট — প্রতিটি কাস্টমারের মধ্যে
    </div>
 
  </div>
@@ -648,9 +759,9 @@ th{
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      POSTS
-========================= -->
+===================================================== -->
 
 <div id="postsPage" class="page">
 
@@ -692,13 +803,12 @@ th{
 
 </div>
 
-
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      AUTH MODAL
-========================= -->
+===================================================== -->
 
 <div class="modal"
      id="authModal">
@@ -758,6 +868,56 @@ th{
 </div>
 
 
+<!-- =====================================================
+     UPDATE CUSTOMER MODAL
+===================================================== -->
+
+<div class="modal"
+     id="updateCustomerModal">
+
+ <div class="modal-box">
+
+   <span class="close"
+         onclick="closeUpdateCustomer()">×</span>
+
+   <h2>✏️ কাস্টমারের তথ্য আপডেট</h2>
+
+   <input id="editCustomerName"
+          placeholder="কাস্টমারের নাম">
+
+   <input id="editCustomerPhone"
+          placeholder="ফোন নম্বর">
+
+   <textarea id="editCustomerAddress"
+             placeholder="ঠিকানা"></textarea>
+
+   <input id="editWorkName"
+          placeholder="কাজের নাম">
+
+   <input id="editWorkPrice"
+          type="number"
+          min="0"
+          placeholder="চুক্তির দাম">
+
+   <label>কাজ শুরুর তারিখ</label>
+   <input id="editStartDate"
+          type="date">
+
+   <label>ডেলিভারি তারিখ</label>
+   <input id="editDeliveryDate"
+          type="date">
+
+   <button class="success"
+           style="width:100%"
+           onclick="updateCustomer()">
+     💾 তথ্য আপডেট করুন
+   </button>
+
+ </div>
+
+</div>
+
+
 <script>
 
 /* =====================================================
@@ -779,48 +939,9 @@ window.supabase.createClient(
 const IMAGE_BUCKET="post-images";
 
 let currentUser=null;
+let accountingAllowed=false;
 let registerMode=false;
-
-
-/* =====================================================
-   LOCAL DATABASE
-   কাস্টমার / মাল / মিস্ত্রি এই ব্রাউজারে সংরক্ষণ হবে
-===================================================== */
-
-let customers =
- JSON.parse(
-   localStorage.getItem("omor_customers") || "[]"
- );
-
-let materials =
- JSON.parse(
-   localStorage.getItem("omor_materials") || "[]"
- );
-
-let workers =
- JSON.parse(
-   localStorage.getItem("omor_workers") || "[]"
- );
-
-
-function saveLocalData(){
-
- localStorage.setItem(
-   "omor_customers",
-   JSON.stringify(customers)
- );
-
- localStorage.setItem(
-   "omor_materials",
-   JSON.stringify(materials)
- );
-
- localStorage.setItem(
-   "omor_workers",
-   JSON.stringify(workers)
- );
-
-}
+let selectedCustomerId=null;
 
 
 /* =====================================================
@@ -841,19 +962,6 @@ function showPage(pageId){
  if(page)
    page.classList.add("active");
 
-
- if(pageId==="customersPage")
-   renderCustomers();
-
- if(pageId==="materialsPage")
-   renderMaterials();
-
- if(pageId==="workersPage")
-   renderWorkers();
-
- if(pageId==="postsPage")
-   loadPosts();
-
  window.scrollTo({
    top:0,
    behavior:"smooth"
@@ -862,10 +970,501 @@ function showPage(pageId){
 
 
 /* =====================================================
-   CUSTOMER
+   AUTH USER
 ===================================================== */
 
-function saveCustomer(){
+async function loadUser(){
+
+ const {data,error}=
+   await supabaseClient.auth.getUser();
+
+ if(error){
+   currentUser=null;
+ }else{
+   currentUser=data?.user || null;
+ }
+
+ await updateUI();
+}
+
+
+/* =====================================================
+   CHECK ACCOUNTING ADMIN
+===================================================== */
+
+async function checkAccountingAccess(){
+
+ accountingAllowed=false;
+
+ if(!currentUser)
+   return false;
+
+ const {data,error}=
+   await supabaseClient
+     .from("accounting_admins")
+     .select("user_id")
+     .eq("user_id",currentUser.id)
+     .maybeSingle();
+
+ if(!error && data){
+   accountingAllowed=true;
+ }
+
+ return accountingAllowed;
+}
+
+
+/* =====================================================
+   UI
+===================================================== */
+
+async function updateUI(){
+
+ const userName=
+   document.getElementById("userName");
+
+ const loginBtn=
+   document.getElementById("loginBtn");
+
+ const logoutBtn=
+   document.getElementById("logoutBtn");
+
+ const notice=
+   document.getElementById("loginNotice");
+
+ const creator=
+   document.getElementById("postCreator");
+
+ if(currentUser){
+
+   const name=
+     currentUser.user_metadata?.full_name ||
+     currentUser.email?.split("@")[0] ||
+     "ব্যবহারকারী";
+
+   userName.textContent=name;
+
+   loginBtn.style.display="none";
+   logoutBtn.style.display="inline-block";
+
+   if(notice)
+     notice.style.display="none";
+
+   if(creator)
+     creator.style.display="block";
+
+   await checkAccountingAccess();
+
+ }else{
+
+   userName.textContent="";
+
+   loginBtn.style.display="inline-block";
+   logoutBtn.style.display="none";
+
+   if(notice)
+     notice.style.display="block";
+
+   if(creator)
+     creator.style.display="none";
+
+   accountingAllowed=false;
+ }
+
+ updateAccountingVisibility();
+}
+
+
+function updateAccountingVisibility(){
+
+ const loginNotice=
+   document.getElementById(
+     "accountingLoginNotice"
+   );
+
+ if(!currentUser){
+
+   loginNotice.style.display="block";
+
+   document
+     .querySelectorAll(
+       "#customersPage,#newCustomerPage,#customerDetailPage,#materialsPage,#workersPage,#settingsPage"
+     )
+     .forEach(p=>p.classList.remove("active"));
+
+   return;
+ }
+
+ if(!accountingAllowed){
+
+   loginNotice.style.display="block";
+
+   loginNotice.innerHTML=`
+     <h2>🔒 হিসাবের অনুমতি নেই</h2>
+     <p>
+       এই অ্যাকাউন্ট দিয়ে ব্যবসার ব্যক্তিগত হিসাব দেখার
+       অনুমতি নেই।
+     </p>
+     <p class="small">
+       শুধু অনুমোদিত অ্যাডমিন অ্যাকাউন্ট এই অংশ ব্যবহার করতে পারবেন।
+     </p>
+   `;
+
+   document
+     .querySelectorAll(
+       "#customersPage,#newCustomerPage,#customerDetailPage,#materialsPage,#workersPage,#settingsPage"
+     )
+     .forEach(p=>p.classList.remove("active"));
+
+   return;
+ }
+
+ loginNotice.style.display="none";
+}
+
+
+/* =====================================================
+   ACCOUNTING OPEN
+===================================================== */
+
+async function openAccountingPage(pageId="customersPage"){
+
+ if(!currentUser){
+
+   openAuth();
+   return;
+ }
+
+ if(!accountingAllowed){
+
+   await checkAccountingAccess();
+
+   if(!accountingAllowed){
+
+     alert(
+       "এই অ্যাকাউন্টে ব্যবসার হিসাব দেখার অনুমতি নেই।"
+     );
+
+     return;
+   }
+ }
+
+ showPage(pageId);
+
+ if(pageId==="customersPage")
+   await loadCustomers();
+
+ if(pageId==="materialsPage")
+   await loadMaterials();
+
+ if(pageId==="workersPage")
+   await loadWorkers();
+}
+
+
+async function openNewCustomer(){
+
+ if(!currentUser){
+
+   openAuth();
+   return;
+ }
+
+ if(!accountingAllowed){
+
+   await checkAccountingAccess();
+
+   if(!accountingAllowed){
+
+     alert(
+       "এই অ্যাকাউন্টে হিসাব ব্যবহারের অনুমতি নেই।"
+     );
+
+     return;
+   }
+ }
+
+ showPage("newCustomerPage");
+}
+
+
+/* =====================================================
+   CUSTOMER LOAD
+===================================================== */
+
+async function loadCustomers(){
+
+ const box=
+   document.getElementById("customerList");
+
+ box.innerHTML=`
+   <div class="card loading">
+     কাস্টমারের হিসাব লোড হচ্ছে...
+   </div>
+ `;
+
+ const {data,error}=
+   await supabaseClient
+     .from("customers")
+     .select("*")
+     .eq("admin_id",currentUser.id)
+     .order("created_at",{ascending:false});
+
+ if(error){
+
+   box.innerHTML=`
+     <div class="card warning">
+       কাস্টমারের হিসাব লোড হয়নি।<br>
+       ${escapeHTML(error.message)}
+     </div>
+   `;
+
+   return;
+ }
+
+ if(!data || !data.length){
+
+   box.innerHTML=`
+     <div class="card center">
+       এখনো কোনো কাস্টমার যোগ করা হয়নি।
+     </div>
+   `;
+
+   return;
+ }
+
+ box.innerHTML="";
+
+ for(const c of data){
+
+   const summary=
+     await getCustomerSummary(c.id,c.contract_price);
+
+   const card=
+     document.createElement("div");
+
+   card.className="customer-card";
+
+   card.innerHTML=`
+
+     <div style="position:relative">
+
+       <div class="three-menu">
+
+         <button class="three-button"
+                 onclick="toggleCustomerMenu('${c.id}')">
+           ⋮
+         </button>
+
+         <div class="dropdown"
+              id="menu-${c.id}">
+
+           <button onclick="openCustomer('${c.id}')">
+             📋 পুরো হিসাব
+           </button>
+
+           <button onclick="openEditCustomer('${c.id}')">
+             ✏️ তথ্য আপডেট
+           </button>
+
+           <button onclick="openCustomer('${c.id}')">
+             📊 লাভ/লোকসান
+           </button>
+
+           <button onclick="printCustomer('${c.id}')">
+             🖨️ হিসাব প্রিন্ট
+           </button>
+
+           <button onclick="downloadCustomer('${c.id}')">
+             📥 হিসাব ডাউনলোড
+           </button>
+
+           <button onclick="deleteCustomer('${c.id}')"
+                   style="color:#d00000">
+             🗑️ কাস্টমার মুছুন
+           </button>
+
+         </div>
+
+       </div>
+
+       <div class="customer-title">
+         👤 ${escapeHTML(c.name)}
+       </div>
+
+       <div>📞 ${escapeHTML(c.phone || "-")}</div>
+
+       <div>
+         🔨 ${escapeHTML(c.work || "-")}
+       </div>
+
+       <div class="small">
+         ডেলিভারি:
+         ${formatDateOnly(c.delivery_date)}
+       </div>
+
+       <hr>
+
+       <div>
+         চুক্তির দাম:
+         <b>${money(c.contract_price)}</b>
+       </div>
+
+       <div>
+         মোট খরচ:
+         <b>${money(summary.totalCost)}</b>
+       </div>
+
+       <div>
+         মোট পেয়েছেন:
+         <b>${money(summary.totalPaid)}</b>
+       </div>
+
+       <div>
+         বাকি:
+         <b>${money(summary.due)}</b>
+       </div>
+
+       <div style="margin-top:8px">
+
+         ${
+           summary.profit>=0
+           ?
+           `<span class="profit">
+             লাভ: ${money(summary.profit)}
+            </span>`
+           :
+           `<span class="loss">
+             লোকসান: ${money(Math.abs(summary.profit))}
+            </span>`
+         }
+
+       </div>
+
+       <button class="primary"
+               onclick="openCustomer('${c.id}')">
+         📋 পুরো হিসাব দেখুন
+       </button>
+
+     </div>
+   `;
+
+   box.appendChild(card);
+ }
+}
+
+
+/* =====================================================
+   CUSTOMER SUMMARY
+===================================================== */
+
+async function getCustomerSummary(customerId,contractPrice){
+
+ let materialCost=0;
+ let workerCost=0;
+ let otherCost=0;
+ let totalPaid=0;
+
+ const materialsResult=
+   await supabaseClient
+     .from("customer_materials")
+     .select("total")
+     .eq("customer_id",customerId);
+
+ if(!materialsResult.error){
+
+   materialCost=
+     (materialsResult.data||[])
+     .reduce(
+       (s,x)=>s+Number(x.total||0),
+       0
+     );
+ }
+
+ const workersResult=
+   await supabaseClient
+     .from("customer_workers")
+     .select("total")
+     .eq("customer_id",customerId);
+
+ if(!workersResult.error){
+
+   workerCost=
+     (workersResult.data||[])
+     .reduce(
+       (s,x)=>s+Number(x.total||0),
+       0
+     );
+ }
+
+ const expensesResult=
+   await supabaseClient
+     .from("customer_expenses")
+     .select("amount")
+     .eq("customer_id",customerId);
+
+ if(!expensesResult.error){
+
+   otherCost=
+     (expensesResult.data||[])
+     .reduce(
+       (s,x)=>s+Number(x.amount||0),
+       0
+     );
+ }
+
+ const paymentsResult=
+   await supabaseClient
+     .from("customer_payments")
+     .select("amount")
+     .eq("customer_id",customerId);
+
+ if(!paymentsResult.error){
+
+   totalPaid=
+     (paymentsResult.data||[])
+     .reduce(
+       (s,x)=>s+Number(x.amount||0),
+       0
+     );
+ }
+
+ const totalCost=
+   materialCost+
+   workerCost+
+   otherCost;
+
+ const price=
+   Number(contractPrice||0);
+
+ const profit=
+   price-totalCost;
+
+ const due=
+   Math.max(0,price-totalPaid);
+
+ return{
+   materialCost,
+   workerCost,
+   otherCost,
+   totalCost,
+   totalPaid,
+   due,
+   profit
+ };
+}
+
+
+/* =====================================================
+   SAVE CUSTOMER
+===================================================== */
+
+async function saveCustomer(){
+
+ if(!accountingAllowed){
+   alert("হিসাব ব্যবহারের অনুমতি নেই।");
+   return;
+ }
 
  const name=
    document.getElementById("customerName")
@@ -885,70 +1484,58 @@ function saveCustomer(){
 
  const price=
    Number(
-     document.getElementById("workPrice")
-     .value
-   ) || 0;
+     document.getElementById("workPrice").value
+   )||0;
 
  const start=
-   document.getElementById("startDate")
-   .value;
+   document.getElementById("startDate").value||null;
 
  const delivery=
-   document.getElementById("deliveryDate")
-   .value;
-
+   document.getElementById("deliveryDate").value||null;
 
  if(!name){
-
    alert("কাস্টমারের নাম লিখুন।");
    return;
  }
 
  if(!phone){
-
    alert("ফোন নম্বর লিখুন।");
    return;
  }
 
+ const {error}=
+   await supabaseClient
+     .from("customers")
+     .insert({
+       admin_id:currentUser.id,
+       name:name,
+       phone:phone,
+       address:address,
+       work:work,
+       contract_price:price,
+       start_date:start,
+       delivery_date:delivery
+     });
 
- const customer={
+ if(error){
 
-   id:crypto.randomUUID(),
+   alert(
+     "কাস্টমার সেভ হয়নি:\n"+
+     error.message
+   );
 
-   name:name,
+   return;
+ }
 
-   phone:phone,
+ alert("কাস্টমার সফলভাবে সেভ হয়েছে।");
 
-   address:address,
+ clearNewCustomerForm();
 
-   work:work,
-
-   contractPrice:price,
-
-   startDate:start,
-
-   deliveryDate:delivery,
-
-   materials:[],
-
-   workers:[],
-
-   otherExpenses:[],
-
-   payments:[],
-
-   createdAt:new Date().toISOString()
-
- };
+ await openAccountingPage();
+}
 
 
- customers.unshift(customer);
-
- saveLocalData();
-
- alert(
-   "কাস্টমার সফলভাবে সেভ হয়েছে।"
- );
+function clearNewCustomerForm(){
 
  document.getElementById("customerName").value="";
  document.getElementById("customerPhone").value="";
@@ -957,114 +1544,6 @@ function saveCustomer(){
  document.getElementById("workPrice").value="";
  document.getElementById("startDate").value="";
  document.getElementById("deliveryDate").value="";
-
-
- renderCustomers();
-
- showPage("customersPage");
-}
-
-
-/* =====================================================
-   CUSTOMER LIST
-===================================================== */
-
-function renderCustomers(){
-
- const box=
-   document.getElementById("customerList");
-
- if(!customers.length){
-
-   box.innerHTML=`
-     <div class="card"
-          style="text-align:center;color:#777">
-       এখনো কোনো কাস্টমার যোগ করা হয়নি।
-     </div>
-   `;
-
-   return;
- }
-
-
- box.innerHTML=
- customers.map(c=>{
-
-   const summary=
-     calculateCustomer(c);
-
-   return `
-
-   <div class="customer-card">
-
-     <div class="customer-title">
-       👤 ${escapeHTML(c.name)}
-     </div>
-
-     <div>
-       📞 ${escapeHTML(c.phone)}
-     </div>
-
-     <div>
-       🔨 ${escapeHTML(c.work || "কাজ নির্ধারণ করা হয়নি")}
-     </div>
-
-     <div class="small">
-       ডেলিভারি:
-       ${formatDateOnly(c.deliveryDate)}
-     </div>
-
-     <hr>
-
-     <div>
-       কাজের দাম:
-       <b>${money(c.contractPrice)}</b>
-     </div>
-
-     <div>
-       খরচ:
-       <b>${money(summary.totalCost)}</b>
-     </div>
-
-     <div>
-       পেয়েছেন:
-       <b>${money(summary.totalPaid)}</b>
-     </div>
-
-     <div>
-       বাকি:
-       <b>${money(summary.due)}</b>
-     </div>
-
-     <div style="margin-top:8px">
-
-       ${
-         summary.profit >= 0
-
-         ?
-         `<span class="profit">
-            লাভ: ${money(summary.profit)}
-          </span>`
-
-         :
-         `<span class="loss">
-            লোকসান: ${money(Math.abs(summary.profit))}
-          </span>`
-       }
-
-     </div>
-
-     <button
-       class="primary"
-       onclick="openCustomer('${c.id}')">
-       📋 পুরো হিসাব দেখুন
-     </button>
-
-   </div>
-
-   `;
-
- }).join("");
 }
 
 
@@ -1072,76 +1551,219 @@ function renderCustomers(){
    CUSTOMER DETAIL
 ===================================================== */
 
-function openCustomer(id){
+async function openCustomer(id){
 
- const customer=
-   customers.find(c=>c.id===id);
+ if(!accountingAllowed)
+   return;
 
- if(!customer) return;
+ selectedCustomerId=id;
 
  showPage("customerDetailPage");
 
- renderCustomerDetail(customer);
+ const box=
+   document.getElementById("customerDetail");
+
+ box.innerHTML=`
+   <div class="loading">
+     কাস্টমারের সম্পূর্ণ হিসাব লোড হচ্ছে...
+   </div>
+ `;
+
+ const {data:c,error}=
+   await supabaseClient
+     .from("customers")
+     .select("*")
+     .eq("id",id)
+     .eq("admin_id",currentUser.id)
+     .single();
+
+ if(error || !c){
+
+   box.innerHTML=`
+     <div class="warning">
+       কাস্টমারের হিসাব পাওয়া যায়নি।
+     </div>
+   `;
+
+   return;
+ }
+
+ await renderCustomerDetail(c);
 }
 
 
-function renderCustomerDetail(c){
+async function renderCustomerDetail(c){
+
+ selectedCustomerId=c.id;
 
  const box=
    document.getElementById("customerDetail");
 
  const summary=
-   calculateCustomer(c);
+   await getCustomerSummary(
+     c.id,
+     c.contract_price
+   );
 
+ const materialsResult=
+   await supabaseClient
+     .from("customer_materials")
+     .select("*")
+     .eq("customer_id",c.id)
+     .order("created_at",{ascending:true});
+
+ const workersResult=
+   await supabaseClient
+     .from("customer_workers")
+     .select("*")
+     .eq("customer_id",c.id)
+     .order("created_at",{ascending:true});
+
+ const expensesResult=
+   await supabaseClient
+     .from("customer_expenses")
+     .select("*")
+     .eq("customer_id",c.id)
+     .order("created_at",{ascending:true});
+
+ const paymentsResult=
+   await supabaseClient
+     .from("customer_payments")
+     .select("*")
+     .eq("customer_id",c.id)
+     .order("payment_date",{ascending:true});
+
+ const customerMaterials=
+   materialsResult.data||[];
+
+ const customerWorkers=
+   workersResult.data||[];
+
+ const expenses=
+   expensesResult.data||[];
+
+ const payments=
+   paymentsResult.data||[];
+
+ const materials=
+   await getMaterials();
+
+ const workers=
+   await getWorkers();
 
  box.innerHTML=`
 
- <h2>
-   👤 ${escapeHTML(c.name)}
- </h2>
+ <div style="position:relative">
 
- <div class="status">
+   <div class="three-menu">
 
-   <b>ফোন:</b> ${escapeHTML(c.phone)}
-   <br>
+     <button class="three-button"
+             onclick="toggleDetailMenu()">
+       ⋮
+     </button>
 
-   <b>ঠিকানা:</b>
-   ${escapeHTML(c.address || "-")}
-   <br>
+     <div class="dropdown"
+          id="detailMenu">
 
-   <b>কাজ:</b>
-   ${escapeHTML(c.work || "-")}
-   <br>
+       <button onclick="openEditCustomer('${c.id}')">
+         ✏️ কাস্টমারের তথ্য আপডেট
+       </button>
 
-   <b>কাজের তারিখ:</b>
-   ${formatDateOnly(c.startDate)}
-   <br>
+       <button onclick="scrollToBox('materialBox')">
+         🔩 মালামালের হিসাব
+       </button>
 
-   <b>ডেলিভারি:</b>
-   ${formatDateOnly(c.deliveryDate)}
+       <button onclick="scrollToBox('workerBox')">
+         👷 মিস্ত্রির হিসাব
+       </button>
+
+       <button onclick="scrollToBox('expenseBox')">
+         💸 অন্যান্য খরচ
+       </button>
+
+       <button onclick="scrollToBox('paymentBox')">
+         💰 পেমেন্ট যোগ করুন
+       </button>
+
+       <button onclick="scrollToBox('summaryBox')">
+         📊 লাভ/লোকসান দেখুন
+       </button>
+
+       <button onclick="scrollToBox('deliveryBox')">
+         📅 ডেলিভারি তথ্য
+       </button>
+
+       <button onclick="downloadCustomer('${c.id}')">
+         📥 হিসাব ডাউনলোড
+       </button>
+
+       <button onclick="printCustomer('${c.id}')">
+         🖨️ হিসাব প্রিন্ট
+       </button>
+
+       <button onclick="deleteCustomer('${c.id}')"
+               style="color:#d00000">
+         🗑️ কাস্টমার মুছুন
+       </button>
+
+     </div>
+
+   </div>
+
+   <h2>
+     👤 ${escapeHTML(c.name)}
+   </h2>
+
+   <div class="status">
+
+     <b>📞 ফোন:</b>
+     ${escapeHTML(c.phone||"-")}
+     <br>
+
+     <b>📍 ঠিকানা:</b>
+     ${escapeHTML(c.address||"-")}
+     <br>
+
+     <b>🔨 কাজ:</b>
+     ${escapeHTML(c.work||"-")}
+     <br>
+
+     <b>📅 কাজ শুরু:</b>
+     ${formatDateOnly(c.start_date)}
+     <br>
+
+     <span id="deliveryBox">
+       <b>🚚 ডেলিভারি:</b>
+       ${formatDateOnly(c.delivery_date)}
+     </span>
+
+   </div>
 
  </div>
 
 
- <div class="total-box">
+ <div class="total-box"
+      id="summaryBox">
+
+   <h3>📊 সম্পূর্ণ হিসাব</h3>
 
    <div class="total-line">
-     <span>কাজের মোট দাম</span>
-     <b>${money(c.contractPrice)}</b>
+     <span>কাজের মোট চুক্তির দাম</span>
+     <b>${money(c.contract_price)}</b>
    </div>
 
    <div class="total-line">
-     <span>মালের খরচ</span>
+     <span>🔩 মালের খরচ</span>
      <b>${money(summary.materialCost)}</b>
    </div>
 
    <div class="total-line">
-     <span>মিস্ত্রির খরচ</span>
+     <span>👷 মিস্ত্রির খরচ</span>
      <b>${money(summary.workerCost)}</b>
    </div>
 
    <div class="total-line">
-     <span>হেলপার/অন্যান্য খরচ</span>
+     <span>💸 অন্যান্য খরচ</span>
      <b>${money(summary.otherCost)}</b>
    </div>
 
@@ -1153,12 +1775,12 @@ function renderCustomerDetail(c){
    </div>
 
    <div class="total-line">
-     <span>মোট পেয়েছেন</span>
+     <span>💰 মোট পেয়েছেন</span>
      <b>${money(summary.totalPaid)}</b>
    </div>
 
    <div class="total-line">
-     <span>কাস্টমারের বাকি</span>
+     <span>💵 কাস্টমারের বাকি</span>
      <b>${money(summary.due)}</b>
    </div>
 
@@ -1166,16 +1788,12 @@ function renderCustomerDetail(c){
 
    ${
      summary.profit>=0
-
      ?
-
      `<div class="total-line big-total profit">
        <span>আপনার লাভ</span>
        <span>${money(summary.profit)}</span>
       </div>`
-
      :
-
      `<div class="total-line big-total loss">
        <span>আপনার লোকসান</span>
        <span>${money(Math.abs(summary.profit))}</span>
@@ -1185,9 +1803,10 @@ function renderCustomerDetail(c){
  </div>
 
 
- <!-- MAL -->
+ <!-- MATERIAL -->
 
- <div class="card">
+ <div class="card"
+      id="materialBox">
 
    <h3>🔩 এই কাজে ব্যবহৃত মাল</h3>
 
@@ -1199,11 +1818,12 @@ function renderCustomerDetail(c){
        </option>
 
        ${
-         materials.map(m=>
-           `<option value="${m.id}">
+         materials.map(m=>`
+           <option value="${m.id}"
+                   data-price="${m.price}">
              ${escapeHTML(m.name)}
-           </option>`
-         ).join("")
+           </option>
+         `).join("")
        }
 
      </select>
@@ -1220,6 +1840,10 @@ function renderCustomerDetail(c){
 
    </div>
 
+   <div id="selectedMaterialPrice"
+        class="small">
+     মাল নির্বাচন করলে দাম দেখা যাবে।
+   </div>
 
    <div class="table-wrap">
 
@@ -1229,7 +1853,7 @@ function renderCustomerDetail(c){
          <tr>
            <th>মাল</th>
            <th>পরিমাণ</th>
-           <th>দাম</th>
+           <th>একক দাম</th>
            <th>মোট</th>
            <th></th>
          </tr>
@@ -1238,34 +1862,21 @@ function renderCustomerDetail(c){
        <tbody>
 
        ${
-         c.materials.map((item,index)=>`
+         customerMaterials.map(item=>`
 
            <tr>
 
-             <td>
-               ${escapeHTML(item.name)}
-             </td>
+             <td>${escapeHTML(item.name)}</td>
+
+             <td>${item.qty}</td>
+
+             <td>${money(item.price)}</td>
+
+             <td>${money(item.total)}</td>
 
              <td>
-               ${item.qty}
-             </td>
-
-             <td>
-               ${money(item.price)}
-             </td>
-
-             <td>
-               ${money(item.total)}
-             </td>
-
-             <td>
-               <button
-                 class="danger"
-                 onclick="
-                   removeCustomerMaterial(
-                     '${c.id}',
-                     ${index}
-                   )">
+               <button class="danger"
+                       onclick="removeCustomerMaterial('${item.id}')">
                  মুছুন
                </button>
              </td>
@@ -1286,24 +1897,25 @@ function renderCustomerDetail(c){
 
  <!-- WORKER -->
 
- <div class="card">
+ <div class="card"
+      id="workerBox">
 
    <h3>👷 এই কাজে মিস্ত্রির হিসাব</h3>
 
    <div class="row3">
 
      <select id="detailWorker">
-
        <option value="">
          মিস্ত্রি নির্বাচন করুন
        </option>
 
        ${
-         workers.map(w=>
-           `<option value="${w.id}">
+         workers.map(w=>`
+           <option value="${w.id}"
+                   data-salary="${w.monthly_salary}">
              ${escapeHTML(w.name)}
-           </option>`
-         ).join("")
+           </option>
+         `).join("")
        }
 
      </select>
@@ -1320,6 +1932,10 @@ function renderCustomerDetail(c){
 
    </div>
 
+   <div id="selectedWorkerSalary"
+        class="small">
+     মিস্ত্রি নির্বাচন করলে মাসিক বেতন দেখা যাবে।
+   </div>
 
    <div class="table-wrap">
 
@@ -1338,43 +1954,28 @@ function renderCustomerDetail(c){
        <tbody>
 
        ${
-         c.workers.map((item,index)=>`
+         customerWorkers.map(item=>`
 
-         <tr>
+           <tr>
 
-           <td>
-             ${escapeHTML(item.name)}
-           </td>
+             <td>${escapeHTML(item.name)}</td>
 
-           <td>
-             ${money(item.salary)}
-           </td>
+             <td>${money(item.salary)}</td>
 
-           <td>
-             ${item.days}
-           </td>
+             <td>${item.days}</td>
 
-           <td>
-             ${money(item.total)}
-           </td>
+             <td>${money(item.total)}</td>
 
-           <td>
+             <td>
+               <button class="danger"
+                       onclick="removeCustomerWorker('${item.id}')">
+                 মুছুন
+               </button>
+             </td>
 
-             <button
-               class="danger"
-               onclick="
-                 removeCustomerWorker(
-                   '${c.id}',
-                   ${index}
-                 )">
-               মুছুন
-             </button>
+           </tr>
 
-           </td>
-
-         </tr>
-
-       `).join("")
+         `).join("")
        }
 
        </tbody>
@@ -1384,22 +1985,23 @@ function renderCustomerDetail(c){
    </div>
 
    <p class="small">
-     মিস্ত্রির দৈনিক হিসাব = মাসিক বেতন ÷ ৩০ × কাজের দিন।
+     দৈনিক মজুরি = মাসিক বেতন ÷ ৩০ × কাজের দিন।
    </p>
 
  </div>
 
 
- <!-- OTHER -->
+ <!-- OTHER EXPENSE -->
 
- <div class="card">
+ <div class="card"
+      id="expenseBox">
 
    <h3>💸 হেলপার / অন্যান্য খরচ</h3>
 
    <div class="row">
 
      <input id="otherName"
-            placeholder="খরচের নাম">
+            placeholder="যেমন: হেলপার / পরিবহন / অন্যান্য">
 
      <input id="otherAmount"
             type="number"
@@ -1412,7 +2014,6 @@ function renderCustomerDetail(c){
            onclick="addOtherExpense('${c.id}')">
      ➕ খরচ যোগ করুন
    </button>
-
 
    <div class="table-wrap">
 
@@ -1429,35 +2030,24 @@ function renderCustomerDetail(c){
        <tbody>
 
        ${
-         c.otherExpenses.map((item,index)=>`
+         expenses.map(item=>`
 
            <tr>
 
-             <td>
-               ${escapeHTML(item.name)}
-             </td>
+             <td>${escapeHTML(item.name)}</td>
+
+             <td>${money(item.amount)}</td>
 
              <td>
-               ${money(item.amount)}
-             </td>
-
-             <td>
-
-               <button
-                 class="danger"
-                 onclick="
-                   removeOtherExpense(
-                     '${c.id}',
-                     ${index}
-                   )">
+               <button class="danger"
+                       onclick="removeOtherExpense('${item.id}')">
                  মুছুন
                </button>
-
              </td>
 
            </tr>
 
-       `).join("")
+         `).join("")
        }
 
        </tbody>
@@ -1471,7 +2061,8 @@ function renderCustomerDetail(c){
 
  <!-- PAYMENT -->
 
- <div class="card">
+ <div class="card"
+      id="paymentBox">
 
    <h3>💰 কাস্টমারের পেমেন্ট</h3>
 
@@ -1495,7 +2086,6 @@ function renderCustomerDetail(c){
      💵 পেমেন্ট যোগ করুন
    </button>
 
-
    <div class="table-wrap">
 
      <table>
@@ -1512,39 +2102,26 @@ function renderCustomerDetail(c){
        <tbody>
 
        ${
-         c.payments.map((p,index)=>`
+         payments.map(p=>`
 
            <tr>
 
-             <td>
-               ${formatDateOnly(p.date)}
-             </td>
+             <td>${formatDateOnly(p.payment_date)}</td>
+
+             <td>${money(p.amount)}</td>
+
+             <td>${escapeHTML(p.note||"")}</td>
 
              <td>
-               ${money(p.amount)}
-             </td>
-
-             <td>
-               ${escapeHTML(p.note || "")}
-             </td>
-
-             <td>
-
-               <button
-                 class="danger"
-                 onclick="
-                   removePayment(
-                     '${c.id}',
-                     ${index}
-                   )">
+               <button class="danger"
+                       onclick="removePayment('${p.id}')">
                  মুছুন
                </button>
-
              </td>
 
            </tr>
 
-       `).join("")
+         `).join("")
        }
 
        </tbody>
@@ -1563,91 +2140,120 @@ function renderCustomerDetail(c){
      📥 এই কাস্টমারের হিসাব ডাউনলোড
    </button>
 
-   <button class="danger"
-           onclick="deleteCustomer('${c.id}')">
-     🗑️ কাস্টমার মুছুন
+   <button class="dark"
+           onclick="printCustomer('${c.id}')">
+     🖨️ হিসাব প্রিন্ট
    </button>
 
  </div>
 
  `;
+
+
+ const materialSelect=
+   document.getElementById("detailMaterial");
+
+ if(materialSelect){
+
+   materialSelect.onchange=function(){
+
+     const option=
+       this.options[this.selectedIndex];
+
+     const price=
+       option?.dataset?.price;
+
+     document.getElementById(
+       "selectedMaterialPrice"
+     ).textContent=
+       price
+       ?
+       "বর্তমান দাম: "+money(price)
+       :
+       "মাল নির্বাচন করলে দাম দেখা যাবে।";
+   };
+ }
+
+
+ const workerSelect=
+   document.getElementById("detailWorker");
+
+ if(workerSelect){
+
+   workerSelect.onchange=function(){
+
+     const option=
+       this.options[this.selectedIndex];
+
+     const salary=
+       option?.dataset?.salary;
+
+     document.getElementById(
+       "selectedWorkerSalary"
+     ).textContent=
+       salary
+       ?
+       "মাসিক বেতন: "+money(salary)
+       :
+       "মিস্ত্রি নির্বাচন করলে মাসিক বেতন দেখা যাবে।";
+   };
+ }
 }
 
 
 /* =====================================================
-   CALCULATE
+   MATERIALS
 ===================================================== */
 
-function calculateCustomer(c){
+async function getMaterials(){
 
- const materialCost=
-   (c.materials || [])
-   .reduce(
-     (sum,x)=>sum+Number(x.total||0),
-     0
-   );
+ const {data,error}=
+   await supabaseClient
+     .from("materials")
+     .select("*")
+     .eq("admin_id",currentUser.id)
+     .order("name");
 
+ if(error)
+   return [];
 
- const workerCost=
-   (c.workers || [])
-   .reduce(
-     (sum,x)=>sum+Number(x.total||0),
-     0
-   );
-
-
- const otherCost=
-   (c.otherExpenses || [])
-   .reduce(
-     (sum,x)=>sum+Number(x.amount||0),
-     0
-   );
-
-
- const totalPaid=
-   (c.payments || [])
-   .reduce(
-     (sum,x)=>sum+Number(x.amount||0),
-     0
-   );
-
-
- const totalCost=
-   materialCost+
-   workerCost+
-   otherCost;
-
-
- const profit=
-   Number(c.contractPrice||0)-
-   totalCost;
-
-
- const due=
-   Math.max(
-     0,
-     Number(c.contractPrice||0)-
-     totalPaid
-   );
-
-
- return{
-   materialCost,
-   workerCost,
-   otherCost,
-   totalCost,
-   totalPaid,
-   due,
-   profit
- };
+ return data||[];
 }
 
 
-/* =====================================================
-   MATERIAL
-===================================================== */
+async function loadMaterials(){
 
-function addMaterial(){
+ const materials=
+   await getMaterials();
+
+ const box=
+   document.getElementById("materialsTable");
+
+ box.innerHTML=
+ materials.map(m=>`
+
+   <tr>
+
+     <td>${escapeHTML(m.name)}</td>
+
+     <td>${money(m.price)}</td>
+
+     <td>
+
+       <button class="danger"
+               onclick="deleteMaterial('${m.id}')">
+         মুছুন
+       </button>
+
+     </td>
+
+   </tr>
+
+ `).join("");
+}
+
+
+async function addMaterial(){
 
  const name=
    document.getElementById("materialName")
@@ -1655,82 +2261,64 @@ function addMaterial(){
 
  const price=
    Number(
-     document.getElementById("materialPrice")
-     .value
-   ) || 0;
-
+     document.getElementById("materialPrice").value
+   )||0;
 
  if(!name){
-
    alert("মালের নাম লিখুন।");
    return;
  }
 
+ if(price<=0){
+   alert("মালের দাম দিন।");
+   return;
+ }
 
- materials.push({
+ const {error}=
+   await supabaseClient
+     .from("materials")
+     .insert({
+       admin_id:currentUser.id,
+       name:name,
+       price:price
+     });
 
-   id:crypto.randomUUID(),
+ if(error){
 
-   name:name,
+   alert(
+     "মাল যোগ হয়নি:\n"+
+     error.message
+   );
 
-   price:price
-
- });
-
-
- saveLocalData();
+   return;
+ }
 
  document.getElementById("materialName").value="";
  document.getElementById("materialPrice").value="";
 
- renderMaterials();
+ await loadMaterials();
 }
 
 
-function renderMaterials(){
-
- const box=
-   document.getElementById("materialsTable");
-
- box.innerHTML=
- materials.map((m,index)=>`
-
-   <tr>
-
-     <td>
-       ${escapeHTML(m.name)}
-     </td>
-
-     <td>
-       ${money(m.price)}
-     </td>
-
-     <td>
-
-       <button
-         class="danger"
-         onclick="deleteMaterial(${index})">
-         মুছুন
-       </button>
-
-     </td>
-
-   </tr>
-
- `).join("");
-}
-
-
-function deleteMaterial(index){
+async function deleteMaterial(id){
 
  if(!confirm("এই মালটি মুছবেন?"))
    return;
 
- materials.splice(index,1);
+ const {error}=
+   await supabaseClient
+     .from("materials")
+     .delete()
+     .eq("id",id)
+     .eq("admin_id",currentUser.id);
 
- saveLocalData();
+ if(error){
 
- renderMaterials();
+   alert(error.message);
+   return;
+ }
+
+ await loadMaterials();
 }
 
 
@@ -1738,24 +2326,15 @@ function deleteMaterial(index){
    CUSTOMER MATERIAL
 ===================================================== */
 
-function addCustomerMaterial(id){
-
- const c=
-   customers.find(x=>x.id===id);
-
- if(!c) return;
-
+async function addCustomerMaterial(customerId){
 
  const materialId=
-   document.getElementById("detailMaterial")
-   .value;
+   document.getElementById("detailMaterial").value;
 
  const qty=
    Number(
-     document.getElementById("detailMaterialQty")
-     .value
-   ) || 0;
-
+     document.getElementById("detailMaterialQty").value
+   )||0;
 
  if(!materialId || qty<=0){
 
@@ -1763,116 +2342,108 @@ function addCustomerMaterial(id){
    return;
  }
 
+ const materials=
+   await getMaterials();
 
  const material=
-   materials.find(m=>m.id===materialId);
+   materials.find(x=>x.id===materialId);
 
- if(!material) return;
+ if(!material)
+   return;
 
+ const total=
+   Number(material.price)*qty;
 
- c.materials.push({
+ const {error}=
+   await supabaseClient
+     .from("customer_materials")
+     .insert({
+       admin_id:currentUser.id,
+       customer_id:customerId,
+       material_id:material.id,
+       name:material.name,
+       price:Number(material.price),
+       qty:qty,
+       total:total
+     });
 
-   name:material.name,
+ if(error){
 
-   price:Number(material.price),
+   alert(
+     "মাল যোগ হয়নি:\n"+
+     error.message
+   );
 
-   qty:qty,
+   return;
+ }
 
-   total:
-     Number(material.price)*qty
-
- });
-
-
- saveLocalData();
-
- renderCustomerDetail(c);
+ await openCustomer(customerId);
 }
 
 
-function removeCustomerMaterial(id,index){
+async function removeCustomerMaterial(id){
 
- const c=
-   customers.find(x=>x.id===id);
+ if(!confirm("এই মালটি হিসাব থেকে মুছবেন?"))
+   return;
 
- if(!c) return;
+ const {error}=
+   await supabaseClient
+     .from("customer_materials")
+     .delete()
+     .eq("id",id)
+     .eq("admin_id",currentUser.id);
 
+ if(error){
 
- c.materials.splice(index,1);
+   alert(error.message);
+   return;
+ }
 
- saveLocalData();
-
- renderCustomerDetail(c);
+ await openCustomer(selectedCustomerId);
 }
 
 
 /* =====================================================
-   WORKER
+   WORKERS
 ===================================================== */
 
-function addWorker(){
+async function getWorkers(){
 
- const name=
-   document.getElementById("workerName")
-   .value.trim();
+ const {data,error}=
+   await supabaseClient
+     .from("workers")
+     .select("*")
+     .eq("admin_id",currentUser.id)
+     .order("name");
 
- const salary=
-   Number(
-     document.getElementById("workerSalary")
-     .value
-   ) || 0;
+ if(error)
+   return [];
 
-
- if(!name){
-
-   alert("মিস্ত্রির নাম লিখুন।");
-   return;
- }
-
-
- workers.push({
-
-   id:crypto.randomUUID(),
-
-   name:name,
-
-   salary:salary
-
- });
-
-
- saveLocalData();
-
- document.getElementById("workerName").value="";
- document.getElementById("workerSalary").value="";
-
- renderWorkers();
+ return data||[];
 }
 
 
-function renderWorkers(){
+async function loadWorkers(){
+
+ const workers=
+   await getWorkers();
 
  const box=
    document.getElementById("workersTable");
 
  box.innerHTML=
- workers.map((w,index)=>`
+ workers.map(w=>`
 
    <tr>
 
-     <td>
-       ${escapeHTML(w.name)}
-     </td>
+     <td>${escapeHTML(w.name)}</td>
 
-     <td>
-       ${money(w.salary)}
-     </td>
+     <td>${money(w.monthly_salary)}</td>
 
      <td>
 
-       <button
-         class="danger"
-         onclick="deleteWorker(${index})">
+       <button class="danger"
+               onclick="deleteWorker('${w.id}')">
          মুছুন
        </button>
 
@@ -1884,16 +2455,72 @@ function renderWorkers(){
 }
 
 
-function deleteWorker(index){
+async function addWorker(){
+
+ const name=
+   document.getElementById("workerName")
+   .value.trim();
+
+ const salary=
+   Number(
+     document.getElementById("workerSalary").value
+   )||0;
+
+ if(!name){
+   alert("মিস্ত্রির নাম লিখুন।");
+   return;
+ }
+
+ if(salary<=0){
+   alert("মাসিক বেতন দিন।");
+   return;
+ }
+
+ const {error}=
+   await supabaseClient
+     .from("workers")
+     .insert({
+       admin_id:currentUser.id,
+       name:name,
+       monthly_salary:salary
+     });
+
+ if(error){
+
+   alert(
+     "মিস্ত্রি যোগ হয়নি:\n"+
+     error.message
+   );
+
+   return;
+ }
+
+ document.getElementById("workerName").value="";
+ document.getElementById("workerSalary").value="";
+
+ await loadWorkers();
+}
+
+
+async function deleteWorker(id){
 
  if(!confirm("এই মিস্ত্রিকে মুছবেন?"))
    return;
 
- workers.splice(index,1);
+ const {error}=
+   await supabaseClient
+     .from("workers")
+     .delete()
+     .eq("id",id)
+     .eq("admin_id",currentUser.id);
 
- saveLocalData();
+ if(error){
 
- renderWorkers();
+   alert(error.message);
+   return;
+ }
+
+ await loadWorkers();
 }
 
 
@@ -1901,24 +2528,15 @@ function deleteWorker(index){
    CUSTOMER WORKER
 ===================================================== */
 
-function addCustomerWorker(id){
-
- const c=
-   customers.find(x=>x.id===id);
-
- if(!c) return;
-
+async function addCustomerWorker(customerId){
 
  const workerId=
-   document.getElementById("detailWorker")
-   .value;
+   document.getElementById("detailWorker").value;
 
  const days=
    Number(
-     document.getElementById("detailWorkerDays")
-     .value
-   ) || 0;
-
+     document.getElementById("detailWorkerDays").value
+   )||0;
 
  if(!workerId || days<=0){
 
@@ -1926,52 +2544,67 @@ function addCustomerWorker(id){
    return;
  }
 
+ const workers=
+   await getWorkers();
 
  const worker=
-   workers.find(w=>w.id===workerId);
+   workers.find(x=>x.id===workerId);
 
- if(!worker) return;
-
+ if(!worker)
+   return;
 
  const daily=
-   Number(worker.salary)/30;
+   Number(worker.monthly_salary)/30;
 
  const total=
    daily*days;
 
+ const {error}=
+   await supabaseClient
+     .from("customer_workers")
+     .insert({
+       admin_id:currentUser.id,
+       customer_id:customerId,
+       worker_id:worker.id,
+       name:worker.name,
+       salary:Number(worker.monthly_salary),
+       days:days,
+       total:total
+     });
 
- c.workers.push({
+ if(error){
 
-   name:worker.name,
+   alert(
+     "মিস্ত্রির হিসাব যোগ হয়নি:\n"+
+     error.message
+   );
 
-   salary:Number(worker.salary),
+   return;
+ }
 
-   days:days,
-
-   total:total
-
- });
-
-
- saveLocalData();
-
- renderCustomerDetail(c);
+ await openCustomer(customerId);
 }
 
 
-function removeCustomerWorker(id,index){
+async function removeCustomerWorker(id){
 
- const c=
-   customers.find(x=>x.id===id);
+ if(!confirm("এই মিস্ত্রির হিসাব মুছবেন?"))
+   return;
 
- if(!c) return;
+ const {error}=
+   await supabaseClient
+     .from("customer_workers")
+     .delete()
+     .eq("id",id)
+     .eq("admin_id",currentUser.id);
 
+ if(error){
 
- c.workers.splice(index,1);
+   alert(error.message);
+   return;
+ }
 
- saveLocalData();
-
- renderCustomerDetail(c);
+ await openCustomer(selectedCustomerId);
 }
 
 
@@ -1979,13 +2612,7 @@ function removeCustomerWorker(id,index){
    OTHER EXPENSE
 ===================================================== */
 
-function addOtherExpense(id){
-
- const c=
-   customers.find(x=>x.id===id);
-
- if(!c) return;
-
+async function addOtherExpense(customerId){
 
  const name=
    document.getElementById("otherName")
@@ -1993,10 +2620,8 @@ function addOtherExpense(id){
 
  const amount=
    Number(
-     document.getElementById("otherAmount")
-     .value
-   ) || 0;
-
+     document.getElementById("otherAmount").value
+   )||0;
 
  if(!name || amount<=0){
 
@@ -2004,35 +2629,49 @@ function addOtherExpense(id){
    return;
  }
 
+ const {error}=
+   await supabaseClient
+     .from("customer_expenses")
+     .insert({
+       admin_id:currentUser.id,
+       customer_id:customerId,
+       name:name,
+       amount:amount
+     });
 
- c.otherExpenses.push({
+ if(error){
 
-   name:name,
+   alert(
+     "খরচ যোগ হয়নি:\n"+
+     error.message
+   );
 
-   amount:amount
+   return;
+ }
 
- });
-
-
- saveLocalData();
-
- renderCustomerDetail(c);
+ await openCustomer(customerId);
 }
 
 
-function removeOtherExpense(id,index){
+async function removeOtherExpense(id){
 
- const c=
-   customers.find(x=>x.id===id);
+ if(!confirm("এই খরচটি মুছবেন?"))
+   return;
 
- if(!c) return;
+ const {error}=
+   await supabaseClient
+     .from("customer_expenses")
+     .delete()
+     .eq("id",id)
+     .eq("admin_id",currentUser.id);
 
+ if(error){
 
- c.otherExpenses.splice(index,1);
+   alert(error.message);
+   return;
+ }
 
- saveLocalData();
-
- renderCustomerDetail(c);
+ await openCustomer(selectedCustomerId);
 }
 
 
@@ -2040,28 +2679,19 @@ function removeOtherExpense(id,index){
    PAYMENT
 ===================================================== */
 
-function addPayment(id){
-
- const c=
-   customers.find(x=>x.id===id);
-
- if(!c) return;
-
+async function addPayment(customerId){
 
  const date=
-   document.getElementById("paymentDate")
-   .value;
+   document.getElementById("paymentDate").value;
 
  const amount=
    Number(
-     document.getElementById("paymentAmount")
-     .value
-   ) || 0;
+     document.getElementById("paymentAmount").value
+   )||0;
 
  const note=
    document.getElementById("paymentNote")
    .value.trim();
-
 
  if(!date || amount<=0){
 
@@ -2069,37 +2699,183 @@ function addPayment(id){
    return;
  }
 
+ const {error}=
+   await supabaseClient
+     .from("customer_payments")
+     .insert({
+       admin_id:currentUser.id,
+       customer_id:customerId,
+       payment_date:date,
+       amount:amount,
+       note:note
+     });
 
- c.payments.push({
+ if(error){
 
-   date:date,
+   alert(
+     "পেমেন্ট যোগ হয়নি:\n"+
+     error.message
+   );
 
-   amount:amount,
+   return;
+ }
 
-   note:note
-
- });
-
-
- saveLocalData();
-
- renderCustomerDetail(c);
+ await openCustomer(customerId);
 }
 
 
-function removePayment(id,index){
+async function removePayment(id){
 
- const c=
-   customers.find(x=>x.id===id);
+ if(!confirm("এই পেমেন্টটি মুছবেন?"))
+   return;
 
- if(!c) return;
+ const {error}=
+   await supabaseClient
+     .from("customer_payments")
+     .delete()
+     .eq("id",id)
+     .eq("admin_id",currentUser.id);
+
+ if(error){
+
+   alert(error.message);
+   return;
+ }
+
+ await openCustomer(selectedCustomerId);
+}
 
 
- c.payments.splice(index,1);
+/* =====================================================
+   UPDATE CUSTOMER
+===================================================== */
 
- saveLocalData();
+async function openEditCustomer(id){
 
- renderCustomerDetail(c);
+ const {data,error}=
+   await supabaseClient
+     .from("customers")
+     .select("*")
+     .eq("id",id)
+     .eq("admin_id",currentUser.id)
+     .single();
+
+ if(error || !data){
+
+   alert("কাস্টমারের তথ্য পাওয়া যায়নি।");
+   return;
+ }
+
+ selectedCustomerId=id;
+
+ document.getElementById("editCustomerName").value=
+   data.name||"";
+
+ document.getElementById("editCustomerPhone").value=
+   data.phone||"";
+
+ document.getElementById("editCustomerAddress").value=
+   data.address||"";
+
+ document.getElementById("editWorkName").value=
+   data.work||"";
+
+ document.getElementById("editWorkPrice").value=
+   data.contract_price||0;
+
+ document.getElementById("editStartDate").value=
+   data.start_date||"";
+
+ document.getElementById("editDeliveryDate").value=
+   data.delivery_date||"";
+
+ document.getElementById(
+   "updateCustomerModal"
+ ).style.display="flex";
+}
+
+
+function closeUpdateCustomer(){
+
+ document.getElementById(
+   "updateCustomerModal"
+ ).style.display="none";
+}
+
+
+async function updateCustomer(){
+
+ const id=selectedCustomerId;
+
+ const name=
+   document.getElementById("editCustomerName")
+   .value.trim();
+
+ const phone=
+   document.getElementById("editCustomerPhone")
+   .value.trim();
+
+ const address=
+   document.getElementById("editCustomerAddress")
+   .value.trim();
+
+ const work=
+   document.getElementById("editWorkName")
+   .value.trim();
+
+ const price=
+   Number(
+     document.getElementById("editWorkPrice").value
+   )||0;
+
+ const start=
+   document.getElementById("editStartDate").value||null;
+
+ const delivery=
+   document.getElementById("editDeliveryDate").value||null;
+
+ if(!name || !phone){
+
+   alert("নাম ও ফোন নম্বর দিন।");
+   return;
+ }
+
+ const {error}=
+   await supabaseClient
+     .from("customers")
+     .update({
+       name:name,
+       phone:phone,
+       address:address,
+       work:work,
+       contract_price:price,
+       start_date:start,
+       delivery_date:delivery
+     })
+     .eq("id",id)
+     .eq("admin_id",currentUser.id);
+
+ if(error){
+
+   alert(
+     "তথ্য আপডেট হয়নি:\n"+
+     error.message
+   );
+
+   return;
+ }
+
+ closeUpdateCustomer();
+
+ if(
+   document.getElementById(
+     "customerDetailPage"
+   ).classList.contains("active")
+ ){
+   await openCustomer(id);
+ }else{
+   await openAccountingPage();
+ }
 }
 
 
@@ -2107,20 +2883,33 @@ function removePayment(id,index){
    DELETE CUSTOMER
 ===================================================== */
 
-function deleteCustomer(id){
+async function deleteCustomer(id){
 
  if(!confirm(
    "এই কাস্টমারের সম্পূর্ণ হিসাব মুছে ফেলবেন?"
  ))
    return;
 
+ const {error}=
+   await supabaseClient
+     .from("customers")
+     .delete()
+     .eq("id",id)
+     .eq("admin_id",currentUser.id);
 
- customers=
-   customers.filter(c=>c.id!==id);
+ if(error){
 
- saveLocalData();
+   alert(
+     "কাস্টমার মুছতে সমস্যা:\n"+
+     error.message
+   );
 
- showPage("customersPage");
+   return;
+ }
+
+ alert("কাস্টমার মুছে ফেলা হয়েছে।");
+
+ await openAccountingPage();
 }
 
 
@@ -2128,21 +2917,71 @@ function deleteCustomer(id){
    DOWNLOAD CUSTOMER
 ===================================================== */
 
-function downloadCustomer(id){
+async function downloadCustomer(id){
 
- const c=
-   customers.find(x=>x.id===id);
+ const customerResult=
+   await supabaseClient
+     .from("customers")
+     .select("*")
+     .eq("id",id)
+     .eq("admin_id",currentUser.id)
+     .single();
 
- if(!c) return;
+ if(customerResult.error){
 
+   alert("কাস্টমারের তথ্য পাওয়া যায়নি।");
+   return;
+ }
 
- const s=
-   calculateCustomer(c);
+ const c=customerResult.data;
 
+ const materialsResult=
+   await supabaseClient
+     .from("customer_materials")
+     .select("*")
+     .eq("customer_id",id);
+
+ const workersResult=
+   await supabaseClient
+     .from("customer_workers")
+     .select("*")
+     .eq("customer_id",id);
+
+ const expensesResult=
+   await supabaseClient
+     .from("customer_expenses")
+     .select("*")
+     .eq("customer_id",id);
+
+ const paymentsResult=
+   await supabaseClient
+     .from("customer_payments")
+     .select("*")
+     .eq("customer_id",id);
+
+ const materials=
+   materialsResult.data||[];
+
+ const workers=
+   workersResult.data||[];
+
+ const expenses=
+   expensesResult.data||[];
+
+ const payments=
+   paymentsResult.data||[];
+
+ const summary=
+   await getCustomerSummary(
+     id,
+     c.contract_price
+   );
 
  let csv=
- "কাস্টমার,ফোন,ঠিকানা,কাজ,কাজের দাম,মালের খরচ,মিস্ত্রির খরচ,অন্যান্য খরচ,মোট খরচ,লাভ/লোকসান,মোট পেয়েছেন,বাকি\n";
+ "ওমর এস এস ঘর - কাস্টমারের সম্পূর্ণ হিসাব\n\n";
 
+ csv+=
+ "কাস্টমার,ফোন,ঠিকানা,কাজ,চুক্তির দাম,মালের খরচ,মিস্ত্রির খরচ,অন্যান্য খরচ,মোট খরচ,লাভ/লোকসান,মোট পেয়েছেন,বাকি\n";
 
  csv+=
  [
@@ -2150,28 +2989,24 @@ function downloadCustomer(id){
    c.phone,
    c.address,
    c.work,
-   c.contractPrice,
-   s.materialCost,
-   s.workerCost,
-   s.otherCost,
-   s.totalCost,
-   s.profit,
-   s.totalPaid,
-   s.due
+   c.contract_price,
+   summary.materialCost,
+   summary.workerCost,
+   summary.otherCost,
+   summary.totalCost,
+   summary.profit,
+   summary.totalPaid,
+   summary.due
  ]
  .map(csvEscape)
  .join(",")+
  "\n";
 
 
- csv+=
- "\nমালামাল\n";
+ csv+="\nমালামাল\n";
+ csv+="মাল,পরিমাণ,একক দাম,মোট\n";
 
- csv+=
- "মাল,পরিমাণ,একক দাম,মোট\n";
-
-
- c.materials.forEach(x=>{
+ materials.forEach(x=>{
 
    csv+=
    [
@@ -2183,18 +3018,13 @@ function downloadCustomer(id){
    .map(csvEscape)
    .join(",")+
    "\n";
-
  });
 
 
- csv+=
- "\nমিস্ত্রি\n";
+ csv+="\nমিস্ত্রি\n";
+ csv+="মিস্ত্রি,মাসিক বেতন,দিন,খরচ\n";
 
- csv+=
- "মিস্ত্রি,মাসিক বেতন,দিন,খরচ\n";
-
-
- c.workers.forEach(x=>{
+ workers.forEach(x=>{
 
    csv+=
    [
@@ -2206,29 +3036,39 @@ function downloadCustomer(id){
    .map(csvEscape)
    .join(",")+
    "\n";
-
  });
 
 
- csv+=
- "\nপেমেন্ট\n";
+ csv+="\nঅন্যান্য খরচ\n";
+ csv+="খরচের নাম,টাকা\n";
 
- csv+=
- "তারিখ,টাকা,বিবরণ\n";
-
-
- c.payments.forEach(x=>{
+ expenses.forEach(x=>{
 
    csv+=
    [
-     x.date,
+     x.name,
+     x.amount
+   ]
+   .map(csvEscape)
+   .join(",")+
+   "\n";
+ });
+
+
+ csv+="\nপেমেন্ট\n";
+ csv+="তারিখ,টাকা,বিবরণ\n";
+
+ payments.forEach(x=>{
+
+   csv+=
+   [
+     x.payment_date,
      x.amount,
      x.note
    ]
    .map(csvEscape)
    .join(",")+
    "\n";
-
  });
 
 
@@ -2239,30 +3079,38 @@ function downloadCustomer(id){
 }
 
 
-function downloadAllCustomers(){
+async function downloadAllCustomers(){
 
- if(!customers.length){
+ const {data,error}=
+   await supabaseClient
+     .from("customers")
+     .select("*")
+     .eq("admin_id",currentUser.id)
+     .order("created_at",{ascending:false});
+
+ if(error || !data?.length){
 
    alert("কোনো কাস্টমার নেই।");
    return;
  }
 
-
  let csv=
- "কাস্টমার,ফোন,কাজ,কাজের দাম,মোট খরচ,মোট পেয়েছেন,বাকি,লাভ/লোকসান\n";
+ "কাস্টমার,ফোন,কাজ,চুক্তির দাম,মোট খরচ,মোট পেয়েছেন,বাকি,লাভ/লোকসান\n";
 
-
- customers.forEach(c=>{
+ for(const c of data){
 
    const s=
-     calculateCustomer(c);
+     await getCustomerSummary(
+       c.id,
+       c.contract_price
+     );
 
    csv+=
    [
      c.name,
      c.phone,
      c.work,
-     c.contractPrice,
+     c.contract_price,
      s.totalCost,
      s.totalPaid,
      s.due,
@@ -2271,9 +3119,7 @@ function downloadAllCustomers(){
    .map(csvEscape)
    .join(",")+
    "\n";
-
- });
-
+ }
 
  downloadCSV(
    csv,
@@ -2299,7 +3145,6 @@ function downloadCSV(csv,fileName){
    document.createElement("a");
 
  a.href=url;
-
  a.download=fileName;
 
  document.body.appendChild(a);
@@ -2315,7 +3160,7 @@ function downloadCSV(csv,fileName){
 function csvEscape(value){
 
  const s=
-   String(value ?? "");
+   String(value??"");
 
  return `"${s.replace(/"/g,'""')}"`;
 }
@@ -2330,74 +3175,246 @@ function safeFileName(name){
 
 
 /* =====================================================
-   AUTH
+   PRINT CUSTOMER
 ===================================================== */
 
-async function loadUser(){
+async function printCustomer(id){
 
- const {data}=
-   await supabaseClient.auth.getUser();
+ const {data:c,error}=
+   await supabaseClient
+     .from("customers")
+     .select("*")
+     .eq("id",id)
+     .eq("admin_id",currentUser.id)
+     .single();
 
- currentUser=
-   data?.user || null;
+ if(error || !c){
 
- updateUI();
+   alert("কাস্টমারের তথ্য পাওয়া যায়নি।");
+   return;
+ }
+
+ const summary=
+   await getCustomerSummary(
+     id,
+     c.contract_price
+   );
+
+ const html=`
+
+ <!DOCTYPE html>
+ <html lang="bn">
+
+ <head>
+
+ <meta charset="UTF-8">
+
+ <title>
+   ${escapeHTML(c.name)} - হিসাব
+ </title>
+
+ <style>
+
+ body{
+   font-family:Arial,"Noto Sans Bengali",sans-serif;
+   padding:25px;
+   color:#111;
+ }
+
+ h1,h2{
+   text-align:center;
+ }
+
+ table{
+   width:100%;
+   border-collapse:collapse;
+   margin-top:15px;
+ }
+
+ th,td{
+   border:1px solid #999;
+   padding:8px;
+ }
+
+ th{
+   background:#eee;
+ }
+
+ .summary{
+   margin-top:20px;
+   padding:15px;
+   border:1px solid #ccc;
+ }
+
+ </style>
+
+ </head>
+
+ <body>
+
+ <h1>ওমর এস এস ঘর</h1>
+
+ <h2>কাস্টমারের কাজের হিসাব</h2>
+
+ <p>
+   <b>কাস্টমার:</b>
+   ${escapeHTML(c.name)}
+ </p>
+
+ <p>
+   <b>ফোন:</b>
+   ${escapeHTML(c.phone||"-")}
+ </p>
+
+ <p>
+   <b>ঠিকানা:</b>
+   ${escapeHTML(c.address||"-")}
+ </p>
+
+ <p>
+   <b>কাজ:</b>
+   ${escapeHTML(c.work||"-")}
+ </p>
+
+ <div class="summary">
+
+ <p>
+   চুক্তির দাম:
+   <b>${money(c.contract_price)}</b>
+ </p>
+
+ <p>
+   মালের খরচ:
+   <b>${money(summary.materialCost)}</b>
+ </p>
+
+ <p>
+   মিস্ত্রির খরচ:
+   <b>${money(summary.workerCost)}</b>
+ </p>
+
+ <p>
+   অন্যান্য খরচ:
+   <b>${money(summary.otherCost)}</b>
+ </p>
+
+ <p>
+   মোট খরচ:
+   <b>${money(summary.totalCost)}</b>
+ </p>
+
+ <p>
+   মোট পেয়েছেন:
+   <b>${money(summary.totalPaid)}</b>
+ </p>
+
+ <p>
+   বাকি:
+   <b>${money(summary.due)}</b>
+ </p>
+
+ <p>
+   লাভ/লোকসান:
+   <b>${money(summary.profit)}</b>
+ </p>
+
+ </div>
+
+ <script>
+ window.onload=function(){
+   window.print();
+ };
+ <\/script>
+
+ </body>
+
+ </html>
+ `;
+
+ const win=
+   window.open(
+     "",
+     "_blank"
+   );
+
+ if(!win){
+
+   alert(
+     "প্রিন্ট করার জন্য Browser-এর popup অনুমতি দিন।"
+   );
+
+   return;
+ }
+
+ win.document.write(html);
+ win.document.close();
 }
 
 
-function updateUI(){
+/* =====================================================
+   CUSTOMER MENU
+===================================================== */
 
- const userName=
-   document.getElementById("userName");
+function toggleCustomerMenu(id){
 
- const loginBtn=
-   document.getElementById("loginBtn");
+ document
+   .querySelectorAll(".dropdown")
+   .forEach(x=>{
+     x.style.display="none";
+   });
 
- const logoutBtn=
-   document.getElementById("logoutBtn");
+ const menu=
+   document.getElementById("menu-"+id);
 
- const notice=
-   document.getElementById("loginNotice");
+ if(menu){
 
- const creator=
-   document.getElementById("postCreator");
-
-
- if(currentUser){
-
-   const name=
-     currentUser.user_metadata?.full_name ||
-     currentUser.email?.split("@")[0] ||
-     "ব্যবহারকারী";
-
-   userName.textContent=name;
-
-   loginBtn.style.display="none";
-
-   logoutBtn.style.display="inline-block";
-
-   if(notice)
-     notice.style.display="none";
-
-   if(creator)
-     creator.style.display="block";
-
- }else{
-
-   userName.textContent="";
-
-   loginBtn.style.display="inline-block";
-
-   logoutBtn.style.display="none";
-
-   if(notice)
-     notice.style.display="block";
-
-   if(creator)
-     creator.style.display="none";
+   menu.style.display=
+     menu.style.display==="block"
+     ?"none"
+     :"block";
  }
 }
 
+
+function toggleDetailMenu(){
+
+ const menu=
+   document.getElementById("detailMenu");
+
+ if(!menu)
+   return;
+
+ menu.style.display=
+   menu.style.display==="block"
+   ?"none"
+   :"block";
+}
+
+
+function scrollToBox(id){
+
+ const el=
+   document.getElementById(id);
+
+ if(el){
+
+   el.scrollIntoView({
+     behavior:"smooth",
+     block:"start"
+   });
+ }
+
+ const menu=
+   document.getElementById("detailMenu");
+
+ if(menu)
+   menu.style.display="none";
+}
+
+
+/* =====================================================
+   AUTH
+===================================================== */
 
 function openAuth(){
 
@@ -2478,7 +3495,6 @@ async function submitAuth(){
 
  msg.style.display="block";
 
-
  if(!email || !password){
 
    msg.textContent=
@@ -2498,7 +3514,6 @@ async function submitAuth(){
      return;
    }
 
-
    const {error}=
      await supabaseClient.auth.signUp({
 
@@ -2514,7 +3529,6 @@ async function submitAuth(){
 
      });
 
-
    if(error){
 
      msg.textContent=
@@ -2524,9 +3538,8 @@ async function submitAuth(){
      return;
    }
 
-
    msg.textContent=
-     "রেজিস্ট্রেশন সফল হয়েছে।";
+     "রেজিস্ট্রেশন সফল হয়েছে। ইমেইল যাচাই করে লগইন করুন।";
 
  }else{
 
@@ -2539,7 +3552,6 @@ async function submitAuth(){
 
      });
 
-
    if(error){
 
      msg.textContent=
@@ -2549,13 +3561,11 @@ async function submitAuth(){
      return;
    }
 
-
    currentUser=data.user;
 
+   await updateUI();
+
    closeAuth();
-
-   updateUI();
-
  }
 }
 
@@ -2565,8 +3575,17 @@ async function logout(){
  await supabaseClient.auth.signOut();
 
  currentUser=null;
+ accountingAllowed=false;
+
+ document
+   .querySelectorAll(".page")
+   .forEach(p=>{
+     p.classList.remove("active");
+   });
 
  updateUI();
+
+ alert("লগআউট হয়েছে।");
 }
 
 
@@ -2579,10 +3598,8 @@ async function createPost(){
  if(!currentUser){
 
    openAuth();
-
    return;
  }
-
 
  const text=
    document.getElementById("postText")
@@ -2592,16 +3609,13 @@ async function createPost(){
    document.getElementById("postImage")
    .files[0];
 
-
  if(!text && !file){
 
    alert("লেখা অথবা ছবি দিন।");
    return;
  }
 
-
  let imageURL=null;
-
 
  if(file){
 
@@ -2617,7 +3631,6 @@ async function createPost(){
      "."+
      extension;
 
-
    const {data,error}=
      await supabaseClient.storage
        .from(IMAGE_BUCKET)
@@ -2630,7 +3643,6 @@ async function createPost(){
          }
        );
 
-
    if(error){
 
      alert(
@@ -2641,17 +3653,14 @@ async function createPost(){
      return;
    }
 
-
    const publicURL=
      supabaseClient.storage
        .from(IMAGE_BUCKET)
        .getPublicUrl(data.path);
 
-
    imageURL=
      publicURL.data.publicUrl;
  }
-
 
  const {error}=
    await supabaseClient
@@ -2666,7 +3675,6 @@ async function createPost(){
 
      });
 
-
  if(error){
 
    alert(
@@ -2677,12 +3685,8 @@ async function createPost(){
    return;
  }
 
-
- document.getElementById("postText")
- .value="";
-
- document.getElementById("postImage")
- .value="";
+ document.getElementById("postText").value="";
+ document.getElementById("postImage").value="";
 
  loadPosts();
 }
@@ -2699,11 +3703,8 @@ async function loadPosts(){
  if(!loading || !box)
    return;
 
-
  loading.style.display="block";
-
  box.innerHTML="";
-
 
  const {data,error}=
    await supabaseClient
@@ -2714,9 +3715,7 @@ async function loadPosts(){
        {ascending:false}
      );
 
-
  loading.style.display="none";
-
 
  if(error){
 
@@ -2728,18 +3727,15 @@ async function loadPosts(){
    return;
  }
 
-
- if(!data || data.length===0){
+ if(!data || !data.length){
 
    box.innerHTML=
-     `<div class="card"
-       style="text-align:center;color:#777">
+     `<div class="card center">
        এখনো কোনো পোস্ট নেই।
       </div>`;
 
    return;
  }
-
 
  for(const post of data){
 
@@ -2758,7 +3754,6 @@ async function renderPost(post){
 
  card.className="card";
 
-
  const {count:likeCount}=
    await supabaseClient
      .from("post_likes")
@@ -2768,9 +3763,7 @@ async function renderPost(post){
      })
      .eq("post_id",post.id);
 
-
  let liked=false;
-
 
  if(currentUser){
 
@@ -2785,7 +3778,6 @@ async function renderPost(post){
    liked=!!like;
  }
 
-
  const {data:comments}=
    await supabaseClient
      .from("post_comments")
@@ -2796,9 +3788,7 @@ async function renderPost(post){
        {ascending:true}
      );
 
-
  let imageHTML="";
-
 
  if(post.image_url){
 
@@ -2809,7 +3799,6 @@ async function renderPost(post){
        alt="পোস্টের ছবি"
        loading="lazy">`;
  }
-
 
  card.innerHTML=`
 
@@ -2857,11 +3846,11 @@ async function renderPost(post){
         margin-top:10px">
 
      <span>
-       ❤️ ${likeCount || 0} লাইক
+       ❤️ ${likeCount||0} লাইক
      </span>
 
      <span>
-       ${comments?.length || 0} কমেন্ট
+       ${comments?.length||0} কমেন্ট
      </span>
 
    </div>
@@ -2869,7 +3858,6 @@ async function renderPost(post){
    <div class="actions">
 
      <button
-       class="${liked ? "liked":""}"
        onclick="toggleLike('${post.id}')">
        ❤️ লাইক
      </button>
@@ -2887,7 +3875,7 @@ async function renderPost(post){
    </div>
 
    <div id="comments-${post.id}">
-     ${renderComments(comments || [])}
+     ${renderComments(comments||[])}
    </div>
 
    ${
@@ -2917,7 +3905,6 @@ async function renderPost(post){
 
  `;
 
-
  box.appendChild(card);
 }
 
@@ -2927,10 +3914,8 @@ function renderComments(comments){
  if(!comments.length)
    return "";
 
-
  const top=
    comments.filter(c=>!c.parent_id);
-
 
  return top.map(comment=>{
 
@@ -2938,7 +3923,6 @@ function renderComments(comments){
      comments.filter(
        r=>r.parent_id===comment.id
      );
-
 
    return `
 
@@ -3002,7 +3986,6 @@ async function addComment(postId){
    return;
  }
 
-
  const input=
    document.getElementById(
      "comment-"+postId
@@ -3011,9 +3994,8 @@ async function addComment(postId){
  const text=
    input.value.trim();
 
-
- if(!text) return;
-
+ if(!text)
+   return;
 
  const {error}=
    await supabaseClient
@@ -3030,7 +4012,6 @@ async function addComment(postId){
 
      });
 
-
  if(error){
 
    alert(
@@ -3041,17 +4022,13 @@ async function addComment(postId){
    return;
  }
 
-
  input.value="";
 
  loadPosts();
 }
 
 
-async function replyTo(
- postId,
- parentId
-){
+async function replyTo(postId,parentId){
 
  if(!currentUser){
 
@@ -3059,14 +4036,11 @@ async function replyTo(
    return;
  }
 
-
  const text=
    prompt("রিপ্লাই লিখুন:");
 
-
  if(!text || !text.trim())
    return;
-
 
  const {error}=
    await supabaseClient
@@ -3083,7 +4057,6 @@ async function replyTo(
 
      });
 
-
  if(error){
 
    alert(
@@ -3093,7 +4066,6 @@ async function replyTo(
 
    return;
  }
-
 
  loadPosts();
 }
@@ -3107,7 +4079,6 @@ async function toggleLike(postId){
    return;
  }
 
-
  const {data:existing}=
    await supabaseClient
      .from("post_likes")
@@ -3115,7 +4086,6 @@ async function toggleLike(postId){
      .eq("post_id",postId)
      .eq("user_id",currentUser.id)
      .maybeSingle();
-
 
  if(existing){
 
@@ -3138,7 +4108,6 @@ async function toggleLike(postId){
      });
  }
 
-
  loadPosts();
 }
 
@@ -3149,7 +4118,6 @@ async function sharePost(postId){
    window.location.origin+
    window.location.pathname+
    "?post="+postId;
-
 
  if(navigator.share){
 
@@ -3195,7 +4163,6 @@ function focusComment(postId){
      "comment-"+postId
    );
 
-
  if(input){
 
    input.focus();
@@ -3218,7 +4185,7 @@ function focusComment(postId){
 
 function money(number){
 
- return Number(number || 0)
+ return Number(number||0)
    .toLocaleString("bn-BD",{
      maximumFractionDigits:2
    })+
@@ -3232,13 +4199,14 @@ function formatDateOnly(date){
    return "-";
 
  return new Date(date+"T00:00:00")
-   .toLocaleDateString(
-     "bn-BD"
-   );
+   .toLocaleDateString("bn-BD");
 }
 
 
 function formatDate(date){
+
+ if(!date)
+   return "";
 
  return new Date(date)
    .toLocaleString(
@@ -3272,12 +4240,12 @@ function escapeHTML(value){
 
 supabaseClient.auth
  .onAuthStateChange(
-   (event,session)=>{
+   async (event,session)=>{
 
      currentUser=
-       session?.user || null;
+       session?.user||null;
 
-     updateUI();
+     await updateUI();
 
    }
  );
@@ -3290,12 +4258,6 @@ supabaseClient.auth
 (async function(){
 
  await loadUser();
-
- renderCustomers();
-
- renderMaterials();
-
- renderWorkers();
 
 })();
 
