@@ -9,251 +9,346 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Bengali",Arial,sans-serif;
-background:#f3f6f8;
-color:#18232d
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Bengali",Arial,sans-serif;
+  background:#f3f6f8;
+  color:#18232d;
 }
+
 button,input,select,textarea{font:inherit}
 button{border:0;cursor:pointer}
 
 .top{
-position:sticky;
-top:0;
-z-index:10;
-background:#102027;
-color:#fff;
-padding:12px 14px;
-display:flex;
-align-items:center;
-justify-content:space-between
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:#102027;
+  color:#fff;
+  padding:12px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
 }
 
-.btn{
-padding:8px 12px;
-border-radius:9px;
-background:#102027;
-color:#fff;
-font-weight:700
+.brand{font-weight:900}
+
+.mini{
+  font-size:11px;
+  color:#748188;
 }
-.btn.green{background:#15966b}
-.btn.blue{background:#2674c9}
-.btn.red{background:#dc4c4c}
-.btn.light{
-background:#edf2f4;
-color:#26353c
-}
+
+.top .mini{color:#c8d2d5}
 
 .content{
-max-width:1050px;
-margin:auto;
-padding:16px 12px 50px
+  max-width:1100px;
+  margin:auto;
+  padding:14px 12px 55px;
 }
 
 .title{
-font-size:23px;
-font-weight:900;
-margin:10px 0 14px
+  font-size:23px;
+  font-weight:900;
+  margin:8px 0 14px;
 }
 
 .grid{
-display:grid;
-grid-template-columns:1.1fr .9fr;
-gap:12px
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:12px;
 }
 
 .card{
-background:#fff;
-border-radius:16px;
-padding:15px;
-box-shadow:0 8px 25px rgba(16,32,39,.10);
-margin-bottom:12px
+  background:#fff;
+  border-radius:16px;
+  padding:15px;
+  box-shadow:0 8px 25px rgba(16,32,39,.09);
+  margin-bottom:12px;
 }
 
 .form-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:9px
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
 }
 
 .full{grid-column:1/-1}
 
 label{
-display:block;
-font-size:12px;
-font-weight:700;
-margin-bottom:5px
+  display:block;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:5px;
 }
 
 input,select,textarea{
-width:100%;
-padding:10px 11px;
-border:1px solid #d5dfe3;
-border-radius:10px;
-background:#fff
+  width:100%;
+  padding:10px 11px;
+  border:1px solid #d5dfe3;
+  border-radius:10px;
+  background:#fff;
 }
 
 input:focus,select:focus,textarea:focus{
-outline:0;
-border-color:#2674c9
+  outline:0;
+  border-color:#2674c9;
 }
 
 .actions{
-display:flex;
-gap:7px;
-flex-wrap:wrap;
-margin-top:10px
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:10px;
 }
 
-.sale-row{
-display:grid;
-grid-template-columns:1.5fr .8fr .65fr .9fr auto;
-gap:7px;
-align-items:end;
-margin-bottom:8px
+.btn{
+  padding:7px 10px;
+  border-radius:9px;
+  background:#102027;
+  color:#fff;
+  font-weight:800;
+  font-size:12px;
 }
 
-.mini{
-font-size:11px;
-color:#748188
-}
+.btn.green{background:#15966b}
+.btn.blue{background:#2674c9}
+.btn.red{background:#dc4c4c}
+.btn.light{background:#edf2f4;color:#26353c}
+.btn.gold{background:#9a6b12}
 
 .summary{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:7px
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
 }
 
 .stat{
-background:#f4f7f8;
-padding:10px;
-border-radius:10px
+  background:#f4f7f8;
+  padding:10px;
+  border-radius:10px;
 }
 
 .stat small{
-display:block;
-color:#748188
+  display:block;
+  color:#748188;
 }
 
 .stat b{
-display:block;
-font-size:18px;
-margin-top:3px
+  display:block;
+  font-size:18px;
+  margin-top:3px;
+}
+
+.sale-row{
+  display:grid;
+  grid-template-columns:1.5fr .8fr .65fr .9fr auto;
+  gap:7px;
+  align-items:end;
+  margin-bottom:8px;
 }
 
 .list{
-display:flex;
-flex-direction:column;
-gap:7px
+  display:flex;
+  flex-direction:column;
+  gap:7px;
 }
 
 .item{
-background:#fff;
-border-radius:12px;
-padding:11px;
-box-shadow:0 4px 15px rgba(0,0,0,.06);
-display:flex;
-justify-content:space-between;
-gap:8px;
-align-items:center
+  background:#fff;
+  border-radius:12px;
+  padding:11px;
+  box-shadow:0 4px 15px rgba(0,0,0,.06);
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  align-items:center;
 }
 
 .name{font-weight:900}
 
 .sub{
-font-size:12px;
-color:#748188;
-margin-top:3px
+  font-size:12px;
+  color:#748188;
+  margin-top:3px;
 }
 
 .right{
-display:flex;
-gap:5px;
-flex-wrap:wrap;
-justify-content:flex-end
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
 }
 
 .badge{
-display:inline-block;
-padding:4px 7px;
-border-radius:20px;
-font-size:11px;
-font-weight:800;
-background:#edf2f4
+  display:inline-block;
+  padding:4px 7px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:800;
+  background:#edf2f4;
 }
 
 .badge.red{
-background:#ffe7e7;
-color:#b22e2e
+  background:#ffe7e7;
+  color:#b22e2e;
 }
 
 .badge.green{
-background:#ddf7ed;
-color:#08794f
+  background:#ddf7ed;
+  color:#08794f;
 }
 
 .empty{
-text-align:center;
-padding:22px;
-color:#7a878c
+  text-align:center;
+  padding:22px;
+  color:#7a878c;
 }
 
 .modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.55);
-display:flex;
-align-items:center;
-justify-content:center;
-padding:12px;
-z-index:50
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px;
+  z-index:50;
 }
 
 .modal-box{
-background:#fff;
-width:min(850px,100%);
-max-height:92vh;
-overflow:auto;
-border-radius:18px;
-padding:18px;
-position:relative
+  background:#fff;
+  width:min(900px,100%);
+  max-height:92vh;
+  overflow:auto;
+  border-radius:18px;
+  padding:18px;
+  position:relative;
 }
 
 .close{
-position:absolute;
-right:10px;
-top:10px;
-width:32px;
-height:32px;
-border-radius:50%;
-background:#edf2f4
+  position:absolute;
+  right:10px;
+  top:10px;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:#edf2f4;
 }
 
 .hidden{display:none!important}
 
 table{
-width:100%;
-border-collapse:collapse
+  width:100%;
+  border-collapse:collapse;
 }
 
 th,td{
-padding:8px;
-border-bottom:1px solid #e5eaec;
-font-size:12px;
-text-align:left
+  padding:8px;
+  border-bottom:1px solid #e5eaec;
+  font-size:12px;
+  text-align:left;
 }
 
 th{background:#f4f7f8}
 
+.perm{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:9px 0;
+  border-bottom:1px solid #edf1f2;
+}
+
+.perm:last-child{border-bottom:0}
+
+.switch{
+  position:relative;
+  width:43px;
+  height:24px;
+  flex:none;
+}
+
+.switch input{display:none}
+
+.slider{
+  position:absolute;
+  inset:0;
+  background:#cbd5d8;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+.slider:before{
+  content:"";
+  position:absolute;
+  width:18px;
+  height:18px;
+  left:3px;
+  top:3px;
+  background:#fff;
+  border-radius:50%;
+  transition:.2s;
+}
+
+.switch input:checked+.slider{
+  background:#15966b;
+}
+
+.switch input:checked+.slider:before{
+  transform:translateX(19px);
+}
+
+.userbox{
+  border:1px solid #e3eaed;
+  border-radius:12px;
+  padding:10px;
+  margin:8px 0;
+}
+
+.note{
+  background:#f7fafb;
+  border-left:4px solid #2674c9;
+  padding:10px;
+  border-radius:8px;
+  font-size:12px;
+}
+
 @media(max-width:700px){
-.grid{grid-template-columns:1fr}
-.form-grid{grid-template-columns:1fr}
-.full{grid-column:auto}
-.sale-row{grid-template-columns:1fr 1fr}
-.summary{grid-template-columns:1fr 1fr}
-.item{align-items:flex-start}
-.right .btn{font-size:11px}
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .sale-row{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .summary{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .item{
+    align-items:flex-start;
+  }
+
+  .top{
+    align-items:flex-start;
+  }
+
+  .title{
+    font-size:20px;
+  }
 }
 </style>
 </head>
@@ -261,57 +356,70 @@ th{background:#f4f7f8}
 <body>
 
 <div class="top">
-<div>
-<b>🏪 ওমর এস এস ঘর</b>
-<div class="mini" style="color:#c8d2d5">🔩 মাল বিক্রি</div>
-</div>
 
-<button class="btn light" onclick="location.href='index.html'">
-← মূল হিসাব
-</button>
+  <div>
+    <div class="brand">🏪 ওমর এস এস ঘর</div>
+    <div class="mini">🔩 মাল বিক্রি · ব্যক্তিগত ইউজার হিসাব</div>
+  </div>
+
+  <div class="actions" style="margin:0">
+
+    <button
+      class="btn light"
+      onclick="location.href='index.html'">
+      ← মূল হিসাব
+    </button>
+
+    <button
+      id="permBtn"
+      class="btn gold hidden"
+      onclick="openPermissions()">
+      ⚙️ Permission
+    </button>
+
+    <button
+      class="btn red"
+      onclick="logout()">
+      Logout
+    </button>
+
+  </div>
+
 </div>
 
 <main class="content">
 
 <div class="title">
-🔩 মাল বিক্রি
-<span class="mini">নগদ / বাকি / আংশিক</span>
+  🔩 মাল বিক্রি
+  <span class="mini">নগদ / বাকি / আংশিক</span>
 </div>
 
 <div id="loginBox" class="card">
 
-<b>🔐 Admin Login প্রয়োজন</b>
+  <b>🔐 Website Login প্রয়োজন</b>
 
-<div class="form-grid" style="margin-top:10px">
+  <p class="mini">
+    আগে মূল Website-এ Login করুন।
+    এখানে আলাদা Admin Login লাগবে না।
+  </p>
 
-<input
-id="email"
-type="email"
-placeholder="Email">
+  <div class="actions">
 
-<input
-id="password"
-type="password"
-placeholder="Password">
+    <button
+      class="btn blue"
+      onclick="location.href='index.html'">
+      মূল Website-এ Login
+    </button>
 
-</div>
-
-<div class="actions">
-
-<button class="btn blue" onclick="login()">
-Login
-</button>
+  </div>
 
 </div>
-
-</div>
-
 
 <div id="app" class="hidden">
 
-<div class="grid">
+<div id="permissionNote" class="note hidden"></div>
 
-<section class="card">
+<div id="newSaleCard" class="card">
 
 <h3>🧾 নতুন মাল বিক্রি</h3>
 
@@ -319,50 +427,68 @@ Login
 
 <div>
 <label>ক্রেতার নাম</label>
-<input id="buyerName" placeholder="নাম">
+<input
+  id="buyerName"
+  placeholder="নাম">
 </div>
 
 <div>
 <label>মোবাইল</label>
-<input id="buyerPhone" placeholder="মোবাইল">
+<input
+  id="buyerPhone"
+  placeholder="মোবাইল">
 </div>
 
 <div class="full">
 <label>ঠিকানা</label>
-<input id="buyerAddress" placeholder="ঠিকানা">
+<input
+  id="buyerAddress"
+  placeholder="ঠিকানা">
 </div>
 
 <div>
 <label>তারিখ</label>
-<input id="saleDate" type="date">
+<input
+  id="saleDate"
+  type="date">
 </div>
 
 <div>
 <label>পেমেন্ট</label>
 
-<select id="paymentType" onchange="paymentChanged()">
+<select
+  id="paymentType"
+  onchange="paymentChanged()">
+
 <option value="cash">নগদ</option>
 <option value="credit">বাকি</option>
 <option value="partial">আংশিক</option>
+
 </select>
 
 </div>
 
 </div>
 
-
-<div id="rows" style="margin-top:12px"></div>
+<div
+  id="rows"
+  style="margin-top:12px">
+</div>
 
 <div class="actions">
 
-<button class="btn light" onclick="addRow()">
-+ মাল যোগ
+<button
+  id="addRowBtn"
+  class="btn light"
+  onclick="addRow()">
+  + মাল যোগ
 </button>
 
 </div>
 
-
-<div class="summary" style="margin-top:12px">
+<div
+  class="summary"
+  style="margin-top:12px">
 
 <div class="stat">
 <small>মোট</small>
@@ -381,48 +507,51 @@ Login
 
 </div>
 
-
-<div id="paidWrap" style="margin-top:10px">
+<div
+  id="paidWrap"
+  style="margin-top:10px">
 
 <label>এখন কত টাকা নিলেন</label>
 
 <input
-id="paidNow"
-type="number"
-min="0"
-value="0"
-oninput="recalc()">
+  id="paidNow"
+  type="number"
+  min="0"
+  value="0"
+  oninput="recalc()">
 
 </div>
-
 
 <div class="actions">
 
-<button class="btn green" onclick="saveSale()">
-💾 বিক্রি Save
+<button
+  id="saveBtn"
+  class="btn green"
+  onclick="saveSale()">
+  💾 বিক্রি Save
 </button>
 
-<button class="btn light" onclick="resetSale()">
-Clear
+<button
+  class="btn light"
+  onclick="resetSale()">
+  Clear
 </button>
 
 </div>
 
-</section>
+</div>
 
+<div class="grid">
 
-<section class="card">
+<section id="buyersCard" class="card">
 
 <h3>👥 মাল কেনা ক্রেতা</h3>
 
-<div class="list" id="buyerList"></div>
+<div id="buyerList"></div>
 
 </section>
 
-</div>
-
-
-<section class="card">
+<section id="salesCard" class="card">
 
 <h3>📋 বিক্রির ইতিহাস</h3>
 
@@ -432,17 +561,22 @@ Clear
 
 </div>
 
+</div>
+
 </main>
 
-
 <div
-id="modal"
-class="modal hidden"
-onclick="if(event.target===this)closeModal()">
+  id="modal"
+  class="modal hidden"
+  onclick="if(event.target===this)closeModal()">
 
 <div class="modal-box">
 
-<button class="close" onclick="closeModal()">×</button>
+<button
+  class="close"
+  onclick="closeModal()">
+  ×
+</button>
 
 <div id="modalContent"></div>
 
@@ -450,1427 +584,2299 @@ onclick="if(event.target===this)closeModal()">
 
 </div>
 
-
 <script>
 
-const SUPABASE_URL=
+const SUPABASE_URL =
 "https://gzujcqjpxypcoiqhpvvu.supabase.co";
 
-const SUPABASE_KEY=
+const SUPABASE_KEY =
 "sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
 
-const sb=
+const sb =
 window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
-let user=null;
-let materials=[];
+let user = null;
+let adminId = null;
+let isAdmin = false;
+let materials = [];
+let perm = {};
 
+const money = n =>
+  "৳" +
+  Number(n || 0).toLocaleString(
+    "en-US",
+    {
+      maximumFractionDigits:2
+    }
+  );
 
-const money=n=>
-"৳"+
-(Number(n||0).toLocaleString(
-"en-US",
-{maximumFractionDigits:2}
-));
+const esc = s =>
+  String(s ?? "").replace(
+    /[&<>'"]/g,
+    c => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      "'":"&#39;",
+      '"':"&quot;"
+    }[c])
+  );
 
+const today = () =>
+  new Date().toISOString().slice(0,10);
 
-const esc=s=>
-String(s??"").replace(
-/[&<>'"]/g,
-c=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-"'":"&#39;",
-'"':"&quot;"
-}[c])
-);
+const P = {
 
+  can_view:
+    "মাল বিক্রি পেজ দেখা",
 
-function today(){
-return new Date().toISOString().slice(0,10);
+  can_create_sale:
+    "নতুন বিক্রি তৈরি",
+
+  can_create_buyer:
+    "নতুন ক্রেতা তৈরি",
+
+  can_view_buyer:
+    "ক্রেতার Details দেখা",
+
+  can_view_history:
+    "বিক্রির ইতিহাস দেখা",
+
+  can_view_due:
+    "বাকি দেখা",
+
+  can_collect_due:
+    "বাকি আদায়",
+
+  can_edit_sale:
+    "বিক্রি Edit",
+
+  can_delete_sale:
+    "বিক্রি Delete",
+
+  can_view_material_rate:
+    "মালের Rate দেখা/Auto-fill",
+
+  can_view_buyer_contact:
+    "ক্রেতার ফোন/ঠিকানা দেখা",
+
+  can_view_report:
+    "বিক্রির Report দেখা"
+
+};
+
+function todayInit(){
+
+  document.getElementById(
+    "saleDate"
+  ).value = today();
+
 }
-
 
 document.addEventListener(
-"DOMContentLoaded",
-async()=>{
+  "DOMContentLoaded",
+  async () => {
 
-saleDate.value=today();
+    todayInit();
 
-addRow();
+    const {
+      data:{session}
+    } =
+      await sb.auth.getSession();
 
-const {
-data:{session}
-}=await sb.auth.getSession();
+    if(session)
+      await start(session.user);
 
-if(session)
-await start(session.user);
-
-});
-
+  }
+);
 
 sb.auth.onAuthStateChange(
-async(e,s)=>{
+  async (e,s) => {
 
-if(e==="SIGNED_OUT")
-location.reload();
+    if(e === "SIGNED_OUT")
+      location.reload();
 
-if(e==="SIGNED_IN"&&s)
-await start(s.user);
+    if(e === "SIGNED_IN" && s)
+      await start(s.user);
 
-});
-
-
-async function login(){
-
-const email=
-document.getElementById("email")
-.value.trim();
-
-const password=
-document.getElementById("password")
-.value;
-
-if(!email||!password)
-return alert("Email এবং Password দিন");
-
-const {
-data,
-error
-}=await sb.auth.signInWithPassword({
-email,
-password
-});
-
-if(error)
-return alert(error.message);
-
-await start(data.user);
-
-}
-
+  }
+);
 
 async function start(u){
 
-user=u;
+  user = u;
 
-const {
-data:admin,
-error
-}=await sb
-.from("accounting_admins")
-.select("user_id")
-.eq("user_id",u.id)
-.maybeSingle();
+  const r =
+    await sb.rpc(
+      "ensure_material_sale_access"
+    );
 
-if(error||!admin){
+  if(r.error){
 
-await sb.auth.signOut();
+    document.getElementById(
+      "loginBox"
+    ).innerHTML =
 
-return alert(
-"এই Account-এর Admin হিসাবের Access নেই।"
-);
+      "<b>⚠️ Access পাওয়া যায়নি</b>" +
+
+      "<p class='mini'>" +
+
+      esc(r.error.message) +
+
+      "</p>";
+
+    return;
+
+  }
+
+  adminId =
+    r.data?.admin_id;
+
+  isAdmin =
+    r.data?.admin === true;
+
+  await loadPermissions();
+
+  if(
+    !isAdmin &&
+    !perm.can_view
+  ){
+
+    document.getElementById(
+      "loginBox"
+    ).classList.add("hidden");
+
+    document.getElementById(
+      "app"
+    ).classList.remove("hidden");
+
+    document.getElementById(
+      "app"
+    ).innerHTML =
+
+      '<div class="card">' +
+
+      '<h3>🔒 Access বন্ধ</h3>' +
+
+      '<p>Admin এই পেজ দেখার অনুমতি বন্ধ করেছেন।</p>' +
+
+      '</div>';
+
+    return;
+
+  }
+
+  document.getElementById(
+    "loginBox"
+  ).classList.add("hidden");
+
+  document.getElementById(
+    "app"
+  ).classList.remove("hidden");
+
+  if(isAdmin){
+
+    document.getElementById(
+      "permBtn"
+    ).classList.remove("hidden");
+
+  }
+
+  applyPermissions();
+
+  await loadMaterials();
+  await loadBuyers();
+  await loadSales();
 
 }
 
-document
-.getElementById("loginBox")
-.classList.add("hidden");
+async function loadPermissions(){
 
-document
-.getElementById("app")
-.classList.remove("hidden");
+  if(isAdmin){
 
-await loadMaterials();
-await loadBuyers();
-await loadSales();
+    perm =
+      Object.fromEntries(
+        Object.keys(P).map(
+          k => [k,true]
+        )
+      );
+
+    return;
+
+  }
+
+  const {
+    data,
+    error
+  } =
+    await sb
+      .from("material_sale_permissions")
+      .select(
+        Object.keys(P).join(",")
+      )
+      .eq(
+        "user_id",
+        user.id
+      )
+      .eq(
+        "admin_id",
+        adminId
+      )
+      .maybeSingle();
+
+  if(error){
+
+    alert(error.message);
+    perm = {};
+
+  }else{
+
+    perm = data || {};
+
+  }
 
 }
 
+function allowed(k){
+
+  return (
+    isAdmin ||
+    perm[k] === true
+  );
+
+}
+
+function applyPermissions(){
+
+  const hide =
+    (id,ok) => {
+
+      const e =
+        document.getElementById(id);
+
+      if(e)
+        e.classList.toggle(
+          "hidden",
+          !ok
+        );
+
+    };
+
+  hide(
+    "newSaleCard",
+    allowed("can_create_sale") ||
+    allowed("can_create_buyer")
+  );
+
+  hide(
+    "buyersCard",
+    allowed("can_view_buyer") ||
+    allowed("can_view_due")
+  );
+
+  hide(
+    "salesCard",
+    allowed("can_view_history")
+  );
+
+  if(!allowed("can_create_sale")){
+
+    document.getElementById(
+      "saveBtn"
+    ).disabled = true;
+
+  }
+
+  if(!allowed("can_create_buyer")){
+
+    buyerName.disabled = true;
+    buyerPhone.disabled = true;
+    buyerAddress.disabled = true;
+
+  }
+
+  const n =
+    document.getElementById(
+      "permissionNote"
+    );
+
+  if(
+    !isAdmin &&
+    n &&
+    !allowed("can_view_material_rate")
+  ){
+
+    n.classList.remove("hidden");
+
+    n.innerHTML =
+      "ℹ️ আপনার অনুমতি অনুযায়ী কিছু তথ্য/Rate দেখা যাচ্ছে না। Admin চাইলে Permission থেকে পরিবর্তন করতে পারবেন।";
+
+  }
+
+}
 
 async function loadMaterials(){
 
-const {
-data,
-error
-}=await sb
-.from("materials")
-.select("id,name,price")
-.eq("admin_id",user.id)
-.order("name");
+  const {
+    data,
+    error
+  } =
+    await sb.rpc(
+      "get_material_sale_materials"
+    );
 
-if(error)
-return alert(error.message);
+  if(error){
 
-materials=data||[];
+    alert(error.message);
+    return;
 
-document
-.querySelectorAll(".mat-select")
-.forEach(fillSelect);
+  }
+
+  materials = data || [];
+
+  document
+    .querySelectorAll(".mat-select")
+    .forEach(fillSelect);
 
 }
-
 
 function addRow(){
 
-const wrap=
-document.getElementById("rows");
+  if(
+    !allowed("can_create_sale")
+  )
+    return;
 
-const id=
-"r"+
-Date.now()+
-Math.random()
-.toString(16)
-.slice(2);
+  const wrap =
+    document.getElementById(
+      "rows"
+    );
 
-wrap.insertAdjacentHTML(
-"beforeend",
+  const id =
+    "r" +
+    Date.now() +
+    Math.random()
+      .toString(16)
+      .slice(2);
 
-`<div class="sale-row" id="${id}">
+  wrap.insertAdjacentHTML(
+    "beforeend",
 
-<div>
+    `
+    <div
+      class="sale-row"
+      id="${id}">
 
-<label>মাল</label>
+      <div>
 
-<select
-class="mat-select"
-onchange="rateFromMaterial(this)">
+        <label>মাল</label>
 
-<option value="">
-মাল নির্বাচন
-</option>
+        <select
+          class="mat-select"
+          onchange="rateFromMaterial(this)">
 
-${materials.map(m=>
+          <option value="">
+            মাল নির্বাচন
+          </option>
 
-`<option
-value="${esc(m.id)}"
-data-price="${Number(m.price||0)}"
-data-name="${esc(m.name)}">
+        </select>
 
-${esc(m.name)}
+      </div>
 
-</option>`
+      <div>
 
-).join("")}
+        <label>Rate</label>
 
-</select>
+        <input
+          class="rate"
+          type="number"
+          min="0"
+          step="0.01"
+          oninput="recalc()">
 
-</div>
+      </div>
 
+      <div>
 
-<div>
+        <label>Qty</label>
 
-<label>Rate</label>
+        <input
+          class="qty"
+          type="number"
+          min="0"
+          step="0.001"
+          value="1"
+          oninput="recalc()">
 
-<input
-class="rate"
-type="number"
-min="0"
-step="0.01"
-oninput="recalc()">
+      </div>
 
-</div>
+      <div>
 
+        <label>Total</label>
 
-<div>
+        <input
+          class="line-total"
+          readonly>
 
-<label>Qty</label>
+      </div>
 
-<input
-class="qty"
-type="number"
-min="0"
-step="0.001"
-value="1"
-oninput="recalc()">
+      <button
+        class="btn red"
+        onclick="
+          document.getElementById('${id}').remove();
+          recalc();
+        ">
 
-</div>
+        ×
 
+      </button>
 
-<div>
+    </div>
+    `
+  );
 
-<label>Total</label>
+  fillSelect(
+    wrap.lastElementChild
+      .querySelector("select")
+  );
 
-<input
-class="line-total"
-readonly>
-
-</div>
-
-
-<button
-class="btn red"
-onclick="document.getElementById('${id}').remove();recalc()">
-
-×
-
-</button>
-
-</div>`
-
-);
-
-fillSelect(
-wrap.lastElementChild.querySelector("select")
-);
-
-recalc();
+  recalc();
 
 }
-
 
 function fillSelect(sel){
 
-sel.innerHTML=
-'<option value="">মাল নির্বাচন</option>'+
-materials.map(m=>
+  sel.innerHTML =
+    '<option value="">মাল নির্বাচন</option>' +
 
-`<option
-value="${esc(m.id)}"
-data-price="${Number(m.price||0)}"
-data-name="${esc(m.name)}">
+    materials.map(
+      m =>
 
-${esc(m.name)} — ${money(m.price)}
+        `<option
+          value="${esc(m.id)}"
+          data-price="${
+            m.price == null
+              ? ""
+              : Number(m.price)
+          }"
+          data-name="${esc(m.name)}">
 
-</option>`
+          ${esc(m.name)}
 
-).join("");
+          ${
+            m.price == null
+              ? ""
+              : " — " +
+                money(m.price)
+          }
+
+        </option>`
+
+    ).join("");
 
 }
-
 
 function rateFromMaterial(sel){
 
-const o=
-sel.options[sel.selectedIndex];
+  if(
+    !allowed(
+      "can_view_material_rate"
+    )
+  ){
 
-const row=
-sel.closest(".sale-row");
+    alert(
+      "মালের Rate দেখার Permission বন্ধ আছে"
+    );
 
-row.querySelector(".rate")
-.value=o?.dataset.price||"";
+    return;
 
-recalc();
+  }
+
+  const o =
+    sel.options[
+      sel.selectedIndex
+    ];
+
+  const row =
+    sel.closest(
+      ".sale-row"
+    );
+
+  row.querySelector(
+    ".rate"
+  ).value =
+    o?.dataset.price || "";
+
+  recalc();
 
 }
-
 
 function recalc(){
 
-let total=0;
+  let total = 0;
 
-document
-.querySelectorAll(".sale-row")
-.forEach(r=>{
+  document
+    .querySelectorAll(
+      ".sale-row"
+    )
+    .forEach(r => {
 
-const x=
-Number(
-r.querySelector(".rate").value||0
-)*
-Number(
-r.querySelector(".qty").value||0
-);
+      const x =
+        Number(
+          r.querySelector(
+            ".rate"
+          ).value || 0
+        ) *
 
-r.querySelector(".line-total")
-.value=x.toFixed(2);
+        Number(
+          r.querySelector(
+            ".qty"
+          ).value || 0
+        );
 
-total+=x;
+      r.querySelector(
+        ".line-total"
+      ).value =
+        x.toFixed(2);
 
-});
+      total += x;
 
+    });
 
-let paid=
-Number(
-document.getElementById("paidNow")
-.value||0
-);
+  let paid =
+    Number(
+      document.getElementById(
+        "paidNow"
+      ).value || 0
+    );
 
+  if(
+    paymentType.value === "cash"
+  )
+    paid = total;
 
-if(
-document.getElementById("paymentType").value
-==="cash"
-)
-paid=total;
+  else if(
+    paymentType.value === "credit"
+  )
+    paid = 0;
 
-else if(
-document.getElementById("paymentType").value
-==="credit"
-)
-paid=0;
+  else
+    paid =
+      Math.min(
+        paid,
+        total
+      );
 
-else
-paid=Math.min(paid,total);
+  saleTotal.textContent =
+    money(total);
 
+  salePaid.textContent =
+    money(paid);
 
-document.getElementById("saleTotal")
-.textContent=money(total);
-
-document.getElementById("salePaid")
-.textContent=money(paid);
-
-document.getElementById("saleDue")
-.textContent=
-money(Math.max(0,total-paid));
+  saleDue.textContent =
+    money(
+      Math.max(
+        0,
+        total - paid
+      )
+    );
 
 }
-
 
 function paymentChanged(){
 
-document.getElementById("paidNow").value=
-document.getElementById("paymentType").value
-==="cash"
-?0
-:"0";
+  paidNow.value = 0;
 
-recalc();
+  recalc();
 
 }
-
 
 function resetSale(){
 
-buyerName.value="";
-buyerPhone.value="";
-buyerAddress.value="";
+  buyerName.value = "";
+  buyerPhone.value = "";
+  buyerAddress.value = "";
 
-saleDate.value=today();
+  saleDate.value =
+    today();
 
-paymentType.value="cash";
+  paymentType.value =
+    "cash";
 
-paidNow.value=0;
+  paidNow.value = 0;
 
-rows.innerHTML="";
+  rows.innerHTML = "";
 
-addRow();
+  addRow();
 
-recalc();
+  recalc();
 
 }
-
 
 async function getOrCreateBuyer(){
 
-const name=
-buyerName.value.trim();
+  if(
+    !allowed(
+      "can_create_buyer"
+    )
+  )
+    throw Error(
+      "নতুন ক্রেতা তৈরির Permission বন্ধ আছে"
+    );
 
-const phone=
-buyerPhone.value.trim();
+  const name =
+    buyerName.value.trim();
 
-const address=
-buyerAddress.value.trim();
+  const phone =
+    buyerPhone.value.trim();
 
-if(!name)
-throw Error("ক্রেতার নাম দিন");
+  const address =
+    buyerAddress.value.trim();
 
+  if(!name)
+    throw Error(
+      "ক্রেতার নাম দিন"
+    );
 
-let q=
-sb
-.from("material_sale_customers")
-.select("*")
-.eq("admin_id",user.id);
+  let q =
+    sb
+      .from(
+        "material_sale_customers"
+      )
+      .select("*")
+      .eq(
+        "admin_id",
+        adminId
+      )
+      .eq(
+        "user_id",
+        user.id
+      );
 
+  if(phone)
+    q = q.eq(
+      "phone",
+      phone
+    );
+  else
+    q = q.ilike(
+      "name",
+      name
+    );
 
-if(phone)
-q=q.eq("phone",phone);
+  const {
+    data,
+    error
+  } =
+    await q.maybeSingle();
 
-else
-q=q.ilike("name",name);
+  if(error)
+    throw error;
 
+  if(data){
 
-const {
-data,
-error
-}=await q.maybeSingle();
+    if(
+      address &&
+      address !== data.address
+    ){
 
-if(error)
-throw error;
+      const {
+        error:e
+      } =
+        await sb
+          .from(
+            "material_sale_customers"
+          )
+          .update({
+            name,
+            address
+          })
+          .eq(
+            "id",
+            data.id
+          )
+          .eq(
+            "user_id",
+            user.id
+          );
 
+      if(e)
+        throw e;
 
-if(data){
+    }
 
-if(
-address &&
-address!==data.address
-){
+    return data;
 
-await sb
-.from("material_sale_customers")
-.update({
-name,
-address
-})
-.eq("id",data.id)
-.eq("admin_id",user.id);
+  }
+
+  const {
+    data:n,
+    error:e
+  } =
+    await sb
+      .from(
+        "material_sale_customers"
+      )
+      .insert({
+        admin_id:adminId,
+        user_id:user.id,
+        name,
+        phone,
+        address
+      })
+      .select()
+      .single();
+
+  if(e)
+    throw e;
+
+  return n;
 
 }
-
-return data;
-
-}
-
-
-const {
-data:n,
-error:e
-}=await sb
-.from("material_sale_customers")
-.insert({
-admin_id:user.id,
-name,
-phone,
-address
-})
-.select()
-.single();
-
-
-if(e)
-throw e;
-
-return n;
-
-}
-
 
 async function saveSale(){
 
-try{
+  if(
+    !allowed(
+      "can_create_sale"
+    )
+  ){
 
-const buyer=
-await getOrCreateBuyer();
+    alert(
+      "নতুন বিক্রি করার Permission বন্ধ আছে"
+    );
 
-let items=[];
-let total=0;
+    return;
 
+  }
 
-document
-.querySelectorAll(".sale-row")
-.forEach(r=>{
+  try{
 
-const sel=
-r.querySelector(".mat-select");
+    const buyer =
+      await getOrCreateBuyer();
 
-const o=
-sel.options[sel.selectedIndex];
+    let items = [];
+    let total = 0;
 
-const price=
-Number(
-r.querySelector(".rate").value||0
-);
+    document
+      .querySelectorAll(
+        ".sale-row"
+      )
+      .forEach(r => {
 
-const qty=
-Number(
-r.querySelector(".qty").value||0
-);
+        const sel =
+          r.querySelector(
+            ".mat-select"
+          );
 
+        const o =
+          sel.options[
+            sel.selectedIndex
+          ];
 
-if(
-o &&
-o.value &&
-price>0 &&
-qty>0
-){
+        const price =
+          Number(
+            r.querySelector(
+              ".rate"
+            ).value || 0
+          );
 
-const t=price*qty;
+        const qty =
+          Number(
+            r.querySelector(
+              ".qty"
+            ).value || 0
+          );
 
-items.push({
+        if(
+          o &&
+          o.value &&
+          price > 0 &&
+          qty > 0
+        ){
 
-material_id:o.value,
+          const t =
+            price * qty;
 
-material_name:
-o.dataset?.name||
-o.textContent.split(" — ")[0],
+          items.push({
+            material_id:o.value,
+            material_name:
+              o.dataset.name ||
+              o.textContent
+                .split(" — ")[0],
+            price,
+            qty,
+            total:t
+          });
 
-price,
+          total += t;
 
-qty,
+        }
 
-total:t
+      });
 
-});
+    if(!items.length){
 
-total+=t;
+      alert(
+        "কমপক্ষে একটি মাল নির্বাচন করুন"
+      );
+
+      return;
+
+    }
+
+    let paid =
+      paymentType.value === "cash"
+        ? total
+        : paymentType.value === "credit"
+          ? 0
+          : Math.min(
+              Number(
+                paidNow.value || 0
+              ),
+              total
+            );
+
+    const due =
+      Math.max(
+        0,
+        total - paid
+      );
+
+    const {
+      data:sale,
+      error
+    } =
+      await sb
+        .from(
+          "material_sales"
+        )
+        .insert({
+          admin_id:adminId,
+          user_id:user.id,
+          customer_id:buyer.id,
+          sale_date:saleDate.value,
+          payment_type:
+            paymentType.value,
+          total,
+          paid,
+          due
+        })
+        .select()
+        .single();
+
+    if(error)
+      throw error;
+
+    const {
+      error:ie
+    } =
+      await sb
+        .from(
+          "material_sale_items"
+        )
+        .insert(
+          items.map(
+            x => ({
+              ...x,
+              admin_id:adminId,
+              user_id:user.id,
+              sale_id:sale.id
+            })
+          )
+        );
+
+    if(ie)
+      throw ie;
+
+    if(paid > 0){
+
+      const {
+        error:pe
+      } =
+        await sb
+          .from(
+            "material_sale_payments"
+          )
+          .insert({
+            admin_id:adminId,
+            user_id:user.id,
+            sale_id:sale.id,
+            payment_date:
+              saleDate.value,
+            amount:paid,
+            note:"বিক্রির সময় জমা"
+          });
+
+      if(pe)
+        throw pe;
+
+    }
+
+    alert(
+      "মাল বিক্রির হিসাব Save হয়েছে"
+    );
+
+    resetSale();
+
+    await loadBuyers();
+    await loadSales();
+
+  }catch(e){
+
+    alert(
+      e.message ||
+      "Save করা যায়নি"
+    );
+
+  }
 
 }
-
-});
-
-
-if(!items.length)
-return alert(
-"কমপক্ষে একটি মাল নির্বাচন করুন"
-);
-
-
-let paid=
-paymentType.value==="cash"
-?total
-:paymentType.value==="credit"
-?0
-:Math.min(
-Number(paidNow.value||0),
-total
-);
-
-
-const due=
-Math.max(0,total-paid);
-
-
-const {
-data:sale,
-error
-}=await sb
-.from("material_sales")
-.insert({
-
-admin_id:user.id,
-
-customer_id:buyer.id,
-
-sale_date:saleDate.value,
-
-payment_type:paymentType.value,
-
-total,
-
-paid,
-
-due
-
-})
-.select()
-.single();
-
-
-if(error)
-throw error;
-
-
-const payload=
-items.map(x=>({
-
-...x,
-
-admin_id:user.id,
-
-sale_id:sale.id
-
-}));
-
-
-const {
-error:ie
-}=await sb
-.from("material_sale_items")
-.insert(payload);
-
-
-if(ie)
-throw ie;
-
-
-if(paid>0){
-
-const {
-error:pe
-}=await sb
-.from("material_sale_payments")
-.insert({
-
-admin_id:user.id,
-
-sale_id:sale.id,
-
-payment_date:saleDate.value,
-
-amount:paid,
-
-note:"বিক্রির সময় জমা"
-
-});
-
-
-if(pe)
-throw pe;
-
-}
-
-
-alert(
-"মাল বিক্রির হিসাব Save হয়েছে"
-);
-
-resetSale();
-
-await loadBuyers();
-await loadSales();
-
-
-}catch(e){
-
-alert(
-e.message||
-"Save করা যায়নি"
-);
-
-}
-
-}
-
 
 async function loadBuyers(){
 
-const {
-data,
-error
-}=await sb
-.from("material_sale_customers")
-.select("*")
-.eq("admin_id",user.id)
-.order(
-"created_at",
-{ascending:false}
-);
+  if(
+    !allowed("can_view_buyer") &&
+    !allowed("can_view_due")
+  )
+    return;
 
-if(error)
-return;
+  const {
+    data,
+    error
+  } =
+    await sb
+      .from(
+        "material_sale_customers"
+      )
+      .select("*")
+      .eq(
+        "admin_id",
+        adminId
+      )
+      .eq(
+        "user_id",
+        user.id
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
 
+  if(error)
+    return;
 
-const ids=
-(data||[]).map(x=>x.id);
+  const ids =
+    (data || [])
+      .map(x => x.id);
 
-let sales=[];
+  let sales = [];
 
+  if(ids.length){
 
-if(ids.length){
+    const r =
+      await sb
+        .from(
+          "material_sales"
+        )
+        .select(
+          "customer_id,total,paid,due"
+        )
+        .eq(
+          "admin_id",
+          adminId
+        )
+        .eq(
+          "user_id",
+          user.id
+        );
 
-const r=
-await sb
-.from("material_sales")
-.select(
-"customer_id,total,paid,due"
-)
-.eq("admin_id",user.id);
+    sales =
+      r.data || [];
 
-sales=r.data||[];
+  }
+
+  buyerList.innerHTML =
+    (data || [])
+      .map(b => {
+
+        const ss =
+          sales.filter(
+            s =>
+              s.customer_id === b.id
+          );
+
+        const total =
+          ss.reduce(
+            (a,s) =>
+              a +
+              Number(s.total),
+            0
+          );
+
+        const due =
+          ss.reduce(
+            (a,s) =>
+              a +
+              Number(s.due),
+            0
+          );
+
+        return `
+
+        <div class="item">
+
+          <div>
+
+            <div class="name">
+              ${esc(b.name)}
+            </div>
+
+            <div class="sub">
+
+              ${
+                allowed(
+                  "can_view_buyer_contact"
+                )
+                ? esc(b.phone || "") +
+                  " · "
+                : ""
+              }
+
+              কেনা
+              ${money(total)}
+
+              ·
+
+              ${
+                allowed("can_view_due")
+                ?
+                `<span class="badge ${
+                  due > 0
+                    ? "red"
+                    : "green"
+                }">
+                  বাকি ${money(due)}
+                </span>`
+                :
+                ""
+              }
+
+            </div>
+
+          </div>
+
+          <div class="right">
+
+            ${
+              allowed(
+                "can_view_buyer"
+              )
+              ?
+
+              `<button
+                class="btn blue"
+                onclick="buyerDetails('${b.id}')">
+
+                Details
+
+              </button>`
+
+              :
+
+              ""
+            }
+
+          </div>
+
+        </div>
+
+        `;
+
+      })
+      .join("") ||
+
+    '<div class="empty">এখনও কোনো মাল ক্রেতা নেই</div>';
 
 }
-
-
-document.getElementById("buyerList")
-.innerHTML=
-
-(data||[])
-.map(b=>{
-
-const ss=
-sales.filter(
-s=>s.customer_id===b.id
-);
-
-const total=
-ss.reduce(
-(a,s)=>a+Number(s.total),
-0
-);
-
-const paid=
-ss.reduce(
-(a,s)=>a+Number(s.paid),
-0
-);
-
-const due=
-ss.reduce(
-(a,s)=>a+Number(s.due),
-0
-);
-
-
-return `
-
-<div class="item">
-
-<div>
-
-<div class="name">
-${esc(b.name)}
-</div>
-
-<div class="sub">
-
-${esc(b.phone||"")}
-
-· কেনা ${money(total)}
-
-·
-
-<span class="badge ${
-due>0?"red":"green"
-}">
-
-বাকি ${money(due)}
-
-</span>
-
-</div>
-
-</div>
-
-<div class="right">
-
-<button
-class="btn blue"
-onclick="buyerDetails('${b.id}')">
-
-Details
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-})
-.join("")
-
-||
-
-'<div class="empty">
-এখনও কোনো মাল ক্রেতা নেই
-</div>';
-
-}
-
 
 async function loadSales(){
 
-const {
-data,
-error
-}=await sb
-.from("material_sales")
-.select(
-"*,material_sale_customers(name,phone)"
-)
-.eq("admin_id",user.id)
-.order(
-"sale_date",
-{ascending:false}
-)
-.limit(100);
+  if(
+    !allowed(
+      "can_view_history"
+    )
+  )
+    return;
 
-if(error)
-return;
+  const {
+    data,
+    error
+  } =
+    await sb
+      .from(
+        "material_sales"
+      )
+      .select(
+        "*,material_sale_customers(name,phone,address)"
+      )
+      .eq(
+        "admin_id",
+        adminId
+      )
+      .eq(
+        "user_id",
+        user.id
+      )
+      .order(
+        "sale_date",
+        {
+          ascending:false
+        }
+      )
+      .limit(100);
 
+  if(error)
+    return;
 
-document.getElementById("saleList")
-.innerHTML=
+  saleList.innerHTML = `
 
-`<div>
+  <div style="overflow:auto">
 
-<table>
+  <table>
 
-<tr>
+  <tr>
+    <th>তারিখ</th>
+    <th>ক্রেতা</th>
+    <th>মোট</th>
+    <th>জমা</th>
+    <th>বাকি</th>
+    <th></th>
+  </tr>
 
-<th>তারিখ</th>
-<th>ক্রেতা</th>
-<th>মোট</th>
-<th>জমা</th>
-<th>বাকি</th>
-<th></th>
+  ${
+    (data || [])
+      .map(s => `
 
-</tr>
+      <tr>
 
-${(data||[])
-.map(s=>
+        <td>
+          ${esc(s.sale_date)}
+        </td>
 
-`<tr>
+        <td>
+          ${esc(
+            s.material_sale_customers?.name ||
+            "—"
+          )}
+        </td>
 
-<td>
-${esc(s.sale_date)}
-</td>
+        <td>
+          ${money(s.total)}
+        </td>
 
-<td>
-${esc(
-s.material_sale_customers?.name||"—"
-)}
-</td>
+        <td>
+          ${money(s.paid)}
+        </td>
 
-<td>
-${money(s.total)}
-</td>
+        <td>
+          ${money(s.due)}
+        </td>
 
-<td>
-${money(s.paid)}
-</td>
+        <td>
 
-<td>
-${money(s.due)}
-</td>
+          <button
+            class="btn blue"
+            onclick="saleDetails('${s.id}')">
 
-<td>
+            Details
 
-<button
-class="btn blue"
-onclick="saleDetails('${s.id}')">
+          </button>
 
-Details
+        </td>
 
-</button>
+      </tr>
 
-</td>
+      `)
+      .join("")
+  }
 
-</tr>`
+  </table>
 
-).join("")}
+  </div>
 
-</table>
-
-</div>`;
+  `;
 
 }
-
 
 async function buyerDetails(id){
 
-const {
-data:b
-}=await sb
-.from("material_sale_customers")
-.select("*")
-.eq("id",id)
-.eq("admin_id",user.id)
-.single();
+  if(
+    !allowed(
+      "can_view_buyer"
+    )
+  )
+    return;
 
+  const {
+    data:b
+  } =
+    await sb
+      .from(
+        "material_sale_customers"
+      )
+      .select("*")
+      .eq(
+        "id",
+        id
+      )
+      .eq(
+        "admin_id",
+        adminId
+      )
+      .eq(
+        "user_id",
+        user.id
+      )
+      .single();
 
-const {
-data:sales
-}=await sb
-.from("material_sales")
-.select("*")
-.eq("customer_id",id)
-.eq("admin_id",user.id)
-.order(
-"sale_date",
-{ascending:false}
-);
+  if(!b)
+    return;
 
+  const {
+    data:sales
+  } =
+    await sb
+      .from(
+        "material_sales"
+      )
+      .select("*")
+      .eq(
+        "customer_id",
+        id
+      )
+      .eq(
+        "admin_id",
+        adminId
+      )
+      .eq(
+        "user_id",
+        user.id
+      )
+      .order(
+        "sale_date",
+        {
+          ascending:false
+        }
+      );
 
-const total=
-(sales||[])
-.reduce(
-(a,s)=>a+Number(s.total),
-0
-);
+  const total =
+    (sales || [])
+      .reduce(
+        (a,s) =>
+          a + Number(s.total),
+        0
+      );
 
-const paid=
-(sales||[])
-.reduce(
-(a,s)=>a+Number(s.paid),
-0
-);
+  const paid =
+    (sales || [])
+      .reduce(
+        (a,s) =>
+          a + Number(s.paid),
+        0
+      );
 
-const due=
-(sales||[])
-.reduce(
-(a,s)=>a+Number(s.due),
-0
-);
+  const due =
+    (sales || [])
+      .reduce(
+        (a,s) =>
+          a + Number(s.due),
+        0
+      );
 
+  openModal(`
 
-openModal(`
+    <h2>
+      👤 ${esc(b.name)}
+    </h2>
 
-<h2>👤 ${esc(b.name)}</h2>
+    ${
+      allowed(
+        "can_view_buyer_contact"
+      )
 
-<p class="mini">
-${esc(b.phone||"")}
-·
-${esc(b.address||"")}
-</p>
+      ?
 
+      `<p class="mini">
+        ${esc(b.phone || "")}
+        ·
+        ${esc(b.address || "")}
+      </p>`
 
-<div class="summary">
+      :
 
-<div class="stat">
-<small>মোট কেনা</small>
-<b>${money(total)}</b>
-</div>
+      `<p class="mini">
+        ফোন/ঠিকানা দেখার Permission বন্ধ আছে
+      </p>`
+    }
 
-<div class="stat">
-<small>জমা</small>
-<b>${money(paid)}</b>
-</div>
+    <div class="summary">
 
-<div class="stat">
-<small>বাকি</small>
-<b>${money(due)}</b>
-</div>
+      <div class="stat">
+        <small>মোট কেনা</small>
+        <b>${money(total)}</b>
+      </div>
 
-</div>
+      <div class="stat">
+        <small>জমা</small>
+        <b>${money(paid)}</b>
+      </div>
 
+      <div class="stat">
+        <small>বাকি</small>
+        <b>${money(due)}</b>
+      </div>
 
-<div class="actions">
+    </div>
 
-${
-due>0
-?
+    ${
+      allowed("can_collect_due") &&
+      due > 0
 
-`<button
-class="btn green"
-onclick="collectBuyerDue('${id}')">
+      ?
 
-💵 বাকি আদায়
+      `<div class="actions">
 
-</button>`
+        <button
+          class="btn green"
+          onclick="collectBuyerDue('${id}')">
 
-:
+          💵 বাকি আদায়
 
-"<span class='badge green'>সব পরিশোধ</span>"
+        </button>
+
+      </div>`
+
+      :
+
+      ""
+    }
+
+    <div style="margin-top:14px">
+
+      <table>
+
+        <tr>
+          <th>তারিখ</th>
+          <th>মোট</th>
+          <th>জমা</th>
+          <th>বাকি</th>
+          <th></th>
+        </tr>
+
+        ${
+          (sales || [])
+            .map(s => `
+
+            <tr>
+
+              <td>
+                ${esc(s.sale_date)}
+              </td>
+
+              <td>
+                ${money(s.total)}
+              </td>
+
+              <td>
+                ${money(s.paid)}
+              </td>
+
+              <td>
+                ${money(s.due)}
+              </td>
+
+              <td>
+
+                <button
+                  class="btn blue"
+                  onclick="saleDetails('${s.id}')">
+
+                  দেখুন
+
+                </button>
+
+              </td>
+
+            </tr>
+
+            `)
+            .join("")
+        }
+
+      </table>
+
+    </div>
+
+  `);
 
 }
-
-</div>
-
-
-<div style="margin-top:14px">
-
-<table>
-
-<tr>
-<th>তারিখ</th>
-<th>মোট</th>
-<th>জমা</th>
-<th>বাকি</th>
-<th></th>
-</tr>
-
-
-${(sales||[])
-.map(s=>
-
-`<tr>
-
-<td>${esc(s.sale_date)}</td>
-
-<td>${money(s.total)}</td>
-
-<td>${money(s.paid)}</td>
-
-<td>${money(s.due)}</td>
-
-<td>
-
-<button
-class="btn blue"
-onclick="saleDetails('${s.id}')">
-
-দেখুন
-
-</button>
-
-</td>
-
-</tr>`
-
-).join("")}
-
-</table>
-
-</div>
-
-`);
-
-}
-
 
 async function saleDetails(id){
 
-const {
-data:s
-}=await sb
-.from("material_sales")
-.select(
-"*,material_sale_customers(name,phone,address)"
-)
-.eq("id",id)
-.eq("admin_id",user.id)
-.single();
+  const {
+    data:s
+  } =
+    await sb
+      .from(
+        "material_sales"
+      )
+      .select(
+        "*,material_sale_customers(name,phone,address)"
+      )
+      .eq(
+        "id",
+        id
+      )
+      .eq(
+        "admin_id",
+        adminId
+      )
+      .eq(
+        "user_id",
+        user.id
+      )
+      .single();
 
+  if(!s)
+    return;
 
-const {
-data:items
-}=await sb
-.from("material_sale_items")
-.select("*")
-.eq("sale_id",id)
-.eq("admin_id",user.id);
+  const {
+    data:items
+  } =
+    await sb
+      .from(
+        "material_sale_items"
+      )
+      .select("*")
+      .eq(
+        "sale_id",
+        id
+      )
+      .eq(
+        "admin_id",
+        adminId
+      )
+      .eq(
+        "user_id",
+        user.id
+      );
 
+  openModal(`
 
-openModal(`
+    <h2>
+      🧾 মাল বিক্রির বিস্তারিত
+    </h2>
 
-<h2>🧾 মাল বিক্রির বিস্তারিত</h2>
+    <p>
+      <b>ক্রেতা:</b>
+      ${esc(
+        s.material_sale_customers?.name ||
+        ""
+      )}
+    </p>
 
-<p>
-<b>ক্রেতা:</b>
+    ${
+      allowed(
+        "can_view_buyer_contact"
+      )
 
-${esc(
-s.material_sale_customers?.name||""
-)}
+      ?
 
-·
+      `<p class="mini">
+        ${esc(
+          s.material_sale_customers?.phone ||
+          ""
+        )}
 
-${esc(
-s.material_sale_customers?.phone||""
-)}
+        ·
 
-</p>
+        ${esc(
+          s.material_sale_customers?.address ||
+          ""
+        )}
+      </p>`
 
-<p>
-<b>তারিখ:</b>
-${esc(s.sale_date)}
-</p>
+      :
 
+      ""
+    }
 
-<table>
+    <p>
+      <b>তারিখ:</b>
+      ${esc(s.sale_date)}
+    </p>
 
-<tr>
-<th>মাল</th>
-<th>Rate</th>
-<th>Qty</th>
-<th>Total</th>
-</tr>
+    <table>
 
+      <tr>
+        <th>মাল</th>
+        <th>Rate</th>
+        <th>Qty</th>
+        <th>Total</th>
+      </tr>
 
-${(items||[])
-.map(i=>
+      ${
+        (items || [])
+          .map(i => `
 
-`<tr>
+          <tr>
 
-<td>${esc(i.material_name)}</td>
+            <td>
+              ${esc(i.material_name)}
+            </td>
 
-<td>${money(i.price)}</td>
+            <td>
+              ${money(i.price)}
+            </td>
 
-<td>${i.qty}</td>
+            <td>
+              ${i.qty}
+            </td>
 
-<td>${money(i.total)}</td>
+            <td>
+              ${money(i.total)}
+            </td>
 
-</tr>`
+          </tr>
 
-).join("")}
+          `)
+          .join("")
+      }
 
-</table>
+    </table>
 
+    <div
+      class="summary"
+      style="margin-top:12px">
 
-<div class="summary" style="margin-top:12px">
+      <div class="stat">
+        <small>মোট</small>
+        <b>${money(s.total)}</b>
+      </div>
 
-<div class="stat">
-<small>মোট</small>
-<b>${money(s.total)}</b>
-</div>
+      <div class="stat">
+        <small>জমা</small>
+        <b>${money(s.paid)}</b>
+      </div>
 
-<div class="stat">
-<small>জমা</small>
-<b>${money(s.paid)}</b>
-</div>
+      <div class="stat">
+        <small>বাকি</small>
+        <b>${money(s.due)}</b>
+      </div>
 
-<div class="stat">
-<small>বাকি</small>
-<b>${money(s.due)}</b>
-</div>
+    </div>
 
-</div>
+    <div class="actions">
 
+      ${
+        allowed(
+          "can_collect_due"
+        ) &&
+        Number(s.due) > 0
 
-${
-Number(s.due)>0
+        ?
 
-?
+        `<button
+          class="btn green"
+          onclick="collectSaleDue('${s.id}')">
 
-`<div class="actions">
+          💵 বাকি আদায়
 
-<button
-class="btn green"
-onclick="collectSaleDue('${s.id}')">
+        </button>`
 
-💵 বাকি আদায়
+        :
 
-</button>
+        ""
+      }
 
-</div>`
+      ${
+        allowed(
+          "can_delete_sale"
+        )
 
-:
+        ?
 
-"<div class='actions'><span class='badge green'>সম্পূর্ণ পরিশোধ</span></div>"
+        `<button
+          class="btn red"
+          onclick="deleteSale('${s.id}')">
+
+          🗑 Delete
+
+        </button>`
+
+        :
+
+        ""
+      }
+
+    </div>
+
+  `);
 
 }
 
-`);
+async function collectBuyerDue(
+  customerId
+){
+
+  if(
+    !allowed(
+      "can_collect_due"
+    )
+  ){
+
+    alert(
+      "বাকি আদায়ের Permission বন্ধ আছে"
+    );
+
+    return;
+
+  }
+
+  const {
+    data:sales
+  } =
+    await sb
+      .from(
+        "material_sales"
+      )
+      .select(
+        "id,due,paid,total"
+      )
+      .eq(
+        "admin_id",
+        adminId
+      )
+      .eq(
+        "user_id",
+        user.id
+      )
+      .eq(
+        "customer_id",
+        customerId
+      )
+      .gt(
+        "due",
+        0
+      )
+      .order(
+        "sale_date"
+      );
+
+  const due =
+    (sales || [])
+      .reduce(
+        (a,s) =>
+          a + Number(s.due),
+        0
+      );
+
+  if(due <= 0){
+
+    alert(
+      "কোনো বাকি নেই"
+    );
+
+    return;
+
+  }
+
+  const amount =
+    Number(
+      prompt(
+        "কত টাকা নিলেন?\nবর্তমান বাকি: " +
+        money(due),
+        due
+      ) || 0
+    );
+
+  if(
+    !amount ||
+    amount <= 0
+  )
+    return;
+
+  if(amount > due){
+
+    alert(
+      "বাকি থেকে বেশি টাকা নেওয়া যাবে না"
+    );
+
+    return;
+
+  }
+
+  let remain = amount;
+
+  for(
+    const s of sales
+  ){
+
+    if(remain <= 0)
+      break;
+
+    const take =
+      Math.min(
+        remain,
+        Number(s.due)
+      );
+
+    const {
+      error
+    } =
+      await sb
+        .from(
+          "material_sale_payments"
+        )
+        .insert({
+          admin_id:adminId,
+          user_id:user.id,
+          sale_id:s.id,
+          payment_date:today(),
+          amount:take,
+          note:"বাকি আদায়"
+        });
+
+    if(error){
+
+      alert(
+        error.message
+      );
+
+      return;
+
+    }
+
+    const np =
+      Number(s.paid) +
+      take;
+
+    const nd =
+      Math.max(
+        0,
+        Number(s.total) -
+        np
+      );
+
+    const {
+      error:ue
+    } =
+      await sb
+        .from(
+          "material_sales"
+        )
+        .update({
+          paid:np,
+          due:nd,
+          payment_type:
+            nd === 0
+              ? "cash"
+              : "partial"
+        })
+        .eq(
+          "id",
+          s.id
+        )
+        .eq(
+          "user_id",
+          user.id
+        );
+
+    if(ue){
+
+      alert(
+        ue.message
+      );
+
+      return;
+
+    }
+
+    remain -= take;
+
+  }
+
+  closeModal();
+
+  await loadBuyers();
+  await loadSales();
 
 }
-
-
-async function collectBuyerDue(customerId){
-
-const {
-data:sales
-}=await sb
-.from("material_sales")
-.select("id,due")
-.eq("admin_id",user.id)
-.eq("customer_id",customerId)
-.gt("due",0);
-
-
-const due=
-(sales||[])
-.reduce(
-(a,s)=>a+Number(s.due),
-0
-);
-
-
-if(due<=0)
-return alert("কোনো বাকি নেই");
-
-
-const amount=
-Number(
-prompt(
-"কত টাকা নিলেন?\nবর্তমান বাকি: "+
-money(due),
-due
-)||0
-);
-
-
-if(!amount||amount<=0)
-return;
-
-
-if(amount>due)
-return alert(
-"বাকি থেকে বেশি টাকা নেওয়া যাবে না"
-);
-
-
-let remain=amount;
-
-
-for(const s of sales){
-
-if(remain<=0)
-break;
-
-
-const take=
-Math.min(
-remain,
-Number(s.due)
-);
-
-
-const {
-error
-}=await sb
-.from("material_sale_payments")
-.insert({
-
-admin_id:user.id,
-
-sale_id:s.id,
-
-payment_date:today(),
-
-amount:take,
-
-note:"বাকি আদায়"
-
-});
-
-
-if(error)
-return alert(error.message);
-
-
-const current=
-await sb
-.from("material_sales")
-.select("paid,due,total")
-.eq("id",s.id)
-.single();
-
-
-const np=
-Number(current.data.paid||0)+take;
-
-const nd=
-Math.max(
-0,
-Number(current.data.total)-np
-);
-
-
-await sb
-.from("material_sales")
-.update({
-
-paid:np,
-
-due:nd,
-
-payment_type:
-nd===0
-?'cash'
-:'partial'
-
-})
-.eq("id",s.id);
-
-
-remain-=take;
-
-}
-
-
-closeModal();
-
-await loadBuyers();
-await loadSales();
-
-}
-
 
 async function collectSaleDue(id){
 
-const {
-data:s
-}=await sb
-.from("material_sales")
-.select("*")
-.eq("id",id)
-.eq("admin_id",user.id)
-.single();
+  if(
+    !allowed(
+      "can_collect_due"
+    )
+  ){
 
+    alert(
+      "বাকি আদায়ের Permission বন্ধ আছে"
+    );
 
-if(
-!s||
-Number(s.due)<=0
-)
-return;
+    return;
 
+  }
 
-const amount=
-Number(
-prompt(
-"কত টাকা নিলেন?\nবাকি: "+
-money(s.due),
-s.due
-)||0
-);
+  const {
+    data:s
+  } =
+    await sb
+      .from(
+        "material_sales"
+      )
+      .select("*")
+      .eq(
+        "id",
+        id
+      )
+      .eq(
+        "admin_id",
+        adminId
+      )
+      .eq(
+        "user_id",
+        user.id
+      )
+      .single();
 
+  if(
+    !s ||
+    Number(s.due) <= 0
+  )
+    return;
 
-if(!amount||amount<=0)
-return;
+  const amount =
+    Number(
+      prompt(
+        "কত টাকা নিলেন?\nবাকি: " +
+        money(s.due),
+        s.due
+      ) || 0
+    );
 
+  if(
+    !amount ||
+    amount <= 0
+  )
+    return;
 
-if(amount>Number(s.due))
-return alert(
-"বাকি থেকে বেশি নেওয়া যাবে না"
-);
+  if(
+    amount >
+    Number(s.due)
+  ){
 
+    alert(
+      "বাকি থেকে বেশি টাকা নেওয়া যাবে না"
+    );
 
-const {
-error
-}=await sb
-.from("material_sale_payments")
-.insert({
+    return;
 
-admin_id:user.id,
+  }
 
-sale_id:id,
+  const {
+    error
+  } =
+    await sb
+      .from(
+        "material_sale_payments"
+      )
+      .insert({
+        admin_id:adminId,
+        user_id:user.id,
+        sale_id:id,
+        payment_date:today(),
+        amount,
+        note:"বাকি আদায়"
+      });
 
-payment_date:today(),
+  if(error){
 
-amount,
+    alert(
+      error.message
+    );
 
-note:"বাকি আদায়"
+    return;
 
-});
+  }
 
+  const np =
+    Number(s.paid) +
+    amount;
 
-if(error)
-return alert(error.message);
+  const nd =
+    Math.max(
+      0,
+      Number(s.total) -
+      np
+    );
 
+  const {
+    error:ue
+  } =
+    await sb
+      .from(
+        "material_sales"
+      )
+      .update({
+        paid:np,
+        due:nd,
+        payment_type:
+          nd === 0
+            ? "cash"
+            : "partial"
+      })
+      .eq(
+        "id",
+        id
+      )
+      .eq(
+        "user_id",
+        user.id
+      );
 
-const np=
-Number(s.paid)+amount;
+  if(ue){
 
-const nd=
-Math.max(
-0,
-Number(s.total)-np
-);
+    alert(
+      ue.message
+    );
 
+    return;
 
-const {
-error:ue
-}=await sb
-.from("material_sales")
-.update({
+  }
 
-paid:np,
+  closeModal();
 
-due:nd,
-
-payment_type:
-nd===0
-?'cash'
-:'partial'
-
-})
-.eq("id",id)
-.eq("admin_id",user.id);
-
-
-if(ue)
-return alert(ue.message);
-
-
-closeModal();
-
-await loadBuyers();
-await loadSales();
+  await loadBuyers();
+  await loadSales();
 
 }
 
+async function deleteSale(id){
+
+  if(
+    !allowed(
+      "can_delete_sale"
+    )
+  ){
+
+    alert(
+      "Delete Permission বন্ধ আছে"
+    );
+
+    return;
+
+  }
+
+  if(
+    !confirm(
+      "এই বিক্রির হিসাব Delete করবেন?"
+    )
+  )
+    return;
+
+  const {
+    error
+  } =
+    await sb
+      .from(
+        "material_sales"
+      )
+      .delete()
+      .eq(
+        "id",
+        id
+      )
+      .eq(
+        "admin_id",
+        adminId
+      )
+      .eq(
+        "user_id",
+        user.id
+      );
+
+  if(error){
+
+    alert(
+      error.message
+    );
+
+    return;
+
+  }
+
+  closeModal();
+
+  await loadBuyers();
+  await loadSales();
+
+}
+
+async function openPermissions(){
+
+  if(!isAdmin)
+    return;
+
+  const {
+    data:users,
+    error
+  } =
+    await sb
+      .from(
+        "website_users"
+      )
+      .select(
+        "user_id,name,email,active,created_at"
+      )
+      .neq(
+        "user_id",
+        adminId
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
+
+  if(error){
+
+    alert(
+      error.message
+    );
+
+    return;
+
+  }
+
+  let html =
+
+    '<h2>⚙️ মাল বিক্রি Permission</h2>' +
+
+    '<p class="mini">' +
+
+    'প্রতিটি Website User-এর জন্য আলাদা আলাদা অনুমতি ON/OFF করুন। ' +
+
+    'একজনের Data অন্যজন দেখতে পারবে না।' +
+
+    '</p>';
+
+  for(
+    const u of users || []
+  ){
+
+    let {
+      data:p
+    } =
+      await sb
+        .from(
+          "material_sale_permissions"
+        )
+        .select(
+          Object.keys(P).join(",")
+        )
+        .eq(
+          "admin_id",
+          adminId
+        )
+        .eq(
+          "user_id",
+          u.user_id
+        )
+        .maybeSingle();
+
+    if(!p){
+
+      await sb
+        .from(
+          "material_sale_permissions"
+        )
+        .insert({
+          admin_id:adminId,
+          user_id:u.user_id
+        });
+
+      p =
+        Object.fromEntries(
+          Object.keys(P)
+            .map(
+              k => [k,true]
+            )
+        );
+
+    }
+
+    html +=
+
+      `<div class="userbox">
+
+        <div class="name">
+          ${esc(
+            u.name ||
+            "নাম নেই"
+          )}
+        </div>
+
+        <div class="sub">
+          ${esc(
+            u.email ||
+            ""
+          )}
+        </div>
+
+        <div
+          style="margin-top:8px">`;
+
+    for(
+      const [
+        k,
+        label
+      ] of Object.entries(P)
+    ){
+
+      html +=
+
+        `<div class="perm">
+
+          <span>
+            ${label}
+          </span>
+
+          <label class="switch">
+
+            <input
+              type="checkbox"
+              ${
+                p[k]
+                  ? "checked"
+                  : ""
+              }
+              onchange="
+                setPerm(
+                  '${u.user_id}',
+                  '${k}',
+                  this.checked
+                )
+              ">
+
+            <span
+              class="slider">
+            </span>
+
+          </label>
+
+        </div>`;
+
+    }
+
+    html +=
+      `</div></div>`;
+
+  }
+
+  if(
+    !users?.length
+  ){
+
+    html +=
+
+      '<div class="empty">' +
+
+      'এখনও কোনো Public Website User নেই।' +
+
+      '</div>';
+
+  }
+
+  openModal(html);
+
+}
+
+async function setPerm(
+  uid,
+  key,
+  val
+){
+
+  const patch = {};
+
+  patch[key] = val;
+
+  patch.updated_at =
+    new Date().toISOString();
+
+  const {
+    error
+  } =
+    await sb
+      .from(
+        "material_sale_permissions"
+      )
+      .update(patch)
+      .eq(
+        "admin_id",
+        adminId
+      )
+      .eq(
+        "user_id",
+        uid
+      );
+
+  if(error){
+
+    alert(
+      error.message
+    );
+
+    return;
+
+  }
+
+}
+
+async function logout(){
+
+  await sb.auth.signOut();
+
+}
 
 function openModal(html){
 
-document.getElementById("modalContent")
-.innerHTML=html;
+  modalContent.innerHTML =
+    html;
 
-document.getElementById("modal")
-.classList.remove("hidden");
+  modal.classList.remove(
+    "hidden"
+  );
 
 }
 
-
 function closeModal(){
 
-document.getElementById("modal")
-.classList.add("hidden");
+  modal.classList.add(
+    "hidden"
+  );
 
-document.getElementById("modalContent")
-.innerHTML="";
+  modalContent.innerHTML =
+    "";
 
 }
 
