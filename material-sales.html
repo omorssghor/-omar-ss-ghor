@@ -1,0 +1,1880 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ওমর এস এস ঘর | মাল বিক্রি</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Bengali",Arial,sans-serif;
+background:#f3f6f8;
+color:#18232d
+}
+button,input,select,textarea{font:inherit}
+button{border:0;cursor:pointer}
+
+.top{
+position:sticky;
+top:0;
+z-index:10;
+background:#102027;
+color:#fff;
+padding:12px 14px;
+display:flex;
+align-items:center;
+justify-content:space-between
+}
+
+.btn{
+padding:8px 12px;
+border-radius:9px;
+background:#102027;
+color:#fff;
+font-weight:700
+}
+.btn.green{background:#15966b}
+.btn.blue{background:#2674c9}
+.btn.red{background:#dc4c4c}
+.btn.light{
+background:#edf2f4;
+color:#26353c
+}
+
+.content{
+max-width:1050px;
+margin:auto;
+padding:16px 12px 50px
+}
+
+.title{
+font-size:23px;
+font-weight:900;
+margin:10px 0 14px
+}
+
+.grid{
+display:grid;
+grid-template-columns:1.1fr .9fr;
+gap:12px
+}
+
+.card{
+background:#fff;
+border-radius:16px;
+padding:15px;
+box-shadow:0 8px 25px rgba(16,32,39,.10);
+margin-bottom:12px
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:9px
+}
+
+.full{grid-column:1/-1}
+
+label{
+display:block;
+font-size:12px;
+font-weight:700;
+margin-bottom:5px
+}
+
+input,select,textarea{
+width:100%;
+padding:10px 11px;
+border:1px solid #d5dfe3;
+border-radius:10px;
+background:#fff
+}
+
+input:focus,select:focus,textarea:focus{
+outline:0;
+border-color:#2674c9
+}
+
+.actions{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+margin-top:10px
+}
+
+.sale-row{
+display:grid;
+grid-template-columns:1.5fr .8fr .65fr .9fr auto;
+gap:7px;
+align-items:end;
+margin-bottom:8px
+}
+
+.mini{
+font-size:11px;
+color:#748188
+}
+
+.summary{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px
+}
+
+.stat{
+background:#f4f7f8;
+padding:10px;
+border-radius:10px
+}
+
+.stat small{
+display:block;
+color:#748188
+}
+
+.stat b{
+display:block;
+font-size:18px;
+margin-top:3px
+}
+
+.list{
+display:flex;
+flex-direction:column;
+gap:7px
+}
+
+.item{
+background:#fff;
+border-radius:12px;
+padding:11px;
+box-shadow:0 4px 15px rgba(0,0,0,.06);
+display:flex;
+justify-content:space-between;
+gap:8px;
+align-items:center
+}
+
+.name{font-weight:900}
+
+.sub{
+font-size:12px;
+color:#748188;
+margin-top:3px
+}
+
+.right{
+display:flex;
+gap:5px;
+flex-wrap:wrap;
+justify-content:flex-end
+}
+
+.badge{
+display:inline-block;
+padding:4px 7px;
+border-radius:20px;
+font-size:11px;
+font-weight:800;
+background:#edf2f4
+}
+
+.badge.red{
+background:#ffe7e7;
+color:#b22e2e
+}
+
+.badge.green{
+background:#ddf7ed;
+color:#08794f
+}
+
+.empty{
+text-align:center;
+padding:22px;
+color:#7a878c
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.55);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:12px;
+z-index:50
+}
+
+.modal-box{
+background:#fff;
+width:min(850px,100%);
+max-height:92vh;
+overflow:auto;
+border-radius:18px;
+padding:18px;
+position:relative
+}
+
+.close{
+position:absolute;
+right:10px;
+top:10px;
+width:32px;
+height:32px;
+border-radius:50%;
+background:#edf2f4
+}
+
+.hidden{display:none!important}
+
+table{
+width:100%;
+border-collapse:collapse
+}
+
+th,td{
+padding:8px;
+border-bottom:1px solid #e5eaec;
+font-size:12px;
+text-align:left
+}
+
+th{background:#f4f7f8}
+
+@media(max-width:700px){
+.grid{grid-template-columns:1fr}
+.form-grid{grid-template-columns:1fr}
+.full{grid-column:auto}
+.sale-row{grid-template-columns:1fr 1fr}
+.summary{grid-template-columns:1fr 1fr}
+.item{align-items:flex-start}
+.right .btn{font-size:11px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="top">
+<div>
+<b>🏪 ওমর এস এস ঘর</b>
+<div class="mini" style="color:#c8d2d5">🔩 মাল বিক্রি</div>
+</div>
+
+<button class="btn light" onclick="location.href='index.html'">
+← মূল হিসাব
+</button>
+</div>
+
+<main class="content">
+
+<div class="title">
+🔩 মাল বিক্রি
+<span class="mini">নগদ / বাকি / আংশিক</span>
+</div>
+
+<div id="loginBox" class="card">
+
+<b>🔐 Admin Login প্রয়োজন</b>
+
+<div class="form-grid" style="margin-top:10px">
+
+<input
+id="email"
+type="email"
+placeholder="Email">
+
+<input
+id="password"
+type="password"
+placeholder="Password">
+
+</div>
+
+<div class="actions">
+
+<button class="btn blue" onclick="login()">
+Login
+</button>
+
+</div>
+
+</div>
+
+
+<div id="app" class="hidden">
+
+<div class="grid">
+
+<section class="card">
+
+<h3>🧾 নতুন মাল বিক্রি</h3>
+
+<div class="form-grid">
+
+<div>
+<label>ক্রেতার নাম</label>
+<input id="buyerName" placeholder="নাম">
+</div>
+
+<div>
+<label>মোবাইল</label>
+<input id="buyerPhone" placeholder="মোবাইল">
+</div>
+
+<div class="full">
+<label>ঠিকানা</label>
+<input id="buyerAddress" placeholder="ঠিকানা">
+</div>
+
+<div>
+<label>তারিখ</label>
+<input id="saleDate" type="date">
+</div>
+
+<div>
+<label>পেমেন্ট</label>
+
+<select id="paymentType" onchange="paymentChanged()">
+<option value="cash">নগদ</option>
+<option value="credit">বাকি</option>
+<option value="partial">আংশিক</option>
+</select>
+
+</div>
+
+</div>
+
+
+<div id="rows" style="margin-top:12px"></div>
+
+<div class="actions">
+
+<button class="btn light" onclick="addRow()">
++ মাল যোগ
+</button>
+
+</div>
+
+
+<div class="summary" style="margin-top:12px">
+
+<div class="stat">
+<small>মোট</small>
+<b id="saleTotal">৳0</b>
+</div>
+
+<div class="stat">
+<small>জমা</small>
+<b id="salePaid">৳0</b>
+</div>
+
+<div class="stat">
+<small>বাকি</small>
+<b id="saleDue">৳0</b>
+</div>
+
+</div>
+
+
+<div id="paidWrap" style="margin-top:10px">
+
+<label>এখন কত টাকা নিলেন</label>
+
+<input
+id="paidNow"
+type="number"
+min="0"
+value="0"
+oninput="recalc()">
+
+</div>
+
+
+<div class="actions">
+
+<button class="btn green" onclick="saveSale()">
+💾 বিক্রি Save
+</button>
+
+<button class="btn light" onclick="resetSale()">
+Clear
+</button>
+
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h3>👥 মাল কেনা ক্রেতা</h3>
+
+<div class="list" id="buyerList"></div>
+
+</section>
+
+</div>
+
+
+<section class="card">
+
+<h3>📋 বিক্রির ইতিহাস</h3>
+
+<div id="saleList"></div>
+
+</section>
+
+</div>
+
+</main>
+
+
+<div
+id="modal"
+class="modal hidden"
+onclick="if(event.target===this)closeModal()">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModal()">×</button>
+
+<div id="modalContent"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL=
+"https://gzujcqjpxypcoiqhpvvu.supabase.co";
+
+const SUPABASE_KEY=
+"sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
+
+const sb=
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+let user=null;
+let materials=[];
+
+
+const money=n=>
+"৳"+
+(Number(n||0).toLocaleString(
+"en-US",
+{maximumFractionDigits:2}
+));
+
+
+const esc=s=>
+String(s??"").replace(
+/[&<>'"]/g,
+c=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+"'":"&#39;",
+'"':"&quot;"
+}[c])
+);
+
+
+function today(){
+return new Date().toISOString().slice(0,10);
+}
+
+
+document.addEventListener(
+"DOMContentLoaded",
+async()=>{
+
+saleDate.value=today();
+
+addRow();
+
+const {
+data:{session}
+}=await sb.auth.getSession();
+
+if(session)
+await start(session.user);
+
+});
+
+
+sb.auth.onAuthStateChange(
+async(e,s)=>{
+
+if(e==="SIGNED_OUT")
+location.reload();
+
+if(e==="SIGNED_IN"&&s)
+await start(s.user);
+
+});
+
+
+async function login(){
+
+const email=
+document.getElementById("email")
+.value.trim();
+
+const password=
+document.getElementById("password")
+.value;
+
+if(!email||!password)
+return alert("Email এবং Password দিন");
+
+const {
+data,
+error
+}=await sb.auth.signInWithPassword({
+email,
+password
+});
+
+if(error)
+return alert(error.message);
+
+await start(data.user);
+
+}
+
+
+async function start(u){
+
+user=u;
+
+const {
+data:admin,
+error
+}=await sb
+.from("accounting_admins")
+.select("user_id")
+.eq("user_id",u.id)
+.maybeSingle();
+
+if(error||!admin){
+
+await sb.auth.signOut();
+
+return alert(
+"এই Account-এর Admin হিসাবের Access নেই।"
+);
+
+}
+
+document
+.getElementById("loginBox")
+.classList.add("hidden");
+
+document
+.getElementById("app")
+.classList.remove("hidden");
+
+await loadMaterials();
+await loadBuyers();
+await loadSales();
+
+}
+
+
+async function loadMaterials(){
+
+const {
+data,
+error
+}=await sb
+.from("materials")
+.select("id,name,price")
+.eq("admin_id",user.id)
+.order("name");
+
+if(error)
+return alert(error.message);
+
+materials=data||[];
+
+document
+.querySelectorAll(".mat-select")
+.forEach(fillSelect);
+
+}
+
+
+function addRow(){
+
+const wrap=
+document.getElementById("rows");
+
+const id=
+"r"+
+Date.now()+
+Math.random()
+.toString(16)
+.slice(2);
+
+wrap.insertAdjacentHTML(
+"beforeend",
+
+`<div class="sale-row" id="${id}">
+
+<div>
+
+<label>মাল</label>
+
+<select
+class="mat-select"
+onchange="rateFromMaterial(this)">
+
+<option value="">
+মাল নির্বাচন
+</option>
+
+${materials.map(m=>
+
+`<option
+value="${esc(m.id)}"
+data-price="${Number(m.price||0)}"
+data-name="${esc(m.name)}">
+
+${esc(m.name)}
+
+</option>`
+
+).join("")}
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>Rate</label>
+
+<input
+class="rate"
+type="number"
+min="0"
+step="0.01"
+oninput="recalc()">
+
+</div>
+
+
+<div>
+
+<label>Qty</label>
+
+<input
+class="qty"
+type="number"
+min="0"
+step="0.001"
+value="1"
+oninput="recalc()">
+
+</div>
+
+
+<div>
+
+<label>Total</label>
+
+<input
+class="line-total"
+readonly>
+
+</div>
+
+
+<button
+class="btn red"
+onclick="document.getElementById('${id}').remove();recalc()">
+
+×
+
+</button>
+
+</div>`
+
+);
+
+fillSelect(
+wrap.lastElementChild.querySelector("select")
+);
+
+recalc();
+
+}
+
+
+function fillSelect(sel){
+
+sel.innerHTML=
+'<option value="">মাল নির্বাচন</option>'+
+materials.map(m=>
+
+`<option
+value="${esc(m.id)}"
+data-price="${Number(m.price||0)}"
+data-name="${esc(m.name)}">
+
+${esc(m.name)} — ${money(m.price)}
+
+</option>`
+
+).join("");
+
+}
+
+
+function rateFromMaterial(sel){
+
+const o=
+sel.options[sel.selectedIndex];
+
+const row=
+sel.closest(".sale-row");
+
+row.querySelector(".rate")
+.value=o?.dataset.price||"";
+
+recalc();
+
+}
+
+
+function recalc(){
+
+let total=0;
+
+document
+.querySelectorAll(".sale-row")
+.forEach(r=>{
+
+const x=
+Number(
+r.querySelector(".rate").value||0
+)*
+Number(
+r.querySelector(".qty").value||0
+);
+
+r.querySelector(".line-total")
+.value=x.toFixed(2);
+
+total+=x;
+
+});
+
+
+let paid=
+Number(
+document.getElementById("paidNow")
+.value||0
+);
+
+
+if(
+document.getElementById("paymentType").value
+==="cash"
+)
+paid=total;
+
+else if(
+document.getElementById("paymentType").value
+==="credit"
+)
+paid=0;
+
+else
+paid=Math.min(paid,total);
+
+
+document.getElementById("saleTotal")
+.textContent=money(total);
+
+document.getElementById("salePaid")
+.textContent=money(paid);
+
+document.getElementById("saleDue")
+.textContent=
+money(Math.max(0,total-paid));
+
+}
+
+
+function paymentChanged(){
+
+document.getElementById("paidNow").value=
+document.getElementById("paymentType").value
+==="cash"
+?0
+:"0";
+
+recalc();
+
+}
+
+
+function resetSale(){
+
+buyerName.value="";
+buyerPhone.value="";
+buyerAddress.value="";
+
+saleDate.value=today();
+
+paymentType.value="cash";
+
+paidNow.value=0;
+
+rows.innerHTML="";
+
+addRow();
+
+recalc();
+
+}
+
+
+async function getOrCreateBuyer(){
+
+const name=
+buyerName.value.trim();
+
+const phone=
+buyerPhone.value.trim();
+
+const address=
+buyerAddress.value.trim();
+
+if(!name)
+throw Error("ক্রেতার নাম দিন");
+
+
+let q=
+sb
+.from("material_sale_customers")
+.select("*")
+.eq("admin_id",user.id);
+
+
+if(phone)
+q=q.eq("phone",phone);
+
+else
+q=q.ilike("name",name);
+
+
+const {
+data,
+error
+}=await q.maybeSingle();
+
+if(error)
+throw error;
+
+
+if(data){
+
+if(
+address &&
+address!==data.address
+){
+
+await sb
+.from("material_sale_customers")
+.update({
+name,
+address
+})
+.eq("id",data.id)
+.eq("admin_id",user.id);
+
+}
+
+return data;
+
+}
+
+
+const {
+data:n,
+error:e
+}=await sb
+.from("material_sale_customers")
+.insert({
+admin_id:user.id,
+name,
+phone,
+address
+})
+.select()
+.single();
+
+
+if(e)
+throw e;
+
+return n;
+
+}
+
+
+async function saveSale(){
+
+try{
+
+const buyer=
+await getOrCreateBuyer();
+
+let items=[];
+let total=0;
+
+
+document
+.querySelectorAll(".sale-row")
+.forEach(r=>{
+
+const sel=
+r.querySelector(".mat-select");
+
+const o=
+sel.options[sel.selectedIndex];
+
+const price=
+Number(
+r.querySelector(".rate").value||0
+);
+
+const qty=
+Number(
+r.querySelector(".qty").value||0
+);
+
+
+if(
+o &&
+o.value &&
+price>0 &&
+qty>0
+){
+
+const t=price*qty;
+
+items.push({
+
+material_id:o.value,
+
+material_name:
+o.dataset?.name||
+o.textContent.split(" — ")[0],
+
+price,
+
+qty,
+
+total:t
+
+});
+
+total+=t;
+
+}
+
+});
+
+
+if(!items.length)
+return alert(
+"কমপক্ষে একটি মাল নির্বাচন করুন"
+);
+
+
+let paid=
+paymentType.value==="cash"
+?total
+:paymentType.value==="credit"
+?0
+:Math.min(
+Number(paidNow.value||0),
+total
+);
+
+
+const due=
+Math.max(0,total-paid);
+
+
+const {
+data:sale,
+error
+}=await sb
+.from("material_sales")
+.insert({
+
+admin_id:user.id,
+
+customer_id:buyer.id,
+
+sale_date:saleDate.value,
+
+payment_type:paymentType.value,
+
+total,
+
+paid,
+
+due
+
+})
+.select()
+.single();
+
+
+if(error)
+throw error;
+
+
+const payload=
+items.map(x=>({
+
+...x,
+
+admin_id:user.id,
+
+sale_id:sale.id
+
+}));
+
+
+const {
+error:ie
+}=await sb
+.from("material_sale_items")
+.insert(payload);
+
+
+if(ie)
+throw ie;
+
+
+if(paid>0){
+
+const {
+error:pe
+}=await sb
+.from("material_sale_payments")
+.insert({
+
+admin_id:user.id,
+
+sale_id:sale.id,
+
+payment_date:saleDate.value,
+
+amount:paid,
+
+note:"বিক্রির সময় জমা"
+
+});
+
+
+if(pe)
+throw pe;
+
+}
+
+
+alert(
+"মাল বিক্রির হিসাব Save হয়েছে"
+);
+
+resetSale();
+
+await loadBuyers();
+await loadSales();
+
+
+}catch(e){
+
+alert(
+e.message||
+"Save করা যায়নি"
+);
+
+}
+
+}
+
+
+async function loadBuyers(){
+
+const {
+data,
+error
+}=await sb
+.from("material_sale_customers")
+.select("*")
+.eq("admin_id",user.id)
+.order(
+"created_at",
+{ascending:false}
+);
+
+if(error)
+return;
+
+
+const ids=
+(data||[]).map(x=>x.id);
+
+let sales=[];
+
+
+if(ids.length){
+
+const r=
+await sb
+.from("material_sales")
+.select(
+"customer_id,total,paid,due"
+)
+.eq("admin_id",user.id);
+
+sales=r.data||[];
+
+}
+
+
+document.getElementById("buyerList")
+.innerHTML=
+
+(data||[])
+.map(b=>{
+
+const ss=
+sales.filter(
+s=>s.customer_id===b.id
+);
+
+const total=
+ss.reduce(
+(a,s)=>a+Number(s.total),
+0
+);
+
+const paid=
+ss.reduce(
+(a,s)=>a+Number(s.paid),
+0
+);
+
+const due=
+ss.reduce(
+(a,s)=>a+Number(s.due),
+0
+);
+
+
+return `
+
+<div class="item">
+
+<div>
+
+<div class="name">
+${esc(b.name)}
+</div>
+
+<div class="sub">
+
+${esc(b.phone||"")}
+
+· কেনা ${money(total)}
+
+·
+
+<span class="badge ${
+due>0?"red":"green"
+}">
+
+বাকি ${money(due)}
+
+</span>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<button
+class="btn blue"
+onclick="buyerDetails('${b.id}')">
+
+Details
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+})
+.join("")
+
+||
+
+'<div class="empty">
+এখনও কোনো মাল ক্রেতা নেই
+</div>';
+
+}
+
+
+async function loadSales(){
+
+const {
+data,
+error
+}=await sb
+.from("material_sales")
+.select(
+"*,material_sale_customers(name,phone)"
+)
+.eq("admin_id",user.id)
+.order(
+"sale_date",
+{ascending:false}
+)
+.limit(100);
+
+if(error)
+return;
+
+
+document.getElementById("saleList")
+.innerHTML=
+
+`<div>
+
+<table>
+
+<tr>
+
+<th>তারিখ</th>
+<th>ক্রেতা</th>
+<th>মোট</th>
+<th>জমা</th>
+<th>বাকি</th>
+<th></th>
+
+</tr>
+
+${(data||[])
+.map(s=>
+
+`<tr>
+
+<td>
+${esc(s.sale_date)}
+</td>
+
+<td>
+${esc(
+s.material_sale_customers?.name||"—"
+)}
+</td>
+
+<td>
+${money(s.total)}
+</td>
+
+<td>
+${money(s.paid)}
+</td>
+
+<td>
+${money(s.due)}
+</td>
+
+<td>
+
+<button
+class="btn blue"
+onclick="saleDetails('${s.id}')">
+
+Details
+
+</button>
+
+</td>
+
+</tr>`
+
+).join("")}
+
+</table>
+
+</div>`;
+
+}
+
+
+async function buyerDetails(id){
+
+const {
+data:b
+}=await sb
+.from("material_sale_customers")
+.select("*")
+.eq("id",id)
+.eq("admin_id",user.id)
+.single();
+
+
+const {
+data:sales
+}=await sb
+.from("material_sales")
+.select("*")
+.eq("customer_id",id)
+.eq("admin_id",user.id)
+.order(
+"sale_date",
+{ascending:false}
+);
+
+
+const total=
+(sales||[])
+.reduce(
+(a,s)=>a+Number(s.total),
+0
+);
+
+const paid=
+(sales||[])
+.reduce(
+(a,s)=>a+Number(s.paid),
+0
+);
+
+const due=
+(sales||[])
+.reduce(
+(a,s)=>a+Number(s.due),
+0
+);
+
+
+openModal(`
+
+<h2>👤 ${esc(b.name)}</h2>
+
+<p class="mini">
+${esc(b.phone||"")}
+·
+${esc(b.address||"")}
+</p>
+
+
+<div class="summary">
+
+<div class="stat">
+<small>মোট কেনা</small>
+<b>${money(total)}</b>
+</div>
+
+<div class="stat">
+<small>জমা</small>
+<b>${money(paid)}</b>
+</div>
+
+<div class="stat">
+<small>বাকি</small>
+<b>${money(due)}</b>
+</div>
+
+</div>
+
+
+<div class="actions">
+
+${
+due>0
+?
+
+`<button
+class="btn green"
+onclick="collectBuyerDue('${id}')">
+
+💵 বাকি আদায়
+
+</button>`
+
+:
+
+"<span class='badge green'>সব পরিশোধ</span>"
+
+}
+
+</div>
+
+
+<div style="margin-top:14px">
+
+<table>
+
+<tr>
+<th>তারিখ</th>
+<th>মোট</th>
+<th>জমা</th>
+<th>বাকি</th>
+<th></th>
+</tr>
+
+
+${(sales||[])
+.map(s=>
+
+`<tr>
+
+<td>${esc(s.sale_date)}</td>
+
+<td>${money(s.total)}</td>
+
+<td>${money(s.paid)}</td>
+
+<td>${money(s.due)}</td>
+
+<td>
+
+<button
+class="btn blue"
+onclick="saleDetails('${s.id}')">
+
+দেখুন
+
+</button>
+
+</td>
+
+</tr>`
+
+).join("")}
+
+</table>
+
+</div>
+
+`);
+
+}
+
+
+async function saleDetails(id){
+
+const {
+data:s
+}=await sb
+.from("material_sales")
+.select(
+"*,material_sale_customers(name,phone,address)"
+)
+.eq("id",id)
+.eq("admin_id",user.id)
+.single();
+
+
+const {
+data:items
+}=await sb
+.from("material_sale_items")
+.select("*")
+.eq("sale_id",id)
+.eq("admin_id",user.id);
+
+
+openModal(`
+
+<h2>🧾 মাল বিক্রির বিস্তারিত</h2>
+
+<p>
+<b>ক্রেতা:</b>
+
+${esc(
+s.material_sale_customers?.name||""
+)}
+
+·
+
+${esc(
+s.material_sale_customers?.phone||""
+)}
+
+</p>
+
+<p>
+<b>তারিখ:</b>
+${esc(s.sale_date)}
+</p>
+
+
+<table>
+
+<tr>
+<th>মাল</th>
+<th>Rate</th>
+<th>Qty</th>
+<th>Total</th>
+</tr>
+
+
+${(items||[])
+.map(i=>
+
+`<tr>
+
+<td>${esc(i.material_name)}</td>
+
+<td>${money(i.price)}</td>
+
+<td>${i.qty}</td>
+
+<td>${money(i.total)}</td>
+
+</tr>`
+
+).join("")}
+
+</table>
+
+
+<div class="summary" style="margin-top:12px">
+
+<div class="stat">
+<small>মোট</small>
+<b>${money(s.total)}</b>
+</div>
+
+<div class="stat">
+<small>জমা</small>
+<b>${money(s.paid)}</b>
+</div>
+
+<div class="stat">
+<small>বাকি</small>
+<b>${money(s.due)}</b>
+</div>
+
+</div>
+
+
+${
+Number(s.due)>0
+
+?
+
+`<div class="actions">
+
+<button
+class="btn green"
+onclick="collectSaleDue('${s.id}')">
+
+💵 বাকি আদায়
+
+</button>
+
+</div>`
+
+:
+
+"<div class='actions'><span class='badge green'>সম্পূর্ণ পরিশোধ</span></div>"
+
+}
+
+`);
+
+}
+
+
+async function collectBuyerDue(customerId){
+
+const {
+data:sales
+}=await sb
+.from("material_sales")
+.select("id,due")
+.eq("admin_id",user.id)
+.eq("customer_id",customerId)
+.gt("due",0);
+
+
+const due=
+(sales||[])
+.reduce(
+(a,s)=>a+Number(s.due),
+0
+);
+
+
+if(due<=0)
+return alert("কোনো বাকি নেই");
+
+
+const amount=
+Number(
+prompt(
+"কত টাকা নিলেন?\nবর্তমান বাকি: "+
+money(due),
+due
+)||0
+);
+
+
+if(!amount||amount<=0)
+return;
+
+
+if(amount>due)
+return alert(
+"বাকি থেকে বেশি টাকা নেওয়া যাবে না"
+);
+
+
+let remain=amount;
+
+
+for(const s of sales){
+
+if(remain<=0)
+break;
+
+
+const take=
+Math.min(
+remain,
+Number(s.due)
+);
+
+
+const {
+error
+}=await sb
+.from("material_sale_payments")
+.insert({
+
+admin_id:user.id,
+
+sale_id:s.id,
+
+payment_date:today(),
+
+amount:take,
+
+note:"বাকি আদায়"
+
+});
+
+
+if(error)
+return alert(error.message);
+
+
+const current=
+await sb
+.from("material_sales")
+.select("paid,due,total")
+.eq("id",s.id)
+.single();
+
+
+const np=
+Number(current.data.paid||0)+take;
+
+const nd=
+Math.max(
+0,
+Number(current.data.total)-np
+);
+
+
+await sb
+.from("material_sales")
+.update({
+
+paid:np,
+
+due:nd,
+
+payment_type:
+nd===0
+?'cash'
+:'partial'
+
+})
+.eq("id",s.id);
+
+
+remain-=take;
+
+}
+
+
+closeModal();
+
+await loadBuyers();
+await loadSales();
+
+}
+
+
+async function collectSaleDue(id){
+
+const {
+data:s
+}=await sb
+.from("material_sales")
+.select("*")
+.eq("id",id)
+.eq("admin_id",user.id)
+.single();
+
+
+if(
+!s||
+Number(s.due)<=0
+)
+return;
+
+
+const amount=
+Number(
+prompt(
+"কত টাকা নিলেন?\nবাকি: "+
+money(s.due),
+s.due
+)||0
+);
+
+
+if(!amount||amount<=0)
+return;
+
+
+if(amount>Number(s.due))
+return alert(
+"বাকি থেকে বেশি নেওয়া যাবে না"
+);
+
+
+const {
+error
+}=await sb
+.from("material_sale_payments")
+.insert({
+
+admin_id:user.id,
+
+sale_id:id,
+
+payment_date:today(),
+
+amount,
+
+note:"বাকি আদায়"
+
+});
+
+
+if(error)
+return alert(error.message);
+
+
+const np=
+Number(s.paid)+amount;
+
+const nd=
+Math.max(
+0,
+Number(s.total)-np
+);
+
+
+const {
+error:ue
+}=await sb
+.from("material_sales")
+.update({
+
+paid:np,
+
+due:nd,
+
+payment_type:
+nd===0
+?'cash'
+:'partial'
+
+})
+.eq("id",id)
+.eq("admin_id",user.id);
+
+
+if(ue)
+return alert(ue.message);
+
+
+closeModal();
+
+await loadBuyers();
+await loadSales();
+
+}
+
+
+function openModal(html){
+
+document.getElementById("modalContent")
+.innerHTML=html;
+
+document.getElementById("modal")
+.classList.remove("hidden");
+
+}
+
+
+function closeModal(){
+
+document.getElementById("modal")
+.classList.add("hidden");
+
+document.getElementById("modalContent")
+.innerHTML="";
+
+}
+
+</script>
+
+</body>
+</html>
