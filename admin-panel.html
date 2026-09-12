@@ -4,24 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin Control Panel | ওমর এস এস ঘর</title>
+<title>Admin C Panel | ওমর এস এস ঘর</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,
-  "Noto Sans Bengali","Segoe UI",sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Bengali","Segoe UI",sans-serif;
   background:#f3f5f7;
   color:#17202a;
 }
 
-button,input,select{
+button,input{
   font:inherit;
 }
 
@@ -30,23 +27,98 @@ button{
   border:0;
 }
 
+.hidden{
+  display:none!important;
+}
+
+.login{
+  width:min(430px,calc(100% - 24px));
+  margin:70px auto;
+  background:white;
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 5px 25px #0002;
+}
+
+.login h1{
+  text-align:center;
+  margin:0 0 5px;
+}
+
+.login p{
+  text-align:center;
+  color:#777;
+}
+
+.form-group{
+  margin:15px 0;
+}
+
+label{
+  display:block;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  border:1px solid #d5dadd;
+  border-radius:10px;
+  outline:none;
+}
+
+input:focus{
+  border-color:#1976d2;
+}
+
+.btn{
+  width:100%;
+  padding:13px;
+  border-radius:10px;
+  background:#263238;
+  color:white;
+  font-weight:800;
+}
+
+.btn:disabled{
+  opacity:.6;
+}
+
+.message{
+  margin-top:14px;
+  padding:12px;
+  border-radius:10px;
+  text-align:center;
+  display:none;
+}
+
+.error{
+  display:block;
+  background:#fff0f0;
+  color:#b00020;
+  border:1px solid #efb4b4;
+}
+
+.success{
+  display:block;
+  background:#eaf8ef;
+  color:#087f23;
+  border:1px solid #b7e3c5;
+}
+
 .header{
-  background:linear-gradient(135deg,#111827,#263238);
+  background:#17202a;
   color:white;
   padding:16px;
-  position:sticky;
-  top:0;
-  z-index:50;
-  box-shadow:0 3px 15px #0003;
 }
 
 .header-inner{
-  max-width:1200px;
+  max-width:1100px;
   margin:auto;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
 }
 
 .shop{
@@ -54,104 +126,18 @@ button{
   font-weight:900;
 }
 
-.subtitle{
-  font-size:12px;
-  opacity:.75;
-  margin-top:3px;
-}
-
 .container{
-  max-width:1200px;
+  max-width:1100px;
   margin:auto;
   padding:15px;
 }
 
 .card{
   background:white;
-  border:1px solid #e4e8eb;
   border-radius:15px;
-  padding:15px;
+  padding:18px;
   margin-bottom:15px;
-  box-shadow:0 3px 15px #0000000b;
-}
-
-.hidden{
-  display:none!important;
-}
-
-.btn{
-  padding:10px 14px;
-  border-radius:10px;
-  background:#263238;
-  color:white;
-  font-weight:800;
-}
-
-.btn.green{
-  background:#16803c;
-}
-
-.btn.red{
-  background:#c62828;
-}
-
-.btn.orange{
-  background:#d97706;
-}
-
-.btn.gray{
-  background:#607d8b;
-}
-
-.btn.light{
-  background:#edf1f3;
-  color:#263238;
-}
-
-.btn.small{
-  padding:7px 10px;
-  font-size:12px;
-}
-
-.actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-.login{
-  width:min(430px,calc(100% - 25px));
-  margin:70px auto;
-}
-
-.login h1{
-  text-align:center;
-  margin-bottom:4px;
-}
-
-.login p{
-  text-align:center;
-  color:#6b747c;
-}
-
-label{
-  display:block;
-  font-weight:800;
-  font-size:13px;
-  margin-bottom:5px;
-}
-
-input,select{
-  width:100%;
-  padding:11px;
-  border:1px solid #d8dee3;
-  border-radius:10px;
-  outline:none;
-  background:white;
-}
-
-.form-group{
-  margin-bottom:12px;
+  box-shadow:0 3px 15px #0001;
 }
 
 .dashboard{
@@ -162,18 +148,18 @@ input,select{
 
 .stat{
   background:white;
-  padding:14px;
+  padding:15px;
   border-radius:13px;
-  border:1px solid #e4e8eb;
+  box-shadow:0 2px 10px #0001;
 }
 
 .stat-title{
-  color:#707980;
-  font-size:12px;
+  color:#777;
+  font-size:13px;
 }
 
 .stat-value{
-  font-size:22px;
+  font-size:23px;
   font-weight:900;
   margin-top:5px;
 }
@@ -185,17 +171,13 @@ input,select{
 }
 
 .menu{
-  padding:17px;
-  border-radius:13px;
-  border:1px solid #e2e6e9;
-  background:white;
+  padding:20px 10px;
   text-align:center;
-  font-weight:900;
+  background:white;
+  border:1px solid #e0e4e7;
+  border-radius:13px;
+  font-weight:800;
   cursor:pointer;
-}
-
-.menu:hover{
-  box-shadow:0 4px 15px #0001;
 }
 
 .menu-icon{
@@ -203,136 +185,15 @@ input,select{
   margin-bottom:5px;
 }
 
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:12px;
-}
-
-.user-card{
-  border:1px solid #e2e6e9;
-  border-radius:12px;
-  padding:12px;
-  margin-bottom:10px;
-}
-
-.user-name{
-  font-weight:900;
-}
-
-.user-email{
-  color:#707980;
-  font-size:12px;
-  margin-top:3px;
-}
-
-.permission-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-
-.permission{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:9px;
-  border:1px solid #e4e8eb;
+.logout{
+  background:#c62828;
+  color:white;
+  padding:9px 13px;
   border-radius:9px;
-  background:#fafbfc;
+  font-weight:800;
 }
 
-.permission input{
-  width:auto;
-}
-
-.table-wrap{
-  overflow:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:650px;
-}
-
-th,td{
-  padding:9px;
-  border-bottom:1px solid #e8ecef;
-  text-align:left;
-  font-size:13px;
-}
-
-th{
-  background:#f2f5f6;
-}
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:#0008;
-  z-index:100;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:15px;
-}
-
-.modal-box{
-  width:min(750px,100%);
-  max-height:92vh;
-  overflow:auto;
-  background:white;
-  border-radius:16px;
-  padding:18px;
-}
-
-.modal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:12px;
-}
-
-.close{
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  background:#edf0f2;
-  font-size:20px;
-}
-
-.notice{
-  padding:12px;
-  border-radius:10px;
-  background:#fff7df;
-  border:1px solid #f2d27a;
-  margin-bottom:12px;
-}
-
-.success{
-  padding:12px;
-  border-radius:10px;
-  background:#eaf8ef;
-  border:1px solid #b7e3c5;
-}
-
-.danger-box{
-  padding:12px;
-  border-radius:10px;
-  background:#fff0f0;
-  border:1px solid #efb4b4;
-}
-
-.empty{
-  text-align:center;
-  padding:25px;
-  color:#7b858d;
-}
-
-@media(max-width:850px){
+@media(max-width:800px){
   .dashboard{
     grid-template-columns:1fr 1fr;
   }
@@ -342,17 +203,13 @@ th{
   }
 }
 
-@media(max-width:520px){
-  .container{
-    padding:10px;
+@media(max-width:450px){
+  .dashboard{
+    grid-template-columns:1fr 1fr;
   }
 
   .shop{
-    font-size:17px;
-  }
-
-  .permission-grid{
-    grid-template-columns:1fr;
+    font-size:16px;
   }
 }
 </style>
@@ -360,11 +217,8 @@ th{
 
 <body>
 
-<!-- =====================================================
-     LOGIN
-===================================================== -->
-
-<div id="loginPage" class="login card">
+<!-- LOGIN -->
+<div id="loginPage" class="login">
 
   <h1>🔐 Admin C Panel</h1>
 
@@ -375,7 +229,8 @@ th{
     <input
       id="email"
       type="email"
-      placeholder="Admin email"
+      autocomplete="email"
+      placeholder="আপনার Admin Email"
     >
   </div>
 
@@ -384,487 +239,176 @@ th{
     <input
       id="password"
       type="password"
-      placeholder="Password"
+      autocomplete="current-password"
+      placeholder="আপনার Password"
     >
   </div>
 
   <button
+    id="loginButton"
     class="btn"
-    style="width:100%"
     onclick="adminLogin()"
   >
     🔐 Admin Login
   </button>
 
-  <div
-    id="loginMessage"
-    style="text-align:center;margin-top:12px"
-  ></div>
+  <div id="loginMessage" class="message"></div>
 
 </div>
 
 
-<!-- =====================================================
-     ADMIN APP
-===================================================== -->
-
+<!-- ADMIN APP -->
 <div id="adminApp" class="hidden">
 
-<header class="header">
+  <header class="header">
 
-  <div class="header-inner">
+    <div class="header-inner">
 
-    <div>
-      <div class="shop">
-        🏪 ওমর এস এস ঘর
+      <div>
+        <div class="shop">
+          🏪 ওমর এস এস ঘর
+        </div>
+
+        <div style="font-size:12px;opacity:.7">
+          Admin Control Panel
+        </div>
       </div>
 
-      <div class="subtitle">
-        Admin Control Panel
-      </div>
+      <button class="logout" onclick="logout()">
+        Logout
+      </button>
+
     </div>
 
-    <button
-      class="btn red small"
-      onclick="logout()"
-    >
-      Logout
-    </button>
-
-  </div>
-
-</header>
+  </header>
 
 
-<main class="container">
+  <main class="container">
 
-  <!-- DASHBOARD -->
+    <div class="dashboard">
 
-  <div class="dashboard">
+      <div class="stat">
+        <div class="stat-title">
+          আজকের বিক্রি
+        </div>
 
-    <div class="stat">
-      <div class="stat-title">
-        আজকের বিক্রি
+        <div id="todaySales" class="stat-value">
+          ৳0
+        </div>
       </div>
-      <div
-        id="todaySales"
-        class="stat-value"
-      >
-        ৳0
+
+
+      <div class="stat">
+        <div class="stat-title">
+          আজকের আদায়
+        </div>
+
+        <div id="todayPaid" class="stat-value">
+          ৳0
+        </div>
       </div>
+
+
+      <div class="stat">
+        <div class="stat-title">
+          মোট বাকি
+        </div>
+
+        <div id="totalDue" class="stat-value">
+          ৳0
+        </div>
+      </div>
+
+
+      <div class="stat">
+        <div class="stat-title">
+          Material
+        </div>
+
+        <div id="materialCount" class="stat-value">
+          0
+        </div>
+      </div>
+
     </div>
 
-    <div class="stat">
-      <div class="stat-title">
-        আজকের আদায়
-      </div>
-      <div
-        id="todayPaid"
-        class="stat-value"
-      >
-        ৳0
-      </div>
-    </div>
 
-    <div class="stat">
-      <div class="stat-title">
-        মোট বাকি
-      </div>
-      <div
-        id="totalDue"
-        class="stat-value"
-      >
-        ৳0
-      </div>
-    </div>
+    <div class="card">
 
-    <div class="stat">
-      <div class="stat-title">
-        Material
-      </div>
-      <div
-        id="materialCount"
-        class="stat-value"
-      >
-        0
-      </div>
-    </div>
-
-  </div>
-
-
-  <!-- MAIN MENU -->
-
-  <div class="card">
-
-    <div class="section-title">
       <h2>⚙️ Control Panel</h2>
-    </div>
 
-    <div class="menu-grid">
+      <div class="menu-grid">
 
-      <div
-        class="menu"
-        onclick="openPOS()"
-      >
-        <div class="menu-icon">🛒</div>
-        POS
-      </div>
+        <div class="menu" onclick="openPOS()">
+          <div class="menu-icon">🛒</div>
+          POS
+        </div>
 
-      <div
-        class="menu"
-        onclick="openUsers()"
-      >
-        <div class="menu-icon">👥</div>
-        Users
-      </div>
+        <div class="menu" onclick="showUsers()">
+          <div class="menu-icon">👥</div>
+          Users
+        </div>
 
-      <div
-        class="menu"
-        onclick="openMaterials()"
-      >
-        <div class="menu-icon">📦</div>
-        Material
-      </div>
+        <div class="menu" onclick="showMaterials()">
+          <div class="menu-icon">📦</div>
+          Material
+        </div>
 
-      <div
-        class="menu"
-        onclick="openWorkers()"
-      >
-        <div class="menu-icon">👷</div>
-        Mistri
-      </div>
+        <div class="menu" onclick="showWorkers()">
+          <div class="menu-icon">👷</div>
+          Mistri
+        </div>
 
-      <div
-        class="menu"
-        onclick="openCustomers()"
-      >
-        <div class="menu-icon">👤</div>
-        Customer
-      </div>
+        <div class="menu" onclick="showCustomers()">
+          <div class="menu-icon">👤</div>
+          Customer
+        </div>
 
-      <div
-        class="menu"
-        onclick="openSalesHistory()"
-      >
-        <div class="menu-icon">📋</div>
-        Sales History
-      </div>
+        <div class="menu" onclick="showHistory()">
+          <div class="menu-icon">📋</div>
+          Sales History
+        </div>
 
-      <div
-        class="menu"
-        onclick="openDueList()"
-      >
-        <div class="menu-icon">💰</div>
-        Due
-      </div>
+        <div class="menu" onclick="showDue()">
+          <div class="menu-icon">💰</div>
+          Due
+        </div>
 
-      <div
-        class="menu"
-        onclick="openReports()"
-      >
-        <div class="menu-icon">📊</div>
-        Reports
+        <div class="menu" onclick="showReports()">
+          <div class="menu-icon">📊</div>
+          Reports
+        </div>
+
       </div>
 
     </div>
 
-  </div>
 
+    <div class="card">
 
-  <!-- IMPORTANT -->
+      <h3>🔒 Admin Security</h3>
 
-  <div class="card">
+      <p>
+        এই Panel শুধুমাত্র
+        <b>Accounting Admin</b>-এর জন্য।
+      </p>
 
-    <h3>🔒 Admin Security</h3>
+      <p>
+        Public User এই Admin Panel-এ ঢুকতে পারবে না।
+      </p>
 
-    <div class="success">
-      এই Control Panel শুধুমাত্র
-      <b>Accounting Admin</b>-এর জন্য।
-
-      Public User এই Panel-এর ভিতরের
-      Admin data দেখতে পারবে না।
     </div>
 
-  </div>
-
-</main>
-
-</div>
-
-
-<!-- =====================================================
-     USERS MODAL
-===================================================== -->
-
-<div
-  id="usersModal"
-  class="modal hidden"
->
-
-<div class="modal-box">
-
-  <div class="modal-head">
-
-    <h2>👥 User Permission</h2>
-
-    <button
-      class="close"
-      onclick="closeModal('usersModal')"
-    >
-      ×
-    </button>
-
-  </div>
-
-  <div class="notice">
-    এখানে প্রত্যেক Public User-এর জন্য
-    আলাদা আলাদা POS Permission দেওয়া যাবে।
-  </div>
-
-  <div id="usersContent">
-    ⏳ User list loading...
-  </div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     PERMISSION EDIT MODAL
-===================================================== -->
-
-<div
-  id="permissionModal"
-  class="modal hidden"
->
-
-<div class="modal-box">
-
-  <div class="modal-head">
-
-    <h2>🔐 Permission Control</h2>
-
-    <button
-      class="close"
-      onclick="closeModal('permissionModal')"
-    >
-      ×
-    </button>
-
-  </div>
-
-  <div id="permissionContent"></div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     MATERIAL MODAL
-===================================================== -->
-
-<div
-  id="materialsModal"
-  class="modal hidden"
->
-
-<div class="modal-box">
-
-  <div class="modal-head">
-
-    <h2>📦 Materials</h2>
-
-    <button
-      class="close"
-      onclick="closeModal('materialsModal')"
-    >
-      ×
-    </button>
-
-  </div>
-
-  <div id="materialsContent">
-    Loading...
-  </div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     WORKERS MODAL
-===================================================== -->
-
-<div
-  id="workersModal"
-  class="modal hidden"
->
-
-<div class="modal-box">
-
-  <div class="modal-head">
-
-    <h2>👷 Mistri</h2>
-
-    <button
-      class="close"
-      onclick="closeModal('workersModal')"
-    >
-      ×
-    </button>
-
-  </div>
-
-  <div id="workersContent">
-    Loading...
-  </div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     CUSTOMERS MODAL
-===================================================== -->
-
-<div
-  id="customersModal"
-  class="modal hidden"
->
-
-<div class="modal-box">
-
-  <div class="modal-head">
-
-    <h2>👤 Customers</h2>
-
-    <button
-      class="close"
-      onclick="closeModal('customersModal')"
-    >
-      ×
-    </button>
-
-  </div>
-
-  <div id="customersContent">
-    Loading...
-  </div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     SALES MODAL
-===================================================== -->
-
-<div
-  id="salesModal"
-  class="modal hidden"
->
-
-<div class="modal-box">
-
-  <div class="modal-head">
-
-    <h2>📋 Sales History</h2>
-
-    <button
-      class="close"
-      onclick="closeModal('salesModal')"
-    >
-      ×
-    </button>
-
-  </div>
-
-  <div id="salesContent">
-    Loading...
-  </div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     DUE MODAL
-===================================================== -->
-
-<div
-  id="dueModal"
-  class="modal hidden"
->
-
-<div class="modal-box">
-
-  <div class="modal-head">
-
-    <h2>💰 Due List</h2>
-
-    <button
-      class="close"
-      onclick="closeModal('dueModal')"
-    >
-      ×
-    </button>
-
-  </div>
-
-  <div id="dueContent">
-    Loading...
-  </div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     REPORT MODAL
-===================================================== -->
-
-<div
-  id="reportsModal"
-  class="modal hidden"
->
-
-<div class="modal-box">
-
-  <div class="modal-head">
-
-    <h2>📊 Reports</h2>
-
-    <button
-      class="close"
-      onclick="closeModal('reportsModal')"
-    >
-      ×
-    </button>
-
-  </div>
-
-  <div id="reportsContent">
-    Loading...
-  </div>
-
-</div>
+  </main>
 
 </div>
 
 
 <script>
 
-/* =====================================================
+/* ================================
    SUPABASE
-===================================================== */
+================================ */
 
 const SUPABASE_URL =
 "https://gzujcqjpxypcoiqhpvvu.supabase.co";
@@ -872,7 +416,7 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
 
-const supabase =
+const supabaseClient =
 window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
@@ -881,11 +425,30 @@ window.supabase.createClient(
 let adminUser = null;
 
 
-/* =====================================================
+/* ================================
+   MESSAGE
+================================ */
+
+function showMessage(text,type){
+
+  const box =
+    document.getElementById("loginMessage");
+
+  box.className =
+    "message " + type;
+
+  box.innerHTML = text;
+}
+
+
+/* ================================
    LOGIN
-===================================================== */
+================================ */
 
 async function adminLogin(){
+
+  const button =
+    document.getElementById("loginButton");
 
   const email =
     document
@@ -898,204 +461,404 @@ async function adminLogin(){
       .getElementById("password")
       .value;
 
-  const msg =
-    document
-      .getElementById("loginMessage");
+  if(!email){
 
-  if(!email || !password){
-
-    msg.innerHTML =
-      "⚠️ Email এবং Password দিন।";
+    showMessage(
+      "⚠️ Admin Email লিখুন।",
+      "error"
+    );
 
     return;
   }
 
-  msg.innerHTML =
+  if(!password){
+
+    showMessage(
+      "⚠️ Password লিখুন।",
+      "error"
+    );
+
+    return;
+  }
+
+  button.disabled = true;
+
+  button.innerText =
     "⏳ Login হচ্ছে...";
 
-
-  const {data,error} =
-    await supabase.auth.signInWithPassword({
-
-      email:email,
-
-      password:password
-
-    });
+  showMessage(
+    "⏳ Supabase-এর সাথে সংযোগ হচ্ছে...",
+    "success"
+  );
 
 
-  if(error){
+  try{
 
-    msg.innerHTML =
-      "❌ " + escapeHtml(error.message);
+    const result =
+      await supabaseClient.auth.signInWithPassword({
 
-    return;
-  }
+        email: email,
 
+        password: password
 
-  adminUser =
-    data.user;
-
-
-  /* Admin check */
-
-  const {data:admin,error:adminError} =
-    await supabase
-      .from("accounting_admins")
-      .select("user_id")
-      .eq("user_id",adminUser.id)
-      .maybeSingle();
+      });
 
 
-  if(adminError || !admin){
+    if(result.error){
 
-    await supabase.auth.signOut();
-
-    msg.innerHTML =
-      "❌ এই Account Admin নয়।";
-
-    return;
-  }
-
-
-  document
-    .getElementById("loginPage")
-    .classList.add("hidden");
-
-  document
-    .getElementById("adminApp")
-    .classList.remove("hidden");
-
-
-  await loadDashboard();
-
-}
-
-
-/* =====================================================
-   SESSION
-===================================================== */
-
-async function checkSession(){
-
-  const {data} =
-    await supabase.auth.getSession();
-
-  if(!data.session)
-    return;
-
-
-  const user =
-    data.session.user;
-
-
-  const {data:admin} =
-    await supabase
-      .from("accounting_admins")
-      .select("user_id")
-      .eq("user_id",user.id)
-      .maybeSingle();
-
-
-  if(!admin){
-
-    await supabase.auth.signOut();
-
-    return;
-  }
-
-
-  adminUser = user;
-
-
-  document
-    .getElementById("loginPage")
-    .classList.add("hidden");
-
-  document
-    .getElementById("adminApp")
-    .classList.remove("hidden");
-
-
-  await loadDashboard();
-
-}
-
-
-/* =====================================================
-   DASHBOARD
-===================================================== */
-
-async function loadDashboard(){
-
-  const today =
-    new Date()
-      .toISOString()
-      .slice(0,10);
-
-
-  const {data:sales} =
-    await supabase
-      .from("material_sales")
-      .select("sale_date,total,paid,due");
-
-
-  let todaySales = 0;
-  let todayPaid = 0;
-  let totalDue = 0;
-
-
-  (sales || []).forEach(s => {
-
-    totalDue +=
-      Number(s.due || 0);
-
-    if(s.sale_date === today){
-
-      todaySales +=
-        Number(s.total || 0);
-
-      todayPaid +=
-        Number(s.paid || 0);
+      throw new Error(
+        getBanglaAuthError(
+          result.error
+        )
+      );
 
     }
 
-  });
+
+    if(!result.data || !result.data.user){
+
+      throw new Error(
+        "Login-এর পরে User পাওয়া যায়নি।"
+      );
+
+    }
 
 
-  document
-    .getElementById("todaySales")
-    .innerText =
-      "৳" + money(todaySales);
-
-  document
-    .getElementById("todayPaid")
-    .innerText =
-      "৳" + money(todayPaid);
-
-  document
-    .getElementById("totalDue")
-    .innerText =
-      "৳" + money(totalDue);
+    adminUser =
+      result.data.user;
 
 
-  const {count} =
-    await supabase
-      .from("materials")
-      .select("*",{count:"exact",head:true});
+    showMessage(
+      "⏳ Admin Account পরীক্ষা করা হচ্ছে...",
+      "success"
+    );
 
 
-  document
-    .getElementById("materialCount")
-    .innerText =
-      count || 0;
+    const adminCheck =
+      await supabaseClient
+        .from("accounting_admins")
+        .select("user_id")
+        .eq(
+          "user_id",
+          adminUser.id
+        )
+        .maybeSingle();
+
+
+    if(adminCheck.error){
+
+      await supabaseClient.auth.signOut();
+
+      throw new Error(
+        "Admin যাচাই করা যায়নি। Supabase RLS/Database সমস্যা হতে পারে।"
+      );
+
+    }
+
+
+    if(!adminCheck.data){
+
+      await supabaseClient.auth.signOut();
+
+      adminUser = null;
+
+      throw new Error(
+        "এই Email দিয়ে Login হয়েছে, কিন্তু এটি Accounting Admin হিসেবে যুক্ত নেই।"
+      );
+
+    }
+
+
+    showMessage(
+      "✅ Login সফল হয়েছে।",
+      "success"
+    );
+
+
+    setTimeout(
+      function(){
+
+        document
+          .getElementById("loginPage")
+          .classList.add("hidden");
+
+        document
+          .getElementById("adminApp")
+          .classList.remove("hidden");
+
+        loadDashboard();
+
+      },
+      500
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "❌ " +
+      escapeHtml(
+        error.message ||
+        "Login করা যায়নি।"
+      ),
+      "error"
+    );
+
+    button.disabled = false;
+
+    button.innerText =
+      "🔐 Admin Login";
+
+  }
 
 }
 
 
-/* =====================================================
-   OPEN POS
-===================================================== */
+/* ================================
+   AUTH ERROR
+================================ */
+
+function getBanglaAuthError(error){
+
+  const message =
+    String(
+      error?.message ||
+      ""
+    ).toLowerCase();
+
+
+  if(
+    message.includes("invalid login credentials")
+  ){
+
+    return "Email অথবা Password সঠিক নয়।";
+
+  }
+
+
+  if(
+    message.includes("email not confirmed")
+  ){
+
+    return "এই Email এখনো Confirm করা হয়নি।";
+
+  }
+
+
+  if(
+    message.includes("too many requests")
+  ){
+
+    return "অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।";
+
+  }
+
+
+  if(
+    message.includes("network")
+  ){
+
+    return "Internet connection সমস্যা হয়েছে।";
+
+  }
+
+
+  return error?.message ||
+    "Login করা যায়নি।";
+
+}
+
+
+/* ================================
+   SESSION
+================================ */
+
+async function checkSession(){
+
+  try{
+
+    const result =
+      await supabaseClient.auth.getSession();
+
+    if(!result.data.session){
+
+      return;
+
+    }
+
+
+    const user =
+      result.data.session.user;
+
+
+    const adminCheck =
+      await supabaseClient
+        .from("accounting_admins")
+        .select("user_id")
+        .eq(
+          "user_id",
+          user.id
+        )
+        .maybeSingle();
+
+
+    if(
+      adminCheck.error ||
+      !adminCheck.data
+    ){
+
+      await supabaseClient.auth.signOut();
+
+      return;
+
+    }
+
+
+    adminUser =
+      user;
+
+
+    document
+      .getElementById("loginPage")
+      .classList.add("hidden");
+
+    document
+      .getElementById("adminApp")
+      .classList.remove("hidden");
+
+    loadDashboard();
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* ================================
+   DASHBOARD
+================================ */
+
+async function loadDashboard(){
+
+  try{
+
+    const today =
+      new Date()
+        .toISOString()
+        .slice(0,10);
+
+
+    const salesResult =
+      await supabaseClient
+        .from("material_sales")
+        .select(
+          "sale_date,total,paid,due"
+        );
+
+
+    if(salesResult.error){
+
+      console.log(
+        salesResult.error
+      );
+
+      return;
+
+    }
+
+
+    let todaySales = 0;
+    let todayPaid = 0;
+    let totalDue = 0;
+
+
+    (salesResult.data || [])
+      .forEach(function(sale){
+
+        totalDue +=
+          Number(
+            sale.due || 0
+          );
+
+
+        if(
+          sale.sale_date === today
+        ){
+
+          todaySales +=
+            Number(
+              sale.total || 0
+            );
+
+          todayPaid +=
+            Number(
+              sale.paid || 0
+            );
+
+        }
+
+      });
+
+
+    document
+      .getElementById("todaySales")
+      .innerText =
+        "৳" +
+        money(todaySales);
+
+
+    document
+      .getElementById("todayPaid")
+      .innerText =
+        "৳" +
+        money(todayPaid);
+
+
+    document
+      .getElementById("totalDue")
+      .innerText =
+        "৳" +
+        money(totalDue);
+
+
+    const materialResult =
+      await supabaseClient
+        .from("materials")
+        .select(
+          "id",
+          {
+            count:"exact",
+            head:true
+          }
+        );
+
+
+    if(!materialResult.error){
+
+      document
+        .getElementById("materialCount")
+        .innerText =
+          materialResult.count || 0;
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* ================================
+   BUTTONS
+================================ */
 
 function openPOS(){
 
@@ -1105,943 +868,124 @@ function openPOS(){
 }
 
 
-/* =====================================================
-   USERS
-===================================================== */
-
-async function openUsers(){
-
-  document
-    .getElementById("usersModal")
-    .classList.remove("hidden");
-
-  const box =
-    document
-      .getElementById("usersContent");
-
-  box.innerHTML =
-    "⏳ User list loading...";
-
-
-  /*
-    website_users table থেকে Public User নেওয়া হচ্ছে।
-  */
-
-  const {data,error} =
-    await supabase
-      .from("website_users")
-      .select("user_id,name,email,active")
-      .order("created_at",{ascending:false});
-
-
-  if(error){
-
-    box.innerHTML =
-      `
-      <div class="danger-box">
-        ❌ User list পাওয়া যায়নি।<br><br>
-        ${escapeHtml(error.message)}
-      </div>
-      `;
-
-    return;
-  }
-
-
-  if(!data?.length){
-
-    box.innerHTML =
-      '<div class="empty">কোনো Public User পাওয়া যায়নি।</div>';
-
-    return;
-  }
-
-
-  box.innerHTML =
-    data.map(user => `
-
-      <div class="user-card">
-
-        <div class="user-name">
-          👤 ${escapeHtml(user.name || "নাম নেই")}
-        </div>
-
-        <div class="user-email">
-          ${escapeHtml(user.email || "")}
-        </div>
-
-        <div style="margin-top:8px">
-
-          <button
-            class="btn small"
-            onclick="editPermission('${user.user_id}','${escapeHtml(user.name || "User")}')"
-          >
-            🔐 Permission
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-/* =====================================================
-   EDIT USER PERMISSION
-===================================================== */
-
-async function editPermission(
-  userId,
-  userName
-){
-
-  const {data,error} =
-    await supabase
-      .from("pos_permissions")
-      .select("*")
-      .eq("user_id",userId)
-      .maybeSingle();
-
-
-  if(error){
-
-    alert(error.message);
-    return;
-  }
-
-
-  const p =
-    data || {};
-
-
-  const permissions = [
-
-    ["can_use_pos","🛒 POS ব্যবহার"],
-
-    ["can_create_sale","🧾 Sale তৈরি"],
-
-    ["can_cash_sale","💵 Cash Sale"],
-
-    ["can_credit_sale","📒 Credit Sale"],
-
-    ["can_partial_sale","💰 Partial Sale"],
-
-    ["can_view_history","📋 History দেখা"],
-
-    ["can_view_due","💰 Due দেখা"],
-
-    ["can_collect_due","💵 Due আদায়"],
-
-    ["can_view_report","📊 Report দেখা"],
-
-    ["can_manage_material","📦 Material Management"],
-
-    ["can_add_material","➕ Material যোগ"],
-
-    ["can_edit_material","✏️ Material Edit"],
-
-    ["can_change_material_price","💵 Material Price Change"],
-
-    ["can_delete_material","🗑 Material Delete"],
-
-    ["can_view_material_rate","👁 Material Rate দেখা"],
-
-    ["can_manage_worker","👷 Mistri Management"],
-
-    ["can_add_worker","➕ Mistri যোগ"],
-
-    ["can_edit_worker","✏️ Mistri Edit"],
-
-    ["can_change_worker_salary","💰 Salary Change"],
-
-    ["can_delete_worker","🗑 Mistri Delete"],
-
-    ["can_view_worker_salary","👁 Salary দেখা"],
-
-    ["can_manage_customer","👤 Customer Management"],
-
-    ["can_add_customer","➕ Customer যোগ"],
-
-    ["can_edit_customer","✏️ Customer Edit"],
-
-    ["can_delete_customer","🗑 Customer Delete"],
-
-    ["can_view_customer_phone","📞 Customer Phone দেখা"],
-
-    ["can_view_customer_address","📍 Customer Address দেখা"],
-
-    ["can_view_customer_financial","💰 Customer Financial দেখা"],
-
-    ["can_view_worker_financial","💰 Mistri Financial দেখা"]
-
-  ];
-
-
-  document
-    .getElementById("permissionModal")
-    .classList.remove("hidden");
-
-
-  document
-    .getElementById("permissionContent")
-    .innerHTML = `
-
-      <h3>
-        👤 ${escapeHtml(userName)}
-      </h3>
-
-      <div class="permission-grid">
-
-        ${
-          permissions.map(([key,label]) => `
-
-            <label class="permission">
-
-              <input
-                type="checkbox"
-                data-permission="${key}"
-                ${p[key] ? "checked" : ""}
-              >
-
-              ${label}
-
-            </label>
-
-          `).join("")
-        }
-
-      </div>
-
-      <button
-        class="btn green"
-        style="width:100%;margin-top:15px"
-        onclick="savePermission('${userId}')"
-      >
-        💾 Permission Save
-      </button>
-
-    `;
-
-}
-
-
-/* =====================================================
-   SAVE PERMISSION
-===================================================== */
-
-async function savePermission(userId){
-
-  const values = {};
-
-
-  document
-    .querySelectorAll("[data-permission]")
-    .forEach(input => {
-
-      values[
-        input.dataset.permission
-      ] =
-        input.checked;
-
-    });
-
-
-  const payload = {
-
-    admin_id:
-      adminUser.id,
-
-    user_id:
-      userId,
-
-    ...values,
-
-    updated_at:
-      new Date().toISOString()
-
-  };
-
-
-  const {error} =
-    await supabase
-      .from("pos_permissions")
-      .upsert(
-        payload,
-        {
-          onConflict:
-            "admin_id,user_id"
-        }
-      );
-
-
-  if(error){
-
-    alert(
-      "❌ Permission Save হয়নি:\n" +
-      error.message
-    );
-
-    return;
-  }
-
+function showUsers(){
 
   alert(
-    "✅ Permission Save হয়েছে।"
+    "👥 Users Permission অংশ পরের ধাপে চালু করা হবে।"
   );
 
+}
 
-  closeModal("permissionModal");
+
+function showMaterials(){
+
+  alert(
+    "📦 Material Management অংশ পরের ধাপে চালু করা হবে।"
+  );
 
 }
 
 
-/* =====================================================
-   MATERIALS
-===================================================== */
+function showWorkers(){
 
-async function openMaterials(){
-
-  document
-    .getElementById("materialsModal")
-    .classList.remove("hidden");
-
-
-  const box =
-    document
-      .getElementById("materialsContent");
-
-  box.innerHTML =
-    "⏳ Loading...";
-
-
-  const {data,error} =
-    await supabase
-      .from("materials")
-      .select("id,name,price")
-      .order("name");
-
-
-  if(error){
-
-    box.innerHTML =
-      "❌ " + escapeHtml(error.message);
-
-    return;
-  }
-
-
-  if(!data?.length){
-
-    box.innerHTML =
-      '<div class="empty">Material নেই।</div>';
-
-    return;
-  }
-
-
-  box.innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-            <th>Material</th>
-            <th>Price</th>
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          ${
-            data.map(m => `
-
-              <tr>
-
-                <td>
-                  ${escapeHtml(m.name)}
-                </td>
-
-                <td>
-                  ৳${money(m.price)}
-                </td>
-
-              </tr>
-
-            `).join("")
-          }
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
+  alert(
+    "👷 Mistri Management অংশ পরের ধাপে চালু করা হবে।"
+  );
 
 }
 
 
-/* =====================================================
-   WORKERS
-===================================================== */
+function showCustomers(){
 
-async function openWorkers(){
-
-  document
-    .getElementById("workersModal")
-    .classList.remove("hidden");
-
-
-  const box =
-    document
-      .getElementById("workersContent");
-
-  box.innerHTML =
-    "⏳ Loading...";
-
-
-  const {data,error} =
-    await supabase
-      .from("workers")
-      .select("id,name,monthly_salary")
-      .order("name");
-
-
-  if(error){
-
-    box.innerHTML =
-      "❌ " + escapeHtml(error.message);
-
-    return;
-  }
-
-
-  if(!data?.length){
-
-    box.innerHTML =
-      '<div class="empty">কোনো Mistri নেই।</div>';
-
-    return;
-  }
-
-
-  box.innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-            <th>Mistri</th>
-            <th>Monthly Salary</th>
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          ${
-            data.map(w => `
-
-              <tr>
-
-                <td>
-                  ${escapeHtml(w.name)}
-                </td>
-
-                <td>
-                  ৳${money(w.monthly_salary)}
-                </td>
-
-              </tr>
-
-            `).join("")
-          }
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
+  alert(
+    "👤 Customer Management অংশ পরের ধাপে চালু করা হবে।"
+  );
 
 }
 
 
-/* =====================================================
-   CUSTOMERS
-===================================================== */
+function showHistory(){
 
-async function openCustomers(){
-
-  document
-    .getElementById("customersModal")
-    .classList.remove("hidden");
-
-
-  const box =
-    document
-      .getElementById("customersContent");
-
-  box.innerHTML =
-    "⏳ Loading...";
-
-
-  const {data,error} =
-    await supabase
-      .from("material_sale_customers")
-      .select("id,name,phone,address")
-      .order("name");
-
-
-  if(error){
-
-    box.innerHTML =
-      "❌ " + escapeHtml(error.message);
-
-    return;
-  }
-
-
-  if(!data?.length){
-
-    box.innerHTML =
-      '<div class="empty">Customer নেই।</div>';
-
-    return;
-  }
-
-
-  box.innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Address</th>
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          ${
-            data.map(c => `
-
-              <tr>
-
-                <td>
-                  ${escapeHtml(c.name)}
-                </td>
-
-                <td>
-                  ${escapeHtml(c.phone || "")}
-                </td>
-
-                <td>
-                  ${escapeHtml(c.address || "")}
-                </td>
-
-              </tr>
-
-            `).join("")
-          }
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
+  alert(
+    "📋 Sales History অংশ পরের ধাপে চালু করা হবে।"
+  );
 
 }
 
 
-/* =====================================================
-   SALES HISTORY
-===================================================== */
+function showDue(){
 
-async function openSalesHistory(){
-
-  document
-    .getElementById("salesModal")
-    .classList.remove("hidden");
-
-
-  const box =
-    document
-      .getElementById("salesContent");
-
-  box.innerHTML =
-    "⏳ Loading...";
-
-
-  const {data,error} =
-    await supabase
-      .from("material_sales")
-      .select(
-        "id,sale_date,total,paid,due,payment_type,customer_id"
-      )
-      .order("created_at",{ascending:false})
-      .limit(200);
-
-
-  if(error){
-
-    box.innerHTML =
-      "❌ " + escapeHtml(error.message);
-
-    return;
-  }
-
-
-  if(!data?.length){
-
-    box.innerHTML =
-      '<div class="empty">কোনো Sale নেই।</div>';
-
-    return;
-  }
-
-
-  box.innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-            <th>Date</th>
-            <th>Total</th>
-            <th>Paid</th>
-            <th>Due</th>
-            <th>Type</th>
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          ${
-            data.map(s => `
-
-              <tr>
-
-                <td>
-                  ${escapeHtml(s.sale_date || "")}
-                </td>
-
-                <td>
-                  ৳${money(s.total)}
-                </td>
-
-                <td>
-                  ৳${money(s.paid)}
-                </td>
-
-                <td>
-                  ৳${money(s.due)}
-                </td>
-
-                <td>
-                  ${escapeHtml(s.payment_type || "")}
-                </td>
-
-              </tr>
-
-            `).join("")
-          }
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
+  alert(
+    "💰 Due অংশ পরের ধাপে চালু করা হবে।"
+  );
 
 }
 
 
-/* =====================================================
-   DUE
-===================================================== */
+function showReports(){
 
-async function openDueList(){
-
-  document
-    .getElementById("dueModal")
-    .classList.remove("hidden");
-
-
-  const box =
-    document
-      .getElementById("dueContent");
-
-  box.innerHTML =
-    "⏳ Loading...";
-
-
-  const {data,error} =
-    await supabase
-      .from("material_sales")
-      .select(
-        "id,sale_date,total,paid,due"
-      )
-      .gt("due",0)
-      .order("sale_date",{ascending:false});
-
-
-  if(error){
-
-    box.innerHTML =
-      "❌ " + escapeHtml(error.message);
-
-    return;
-  }
-
-
-  if(!data?.length){
-
-    box.innerHTML =
-      '<div class="success">🎉 কোনো বাকি নেই।</div>';
-
-    return;
-  }
-
-
-  box.innerHTML = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-            <th>Date</th>
-            <th>Total</th>
-            <th>Paid</th>
-            <th>Due</th>
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          ${
-            data.map(s => `
-
-              <tr>
-
-                <td>
-                  ${escapeHtml(s.sale_date || "")}
-                </td>
-
-                <td>
-                  ৳${money(s.total)}
-                </td>
-
-                <td>
-                  ৳${money(s.paid)}
-                </td>
-
-                <td style="font-weight:900;color:#c62828">
-                  ৳${money(s.due)}
-                </td>
-
-              </tr>
-
-            `).join("")
-          }
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
+  alert(
+    "📊 Reports অংশ পরের ধাপে চালু করা হবে।"
+  );
 
 }
 
 
-/* =====================================================
-   REPORT
-===================================================== */
-
-async function openReports(){
-
-  document
-    .getElementById("reportsModal")
-    .classList.remove("hidden");
-
-
-  const box =
-    document
-      .getElementById("reportsContent");
-
-  box.innerHTML =
-    "⏳ Report তৈরি হচ্ছে...";
-
-
-  const {data,error} =
-    await supabase
-      .from("material_sales")
-      .select("sale_date,total,paid,due")
-      .order("sale_date",{ascending:false});
-
-
-  if(error){
-
-    box.innerHTML =
-      "❌ " + escapeHtml(error.message);
-
-    return;
-  }
-
-
-  let totalSales = 0;
-  let totalPaid = 0;
-  let totalDue = 0;
-
-
-  (data || []).forEach(s => {
-
-    totalSales +=
-      Number(s.total || 0);
-
-    totalPaid +=
-      Number(s.paid || 0);
-
-    totalDue +=
-      Number(s.due || 0);
-
-  });
-
-
-  box.innerHTML = `
-
-    <div class="dashboard">
-
-      <div class="stat">
-
-        <div class="stat-title">
-          মোট বিক্রি
-        </div>
-
-        <div class="stat-value">
-          ৳${money(totalSales)}
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="stat-title">
-          মোট আদায়
-        </div>
-
-        <div class="stat-value">
-          ৳${money(totalPaid)}
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="stat-title">
-          মোট বাকি
-        </div>
-
-        <div class="stat-value">
-          ৳${money(totalDue)}
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="stat-title">
-          মোট Sale
-        </div>
-
-        <div class="stat-value">
-          ${(data || []).length}
-        </div>
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-/* =====================================================
-   CLOSE MODAL
-===================================================== */
-
-function closeModal(id){
-
-  document
-    .getElementById(id)
-    .classList.add("hidden");
-
-}
-
-
-/* =====================================================
+/* ================================
    LOGOUT
-===================================================== */
+================================ */
 
 async function logout(){
 
-  await supabase.auth.signOut();
+  await supabaseClient.auth.signOut();
 
-  location.reload();
+  adminUser = null;
+
+  document
+    .getElementById("adminApp")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loginPage")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("email")
+    .value = "";
+
+  document
+    .getElementById("password")
+    .value = "";
+
+  document
+    .getElementById("loginMessage")
+    .className =
+      "message";
 
 }
 
 
-/* =====================================================
+/* ================================
    HELPERS
-===================================================== */
+================================ */
 
 function money(value){
 
-  return Number(value || 0)
-    .toLocaleString("en-US",{
+  return Number(
+    value || 0
+  ).toLocaleString(
+    "en-BD",
+    {
       maximumFractionDigits:2
-    });
+    }
+  );
 
 }
 
 
 function escapeHtml(value){
 
-  return String(value ?? "")
+  return String(value || "")
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
@@ -2051,9 +995,31 @@ function escapeHtml(value){
 }
 
 
-/* =====================================================
+/* ================================
+   ENTER KEY LOGIN
+================================ */
+
+document
+  .getElementById("password")
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(
+        event.key === "Enter"
+      ){
+
+        adminLogin();
+
+      }
+
+    }
+  );
+
+
+/* ================================
    START
-===================================================== */
+================================ */
 
 checkSession();
 
