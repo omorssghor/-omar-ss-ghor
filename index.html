@@ -2,4544 +2,1396 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ওমর এস এস ঘর</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ওমর এস এস ঘর | হিসাব</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-  box-sizing:border-box;
-}
-
-body{
-  margin:0;
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
-  color:#17202a;
-  background:
-    radial-gradient(circle at top left,#dff4ff 0,#eef7ff 28%,transparent 55%),
-    radial-gradient(circle at bottom right,#e5fff5 0,#f5fbff 30%,#eef2f6 70%);
-  min-height:100vh;
-}
-
-button{
-  cursor:pointer;
-  font-family:inherit;
-}
-
-button:active{
-  transform:scale(.98);
-}
-
-#loginPage{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:
-    radial-gradient(circle at top,#48a9ff 0,#164a79 35%,#08121c 100%);
-}
-
-.login-box{
-  width:100%;
-  max-width:460px;
-  background:rgba(255,255,255,.97);
-  border-radius:28px;
-  padding:30px 24px;
-  box-shadow:0 25px 70px rgba(0,0,0,.38);
-  text-align:center;
-  animation:boxIn .5s ease;
-}
-
-@keyframes boxIn{
-  from{
-    opacity:0;
-    transform:translateY(20px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-.welcome{
-  font-size:28px;
-  font-weight:900;
-  line-height:1.4;
-  margin-bottom:8px;
-  background:linear-gradient(90deg,#0077ff,#00a884,#0077ff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.login-subtitle{
-  color:#777;
-  margin-bottom:25px;
-}
-
-.login-input{
-  width:100%;
-  height:58px;
-  border:2px solid #e1e6eb;
-  border-radius:15px;
-  padding:0 17px;
-  font-size:16px;
-  outline:none;
-  margin-bottom:13px;
-  background:#f8fafc;
-}
-
-.login-input:focus{
-  border-color:#1683ff;
-  background:#fff;
-  box-shadow:0 0 0 4px rgba(0,119,255,.08);
-}
-
-.login-btn{
-  width:100%;
-  height:58px;
-  border:0;
-  border-radius:15px;
-  background:linear-gradient(135deg,#0077ff,#005bd1);
-  color:white;
-  font-size:18px;
-  font-weight:bold;
-  margin-top:4px;
-  box-shadow:0 8px 18px rgba(0,119,255,.25);
-}
-
-.create-btn,
-.forgot-btn{
-  width:100%;
-  border:0;
-  background:none;
-  font-size:15px;
-  margin-top:18px;
-  cursor:pointer;
-}
-
-.create-btn{
-  color:#0077ff;
-  font-weight:bold;
-}
-
-.forgot-btn{
-  color:#555;
-}
-
-.login-message{
-  min-height:24px;
-  margin-top:15px;
-  font-size:14px;
-  font-weight:bold;
-}
-
-/* PUBLIC LOGIN */
-
-.public-box{
-  margin-top:25px;
-  padding-top:22px;
-  border-top:1px solid #e5e9ed;
-}
-
-.public-title{
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:13px;
-}
-
-.public-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.public-btn{
-  border:0;
-  padding:15px 8px;
-  border-radius:14px;
-  background:#eaf4ff;
-  color:#0067d9;
-  font-weight:bold;
-  font-size:15px;
-}
-
-.public-btn.worker{
-  background:#eafaf5;
-  color:#087f5b;
-}
-
-/* MAIN */
-
-#mainPage{
-  display:none;
-  min-height:100vh;
-}
-
-.topbar{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:
-    linear-gradient(135deg,#102a43,#1769aa,#007f67);
-  color:#fff;
-  padding:12px 15px;
-  box-shadow:0 4px 20px rgba(0,0,0,.22);
-}
-
-.topbar-inner{
-  max-width:1150px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.brand{
-  font-size:21px;
-  font-weight:900;
-}
-
-.top-actions{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.menu-toggle{
-  border:0;
-  background:rgba(255,255,255,.16);
-  color:#fff;
-  border-radius:12px;
-  padding:10px 13px;
-  font-weight:bold;
-  font-size:15px;
-}
-
-.logout-btn{
-  border:0;
-  background:#e74c3c;
-  color:#fff;
-  border-radius:10px;
-  padding:10px 14px;
-  font-weight:bold;
-}
-
-.container{
-  max-width:1150px;
-  margin:auto;
-  padding:18px;
-}
-
-/* DROPDOWN MENU */
-
-.menu{
-  display:none;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-bottom:18px;
-  background:rgba(255,255,255,.9);
-  border-radius:20px;
-  padding:12px;
-  box-shadow:0 8px 28px rgba(0,0,0,.10);
-  animation:menuIn .2s ease;
-}
-
-.menu.open{
-  display:grid;
-}
-
-@keyframes menuIn{
-  from{
-    opacity:0;
-    transform:translateY(-8px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-.menu button{
-  border:0;
-  background:#f5f8fb;
-  border-radius:15px;
-  padding:15px 8px;
-  font-weight:bold;
-  color:#263746;
-  box-shadow:0 2px 8px rgba(0,0,0,.05);
-  transition:.2s;
-}
-
-.menu button:hover{
-  transform:translateY(-2px);
-  background:#eaf3ff;
-}
-
-.menu button.active{
-  background:linear-gradient(135deg,#0077ff,#005bd1);
-  color:#fff;
-}
-
-/* PAGES */
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-  animation:pageIn .25s ease;
-}
-
-@keyframes pageIn{
-  from{
-    opacity:0;
-    transform:translateY(8px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-/* CARDS */
-
-.card{
-  background:rgba(255,255,255,.95);
-  border-radius:22px;
-  padding:20px;
-  margin-bottom:16px;
-  box-shadow:0 7px 25px rgba(0,0,0,.08);
-  border:1px solid rgba(255,255,255,.8);
-}
-
-.card h2{
-  margin-top:0;
-}
-
-.hero-card{
-  background:
-    linear-gradient(135deg,#ffffff,#eaf7ff,#edfff8);
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-input,
-textarea,
-select{
-  width:100%;
-  padding:13px;
-  border:1px solid #d8dee5;
-  border-radius:11px;
-  font-size:15px;
-  outline:none;
-  background:#fff;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-  border-color:#1683ff;
-  box-shadow:0 0 0 3px rgba(0,119,255,.08);
-}
-
-textarea{
-  min-height:100px;
-  resize:vertical;
-}
-
-label{
-  display:block;
-  margin-bottom:6px;
-  font-weight:bold;
-  font-size:14px;
-}
-
-.primary{
-  border:0;
-  background:linear-gradient(135deg,#0077ff,#005bd1);
-  color:white;
-  padding:13px 18px;
-  border-radius:11px;
-  font-weight:bold;
-  box-shadow:0 5px 12px rgba(0,119,255,.18);
-}
-
-.success{
-  border:0;
-  background:linear-gradient(135deg,#0a9b70,#087f5b);
-  color:white;
-  padding:13px 18px;
-  border-radius:11px;
-  font-weight:bold;
-}
-
-.danger{
-  border:0;
-  background:#e74c3c;
-  color:#fff;
-  padding:9px 13px;
-  border-radius:9px;
-}
-
-.secondary{
-  border:0;
-  background:#edf2f7;
-  padding:10px 14px;
-  border-radius:9px;
-  font-weight:bold;
-}
-
-.customer{
-  border:1px solid #e3e8ed;
-  border-radius:17px;
-  padding:16px;
-  margin-top:12px;
-  background:linear-gradient(135deg,#fff,#f8fbff);
-  box-shadow:0 3px 12px rgba(0,0,0,.04);
-}
-
-.customer-head{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.customer-name{
-  font-size:19px;
-  font-weight:bold;
-}
-
-.amount{
-  font-size:18px;
-  font-weight:bold;
-  color:#087f5b;
-}
-
-.due-amount{
-  color:#d93025;
-}
-
-.paid-amount{
-  color:#087f5b;
-}
-
-.small{
-  color:#66717c;
-  font-size:14px;
-  line-height:1.7;
-}
-
-.code-badge{
-  display:inline-block;
-  background:#17232f;
-  color:#fff;
-  padding:6px 12px;
-  border-radius:20px;
-  font-weight:bold;
-  letter-spacing:3px;
-  margin-top:7px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-
-.stat{
-  background:linear-gradient(135deg,#f5f8fb,#edf5ff);
-  padding:15px;
-  border-radius:15px;
-  text-align:center;
-}
-
-.stat b{
-  display:block;
-  font-size:20px;
-  margin-top:5px;
-}
-
-.table-wrap{
-  overflow-x:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:12px;
-}
-
-th,td{
-  border-bottom:1px solid #e4e8ec;
-  padding:10px;
-  text-align:left;
-  white-space:nowrap;
-}
-
-th{
-  background:#f4f7fa;
-}
-
-.empty{
-  text-align:center;
-  color:#777;
-  padding:30px;
-}
-
-.status{
-  padding:13px;
-  border-radius:11px;
-  background:#f4f7fa;
-  margin-bottom:10px;
-}
-
-.section-title{
-  margin-top:25px;
-  margin-bottom:10px;
-  font-size:18px;
-  font-weight:bold;
-}
-
-.contact-box{
-  background:#f5f8fb;
-  padding:15px;
-  border-radius:14px;
-  margin-top:15px;
-  line-height:2;
-}
-
-.contact-box a{
-  color:#0067d9;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-/* HOME */
-
-.dashboard-title{
-  font-size:27px;
-  font-weight:900;
-  margin-bottom:5px;
-}
-
-.dashboard-sub{
-  color:#65727e;
-}
-
-.quick-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-top:18px;
-}
-
-.quick{
-  border:0;
-  border-radius:17px;
-  padding:18px;
-  color:#fff;
-  font-weight:bold;
-  min-height:90px;
-  text-align:left;
-}
-
-.quick.blue{
-  background:linear-gradient(135deg,#1683ff,#005bd1);
-}
-
-.quick.green{
-  background:linear-gradient(135deg,#12a77a,#087f5b);
-}
-
-.quick.orange{
-  background:linear-gradient(135deg,#ff9f43,#e67e22);
-}
-
-.quick.red{
-  background:linear-gradient(135deg,#ff6b6b,#d93025);
-}
-
-.quick-icon{
-  font-size:25px;
-  display:block;
-  margin-bottom:7px;
-}
-
-/* DUE */
-
-.due-summary{
-  background:linear-gradient(135deg,#fff1f1,#fff9f9);
-  border:1px solid #ffd6d6;
-  border-radius:18px;
-  padding:18px;
-  margin-bottom:15px;
-}
-
-.due-total{
-  font-size:28px;
-  font-weight:900;
-  color:#d93025;
-}
-
-.due-item{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding:16px;
-  border-radius:16px;
-  background:#fff;
-  border:1px solid #eee;
-  margin-top:10px;
-  box-shadow:0 3px 12px rgba(0,0,0,.05);
-}
-
-.due-name{
-  font-size:18px;
-  font-weight:bold;
-}
-
-.due-phone{
-  color:#777;
-  font-size:13px;
-}
-
-/* ATTENDANCE */
-
-.attendance-summary{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin:15px 0;
-}
-
-.att-box{
-  border-radius:14px;
-  padding:14px;
-  text-align:center;
-  background:#f4f7fa;
-}
-
-.att-box b{
-  display:block;
-  font-size:22px;
-  margin-top:4px;
-}
-
-.att-present{
-  background:#eafaf5;
-  color:#087f5b;
-}
-
-.att-absent{
-  background:#fff0f0;
-  color:#d93025;
-}
-
-.att-half{
-  background:#fff7e6;
-  color:#c77700;
-}
-
-.att-salary{
-  background:#eaf4ff;
-  color:#0067d9;
-}
-
-.att-status{
-  padding:7px 10px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:bold;
-}
-
-.status-present{
-  background:#d9f7eb;
-  color:#087f5b;
-}
-
-.status-absent{
-  background:#ffe0e0;
-  color:#d93025;
-}
-
-.status-half{
-  background:#fff0c9;
-  color:#a96600;
-}
-
-/* MODAL */
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  z-index:100;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-}
-
-.modal-box{
-  background:#fff;
-  width:100%;
-  max-width:650px;
-  max-height:92vh;
-  overflow:auto;
-  border-radius:22px;
-  padding:22px;
-  box-shadow:0 20px 60px rgba(0,0,0,.3);
-}
-
-.modal-title{
-  font-size:21px;
-  font-weight:bold;
-  margin-bottom:18px;
-}
-
-.close{
-  float:right;
-  border:0;
-  background:#eee;
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  font-size:18px;
-}
-
-.portal-code-input{
-  text-align:center;
-  font-size:25px;
-  letter-spacing:10px;
-  font-weight:bold;
-}
-
-.public-result{
-  margin-top:18px;
-  text-align:left;
-}
-
-.public-header{
-  background:linear-gradient(135deg,#17232f,#1769aa);
-  color:#fff;
-  padding:18px;
-  border-radius:15px;
-  margin-bottom:15px;
-}
-
-.public-stat{
-  background:#f4f7fa;
-  padding:14px;
-  border-radius:12px;
-  margin-bottom:9px;
-}
-
-.good{
-  color:#087f5b;
-}
-
-.bad{
-  color:#d93025;
-}
-
-.note{
-  background:#fff8e8;
-  padding:12px;
-  border-radius:11px;
-  margin-top:12px;
-  font-size:14px;
-}
-
-/* MOBILE */
-
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f3f6f9;color:#17202a}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px}
+.primary{background:#087f5b;color:white}
+.blue{background:#1971c2;color:white}
+.red{background:#c92a2a;color:white}
+.gray{background:#e9ecef;color:#222}
+.card{background:white;border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 3px 12px #00000010}
+input,select,textarea{width:100%;padding:11px;border:1px solid #ccd3da;border-radius:9px;background:white}
+textarea{min-height:80px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.top{background:#087f5b;color:white;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.top h2{margin:0;font-size:19px}
+.menu{background:white;padding:10px;display:flex;gap:7px;overflow-x:auto;box-shadow:0 2px 8px #0001}
+.menu button{white-space:nowrap;background:#edf2f7}
+.menu button.active{background:#087f5b;color:white}
+.page{display:none;padding:14px;max-width:1100px;margin:auto}
+.page.active{display:block}
+.login{max-width:430px;margin:60px auto;padding:22px}
+.login h1{text-align:center}
+.login input{margin:7px 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:white;padding:18px;border-radius:14px;text-align:center;box-shadow:0 2px 8px #0001}
+.stat b{font-size:24px;display:block;margin-top:7px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px;border-bottom:1px solid #e9ecef;text-align:left}
+.tablewrap{overflow:auto}
+.badge{display:inline-block;padding:5px 9px;background:#e7f5ff;border-radius:20px}
+.due{color:#c92a2a;font-weight:bold}
+.ok{color:#087f5b;font-weight:bold}
+.workerBox{border:1px solid #dee2e6;border-radius:13px;padding:14px;margin:10px 0}
+.workerHead{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.workerName{font-size:18px;font-weight:bold}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:100;padding:15px;overflow:auto}
+.modal.show{display:block}
+.modalBox{background:white;max-width:900px;margin:25px auto;border-radius:16px;padding:18px}
+.close{text-align:right}
+.small{font-size:13px;color:#666}
+.empty{text-align:center;padding:25px;color:#777}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.quick button{padding:16px}
 @media(max-width:700px){
-
-  .welcome{
-    font-size:25px;
-  }
-
-  .login-box{
-    padding:27px 18px;
-  }
-
-  .menu{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .attendance-summary{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .quick-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .brand{
-    font-size:17px;
-  }
-
-  .container{
-    padding:12px;
-  }
-
-  .customer-head{
-    flex-direction:column;
-  }
-
-  .public-buttons{
-    grid-template-columns:1fr;
-  }
-
-  .top-actions{
-    gap:5px;
-  }
-
-  .menu-toggle{
-    padding:9px 10px;
-  }
-
-  .logout-btn{
-    padding:9px 10px;
-  }
+ .grid,.grid3,.stats{grid-template-columns:1fr 1fr}
+ .stats .stat:last-child{grid-column:span 2}
+ .quick{grid-template-columns:1fr 1fr}
+ .top h2{font-size:16px}
 }
-
-@media(max-width:430px){
-
-  .menu{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .quick-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .quick{
-    padding:14px;
-    min-height:80px;
-  }
-
-  .quick-icon{
-    font-size:21px;
-  }
+@media(max-width:480px){
+ .grid,.grid3,.stats{grid-template-columns:1fr}
+ .stats .stat:last-child{grid-column:auto}
+ .quick{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
- LOGIN
-===================================================== -->
-
+<!-- LOGIN -->
 <section id="loginPage">
+<div class="login card">
+<h1>🏪 ওমর এস এস ঘর</h1>
+<p style="text-align:center">হিসাব ব্যবস্থাপনা</p>
 
-<div class="login-box">
+<input id="loginEmail" type="email" placeholder="ইমেইল">
+<input id="loginPassword" type="password" placeholder="পাসওয়ার্ড">
 
-<div class="welcome">
-🏪 ওমর এস এস ঘরে<br>
-আপনাকে স্বাগতম
+<button class="primary" style="width:100%" onclick="login()">🔐 Login</button>
+<br><br>
+<button class="blue" style="width:100%" onclick="signup()">➕ নতুন Account</button>
+<br><br>
+<button class="gray" style="width:100%" onclick="forgotPassword()">পাসওয়ার্ড ভুলে গেছেন?</button>
+
+<p id="loginMsg" class="small"></p>
 </div>
-
-<div class="login-subtitle">
-আপনার অ্যাকাউন্টে Login করুন
-</div>
-
-<input
-id="loginEmail"
-class="login-input"
-type="email"
-placeholder="Your Email"
-autocomplete="email">
-
-<input
-id="loginPassword"
-class="login-input"
-type="password"
-placeholder="Your Password"
-autocomplete="current-password">
-
-<button class="login-btn" onclick="loginUser()">
-Login
-</button>
-
-<button class="create-btn" onclick="openCreateAccount()">
-New Account Created / Login
-</button>
-
-<button class="forgot-btn" onclick="forgotPassword()">
-Forget Password
-</button>
-
-<div id="loginMessage" class="login-message"></div>
-
-<div class="public-box">
-
-<div class="public-title">
-📋 হিসাব দেখতে Login লাগবে না
-</div>
-
-<div class="public-buttons">
-
-<button
-class="public-btn"
-onclick="openPublicPortal('customer')">
-👤 কাস্টমার হিসাব
-</button>
-
-<button
-class="public-btn worker"
-onclick="openPublicPortal('worker')">
-👷 মিস্ত্রি হিসাব
-</button>
-
-</div>
-
-</div>
-
-</div>
-
 </section>
 
+<!-- MAIN -->
+<section id="mainPage" style="display:none">
 
-<!-- =====================================================
- MAIN PAGE
-===================================================== -->
-
-<section id="mainPage">
-
-<header class="topbar">
-
-<div class="topbar-inner">
-
-<div class="brand">
-🏪 ওমর এস এস ঘর
-</div>
-
-<div class="top-actions">
-
-<button
-class="menu-toggle"
-onclick="toggleMenu()">
-☰ Menu
-</button>
-
-<button
-class="logout-btn"
-onclick="logoutUser()">
-Logout
-</button>
-
-</div>
-
-</div>
-
+<header class="top">
+<h2>🏪 ওমর এস এস ঘর</h2>
+<button class="red" onclick="logout()">Logout</button>
 </header>
 
-<main class="container">
-
-<!-- MENU -->
-
-<nav id="mainMenu" class="menu">
-
-<button class="active"
-onclick="showPage('homePage',this)">
-🏠 হোম
-</button>
-
-<button
-onclick="showPage('customersPage',this)">
-👤 Customer
-</button>
-
-<button
-onclick="showPage('newCustomerPage',this)">
-➕ নতুন Customer
-</button>
-
-<button
-onclick="showPage('duePage',this)">
-💰 বাকি তালিকা
-</button>
-
-<button
-onclick="showPage('materialsPage',this)">
-🔩 মালামাল
-</button>
-
-<button
-onclick="showPage('workersPage',this)">
-👷 মিস্ত্রি
-</button>
-
-<button
-onclick="showPage('attendancePage',this)">
-📅 হাজিরা খাতা
-</button>
-
-<button
-onclick="showPage('settingsPage',this)">
-⚙️ Settings
-</button>
-
+<nav class="menu">
+<button onclick="showPage('homePage',this)" class="active">🏠 Home</button>
+<button onclick="showPage('customersPage',this)">👤 Customer</button>
+<button onclick="showPage('newCustomerPage',this)">➕ New Customer</button>
+<button onclick="showPage('duePage',this)">💰 Due</button>
+<button onclick="showPage('materialsPage',this)">🔩 Materials</button>
+<button onclick="showPage('workersPage',this)">👷 Mistri</button>
+<button onclick="showPage('attendancePage',this)">🕐 Attendance</button>
 </nav>
 
-
-<!-- =====================================================
- HOME
-===================================================== -->
-
+<!-- HOME -->
 <section id="homePage" class="page active">
-
-<div class="card hero-card">
-
-<div class="dashboard-title">
-🏪 ওমর এস এস ঘর
-</div>
-
-<div class="dashboard-sub">
-SS ও গ্লাসের সকল ধরনের কাজের বিশ্বস্ত প্রতিষ্ঠান।
-</div>
-
+<div class="card">
+<h2>🏠 Dashboard</h2>
 <div class="stats">
-
-<div class="stat">
-👤 Customer
-<b id="homeCustomers">0</b>
+<div class="stat">Customer<b id="homeCustomers">0</b></div>
+<div class="stat">Mistri<b id="homeWorkers">0</b></div>
+<div class="stat">Due<b id="homeDue">৳0</b></div>
+<div class="stat">Materials<b id="homeMaterials">0</b></div>
+</div>
 </div>
 
-<div class="stat">
-🔩 Material
-<b id="homeMaterials">0</b>
+<div class="card">
+<h3>⚡ দ্রুত কাজ</h3>
+<div class="quick">
+<button class="blue" onclick="go('newCustomerPage')">➕ Customer</button>
+<button class="primary" onclick="go('workersPage')">👷 Mistri</button>
+<button class="gray" onclick="go('materialsPage')">🔩 Material</button>
+<button class="gray" onclick="go('attendancePage')">🕐 Attendance</button>
 </div>
-
-<div class="stat">
-👷 Mistri
-<b id="homeWorkers">0</b>
 </div>
-
-<div class="stat">
-💰 বাকি
-<b id="homeDue">0</b>
-</div>
-
-</div>
-
-<div class="quick-grid">
-
-<button class="quick blue"
-onclick="goToPage('newCustomerPage')">
-<span class="quick-icon">➕</span>
-নতুন Customer
-</button>
-
-<button class="quick red"
-onclick="goToPage('duePage')">
-<span class="quick-icon">💰</span>
-বাকি তালিকা
-</button>
-
-<button class="quick green"
-onclick="goToPage('attendancePage')">
-<span class="quick-icon">📅</span>
-মিস্ত্রি হাজিরা
-</button>
-
-<button class="quick orange"
-onclick="goToPage('customersPage')">
-<span class="quick-icon">👤</span>
-Customer হিসাব
-</button>
-
-</div>
-
-</div>
-
 </section>
 
-
-<!-- =====================================================
- CUSTOMERS
-===================================================== -->
-
+<!-- CUSTOMERS -->
 <section id="customersPage" class="page">
-
 <div class="card">
-
-<h2>👤 সকল Customer</h2>
-
+<h2>👤 Customer List</h2>
 <div id="customerList"></div>
-
 </div>
-
 </section>
 
-
-<!-- =====================================================
- NEW CUSTOMER
-===================================================== -->
-
+<!-- NEW CUSTOMER -->
 <section id="newCustomerPage" class="page">
-
 <div class="card">
-
 <h2>➕ নতুন Customer</h2>
 
 <div class="grid">
-
-<div>
-<label>Customer Name</label>
 <input id="customerName" placeholder="Customer Name">
-</div>
-
-<div>
-<label>Phone Number</label>
 <input id="customerPhone" placeholder="Phone Number">
-</div>
-
-<div>
-<label>Address</label>
 <input id="customerAddress" placeholder="Address">
-</div>
-
-<div>
-<label>কাজের ধরন</label>
-<input id="customerWork" placeholder="যেমন: SS Gate">
-</div>
-
-<div>
-<label>Contact Price</label>
-<input id="contractPrice" type="number" placeholder="মোট চুক্তির দাম">
-</div>
-
-<div>
-<label>Delivery Date</label>
-<input id="deliveryDate" type="date">
-</div>
-
+<input id="customerWork" placeholder="কাজের বিবরণ">
+<input id="customerContract" type="number" placeholder="Contact Price">
+<input id="customerDelivery" type="date">
 </div>
 
 <br>
-
-<button class="primary" onclick="addCustomer()">
-💾 Save Customer
-</button>
-
-<div id="customerMessage" class="login-message"></div>
-
+<button class="primary" onclick="addCustomer()">💾 Customer Save</button>
 </div>
-
 </section>
 
-
-<!-- =====================================================
- DUE LIST
-===================================================== -->
-
+<!-- DUE -->
 <section id="duePage" class="page">
-
 <div class="card">
-
-<h2>💰 বাকি তালিকা</h2>
-
-<div class="due-summary">
-
-<div class="small">
-Customer-দের মোট বাকি টাকা
-</div>
-
-<div id="dueTotal" class="due-total">
-৳0
-</div>
-
-<div class="small">
-সম্পূর্ণ টাকা পরিশোধ হয়ে গেলে Customer এই তালিকা থেকে অটো চলে যাবে।
-</div>
-
-</div>
-
+<h2>💰 Due List</h2>
 <div id="dueList"></div>
-
 </div>
-
 </section>
 
-
-<!-- =====================================================
- MATERIALS
-===================================================== -->
-
+<!-- MATERIAL -->
 <section id="materialsPage" class="page">
-
 <div class="card">
-
-<h2>🔩 Materials / মালামাল</h2>
-
+<h2>🔩 Materials</h2>
 <div class="grid">
-
-<input
-id="materialName"
-placeholder="Material Name">
-
-<input
-id="materialPrice"
-type="number"
-placeholder="Price">
-
+<input id="materialName" placeholder="Material Name">
+<input id="materialPrice" type="number" placeholder="Price">
 </div>
-
 <br>
-
-<button class="primary" onclick="addMaterial()">
-➕ Material Save
-</button>
-
+<button class="primary" onclick="addMaterial()">➕ Material Save</button>
 <div id="materialList"></div>
-
 </div>
-
 </section>
 
-
-<!-- =====================================================
- WORKERS
-===================================================== -->
-
+<!-- WORKERS -->
 <section id="workersPage" class="page">
-
 <div class="card">
-
-<h2>👷 Workers / Mistri</h2>
+<h2>👷 Mistri / Worker</h2>
 
 <div class="grid">
-
-<input
-id="workerName"
-placeholder="Mistri Name">
-
-<input
-id="workerSalary"
-type="number"
-placeholder="Monthly Salary">
-
+<input id="workerName" placeholder="Mistri Name">
+<input id="workerSalary" type="number" placeholder="Monthly Salary">
 </div>
 
 <br>
+<button class="primary" onclick="addWorker()">➕ Mistri Save</button>
 
-<button class="primary" onclick="addWorker()">
-➕ Mistri Save
-</button>
-
+<hr>
 <div id="workerList"></div>
-
 </div>
-
 </section>
 
-
-<!-- =====================================================
- ATTENDANCE
-===================================================== -->
-
+<!-- ATTENDANCE -->
 <section id="attendancePage" class="page">
-
 <div class="card">
-
-<h2>📅 মিস্ত্রির হাজিরা খাতা</h2>
+<h2>🕐 Mistri Attendance</h2>
 
 <div class="grid">
-
-<div>
-<label>তারিখ</label>
-<input
-id="attendanceDate"
-type="date">
-</div>
-
-<div>
-<label>মিস্ত্রি</label>
-<select id="attendanceWorker">
-<option value="">
-মিস্ত্রি নির্বাচন করুন
-</option>
-</select>
-</div>
-
+<select id="attendanceWorker"></select>
+<input id="attendanceDate" type="date">
 </div>
 
 <br>
 
-<div class="grid">
-
-<button
-class="success"
-onclick="saveAttendance('present')">
-✅ উপস্থিত
-</button>
-
-<button
-class="danger"
-onclick="saveAttendance('absent')">
-❌ অনুপস্থিত
-</button>
-
+<div class="quick">
+<button class="primary" onclick="saveAttendance('present')">✅ Present</button>
+<button class="red" onclick="saveAttendance('absent')">❌ Absent</button>
+<button class="gray" onclick="saveAttendance('half')">½ Half</button>
 </div>
 
 <br>
-
-<button
-class="secondary"
-style="width:100%;"
-onclick="saveAttendance('half')">
-🌓 অর্ধদিবস
-</button>
-
-<div id="attendanceMessage"
-class="login-message"></div>
-
-</div>
-
-
-<div class="card">
-
-<h3>📊 মাসের হাজিরা ও বেতন</h3>
-
-<div class="grid">
-
-<div>
-<label>মাস নির্বাচন</label>
-<input
-id="attendanceMonth"
-type="month"
-onchange="loadAttendance()">
-</div>
-
-<div>
-<label>মিস্ত্রি</label>
-<select
-id="attendanceFilterWorker"
-onchange="loadAttendance()">
-<option value="">সব মিস্ত্রি</option>
-</select>
-</div>
-
-</div>
-
-<div class="attendance-summary">
-
-<div class="att-box att-present">
-উপস্থিত
-<b id="attPresent">0</b>
-</div>
-
-<div class="att-box att-absent">
-অনুপস্থিত
-<b id="attAbsent">0</b>
-</div>
-
-<div class="att-box att-half">
-অর্ধদিবস
-<b id="attHalf">0</b>
-</div>
-
-<div class="att-box att-salary">
-বেতন
-<b id="attSalary">৳0</b>
-</div>
-
-</div>
-
 <div id="attendanceList"></div>
-
 </div>
+</section>
 
 </section>
 
-
-<!-- =====================================================
- SETTINGS
-===================================================== -->
-
-<section id="settingsPage" class="page">
-
-<div class="card">
-
-<h2>⚙️ Settings</h2>
-
-<div class="grid">
-
-<div>
-<label>ব্যবসার নাম</label>
-<input id="settingName">
-</div>
-
-<div>
-<label>ফোন</label>
-<input id="settingPhone">
-</div>
-
-<div>
-<label>WhatsApp</label>
-<input id="settingWhatsapp">
-</div>
-
-<div>
-<label>Email</label>
-<input id="settingEmail">
-</div>
-
-</div>
-
-<br>
-
-<label>ঠিকানা</label>
-<input id="settingAddress">
-
-<br><br>
-
-<label>ব্যবসার বিবরণ</label>
-<textarea id="settingDescription"></textarea>
-
-<br>
-
-<button class="primary" onclick="saveSettings()">
-💾 Settings Save
-</button>
-
-<div id="settingsMessage" class="login-message"></div>
-
-</div>
-
-</section>
-
-</main>
-
-</section>
-
-
-<!-- =====================================================
- CREATE ACCOUNT MODAL
-===================================================== -->
-
-<div id="createModal" class="modal">
-
-<div class="modal-box">
-
-<button class="close"
-onclick="closeCreateAccount()">×</button>
-
-<div class="modal-title">
-🆕 New Account Created
-</div>
-
-<input id="registerName"
-placeholder="Your Name">
-
-<br><br>
-
-<input id="registerEmail"
-type="email"
-placeholder="Your Email">
-
-<br><br>
-
-<input id="registerPassword"
-type="password"
-placeholder="Your Password">
-
-<br><br>
-
-<button class="primary"
-onclick="createAccount()">
-Create Account
-</button>
-
-<div id="registerMessage"
-class="login-message"></div>
-
-</div>
-</div>
-
-
-<!-- =====================================================
- CUSTOMER DETAIL
-===================================================== -->
-
+<!-- CUSTOMER MODAL -->
 <div id="customerModal" class="modal">
-
-<div class="modal-box">
-
-<button class="close"
-onclick="closeCustomerModal()">×</button>
-
+<div class="modalBox">
+<div class="close">
+<button class="red" onclick="closeCustomer()">✕</button>
+</div>
 <div id="customerDetail"></div>
-
 </div>
 </div>
 
-
-<!-- =====================================================
- PUBLIC PORTAL
-===================================================== -->
-
-<div id="publicModal" class="modal">
-
-<div class="modal-box">
-
-<button class="close"
-onclick="closePublicPortal()">×</button>
-
-<div id="publicPortalContent"></div>
-
+<!-- WORKER DETAIL MODAL/PAGE -->
+<div id="workerModal" class="modal">
+<div class="modalBox">
+<div class="close">
+<button class="red" onclick="closeWorker()">✕</button>
 </div>
-
+<div id="workerDetail"></div>
 </div>
-
+</div>
 
 <script>
+const SUPABASE_URL="https://gzujcqjpxypcoiqhpvvu.supabase.co";
+const SUPABASE_KEY="sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
 
-/* =====================================================
- SUPABASE
-===================================================== */
-
-const SUPABASE_URL =
-"https://gzujcqjpxypcoiqhpvvu.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
-
-const supabaseClient =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
+const supabaseClient=window.supabase.createClient(
+ SUPABASE_URL,SUPABASE_KEY
 );
-
-
-/* =====================================================
- DATA
-===================================================== */
 
 let currentUser=null;
 let customers=[];
 let materials=[];
 let workers=[];
-let attendanceRows=[];
+let currentWorker=null;
+let currentCustomer=null;
 
+function $(id){return document.getElementById(id)}
 
-/* =====================================================
- START
-===================================================== */
-
-document.addEventListener(
-"DOMContentLoaded",
-async()=>{
-
-const result=
-await supabaseClient.auth.getSession();
-
-currentUser=
-result.data.session?.user||null;
-
-setDefaultDates();
-
-if(currentUser){
-
-await showMainPage();
-
-}else{
-
-showLoginPage();
-
+function money(n){
+ return "৳"+Number(n||0).toLocaleString("en-IN");
 }
 
-});
-
-
-function setDefaultDates(){
-
-const today=
-new Date().toISOString().slice(0,10);
-
-const month=
-new Date().toISOString().slice(0,7);
-
-if(document.getElementById("attendanceDate"))
-document.getElementById("attendanceDate").value=today;
-
-if(document.getElementById("attendanceMonth"))
-document.getElementById("attendanceMonth").value=month;
-
+function esc(v){
+ return String(v??"")
+ .replaceAll("&","&amp;")
+ .replaceAll("<","&lt;")
+ .replaceAll(">","&gt;")
+ .replaceAll('"',"&quot;")
+ .replaceAll("'","&#039;");
 }
 
+async function login(){
+ const email=$("loginEmail").value.trim();
+ const password=$("loginPassword").value;
 
-/* =====================================================
- LOGIN
-===================================================== */
+ if(!email||!password){
+  $("loginMsg").textContent="ইমেইল ও Password দিন।";
+  return;
+ }
 
-function showLoginPage(){
+ const {data,error}=await supabaseClient.auth.signInWithPassword({
+  email,password
+ });
 
-document.getElementById("loginPage").style.display="flex";
+ if(error){
+  $("loginMsg").textContent=error.message;
+  return;
+ }
 
-document.getElementById("mainPage").style.display="none";
-
+ currentUser=data.user;
+ await startApp();
 }
 
+async function signup(){
+ const email=$("loginEmail").value.trim();
+ const password=$("loginPassword").value;
 
-async function loginUser(){
+ if(!email||!password){
+  $("loginMsg").textContent="ইমেইল ও Password দিন।";
+  return;
+ }
 
-const email=
-document.getElementById("loginEmail").value.trim();
+ if(password.length<6){
+  $("loginMsg").textContent="Password কমপক্ষে ৬ অক্ষরের দিন।";
+  return;
+ }
 
-const password=
-document.getElementById("loginPassword").value;
+ const {data,error}=await supabaseClient.auth.signUp({
+  email,password
+ });
 
-const message=
-document.getElementById("loginMessage");
+ if(error){
+  $("loginMsg").textContent=error.message;
+  return;
+ }
 
-message.style.color="#d93025";
-
-if(!email||!password){
-
-message.textContent=
-"Email এবং Password দিন।";
-
-return;
+ $("loginMsg").textContent=
+ "Account তৈরি হয়েছে। Email confirmation প্রয়োজন হলে Email দেখুন।";
 }
-
-message.style.color="#0077ff";
-
-message.textContent="Login হচ্ছে...";
-
-const {data,error}=
-await supabaseClient.auth.signInWithPassword({
-
-email:email,
-password:password
-
-});
-
-if(error){
-
-message.style.color="#d93025";
-
-message.textContent=
-"Email অথবা Password সঠিক নয়।";
-
-return;
-}
-
-currentUser=data.user;
-
-await showMainPage();
-
-}
-
-
-async function logoutUser(){
-
-await supabaseClient.auth.signOut();
-
-currentUser=null;
-
-showLoginPage();
-
-}
-
-
-/* =====================================================
- ACCOUNT
-===================================================== */
-
-function openCreateAccount(){
-
-document.getElementById("createModal").style.display="flex";
-
-}
-
-function closeCreateAccount(){
-
-document.getElementById("createModal").style.display="none";
-
-}
-
-
-async function createAccount(){
-
-const name=
-document.getElementById("registerName").value.trim();
-
-const email=
-document.getElementById("registerEmail").value.trim();
-
-const password=
-document.getElementById("registerPassword").value;
-
-const message=
-document.getElementById("registerMessage");
-
-if(!name||!email||!password){
-
-message.style.color="#d93025";
-
-message.textContent=
-"সব তথ্য পূরণ করুন।";
-
-return;
-}
-
-if(password.length<6){
-
-message.style.color="#d93025";
-
-message.textContent=
-"Password কমপক্ষে ৬ অক্ষরের হতে হবে।";
-
-return;
-}
-
-message.style.color="#0077ff";
-
-message.textContent="Account তৈরি হচ্ছে...";
-
-const {data,error}=
-await supabaseClient.auth.signUp({
-
-email:email,
-password:password,
-
-options:{
-data:{
-full_name:name
-}
-}
-
-});
-
-if(error){
-
-message.style.color="#d93025";
-
-message.textContent=error.message;
-
-return;
-}
-
-message.style.color="#087f5b";
-
-message.textContent=
-"Account তৈরি হয়েছে। এখন Login করুন।";
-
-document.getElementById("loginEmail").value=email;
-
-document.getElementById("loginPassword").value="";
-
-}
-
-
-/* =====================================================
- FORGOT PASSWORD
-===================================================== */
 
 async function forgotPassword(){
+ const email=$("loginEmail").value.trim();
 
-const email=
-document.getElementById("loginEmail").value.trim();
+ if(!email){
+  $("loginMsg").textContent="আগে Email লিখুন।";
+  return;
+ }
 
-const message=
-document.getElementById("loginMessage");
+ const {error}=await supabaseClient.auth.resetPasswordForEmail(email,{
+  redirectTo:location.origin+location.pathname
+ });
 
-if(!email){
-
-message.style.color="#d93025";
-
-message.textContent=
-"আগে Your Email ঘরে আপনার Email লিখুন।";
-
-return;
+ $("loginMsg").textContent=
+ error?error.message:"Password reset link Email-এ পাঠানো হয়েছে।";
 }
 
-const {error}=
-await supabaseClient.auth.resetPasswordForEmail(
-email,
-{
-redirectTo:
-window.location.origin+
-window.location.pathname
-}
-);
-
-if(error){
-
-message.style.color="#d93025";
-
-message.textContent=error.message;
-
-}else{
-
-message.style.color="#087f5b";
-
-message.textContent=
-"Password পরিবর্তনের জন্য আপনার Email দেখুন।";
-
+async function logout(){
+ await supabaseClient.auth.signOut();
+ location.reload();
 }
 
+async function startApp(){
+ $("loginPage").style.display="none";
+ $("mainPage").style.display="block";
+
+ await loadAll();
 }
 
-
-/* =====================================================
- MAIN
-===================================================== */
-
-async function showMainPage(){
-
-document.getElementById("loginPage").style.display="none";
-
-document.getElementById("mainPage").style.display="block";
-
-await checkAccountingAccess();
-
-await loadAllData();
-
-loadSettings();
-
-setDefaultDates();
-
+async function loadAll(){
+ await loadCustomers();
+ await loadMaterials();
+ await loadWorkers();
+ await loadDue();
 }
 
+function showPage(id,btn){
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+ $(id).classList.add("active");
 
-async function checkAccountingAccess(){
+ document.querySelectorAll(".menu button")
+ .forEach(x=>x.classList.remove("active"));
 
-if(!currentUser)return;
+ if(btn)btn.classList.add("active");
 
-const {data,error}=
-await supabaseClient
-.from("accounting_admins")
-.select("user_id")
-.eq("user_id",currentUser.id)
-.maybeSingle();
-
-if(error){
-
-console.log(error);
-
-return;
+ if(id==="workersPage")loadWorkers();
+ if(id==="attendancePage")loadAttendanceWorkers();
+ if(id==="duePage")loadDue();
+ if(id==="customersPage")loadCustomers();
 }
 
-if(!data){
-
-console.log(
-"এই account accounting admin নয়।"
-);
-
+function go(id){
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+ $(id).classList.add("active");
+ window.scrollTo(0,0);
 }
 
-}
-
-
-/* =====================================================
- MENU
-===================================================== */
-
-function toggleMenu(){
-
-const menu=
-document.getElementById("mainMenu");
-
-menu.classList.toggle("open");
-
-}
-
-
-function closeMenu(){
-
-document
-.getElementById("mainMenu")
-.classList.remove("open");
-
-}
-
-
-function showPage(id,button){
-
-document.querySelectorAll(".page")
-.forEach(page=>
-page.classList.remove("active"));
-
-document.getElementById(id)
-.classList.add("active");
-
-document.querySelectorAll(".menu button")
-.forEach(btn=>
-btn.classList.remove("active"));
-
-if(button){
-
-button.classList.add("active");
-
-}
-
-closeMenu();
-
-if(id==="duePage"){
-renderDueList();
-}
-
-if(id==="attendancePage"){
-loadAttendanceWorkers();
-loadAttendance();
-}
-
-}
-
-
-function goToPage(id){
-
-const button=
-document.querySelector(
-`.menu button[onclick*="'${id}'"]`
-);
-
-showPage(id,button);
-
-}
-
-
-/* =====================================================
- LOAD ALL
-===================================================== */
-
-async function loadAllData(){
-
-await loadCustomers();
-
-await loadMaterials();
-
-await loadWorkers();
-
-await loadAttendanceWorkers();
-
-}
-
-
-/* =====================================================
- CUSTOMERS
-===================================================== */
+/* CUSTOMER */
 
 async function loadCustomers(){
+ const {data,error}=await supabaseClient
+ .from("customers")
+ .select("*")
+ .eq("admin_id",currentUser.id)
+ .order("created_at",{ascending:false});
 
-const {data,error}=
-await supabaseClient
-.from("customers")
-.select("*")
-.eq("admin_id",currentUser.id)
-.order("created_at",{ascending:false});
+ if(error){
+  console.log(error);
+  return;
+ }
 
-if(error){
+ customers=data||[];
 
-console.log(error);
+ $("homeCustomers").textContent=customers.length;
 
-return;
+ renderCustomers();
+ await loadDue();
 }
-
-customers=data||[];
-
-renderCustomers();
-
-renderDueList();
-
-document.getElementById("homeCustomers")
-.textContent=customers.length;
-
-}
-
 
 function renderCustomers(){
+ if(!customers.length){
+  $("customerList").innerHTML=
+   '<div class="empty">কোনো Customer নেই।</div>';
+  return;
+ }
 
-const box=
-document.getElementById("customerList");
-
-if(!customers.length){
-
-box.innerHTML=
-'<div class="empty">এখনও কোনো Customer নেই।</div>';
-
-return;
+ $("customerList").innerHTML=customers.map(c=>`
+ <div class="workerBox">
+  <div class="workerHead">
+   <div>
+    <div class="workerName">${esc(c.name)}</div>
+    <div>${esc(c.phone||"")}</div>
+    <div class="small">${esc(c.address||"")}</div>
+   </div>
+   <button class="blue"
+    onclick='openCustomer(${JSON.stringify(c.id)})'>
+    📂 হিসাব
+   </button>
+  </div>
+ </div>
+ `).join("");
 }
-
-box.innerHTML=
-customers.map(customer=>`
-
-<div class="customer">
-
-<div class="customer-head">
-
-<div>
-
-<div class="customer-name">
-${escapeHtml(customer.name||"")}
-</div>
-
-<div class="small">
-📞 ${escapeHtml(customer.phone||"")}<br>
-📍 ${escapeHtml(customer.address||"")}<br>
-🔑 Customer Code:
-<span class="code-badge">
-${escapeHtml(customer.portal_code||"----")}
-</span>
-</div>
-
-</div>
-
-<div class="amount">
-৳${Number(customer.contract_price||0).toLocaleString()}
-</div>
-
-</div>
-
-<br>
-
-<div class="small">
-🔧 ${escapeHtml(customer.work||"")}<br>
-📅 Delivery:
-${escapeHtml(customer.delivery_date||"নির্ধারিত নয়")}
-</div>
-
-<br>
-
-<button
-class="primary"
-onclick='openCustomer(${JSON.stringify(customer.id)})'>
-📂 হিসাব খুলুন
-</button>
-
-</div>
-
-`).join("");
-
-}
-
-
-/* =====================================================
- DUE LIST
-===================================================== */
-
-async function renderDueList(){
-
-const box=
-document.getElementById("dueList");
-
-if(!box)return;
-
-if(!customers.length){
-
-box.innerHTML=
-'<div class="empty">এখনও কোনো Customer নেই।</div>';
-
-document.getElementById("dueTotal")
-.textContent="৳0";
-
-document.getElementById("homeDue")
-.textContent="0";
-
-return;
-}
-
-const ids=
-customers.map(c=>c.id);
-
-const {data:payments,error}=
-await supabaseClient
-.from("customer_payments")
-.select("customer_id,amount")
-.eq("admin_id",currentUser.id)
-.in("customer_id",ids);
-
-if(error){
-
-console.log(error);
-
-return;
-}
-
-const paidMap={};
-
-(payments||[]).forEach(p=>{
-
-const id=String(p.customer_id);
-
-paidMap[id]=
-(paidMap[id]||0)+Number(p.amount||0);
-
-});
-
-let totalDue=0;
-
-const dueCustomers=[];
-
-customers.forEach(c=>{
-
-const contract=
-Number(c.contract_price||0);
-
-const paid=
-Number(paidMap[String(c.id)]||0);
-
-const due=
-Math.max(contract-paid,0);
-
-if(due>0){
-
-totalDue+=due;
-
-dueCustomers.push({
-...c,
-paid:paid,
-due:due
-});
-
-}
-
-});
-
-document.getElementById("dueTotal")
-.textContent=
-"৳"+totalDue.toLocaleString();
-
-document.getElementById("homeDue")
-.textContent=
-dueCustomers.length;
-
-if(!dueCustomers.length){
-
-box.innerHTML=`
-
-<div class="empty">
-
-🎉 কোনো Customer-এর টাকা বাকি নেই।
-
-</div>
-
-`;
-
-return;
-}
-
-box.innerHTML=
-dueCustomers.map(c=>`
-
-<div class="due-item">
-
-<div>
-
-<div class="due-name">
-${escapeHtml(c.name||"")}
-</div>
-
-<div class="due-phone">
-📞 ${escapeHtml(c.phone||"")}
-</div>
-
-</div>
-
-<div style="text-align:right;">
-
-<div class="due-amount">
-৳${c.due.toLocaleString()}
-</div>
-
-<button
-class="secondary"
-style="margin-top:6px;"
-onclick='openCustomer(${JSON.stringify(c.id)})'>
-হিসাব
-</button>
-
-</div>
-
-</div>
-
-`).join("");
-
-}
-
-
-/* =====================================================
- ADD CUSTOMER
-===================================================== */
 
 async function addCustomer(){
+ const name=$("customerName").value.trim();
 
-const name=
-document.getElementById("customerName").value.trim();
+ if(!name){
+  alert("Customer Name দিন।");
+  return;
+ }
 
-const phone=
-document.getElementById("customerPhone").value.trim();
+ const {data,error}=await supabaseClient
+ .from("customers")
+ .insert({
+  admin_id:currentUser.id,
+  name,
+  phone:$("customerPhone").value.trim(),
+  address:$("customerAddress").value.trim(),
+  work:$("customerWork").value.trim(),
+  contract_price:Number($("customerContract").value||0),
+  delivery_date:$("customerDelivery").value||null
+ })
+ .select()
+ .single();
 
-const address=
-document.getElementById("customerAddress").value.trim();
+ if(error){
+  alert(error.message);
+  return;
+ }
 
-const work=
-document.getElementById("customerWork").value.trim();
+ alert("Customer Save হয়েছে।");
 
-const contract=
-Number(
-document.getElementById("contractPrice").value||0
-);
+ ["customerName","customerPhone","customerAddress",
+  "customerWork","customerContract","customerDelivery"]
+ .forEach(id=>$(id).value="");
 
-const delivery=
-document.getElementById("deliveryDate").value;
-
-const message=
-document.getElementById("customerMessage");
-
-if(!name||!phone||!address){
-
-message.style.color="#d93025";
-
-message.textContent=
-"Customer Name, Phone এবং Address দিন।";
-
-return;
+ await loadCustomers();
+ go("customersPage");
 }
-
-const {data,error}=
-await supabaseClient
-.from("customers")
-.insert({
-
-admin_id:currentUser.id,
-name:name,
-phone:phone,
-address:address,
-work:work,
-contract_price:contract,
-delivery_date:delivery||null
-
-})
-.select()
-.single();
-
-if(error){
-
-message.style.color="#d93025";
-
-message.textContent=error.message;
-
-return;
-}
-
-message.style.color="#087f5b";
-
-message.textContent=
-"Customer Save হয়েছে। Customer Code: "+
-(data?.portal_code||"");
-
-document.getElementById("customerName").value="";
-document.getElementById("customerPhone").value="";
-document.getElementById("customerAddress").value="";
-document.getElementById("customerWork").value="";
-document.getElementById("contractPrice").value="";
-document.getElementById("deliveryDate").value="";
-
-await loadCustomers();
-
-}
-
-
-/* =====================================================
- CUSTOMER DETAIL
-===================================================== */
 
 async function openCustomer(id){
+ currentCustomer=customers.find(c=>String(c.id)===String(id));
 
-const customer=
-customers.find(c=>String(c.id)===String(id));
+ if(!currentCustomer)return;
 
-if(!customer)return;
-
-const detail=
-document.getElementById("customerDetail");
-
-detail.innerHTML=`
-
-<h2>👤 ${escapeHtml(customer.name||"")}</h2>
-
-<div class="status">
-📞 Phone:
-<b>${escapeHtml(customer.phone||"")}</b>
-</div>
-
-<div class="status">
-📍 Address:
-<b>${escapeHtml(customer.address||"")}</b>
-</div>
-
-<div class="status">
-🔧 Work:
-<b>${escapeHtml(customer.work||"")}</b>
-</div>
-
-<div class="status">
-🔑 Customer Code:
-<br>
-<span class="code-badge">
-${escapeHtml(customer.portal_code||"----")}
-</span>
-</div>
-
-<div class="status">
-💰 Contact Price:
-<b>৳${Number(customer.contract_price||0).toLocaleString()}</b>
-</div>
-
-<div class="status">
-📅 Delivery:
-<b>${escapeHtml(customer.delivery_date||"নির্ধারিত নয়")}</b>
-</div>
-
-<hr>
-
-<h3>📊 কাজের হিসাব</h3>
-
-<div class="stats">
-
-<div class="stat">
-মাল
-<b id="detailMaterial">৳0</b>
-</div>
-
-<div class="stat">
-মিস্ত্রি
-<b id="detailWorker">৳0</b>
-</div>
-
-<div class="stat">
-অন্যান্য
-<b id="detailOther">৳0</b>
-</div>
-
-<div class="stat">
-লাভ
-<b id="detailProfit">৳0</b>
-</div>
-
-</div>
-
-<div class="status" style="margin-top:12px;">
-💵 Customer-এর কাছ থেকে মোট জমা:
-<b id="detailPaid">৳0</b>
-<br>
-⏳ Customer-এর বাকি:
-<b id="detailDue" class="bad">৳0</b>
-</div>
-
-<hr>
-
-<h3>🔩 Customer-এর মাল যোগ করুন</h3>
-
-<div class="grid">
-
-<select id="customerMaterialSelect"
-onchange="fillMaterialPrice()">
-
-<option value="">
-Material নির্বাচন করুন
-</option>
-
-${materials.map(m=>`
-
-<option
-value="${escapeHtml(m.id)}"
-data-price="${Number(m.price||0)}">
-
-${escapeHtml(m.name)}
-
-</option>
-
-`).join("")}
-
-</select>
-
-<input
-id="customerMaterialQty"
-type="number"
-step="0.01"
-placeholder="পরিমাণ">
-
-</div>
-
-<br>
-
-<input
-id="customerMaterialPrice"
-type="number"
-placeholder="একক দাম">
-
-<br><br>
-
-<button
-class="primary"
-onclick='addCustomerMaterial(${JSON.stringify(customer.id)})'>
-➕ মাল যোগ করুন
-</button>
-
-<div id="customerMaterialMessage"
-class="login-message"></div>
-
-
-<div class="section-title">
-👷 Customer-এর কাজে মিস্ত্রি যোগ করুন
-</div>
-
-<div class="grid">
-
-<select id="customerWorkerSelect"
-onchange="fillWorkerSalary()">
-
-<option value="">
-মিস্ত্রি নির্বাচন করুন
-</option>
-
-${workers.map(w=>`
-
-<option
-value="${escapeHtml(w.id)}"
-data-salary="${Number(w.monthly_salary||0)}">
-
-${escapeHtml(w.name)}
-
-</option>
-
-`).join("")}
-
-</select>
-
-<input
-id="customerWorkerDays"
-type="number"
-step="0.5"
-placeholder="কত দিন">
-
-</div>
-
-<br>
-
-<input
-id="customerWorkerSalary"
-type="number"
-placeholder="মাসিক Salary">
-
-<br><br>
-
-<input
-id="customerWorkerDate"
-type="date">
-
-<br><br>
-
-<button
-class="primary"
-onclick='addCustomerWorker(${JSON.stringify(customer.id)})'>
-➕ মিস্ত্রির কাজ যোগ করুন
-</button>
-
-<div id="customerWorkerMessage"
-class="login-message"></div>
-
-
-<div class="section-title">
-🧾 অন্যান্য খরচ
-</div>
-
-<div class="grid">
-
-<input
-id="expenseName"
-placeholder="খরচের নাম">
-
-<input
-id="expenseAmount"
-type="number"
-placeholder="টাকা">
-
-</div>
-
-<br>
-
-<button
-class="primary"
-onclick='addCustomerExpense(${JSON.stringify(customer.id)})'>
-➕ খরচ যোগ করুন
-</button>
-
-
-<div class="section-title">
-💰 Customer-এর কাছ থেকে টাকা জমা
-</div>
-
-<div class="grid">
-
-<input
-id="customerPaymentDate"
-type="date">
-
-<input
-id="customerPaymentAmount"
-type="number"
-placeholder="কত টাকা জমা">
-
-</div>
-
-<br>
-
-<input
-id="customerPaymentNote"
-placeholder="নোট">
-
-<br><br>
-
-<button
-class="success"
-onclick='addCustomerPayment(${JSON.stringify(customer.id)})'>
-💰 টাকা জমা করুন
-</button>
-
-<div id="customerPaymentMessage"
-class="login-message"></div>
-
-
-<div class="section-title">
-📜 টাকা জমার ইতিহাস
-</div>
-
-<div id="customerPaymentHistory">
-লোড হচ্ছে...
-</div>
-
-
-<div class="section-title">
-🔩 মাল খরচের তালিকা
-</div>
-
-<div id="customerMaterialHistory">
-লোড হচ্ছে...
-</div>
-
-
-<div class="section-title">
-👷 মিস্ত্রির কাজের তালিকা
-</div>
-
-<div id="customerWorkerHistory">
-লোড হচ্ছে...
-</div>
-
-`;
-
-document.getElementById("customerModal")
-.style.display="flex";
-
-document.getElementById("customerPaymentDate")
-.value=new Date().toISOString().slice(0,10);
-
-document.getElementById("customerWorkerDate")
-.value=new Date().toISOString().slice(0,10);
-
-await calculateCustomer(id);
-
-await loadCustomerHistory(id);
-
+ await renderCustomerDetail();
+ $("customerModal").classList.add("show");
 }
 
-
-function fillMaterialPrice(){
-
-const select=
-document.getElementById("customerMaterialSelect");
-
-const option=
-select.options[select.selectedIndex];
-
-if(!option)return;
-
-document.getElementById("customerMaterialPrice")
-.value=option.dataset.price||"";
-
+function closeCustomer(){
+ $("customerModal").classList.remove("show");
 }
 
+async function renderCustomerDetail(){
+ const c=currentCustomer;
 
-function fillWorkerSalary(){
+ const {data:payments}=await supabaseClient
+ .from("customer_payments")
+ .select("*")
+ .eq("customer_id",c.id)
+ .eq("admin_id",currentUser.id)
+ .order("payment_date",{ascending:false});
 
-const select=
-document.getElementById("customerWorkerSelect");
+ const paid=(payments||[])
+ .reduce((a,x)=>a+Number(x.amount||0),0);
 
-const option=
-select.options[select.selectedIndex];
+ const due=Math.max(Number(c.contract_price||0)-paid,0);
 
-if(!option)return;
+ const {data:cm}=await supabaseClient
+ .from("customer_materials")
+ .select("*")
+ .eq("customer_id",c.id)
+ .eq("admin_id",currentUser.id)
+ .order("created_at",{ascending:false});
 
-document.getElementById("customerWorkerSalary")
-.value=option.dataset.salary||"";
+ const {data:cw}=await supabaseClient
+ .from("customer_workers")
+ .select("*")
+ .eq("customer_id",c.id)
+ .eq("admin_id",currentUser.id)
+ .order("work_date",{ascending:false});
 
+ const {data:ex}=await supabaseClient
+ .from("customer_expenses")
+ .select("*")
+ .eq("customer_id",c.id)
+ .eq("admin_id",currentUser.id)
+ .order("created_at",{ascending:false});
+
+ const materialTotal=(cm||[])
+ .reduce((a,x)=>a+Number(x.total||0),0);
+
+ const workerTotal=(cw||[])
+ .reduce((a,x)=>a+Number(x.total||0),0);
+
+ const expenseTotal=(ex||[])
+ .reduce((a,x)=>a+Number(x.amount||0),0);
+
+ $("customerDetail").innerHTML=`
+ <h2>👤 ${esc(c.name)}</h2>
+
+ <p>📞 ${esc(c.phone||"")}</p>
+ <p>📍 ${esc(c.address||"")}</p>
+ <p>🔨 ${esc(c.work||"")}</p>
+ <p>🚚 Delivery: ${esc(c.delivery_date||"")}</p>
+
+ <div class="stats">
+  <div class="stat">Contract<b>${money(c.contract_price)}</b></div>
+  <div class="stat">Paid<b>${money(paid)}</b></div>
+  <div class="stat">Due<b class="due">${money(due)}</b></div>
+  <div class="stat">Material<b>${money(materialTotal)}</b></div>
+ </div>
+
+ <div class="card">
+  <h3>💳 Customer Payment</h3>
+
+  <div class="grid">
+   <input id="custPayDate" type="date"
+    value="${new Date().toISOString().slice(0,10)}">
+
+   <input id="custPayAmount" type="number"
+    placeholder="কত টাকা নিয়েছেন?">
+  </div>
+
+  <br>
+  <input id="custPayNote" placeholder="Note">
+
+  <br><br>
+  <button class="primary"
+   onclick='addCustomerPayment(${JSON.stringify(c.id)})'>
+   💾 Payment Save
+  </button>
+ </div>
+
+ <div class="card">
+  <h3>🔩 মাল যোগ করুন</h3>
+
+  <div class="grid">
+   <select id="customerMaterialSelect"
+    onchange="materialPriceAuto()">
+    <option value="">Material নির্বাচন করুন</option>
+    ${materials.map(m=>`
+     <option value="${m.id}"
+      data-price="${Number(m.price||0)}">
+      ${esc(m.name)} — ${money(m.price)}
+     </option>
+    `).join("")}
+   </select>
+
+   <input id="customerMaterialPrice" type="number"
+    placeholder="Price">
+
+   <input id="customerMaterialQty" type="number"
+    placeholder="Quantity" value="1">
+
+   <input id="customerMaterialName"
+    placeholder="Material Name">
+  </div>
+
+  <br>
+  <button class="primary"
+   onclick='addCustomerMaterial(${JSON.stringify(c.id)})'>
+   ➕ মাল যোগ
+  </button>
+
+  <div>
+   ${(cm||[]).map(x=>`
+    <p>🔩 ${esc(x.name)}
+    × ${x.qty}
+    = <b>${money(x.total)}</b></p>
+   `).join("")||'<div class="empty">মাল নেই</div>'}
+  </div>
+ </div>
+
+ <div class="card">
+  <h3>👷 Mistri কাজ যোগ করুন</h3>
+
+  <div class="grid">
+   <select id="customerWorkerSelect">
+    <option value="">Mistri নির্বাচন করুন</option>
+    ${workers.map(w=>`
+     <option value="${w.id}">
+      ${esc(w.name)} — ${money(w.monthly_salary)}
+     </option>
+    `).join("")}
+   </select>
+
+   <input id="customerWorkerDays"
+    type="number" step="0.5" placeholder="কত দিন">
+
+   <input id="customerWorkerSalary"
+    type="number" placeholder="Monthly Salary">
+
+   <input id="customerWorkerDate" type="date"
+    value="${new Date().toISOString().slice(0,10)}">
+  </div>
+
+  <br>
+  <button class="primary"
+   onclick='addCustomerWorker(${JSON.stringify(c.id)})'>
+   ➕ Mistri কাজ যোগ
+  </button>
+
+  <div>
+   ${(cw||[]).map(x=>`
+    <p>
+     👷 ${esc(x.name)}
+     | ${x.days} দিন
+     | ${money(x.total)}
+     | ${esc(x.work_date||"")}
+    </p>
+   `).join("")||'<div class="empty">Mistri কাজ নেই</div>'}
+  </div>
+ </div>
+
+ <div class="card">
+  <h3>📋 হিসাব</h3>
+  <p>🔩 মাল: <b>${money(materialTotal)}</b></p>
+  <p>👷 মিস্ত্রি: <b>${money(workerTotal)}</b></p>
+  <p>📦 অন্যান্য: <b>${money(expenseTotal)}</b></p>
+  <p>💰 মোট খরচ:
+   <b>${money(materialTotal+workerTotal+expenseTotal)}</b>
+  </p>
+  <p>📈 লাভ:
+   <b class="ok">
+   ${money(Number(c.contract_price||0)-
+    materialTotal-workerTotal-expenseTotal)}
+   </b>
+  </p>
+ </div>
+
+ <div class="card">
+  <h3>💳 Payment History</h3>
+  ${(payments||[]).map(x=>`
+   <p>📅 ${esc(x.payment_date||"")}
+   — <b>${money(x.amount)}</b>
+   — ${esc(x.note||"")}</p>
+  `).join("")||'<div class="empty">Payment নেই</div>'}
+ </div>
+ `;
 }
 
+function materialPriceAuto(){
+ const s=$("customerMaterialSelect");
+ const o=s.options[s.selectedIndex];
+ $("customerMaterialPrice").value=o?.dataset?.price||"";
+
+ if(o?.value){
+  const m=materials.find(x=>String(x.id)===String(o.value));
+  if(m)$("customerMaterialName").value=m.name;
+ }
+}
 
 async function addCustomerMaterial(customerId){
+ const materialId=$("customerMaterialSelect").value;
+ const name=$("customerMaterialName").value.trim();
+ const price=Number($("customerMaterialPrice").value||0);
+ const qty=Number($("customerMaterialQty").value||0);
 
-const materialId=
-document.getElementById("customerMaterialSelect").value;
+ if(!name||!price||!qty){
+  alert("Material, Price এবং Quantity দিন।");
+  return;
+ }
 
-const qty=
-Number(
-document.getElementById("customerMaterialQty").value||0
-);
+ const {error}=await supabaseClient
+ .from("customer_materials")
+ .insert({
+  admin_id:currentUser.id,
+  customer_id:customerId,
+  material_id:materialId||null,
+  name,
+  price,
+  qty,
+  total:price*qty
+ });
 
-const price=
-Number(
-document.getElementById("customerMaterialPrice").value||0
-);
+ if(error){
+  alert(error.message);
+  return;
+ }
 
-const message=
-document.getElementById("customerMaterialMessage");
-
-if(!materialId||qty<=0||price<=0){
-
-message.style.color="#d93025";
-
-message.textContent=
-"Material, পরিমাণ এবং দাম দিন।";
-
-return;
+ await renderCustomerDetail();
+ await loadCustomers();
 }
-
-const option=
-document.getElementById("customerMaterialSelect")
-.options[
-document.getElementById("customerMaterialSelect").selectedIndex
-];
-
-const name=option.textContent.trim();
-
-const total=qty*price;
-
-const {error}=
-await supabaseClient
-.from("customer_materials")
-.insert({
-
-admin_id:currentUser.id,
-customer_id:customerId,
-material_id:materialId,
-name:name,
-price:price,
-qty:qty,
-total:total
-
-});
-
-if(error){
-
-message.style.color="#d93025";
-
-message.textContent=error.message;
-
-return;
-}
-
-message.style.color="#087f5b";
-
-message.textContent="মাল যোগ হয়েছে।";
-
-document.getElementById("customerMaterialQty").value="";
-
-await calculateCustomer(customerId);
-
-await loadCustomerHistory(customerId);
-
-}
-
 
 async function addCustomerWorker(customerId){
+ const workerId=$("customerWorkerSelect").value;
+ const days=Number($("customerWorkerDays").value||0);
+ const salary=Number($("customerWorkerSalary").value||0);
+ const workDate=$("customerWorkerDate").value;
 
-const workerId=
-document.getElementById("customerWorkerSelect").value;
+ if(!workerId||!days||!salary){
+  alert("Mistri, দিন ও Salary দিন।");
+  return;
+ }
 
-const days=
-Number(
-document.getElementById("customerWorkerDays").value||0
-);
+ const worker=workers.find(
+  w=>String(w.id)===String(workerId)
+ );
 
-const salary=
-Number(
-document.getElementById("customerWorkerSalary").value||0
-);
+ const total=(salary/30)*days;
 
-const workDate=
-document.getElementById("customerWorkerDate").value;
+ const {error}=await supabaseClient
+ .from("customer_workers")
+ .insert({
+  admin_id:currentUser.id,
+  customer_id:customerId,
+  worker_id:workerId,
+  name:worker?.name||"",
+  salary,
+  days,
+  total,
+  work_date:workDate||null
+ });
 
-const message=
-document.getElementById("customerWorkerMessage");
+ if(error){
+  alert(error.message);
+  return;
+ }
 
-if(!workerId||days<=0||salary<=0){
+ alert("Mistri কাজ Save হয়েছে।");
 
-message.style.color="#d93025";
-
-message.textContent=
-"মিস্ত্রি, দিন এবং Salary দিন।";
-
-return;
+ await renderCustomerDetail();
 }
-
-const worker=
-workers.find(w=>
-String(w.id)===String(workerId));
-
-const total=
-(salary/30)*days;
-
-const {error}=
-await supabaseClient
-.from("customer_workers")
-.insert({
-
-admin_id:currentUser.id,
-customer_id:customerId,
-worker_id:workerId,
-name:worker?.name||"",
-salary:salary,
-days:days,
-total:total,
-work_date:workDate||null
-
-});
-
-if(error){
-
-message.style.color="#d93025";
-
-message.textContent=error.message;
-
-return;
-}
-
-message.style.color="#087f5b";
-
-message.textContent=
-"মিস্ত্রির কাজ যোগ হয়েছে।";
-
-document.getElementById("customerWorkerDays").value="";
-
-await calculateCustomer(customerId);
-
-await loadCustomerHistory(customerId);
-
-}
-
-
-async function addCustomerExpense(customerId){
-
-const name=
-document.getElementById("expenseName").value.trim();
-
-const amount=
-Number(
-document.getElementById("expenseAmount").value||0
-);
-
-if(!name||amount<=0){
-
-alert("খরচের নাম ও টাকা দিন।");
-
-return;
-}
-
-const {error}=
-await supabaseClient
-.from("customer_expenses")
-.insert({
-
-admin_id:currentUser.id,
-customer_id:customerId,
-name:name,
-amount:amount
-
-});
-
-if(error){
-
-alert(error.message);
-
-return;
-}
-
-document.getElementById("expenseName").value="";
-document.getElementById("expenseAmount").value="";
-
-await calculateCustomer(customerId);
-
-}
-
 
 async function addCustomerPayment(customerId){
+ const amount=Number($("custPayAmount").value||0);
 
-const paymentDate=
-document.getElementById("customerPaymentDate").value;
+ if(!amount){
+  alert("Payment amount দিন।");
+  return;
+ }
 
-const amount=
-Number(
-document.getElementById("customerPaymentAmount").value||0
-);
+ const {error}=await supabaseClient
+ .from("customer_payments")
+ .insert({
+  admin_id:currentUser.id,
+  customer_id:customerId,
+  payment_date:$("custPayDate").value||
+   new Date().toISOString().slice(0,10),
+  amount,
+  note:$("custPayNote").value.trim()
+ });
 
-const note=
-document.getElementById("customerPaymentNote").value.trim();
+ if(error){
+  alert(error.message);
+  return;
+ }
 
-const message=
-document.getElementById("customerPaymentMessage");
+ alert("Customer Payment Save হয়েছে।");
 
-if(!paymentDate||amount<=0){
-
-message.style.color="#d93025";
-
-message.textContent=
-"তারিখ এবং টাকার পরিমাণ দিন।";
-
-return;
+ await renderCustomerDetail();
+ await loadCustomers();
 }
 
-const {error}=
-await supabaseClient
-.from("customer_payments")
-.insert({
+/* DUE */
 
-admin_id:currentUser.id,
-customer_id:customerId,
-payment_date:paymentDate,
-amount:amount,
-note:note
+async function loadDue(){
+ if(!customers.length){
+  $("homeDue").textContent="৳0";
+  $("dueList").innerHTML=
+   '<div class="empty">কোনো Due নেই।</div>';
+  return;
+ }
 
-});
+ const {data:payments,error}=await supabaseClient
+ .from("customer_payments")
+ .select("customer_id,amount")
+ .eq("admin_id",currentUser.id);
 
-if(error){
+ if(error){
+  console.log(error);
+  return;
+ }
 
-message.style.color="#d93025";
+ let totalDue=0;
+ let html="";
 
-message.textContent=error.message;
+ customers.forEach(c=>{
+  const paid=(payments||[])
+   .filter(x=>String(x.customer_id)===String(c.id))
+   .reduce((a,x)=>a+Number(x.amount||0),0);
 
-return;
+  const due=Math.max(
+   Number(c.contract_price||0)-paid,0
+  );
+
+  if(due>0){
+   totalDue+=due;
+
+   html+=`
+   <div class="workerBox">
+    <div class="workerHead">
+     <div>
+      <div class="workerName">${esc(c.name)}</div>
+      <div class="due">${money(due)} বাকি</div>
+     </div>
+
+     <button class="blue"
+      onclick='openCustomer(${JSON.stringify(c.id)})'>
+      📂 হিসাব
+     </button>
+    </div>
+   </div>`;
+  }
+ });
+
+ $("homeDue").textContent=money(totalDue);
+
+ $("dueList").innerHTML=html||
+  '<div class="empty">🎉 কোনো Due নেই।</div>';
 }
 
-message.style.color="#087f5b";
-
-message.textContent=
-"Customer-এর টাকা জমা হয়েছে।";
-
-document.getElementById("customerPaymentAmount").value="";
-document.getElementById("customerPaymentNote").value="";
-
-await loadCustomers();
-
-await calculateCustomer(customerId);
-
-await loadCustomerHistory(customerId);
-
-}
-
-
-/* =====================================================
- CUSTOMER HISTORY
-===================================================== */
-
-async function loadCustomerHistory(customerId){
-
-const paymentBox=
-document.getElementById("customerPaymentHistory");
-
-const materialBox=
-document.getElementById("customerMaterialHistory");
-
-const workerBox=
-document.getElementById("customerWorkerHistory");
-
-
-const {data:payments}=
-await supabaseClient
-.from("customer_payments")
-.select("*")
-.eq("customer_id",customerId)
-.eq("admin_id",currentUser.id)
-.order("payment_date",{ascending:false});
-
-
-if(!payments||!payments.length){
-
-paymentBox.innerHTML=
-'<div class="empty">এখনও কোনো টাকা জমা নেই।</div>';
-
-}else{
-
-paymentBox.innerHTML=`
-
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>তারিখ</th>
-<th>টাকা</th>
-<th>নোট</th>
-</tr>
-
-${payments.map(p=>`
-
-<tr>
-<td>${escapeHtml(p.payment_date||"")}</td>
-<td>৳${Number(p.amount||0).toLocaleString()}</td>
-<td>${escapeHtml(p.note||"")}</td>
-</tr>
-
-`).join("")}
-
-</table>
-
-</div>
-
-`;
-
-}
-
-
-const {data:materialRows}=
-await supabaseClient
-.from("customer_materials")
-.select("*")
-.eq("customer_id",customerId)
-.eq("admin_id",currentUser.id)
-.order("id",{ascending:false});
-
-
-if(!materialRows||!materialRows.length){
-
-materialBox.innerHTML=
-'<div class="empty">কোনো মাল যোগ করা হয়নি।</div>';
-
-}else{
-
-materialBox.innerHTML=`
-
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>মাল</th>
-<th>পরিমাণ</th>
-<th>দাম</th>
-<th>মোট</th>
-</tr>
-
-${materialRows.map(m=>`
-
-<tr>
-
-<td>${escapeHtml(m.name||"")}</td>
-
-<td>${Number(m.qty||0)}</td>
-
-<td>৳${Number(m.price||0).toLocaleString()}</td>
-
-<td>৳${Number(m.total||0).toLocaleString()}</td>
-
-</tr>
-
-`).join("")}
-
-</table>
-
-</div>
-
-`;
-
-}
-
-
-const {data:workerRows}=
-await supabaseClient
-.from("customer_workers")
-.select("*")
-.eq("customer_id",customerId)
-.eq("admin_id",currentUser.id)
-.order("work_date",{ascending:false});
-
-
-if(!workerRows||!workerRows.length){
-
-workerBox.innerHTML=
-'<div class="empty">কোনো মিস্ত্রির কাজ যোগ করা হয়নি।</div>';
-
-}else{
-
-workerBox.innerHTML=`
-
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>তারিখ</th>
-<th>মিস্ত্রি</th>
-<th>দিন</th>
-<th>মোট</th>
-</tr>
-
-${workerRows.map(w=>`
-
-<tr>
-
-<td>${escapeHtml(w.work_date||"")}</td>
-
-<td>${escapeHtml(w.name||"")}</td>
-
-<td>${Number(w.days||0)}</td>
-
-<td>৳${Number(w.total||0).toLocaleString()}</td>
-
-</tr>
-
-`).join("")}
-
-</table>
-
-</div>
-
-`;
-
-}
-
-}
-
-
-/* =====================================================
- CUSTOMER CALCULATION
-===================================================== */
-
-async function calculateCustomer(customerId){
-
-const customer=
-customers.find(c=>
-String(c.id)===String(customerId));
-
-if(!customer)return;
-
-const {data:materialsData}=
-await supabaseClient
-.from("customer_materials")
-.select("total")
-.eq("customer_id",customerId)
-.eq("admin_id",currentUser.id);
-
-const {data:workersData}=
-await supabaseClient
-.from("customer_workers")
-.select("total")
-.eq("customer_id",customerId)
-.eq("admin_id",currentUser.id);
-
-const {data:expensesData}=
-await supabaseClient
-.from("customer_expenses")
-.select("amount")
-.eq("customer_id",customerId)
-.eq("admin_id",currentUser.id);
-
-const {data:paymentsData}=
-await supabaseClient
-.from("customer_payments")
-.select("amount")
-.eq("customer_id",customerId)
-.eq("admin_id",currentUser.id);
-
-const material=
-(materialsData||[])
-.reduce(
-(sum,x)=>sum+Number(x.total||0),0
-);
-
-const worker=
-(workersData||[])
-.reduce(
-(sum,x)=>sum+Number(x.total||0),0
-);
-
-const other=
-(expensesData||[])
-.reduce(
-(sum,x)=>sum+Number(x.amount||0),0
-);
-
-const paid=
-(paymentsData||[])
-.reduce(
-(sum,x)=>sum+Number(x.amount||0),0
-);
-
-const cost=
-material+worker+other;
-
-const profit=
-Number(customer.contract_price||0)-cost;
-
-const due=
-Math.max(
-Number(customer.contract_price||0)-paid,
-0
-);
-
-if(document.getElementById("detailMaterial"))
-document.getElementById("detailMaterial")
-.textContent=
-"৳"+material.toLocaleString();
-
-if(document.getElementById("detailWorker"))
-document.getElementById("detailWorker")
-.textContent=
-"৳"+worker.toLocaleString();
-
-if(document.getElementById("detailOther"))
-document.getElementById("detailOther")
-.textContent=
-"৳"+other.toLocaleString();
-
-if(document.getElementById("detailProfit"))
-document.getElementById("detailProfit")
-.textContent=
-"৳"+profit.toLocaleString();
-
-if(document.getElementById("detailPaid"))
-document.getElementById("detailPaid")
-.textContent=
-"৳"+paid.toLocaleString();
-
-if(document.getElementById("detailDue"))
-document.getElementById("detailDue")
-.textContent=
-"৳"+due.toLocaleString();
-
-}
-
-
-function closeCustomerModal(){
-
-document.getElementById("customerModal")
-.style.display="none";
-
-}
-
-
-/* =====================================================
- MATERIALS
-===================================================== */
+/* MATERIALS */
 
 async function loadMaterials(){
+ const {data,error}=await supabaseClient
+ .from("materials")
+ .select("*")
+ .eq("admin_id",currentUser.id)
+ .order("name");
 
-const {data,error}=
-await supabaseClient
-.from("materials")
-.select("*")
-.eq("admin_id",currentUser.id)
-.order("name");
+ if(error)return;
 
-if(error){
+ materials=data||[];
 
-console.log(error);
+ $("homeMaterials").textContent=materials.length;
 
-return;
+ renderMaterials();
 }
-
-materials=data||[];
-
-renderMaterials();
-
-document.getElementById("homeMaterials")
-.textContent=materials.length;
-
-}
-
 
 function renderMaterials(){
+ if(!materials.length){
+  $("materialList").innerHTML=
+   '<div class="empty">কোনো Material নেই।</div>';
+  return;
+ }
 
-const box=
-document.getElementById("materialList");
+ $("materialList").innerHTML=`
+ <div class="tablewrap">
+ <table>
+ <tr><th>Material</th><th>Price</th><th>Action</th></tr>
 
-if(!materials.length){
-
-box.innerHTML=
-'<div class="empty">কোনো Material নেই।</div>';
-
-return;
+ ${materials.map(m=>`
+ <tr>
+  <td>${esc(m.name)}</td>
+  <td>${money(m.price)}</td>
+  <td>
+   <button class="red"
+    onclick='deleteMaterial(${JSON.stringify(m.id)})'>
+    Delete
+   </button>
+  </td>
+ </tr>
+ `).join("")}
+ </table>
+ </div>`;
 }
-
-box.innerHTML=`
-
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>Material</th>
-<th>Price</th>
-<th>Action</th>
-</tr>
-
-${materials.map(m=>`
-
-<tr>
-
-<td>${escapeHtml(m.name||"")}</td>
-
-<td>
-৳${Number(m.price||0).toLocaleString()}
-</td>
-
-<td>
-
-<button
-class="danger"
-onclick='deleteMaterial(${JSON.stringify(m.id)})'>
-Delete
-</button>
-
-</td>
-
-</tr>
-
-`).join("")}
-
-</table>
-
-</div>
-
-`;
-
-}
-
 
 async function addMaterial(){
+ const name=$("materialName").value.trim();
+ const price=Number($("materialPrice").value||0);
 
-const name=
-document.getElementById("materialName").value.trim();
+ if(!name||!price){
+  alert("Material Name ও Price দিন।");
+  return;
+ }
 
-const price=
-Number(
-document.getElementById("materialPrice").value||0
-);
+ const {error}=await supabaseClient
+ .from("materials")
+ .insert({
+  admin_id:currentUser.id,
+  name,
+  price
+ });
 
-if(!name){
+ if(error){
+  alert(error.message);
+  return;
+ }
 
-alert("Material Name দিন।");
+ $("materialName").value="";
+ $("materialPrice").value="";
 
-return;
+ await loadMaterials();
 }
-
-const {error}=
-await supabaseClient
-.from("materials")
-.insert({
-
-admin_id:currentUser.id,
-name:name,
-price:price
-
-});
-
-if(error){
-
-alert(error.message);
-
-return;
-}
-
-document.getElementById("materialName").value="";
-document.getElementById("materialPrice").value="";
-
-await loadMaterials();
-
-}
-
 
 async function deleteMaterial(id){
+ if(!confirm("Material মুছে ফেলবেন?"))return;
 
-if(!confirm("এই Material মুছে ফেলবেন?"))
-return;
+ await supabaseClient
+ .from("materials")
+ .delete()
+ .eq("id",id)
+ .eq("admin_id",currentUser.id);
 
-await supabaseClient
-.from("materials")
-.delete()
-.eq("id",id)
-.eq("admin_id",currentUser.id);
-
-await loadMaterials();
-
+ await loadMaterials();
 }
 
-
-/* =====================================================
- WORKERS
-===================================================== */
+/* WORKERS */
 
 async function loadWorkers(){
+ const {data,error}=await supabaseClient
+ .from("workers")
+ .select("*")
+ .eq("admin_id",currentUser.id)
+ .order("name");
 
-const {data,error}=
-await supabaseClient
-.from("workers")
-.select("*")
-.eq("admin_id",currentUser.id)
-.order("name");
+ if(error){
+  console.log(error);
+  return;
+ }
 
-if(error){
+ workers=data||[];
 
-console.log(error);
+ $("homeWorkers").textContent=workers.length;
 
-return;
+ renderWorkers();
+ await loadAttendanceWorkers();
 }
-
-workers=data||[];
-
-renderWorkers();
-
-document.getElementById("homeWorkers")
-.textContent=workers.length;
-
-await loadAttendanceWorkers();
-
-}
-
 
 function renderWorkers(){
+ if(!workers.length){
+  $("workerList").innerHTML=
+   '<div class="empty">কোনো Mistri নেই।</div>';
+  return;
+ }
 
-const box=
-document.getElementById("workerList");
+ $("workerList").innerHTML=workers.map(w=>`
+ <div class="workerBox">
+  <div class="workerHead">
+   <div>
+    <div class="workerName">👷 ${esc(w.name)}</div>
+    <div>💰 মাসিক Salary: ${money(w.monthly_salary)}</div>
+    <div>🔑 Code:
+     <span class="badge">${esc(w.portal_code||"----")}</span>
+    </div>
+   </div>
 
-if(!workers.length){
+   <div>
+    <button class="blue"
+     onclick='openWorker(${JSON.stringify(w.id)})'>
+     📂 হিসাব খুলুন
+    </button>
 
-box.innerHTML=
-'<div class="empty">কোনো Mistri নেই।</div>';
-
-return;
+    <button class="red"
+     onclick='deleteWorker(${JSON.stringify(w.id)})'>
+     Delete
+    </button>
+   </div>
+  </div>
+ </div>
+ `).join("");
 }
-
-box.innerHTML=`
-
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>Mistri</th>
-<th>Salary</th>
-<th>Code</th>
-<th>Action</th>
-</tr>
-
-${workers.map(w=>`
-
-<tr>
-
-<td>${escapeHtml(w.name||"")}</td>
-
-<td>
-৳${Number(w.monthly_salary||0).toLocaleString()}
-</td>
-
-<td>
-<span class="code-badge">
-${escapeHtml(w.portal_code||"----")}
-</span>
-</td>
-
-<td>
-
-<button
-class="danger"
-onclick='deleteWorker(${JSON.stringify(w.id)})'>
-Delete
-</button>
-
-</td>
-
-</tr>
-
-`).join("")}
-
-</table>
-
-</div>
-
-`;
-
-}
-
 
 async function addWorker(){
+ const name=$("workerName").value.trim();
+ const salary=Number($("workerSalary").value||0);
 
-const name=
-document.getElementById("workerName").value.trim();
+ if(!name){
+  alert("Mistri Name দিন।");
+  return;
+ }
 
-const salary=
-Number(
-document.getElementById("workerSalary").value||0
-);
+ const {data,error}=await supabaseClient
+ .from("workers")
+ .insert({
+  admin_id:currentUser.id,
+  name,
+  monthly_salary:salary
+ })
+ .select()
+ .single();
 
-if(!name){
+ if(error){
+  alert(error.message);
+  return;
+ }
 
-alert("Mistri Name দিন।");
+ alert(
+  "মিস্ত্রি Save হয়েছে।\n\n"+
+  "মিস্ত্রির Code: "+(data?.portal_code||"----")
+ );
 
-return;
+ $("workerName").value="";
+ $("workerSalary").value="";
+
+ await loadWorkers();
+
+ /* নতুন মিস্ত্রির হিসাব পেজ সঙ্গে সঙ্গে খুলবে */
+ openWorker(data.id);
 }
-
-const {data,error}=
-await supabaseClient
-.from("workers")
-.insert({
-
-admin_id:currentUser.id,
-name:name,
-monthly_salary:salary
-
-})
-.select()
-.single();
-
-if(error){
-
-alert(error.message);
-
-return;
-}
-
-alert(
-"মিস্ত্রি Save হয়েছে।\n\nমিস্ত্রির ৪ সংখ্যার Code:\n"+
-(data?.portal_code||"----")
-);
-
-document.getElementById("workerName").value="";
-document.getElementById("workerSalary").value="";
-
-await loadWorkers();
-
-}
-
 
 async function deleteWorker(id){
+ if(!confirm("এই Mistri মুছে ফেলবেন?"))return;
 
-if(!confirm("এই Mistri মুছে ফেলবেন?"))
-return;
+ await supabaseClient
+ .from("workers")
+ .delete()
+ .eq("id",id)
+ .eq("admin_id",currentUser.id);
 
-await supabaseClient
-.from("workers")
-.delete()
-.eq("id",id)
-.eq("admin_id",currentUser.id);
-
-await loadWorkers();
-
+ await loadWorkers();
 }
 
+/* WORKER DETAIL */
 
-/* =====================================================
- ATTENDANCE WORKERS
-===================================================== */
+async function openWorker(workerId){
+ currentWorker=workers.find(
+  w=>String(w.id)===String(workerId)
+ );
 
-async function loadAttendanceWorkers(){
+ if(!currentWorker)return;
 
-const select=
-document.getElementById("attendanceWorker");
+ await renderWorkerDetail();
 
-const filter=
-document.getElementById("attendanceFilterWorker");
-
-if(!select||!filter)return;
-
-select.innerHTML=
-`
-<option value="">
-মিস্ত্রি নির্বাচন করুন
-</option>
-`+
-workers.map(w=>`
-
-<option value="${escapeHtml(w.id)}">
-${escapeHtml(w.name)}
-</option>
-
-`).join("");
-
-filter.innerHTML=
-`
-<option value="">
-সব মিস্ত্রি
-</option>
-`+
-workers.map(w=>`
-
-<option value="${escapeHtml(w.id)}">
-${escapeHtml(w.name)}
-</option>
-
-`).join("");
-
+ $("workerModal").classList.add("show");
 }
 
+function closeWorker(){
+ $("workerModal").classList.remove("show");
+}
+
+async function renderWorkerDetail(){
+ const w=currentWorker;
+
+ const {data:works}=await supabaseClient
+ .from("customer_workers")
+ .select("*")
+ .eq("worker_id",w.id)
+ .eq("admin_id",currentUser.id)
+ .order("work_date",{ascending:false});
+
+ const {data:payments}=await supabaseClient
+ .from("worker_payments")
+ .select("*")
+ .eq("worker_id",w.id)
+ .eq("admin_id",currentUser.id)
+ .order("payment_date",{ascending:false});
+
+ const {data:attendance}=await supabaseClient
+ .from("worker_attendance")
+ .select("*")
+ .eq("worker_id",w.id)
+ .eq("admin_id",currentUser.id)
+ .order("attendance_date",{ascending:false});
+
+ const totalDays=(works||[])
+ .reduce((a,x)=>a+Number(x.days||0),0);
+
+ const totalEarned=(works||[])
+ .reduce((a,x)=>a+Number(x.total||0),0);
+
+ const totalPaid=(payments||[])
+ .reduce((a,x)=>a+Number(x.amount||0),0);
+
+ const due=Math.max(totalEarned-totalPaid,0);
+
+ const present=(attendance||[])
+ .reduce((a,x)=>{
+  if(x.status==="present")return a+1;
+  if(x.status==="half")return a+.5;
+  return a;
+ },0);
+
+ $("workerDetail").innerHTML=`
+ <h2>👷 ${esc(w.name)}</h2>
+
+ <p>
+ 🔑 Code:
+ <span class="badge">${esc(w.portal_code||"----")}</span>
+ </p>
+
+ <p>💰 মাসিক Salary:
+ <b>${money(w.monthly_salary)}</b></p>
+
+ <div class="stats">
+  <div class="stat">
+   📅 কাজের দিন
+   <b>${totalDays}</b>
+  </div>
+
+  <div class="stat">
+   💵 মোট কাজ
+   <b>${money(totalEarned)}</b>
+  </div>
+
+  <div class="stat">
+   💳 দেওয়া হয়েছে
+   <b>${money(totalPaid)}</b>
+  </div>
+
+  <div class="stat">
+   🔴 পাওনা
+   <b class="due">${money(due)}</b>
+  </div>
+ </div>
+
+ <div class="card">
+  <h3>💳 মিস্ত্রিকে টাকা দিন</h3>
+
+  <div class="grid">
+   <input id="workerPayDate" type="date"
+    value="${new Date().toISOString().slice(0,10)}">
+
+   <input id="workerPayAmount"
+    type="number"
+    placeholder="কত টাকা দিয়েছেন?">
+  </div>
+
+  <br>
+
+  <input id="workerPayNote"
+   placeholder="Note / কারণ">
+
+  <br><br>
+
+  <button class="primary"
+   onclick='addWorkerPayment(${JSON.stringify(w.id)})'>
+   💾 টাকা Save
+  </button>
+ </div>
+
+ <div class="card">
+  <h3>📋 কাজের হিসাব</h3>
+
+  <p>
+   মোট কাজের দিন:
+   <b>${totalDays}</b>
+  </p>
+
+  <p>
+   মোট কাজের টাকা:
+   <b>${money(totalEarned)}</b>
+  </p>
+
+  ${
+   (works||[]).length
+   ?`
+   <div class="tablewrap">
+   <table>
+   <tr>
+    <th>তারিখ</th>
+    <th>Customer</th>
+    <th>দিন</th>
+    <th>টাকা</th>
+   </tr>
+
+   ${(works||[]).map(x=>`
+   <tr>
+    <td>${esc(x.work_date||"")}</td>
+    <td>${esc(x.customer_id||"")}</td>
+    <td>${x.days}</td>
+    <td>${money(x.total)}</td>
+   </tr>
+   `).join("")}
+   </table>
+   </div>`
+   :'<div class="empty">এখনও কোনো কাজের হিসাব নেই।</div>'
+  }
+ </div>
+
+ <div class="card">
+  <h3>💳 টাকা নেওয়ার / পাওয়ার ইতিহাস</h3>
+
+  ${
+   (payments||[]).length
+   ?`
+   <div class="tablewrap">
+   <table>
+   <tr>
+    <th>তারিখ</th>
+    <th>টাকা</th>
+    <th>Note</th>
+   </tr>
+
+   ${(payments||[]).map(x=>`
+   <tr>
+    <td>${esc(x.payment_date||"")}</td>
+    <td>${money(x.amount)}</td>
+    <td>${esc(x.note||"")}</td>
+   </tr>
+   `).join("")}
+   </table>
+   </div>`
+   :'<div class="empty">এখনও কোনো Payment নেই।</div>'
+  }
+ </div>
+
+ <div class="card">
+  <h3>🕐 Attendance</h3>
+
+  <p>
+   Attendance অনুযায়ী কাজের দিন:
+   <b>${present}</b>
+  </p>
+
+  ${
+   (attendance||[]).length
+   ?`
+   <div class="tablewrap">
+   <table>
+   <tr>
+    <th>তারিখ</th>
+    <th>অবস্থা</th>
+   </tr>
+
+   ${(attendance||[]).map(x=>`
+   <tr>
+    <td>${esc(x.attendance_date||"")}</td>
+    <td>
+     ${
+      x.status==="present"
+      ?"✅ Present"
+      :x.status==="half"
+      ?"½ Half"
+      :"❌ Absent"
+     }
+    </td>
+   </tr>
+   `).join("")}
+   </table>
+   </div>`
+   :'<div class="empty">Attendance নেই।</div>'
+  }
+ </div>
+
+ <div class="card">
+  <h3>📊 মিস্ত্রির বর্তমান হিসাব</h3>
+
+  <p>মোট কাজের টাকা:
+   <b>${money(totalEarned)}</b>
+  </p>
+
+  <p>মোট দেওয়া টাকা:
+   <b>${money(totalPaid)}</b>
+  </p>
+
+  <hr>
+
+  <p style="font-size:20px">
+   🔴 মিস্ত্রির পাওনা:
+   <b class="due">${money(due)}</b>
+  </p>
+ </div>
+ `;
+}
+
+async function addWorkerPayment(workerId){
+ const amount=Number($("workerPayAmount").value||0);
+
+ if(!amount){
+  alert("কত টাকা দিয়েছেন সেটা লিখুন।");
+  return;
+ }
+
+ const {error}=await supabaseClient
+ .from("worker_payments")
+ .insert({
+  admin_id:currentUser.id,
+  worker_id:workerId,
+  payment_date:$("workerPayDate").value||
+   new Date().toISOString().slice(0,10),
+  amount,
+  note:$("workerPayNote").value.trim()
+ });
+
+ if(error){
+  alert(error.message);
+  return;
+ }
+
+ alert("মিস্ত্রির Payment Save হয়েছে।");
+
+ await renderWorkerDetail();
+}
+
+/* ATTENDANCE */
+
+function loadAttendanceWorkers(){
+ $("attendanceWorker").innerHTML=
+ '<option value="">Mistri নির্বাচন করুন</option>'+
+ workers.map(w=>`
+  <option value="${w.id}">
+   ${esc(w.name)}
+  </option>
+ `).join("");
+
+ loadAttendanceList();
+}
 
 async function saveAttendance(status){
+ const workerId=$("attendanceWorker").value;
+ const date=$("attendanceDate").value;
 
-const workerId=
-document.getElementById("attendanceWorker").value;
+ if(!workerId||!date){
+  alert("Mistri ও Date নির্বাচন করুন।");
+  return;
+ }
 
-const date=
-document.getElementById("attendanceDate").value;
+ const {error}=await supabaseClient
+ .from("worker_attendance")
+ .upsert({
+  admin_id:currentUser.id,
+  worker_id:workerId,
+  attendance_date:date,
+  status
+ },{
+  onConflict:"worker_id,attendance_date"
+ });
 
-const message=
-document.getElementById("attendanceMessage");
+ if(error){
+  alert(error.message);
+  return;
+ }
 
-if(!workerId||!date){
+ alert("Attendance Save হয়েছে।");
 
-message.style.color="#d93025";
-
-message.textContent=
-"তারিখ এবং মিস্ত্রি নির্বাচন করুন।";
-
-return;
+ await loadAttendanceList();
 }
 
-const {error}=
-await supabaseClient
-.from("worker_attendance")
-.upsert({
+async function loadAttendanceList(){
+ const workerId=$("attendanceWorker").value;
 
-admin_id:currentUser.id,
-worker_id:workerId,
-attendance_date:date,
-status:status
+ if(!workerId){
+  $("attendanceList").innerHTML="";
+  return;
+ }
 
-},{
-onConflict:"worker_id,attendance_date"
+ const {data,error}=await supabaseClient
+ .from("worker_attendance")
+ .select("*")
+ .eq("admin_id",currentUser.id)
+ .eq("worker_id",workerId)
+ .order("attendance_date",{ascending:false})
+ .limit(100);
+
+ if(error)return;
+
+ $("attendanceList").innerHTML=`
+ <div class="tablewrap">
+ <table>
+ <tr>
+  <th>Date</th>
+  <th>Status</th>
+ </tr>
+
+ ${(data||[]).map(x=>`
+ <tr>
+  <td>${esc(x.attendance_date)}</td>
+  <td>
+   ${
+    x.status==="present"
+    ?"✅ Present"
+    :x.status==="half"
+    ?"½ Half"
+    :"❌ Absent"
+   }
+  </td>
+ </tr>
+ `).join("")}
+ </table>
+ </div>`;
+}
+
+$("attendanceWorker").addEventListener("change",loadAttendanceList);
+
+/* SESSION */
+
+supabaseClient.auth.getSession().then(async({data})=>{
+ if(data.session){
+  currentUser=data.session.user;
+  await startApp();
+ }
 });
-
-if(error){
-
-message.style.color="#d93025";
-
-message.textContent=
-"হাজিরা Save হয়নি: "+error.message;
-
-return;
-}
-
-const text=
-status==="present"
-?
-"উপস্থিত"
-:
-status==="absent"
-?
-"অনুপস্থিত"
-:
-"অর্ধদিবস";
-
-message.style.color="#087f5b";
-
-message.textContent=
-"✅ "+text+" হাজিরা Save হয়েছে।";
-
-await loadAttendance();
-
-}
-
-
-async function loadAttendance(){
-
-const box=
-document.getElementById("attendanceList");
-
-if(!box)return;
-
-const month=
-document.getElementById("attendanceMonth").value;
-
-const workerId=
-document.getElementById("attendanceFilterWorker").value;
-
-if(!month)return;
-
-const start=
-month+"-01";
-
-const endDate=
-new Date(
-Number(month.slice(0,4)),
-Number(month.slice(5,7)),
-0
-);
-
-const end=
-endDate.toISOString().slice(0,10);
-
-let query=
-supabaseClient
-.from("worker_attendance")
-.select("*")
-.eq("admin_id",currentUser.id)
-.gte("attendance_date",start)
-.lte("attendance_date",end)
-.order("attendance_date",{ascending:false});
-
-if(workerId){
-
-query=query.eq("worker_id",workerId);
-
-}
-
-const {data,error}=
-await query;
-
-if(error){
-
-console.log(error);
-
-box.innerHTML=
-'<div class="empty">হাজিরা লোড করা যায়নি।</div>';
-
-return;
-}
-
-attendanceRows=data||[];
-
-let present=0;
-let absent=0;
-let half=0;
-
-attendanceRows.forEach(a=>{
-
-if(a.status==="present")present++;
-
-if(a.status==="absent")absent++;
-
-if(a.status==="half")half++;
-
-});
-
-document.getElementById("attPresent")
-.textContent=present;
-
-document.getElementById("attAbsent")
-.textContent=absent;
-
-document.getElementById("attHalf")
-.textContent=half;
-
-
-/* salary calculation */
-
-let salaryTotal=0;
-
-if(workerId){
-
-const worker=
-workers.find(w=>
-String(w.id)===String(workerId));
-
-if(worker){
-
-const dayValue=
-present+(half*.5);
-
-salaryTotal=
-(Number(worker.monthly_salary||0)/30)
-*dayValue;
-
-}
-
-}else{
-
-/*
-সব মিস্ত্রি নির্বাচন করলে
-প্রত্যেক মিস্ত্রির হাজিরা আলাদাভাবে
-মাসিক Salary অনুযায়ী হিসাব করা হবে।
-*/
-
-const workerMap={};
-
-attendanceRows.forEach(a=>{
-
-const id=String(a.worker_id);
-
-if(!workerMap[id]){
-
-workerMap[id]={
-present:0,
-half:0
-};
-
-}
-
-if(a.status==="present")
-workerMap[id].present++;
-
-if(a.status==="half")
-workerMap[id].half++;
-
-});
-
-Object.keys(workerMap).forEach(id=>{
-
-const worker=
-workers.find(w=>String(w.id)===id);
-
-if(!worker)return;
-
-const days=
-workerMap[id].present+
-(workerMap[id].half*.5);
-
-salaryTotal+=
-(Number(worker.monthly_salary||0)/30)
-*days;
-
-});
-
-}
-
-document.getElementById("attSalary")
-.textContent=
-"৳"+Math.round(salaryTotal).toLocaleString();
-
-
-if(!attendanceRows.length){
-
-box.innerHTML=
-'<div class="empty">এই মাসে কোনো হাজিরা নেই।</div>';
-
-return;
-}
-
-
-box.innerHTML=`
-
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>তারিখ</th>
-<th>মিস্ত্রি</th>
-<th>অবস্থা</th>
-<th>হিসাব</th>
-</tr>
-
-${attendanceRows.map(a=>{
-
-const worker=
-workers.find(w=>
-String(w.id)===String(a.worker_id));
-
-const statusText=
-a.status==="present"
-?
-"উপস্থিত"
-:
-a.status==="absent"
-?
-"অনুপস্থিত"
-:
-"অর্ধদিবস";
-
-const cls=
-a.status==="present"
-?
-"status-present"
-:
-a.status==="absent"
-?
-"status-absent"
-:
-"status-half";
-
-const dayValue=
-a.status==="present"
-?
-1
-:
-a.status==="half"
-?
-.5
-:
-0;
-
-const daily=
-worker
-?
-(Number(worker.monthly_salary||0)/30)
-:
-0;
-
-const amount=
-daily*dayValue;
-
-return `
-
-<tr>
-
-<td>
-${escapeHtml(a.attendance_date||"")}
-</td>
-
-<td>
-${escapeHtml(worker?.name||"")}
-</td>
-
-<td>
-
-<span class="att-status ${cls}">
-${statusText}
-</span>
-
-</td>
-
-<td>
-৳${Math.round(amount).toLocaleString()}
-</td>
-
-</tr>
-
-`;
-
-}).join("")}
-
-</table>
-
-</div>
-
-`;
-
-}
-
-
-/* =====================================================
- SETTINGS
-===================================================== */
-
-function loadSettings(){
-
-const meta=
-currentUser?.user_metadata||{};
-
-document.getElementById("settingName").value=
-meta.business_name||
-"ওমর এস এস ঘর";
-
-document.getElementById("settingAddress").value=
-meta.business_address||
-"কলেজ বাজার পেট্রোল পাম্পের সামনে, বিরামপুর, দিনাজপুর";
-
-document.getElementById("settingPhone").value=
-meta.business_phone||
-"01341241433";
-
-document.getElementById("settingWhatsapp").value=
-meta.business_whatsapp||
-"01816845577";
-
-document.getElementById("settingEmail").value=
-meta.business_email||
-"omorssghor@gmail.com";
-
-document.getElementById("settingDescription").value=
-meta.business_description||
-"SS ও গ্লাসের সকল ধরনের কাজের বিশ্বস্ত প্রতিষ্ঠান।";
-
-}
-
-
-async function saveSettings(){
-
-const data={
-
-...(currentUser.user_metadata||{}),
-
-business_name:
-document.getElementById("settingName").value.trim(),
-
-business_address:
-document.getElementById("settingAddress").value.trim(),
-
-business_phone:
-document.getElementById("settingPhone").value.trim(),
-
-business_whatsapp:
-document.getElementById("settingWhatsapp").value.trim(),
-
-business_email:
-document.getElementById("settingEmail").value.trim(),
-
-business_description:
-document.getElementById("settingDescription").value.trim()
-
-};
-
-const {data:result,error}=
-await supabaseClient.auth.updateUser({
-
-data:data
-
-});
-
-const message=
-document.getElementById("settingsMessage");
-
-if(error){
-
-message.style.color="#d93025";
-
-message.textContent=error.message;
-
-return;
-}
-
-currentUser=result.user;
-
-message.style.color="#087f5b";
-
-message.textContent=
-"✅ Settings সফলভাবে পরিবর্তন হয়েছে।";
-
-}
-
-
-/* =====================================================
- PUBLIC PORTAL
-===================================================== */
-
-function openPublicPortal(type){
-
-const box=
-document.getElementById("publicPortalContent");
-
-const title=
-type==="customer"
-?
-"👤 কাস্টমার হিসাব"
-:
-"👷 মিস্ত্রি হিসাব";
-
-const description=
-type==="customer"
-?
-"আপনার ৪ সংখ্যার Customer Code দিন।"
-:
-"আপনার ৪ সংখ্যার Mistri Code দিন।";
-
-box.innerHTML=`
-
-<h2>${title}</h2>
-
-<p class="small">
-${description}
-</p>
-
-<input
-id="publicCode"
-class="portal-code-input"
-type="text"
-inputmode="numeric"
-maxlength="4"
-placeholder="0000"
-oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)">
-
-<br><br>
-
-<button
-class="primary"
-style="width:100%;"
-onclick='searchPublicPortal(${JSON.stringify(type)})'>
-🔍 হিসাব দেখুন
-</button>
-
-<div id="publicMessage"
-class="login-message"></div>
-
-<div class="contact-box">
-
-<b>📞 কোডের জন্য যোগাযোগ করুন</b><br>
-
-📱 Phone:
-<a href="tel:01341241433">
-01341241433
-</a><br>
-
-💬 WhatsApp:
-<a
-href="https://wa.me/8801816845577"
-target="_blank">
-01816845577
-</a><br>
-
-✉️ Email:
-<a href="mailto:omorssghor@gmail.com">
-omorssghor@gmail.com
-</a>
-
-</div>
-
-<div id="publicResult"
-class="public-result"></div>
-
-`;
-
-document.getElementById("publicModal")
-.style.display="flex";
-
-}
-
-
-function closePublicPortal(){
-
-document.getElementById("publicModal")
-.style.display="none";
-
-}
-
-
-async function searchPublicPortal(type){
-
-const code=
-document.getElementById("publicCode")
-.value.trim();
-
-const message=
-document.getElementById("publicMessage");
-
-const result=
-document.getElementById("publicResult");
-
-if(!/^\d{4}$/.test(code)){
-
-message.style.color="#d93025";
-
-message.textContent=
-"সঠিক ৪ সংখ্যার Code দিন।";
-
-return;
-}
-
-message.style.color="#0077ff";
-
-message.textContent=
-"হিসাব খোঁজা হচ্ছে...";
-
-result.innerHTML="";
-
-let data;
-let error;
-
-if(type==="customer"){
-
-const response=
-await supabaseClient.rpc(
-"customer_public_history",
-{
-p_code:code
-}
-);
-
-data=response.data;
-error=response.error;
-
-}else{
-
-const response=
-await supabaseClient.rpc(
-"worker_public_history",
-{
-p_code:code
-}
-);
-
-data=response.data;
-error=response.error;
-
-}
-
-if(error){
-
-message.style.color="#d93025";
-
-message.textContent=
-"এই Code পাওয়া যায়নি।";
-
-console.log(error);
-
-return;
-}
-
-if(!data){
-
-message.style.color="#d93025";
-
-message.textContent=
-"এই Code-এর কোনো হিসাব পাওয়া যায়নি।";
-
-return;
-}
-
-message.style.color="#087f5b";
-
-message.textContent=
-"হিসাব পাওয়া গেছে।";
-
-if(type==="customer"){
-
-renderPublicCustomer(data);
-
-}else{
-
-renderPublicWorker(data);
-
-}
-
-}
-
-
-/* =====================================================
- PUBLIC CUSTOMER
-===================================================== */
-
-function renderPublicCustomer(data){
-
-const result=
-document.getElementById("publicResult");
-
-const contract=
-Number(data.contract_price||0);
-
-const paid=
-Number(data.total_paid||0);
-
-const due=
-Math.max(contract-paid,0);
-
-const payments=
-Array.isArray(data.payments)
-?
-data.payments
-:
-[];
-
-result.innerHTML=`
-
-<div class="public-header">
-
-<h2>
-👤 ${escapeHtml(data.name||"Customer")}
-</h2>
-
-<div>
-🔧 ${escapeHtml(data.work||"")}
-</div>
-
-<div>
-📅 Delivery:
-${escapeHtml(data.delivery_date||"নির্ধারিত নয়")}
-</div>
-
-</div>
-
-<div class="public-stat">
-💰 মোট চুক্তির দাম
-<b>৳${contract.toLocaleString()}</b>
-</div>
-
-<div class="public-stat">
-✅ মোট জমা
-<b class="good">
-৳${paid.toLocaleString()}
-</b>
-</div>
-
-<div class="public-stat">
-⏳ বাকি
-<b class="${due>0?'bad':'good'}">
-৳${due.toLocaleString()}
-</b>
-</div>
-
-<h3>📜 টাকা জমার ইতিহাস</h3>
-
-${
-payments.length
-?
-`
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>তারিখ</th>
-<th>টাকা</th>
-<th>নোট</th>
-</tr>
-
-${payments.map(p=>`
-
-<tr>
-<td>${escapeHtml(p.payment_date||"")}</td>
-<td>৳${Number(p.amount||0).toLocaleString()}</td>
-<td>${escapeHtml(p.note||"")}</td>
-</tr>
-
-`).join("")}
-
-</table>
-
-</div>
-`
-:
-'<div class="empty">এখনও কোনো payment record নেই।</div>'
-}
-
-<div class="note">
-🔒 এই হিসাব শুধুমাত্র দেখার জন্য।
-আপনি এখান থেকে কোনো তথ্য পরিবর্তন করতে পারবেন না।
-</div>
-
-`;
-
-}
-
-
-/* =====================================================
- PUBLIC WORKER
-===================================================== */
-
-function renderPublicWorker(data){
-
-const result=
-document.getElementById("publicResult");
-
-const earned=
-Number(data.total_earned||0);
-
-const paid=
-Number(data.total_paid||0);
-
-const due=
-Math.max(earned-paid,0);
-
-const workHistory=
-Array.isArray(data.work_history)
-?
-data.work_history
-:
-[];
-
-const payments=
-Array.isArray(data.payments)
-?
-data.payments
-:
-[];
-
-const attendance=
-Array.isArray(data.attendance)
-?
-data.attendance
-:
-[];
-
-result.innerHTML=`
-
-<div class="public-header">
-
-<h2>
-👷 ${escapeHtml(data.name||"Mistri")}
-</h2>
-
-<div>
-💵 মাসিক Salary:
-৳${Number(data.monthly_salary||0).toLocaleString()}
-</div>
-
-</div>
-
-<div class="public-stat">
-👷 মোট কাজের টাকা
-<b>
-৳${earned.toLocaleString()}
-</b>
-</div>
-
-<div class="public-stat">
-💰 মোট নেওয়া টাকা
-<b class="good">
-৳${paid.toLocaleString()}
-</b>
-</div>
-
-<div class="public-stat">
-⏳ এখনও পাওনা
-<b class="${due>0?'bad':'good'}">
-৳${due.toLocaleString()}
-</b>
-</div>
-
-<h3>📅 হাজিরার ইতিহাস</h3>
-
-${
-attendance.length
-?
-`
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>তারিখ</th>
-<th>অবস্থা</th>
-</tr>
-
-${attendance.map(a=>{
-
-const text=
-a.status==="present"
-?
-"✅ উপস্থিত"
-:
-a.status==="absent"
-?
-"❌ অনুপস্থিত"
-:
-"🌓 অর্ধদিবস";
-
-return `
-
-<tr>
-
-<td>
-${escapeHtml(a.date||"")}
-</td>
-
-<td>
-${text}
-</td>
-
-</tr>
-
-`;
-
-}).join("")}
-
-</table>
-
-</div>
-`
-:
-'<div class="empty">এখনও কোনো হাজিরার হিসাব নেই।</div>'
-}
-
-<h3>📅 কাজের ইতিহাস</h3>
-
-${
-workHistory.length
-?
-`
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>তারিখ</th>
-<th>Customer</th>
-<th>কাজ</th>
-<th>দিন</th>
-<th>টাকা</th>
-</tr>
-
-${workHistory.map(w=>`
-
-<tr>
-
-<td>${escapeHtml(w.date||"")}</td>
-
-<td>${escapeHtml(w.customer||"")}</td>
-
-<td>${escapeHtml(w.work||"")}</td>
-
-<td>${Number(w.days||0)}</td>
-
-<td>
-৳${Number(w.amount||0).toLocaleString()}
-</td>
-
-</tr>
-
-`).join("")}
-
-</table>
-
-</div>
-`
-:
-'<div class="empty">এখনও কোনো কাজের হিসাব নেই।</div>'
-}
-
-<h3>💰 টাকা নেওয়ার ইতিহাস</h3>
-
-${
-payments.length
-?
-`
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>তারিখ</th>
-<th>টাকা</th>
-<th>নোট</th>
-</tr>
-
-${payments.map(p=>`
-
-<tr>
-
-<td>${escapeHtml(p.payment_date||"")}</td>
-
-<td>
-৳${Number(p.amount||0).toLocaleString()}
-</td>
-
-<td>
-${escapeHtml(p.note||"")}
-</td>
-
-</tr>
-
-`).join("")}
-
-</table>
-
-</div>
-`
-:
-'<div class="empty">এখনও কোনো payment record নেই।</div>'
-}
-
-<div class="note">
-🔒 এই হিসাব শুধুমাত্র দেখার জন্য।
-আপনি এখান থেকে কোনো তথ্য পরিবর্তন করতে পারবেন না।
-</div>
-
-`;
-
-}
-
-
-/* =====================================================
- SECURITY
-===================================================== */
-
-function escapeHtml(value){
-
-return String(value??"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
-
-
-/* =====================================================
- AUTH STATE
-===================================================== */
-
-supabaseClient.auth.onAuthStateChange(
-async(event,session)=>{
-
-if(session){
-
-currentUser=session.user;
-
-if(event==="SIGNED_IN"){
-
-await showMainPage();
-
-}
-
-}else{
-
-currentUser=null;
-
-showLoginPage();
-
-}
-
-});
-
-
-/* =====================================================
- MODAL OUTSIDE CLICK
-===================================================== */
-
-window.addEventListener(
-"click",
-function(event){
-
-const customerModal=
-document.getElementById("customerModal");
-
-const createModal=
-document.getElementById("createModal");
-
-const publicModal=
-document.getElementById("publicModal");
-
-if(event.target===customerModal){
-
-closeCustomerModal();
-
-}
-
-if(event.target===createModal){
-
-closeCreateAccount();
-
-}
-
-if(event.target===publicModal){
-
-closePublicPortal();
-
-}
-
-});
-
 </script>
 
 </body>
