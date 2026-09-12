@@ -4,113 +4,104 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin C Panel | ওমর এস এস ঘর</title>
+<title>Admin C Panel - ওমর এস এস ঘর</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
+  background:#f1f3f6;
   font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Bengali","Segoe UI",sans-serif;
-  background:#f3f5f7;
-  color:#17202a;
-}
-
-button,input{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-  border:0;
+  color:#222;
 }
 
 .hidden{
-  display:none!important;
+  display:none !important;
 }
 
-.login{
-  width:min(430px,calc(100% - 24px));
+.login-box{
+  width:calc(100% - 30px);
+  max-width:430px;
   margin:70px auto;
   background:white;
-  padding:22px;
+  padding:25px;
   border-radius:18px;
-  box-shadow:0 5px 25px #0002;
+  box-shadow:0 5px 25px rgba(0,0,0,.12);
 }
 
-.login h1{
+.login-box h1{
   text-align:center;
-  margin:0 0 5px;
+  margin:0;
+  font-size:25px;
 }
 
-.login p{
+.shop-name{
   text-align:center;
-  color:#777;
-}
-
-.form-group{
-  margin:15px 0;
+  margin:8px 0 25px;
+  color:#555;
 }
 
 label{
   display:block;
-  font-weight:700;
-  margin-bottom:6px;
+  font-weight:bold;
+  margin:15px 0 6px;
 }
 
 input{
   width:100%;
-  padding:13px;
-  border:1px solid #d5dadd;
+  padding:14px;
+  border:1px solid #ccc;
   border-radius:10px;
-  outline:none;
+  font-size:16px;
 }
 
-input:focus{
-  border-color:#1976d2;
-}
-
-.btn{
+.login-btn{
   width:100%;
-  padding:13px;
+  margin-top:20px;
+  padding:14px;
+  border:0;
   border-radius:10px;
-  background:#263238;
+  background:#111827;
   color:white;
-  font-weight:800;
+  font-size:17px;
+  font-weight:bold;
 }
 
-.btn:disabled{
+.login-btn:disabled{
   opacity:.6;
 }
 
-.message{
-  margin-top:14px;
+#message{
+  margin-top:15px;
   padding:12px;
   border-radius:10px;
   text-align:center;
   display:none;
 }
 
-.error{
-  display:block;
-  background:#fff0f0;
-  color:#b00020;
-  border:1px solid #efb4b4;
+.message-show{
+  display:block !important;
 }
 
-.success{
-  display:block;
-  background:#eaf8ef;
-  color:#087f23;
-  border:1px solid #b7e3c5;
+.message-ok{
+  background:#e8f7ed;
+  color:#08752a;
+}
+
+.message-error{
+  background:#fff0f0;
+  color:#b00020;
 }
 
 .header{
-  background:#17202a;
+  background:#111827;
   color:white;
-  padding:16px;
+  padding:15px;
 }
 
 .header-inner{
@@ -121,9 +112,18 @@ input:focus{
   align-items:center;
 }
 
-.shop{
+.header-title{
   font-size:20px;
-  font-weight:900;
+  font-weight:bold;
+}
+
+.logout{
+  background:#dc2626;
+  color:white;
+  border:0;
+  padding:9px 13px;
+  border-radius:8px;
+  font-weight:bold;
 }
 
 .container{
@@ -132,15 +132,15 @@ input:focus{
   padding:15px;
 }
 
-.card{
+.welcome{
   background:white;
-  border-radius:15px;
   padding:18px;
+  border-radius:15px;
   margin-bottom:15px;
-  box-shadow:0 3px 15px #0001;
+  box-shadow:0 2px 10px rgba(0,0,0,.07);
 }
 
-.dashboard{
+.stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:10px;
@@ -148,20 +148,28 @@ input:focus{
 
 .stat{
   background:white;
-  padding:15px;
-  border-radius:13px;
-  box-shadow:0 2px 10px #0001;
+  padding:18px;
+  border-radius:14px;
+  box-shadow:0 2px 10px rgba(0,0,0,.07);
 }
 
 .stat-title{
-  color:#777;
-  font-size:13px;
+  color:#666;
+  font-size:14px;
 }
 
-.stat-value{
+.stat-number{
   font-size:23px;
-  font-weight:900;
-  margin-top:5px;
+  font-weight:bold;
+  margin-top:6px;
+}
+
+.menu-box{
+  background:white;
+  margin-top:15px;
+  padding:18px;
+  border-radius:15px;
+  box-shadow:0 2px 10px rgba(0,0,0,.07);
 }
 
 .menu-grid{
@@ -171,128 +179,143 @@ input:focus{
 }
 
 .menu{
+  background:#f7f7f7;
+  border:1px solid #ddd;
   padding:20px 10px;
+  border-radius:12px;
   text-align:center;
-  background:white;
-  border:1px solid #e0e4e7;
-  border-radius:13px;
-  font-weight:800;
-  cursor:pointer;
+  font-weight:bold;
 }
 
 .menu-icon{
   font-size:28px;
+  display:block;
   margin-bottom:5px;
 }
 
-.logout{
-  background:#c62828;
-  color:white;
-  padding:9px 13px;
-  border-radius:9px;
-  font-weight:800;
-}
+@media(max-width:700px){
 
-@media(max-width:800px){
-  .dashboard{
+  .stats{
     grid-template-columns:1fr 1fr;
   }
 
   .menu-grid{
     grid-template-columns:1fr 1fr;
   }
+
 }
 
-@media(max-width:450px){
-  .dashboard{
-    grid-template-columns:1fr 1fr;
-  }
+@media(max-width:400px){
 
-  .shop{
+  .header-title{
     font-size:16px;
   }
+
+  .login-box{
+    margin-top:35px;
+  }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div id="loginPage" class="login">
+<!-- =========================
+     LOGIN
+========================= -->
+
+<div id="loginPage" class="login-box">
 
   <h1>🔐 Admin C Panel</h1>
 
-  <p>🏪 ওমর এস এস ঘর</p>
-
-  <div class="form-group">
-    <label>Admin Email</label>
-    <input
-      id="email"
-      type="email"
-      autocomplete="email"
-      placeholder="আপনার Admin Email"
-    >
+  <div class="shop-name">
+    🏪 ওমর এস এস ঘর
   </div>
 
-  <div class="form-group">
-    <label>Password</label>
-    <input
-      id="password"
-      type="password"
-      autocomplete="current-password"
-      placeholder="আপনার Password"
-    >
-  </div>
+  <label>Admin Email</label>
+
+  <input
+    id="email"
+    type="email"
+    placeholder="Admin Email লিখুন"
+    autocomplete="email"
+  >
+
+  <label>Password</label>
+
+  <input
+    id="password"
+    type="password"
+    placeholder="Password লিখুন"
+    autocomplete="current-password"
+  >
 
   <button
     id="loginButton"
-    class="btn"
+    class="login-btn"
     onclick="adminLogin()"
   >
     🔐 Admin Login
   </button>
 
-  <div id="loginMessage" class="message"></div>
+  <div id="message"></div>
 
 </div>
 
 
-<!-- ADMIN APP -->
-<div id="adminApp" class="hidden">
+<!-- =========================
+     ADMIN PANEL
+========================= -->
 
-  <header class="header">
+<div id="adminPanel" class="hidden">
+
+  <div class="header">
 
     <div class="header-inner">
 
-      <div>
-        <div class="shop">
-          🏪 ওমর এস এস ঘর
-        </div>
-
-        <div style="font-size:12px;opacity:.7">
-          Admin Control Panel
-        </div>
+      <div class="header-title">
+        🏪 ওমর এস এস ঘর
       </div>
 
-      <button class="logout" onclick="logout()">
+      <button
+        class="logout"
+        onclick="logout()"
+      >
         Logout
       </button>
 
     </div>
 
-  </header>
+  </div>
 
 
-  <main class="container">
+  <div class="container">
 
-    <div class="dashboard">
+    <div class="welcome">
+
+      <h2>👋 Admin Panel</h2>
+
+      <div id="adminEmail"></div>
+
+      <p>
+        আপনার Admin Control Panel-এ স্বাগতম।
+      </p>
+
+    </div>
+
+
+    <div class="stats">
 
       <div class="stat">
         <div class="stat-title">
           আজকের বিক্রি
         </div>
 
-        <div id="todaySales" class="stat-value">
+        <div
+          id="todaySales"
+          class="stat-number"
+        >
           ৳0
         </div>
       </div>
@@ -303,7 +326,10 @@ input:focus{
           আজকের আদায়
         </div>
 
-        <div id="todayPaid" class="stat-value">
+        <div
+          id="todayPaid"
+          class="stat-number"
+        >
           ৳0
         </div>
       </div>
@@ -314,7 +340,10 @@ input:focus{
           মোট বাকি
         </div>
 
-        <div id="totalDue" class="stat-value">
+        <div
+          id="totalDue"
+          class="stat-number"
+        >
           ৳0
         </div>
       </div>
@@ -322,10 +351,13 @@ input:focus{
 
       <div class="stat">
         <div class="stat-title">
-          Material
+          মোট Material
         </div>
 
-        <div id="materialCount" class="stat-value">
+        <div
+          id="materialCount"
+          class="stat-number"
+        >
           0
         </div>
       </div>
@@ -333,49 +365,49 @@ input:focus{
     </div>
 
 
-    <div class="card">
+    <div class="menu-box">
 
       <h2>⚙️ Control Panel</h2>
 
       <div class="menu-grid">
 
         <div class="menu" onclick="openPOS()">
-          <div class="menu-icon">🛒</div>
+          <span class="menu-icon">🛒</span>
           POS
         </div>
 
         <div class="menu" onclick="showUsers()">
-          <div class="menu-icon">👥</div>
+          <span class="menu-icon">👥</span>
           Users
         </div>
 
         <div class="menu" onclick="showMaterials()">
-          <div class="menu-icon">📦</div>
+          <span class="menu-icon">📦</span>
           Material
         </div>
 
         <div class="menu" onclick="showWorkers()">
-          <div class="menu-icon">👷</div>
+          <span class="menu-icon">👷</span>
           Mistri
         </div>
 
         <div class="menu" onclick="showCustomers()">
-          <div class="menu-icon">👤</div>
+          <span class="menu-icon">👤</span>
           Customer
         </div>
 
         <div class="menu" onclick="showHistory()">
-          <div class="menu-icon">📋</div>
+          <span class="menu-icon">📋</span>
           Sales History
         </div>
 
         <div class="menu" onclick="showDue()">
-          <div class="menu-icon">💰</div>
+          <span class="menu-icon">💰</span>
           Due
         </div>
 
         <div class="menu" onclick="showReports()">
-          <div class="menu-icon">📊</div>
+          <span class="menu-icon">📊</span>
           Reports
         </div>
 
@@ -383,32 +415,16 @@ input:focus{
 
     </div>
 
-
-    <div class="card">
-
-      <h3>🔒 Admin Security</h3>
-
-      <p>
-        এই Panel শুধুমাত্র
-        <b>Accounting Admin</b>-এর জন্য।
-      </p>
-
-      <p>
-        Public User এই Admin Panel-এ ঢুকতে পারবে না।
-      </p>
-
-    </div>
-
-  </main>
+  </div>
 
 </div>
 
 
 <script>
 
-/* ================================
+/* =====================================
    SUPABASE
-================================ */
+===================================== */
 
 const SUPABASE_URL =
 "https://gzujcqjpxypcoiqhpvvu.supabase.co";
@@ -422,33 +438,31 @@ window.supabase.createClient(
   SUPABASE_KEY
 );
 
-let adminUser = null;
 
-
-/* ================================
+/* =====================================
    MESSAGE
-================================ */
+===================================== */
 
-function showMessage(text,type){
+function message(text,type){
 
   const box =
-    document.getElementById("loginMessage");
+    document.getElementById("message");
+
+  box.textContent = text;
 
   box.className =
-    "message " + type;
-
-  box.innerHTML = text;
+    "message-show " +
+    (type === "error"
+      ? "message-error"
+      : "message-ok");
 }
 
 
-/* ================================
+/* =====================================
    LOGIN
-================================ */
+===================================== */
 
 async function adminLogin(){
-
-  const button =
-    document.getElementById("loginButton");
 
   const email =
     document
@@ -461,9 +475,13 @@ async function adminLogin(){
       .getElementById("password")
       .value;
 
+  const button =
+    document.getElementById("loginButton");
+
+
   if(!email){
 
-    showMessage(
+    message(
       "⚠️ Admin Email লিখুন।",
       "error"
     );
@@ -471,9 +489,10 @@ async function adminLogin(){
     return;
   }
 
+
   if(!password){
 
-    showMessage(
+    message(
       "⚠️ Password লিখুন।",
       "error"
     );
@@ -481,134 +500,188 @@ async function adminLogin(){
     return;
   }
 
+
   button.disabled = true;
 
-  button.innerText =
+  button.textContent =
     "⏳ Login হচ্ছে...";
 
-  showMessage(
-    "⏳ Supabase-এর সাথে সংযোগ হচ্ছে...",
-    "success"
+  message(
+    "⏳ Login পরীক্ষা করা হচ্ছে...",
+    "ok"
   );
 
 
   try{
 
-    const result =
+    /* SUPABASE LOGIN */
+
+    const {
+      data,
+      error
+    } =
       await supabaseClient.auth.signInWithPassword({
 
-        email: email,
+        email:email,
 
-        password: password
+        password:password
 
       });
 
 
-    if(result.error){
+    if(error){
 
-      throw new Error(
-        getBanglaAuthError(
-          result.error
+      const errorText =
+        String(
+          error.message || ""
+        ).toLowerCase();
+
+
+      if(
+        errorText.includes(
+          "invalid login credentials"
         )
-      );
+      ){
 
-    }
+        throw new Error(
+          "Email অথবা Password সঠিক নয়।"
+        );
+
+      }
 
 
-    if(!result.data || !result.data.user){
+      if(
+        errorText.includes(
+          "email not confirmed"
+        )
+      ){
+
+        throw new Error(
+          "এই Email এখনো Confirm করা হয়নি।"
+        );
+
+      }
+
 
       throw new Error(
-        "Login-এর পরে User পাওয়া যায়নি।"
+        error.message ||
+        "Login করা যায়নি।"
       );
 
     }
 
 
-    adminUser =
-      result.data.user;
+    if(
+      !data ||
+      !data.user
+    ){
+
+      throw new Error(
+        "Login User পাওয়া যায়নি।"
+      );
+
+    }
 
 
-    showMessage(
-      "⏳ Admin Account পরীক্ষা করা হচ্ছে...",
-      "success"
+    /* =================================
+       ADMIN CHECK
+    ================================= */
+
+    message(
+      "⏳ Admin Account যাচাই করা হচ্ছে...",
+      "ok"
     );
 
 
-    const adminCheck =
+    const {
+      data:adminData,
+      error:adminError
+    } =
       await supabaseClient
         .from("accounting_admins")
         .select("user_id")
         .eq(
           "user_id",
-          adminUser.id
+          data.user.id
         )
         .maybeSingle();
 
 
-    if(adminCheck.error){
+    if(adminError){
+
+      console.error(adminError);
 
       await supabaseClient.auth.signOut();
 
       throw new Error(
-        "Admin যাচাই করা যায়নি। Supabase RLS/Database সমস্যা হতে পারে।"
+        "Admin যাচাই করা যায়নি। Database/RLS সমস্যা হয়েছে।"
       );
 
     }
 
 
-    if(!adminCheck.data){
+    if(!adminData){
 
       await supabaseClient.auth.signOut();
 
-      adminUser = null;
-
       throw new Error(
-        "এই Email দিয়ে Login হয়েছে, কিন্তু এটি Accounting Admin হিসেবে যুক্ত নেই।"
+        "এই Email Admin হিসেবে যুক্ত নেই।"
       );
 
     }
 
 
-    showMessage(
-      "✅ Login সফল হয়েছে।",
-      "success"
+    /* =================================
+       SUCCESS
+    ================================= */
+
+    message(
+      "✅ Admin Login সফল হয়েছে!",
+      "ok"
     );
 
 
-    setTimeout(
-      function(){
+    setTimeout(function(){
 
-        document
-          .getElementById("loginPage")
-          .classList.add("hidden");
+      document
+        .getElementById("loginPage")
+        .classList.add("hidden");
 
-        document
-          .getElementById("adminApp")
-          .classList.remove("hidden");
 
-        loadDashboard();
+      document
+        .getElementById("adminPanel")
+        .classList.remove("hidden");
 
-      },
-      500
-    );
+
+      document
+        .getElementById("adminEmail")
+        .textContent =
+        "Admin: " + data.user.email;
+
+
+      loadDashboard();
+
+    },700);
 
 
   }catch(error){
 
     console.error(error);
 
-    showMessage(
+
+    message(
       "❌ " +
-      escapeHtml(
+      (
         error.message ||
         "Login করা যায়নি।"
       ),
       "error"
     );
 
+
     button.disabled = false;
 
-    button.innerText =
+    button.textContent =
       "🔐 Admin Login";
 
   }
@@ -616,73 +689,24 @@ async function adminLogin(){
 }
 
 
-/* ================================
-   AUTH ERROR
-================================ */
-
-function getBanglaAuthError(error){
-
-  const message =
-    String(
-      error?.message ||
-      ""
-    ).toLowerCase();
-
-
-  if(
-    message.includes("invalid login credentials")
-  ){
-
-    return "Email অথবা Password সঠিক নয়।";
-
-  }
-
-
-  if(
-    message.includes("email not confirmed")
-  ){
-
-    return "এই Email এখনো Confirm করা হয়নি।";
-
-  }
-
-
-  if(
-    message.includes("too many requests")
-  ){
-
-    return "অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।";
-
-  }
-
-
-  if(
-    message.includes("network")
-  ){
-
-    return "Internet connection সমস্যা হয়েছে।";
-
-  }
-
-
-  return error?.message ||
-    "Login করা যায়নি।";
-
-}
-
-
-/* ================================
-   SESSION
-================================ */
+/* =====================================
+   SESSION CHECK
+===================================== */
 
 async function checkSession(){
 
   try{
 
-    const result =
+    const {
+      data
+    } =
       await supabaseClient.auth.getSession();
 
-    if(!result.data.session){
+
+    if(
+      !data ||
+      !data.session
+    ){
 
       return;
 
@@ -690,10 +714,13 @@ async function checkSession(){
 
 
     const user =
-      result.data.session.user;
+      data.session.user;
 
 
-    const adminCheck =
+    const {
+      data:adminData,
+      error
+    } =
       await supabaseClient
         .from("accounting_admins")
         .select("user_id")
@@ -705,8 +732,8 @@ async function checkSession(){
 
 
     if(
-      adminCheck.error ||
-      !adminCheck.data
+      error ||
+      !adminData
     ){
 
       await supabaseClient.auth.signOut();
@@ -716,17 +743,21 @@ async function checkSession(){
     }
 
 
-    adminUser =
-      user;
-
-
     document
       .getElementById("loginPage")
       .classList.add("hidden");
 
+
     document
-      .getElementById("adminApp")
+      .getElementById("adminPanel")
       .classList.remove("hidden");
+
+
+    document
+      .getElementById("adminEmail")
+      .textContent =
+      "Admin: " + user.email;
+
 
     loadDashboard();
 
@@ -739,9 +770,9 @@ async function checkSession(){
 }
 
 
-/* ================================
+/* =====================================
    DASHBOARD
-================================ */
+===================================== */
 
 async function loadDashboard(){
 
@@ -753,7 +784,9 @@ async function loadDashboard(){
         .slice(0,10);
 
 
-    const salesResult =
+    const {
+      data:sales
+    } =
       await supabaseClient
         .from("material_sales")
         .select(
@@ -761,72 +794,55 @@ async function loadDashboard(){
         );
 
 
-    if(salesResult.error){
-
-      console.log(
-        salesResult.error
-      );
-
-      return;
-
-    }
-
-
     let todaySales = 0;
+
     let todayPaid = 0;
+
     let totalDue = 0;
 
 
-    (salesResult.data || [])
-      .forEach(function(sale){
+    (sales || []).forEach(function(row){
 
-        totalDue +=
-          Number(
-            sale.due || 0
-          );
+      totalDue +=
+        Number(row.due || 0);
 
 
-        if(
-          sale.sale_date === today
-        ){
+      if(
+        row.sale_date === today
+      ){
 
-          todaySales +=
-            Number(
-              sale.total || 0
-            );
+        todaySales +=
+          Number(row.total || 0);
 
-          todayPaid +=
-            Number(
-              sale.paid || 0
-            );
+        todayPaid +=
+          Number(row.paid || 0);
 
-        }
+      }
 
-      });
+    });
 
 
     document
       .getElementById("todaySales")
-      .innerText =
-        "৳" +
-        money(todaySales);
+      .textContent =
+      "৳" + todaySales;
 
 
     document
       .getElementById("todayPaid")
-      .innerText =
-        "৳" +
-        money(todayPaid);
+      .textContent =
+      "৳" + todayPaid;
 
 
     document
       .getElementById("totalDue")
-      .innerText =
-        "৳" +
-        money(totalDue);
+      .textContent =
+      "৳" + totalDue;
 
 
-    const materialResult =
+    const {
+      count
+    } =
       await supabaseClient
         .from("materials")
         .select(
@@ -838,14 +854,11 @@ async function loadDashboard(){
         );
 
 
-    if(!materialResult.error){
+    document
+      .getElementById("materialCount")
+      .textContent =
+      count || 0;
 
-      document
-        .getElementById("materialCount")
-        .innerText =
-          materialResult.count || 0;
-
-    }
 
   }catch(error){
 
@@ -856,9 +869,22 @@ async function loadDashboard(){
 }
 
 
-/* ================================
-   BUTTONS
-================================ */
+/* =====================================
+   LOGOUT
+===================================== */
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  location.reload();
+
+}
+
+
+/* =====================================
+   MENU
+===================================== */
 
 function openPOS(){
 
@@ -871,7 +897,7 @@ function openPOS(){
 function showUsers(){
 
   alert(
-    "👥 Users Permission অংশ পরের ধাপে চালু করা হবে।"
+    "Users Management পরের ধাপে চালু করা হবে।"
   );
 
 }
@@ -880,7 +906,7 @@ function showUsers(){
 function showMaterials(){
 
   alert(
-    "📦 Material Management অংশ পরের ধাপে চালু করা হবে।"
+    "Material Management পরের ধাপে চালু করা হবে।"
   );
 
 }
@@ -889,7 +915,7 @@ function showMaterials(){
 function showWorkers(){
 
   alert(
-    "👷 Mistri Management অংশ পরের ধাপে চালু করা হবে।"
+    "Mistri Management পরের ধাপে চালু করা হবে।"
   );
 
 }
@@ -898,7 +924,7 @@ function showWorkers(){
 function showCustomers(){
 
   alert(
-    "👤 Customer Management অংশ পরের ধাপে চালু করা হবে।"
+    "Customer Management পরের ধাপে চালু করা হবে।"
   );
 
 }
@@ -907,7 +933,7 @@ function showCustomers(){
 function showHistory(){
 
   alert(
-    "📋 Sales History অংশ পরের ধাপে চালু করা হবে।"
+    "Sales History পরের ধাপে চালু করা হবে।"
   );
 
 }
@@ -916,7 +942,7 @@ function showHistory(){
 function showDue(){
 
   alert(
-    "💰 Due অংশ পরের ধাপে চালু করা হবে।"
+    "Due Management পরের ধাপে চালু করা হবে।"
   );
 
 }
@@ -925,88 +951,33 @@ function showDue(){
 function showReports(){
 
   alert(
-    "📊 Reports অংশ পরের ধাপে চালু করা হবে।"
+    "Reports পরের ধাপে চালু করা হবে।"
   );
 
 }
 
 
-/* ================================
-   LOGOUT
-================================ */
-
-async function logout(){
-
-  await supabaseClient.auth.signOut();
-
-  adminUser = null;
-
-  document
-    .getElementById("adminApp")
-    .classList.add("hidden");
-
-  document
-    .getElementById("loginPage")
-    .classList.remove("hidden");
-
-  document
-    .getElementById("email")
-    .value = "";
-
-  document
-    .getElementById("password")
-    .value = "";
-
-  document
-    .getElementById("loginMessage")
-    .className =
-      "message";
-
-}
-
-
-/* ================================
-   HELPERS
-================================ */
-
-function money(value){
-
-  return Number(
-    value || 0
-  ).toLocaleString(
-    "en-BD",
-    {
-      maximumFractionDigits:2
-    }
-  );
-
-}
-
-
-function escapeHtml(value){
-
-  return String(value || "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-
-/* ================================
+/* =====================================
    ENTER KEY LOGIN
-================================ */
+===================================== */
 
-document
-  .getElementById("password")
-  .addEventListener(
-    "keydown",
-    function(event){
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      event.key === "Enter"
+    ){
+
+      const loginPage =
+        document.getElementById(
+          "loginPage"
+        );
 
       if(
-        event.key === "Enter"
+        !loginPage.classList.contains(
+          "hidden"
+        )
       ){
 
         adminLogin();
@@ -1014,12 +985,14 @@ document
       }
 
     }
-  );
+
+  }
+);
 
 
-/* ================================
+/* =====================================
    START
-================================ */
+===================================== */
 
 checkSession();
 
