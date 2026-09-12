@@ -1,0 +1,2771 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Customer Service | ওমর এস এস ঘর</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root{
+  --dark:#102027;
+  --dark2:#17343d;
+  --green:#12966a;
+  --blue:#2877c7;
+  --gold:#c8942e;
+  --red:#d94b4b;
+  --bg:#f3f6f8;
+  --card:#fff;
+  --text:#18242b;
+  --muted:#748087;
+  --line:#e2e8eb;
+  --shadow:0 8px 24px rgba(16,32,39,.09);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,
+  "Noto Sans Bengali",Arial,sans-serif;
+}
+
+button,input,textarea,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+  border:0;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.appbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:var(--dark);
+  color:#fff;
+  padding:11px 13px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  box-shadow:0 3px 16px #0002;
+}
+
+.back{
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  background:#ffffff18;
+  color:#fff;
+  font-size:19px;
+}
+
+.title{
+  font-weight:900;
+  font-size:16px;
+  flex:1;
+}
+
+.user-dot{
+  font-size:12px;
+  opacity:.85;
+}
+
+.wrap{
+  max-width:650px;
+  margin:auto;
+  padding:15px 12px 70px;
+}
+
+.hero{
+  background:linear-gradient(135deg,var(--dark),var(--dark2));
+  color:#fff;
+  border-radius:22px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  margin-bottom:14px;
+}
+
+.hero h1{
+  margin:0 0 5px;
+  font-size:24px;
+}
+
+.hero p{
+  margin:0;
+  opacity:.85;
+  font-size:13px;
+  line-height:1.6;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+}
+
+.card{
+  background:var(--card);
+  border-radius:17px;
+  padding:14px;
+  box-shadow:var(--shadow);
+  margin-bottom:12px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  border-radius:11px;
+  padding:10px 12px;
+  font-weight:800;
+  color:#fff;
+  background:var(--dark);
+  text-decoration:none;
+}
+
+.btn.full{
+  width:100%;
+}
+
+.btn.green{
+  background:var(--green);
+}
+
+.btn.blue{
+  background:var(--blue);
+}
+
+.btn.gold{
+  background:var(--gold);
+}
+
+.btn.red{
+  background:var(--red);
+}
+
+.btn.light{
+  background:#edf2f4;
+  color:#26353a;
+}
+
+.btn.small{
+  padding:7px 9px;
+  font-size:12px;
+  border-radius:9px;
+}
+
+.service{
+  min-height:82px;
+  text-align:left;
+  flex-direction:column;
+  align-items:flex-start;
+}
+
+.service .ico{
+  font-size:24px;
+}
+
+.service.off{
+  opacity:.45;
+}
+
+.label{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:5px;
+  display:block;
+}
+
+.field{
+  margin-bottom:11px;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:11px;
+  padding:11px 12px;
+  outline:none;
+}
+
+.field textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px #2877c718;
+}
+
+.form-actions{
+  display:flex;
+  gap:8px;
+}
+
+.form-actions>*{
+  flex:1;
+}
+
+.customer-row{
+  background:#fff;
+  border-radius:15px;
+  padding:12px;
+  box-shadow:0 5px 17px #0000000a;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.avatar{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  background:#e7eef1;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+}
+
+.main{
+  flex:1;
+  min-width:0;
+}
+
+.name{
+  font-weight:900;
+}
+
+.sub{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.dots{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  background:#edf2f4;
+  font-size:20px;
+}
+
+.menu-pop{
+  position:fixed;
+  z-index:50;
+  right:12px;
+  top:60px;
+  width:245px;
+  background:#fff;
+  border-radius:17px;
+  box-shadow:0 18px 50px #0003;
+  padding:8px;
+  border:1px solid var(--line);
+}
+
+.menu-pop button{
+  width:100%;
+  text-align:left;
+  background:#fff;
+  padding:11px;
+  border-radius:10px;
+}
+
+.menu-pop button:hover{
+  background:#f2f6f7;
+}
+
+.section-title{
+  font-weight:900;
+  margin:15px 0 9px;
+}
+
+.chips{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.chip{
+  background:#eaf1f4;
+  border-radius:20px;
+  padding:7px 10px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.cat{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px;
+  margin-bottom:9px;
+  background:#fff;
+}
+
+.cat h3{
+  margin:0 0 8px;
+  font-size:15px;
+}
+
+.mat{
+  display:flex;
+  justify-content:space-between;
+  border-top:1px solid #eef1f2;
+  padding:8px 0;
+  font-size:13px;
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.sum{
+  background:#f3f6f7;
+  border-radius:12px;
+  padding:11px;
+}
+
+.sum b{
+  display:block;
+  font-size:17px;
+  margin-top:3px;
+}
+
+.notice{
+  padding:11px;
+  border-radius:12px;
+  background:#fff6d9;
+  color:#765a0d;
+  font-size:12px;
+  margin-bottom:10px;
+}
+
+.success{
+  padding:11px;
+  border-radius:12px;
+  background:#e0f7ed;
+  color:#08734e;
+  font-size:12px;
+  margin-bottom:10px;
+}
+
+.danger{
+  padding:11px;
+  border-radius:12px;
+  background:#ffe8e8;
+  color:#a52c2c;
+  font-size:12px;
+  margin-bottom:10px;
+}
+
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:28px 12px;
+}
+
+.table-row{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+  padding:9px 0;
+  font-size:13px;
+}
+
+.auth{
+  max-width:440px;
+  margin:35px auto;
+  padding:15px;
+}
+
+.logo{
+  font-size:38px;
+  text-align:center;
+}
+
+.small-note{
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.price{
+  font-weight:900;
+  color:#0d7d57;
+}
+
+@media(min-width:700px){
+  .wrap{
+    padding-top:25px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script>
+
+const SUPABASE_URL =
+'https://gzujcqjpxypcoiqhpvvu.supabase.co';
+
+const SUPABASE_KEY =
+'sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF';
+
+const sb =
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+const $ = id => document.getElementById(id);
+
+let session = null;
+let account = null;
+let perms = {};
+let services = [];
+
+const icons = {
+  pos:'🧾',
+  material:'📦',
+  mistri:'👷',
+  order:'🛠️',
+  payment:'💰',
+  history:'📜'
+};
+
+function esc(v){
+  return String(v ?? '').replace(
+    /[&<>"']/g,
+    m => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#039;'
+    }[m])
+  );
+}
+
+function money(v){
+  return '৳ '+
+    Number(v || 0).toLocaleString(
+      'en-BD',
+      {
+        minimumFractionDigits:0,
+        maximumFractionDigits:2
+      }
+    );
+}
+
+function dateNow(){
+  return new Date().toISOString().slice(0,10);
+}
+
+function go(page,params={}){
+  const q = new URLSearchParams(params);
+
+  location.hash =
+    page +
+    (q.toString() ? '?' + q.toString() : '');
+}
+
+function parse(){
+  const raw =
+    location.hash.slice(1) || 'home';
+
+  const [page,qs] =
+    raw.split('?');
+
+  return {
+    page,
+    params:new URLSearchParams(qs || '')
+  };
+}
+
+function top(title,back=true){
+
+  return `
+  <div class="appbar">
+
+    ${
+      back
+      ?
+      `<button
+        class="back"
+        onclick="history.back()">
+        ‹
+      </button>`
+      :
+      ''
+    }
+
+    <div class="title">
+      ${esc(title)}
+    </div>
+
+    <div class="user-dot">
+      ${esc(account?.name || '')}
+    </div>
+
+  </div>
+  `;
+}
+
+function shell(title,body,back=true){
+
+  $('root').innerHTML =
+  top(title,back)+
+  `<div class="wrap">${body}</div>`;
+}
+
+async function init(){
+
+  const r =
+    await sb.auth.getSession();
+
+  session =
+    r.data.session;
+
+  if(!session){
+    renderAuth();
+    return;
+  }
+
+  await loadAccount();
+
+  if(
+    !account ||
+    account.active === false
+  ){
+    renderBlocked();
+    return;
+  }
+
+  await loadPermissions();
+
+  await render();
+}
+
+async function loadAccount(){
+
+  const uid =
+    session.user.id;
+
+  let r =
+    await sb
+      .from('platform_customer_accounts')
+      .select('*')
+      .eq('user_id',uid)
+      .maybeSingle();
+
+  if(!r.data){
+
+    const name =
+      session.user.user_metadata?.full_name ||
+      session.user.email?.split('@')[0] ||
+      'Customer';
+
+    await sb
+      .from('platform_customer_accounts')
+      .insert({
+        user_id:uid,
+        name,
+        phone:
+          session.user.user_metadata?.phone ||
+          ''
+      });
+
+    r =
+      await sb
+        .from('platform_customer_accounts')
+        .select('*')
+        .eq('user_id',uid)
+        .single();
+  }
+
+  account = r.data;
+}
+
+async function loadPermissions(){
+
+  const s =
+    await sb
+      .from('platform_services')
+      .select('*')
+      .eq('is_active',true)
+      .order('sort_order');
+
+  services =
+    s.data || [];
+
+  const p =
+    await sb
+      .from('platform_service_permissions')
+      .select('service_id,enabled')
+      .eq('user_id',session.user.id);
+
+  perms = {};
+
+  for(
+    const x of p.data || []
+  ){
+    perms[x.service_id] =
+      x.enabled;
+  }
+}
+
+function enabled(key){
+
+  const x =
+    services.find(
+      s => s.service_key === key
+    );
+
+  return x
+    ? perms[x.id] === true
+    : false;
+}
+
+function renderAuth(){
+
+  document.body.innerHTML = `
+
+  <div class="auth">
+
+    <div class="card">
+
+      <div class="logo">
+        🏪
+      </div>
+
+      <h2 style="text-align:center">
+        ওমর এস এস ঘর
+      </h2>
+
+      <p
+        class="small-note"
+        style="text-align:center">
+        Customer Service Account
+      </p>
+
+      <div id="authmsg"></div>
+
+      <div class="field">
+        <span class="label">
+          Email
+        </span>
+
+        <input
+          id="email"
+          type="email"
+          placeholder="আপনার Email">
+      </div>
+
+      <div class="field">
+        <span class="label">
+          Password
+        </span>
+
+        <input
+          id="password"
+          type="password"
+          placeholder="Password">
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          class="btn blue"
+          onclick="login()">
+          Login
+        </button>
+
+        <button
+          class="btn green"
+          onclick="signup()">
+          Account তৈরি
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+  `;
+}
+
+async function login(){
+
+  const e =
+    $('email').value.trim();
+
+  const p =
+    $('password').value;
+
+  const r =
+    await sb.auth.signInWithPassword({
+      email:e,
+      password:p
+    });
+
+  if(r.error){
+
+    $('authmsg').innerHTML =
+      `<div class="danger">
+        ${esc(r.error.message)}
+      </div>`;
+
+    return;
+  }
+
+  session =
+    r.data.session;
+
+  await loadAccount();
+
+  if(account?.active === false){
+    renderBlocked();
+    return;
+  }
+
+  await loadPermissions();
+
+  go('home');
+}
+
+async function signup(){
+
+  const e =
+    $('email').value.trim();
+
+  const p =
+    $('password').value;
+
+  if(!e || p.length < 6){
+
+    $('authmsg').innerHTML =
+      `<div class="notice">
+        Email দিন এবং কমপক্ষে
+        ৬ অক্ষরের Password দিন।
+      </div>`;
+
+    return;
+  }
+
+  const name =
+    prompt('আপনার নাম লিখুন');
+
+  if(!name) return;
+
+  const phone =
+    prompt('ফোন নম্বর লিখুন') || '';
+
+  const r =
+    await sb.auth.signUp({
+      email:e,
+      password:p,
+      options:{
+        data:{
+          full_name:name,
+          phone
+        }
+      }
+    });
+
+  if(r.error){
+
+    $('authmsg').innerHTML =
+      `<div class="danger">
+        ${esc(r.error.message)}
+      </div>`;
+
+    return;
+  }
+
+  if(r.data.session){
+
+    session =
+      r.data.session;
+
+    await loadAccount();
+    await loadPermissions();
+
+    go('home');
+
+  }else{
+
+    $('authmsg').innerHTML =
+      `<div class="success">
+        Account তৈরি হয়েছে।
+        Email confirmation চালু থাকলে
+        Email confirm করে Login করুন।
+      </div>`;
+  }
+}
+
+function renderBlocked(){
+
+  document.body.innerHTML = `
+
+  <div class="auth">
+
+    <div class="card">
+
+      <div class="logo">
+        ⛔
+      </div>
+
+      <h2>
+        Account বন্ধ
+      </h2>
+
+      <p>
+        এই Customer Account বর্তমানে
+        Admin দ্বারা Block করা হয়েছে।
+      </p>
+
+      <button
+        class="btn light full"
+        onclick="logout()">
+        Logout
+      </button>
+
+    </div>
+
+  </div>
+  `;
+}
+
+async function logout(){
+
+  await sb.auth.signOut();
+
+  location.reload();
+}
+
+async function render(){
+
+  const {page} = parse();
+
+  const map = {
+
+    home:pageHome,
+    customers:pageCustomers,
+    'add-customer':pageAddCustomer,
+    detail:pageDetail,
+    'add-payment':pageAddPayment,
+    'add-material':pageAddMaterial,
+    materials:pageMaterials,
+    'add-mistri':pageAddMistri,
+    'other-expense':pageOtherExpense,
+    'payment-history':pagePaymentHistory,
+    summary:pageSummary,
+    profile:pageProfile,
+    services:pageServices
+
+  };
+
+  (
+    map[page] ||
+    pageHome
+  )();
+}
+
+window.addEventListener(
+  'hashchange',
+  () => {
+    if(session) render();
+  }
+);
+
+async function pageHome(){
+
+  shell(
+    'Customer Service',
+    `
+
+    <div class="hero">
+
+      <h1>
+        👋 ${esc(account?.name || 'Customer')}
+      </h1>
+
+      <p>
+        ওমর এস এস ঘরের Customer Service
+        Panel-এ আপনাকে স্বাগতম।
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="section-title">
+        👥 Customer
+      </div>
+
+      <div class="grid">
+
+        <button
+          class="btn blue service"
+          onclick="go('customers')">
+
+          <span class="ico">
+            👥
+          </span>
+
+          <span>
+            Customer List
+          </span>
+
+        </button>
+
+        <button
+          class="btn green service"
+          onclick="go('add-customer')">
+
+          <span class="ico">
+            ➕
+          </span>
+
+          <span>
+            Customer Add
+          </span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="section-title">
+        ⚙️ Service
+      </div>
+
+      <div class="grid">
+
+        ${
+          services.map(s => {
+
+            const on =
+              perms[s.id] === true;
+
+            return `
+
+            <button
+              class="btn ${
+                on ? 'light' : 'light'
+              } service ${
+                on ? '' : 'off'
+              }"
+              onclick="${
+                on
+                ? `serviceOpen('${s.service_key}')`
+                : `alert('এই Service এখন Admin OFF করে রেখেছেন।')`
+              }">
+
+              <span class="ico">
+                ${icons[s.service_key] || '⚙️'}
+              </span>
+
+              <span>
+                ${esc(s.name)}
+              </span>
+
+            </button>
+
+            `;
+
+          }).join('')
+        }
+
+      </div>
+
+    </div>
+
+    <div class="grid">
+
+      <button
+        class="btn light service"
+        onclick="go('services')">
+
+        <span class="ico">
+          ⚙️
+        </span>
+
+        <span>
+          আমার Services
+        </span>
+
+      </button>
+
+      <button
+        class="btn light service"
+        onclick="go('profile')">
+
+        <span class="ico">
+          👤
+        </span>
+
+        <span>
+          My Profile
+        </span>
+
+      </button>
+
+    </div>
+
+    `
+  ,false);
+}
+
+function serviceOpen(key){
+
+  if(key === 'pos'){
+    alert('POS Service প্রস্তুত করা হচ্ছে।');
+  }
+
+  else if(key === 'material'){
+    alert('Material Service প্রস্তুত করা হচ্ছে।');
+  }
+
+  else if(key === 'mistri'){
+    alert('মিস্ত্রি Service প্রস্তুত করা হচ্ছে।');
+  }
+
+  else if(key === 'order'){
+    alert('Order / Work Service প্রস্তুত করা হচ্ছে।');
+  }
+
+  else if(key === 'payment'){
+    alert('Payment Service প্রস্তুত করা হচ্ছে।');
+  }
+
+  else if(key === 'history'){
+    alert('History Service প্রস্তুত করা হচ্ছে।');
+  }
+}
+
+async function getCustomers(){
+
+  const r =
+    await sb
+      .from('platform_customers')
+      .select('*')
+      .eq(
+        'owner_user_id',
+        session.user.id
+      )
+      .order(
+        'created_at',
+        {ascending:false}
+      );
+
+  return r.data || [];
+}
+
+async function pageCustomers(){
+
+  const customers =
+    await getCustomers();
+
+  let body = `
+
+  <div class="card">
+
+    <button
+      class="btn green full"
+      onclick="go('add-customer')">
+      ➕ নতুন Customer Add
+    </button>
+
+  </div>
+  `;
+
+  if(!customers.length){
+
+    body += `
+    <div class="card empty">
+      এখনো কোনো Customer নেই।
+    </div>
+    `;
+
+  }else{
+
+    customers.forEach(c => {
+
+      body += `
+
+      <div class="customer-row">
+
+        <div class="avatar">
+          ${esc(
+            (c.name || 'C')
+            .charAt(0)
+          )}
+        </div>
+
+        <div class="main">
+
+          <div class="name">
+            ${esc(c.name)}
+          </div>
+
+          <div class="sub">
+            📞 ${esc(c.phone || '-')}
+          </div>
+
+          <div class="sub">
+            ${esc(c.service_name || 'কাজ')}
+          </div>
+
+        </div>
+
+        <button
+          class="dots"
+          onclick="openCustomerMenu('${c.id}')">
+          ⋮
+        </button>
+
+      </div>
+
+      `;
+
+    });
+  }
+
+  shell(
+    'Customer List',
+    body
+  );
+}
+
+function openCustomerMenu(id){
+
+  const old =
+    document.getElementById(
+      'customer-menu'
+    );
+
+  if(old) old.remove();
+
+  const div =
+    document.createElement('div');
+
+  div.id =
+    'customer-menu';
+
+  div.className =
+    'menu-pop';
+
+  div.innerHTML = `
+
+    <button onclick="
+      document.getElementById('customer-menu').remove();
+      go('detail',{id:'${id}'});
+    ">
+      📋 Customer Details
+    </button>
+
+    <button onclick="
+      document.getElementById('customer-menu').remove();
+      go('add-payment',{id:'${id}'});
+    ">
+      💰 টাকা জমা
+    </button>
+
+    <button onclick="
+      document.getElementById('customer-menu').remove();
+      go('add-material',{id:'${id}'});
+    ">
+      📦 মাল Add
+    </button>
+
+    <button onclick="
+      document.getElementById('customer-menu').remove();
+      go('add-mistri',{id:'${id}'});
+    ">
+      👷 মিস্ত্রি Add
+    </button>
+
+    <button onclick="
+      document.getElementById('customer-menu').remove();
+      go('other-expense',{id:'${id}'});
+    ">
+      💸 অন্যান্য খরচ
+    </button>
+
+    <button onclick="
+      document.getElementById('customer-menu').remove();
+      go('payment-history',{id:'${id}'});
+    ">
+      📜 Payment History
+    </button>
+
+    <button onclick="
+      document.getElementById('customer-menu').remove();
+      go('summary',{id:'${id}'});
+    ">
+      📊 Total Lab/Loss
+    </button>
+  `;
+
+  document.body.appendChild(div);
+}
+
+async function pageAddCustomer(){
+
+  shell(
+    'Customer Add',
+    `
+
+    <div class="card">
+
+      <div class="field">
+
+        <span class="label">
+          Customer Name
+        </span>
+
+        <input
+          id="cn"
+          placeholder="Customer-এর নাম">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          Phone Number
+        </span>
+
+        <input
+          id="cp"
+          type="tel"
+          placeholder="01XXXXXXXXX">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          Address
+        </span>
+
+        <textarea
+          id="ca"
+          placeholder="Customer-এর ঠিকানা">
+        </textarea>
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          কাজের নাম
+        </span>
+
+        <input
+          id="cs"
+          placeholder="যেমন: SS Gate">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          Contact Price
+        </span>
+
+        <input
+          id="price"
+          type="number"
+          min="0"
+          placeholder="৳">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          Delivery Date
+        </span>
+
+        <input
+          id="delivery"
+          type="date">
+
+      </div>
+
+      <div id="cmsg"></div>
+
+      <button
+        class="btn green full"
+        onclick="saveCustomer()">
+
+        💾 SAVE
+
+      </button>
+
+    </div>
+
+    `
+  );
+}
+
+async function saveCustomer(){
+
+  const name =
+    $('cn').value.trim();
+
+  const phone =
+    $('cp').value.trim();
+
+  const address =
+    $('ca').value.trim();
+
+  const service =
+    $('cs').value.trim();
+
+  const price =
+    Number(
+      $('price').value || 0
+    );
+
+  const delivery =
+    $('delivery').value || null;
+
+  if(!name || !phone){
+
+    $('cmsg').innerHTML =
+      `<div class="danger">
+        Customer Name এবং Phone Number দিন।
+      </div>`;
+
+    return;
+  }
+
+  const r =
+    await sb
+      .from('platform_customers')
+      .insert({
+
+        owner_user_id:
+          session.user.id,
+
+        name,
+        phone,
+        address,
+
+        service_name:
+          service,
+
+        final_price:
+          price,
+
+        delivery_date:
+          delivery
+
+      })
+      .select()
+      .single();
+
+  if(r.error){
+
+    $('cmsg').innerHTML =
+      `<div class="danger">
+        ${esc(r.error.message)}
+      </div>`;
+
+    return;
+  }
+
+  await sb
+    .from('platform_customer_history')
+    .insert({
+
+      owner_user_id:
+        session.user.id,
+
+      customer_id:
+        r.data.id,
+
+      event_type:
+        'customer_created',
+
+      details:{
+        name,
+        phone
+      }
+
+    });
+
+  go('customers');
+}
+
+async function customer(id){
+
+  const r =
+    await sb
+      .from('platform_customers')
+      .select('*')
+      .eq('id',id)
+      .eq(
+        'owner_user_id',
+        session.user.id
+      )
+      .single();
+
+  return r.data;
+}
+
+async function pageDetail(){
+
+  const id =
+    parse().params.get('id');
+
+  const c =
+    await customer(id);
+
+  if(!c){
+
+    shell(
+      'Customer Details',
+      `<div class="card empty">
+        Customer পাওয়া যায়নি।
+      </div>`
+    );
+
+    return;
+  }
+
+  shell(
+    'Customer Details',
+
+    `
+
+    <div class="card">
+
+      <div class="section-title">
+        👤 ${esc(c.name)}
+      </div>
+
+      <div class="table-row">
+        <span>Phone</span>
+        <b>${esc(c.phone || '-')}</b>
+      </div>
+
+      <div class="table-row">
+        <span>Address</span>
+        <span>
+          ${esc(c.address || '-')}
+        </span>
+      </div>
+
+      <div class="table-row">
+        <span>কাজ</span>
+        <b>
+          ${esc(c.service_name || '-')}
+        </b>
+      </div>
+
+      <div class="table-row">
+        <span>Contact Price</span>
+        <b class="price">
+          ${money(c.final_price)}
+        </b>
+      </div>
+
+      <div class="table-row">
+        <span>Delivery Date</span>
+        <b>
+          ${esc(c.delivery_date || '-')}
+        </b>
+      </div>
+
+    </div>
+
+    <div class="grid">
+
+      <button
+        class="btn blue service"
+        onclick="go('add-payment',{id:'${id}'})">
+
+        <span class="ico">
+          💰
+        </span>
+
+        <span>
+          টাকা জমা
+        </span>
+
+      </button>
+
+      <button
+        class="btn green service"
+        onclick="go('add-material',{id:'${id}'})">
+
+        <span class="ico">
+          📦
+        </span>
+
+        <span>
+          মাল Add
+        </span>
+
+      </button>
+
+      <button
+        class="btn gold service"
+        onclick="go('add-mistri',{id:'${id}'})">
+
+        <span class="ico">
+          👷
+        </span>
+
+        <span>
+          মিস্ত্রি Add
+        </span>
+
+      </button>
+
+      <button
+        class="btn light service"
+        onclick="go('other-expense',{id:'${id}'})">
+
+        <span class="ico">
+          💸
+        </span>
+
+        <span>
+          অন্যান্য খরচ
+        </span>
+
+      </button>
+
+      <button
+        class="btn light service"
+        onclick="go('materials',{id:'${id}'})">
+
+        <span class="ico">
+          📋
+        </span>
+
+        <span>
+          Added Materials
+        </span>
+
+      </button>
+
+      <button
+        class="btn light service"
+        onclick="go('payment-history',{id:'${id}'})">
+
+        <span class="ico">
+          📜
+        </span>
+
+        <span>
+          Payment History
+        </span>
+
+      </button>
+
+      <button
+        class="btn light service"
+        onclick="go('summary',{id:'${id}'})">
+
+        <span class="ico">
+          📊
+        </span>
+
+        <span>
+          Total Lab/Loss
+        </span>
+
+      </button>
+
+    </div>
+
+    `
+  );
+}
+
+async function pageAddPayment(){
+
+  const id =
+    parse().params.get('id');
+
+  const c =
+    await customer(id);
+
+  shell(
+    'টাকা জমা',
+
+    `
+
+    <div class="card">
+
+      <div class="notice">
+        Customer:
+        <b>
+          ${esc(c?.name || '')}
+        </b>
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          Date
+        </span>
+
+        <input
+          id="pd"
+          type="date"
+          value="${dateNow()}">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          টাকার পরিমাণ
+        </span>
+
+        <input
+          id="pa"
+          type="number"
+          min="1"
+          placeholder="৳">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          মন্তব্য
+        </span>
+
+        <textarea
+          id="pc"
+          placeholder="যেমন: প্রথম কিস্তি">
+        </textarea>
+
+      </div>
+
+      <div id="pmsg"></div>
+
+      <button
+        class="btn green full"
+        onclick="savePayment('${id}')">
+
+        SUBMIT
+
+      </button>
+
+    </div>
+
+    `
+  );
+}
+
+async function savePayment(id){
+
+  const amount =
+    Number(
+      $('pa').value
+    );
+
+  if(amount <= 0){
+
+    $('pmsg').innerHTML =
+      `<div class="danger">
+        টাকার পরিমাণ দিন।
+      </div>`;
+
+    return;
+  }
+
+  const r =
+    await sb
+      .from('platform_customer_payments')
+      .insert({
+
+        owner_user_id:
+          session.user.id,
+
+        customer_id:id,
+
+        payment_date:
+          $('pd').value,
+
+        amount,
+
+        comment:
+          $('pc').value.trim()
+
+      });
+
+  if(r.error){
+
+    $('pmsg').innerHTML =
+      `<div class="danger">
+        ${esc(r.error.message)}
+      </div>`;
+
+    return;
+  }
+
+  await sb
+    .from('platform_customer_history')
+    .insert({
+
+      owner_user_id:
+        session.user.id,
+
+      customer_id:id,
+
+      event_type:
+        'payment_added',
+
+      details:{
+        amount,
+        comment:
+          $('pc').value.trim()
+      }
+
+    });
+
+  go(
+    'detail',
+    {id}
+  );
+}
+
+async function pageAddMaterial(){
+
+  const id =
+    parse().params.get('id');
+
+  const c =
+    await customer(id);
+
+  shell(
+    'মাল Add',
+
+    `
+
+    <div class="card">
+
+      <div class="notice">
+        Customer:
+        <b>
+          ${esc(c?.name || '')}
+        </b>
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          Category
+        </span>
+
+        <input
+          id="mc"
+          placeholder="যেমন: SS Pipe">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          মালের নাম
+        </span>
+
+        <input
+          id="mn"
+          placeholder="যেমন: 1 inch গোল পাইপ">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          Price
+        </span>
+
+        <input
+          id="mp"
+          type="number"
+          min="0"
+          placeholder="৳">
+
+      </div>
+
+      <div id="mmsg"></div>
+
+      <button
+        class="btn green full"
+        onclick="saveMaterial('${id}')">
+
+        SUBMIT
+
+      </button>
+
+    </div>
+
+    <div class="card">
+
+      <p class="small-note">
+        Submit করলে Category তৈরি হবে
+        অথবা আগের Category-তে মাল যুক্ত হবে।
+      </p>
+
+    </div>
+
+    `
+  );
+}
+
+async function saveMaterial(id){
+
+  const cat =
+    $('mc').value.trim();
+
+  const name =
+    $('mn').value.trim();
+
+  const price =
+    Number(
+      $('mp').value || 0
+    );
+
+  if(!cat || !name){
+
+    $('mmsg').innerHTML =
+      `<div class="danger">
+        Category এবং মালের নাম দিন।
+      </div>`;
+
+    return;
+  }
+
+  let q =
+    await sb
+      .from('platform_material_categories')
+      .select('id')
+      .eq(
+        'owner_user_id',
+        session.user.id
+      )
+      .eq(
+        'customer_id',
+        id
+      )
+      .eq(
+        'name',
+        cat
+      )
+      .maybeSingle();
+
+  let cid =
+    q.data?.id;
+
+  if(!cid){
+
+    q =
+      await sb
+        .from(
+          'platform_material_categories'
+        )
+        .insert({
+
+          owner_user_id:
+            session.user.id,
+
+          customer_id:id,
+
+          name:cat
+
+        })
+        .select('id')
+        .single();
+
+    cid =
+      q.data?.id;
+  }
+
+  if(!cid){
+
+    $('mmsg').innerHTML =
+      `<div class="danger">
+        Category save হয়নি।
+      </div>`;
+
+    return;
+  }
+
+  const r =
+    await sb
+      .from('platform_materials')
+      .insert({
+
+        owner_user_id:
+          session.user.id,
+
+        customer_id:id,
+
+        category_id:cid,
+
+        name,
+
+        price
+
+      })
+      .select()
+      .single();
+
+  if(r.error){
+
+    $('mmsg').innerHTML =
+      `<div class="danger">
+        ${esc(r.error.message)}
+      </div>`;
+
+    return;
+  }
+
+  await sb
+    .from('platform_customer_history')
+    .insert({
+
+      owner_user_id:
+        session.user.id,
+
+      customer_id:id,
+
+      event_type:
+        'material_added',
+
+      details:{
+        category:cat,
+        name,
+        price
+      }
+
+    });
+
+  go(
+    'materials',
+    {id}
+  );
+}
+
+async function pageMaterials(){
+
+  const id =
+    parse().params.get('id');
+
+  const cats =
+    await sb
+      .from(
+        'platform_material_categories'
+      )
+      .select('id,name')
+      .eq(
+        'customer_id',
+        id
+      )
+      .order('created_at');
+
+  const mats =
+    await sb
+      .from(
+        'platform_materials'
+      )
+      .select(
+        'category_id,name,price'
+      )
+      .eq(
+        'customer_id',
+        id
+      )
+      .order('created_at');
+
+  let body = `
+
+  <div class="card">
+
+    <div class="section-title">
+      📋 সব Category
+    </div>
+
+    <p class="small-note">
+      কোন Category-এর ভিতরে কোন মাল
+      যোগ করা হয়েছে এখানে দেখা যাবে।
+    </p>
+
+  </div>
+
+  `;
+
+  if(
+    !(cats.data || []).length
+  ){
+
+    body += `
+    <div class="card empty">
+      এখনো কোনো মাল যোগ করা হয়নি।
+    </div>
+    `;
+  }
+
+  for(
+    const cat of cats.data || []
+  ){
+
+    body += `
+
+    <div class="cat">
+
+      <h3>
+        📦 ${esc(cat.name)}
+      </h3>
+
+    `;
+
+    const arr =
+      (mats.data || [])
+      .filter(
+        m =>
+          m.category_id === cat.id
+      );
+
+    if(!arr.length){
+
+      body += `
+      <div class="small-note">
+        এই Category-তে এখনো কোনো মাল নেই।
+      </div>
+      `;
+    }
+
+    for(
+      const m of arr
+    ){
+
+      body += `
+
+      <div class="mat">
+
+        <span>
+          ${esc(m.name)}
+        </span>
+
+        <b>
+          ${money(m.price)}
+        </b>
+
+      </div>
+
+      `;
+    }
+
+    body += `
+    </div>
+    `;
+  }
+
+  shell(
+    'Added Materials',
+    body
+  );
+}
+
+async function pageAddMistri(){
+
+  const id =
+    parse().params.get('id');
+
+  shell(
+    'মিস্ত্রি Add',
+
+    `
+
+    <div class="card">
+
+      <div class="field">
+
+        <span class="label">
+          মিস্ত্রির নাম
+        </span>
+
+        <input
+          id="wn"
+          placeholder="মিস্ত্রির নাম">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          তারিখ
+        </span>
+
+        <input
+          id="wd"
+          type="date"
+          value="${dateNow()}">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          কাজের দিন
+        </span>
+
+        <input
+          id="days"
+          type="number"
+          min="0.5"
+          step="0.5"
+          value="1">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          টাকার পরিমাণ
+        </span>
+
+        <input
+          id="wa"
+          type="number"
+          min="0"
+          placeholder="৳">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          মন্তব্য
+        </span>
+
+        <textarea
+          id="wc">
+        </textarea>
+
+      </div>
+
+      <div id="wmsg"></div>
+
+      <button
+        class="btn gold full"
+        onclick="saveMistri('${id}')">
+
+        SUBMIT
+
+      </button>
+
+    </div>
+
+    `
+  );
+}
+
+async function saveMistri(id){
+
+  const name =
+    $('wn').value.trim();
+
+  const amount =
+    Number(
+      $('wa').value || 0
+    );
+
+  if(!name || amount < 0){
+
+    $('wmsg').innerHTML =
+      `<div class="danger">
+        মিস্ত্রির নাম ও টাকার পরিমাণ দিন।
+      </div>`;
+
+    return;
+  }
+
+  const r =
+    await sb
+      .from(
+        'platform_mistri_entries'
+      )
+      .insert({
+
+        owner_user_id:
+          session.user.id,
+
+        customer_id:id,
+
+        mistri_name:name,
+
+        entry_date:
+          $('wd').value,
+
+        work_days:
+          Number(
+            $('days').value || 1
+          ),
+
+        amount,
+
+        comment:
+          $('wc').value.trim()
+
+      });
+
+  if(r.error){
+
+    $('wmsg').innerHTML =
+      `<div class="danger">
+        ${esc(r.error.message)}
+      </div>`;
+
+    return;
+  }
+
+  go(
+    'detail',
+    {id}
+  );
+}
+
+async function pageOtherExpense(){
+
+  const id =
+    parse().params.get('id');
+
+  shell(
+    'অন্যান্য খরচ',
+
+    `
+
+    <div class="card">
+
+      <div class="field">
+
+        <span class="label">
+          তারিখ
+        </span>
+
+        <input
+          id="ed"
+          type="date"
+          value="${dateNow()}">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          খরচের নাম
+        </span>
+
+        <input
+          id="en"
+          placeholder="যেমন: গাড়ি ভাড়া">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          টাকার পরিমাণ
+        </span>
+
+        <input
+          id="ea"
+          type="number"
+          min="0"
+          placeholder="৳">
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          মন্তব্য
+        </span>
+
+        <textarea
+          id="ec">
+        </textarea>
+
+      </div>
+
+      <div id="emsg"></div>
+
+      <button
+        class="btn blue full"
+        onclick="saveExpense('${id}')">
+
+        SUBMIT
+
+      </button>
+
+    </div>
+
+    `
+  );
+}
+
+async function saveExpense(id){
+
+  const name =
+    $('en').value.trim();
+
+  const amount =
+    Number(
+      $('ea').value || 0
+    );
+
+  if(!name){
+
+    $('emsg').innerHTML =
+      `<div class="danger">
+        খরচের নাম দিন।
+      </div>`;
+
+    return;
+  }
+
+  const r =
+    await sb
+      .from(
+        'platform_other_expenses'
+      )
+      .insert({
+
+        owner_user_id:
+          session.user.id,
+
+        customer_id:id,
+
+        expense_date:
+          $('ed').value,
+
+        name,
+
+        amount,
+
+        comment:
+          $('ec').value.trim()
+
+      });
+
+  if(r.error){
+
+    $('emsg').innerHTML =
+      `<div class="danger">
+        ${esc(r.error.message)}
+      </div>`;
+
+    return;
+  }
+
+  go(
+    'detail',
+    {id}
+  );
+}
+
+async function pagePaymentHistory(){
+
+  const id =
+    parse().params.get('id');
+
+  const r =
+    await sb
+      .from(
+        'platform_customer_payments'
+      )
+      .select('*')
+      .eq(
+        'customer_id',
+        id
+      )
+      .order(
+        'payment_date',
+        {ascending:false}
+      );
+
+  let body = `
+
+  <div class="card">
+
+    <div class="section-title">
+      📜 Payment History
+    </div>
+
+  `;
+
+  if(
+    !r.data?.length
+  ){
+
+    body += `
+    <div class="empty">
+      কোনো Payment নেই।
+    </div>
+    `;
+  }
+
+  for(
+    const x of r.data || []
+  ){
+
+    body += `
+
+    <div class="table-row">
+
+      <span>
+
+        ${esc(x.payment_date)}
+
+        <br>
+
+        <span class="small-note">
+          ${esc(x.comment || '')}
+        </span>
+
+      </span>
+
+      <b class="price">
+        ${money(x.amount)}
+      </b>
+
+    </div>
+
+    `;
+  }
+
+  body += `
+  </div>
+  `;
+
+  shell(
+    'Payment History',
+    body
+  );
+}
+
+async function pageSummary(){
+
+  const id =
+    parse().params.get('id');
+
+  const r =
+    await sb.rpc(
+      'platform_customer_summary',
+      {
+        p_customer_id:id
+      }
+    );
+
+  const s =
+    r.data?.[0];
+
+  if(!s){
+
+    shell(
+      'Total Lab/Loss',
+      `<div class="card empty">
+        হিসাব পাওয়া যায়নি।
+      </div>`
+    );
+
+    return;
+  }
+
+  shell(
+    'Total Lab/Loss',
+
+    `
+
+    <div class="card">
+
+      <div class="summary">
+
+        <div class="sum">
+
+          <span class="label">
+            Final Price
+          </span>
+
+          <b>
+            ${money(s.final_price)}
+          </b>
+
+        </div>
+
+        <div class="sum">
+
+          <span class="label">
+            টাকা জমা
+          </span>
+
+          <b>
+            ${money(s.paid)}
+          </b>
+
+        </div>
+
+        <div class="sum">
+
+          <span class="label">
+            মাল খরচ
+          </span>
+
+          <b>
+            ${money(s.material_cost)}
+          </b>
+
+        </div>
+
+        <div class="sum">
+
+          <span class="label">
+            মিস্ত্রি খরচ
+          </span>
+
+          <b>
+            ${money(s.mistri_cost)}
+          </b>
+
+        </div>
+
+        <div class="sum">
+
+          <span class="label">
+            অন্যান্য খরচ
+          </span>
+
+          <b>
+            ${money(s.other_cost)}
+          </b>
+
+        </div>
+
+        <div class="sum">
+
+          <span class="label">
+            মোট খরচ
+          </span>
+
+          <b>
+            ${money(s.total_cost)}
+          </b>
+
+        </div>
+
+      </div>
+
+      <div class="section-title">
+
+        ${
+          Number(s.profit) >= 0
+          ? '🟢 লাভ'
+          : '🔴 ক্ষতি'
+        }
+
+      </div>
+
+      <div
+        class="hero"
+        style="margin:0">
+
+        <h1>
+          ${money(s.profit)}
+        </h1>
+
+        <p>
+          Final Price −
+          (মাল + মিস্ত্রি + অন্যান্য খরচ)
+        </p>
+
+      </div>
+
+    </div>
+
+    `
+  );
+}
+
+async function pageProfile(){
+
+  shell(
+    'My Profile',
+
+    `
+
+    <div class="card">
+
+      <div class="field">
+
+        <span class="label">
+          Name
+        </span>
+
+        <input
+          value="${esc(account.name || '')}"
+          disabled>
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          Phone
+        </span>
+
+        <input
+          value="${esc(account.phone || '')}"
+          disabled>
+
+      </div>
+
+      <div class="field">
+
+        <span class="label">
+          Email
+        </span>
+
+        <input
+          value="${esc(session.user.email || '')}"
+          disabled>
+
+      </div>
+
+      <div class="small-note">
+
+        Password কখনো এই পেজে
+        দেখানো হবে না।
+
+        Supabase Auth এটি
+        নিরাপদভাবে পরিচালনা করে।
+
+      </div>
+
+    </div>
+
+    <button
+      class="btn red full"
+      onclick="logout()">
+
+      Logout
+
+    </button>
+
+    `
+  );
+}
+
+async function pageServices(){
+
+  let body = `
+
+  <div class="card">
+
+    <div class="section-title">
+      ⚙️ আমার Services
+    </div>
+
+    <p class="small-note">
+      Admin যে Service ON করে দিয়েছেন,
+      শুধু সেগুলো এখানে সক্রিয় থাকবে।
+    </p>
+
+  </div>
+
+  <div class="grid">
+  `;
+
+  for(
+    const s of services
+  ){
+
+    body += `
+
+    <div
+      class="card"
+      style="
+        margin:0;
+        opacity:${perms[s.id] === true ? 1 : .45}
+      ">
+
+      <div style="font-size:24px">
+        ${icons[s.service_key] || '⚙️'}
+      </div>
+
+      <b>
+        ${esc(s.name)}
+      </b>
+
+      <div class="small-note">
+        ${
+          perms[s.id] === true
+          ? 'ON'
+          : 'OFF'
+        }
+      </div>
+
+    </div>
+
+    `;
+  }
+
+  body += `
+  </div>
+  `;
+
+  shell(
+    'আমার Services',
+    body
+  );
+}
+
+(async()=>{
+  await init();
+})();
+
+</script>
+
+</body>
+</html>
