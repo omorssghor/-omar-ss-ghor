@@ -15,12 +15,20 @@
 body{
   margin:0;
   font-family:Arial,"Noto Sans Bengali",sans-serif;
-  background:#eef2f6;
   color:#17202a;
+  background:
+    radial-gradient(circle at top left,#dff4ff 0,#eef7ff 28%,transparent 55%),
+    radial-gradient(circle at bottom right,#e5fff5 0,#f5fbff 30%,#eef2f6 70%);
+  min-height:100vh;
 }
 
 button{
   cursor:pointer;
+  font-family:inherit;
+}
+
+button:active{
+  transform:scale(.98);
 }
 
 #loginPage{
@@ -30,17 +38,29 @@ button{
   justify-content:center;
   padding:20px;
   background:
-    radial-gradient(circle at top,#394b5f 0,#18232e 45%,#0b1117 100%);
+    radial-gradient(circle at top,#48a9ff 0,#164a79 35%,#08121c 100%);
 }
 
 .login-box{
   width:100%;
   max-width:460px;
-  background:#fff;
-  border-radius:25px;
+  background:rgba(255,255,255,.97);
+  border-radius:28px;
   padding:30px 24px;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
+  box-shadow:0 25px 70px rgba(0,0,0,.38);
   text-align:center;
+  animation:boxIn .5s ease;
+}
+
+@keyframes boxIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .welcome{
@@ -73,6 +93,7 @@ button{
 .login-input:focus{
   border-color:#1683ff;
   background:#fff;
+  box-shadow:0 0 0 4px rgba(0,119,255,.08);
 }
 
 .login-btn{
@@ -85,6 +106,7 @@ button{
   font-size:18px;
   font-weight:bold;
   margin-top:4px;
+  box-shadow:0 8px 18px rgba(0,119,255,.25);
 }
 
 .create-btn,
@@ -113,7 +135,7 @@ button{
   font-weight:bold;
 }
 
-/* PUBLIC PORTAL */
+/* PUBLIC LOGIN */
 
 .public-box{
   margin-top:25px;
@@ -137,14 +159,14 @@ button{
   border:0;
   padding:15px 8px;
   border-radius:14px;
-  background:#f0f6ff;
+  background:#eaf4ff;
   color:#0067d9;
   font-weight:bold;
   font-size:15px;
 }
 
 .public-btn.worker{
-  background:#eefaf6;
+  background:#eafaf5;
   color:#087f5b;
 }
 
@@ -158,15 +180,16 @@ button{
 .topbar{
   position:sticky;
   top:0;
-  z-index:20;
-  background:#17232f;
+  z-index:50;
+  background:
+    linear-gradient(135deg,#102a43,#1769aa,#007f67);
   color:#fff;
-  padding:14px 16px;
-  box-shadow:0 3px 15px rgba(0,0,0,.18);
+  padding:12px 15px;
+  box-shadow:0 4px 20px rgba(0,0,0,.22);
 }
 
 .topbar-inner{
-  max-width:1100px;
+  max-width:1150px;
   margin:auto;
   display:flex;
   align-items:center;
@@ -179,6 +202,22 @@ button{
   font-weight:900;
 }
 
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.menu-toggle{
+  border:0;
+  background:rgba(255,255,255,.16);
+  color:#fff;
+  border-radius:12px;
+  padding:10px 13px;
+  font-weight:bold;
+  font-size:15px;
+}
+
 .logout-btn{
   border:0;
   background:#e74c3c;
@@ -189,32 +228,62 @@ button{
 }
 
 .container{
-  max-width:1100px;
+  max-width:1150px;
   margin:auto;
   padding:18px;
 }
 
+/* DROPDOWN MENU */
+
 .menu{
-  display:grid;
+  display:none;
   grid-template-columns:repeat(3,1fr);
   gap:10px;
   margin-bottom:18px;
+  background:rgba(255,255,255,.9);
+  border-radius:20px;
+  padding:12px;
+  box-shadow:0 8px 28px rgba(0,0,0,.10);
+  animation:menuIn .2s ease;
+}
+
+.menu.open{
+  display:grid;
+}
+
+@keyframes menuIn{
+  from{
+    opacity:0;
+    transform:translateY(-8px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .menu button{
   border:0;
-  background:white;
-  border-radius:14px;
-  padding:14px 8px;
+  background:#f5f8fb;
+  border-radius:15px;
+  padding:15px 8px;
   font-weight:bold;
   color:#263746;
-  box-shadow:0 3px 12px rgba(0,0,0,.07);
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
+  transition:.2s;
+}
+
+.menu button:hover{
+  transform:translateY(-2px);
+  background:#eaf3ff;
 }
 
 .menu button.active{
-  background:#0077ff;
+  background:linear-gradient(135deg,#0077ff,#005bd1);
   color:#fff;
 }
+
+/* PAGES */
 
 .page{
   display:none;
@@ -222,18 +291,38 @@ button{
 
 .page.active{
   display:block;
+  animation:pageIn .25s ease;
 }
 
+@keyframes pageIn{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* CARDS */
+
 .card{
-  background:#fff;
-  border-radius:18px;
+  background:rgba(255,255,255,.95);
+  border-radius:22px;
   padding:20px;
   margin-bottom:16px;
-  box-shadow:0 4px 18px rgba(0,0,0,.07);
+  box-shadow:0 7px 25px rgba(0,0,0,.08);
+  border:1px solid rgba(255,255,255,.8);
 }
 
 .card h2{
   margin-top:0;
+}
+
+.hero-card{
+  background:
+    linear-gradient(135deg,#ffffff,#eaf7ff,#edfff8);
 }
 
 .grid{
@@ -251,6 +340,14 @@ select{
   border-radius:11px;
   font-size:15px;
   outline:none;
+  background:#fff;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#1683ff;
+  box-shadow:0 0 0 3px rgba(0,119,255,.08);
 }
 
 textarea{
@@ -258,18 +355,26 @@ textarea{
   resize:vertical;
 }
 
+label{
+  display:block;
+  margin-bottom:6px;
+  font-weight:bold;
+  font-size:14px;
+}
+
 .primary{
   border:0;
-  background:#0077ff;
+  background:linear-gradient(135deg,#0077ff,#005bd1);
   color:white;
   padding:13px 18px;
   border-radius:11px;
   font-weight:bold;
+  box-shadow:0 5px 12px rgba(0,119,255,.18);
 }
 
 .success{
   border:0;
-  background:#087f5b;
+  background:linear-gradient(135deg,#0a9b70,#087f5b);
   color:white;
   padding:13px 18px;
   border-radius:11px;
@@ -294,9 +399,11 @@ textarea{
 
 .customer{
   border:1px solid #e3e8ed;
-  border-radius:15px;
+  border-radius:17px;
   padding:16px;
   margin-top:12px;
+  background:linear-gradient(135deg,#fff,#f8fbff);
+  box-shadow:0 3px 12px rgba(0,0,0,.04);
 }
 
 .customer-head{
@@ -313,6 +420,14 @@ textarea{
 .amount{
   font-size:18px;
   font-weight:bold;
+  color:#087f5b;
+}
+
+.due-amount{
+  color:#d93025;
+}
+
+.paid-amount{
   color:#087f5b;
 }
 
@@ -340,9 +455,9 @@ textarea{
 }
 
 .stat{
-  background:#f5f8fb;
+  background:linear-gradient(135deg,#f5f8fb,#edf5ff);
   padding:15px;
-  border-radius:13px;
+  border-radius:15px;
   text-align:center;
 }
 
@@ -407,6 +522,160 @@ th{
   font-weight:bold;
 }
 
+/* HOME */
+
+.dashboard-title{
+  font-size:27px;
+  font-weight:900;
+  margin-bottom:5px;
+}
+
+.dashboard-sub{
+  color:#65727e;
+}
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:18px;
+}
+
+.quick{
+  border:0;
+  border-radius:17px;
+  padding:18px;
+  color:#fff;
+  font-weight:bold;
+  min-height:90px;
+  text-align:left;
+}
+
+.quick.blue{
+  background:linear-gradient(135deg,#1683ff,#005bd1);
+}
+
+.quick.green{
+  background:linear-gradient(135deg,#12a77a,#087f5b);
+}
+
+.quick.orange{
+  background:linear-gradient(135deg,#ff9f43,#e67e22);
+}
+
+.quick.red{
+  background:linear-gradient(135deg,#ff6b6b,#d93025);
+}
+
+.quick-icon{
+  font-size:25px;
+  display:block;
+  margin-bottom:7px;
+}
+
+/* DUE */
+
+.due-summary{
+  background:linear-gradient(135deg,#fff1f1,#fff9f9);
+  border:1px solid #ffd6d6;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:15px;
+}
+
+.due-total{
+  font-size:28px;
+  font-weight:900;
+  color:#d93025;
+}
+
+.due-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:16px;
+  border-radius:16px;
+  background:#fff;
+  border:1px solid #eee;
+  margin-top:10px;
+  box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
+.due-name{
+  font-size:18px;
+  font-weight:bold;
+}
+
+.due-phone{
+  color:#777;
+  font-size:13px;
+}
+
+/* ATTENDANCE */
+
+.attendance-summary{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:15px 0;
+}
+
+.att-box{
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+  background:#f4f7fa;
+}
+
+.att-box b{
+  display:block;
+  font-size:22px;
+  margin-top:4px;
+}
+
+.att-present{
+  background:#eafaf5;
+  color:#087f5b;
+}
+
+.att-absent{
+  background:#fff0f0;
+  color:#d93025;
+}
+
+.att-half{
+  background:#fff7e6;
+  color:#c77700;
+}
+
+.att-salary{
+  background:#eaf4ff;
+  color:#0067d9;
+}
+
+.att-status{
+  padding:7px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.status-present{
+  background:#d9f7eb;
+  color:#087f5b;
+}
+
+.status-absent{
+  background:#ffe0e0;
+  color:#d93025;
+}
+
+.status-half{
+  background:#fff0c9;
+  color:#a96600;
+}
+
 /* MODAL */
 
 .modal{
@@ -423,11 +692,12 @@ th{
 .modal-box{
   background:#fff;
   width:100%;
-  max-width:600px;
+  max-width:650px;
   max-height:92vh;
   overflow:auto;
-  border-radius:20px;
+  border-radius:22px;
   padding:22px;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
 }
 
 .modal-title{
@@ -459,7 +729,7 @@ th{
 }
 
 .public-header{
-  background:#17232f;
+  background:linear-gradient(135deg,#17232f,#1769aa);
   color:#fff;
   padding:18px;
   border-radius:15px;
@@ -491,7 +761,7 @@ th{
 
 /* MOBILE */
 
-@media(max-width:650px){
+@media(max-width:700px){
 
   .welcome{
     font-size:25px;
@@ -513,6 +783,14 @@ th{
     grid-template-columns:repeat(2,1fr);
   }
 
+  .attendance-summary{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .quick-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
   .brand{
     font-size:17px;
   }
@@ -528,6 +806,38 @@ th{
   .public-buttons{
     grid-template-columns:1fr;
   }
+
+  .top-actions{
+    gap:5px;
+  }
+
+  .menu-toggle{
+    padding:9px 10px;
+  }
+
+  .logout-btn{
+    padding:9px 10px;
+  }
+}
+
+@media(max-width:430px){
+
+  .menu{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .quick-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .quick{
+    padding:14px;
+    min-height:80px;
+  }
+
+  .quick-icon{
+    font-size:21px;
+  }
 }
 </style>
 </head>
@@ -540,75 +850,70 @@ th{
 
 <section id="loginPage">
 
-  <div class="login-box">
+<div class="login-box">
 
-    <div class="welcome">
-      🏪 ওমর এস এস ঘরে<br>
-      আপনাকে স্বাগতম
-    </div>
+<div class="welcome">
+🏪 ওমর এস এস ঘরে<br>
+আপনাকে স্বাগতম
+</div>
 
-    <div class="login-subtitle">
-      আপনার অ্যাকাউন্টে Login করুন
-    </div>
+<div class="login-subtitle">
+আপনার অ্যাকাউন্টে Login করুন
+</div>
 
-    <input
-      id="loginEmail"
-      class="login-input"
-      type="email"
-      placeholder="Your Email"
-      autocomplete="email"
-    >
+<input
+id="loginEmail"
+class="login-input"
+type="email"
+placeholder="Your Email"
+autocomplete="email">
 
-    <input
-      id="loginPassword"
-      class="login-input"
-      type="password"
-      placeholder="Your Password"
-      autocomplete="current-password"
-    >
+<input
+id="loginPassword"
+class="login-input"
+type="password"
+placeholder="Your Password"
+autocomplete="current-password">
 
-    <button class="login-btn" onclick="loginUser()">
-      Login
-    </button>
+<button class="login-btn" onclick="loginUser()">
+Login
+</button>
 
-    <button class="create-btn" onclick="openCreateAccount()">
-      New Account Created / Login
-    </button>
+<button class="create-btn" onclick="openCreateAccount()">
+New Account Created / Login
+</button>
 
-    <button class="forgot-btn" onclick="forgotPassword()">
-      Forget Password
-    </button>
+<button class="forgot-btn" onclick="forgotPassword()">
+Forget Password
+</button>
 
-    <div id="loginMessage" class="login-message"></div>
+<div id="loginMessage" class="login-message"></div>
 
+<div class="public-box">
 
-    <!-- PUBLIC হিসাব -->
+<div class="public-title">
+📋 হিসাব দেখতে Login লাগবে না
+</div>
 
-    <div class="public-box">
+<div class="public-buttons">
 
-      <div class="public-title">
-        📋 হিসাব দেখতে Login লাগবে না
-      </div>
+<button
+class="public-btn"
+onclick="openPublicPortal('customer')">
+👤 কাস্টমার হিসাব
+</button>
 
-      <div class="public-buttons">
+<button
+class="public-btn worker"
+onclick="openPublicPortal('worker')">
+👷 মিস্ত্রি হিসাব
+</button>
 
-        <button
-          class="public-btn"
-          onclick="openPublicPortal('customer')">
-          👤 কাস্টমার হিসাব
-        </button>
+</div>
 
-        <button
-          class="public-btn worker"
-          onclick="openPublicPortal('worker')">
-          👷 মিস্ত্রি হিসাব
-        </button>
+</div>
 
-      </div>
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
@@ -621,91 +926,146 @@ th{
 
 <header class="topbar">
 
-  <div class="topbar-inner">
+<div class="topbar-inner">
 
-    <div class="brand">
-      🏪 ওমর এস এস ঘর
-    </div>
+<div class="brand">
+🏪 ওমর এস এস ঘর
+</div>
 
-    <button class="logout-btn" onclick="logoutUser()">
-      Logout
-    </button>
+<div class="top-actions">
 
-  </div>
+<button
+class="menu-toggle"
+onclick="toggleMenu()">
+☰ Menu
+</button>
+
+<button
+class="logout-btn"
+onclick="logoutUser()">
+Logout
+</button>
+
+</div>
+
+</div>
 
 </header>
 
-
 <main class="container">
 
-<nav class="menu">
+<!-- MENU -->
 
-  <button class="active"
-    onclick="showPage('homePage',this)">
-    🏠 Home
-  </button>
+<nav id="mainMenu" class="menu">
 
-  <button
-    onclick="showPage('customersPage',this)">
-    👤 Customers
-  </button>
+<button class="active"
+onclick="showPage('homePage',this)">
+🏠 হোম
+</button>
 
-  <button
-    onclick="showPage('newCustomerPage',this)">
-    ➕ New Customer
-  </button>
+<button
+onclick="showPage('customersPage',this)">
+👤 Customer
+</button>
 
-  <button
-    onclick="showPage('materialsPage',this)">
-    🔩 Materials
-  </button>
+<button
+onclick="showPage('newCustomerPage',this)">
+➕ নতুন Customer
+</button>
 
-  <button
-    onclick="showPage('workersPage',this)">
-    👷 Workers
-  </button>
+<button
+onclick="showPage('duePage',this)">
+💰 বাকি তালিকা
+</button>
 
-  <button
-    onclick="showPage('settingsPage',this)">
-    ⚙️ Settings
-  </button>
+<button
+onclick="showPage('materialsPage',this)">
+🔩 মালামাল
+</button>
+
+<button
+onclick="showPage('workersPage',this)">
+👷 মিস্ত্রি
+</button>
+
+<button
+onclick="showPage('attendancePage',this)">
+📅 হাজিরা খাতা
+</button>
+
+<button
+onclick="showPage('settingsPage',this)">
+⚙️ Settings
+</button>
 
 </nav>
 
 
-<!-- HOME -->
+<!-- =====================================================
+ HOME
+===================================================== -->
 
 <section id="homePage" class="page active">
 
-<div class="card">
+<div class="card hero-card">
 
-<h2>🏪 ওমর এস এস ঘর</h2>
+<div class="dashboard-title">
+🏪 ওমর এস এস ঘর
+</div>
 
-<p class="small">
+<div class="dashboard-sub">
 SS ও গ্লাসের সকল ধরনের কাজের বিশ্বস্ত প্রতিষ্ঠান।
-</p>
+</div>
 
 <div class="stats">
 
 <div class="stat">
-Customers
+👤 Customer
 <b id="homeCustomers">0</b>
 </div>
 
 <div class="stat">
-Materials
+🔩 Material
 <b id="homeMaterials">0</b>
 </div>
 
 <div class="stat">
-Workers
+👷 Mistri
 <b id="homeWorkers">0</b>
 </div>
 
 <div class="stat">
-হিসাব
-<b>✓</b>
+💰 বাকি
+<b id="homeDue">0</b>
 </div>
+
+</div>
+
+<div class="quick-grid">
+
+<button class="quick blue"
+onclick="goToPage('newCustomerPage')">
+<span class="quick-icon">➕</span>
+নতুন Customer
+</button>
+
+<button class="quick red"
+onclick="goToPage('duePage')">
+<span class="quick-icon">💰</span>
+বাকি তালিকা
+</button>
+
+<button class="quick green"
+onclick="goToPage('attendancePage')">
+<span class="quick-icon">📅</span>
+মিস্ত্রি হাজিরা
+</button>
+
+<button class="quick orange"
+onclick="goToPage('customersPage')">
+<span class="quick-icon">👤</span>
+Customer হিসাব
+</button>
 
 </div>
 
@@ -714,7 +1074,9 @@ Workers
 </section>
 
 
-<!-- CUSTOMERS -->
+<!-- =====================================================
+ CUSTOMERS
+===================================================== -->
 
 <section id="customersPage" class="page">
 
@@ -729,7 +1091,9 @@ Workers
 </section>
 
 
-<!-- NEW CUSTOMER -->
+<!-- =====================================================
+ NEW CUSTOMER
+===================================================== -->
 
 <section id="newCustomerPage" class="page">
 
@@ -784,13 +1148,48 @@ Workers
 </section>
 
 
-<!-- MATERIALS -->
+<!-- =====================================================
+ DUE LIST
+===================================================== -->
+
+<section id="duePage" class="page">
+
+<div class="card">
+
+<h2>💰 বাকি তালিকা</h2>
+
+<div class="due-summary">
+
+<div class="small">
+Customer-দের মোট বাকি টাকা
+</div>
+
+<div id="dueTotal" class="due-total">
+৳0
+</div>
+
+<div class="small">
+সম্পূর্ণ টাকা পরিশোধ হয়ে গেলে Customer এই তালিকা থেকে অটো চলে যাবে।
+</div>
+
+</div>
+
+<div id="dueList"></div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+ MATERIALS
+===================================================== -->
 
 <section id="materialsPage" class="page">
 
 <div class="card">
 
-<h2>🔩 Materials</h2>
+<h2>🔩 Materials / মালামাল</h2>
 
 <div class="grid">
 
@@ -818,7 +1217,9 @@ placeholder="Price">
 </section>
 
 
-<!-- WORKERS -->
+<!-- =====================================================
+ WORKERS
+===================================================== -->
 
 <section id="workersPage" class="page">
 
@@ -852,7 +1253,128 @@ placeholder="Monthly Salary">
 </section>
 
 
-<!-- SETTINGS -->
+<!-- =====================================================
+ ATTENDANCE
+===================================================== -->
+
+<section id="attendancePage" class="page">
+
+<div class="card">
+
+<h2>📅 মিস্ত্রির হাজিরা খাতা</h2>
+
+<div class="grid">
+
+<div>
+<label>তারিখ</label>
+<input
+id="attendanceDate"
+type="date">
+</div>
+
+<div>
+<label>মিস্ত্রি</label>
+<select id="attendanceWorker">
+<option value="">
+মিস্ত্রি নির্বাচন করুন
+</option>
+</select>
+</div>
+
+</div>
+
+<br>
+
+<div class="grid">
+
+<button
+class="success"
+onclick="saveAttendance('present')">
+✅ উপস্থিত
+</button>
+
+<button
+class="danger"
+onclick="saveAttendance('absent')">
+❌ অনুপস্থিত
+</button>
+
+</div>
+
+<br>
+
+<button
+class="secondary"
+style="width:100%;"
+onclick="saveAttendance('half')">
+🌓 অর্ধদিবস
+</button>
+
+<div id="attendanceMessage"
+class="login-message"></div>
+
+</div>
+
+
+<div class="card">
+
+<h3>📊 মাসের হাজিরা ও বেতন</h3>
+
+<div class="grid">
+
+<div>
+<label>মাস নির্বাচন</label>
+<input
+id="attendanceMonth"
+type="month"
+onchange="loadAttendance()">
+</div>
+
+<div>
+<label>মিস্ত্রি</label>
+<select
+id="attendanceFilterWorker"
+onchange="loadAttendance()">
+<option value="">সব মিস্ত্রি</option>
+</select>
+</div>
+
+</div>
+
+<div class="attendance-summary">
+
+<div class="att-box att-present">
+উপস্থিত
+<b id="attPresent">0</b>
+</div>
+
+<div class="att-box att-absent">
+অনুপস্থিত
+<b id="attAbsent">0</b>
+</div>
+
+<div class="att-box att-half">
+অর্ধদিবস
+<b id="attHalf">0</b>
+</div>
+
+<div class="att-box att-salary">
+বেতন
+<b id="attSalary">৳0</b>
+</div>
+
+</div>
+
+<div id="attendanceList"></div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+ SETTINGS
+===================================================== -->
 
 <section id="settingsPage" class="page">
 
@@ -907,6 +1429,7 @@ placeholder="Monthly Salary">
 </section>
 
 </main>
+
 </section>
 
 
@@ -1016,6 +1539,7 @@ let currentUser=null;
 let customers=[];
 let materials=[];
 let workers=[];
+let attendanceRows=[];
 
 
 /* =====================================================
@@ -1032,6 +1556,8 @@ await supabaseClient.auth.getSession();
 currentUser=
 result.data.session?.user||null;
 
+setDefaultDates();
+
 if(currentUser){
 
 await showMainPage();
@@ -1043,6 +1569,23 @@ showLoginPage();
 }
 
 });
+
+
+function setDefaultDates(){
+
+const today=
+new Date().toISOString().slice(0,10);
+
+const month=
+new Date().toISOString().slice(0,7);
+
+if(document.getElementById("attendanceDate"))
+document.getElementById("attendanceDate").value=today;
+
+if(document.getElementById("attendanceMonth"))
+document.getElementById("attendanceMonth").value=month;
+
+}
 
 
 /* =====================================================
@@ -1120,7 +1663,7 @@ showLoginPage();
 
 
 /* =====================================================
- CREATE ACCOUNT
+ ACCOUNT
 ===================================================== */
 
 function openCreateAccount(){
@@ -1275,6 +1818,8 @@ await loadAllData();
 
 loadSettings();
 
+setDefaultDates();
+
 }
 
 
@@ -1308,8 +1853,27 @@ console.log(
 
 
 /* =====================================================
- PAGE MENU
+ MENU
 ===================================================== */
+
+function toggleMenu(){
+
+const menu=
+document.getElementById("mainMenu");
+
+menu.classList.toggle("open");
+
+}
+
+
+function closeMenu(){
+
+document
+.getElementById("mainMenu")
+.classList.remove("open");
+
+}
+
 
 function showPage(id,button){
 
@@ -1330,11 +1894,34 @@ button.classList.add("active");
 
 }
 
+closeMenu();
+
+if(id==="duePage"){
+renderDueList();
+}
+
+if(id==="attendancePage"){
+loadAttendanceWorkers();
+loadAttendance();
+}
+
+}
+
+
+function goToPage(id){
+
+const button=
+document.querySelector(
+`.menu button[onclick*="'${id}'"]`
+);
+
+showPage(id,button);
+
 }
 
 
 /* =====================================================
- LOAD DATA
+ LOAD ALL
 ===================================================== */
 
 async function loadAllData(){
@@ -1344,6 +1931,8 @@ await loadCustomers();
 await loadMaterials();
 
 await loadWorkers();
+
+await loadAttendanceWorkers();
 
 }
 
@@ -1371,6 +1960,8 @@ return;
 customers=data||[];
 
 renderCustomers();
+
+renderDueList();
 
 document.getElementById("homeCustomers")
 .textContent=customers.length;
@@ -1436,6 +2027,150 @@ class="primary"
 onclick='openCustomer(${JSON.stringify(customer.id)})'>
 📂 হিসাব খুলুন
 </button>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* =====================================================
+ DUE LIST
+===================================================== */
+
+async function renderDueList(){
+
+const box=
+document.getElementById("dueList");
+
+if(!box)return;
+
+if(!customers.length){
+
+box.innerHTML=
+'<div class="empty">এখনও কোনো Customer নেই।</div>';
+
+document.getElementById("dueTotal")
+.textContent="৳0";
+
+document.getElementById("homeDue")
+.textContent="0";
+
+return;
+}
+
+const ids=
+customers.map(c=>c.id);
+
+const {data:payments,error}=
+await supabaseClient
+.from("customer_payments")
+.select("customer_id,amount")
+.eq("admin_id",currentUser.id)
+.in("customer_id",ids);
+
+if(error){
+
+console.log(error);
+
+return;
+}
+
+const paidMap={};
+
+(payments||[]).forEach(p=>{
+
+const id=String(p.customer_id);
+
+paidMap[id]=
+(paidMap[id]||0)+Number(p.amount||0);
+
+});
+
+let totalDue=0;
+
+const dueCustomers=[];
+
+customers.forEach(c=>{
+
+const contract=
+Number(c.contract_price||0);
+
+const paid=
+Number(paidMap[String(c.id)]||0);
+
+const due=
+Math.max(contract-paid,0);
+
+if(due>0){
+
+totalDue+=due;
+
+dueCustomers.push({
+...c,
+paid:paid,
+due:due
+});
+
+}
+
+});
+
+document.getElementById("dueTotal")
+.textContent=
+"৳"+totalDue.toLocaleString();
+
+document.getElementById("homeDue")
+.textContent=
+dueCustomers.length;
+
+if(!dueCustomers.length){
+
+box.innerHTML=`
+
+<div class="empty">
+
+🎉 কোনো Customer-এর টাকা বাকি নেই।
+
+</div>
+
+`;
+
+return;
+}
+
+box.innerHTML=
+dueCustomers.map(c=>`
+
+<div class="due-item">
+
+<div>
+
+<div class="due-name">
+${escapeHtml(c.name||"")}
+</div>
+
+<div class="due-phone">
+📞 ${escapeHtml(c.phone||"")}
+</div>
+
+</div>
+
+<div style="text-align:right;">
+
+<div class="due-amount">
+৳${c.due.toLocaleString()}
+</div>
+
+<button
+class="secondary"
+style="margin-top:6px;"
+onclick='openCustomer(${JSON.stringify(c.id)})'>
+হিসাব
+</button>
+
+</div>
 
 </div>
 
@@ -1606,18 +2341,26 @@ ${escapeHtml(customer.portal_code||"----")}
 
 </div>
 
+<div class="status" style="margin-top:12px;">
+💵 Customer-এর কাছ থেকে মোট জমা:
+<b id="detailPaid">৳0</b>
+<br>
+⏳ Customer-এর বাকি:
+<b id="detailDue" class="bad">৳0</b>
+</div>
+
 <hr>
 
-<div class="section-title">
-🔩 Customer-এর মাল যোগ করুন
-</div>
+<h3>🔩 Customer-এর মাল যোগ করুন</h3>
 
 <div class="grid">
 
 <select id="customerMaterialSelect"
 onchange="fillMaterialPrice()">
 
-<option value="">Material নির্বাচন করুন</option>
+<option value="">
+Material নির্বাচন করুন
+</option>
 
 ${materials.map(m=>`
 
@@ -1626,6 +2369,7 @@ value="${escapeHtml(m.id)}"
 data-price="${Number(m.price||0)}">
 
 ${escapeHtml(m.name)}
+
 </option>
 
 `).join("")}
@@ -2108,10 +2852,18 @@ message.textContent=
 document.getElementById("customerPaymentAmount").value="";
 document.getElementById("customerPaymentNote").value="";
 
+await loadCustomers();
+
+await calculateCustomer(customerId);
+
 await loadCustomerHistory(customerId);
 
 }
 
+
+/* =====================================================
+ CUSTOMER HISTORY
+===================================================== */
 
 async function loadCustomerHistory(customerId){
 
@@ -2282,6 +3034,10 @@ ${workerRows.map(w=>`
 }
 
 
+/* =====================================================
+ CUSTOMER CALCULATION
+===================================================== */
+
 async function calculateCustomer(customerId){
 
 const customer=
@@ -2311,6 +3067,13 @@ await supabaseClient
 .eq("customer_id",customerId)
 .eq("admin_id",currentUser.id);
 
+const {data:paymentsData}=
+await supabaseClient
+.from("customer_payments")
+.select("amount")
+.eq("customer_id",customerId)
+.eq("admin_id",currentUser.id);
+
 const material=
 (materialsData||[])
 .reduce(
@@ -2329,27 +3092,53 @@ const other=
 (sum,x)=>sum+Number(x.amount||0),0
 );
 
+const paid=
+(paymentsData||[])
+.reduce(
+(sum,x)=>sum+Number(x.amount||0),0
+);
+
 const cost=
 material+worker+other;
 
 const profit=
 Number(customer.contract_price||0)-cost;
 
+const due=
+Math.max(
+Number(customer.contract_price||0)-paid,
+0
+);
+
+if(document.getElementById("detailMaterial"))
 document.getElementById("detailMaterial")
 .textContent=
 "৳"+material.toLocaleString();
 
+if(document.getElementById("detailWorker"))
 document.getElementById("detailWorker")
 .textContent=
 "৳"+worker.toLocaleString();
 
+if(document.getElementById("detailOther"))
 document.getElementById("detailOther")
 .textContent=
 "৳"+other.toLocaleString();
 
+if(document.getElementById("detailProfit"))
 document.getElementById("detailProfit")
 .textContent=
 "৳"+profit.toLocaleString();
+
+if(document.getElementById("detailPaid"))
+document.getElementById("detailPaid")
+.textContent=
+"৳"+paid.toLocaleString();
+
+if(document.getElementById("detailDue"))
+document.getElementById("detailDue")
+.textContent=
+"৳"+due.toLocaleString();
 
 }
 
@@ -2536,6 +3325,8 @@ renderWorkers();
 document.getElementById("homeWorkers")
 .textContent=workers.length;
 
+await loadAttendanceWorkers();
+
 }
 
 
@@ -2671,6 +3462,385 @@ await loadWorkers();
 
 
 /* =====================================================
+ ATTENDANCE WORKERS
+===================================================== */
+
+async function loadAttendanceWorkers(){
+
+const select=
+document.getElementById("attendanceWorker");
+
+const filter=
+document.getElementById("attendanceFilterWorker");
+
+if(!select||!filter)return;
+
+select.innerHTML=
+`
+<option value="">
+মিস্ত্রি নির্বাচন করুন
+</option>
+`+
+workers.map(w=>`
+
+<option value="${escapeHtml(w.id)}">
+${escapeHtml(w.name)}
+</option>
+
+`).join("");
+
+filter.innerHTML=
+`
+<option value="">
+সব মিস্ত্রি
+</option>
+`+
+workers.map(w=>`
+
+<option value="${escapeHtml(w.id)}">
+${escapeHtml(w.name)}
+</option>
+
+`).join("");
+
+}
+
+
+async function saveAttendance(status){
+
+const workerId=
+document.getElementById("attendanceWorker").value;
+
+const date=
+document.getElementById("attendanceDate").value;
+
+const message=
+document.getElementById("attendanceMessage");
+
+if(!workerId||!date){
+
+message.style.color="#d93025";
+
+message.textContent=
+"তারিখ এবং মিস্ত্রি নির্বাচন করুন।";
+
+return;
+}
+
+const {error}=
+await supabaseClient
+.from("worker_attendance")
+.upsert({
+
+admin_id:currentUser.id,
+worker_id:workerId,
+attendance_date:date,
+status:status
+
+},{
+onConflict:"worker_id,attendance_date"
+});
+
+if(error){
+
+message.style.color="#d93025";
+
+message.textContent=
+"হাজিরা Save হয়নি: "+error.message;
+
+return;
+}
+
+const text=
+status==="present"
+?
+"উপস্থিত"
+:
+status==="absent"
+?
+"অনুপস্থিত"
+:
+"অর্ধদিবস";
+
+message.style.color="#087f5b";
+
+message.textContent=
+"✅ "+text+" হাজিরা Save হয়েছে।";
+
+await loadAttendance();
+
+}
+
+
+async function loadAttendance(){
+
+const box=
+document.getElementById("attendanceList");
+
+if(!box)return;
+
+const month=
+document.getElementById("attendanceMonth").value;
+
+const workerId=
+document.getElementById("attendanceFilterWorker").value;
+
+if(!month)return;
+
+const start=
+month+"-01";
+
+const endDate=
+new Date(
+Number(month.slice(0,4)),
+Number(month.slice(5,7)),
+0
+);
+
+const end=
+endDate.toISOString().slice(0,10);
+
+let query=
+supabaseClient
+.from("worker_attendance")
+.select("*")
+.eq("admin_id",currentUser.id)
+.gte("attendance_date",start)
+.lte("attendance_date",end)
+.order("attendance_date",{ascending:false});
+
+if(workerId){
+
+query=query.eq("worker_id",workerId);
+
+}
+
+const {data,error}=
+await query;
+
+if(error){
+
+console.log(error);
+
+box.innerHTML=
+'<div class="empty">হাজিরা লোড করা যায়নি।</div>';
+
+return;
+}
+
+attendanceRows=data||[];
+
+let present=0;
+let absent=0;
+let half=0;
+
+attendanceRows.forEach(a=>{
+
+if(a.status==="present")present++;
+
+if(a.status==="absent")absent++;
+
+if(a.status==="half")half++;
+
+});
+
+document.getElementById("attPresent")
+.textContent=present;
+
+document.getElementById("attAbsent")
+.textContent=absent;
+
+document.getElementById("attHalf")
+.textContent=half;
+
+
+/* salary calculation */
+
+let salaryTotal=0;
+
+if(workerId){
+
+const worker=
+workers.find(w=>
+String(w.id)===String(workerId));
+
+if(worker){
+
+const dayValue=
+present+(half*.5);
+
+salaryTotal=
+(Number(worker.monthly_salary||0)/30)
+*dayValue;
+
+}
+
+}else{
+
+/*
+সব মিস্ত্রি নির্বাচন করলে
+প্রত্যেক মিস্ত্রির হাজিরা আলাদাভাবে
+মাসিক Salary অনুযায়ী হিসাব করা হবে।
+*/
+
+const workerMap={};
+
+attendanceRows.forEach(a=>{
+
+const id=String(a.worker_id);
+
+if(!workerMap[id]){
+
+workerMap[id]={
+present:0,
+half:0
+};
+
+}
+
+if(a.status==="present")
+workerMap[id].present++;
+
+if(a.status==="half")
+workerMap[id].half++;
+
+});
+
+Object.keys(workerMap).forEach(id=>{
+
+const worker=
+workers.find(w=>String(w.id)===id);
+
+if(!worker)return;
+
+const days=
+workerMap[id].present+
+(workerMap[id].half*.5);
+
+salaryTotal+=
+(Number(worker.monthly_salary||0)/30)
+*days;
+
+});
+
+}
+
+document.getElementById("attSalary")
+.textContent=
+"৳"+Math.round(salaryTotal).toLocaleString();
+
+
+if(!attendanceRows.length){
+
+box.innerHTML=
+'<div class="empty">এই মাসে কোনো হাজিরা নেই।</div>';
+
+return;
+}
+
+
+box.innerHTML=`
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>তারিখ</th>
+<th>মিস্ত্রি</th>
+<th>অবস্থা</th>
+<th>হিসাব</th>
+</tr>
+
+${attendanceRows.map(a=>{
+
+const worker=
+workers.find(w=>
+String(w.id)===String(a.worker_id));
+
+const statusText=
+a.status==="present"
+?
+"উপস্থিত"
+:
+a.status==="absent"
+?
+"অনুপস্থিত"
+:
+"অর্ধদিবস";
+
+const cls=
+a.status==="present"
+?
+"status-present"
+:
+a.status==="absent"
+?
+"status-absent"
+:
+"status-half";
+
+const dayValue=
+a.status==="present"
+?
+1
+:
+a.status==="half"
+?
+.5
+:
+0;
+
+const daily=
+worker
+?
+(Number(worker.monthly_salary||0)/30)
+:
+0;
+
+const amount=
+daily*dayValue;
+
+return `
+
+<tr>
+
+<td>
+${escapeHtml(a.attendance_date||"")}
+</td>
+
+<td>
+${escapeHtml(worker?.name||"")}
+</td>
+
+<td>
+
+<span class="att-status ${cls}">
+${statusText}
+</span>
+
+</td>
+
+<td>
+৳${Math.round(amount).toLocaleString()}
+</td>
+
+</tr>
+
+`;
+
+}).join("")}
+
+</table>
+
+</div>
+
+`;
+
+}
+
+
+/* =====================================================
  SETTINGS
 ===================================================== */
 
@@ -2762,7 +3932,7 @@ message.textContent=
 
 
 /* =====================================================
- PUBLIC CUSTOMER / WORKER PORTAL
+ PUBLIC PORTAL
 ===================================================== */
 
 function openPublicPortal(type){
@@ -2955,6 +4125,10 @@ renderPublicWorker(data);
 }
 
 
+/* =====================================================
+ PUBLIC CUSTOMER
+===================================================== */
+
 function renderPublicCustomer(data){
 
 const result=
@@ -3058,6 +4232,10 @@ ${payments.map(p=>`
 }
 
 
+/* =====================================================
+ PUBLIC WORKER
+===================================================== */
+
 function renderPublicWorker(data){
 
 const result=
@@ -3083,6 +4261,13 @@ const payments=
 Array.isArray(data.payments)
 ?
 data.payments
+:
+[];
+
+const attendance=
+Array.isArray(data.attendance)
+?
+data.attendance
 :
 [];
 
@@ -3121,6 +4306,60 @@ result.innerHTML=`
 ৳${due.toLocaleString()}
 </b>
 </div>
+
+<h3>📅 হাজিরার ইতিহাস</h3>
+
+${
+attendance.length
+?
+`
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>তারিখ</th>
+<th>অবস্থা</th>
+</tr>
+
+${attendance.map(a=>{
+
+const text=
+a.status==="present"
+?
+"✅ উপস্থিত"
+:
+a.status==="absent"
+?
+"❌ অনুপস্থিত"
+:
+"🌓 অর্ধদিবস";
+
+return `
+
+<tr>
+
+<td>
+${escapeHtml(a.date||"")}
+</td>
+
+<td>
+${text}
+</td>
+
+</tr>
+
+`;
+
+}).join("")}
+
+</table>
+
+</div>
+`
+:
+'<div class="empty">এখনও কোনো হাজিরার হিসাব নেই।</div>'
+}
 
 <h3>📅 কাজের ইতিহাস</h3>
 
