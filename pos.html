@@ -1,0 +1,2821 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>POS | ওমর এস এস ঘর</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Bengali",
+    "Segoe UI",sans-serif;
+    background:#f3f6f8;
+    color:#18222d;
+}
+
+button,input,select{
+    font:inherit;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+}
+
+.top{
+    background:linear-gradient(135deg,#101820,#26343f);
+    color:white;
+    padding:14px;
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 4px 18px #0002;
+}
+
+.top-inner{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo{
+    width:45px;
+    height:45px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#dce5ea,#71808a);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.brand h1{
+    font-size:18px;
+}
+
+.brand small{
+    display:block;
+    opacity:.7;
+    font-size:11px;
+}
+
+.user-area{
+    display:flex;
+    gap:6px;
+    align-items:center;
+}
+
+.small-btn{
+    padding:7px 10px;
+    border-radius:8px;
+    background:#ffffff16;
+    color:white;
+    font-size:12px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:14px;
+}
+
+.login{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.login-box{
+    width:100%;
+    max-width:430px;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 15px 50px #0002;
+}
+
+.login-box h2{
+    margin-bottom:8px;
+}
+
+.muted{
+    color:#71808b;
+    font-size:13px;
+}
+
+.field{
+    margin-top:12px;
+}
+
+.field label{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:5px;
+}
+
+input,select{
+    width:100%;
+    border:1px solid #dce3e8;
+    background:#fff;
+    padding:11px;
+    border-radius:10px;
+    outline:none;
+}
+
+input:focus,select:focus{
+    border-color:#637782;
+}
+
+.primary{
+    background:#17242d;
+    color:white;
+}
+
+.green{
+    background:#16865d;
+    color:white;
+}
+
+.red{
+    background:#c0392b;
+    color:white;
+}
+
+.gray{
+    background:#edf1f3;
+    color:#25323a;
+}
+
+.btn{
+    padding:10px 13px;
+    border-radius:9px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.full{
+    width:100%;
+    margin-top:15px;
+}
+
+.hidden{
+    display:none!important;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:1fr 360px;
+    gap:15px;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:15px;
+    box-shadow:0 4px 20px #0000000b;
+    border:1px solid #e7ecef;
+}
+
+.card-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.card-title h2{
+    font-size:16px;
+}
+
+.search{
+    margin-bottom:10px;
+}
+
+.material-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    max-height:400px;
+    overflow:auto;
+}
+
+.material{
+    border:1px solid #e1e7eb;
+    background:#fff;
+    border-radius:11px;
+    padding:10px;
+    text-align:left;
+}
+
+.material:hover{
+    border-color:#778891;
+    background:#f7f9fa;
+}
+
+.material strong{
+    display:block;
+    font-size:13px;
+}
+
+.material span{
+    font-size:12px;
+    color:#687780;
+}
+
+.cart{
+    min-height:120px;
+}
+
+.cart-row{
+    display:grid;
+    grid-template-columns:1fr 70px 85px 30px;
+    gap:6px;
+    align-items:center;
+    border-bottom:1px solid #edf0f2;
+    padding:9px 0;
+}
+
+.cart-row small{
+    color:#77838b;
+}
+
+.qty{
+    width:65px;
+    padding:7px;
+}
+
+.remove{
+    background:#fee;
+    color:#b22;
+    border-radius:7px;
+    padding:6px;
+}
+
+.total-box{
+    background:#101820;
+    color:white;
+    border-radius:14px;
+    padding:15px;
+    margin-top:12px;
+}
+
+.total-line{
+    display:flex;
+    justify-content:space-between;
+    margin:5px 0;
+}
+
+.total-big{
+    font-size:25px;
+    font-weight:800;
+}
+
+.payment-buttons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+}
+
+.payment-buttons button{
+    padding:9px;
+    border-radius:8px;
+    background:#edf1f3;
+}
+
+.payment-buttons button.active{
+    background:#17242d;
+    color:white;
+}
+
+.menu{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+    margin-bottom:14px;
+}
+
+.menu button{
+    padding:8px 11px;
+    background:white;
+    border:1px solid #e0e6e9;
+    border-radius:8px;
+    font-size:12px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-bottom:14px;
+}
+
+.stat{
+    background:white;
+    border-radius:13px;
+    padding:13px;
+    border:1px solid #e5eaed;
+}
+
+.stat span{
+    display:block;
+    color:#73808a;
+    font-size:11px;
+}
+
+.stat strong{
+    font-size:20px;
+    display:block;
+    margin-top:4px;
+}
+
+.table-wrap{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+}
+
+th,td{
+    padding:10px;
+    border-bottom:1px solid #edf0f2;
+    text-align:left;
+}
+
+th{
+    background:#f7f9fa;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:#0008;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.modal-box{
+    background:white;
+    width:100%;
+    max-width:700px;
+    max-height:90vh;
+    overflow:auto;
+    border-radius:18px;
+    padding:18px;
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+
+.close{
+    background:#edf1f3;
+    border-radius:8px;
+    padding:7px 10px;
+}
+
+.permission-row{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:9px 0;
+    border-bottom:1px solid #edf0f2;
+    font-size:13px;
+}
+
+.permission-row input{
+    width:20px;
+}
+
+.toast{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#17242d;
+    color:white;
+    padding:11px 16px;
+    border-radius:10px;
+    z-index:200;
+    font-size:13px;
+}
+
+@media(max-width:850px){
+    .dashboard{
+        grid-template-columns:1fr;
+    }
+
+    .material-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:500px){
+    .container{
+        padding:9px;
+    }
+
+    .brand h1{
+        font-size:15px;
+    }
+
+    .material-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .cart-row{
+        grid-template-columns:1fr 55px 70px 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="loginPage" class="login">
+
+<div class="login-box">
+
+<h2>🏪 ওমর এস এস ঘর</h2>
+
+<p class="muted">
+Professional POS System
+</p>
+
+<div class="field">
+<label>ইমেইল</label>
+<input id="loginEmail" type="email" placeholder="আপনার ইমেইল">
+</div>
+
+<div class="field">
+<label>পাসওয়ার্ড</label>
+<input id="loginPassword" type="password" placeholder="পাসওয়ার্ড">
+</div>
+
+<button class="btn primary full" onclick="login()">
+লগইন
+</button>
+
+</div>
+</div>
+
+
+<div id="app" class="hidden">
+
+<header class="top">
+
+<div class="top-inner">
+
+<div class="brand">
+
+<div class="logo">
+🏪
+</div>
+
+<div>
+<h1>ওমর এস এস ঘর</h1>
+<small>Professional POS</small>
+</div>
+
+</div>
+
+<div class="user-area">
+
+<span id="userName" class="muted"></span>
+
+<button class="small-btn" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+<div id="menu" class="menu">
+
+<button onclick="showSection('pos')">
+🛒 POS
+</button>
+
+<button id="historyBtn" onclick="showSection('history')">
+📋 বিক্রয়
+</button>
+
+<button id="dueBtn" onclick="showSection('due')">
+💰 বাকি
+</button>
+
+<button id="materialBtn" onclick="openMaterialModal()">
+📦 Material
+</button>
+
+<button id="workerBtn" onclick="openWorkerModal()">
+👷 Mistri
+</button>
+
+<button id="customerBtn" onclick="openCustomerModal()">
+👤 Customer
+</button>
+
+<button id="permissionBtn" class="hidden" onclick="openPermissionModal()">
+⚙️ Permission
+</button>
+
+</div>
+
+
+<div id="posSection">
+
+<div class="stats">
+
+<div class="stat">
+<span>আজকের বিক্রয়</span>
+<strong id="todaySales">৳0</strong>
+</div>
+
+<div class="stat">
+<span>আজ পাওয়া</span>
+<strong id="todayPaid">৳0</strong>
+</div>
+
+<div class="stat">
+<span>আজকের বাকি</span>
+<strong id="todayDue">৳0</strong>
+</div>
+
+<div class="stat">
+<span>আজকের Invoice</span>
+<strong id="todayCount">0</strong>
+</div>
+
+</div>
+
+
+<div class="dashboard">
+
+<section class="card">
+
+<div class="card-title">
+
+<h2>📦 Material নির্বাচন করুন</h2>
+
+<button id="quickMaterialBtn"
+class="btn gray"
+onclick="openMaterialModal()">
++ Material
+</button>
+
+</div>
+
+<input
+id="materialSearch"
+class="search"
+placeholder="Material খুঁজুন..."
+oninput="renderMaterials()">
+
+<div id="materialGrid" class="material-grid"></div>
+
+</section>
+
+
+<section class="card">
+
+<div class="card-title">
+
+<h2>🛒 Cart</h2>
+
+<button class="btn gray" onclick="clearCart()">
+Clear
+</button>
+
+</div>
+
+<div id="cart" class="cart">
+<p class="muted">কোনো Material নির্বাচন করা হয়নি</p>
+</div>
+
+
+<div class="field">
+<label>Customer</label>
+
+<select id="customerSelect">
+<option value="">Walk-in Customer</option>
+</select>
+
+</div>
+
+
+<div class="field">
+
+<button
+class="btn gray full"
+onclick="openCustomerModal()">
++ নতুন Customer
+</button>
+
+</div>
+
+
+<div class="total-box">
+
+<div class="total-line">
+<span>মোট</span>
+<strong id="cartTotal">৳0</strong>
+</div>
+
+<div class="total-line">
+<span>পরিশোধ</span>
+<input
+id="paidAmount"
+type="number"
+value="0"
+oninput="calculateDue()"
+style="width:120px;padding:7px;border-radius:7px;border:0">
+</div>
+
+<div class="total-line">
+<span>বাকি</span>
+<strong id="cartDue">৳0</strong>
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>Payment Type</label>
+
+<div class="payment-buttons">
+
+<button
+id="cashBtn"
+class="active"
+onclick="setPayment('cash')">
+Cash
+</button>
+
+<button
+id="creditBtn"
+onclick="setPayment('credit')">
+Credit
+</button>
+
+<button
+id="partialBtn"
+onclick="setPayment('partial')">
+Partial
+</button>
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<input
+id="saleNote"
+placeholder="নোট / কাজের বিবরণ">
+
+</div>
+
+
+<button
+id="saveSaleBtn"
+class="btn green full"
+onclick="saveSale()">
+
+💾 বিক্রয় Save করুন
+
+</button>
+
+</section>
+
+</div>
+
+</div>
+
+
+<div id="historySection" class="hidden card">
+
+<div class="card-title">
+<h2>📋 বিক্রয়ের ইতিহাস</h2>
+<button class="btn gray" onclick="loadHistory()">Refresh</button>
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>তারিখ</th>
+<th>Customer</th>
+<th>মোট</th>
+<th>Paid</th>
+<th>Due</th>
+<th>Type</th>
+</tr>
+</thead>
+
+<tbody id="historyBody"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div id="dueSection" class="hidden card">
+
+<div class="card-title">
+<h2>💰 বাকি Customer</h2>
+<button class="btn gray" onclick="loadDue()">Refresh</button>
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Customer</th>
+<th>Phone</th>
+<th>মোট</th>
+<th>Paid</th>
+<th>Due</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="dueBody"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+
+<!-- MATERIAL MODAL -->
+
+<div id="materialModal" class="modal hidden">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2>📦 Material Management</h2>
+
+<button class="close" onclick="closeModal('materialModal')">
+✕
+</button>
+
+</div>
+
+<div id="materialPermissionMessage"></div>
+
+<div class="field">
+
+<label>Material Name</label>
+
+<input id="materialName"
+placeholder="যেমন: SS Pipe 1 inch">
+
+</div>
+
+<div class="field">
+
+<label>Price</label>
+
+<input id="materialPrice"
+type="number"
+placeholder="দাম">
+
+</div>
+
+<button
+id="addMaterialButton"
+class="btn primary full"
+onclick="addMaterial()">
+
+Material যোগ করুন
+
+</button>
+
+<hr style="margin:18px 0;border:0;border-top:1px solid #eee">
+
+<div id="materialList"></div>
+
+</div>
+</div>
+
+
+<!-- WORKER MODAL -->
+
+<div id="workerModal" class="modal hidden">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2>👷 Mistri Management</h2>
+
+<button class="close" onclick="closeModal('workerModal')">
+✕
+</button>
+
+</div>
+
+<div class="field">
+
+<label>Mistri নাম</label>
+
+<input id="workerName"
+placeholder="মিস্ত্রির নাম">
+
+</div>
+
+<div class="field">
+
+<label>মাসিক Salary</label>
+
+<input id="workerSalary"
+type="number"
+placeholder="মাসিক বেতন">
+
+</div>
+
+<button
+class="btn primary full"
+onclick="addWorker()">
+
+Mistri যোগ করুন
+
+</button>
+
+<hr style="margin:18px 0;border:0;border-top:1px solid #eee">
+
+<div id="workerList"></div>
+
+</div>
+</div>
+
+
+<!-- CUSTOMER MODAL -->
+
+<div id="customerModal" class="modal hidden">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2>👤 Customer Management</h2>
+
+<button class="close" onclick="closeModal('customerModal')">
+✕
+</button>
+
+</div>
+
+<div class="field">
+
+<label>Customer নাম</label>
+
+<input id="customerName"
+placeholder="নাম">
+
+</div>
+
+<div class="field">
+
+<label>Phone</label>
+
+<input id="customerPhone"
+placeholder="মোবাইল নম্বর">
+
+</div>
+
+<div class="field">
+
+<label>ঠিকানা</label>
+
+<input id="customerAddress"
+placeholder="ঠিকানা">
+
+</div>
+
+<div class="field">
+
+<label>কাজ</label>
+
+<input id="customerWork"
+placeholder="কাজের নাম">
+
+</div>
+
+<button
+class="btn primary full"
+onclick="addCustomer()">
+
+Customer Save
+
+</button>
+
+<hr style="margin:18px 0;border:0;border-top:1px solid #eee">
+
+<div id="customerList"></div>
+
+</div>
+</div>
+
+
+<!-- PERMISSION MODAL -->
+
+<div id="permissionModal" class="modal hidden">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2>⚙️ User Permission</h2>
+
+<button class="close" onclick="closeModal('permissionModal')">
+✕
+</button>
+
+</div>
+
+<div class="field">
+
+<label>User নির্বাচন করুন</label>
+
+<select id="permissionUser"
+onchange="loadPermissionForSelectedUser()">
+
+<option value="">User নির্বাচন করুন</option>
+
+</select>
+
+</div>
+
+<div id="permissionArea"></div>
+
+<button
+class="btn green full"
+onclick="savePermissions()">
+
+Permission Save
+
+</button>
+
+</div>
+</div>
+
+
+<div id="toast" class="toast hidden"></div>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://gzujcqjpxypcoiqhpvvu.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
+
+const supabase =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+let currentUser=null;
+let isAdmin=false;
+let adminId=null;
+
+let permissions={};
+
+let materials=[];
+let customers=[];
+let workers=[];
+
+let cart=[];
+
+let paymentType="cash";
+
+
+const permissionDefaults={
+
+can_use_pos:true,
+
+can_create_sale:true,
+can_cash_sale:true,
+can_credit_sale:true,
+can_partial_sale:true,
+
+can_view_history:true,
+can_view_due:true,
+can_collect_due:true,
+
+can_view_report:true,
+
+can_manage_material:false,
+can_add_material:false,
+can_edit_material:false,
+can_change_material_price:false,
+can_delete_material:false,
+
+can_manage_worker:false,
+can_add_worker:false,
+can_edit_worker:false,
+can_change_worker_salary:false,
+can_delete_worker:false,
+
+can_manage_customer:false,
+can_add_customer:false,
+can_edit_customer:false,
+can_delete_customer:false,
+
+can_view_customer_phone:true,
+can_view_customer_address:true
+};
+
+
+document.addEventListener("DOMContentLoaded",init);
+
+
+async function init(){
+
+    const {
+        data:{
+            session
+        }
+    }=await supabase.auth.getSession();
+
+    if(session){
+
+        await startApp(session.user);
+
+    }
+
+}
+
+
+async function login(){
+
+    const email=
+        document.getElementById("loginEmail").value.trim();
+
+    const password=
+        document.getElementById("loginPassword").value;
+
+    if(!email || !password){
+
+        toast("ইমেইল ও পাসওয়ার্ড দিন");
+        return;
+    }
+
+    const {
+        data,
+        error
+    }=await supabase.auth.signInWithPassword({
+        email,
+        password
+    });
+
+    if(error){
+
+        toast(error.message);
+        return;
+    }
+
+    await startApp(data.user);
+}
+
+
+async function startApp(user){
+
+    currentUser=user;
+
+    document.getElementById("loginPage")
+    .classList.add("hidden");
+
+    document.getElementById("app")
+    .classList.remove("hidden");
+
+    document.getElementById("userName")
+    .textContent=
+        user.user_metadata?.name ||
+        user.email ||
+        "";
+
+    const access=
+        await supabase
+        .rpc("ensure_pos_permission");
+
+    if(access.error){
+
+        toast("POS access পাওয়া যায়নি: "+
+        access.error.message);
+
+        return;
+    }
+
+    const result=access.data;
+
+    isAdmin=!!result.admin;
+
+    adminId=
+        result.admin_id ||
+        currentUser.id;
+
+    if(isAdmin){
+
+        permissions={
+            ...permissionDefaults,
+
+            can_manage_material:true,
+            can_add_material:true,
+            can_edit_material:true,
+            can_change_material_price:true,
+            can_delete_material:true,
+
+            can_manage_worker:true,
+            can_add_worker:true,
+            can_edit_worker:true,
+            can_change_worker_salary:true,
+            can_delete_worker:true,
+
+            can_manage_customer:true,
+            can_add_customer:true,
+            can_edit_customer:true,
+            can_delete_customer:true
+        };
+
+        document
+        .getElementById("permissionBtn")
+        .classList.remove("hidden");
+
+    }else{
+
+        permissions={
+            ...permissionDefaults,
+            ...(result.permission || {})
+        };
+
+    }
+
+    applyPermissions();
+
+    await loadMaterials();
+    await loadCustomers();
+    await loadWorkers();
+
+    await loadDashboard();
+
+}
+
+
+function applyPermissions(){
+
+    if(!permissions.can_use_pos){
+
+        document
+        .getElementById("posSection")
+        .innerHTML=
+        `<div class="card">
+        <h2>POS অনুমতি দেওয়া হয়নি</h2>
+        <p class="muted">
+        Admin থেকে POS permission চালু করতে হবে।
+        </p>
+        </div>`;
+
+        return;
+    }
+
+    if(!permissions.can_view_history)
+        document
+        .getElementById("historyBtn")
+        .classList.add("hidden");
+
+    if(!permissions.can_view_due)
+        document
+        .getElementById("dueBtn")
+        .classList.add("hidden");
+
+    if(
+        !permissions.can_manage_material &&
+        !permissions.can_add_material &&
+        !permissions.can_edit_material
+    ){
+
+        document
+        .getElementById("materialBtn")
+        .classList.add("hidden");
+
+        document
+        .getElementById("quickMaterialBtn")
+        .classList.add("hidden");
+    }
+
+    if(
+        !permissions.can_manage_worker &&
+        !permissions.can_add_worker &&
+        !permissions.can_edit_worker
+    ){
+
+        document
+        .getElementById("workerBtn")
+        .classList.add("hidden");
+    }
+
+    if(
+        !permissions.can_manage_customer &&
+        !permissions.can_add_customer &&
+        !permissions.can_edit_customer
+    ){
+
+        document
+        .getElementById("customerBtn")
+        .classList.add("hidden");
+    }
+
+    if(!permissions.can_create_sale){
+
+        document
+        .getElementById("saveSaleBtn")
+        .disabled=true;
+    }
+
+}
+
+
+async function logout(){
+
+    await supabase.auth.signOut();
+
+    location.reload();
+
+}
+
+
+async function loadMaterials(){
+
+    const {data,error}=await supabase
+        .from("materials")
+        .select("*")
+        .order("name");
+
+    if(error){
+
+        toast("Material load হয়নি: "+error.message);
+        return;
+    }
+
+    materials=data || [];
+
+    renderMaterials();
+
+    renderMaterialList();
+}
+
+
+function renderMaterials(){
+
+    const search=
+        document
+        .getElementById("materialSearch")
+        .value
+        .toLowerCase();
+
+    const box=
+        document
+        .getElementById("materialGrid");
+
+    const list=
+        materials.filter(m=>
+            (m.name || "")
+            .toLowerCase()
+            .includes(search)
+        );
+
+    box.innerHTML=
+        list.map(m=>`
+
+        <button
+        class="material"
+        onclick="addToCart('${m.id}')">
+
+            <strong>${escapeHtml(m.name)}</strong>
+
+            <span>
+            ${permissions.can_view_material_rate
+                ? "৳"+money(m.price)
+                : "দাম গোপন"}
+            </span>
+
+        </button>
+
+        `).join("");
+
+}
+
+
+function addToCart(id){
+
+    const m=
+        materials.find(x=>x.id===id);
+
+    if(!m)return;
+
+    const old=
+        cart.find(x=>x.material_id===id);
+
+    if(old){
+
+        old.qty++;
+
+    }else{
+
+        cart.push({
+
+            material_id:m.id,
+            name:m.name,
+            price:Number(m.price || 0),
+            qty:1
+
+        });
+
+    }
+
+    renderCart();
+
+}
+
+
+function renderCart(){
+
+    const box=
+        document.getElementById("cart");
+
+    if(!cart.length){
+
+        box.innerHTML=
+        `<p class="muted">
+        কোনো Material নির্বাচন করা হয়নি
+        </p>`;
+
+        updateTotals();
+
+        return;
+    }
+
+    box.innerHTML=
+        cart.map((x,i)=>`
+
+        <div class="cart-row">
+
+            <div>
+                <strong>
+                ${escapeHtml(x.name)}
+                </strong>
+                <br>
+                <small>
+                ৳${money(x.price)}
+                </small>
+            </div>
+
+            <input
+                class="qty"
+                type="number"
+                min="1"
+                value="${x.qty}"
+                onchange="changeQty(${i},this.value)">
+
+            <strong>
+            ৳${money(x.price*x.qty)}
+            </strong>
+
+            <button
+                class="remove"
+                onclick="removeCart(${i})">
+                ×
+            </button>
+
+        </div>
+
+        `).join("");
+
+    updateTotals();
+
+}
+
+
+function changeQty(i,value){
+
+    let q=Number(value);
+
+    if(q<1)q=1;
+
+    cart[i].qty=q;
+
+    renderCart();
+
+}
+
+
+function removeCart(i){
+
+    cart.splice(i,1);
+
+    renderCart();
+
+}
+
+
+function clearCart(){
+
+    cart=[];
+
+    document
+    .getElementById("paidAmount")
+    .value=0;
+
+    renderCart();
+
+}
+
+
+function cartTotal(){
+
+    return cart.reduce(
+        (sum,x)=>
+        sum+(Number(x.price)*Number(x.qty)),
+        0
+    );
+
+}
+
+
+function updateTotals(){
+
+    const total=cartTotal();
+
+    document
+    .getElementById("cartTotal")
+    .textContent="৳"+money(total);
+
+    calculateDue();
+
+}
+
+
+function calculateDue(){
+
+    const total=cartTotal();
+
+    let paid=
+        Number(
+            document
+            .getElementById("paidAmount")
+            .value || 0
+        );
+
+    if(paymentType==="cash")
+        paid=total;
+
+    if(paymentType==="credit")
+        paid=0;
+
+    if(paid>total)
+        paid=total;
+
+    if(paymentType==="cash")
+        document
+        .getElementById("paidAmount")
+        .value=total;
+
+    if(paymentType==="credit")
+        document
+        .getElementById("paidAmount")
+        .value=0;
+
+    document
+    .getElementById("cartDue")
+    .textContent=
+        "৳"+money(Math.max(0,total-paid));
+
+}
+
+
+function setPayment(type){
+
+    paymentType=type;
+
+    ["cash","credit","partial"]
+    .forEach(x=>{
+
+        document
+        .getElementById(x+"Btn")
+        .classList.remove("active");
+
+    });
+
+    document
+    .getElementById(type+"Btn")
+    .classList.add("active");
+
+    calculateDue();
+
+}
+
+
+async function loadCustomers(){
+
+    const {data,error}=await supabase
+        .from("customers")
+        .select("*")
+        .order("name");
+
+    if(error)return;
+
+    customers=data || [];
+
+    const select=
+        document
+        .getElementById("customerSelect");
+
+    select.innerHTML=
+        `<option value="">
+        Walk-in Customer
+        </option>`;
+
+    customers.forEach(c=>{
+
+        select.innerHTML+=`
+        <option value="${c.id}">
+        ${escapeHtml(c.name)}
+        ${c.phone ? " - "+escapeHtml(c.phone):""}
+        </option>
+        `;
+
+    });
+
+    renderCustomerList();
+
+}
+
+
+async function addCustomer(){
+
+    if(
+        !isAdmin &&
+        !permissions.can_add_customer
+    ){
+
+        toast("Customer যোগ করার অনুমতি নেই");
+        return;
+    }
+
+    const name=
+        document
+        .getElementById("customerName")
+        .value.trim();
+
+    const phone=
+        document
+        .getElementById("customerPhone")
+        .value.trim();
+
+    const address=
+        document
+        .getElementById("customerAddress")
+        .value.trim();
+
+    const work=
+        document
+        .getElementById("customerWork")
+        .value.trim();
+
+    if(!name){
+
+        toast("Customer নাম দিন");
+        return;
+    }
+
+    const {data,error}=await supabase
+        .from("customers")
+        .insert({
+
+            admin_id:adminId,
+            user_id:currentUser.id,
+
+            name,
+            phone,
+            address,
+            work
+
+        })
+        .select()
+        .single();
+
+    if(error){
+
+        toast(error.message);
+        return;
+    }
+
+    toast("Customer যোগ হয়েছে");
+
+    document
+    .getElementById("customerName")
+    .value="";
+
+    document
+    .getElementById("customerPhone")
+    .value="";
+
+    document
+    .getElementById("customerAddress")
+    .value="";
+
+    document
+    .getElementById("customerWork")
+    .value="";
+
+    await loadCustomers();
+
+}
+
+
+function renderCustomerList(){
+
+    const box=
+        document.getElementById("customerList");
+
+    box.innerHTML=
+        customers.map(c=>`
+
+        <div style="
+        padding:10px 0;
+        border-bottom:1px solid #eee">
+
+            <strong>
+            ${escapeHtml(c.name)}
+            </strong>
+
+            ${
+                permissions.can_view_customer_phone
+                && c.phone
+                ? `<br><small>${escapeHtml(c.phone)}</small>`
+                : ""
+            }
+
+            ${
+                permissions.can_view_customer_address
+                && c.address
+                ? `<br><small>${escapeHtml(c.address)}</small>`
+                : ""
+            }
+
+        </div>
+
+        `).join("");
+
+}
+
+
+async function loadWorkers(){
+
+    const {data,error}=await supabase
+        .from("workers")
+        .select("*")
+        .order("name");
+
+    if(error)return;
+
+    workers=data || [];
+
+    renderWorkerList();
+
+}
+
+
+async function addWorker(){
+
+    if(
+        !isAdmin &&
+        !permissions.can_add_worker
+    ){
+
+        toast("Mistri যোগ করার অনুমতি নেই");
+        return;
+    }
+
+    const name=
+        document
+        .getElementById("workerName")
+        .value.trim();
+
+    const salary=
+        Number(
+            document
+            .getElementById("workerSalary")
+            .value || 0
+        );
+
+    if(!name){
+
+        toast("Mistri নাম দিন");
+        return;
+    }
+
+    const {error}=await supabase
+        .from("workers")
+        .insert({
+
+            admin_id:adminId,
+            user_id:currentUser.id,
+
+            name,
+            monthly_salary:salary
+
+        });
+
+    if(error){
+
+        toast(error.message);
+        return;
+    }
+
+    toast("Mistri যোগ হয়েছে");
+
+    document
+    .getElementById("workerName")
+    .value="";
+
+    document
+    .getElementById("workerSalary")
+    .value="";
+
+    await loadWorkers();
+
+}
+
+
+function renderWorkerList(){
+
+    const box=
+        document.getElementById("workerList");
+
+    box.innerHTML=
+        workers.map(w=>`
+
+        <div style="
+        padding:10px 0;
+        border-bottom:1px solid #eee">
+
+            <strong>
+            ${escapeHtml(w.name)}
+            </strong>
+
+            <br>
+
+            <small>
+            Salary:
+            ৳${money(w.monthly_salary)}
+            </small>
+
+        </div>
+
+        `).join("");
+
+}
+
+
+async function addMaterial(){
+
+    if(
+        !isAdmin &&
+        !permissions.can_add_material
+    ){
+
+        toast("Material যোগ করার অনুমতি নেই");
+        return;
+    }
+
+    const name=
+        document
+        .getElementById("materialName")
+        .value.trim();
+
+    const price=
+        Number(
+            document
+            .getElementById("materialPrice")
+            .value || 0
+        );
+
+    if(!name){
+
+        toast("Material নাম দিন");
+        return;
+    }
+
+    const same=
+        materials.find(
+            x=>
+            x.name.trim().toLowerCase()
+            ===name.toLowerCase()
+        );
+
+    if(same){
+
+        if(Number(same.price)===price){
+
+            toast("এই Material আগে থেকেই আছে");
+            return;
+        }
+
+        if(
+            !isAdmin &&
+            !permissions.can_change_material_price
+        ){
+
+            toast("এই Material-এর দাম পরিবর্তনের অনুমতি নেই");
+            return;
+        }
+
+        const {error}=await supabase
+        .from("materials")
+        .update({
+            price
+        })
+        .eq("id",same.id);
+
+        if(error){
+
+            toast(error.message);
+            return;
+        }
+
+        toast("Material-এর দাম Update হয়েছে");
+
+    }else{
+
+        const {error}=await supabase
+        .from("materials")
+        .insert({
+
+            admin_id:adminId,
+            user_id:currentUser.id,
+
+            name,
+            price
+
+        });
+
+        if(error){
+
+            toast(error.message);
+            return;
+        }
+
+        toast("নতুন Material যোগ হয়েছে");
+
+    }
+
+    document
+    .getElementById("materialName")
+    .value="";
+
+    document
+    .getElementById("materialPrice")
+    .value="";
+
+    await loadMaterials();
+
+}
+
+
+function renderMaterialList(){
+
+    const box=
+        document.getElementById("materialList");
+
+    box.innerHTML=
+        materials.map(m=>`
+
+        <div style="
+        padding:10px 0;
+        border-bottom:1px solid #eee;
+        display:flex;
+        justify-content:space-between;
+        gap:8px">
+
+            <div>
+                <strong>
+                ${escapeHtml(m.name)}
+                </strong>
+
+                <br>
+
+                <small>
+                ৳${money(m.price)}
+                </small>
+            </div>
+
+            ${
+                isAdmin ||
+                permissions.can_delete_material
+                ?
+                `<button
+                class="btn red"
+                onclick="deleteMaterial('${m.id}')">
+                Delete
+                </button>`
+                :""
+            }
+
+        </div>
+
+        `).join("");
+
+}
+
+
+async function deleteMaterial(id){
+
+    if(
+        !isAdmin &&
+        !permissions.can_delete_material
+    ){
+
+        toast("Delete permission নেই");
+        return;
+    }
+
+    if(!confirm("Material মুছে ফেলবেন?"))
+        return;
+
+    const {error}=await supabase
+        .from("materials")
+        .delete()
+        .eq("id",id);
+
+    if(error){
+
+        toast(error.message);
+        return;
+    }
+
+    toast("Material মুছে ফেলা হয়েছে");
+
+    await loadMaterials();
+
+}
+
+
+async function saveSale(){
+
+    if(!permissions.can_create_sale && !isAdmin){
+
+        toast("বিক্রয় করার অনুমতি নেই");
+        return;
+    }
+
+    if(!cart.length){
+
+        toast("Cart-এ Material যোগ করুন");
+        return;
+    }
+
+    if(
+        paymentType==="cash" &&
+        !isAdmin &&
+        !permissions.can_cash_sale
+    ){
+
+        toast("Cash sale permission নেই");
+        return;
+    }
+
+    if(
+        paymentType==="credit" &&
+        !isAdmin &&
+        !permissions.can_credit_sale
+    ){
+
+        toast("Credit sale permission নেই");
+        return;
+    }
+
+    if(
+        paymentType==="partial" &&
+        !isAdmin &&
+        !permissions.can_partial_sale
+    ){
+
+        toast("Partial sale permission নেই");
+        return;
+    }
+
+    const total=cartTotal();
+
+    let paid=
+        Number(
+            document
+            .getElementById("paidAmount")
+            .value || 0
+        );
+
+    if(paymentType==="cash")
+        paid=total;
+
+    if(paymentType==="credit")
+        paid=0;
+
+    if(paid>total)
+        paid=total;
+
+    const due=total-paid;
+
+    const customerId=
+        document
+        .getElementById("customerSelect")
+        .value || null;
+
+    const note=
+        document
+        .getElementById("saleNote")
+        .value.trim();
+
+    const {data:sale,error:saleError}=
+        await supabase
+        .from("material_sales")
+        .insert({
+
+            admin_id:adminId,
+            user_id:currentUser.id,
+
+            customer_id:customerId,
+
+            payment_type:paymentType,
+
+            total,
+            paid,
+            due,
+
+            note
+
+        })
+        .select()
+        .single();
+
+    if(saleError){
+
+        toast(saleError.message);
+        return;
+    }
+
+    const items=
+        cart.map(x=>({
+
+            admin_id:adminId,
+            user_id:currentUser.id,
+
+            sale_id:sale.id,
+
+            material_id:x.material_id,
+            material_name:x.name,
+
+            price:x.price,
+            qty:x.qty,
+
+            total:x.price*x.qty
+
+        }));
+
+    const {error:itemError}=
+        await supabase
+        .from("material_sale_items")
+        .insert(items);
+
+    if(itemError){
+
+        toast(itemError.message);
+        return;
+    }
+
+    if(paid>0){
+
+        await supabase
+        .from("material_sale_payments")
+        .insert({
+
+            admin_id:adminId,
+            user_id:currentUser.id,
+
+            sale_id:sale.id,
+
+            amount:paid,
+
+            note:"POS sale"
+
+        });
+
+    }
+
+    toast("✅ বিক্রয় সফলভাবে Save হয়েছে");
+
+    clearCart();
+
+    document
+    .getElementById("saleNote")
+    .value="";
+
+    await loadDashboard();
+
+}
+
+
+async function loadDashboard(){
+
+    const today=
+        new Date()
+        .toISOString()
+        .slice(0,10);
+
+    const {data,error}=
+        await supabase
+        .from("material_sales")
+        .select("total,paid,due")
+        .eq("user_id",currentUser.id)
+        .eq("sale_date",today);
+
+    if(error)return;
+
+    const rows=data || [];
+
+    const total=
+        rows.reduce((a,b)=>
+        a+Number(b.total||0),0);
+
+    const paid=
+        rows.reduce((a,b)=>
+        a+Number(b.paid||0),0);
+
+    const due=
+        rows.reduce((a,b)=>
+        a+Number(b.due||0),0);
+
+    document
+    .getElementById("todaySales")
+    .textContent="৳"+money(total);
+
+    document
+    .getElementById("todayPaid")
+    .textContent="৳"+money(paid);
+
+    document
+    .getElementById("todayDue")
+    .textContent="৳"+money(due);
+
+    document
+    .getElementById("todayCount")
+    .textContent=rows.length;
+
+}
+
+
+async function loadHistory(){
+
+    const {data,error}=
+        await supabase
+        .from("material_sales")
+        .select(`
+            *,
+            material_sale_customers(
+                name,
+                phone
+            )
+        `)
+        .eq("user_id",currentUser.id)
+        .order("created_at",{ascending:false})
+        .limit(100);
+
+    if(error){
+
+        toast(error.message);
+        return;
+    }
+
+    const body=
+        document.getElementById("historyBody");
+
+    body.innerHTML=
+        (data||[]).map(s=>`
+
+        <tr>
+
+            <td>
+            ${s.sale_date}
+            </td>
+
+            <td>
+            ${
+                s.material_sale_customers?.name
+                ||"Walk-in"
+            }
+            </td>
+
+            <td>
+            ৳${money(s.total)}
+            </td>
+
+            <td>
+            ৳${money(s.paid)}
+            </td>
+
+            <td>
+            ৳${money(s.due)}
+            </td>
+
+            <td>
+            ${paymentBangla(s.payment_type)}
+            </td>
+
+        </tr>
+
+        `).join("");
+
+}
+
+
+async function loadDue(){
+
+    const {data,error}=
+        await supabase
+        .from("material_sales")
+        .select(`
+            *,
+            material_sale_customers(
+                name,
+                phone
+            )
+        `)
+        .eq("user_id",currentUser.id)
+        .gt("due",0)
+        .order("created_at",{ascending:false});
+
+    if(error)return;
+
+    const map={};
+
+    (data||[]).forEach(s=>{
+
+        const id=s.customer_id || "walkin";
+
+        if(!map[id]){
+
+            map[id]={
+
+                name:
+                    s.material_sale_customers?.name
+                    ||"Walk-in",
+
+                phone:
+                    s.material_sale_customers?.phone
+                    ||"",
+
+                total:0,
+                paid:0,
+                due:0
+
+            };
+
+        }
+
+        map[id].total+=Number(s.total||0);
+        map[id].paid+=Number(s.paid||0);
+        map[id].due+=Number(s.due||0);
+
+    });
+
+    document
+    .getElementById("dueBody")
+    .innerHTML=
+        Object.values(map)
+        .map(c=>`
+
+        <tr>
+
+            <td>${escapeHtml(c.name)}</td>
+
+            <td>
+            ${
+                permissions.can_view_customer_phone
+                ? escapeHtml(c.phone)
+                : "গোপন"
+            }
+            </td>
+
+            <td>৳${money(c.total)}</td>
+
+            <td>৳${money(c.paid)}</td>
+
+            <td><strong>৳${money(c.due)}</strong></td>
+
+            <td>
+
+            ${
+                permissions.can_collect_due
+                ?
+                `<button
+                class="btn green"
+                onclick="collectDue('${escapeHtml(c.name)}')">
+                টাকা নিন
+                </button>`
+                :
+                ""
+            }
+
+            </td>
+
+        </tr>
+
+        `).join("");
+
+}
+
+
+async function collectDue(name){
+
+    if(!permissions.can_collect_due && !isAdmin){
+
+        toast("Due collection permission নেই");
+        return;
+    }
+
+    const amount=
+        Number(
+            prompt(
+                name+
+                " এর কাছ থেকে কত টাকা নিলেন?"
+            )
+        );
+
+    if(!amount || amount<=0)
+        return;
+
+    const {data:sales,error}=
+        await supabase
+        .from("material_sales")
+        .select("*")
+        .eq("user_id",currentUser.id)
+        .gt("due",0);
+
+    if(error)return;
+
+    let remaining=amount;
+
+    for(const sale of sales){
+
+        if(remaining<=0)break;
+
+        const currentDue=
+            Number(sale.due||0);
+
+        const take=
+            Math.min(currentDue,remaining);
+
+        if(take<=0)continue;
+
+        await supabase
+        .from("material_sales")
+        .update({
+
+            paid:
+                Number(sale.paid||0)+take,
+
+            due:
+                currentDue-take
+
+        })
+        .eq("id",sale.id)
+        .eq("user_id",currentUser.id);
+
+        await supabase
+        .from("material_sale_payments")
+        .insert({
+
+            admin_id:adminId,
+            user_id:currentUser.id,
+
+            sale_id:sale.id,
+
+            amount:take,
+
+            note:"Due collection"
+
+        });
+
+        remaining-=take;
+
+    }
+
+    toast("Due payment save হয়েছে");
+
+    await loadDue();
+    await loadDashboard();
+
+}
+
+
+async function openPermissionModal(){
+
+    if(!isAdmin)return;
+
+    document
+    .getElementById("permissionModal")
+    .classList.remove("hidden");
+
+    const {data,error}=
+        await supabase
+        .from("website_users")
+        .select("*")
+        .order("name");
+
+    if(error){
+
+        toast(error.message);
+        return;
+    }
+
+    const select=
+        document
+        .getElementById("permissionUser");
+
+    select.innerHTML=
+        `<option value="">
+        User নির্বাচন করুন
+        </option>`;
+
+    (data||[]).forEach(u=>{
+
+        select.innerHTML+=`
+        <option value="${u.user_id}">
+        ${escapeHtml(u.name||u.email||u.user_id)}
+        </option>
+        `;
+
+    });
+
+}
+
+
+async function loadPermissionForSelectedUser(){
+
+    const userId=
+        document
+        .getElementById("permissionUser")
+        .value;
+
+    if(!userId)return;
+
+    const {data}=await supabase
+        .from("pos_permissions")
+        .select("*")
+        .eq("admin_id",adminId)
+        .eq("user_id",userId)
+        .maybeSingle();
+
+    const p={
+        ...permissionDefaults,
+        ...(data||{})
+    };
+
+    document
+    .getElementById("permissionArea")
+    .innerHTML=
+
+    Object.keys(permissionDefaults)
+    .map(key=>`
+
+        <label class="permission-row">
+
+            <span>
+            ${permissionLabel(key)}
+            </span>
+
+            <input
+            type="checkbox"
+            data-permission="${key}"
+            ${p[key] ? "checked":""}>
+
+        </label>
+
+    `).join("");
+
+}
+
+
+async function savePermissions(){
+
+    if(!isAdmin)return;
+
+    const userId=
+        document
+        .getElementById("permissionUser")
+        .value;
+
+    if(!userId){
+
+        toast("User নির্বাচন করুন");
+        return;
+    }
+
+    const payload={
+
+        admin_id:adminId,
+        user_id:userId
+
+    };
+
+    document
+    .querySelectorAll("[data-permission]")
+    .forEach(el=>{
+
+        payload[
+            el.dataset.permission
+        ]=el.checked;
+
+    });
+
+    const {error}=
+        await supabase
+        .from("pos_permissions")
+        .upsert(
+            payload,
+            {
+                onConflict:"admin_id,user_id"
+            }
+        );
+
+    if(error){
+
+        toast(error.message);
+        return;
+    }
+
+    toast("Permission Save হয়েছে");
+
+}
+
+
+function permissionLabel(k){
+
+    const labels={
+
+        can_use_pos:"POS ব্যবহার",
+
+        can_create_sale:"বিক্রয় করা",
+        can_cash_sale:"Cash Sale",
+        can_credit_sale:"Credit Sale",
+        can_partial_sale:"Partial Sale",
+
+        can_view_history:"বিক্রয়ের ইতিহাস",
+        can_view_due:"বাকি দেখা",
+        can_collect_due:"বাকি টাকা নেওয়া",
+
+        can_view_report:"Report দেখা",
+
+        can_manage_material:"Material Management",
+        can_add_material:"Material যোগ",
+        can_edit_material:"Material Edit",
+        can_change_material_price:"Material Price Change",
+        can_delete_material:"Material Delete",
+
+        can_manage_worker:"Mistri Management",
+        can_add_worker:"Mistri যোগ",
+        can_edit_worker:"Mistri Edit",
+        can_change_worker_salary:"Mistri Salary Change",
+        can_delete_worker:"Mistri Delete",
+
+        can_manage_customer:"Customer Management",
+        can_add_customer:"Customer যোগ",
+        can_edit_customer:"Customer Edit",
+        can_delete_customer:"Customer Delete",
+
+        can_view_customer_phone:"Customer Phone দেখা",
+        can_view_customer_address:"Customer Address দেখা"
+
+    };
+
+    return labels[k] || k;
+
+}
+
+
+function showSection(section){
+
+    document
+    .getElementById("posSection")
+    .classList.add("hidden");
+
+    document
+    .getElementById("historySection")
+    .classList.add("hidden");
+
+    document
+    .getElementById("dueSection")
+    .classList.add("hidden");
+
+    if(section==="pos"){
+
+        document
+        .getElementById("posSection")
+        .classList.remove("hidden");
+
+    }
+
+    if(section==="history"){
+
+        document
+        .getElementById("historySection")
+        .classList.remove("hidden");
+
+        loadHistory();
+
+    }
+
+    if(section==="due"){
+
+        document
+        .getElementById("dueSection")
+        .classList.remove("hidden");
+
+        loadDue();
+
+    }
+
+}
+
+
+function openMaterialModal(){
+
+    document
+    .getElementById("materialModal")
+    .classList.remove("hidden");
+
+    renderMaterialList();
+
+}
+
+
+function openWorkerModal(){
+
+    document
+    .getElementById("workerModal")
+    .classList.remove("hidden");
+
+    renderWorkerList();
+
+}
+
+
+function openCustomerModal(){
+
+    document
+    .getElementById("customerModal")
+    .classList.remove("hidden");
+
+    renderCustomerList();
+
+}
+
+
+function closeModal(id){
+
+    document
+    .getElementById(id)
+    .classList.add("hidden");
+
+}
+
+
+function money(n){
+
+    return Number(n||0)
+        .toLocaleString("en-US",{
+            maximumFractionDigits:2
+        });
+
+}
+
+
+function paymentBangla(t){
+
+    if(t==="cash")return"Cash";
+    if(t==="credit")return"Credit";
+    if(t==="partial")return"Partial";
+
+    return t||"";
+
+}
+
+
+function escapeHtml(value){
+
+    return String(value||"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function toast(message){
+
+    const box=
+        document.getElementById("toast");
+
+    box.textContent=message;
+
+    box.classList.remove("hidden");
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer=
+        setTimeout(()=>{
+
+            box.classList.add("hidden");
+
+        },2500);
+
+}
+
+
+supabase.auth.onAuthStateChange(
+    async(event,session)=>{
+
+        if(event==="SIGNED_OUT"){
+
+            location.reload();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
