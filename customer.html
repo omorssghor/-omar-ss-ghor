@@ -2,1959 +2,3935 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>ওমর এস এস ঘর | Customer Management</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Customer Panel | ওমর এস এস ঘর</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Bengali","Segoe UI",sans-serif;
-  background:#f4f7f9;
-  color:#172033;
-}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer;border:0}
-.app{
-  max-width:760px;
-  margin:auto;
-  min-height:100vh;
-  padding-bottom:35px;
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
-/* HEADER */
-.header{
-  background:linear-gradient(135deg,#087f5b,#0b9f72,#087f5b);
-  color:white;
-  padding:25px 20px 28px;
-  border-radius:0 0 30px 30px;
-  box-shadow:0 8px 25px #087f5b35;
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,
+  "Noto Sans Bengali",Arial,sans-serif;
+  background:#f4f7f9;
+  color:#17212b;
 }
-.header-row{
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#087f55;
+  color:white;
+  padding:14px 15px;
+  box-shadow:0 2px 12px rgba(0,0,0,.12);
+}
+
+.topbar-row{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px;
+  gap:10px;
 }
+
 .brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
+  font-size:18px;
+  font-weight:800;
 }
-.brand-icon{
-  width:54px;
-  height:54px;
-  border-radius:18px;
-  background:#ffffff25;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-}
-.brand h1{
-  margin:0;
-  font-size:25px;
-}
-.brand p{
-  margin:3px 0 0;
+
+.subtitle{
+  font-size:11px;
   opacity:.9;
+  margin-top:2px;
+}
+
+.back-btn{
+  border:0;
+  background:rgba(255,255,255,.16);
+  color:white;
+  padding:8px 12px;
+  border-radius:9px;
+  font-weight:700;
+}
+
+.container{
+  max-width:760px;
+  margin:auto;
+  padding:15px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.card{
+  background:white;
+  border-radius:16px;
+  padding:15px;
+  margin-bottom:13px;
+  box-shadow:0 3px 15px rgba(0,0,0,.06);
+}
+
+h1{
+  font-size:22px;
+  margin:4px 0 15px;
+}
+
+h2{
+  font-size:18px;
+  margin:4px 0 12px;
+}
+
+h3{
+  font-size:15px;
+  margin:0 0 7px;
+}
+
+.muted{
+  color:#71808d;
   font-size:13px;
 }
-.menu-btn{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  background:#ffffff28;
+
+.label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin:12px 0 6px;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  border:1px solid #d9e0e5;
+  border-radius:11px;
+  padding:12px;
+  background:#fff;
+  outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#087f55;
+  box-shadow:0 0 0 3px rgba(8,127,85,.08);
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.primary{
+  width:100%;
+  border:0;
+  background:#087f55;
   color:white;
-  font-size:25px;
+  padding:12px 15px;
+  border-radius:11px;
+  font-weight:800;
+  margin-top:14px;
 }
 
-/* CONTENT */
-.content{padding:20px 16px}
-.welcome{
-  background:linear-gradient(135deg,#d5f8e9,#b8efd9);
-  border-radius:25px;
-  padding:23px;
-  margin-bottom:18px;
-  box-shadow:0 7px 20px #0b9f7220;
+.secondary{
+  border:0;
+  background:#edf3f0;
+  color:#087f55;
+  padding:10px 13px;
+  border-radius:10px;
+  font-weight:700;
 }
-.welcome small{color:#087f5b;font-weight:700}
-.welcome h2{margin:5px 0;font-size:28px}
-.welcome p{margin:0;color:#41605a}
 
-.section{
-  background:white;
-  border-radius:25px;
-  padding:18px;
-  margin-bottom:18px;
-  box-shadow:0 7px 22px #17203310;
+.danger{
+  border:0;
+  background:#fff0f0;
+  color:#c62828;
+  padding:10px 13px;
+  border-radius:10px;
+  font-weight:700;
 }
-.section-title{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:15px;
-}
-.section-title .icon{
-  width:43px;
-  height:43px;
-  border-radius:15px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  font-size:22px;
-}
-.section-title h3{margin:0;font-size:22px}
-.section-title p{margin:2px 0 0;color:#718096;font-size:13px}
 
-/* COLOR BUTTONS */
+.small-btn{
+  border:0;
+  background:#edf3f0;
+  color:#087f55;
+  padding:8px 11px;
+  border-radius:9px;
+  font-size:12px;
+  font-weight:700;
+}
+
 .grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-.grid3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
   gap:10px;
 }
-.action{
-  min-height:115px;
-  border-radius:20px;
-  padding:15px;
-  color:white;
-  text-align:left;
-  box-shadow:0 8px 18px #00000018;
-  transition:.15s;
-}
-.action:active{transform:scale(.97)}
-.action .ico{font-size:30px}
-.action b{
-  display:block;
-  font-size:16px;
-  margin-top:7px;
-}
-.action small{
-  display:block;
-  margin-top:4px;
-  opacity:.9;
-  line-height:1.35;
-}
-.green{background:linear-gradient(135deg,#079b70,#16b981)}
-.blue{background:linear-gradient(135deg,#1877d2,#2696e8)}
-.purple{background:linear-gradient(135deg,#7251d8,#9861e8)}
-.orange{background:linear-gradient(135deg,#f08b0b,#ffad22)}
-.red{background:linear-gradient(135deg,#e53955,#f45c70)}
-.teal{background:linear-gradient(135deg,#079da0,#18bfc0)}
-.indigo{background:linear-gradient(135deg,#315ca9,#4681ce)}
-.pink{background:linear-gradient(135deg,#df477e,#f2669a)}
-.dark{background:linear-gradient(135deg,#27364b,#40556d)}
 
-/* FORM */
-.card{
+.menu-btn{
+  border:1px solid #e2e8eb;
   background:white;
-  border-radius:25px;
-  padding:20px;
-  box-shadow:0 7px 22px #17203310;
-}
-label{
-  display:block;
-  font-weight:700;
-  margin:13px 0 7px;
-}
-input,select,textarea{
-  width:100%;
-  border:1px solid #dbe3e8;
-  background:#f8fafb;
-  padding:13px 14px;
-  border-radius:14px;
-  outline:none;
-}
-input:focus,select:focus,textarea:focus{
-  border-color:#0b9f72;
-  box-shadow:0 0 0 3px #0b9f7215;
-}
-textarea{min-height:90px;resize:vertical}
-.primary{
-  width:100%;
-  margin-top:18px;
-  padding:14px;
-  border-radius:15px;
-  background:linear-gradient(135deg,#087f5b,#11a873);
-  color:white;
-  font-weight:800;
-}
-.secondary{
-  padding:12px 15px;
   border-radius:13px;
-  background:#edf2f5;
-  color:#334155;
-  font-weight:700;
-}
-.back{
-  margin-bottom:15px;
-  background:#e8f6f0;
-  color:#087f5b;
+  padding:13px 9px;
+  text-align:center;
+  min-height:74px;
+  font-weight:800;
+  color:#26343d;
+  box-shadow:0 2px 7px rgba(0,0,0,.035);
 }
 
-/* CUSTOMER LIST */
-.customer-item{
+.menu-btn span{
+  display:block;
+  font-size:23px;
+  margin-bottom:5px;
+}
+
+.customer-row{
+  position:relative;
   display:flex;
   align-items:center;
   gap:12px;
-  background:#f8fafb;
-  border:1px solid #e4eaee;
-  padding:15px;
-  border-radius:18px;
-  margin-bottom:10px;
+  padding:13px 4px;
+  border-bottom:1px solid #edf0f2;
 }
+
+.customer-row:last-child{
+  border-bottom:0;
+}
+
 .avatar{
-  width:48px;
-  height:48px;
-  border-radius:16px;
-  background:linear-gradient(135deg,#087f5b,#19b681);
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#087f55;
   color:white;
   display:flex;
   align-items:center;
   justify-content:center;
+  font-weight:900;
+  flex-shrink:0;
+}
+
+.customer-main{
+  flex:1;
+  min-width:0;
+}
+
+.customer-name{
+  font-weight:800;
+  margin-bottom:3px;
+}
+
+.customer-phone{
+  font-size:12px;
+  color:#72808a;
+}
+
+.dots{
+  border:0;
+  background:#f0f3f5;
+  width:35px;
+  height:35px;
+  border-radius:50%;
   font-size:21px;
-  font-weight:800;
-}
-.customer-info{flex:1}
-.customer-info b{font-size:17px}
-.customer-info small{display:block;color:#718096;margin-top:3px}
-.more{
-  width:40px;
-  height:40px;
-  border-radius:12px;
-  background:#e9eef2;
-  font-size:20px;
 }
 
-/* DETAILS */
-.hero-customer{
-  background:linear-gradient(135deg,#087f5b,#11a873);
-  color:white;
-  border-radius:25px;
-  padding:20px;
-  margin-bottom:18px;
-}
-.hero-customer h2{margin:0 0 5px}
-.hero-customer p{margin:4px 0;opacity:.9}
-
-.info-row{
+.stat-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:15px;
-}
-.info-box{
-  background:#ffffff22;
-  border-radius:15px;
-  padding:11px;
-}
-.info-box small{display:block;opacity:.8}
-.info-box b{font-size:16px}
-
-.category{
-  background:linear-gradient(135deg,#1877d2,#2696e8);
-  color:white;
-  border-radius:17px;
-  padding:16px;
-  margin-bottom:10px;
-  font-weight:800;
-  display:flex;
-  justify-content:space-between;
-}
-
-/* TABLE / ITEMS */
-.item{
-  border:1px solid #e3e9ed;
-  background:#fafcfd;
-  border-radius:17px;
-  padding:14px;
-  margin-bottom:10px;
-}
-.item-top{
-  display:flex;
-  justify-content:space-between;
+  grid-template-columns:repeat(2,1fr);
   gap:10px;
 }
-.amount{font-weight:900;color:#087f5b}
-.muted{color:#718096;font-size:13px}
-.total-box{
-  background:linear-gradient(135deg,#ecfff7,#d8f9eb);
-  border-radius:20px;
-  padding:18px;
-  margin-top:15px;
+
+.stat{
+  background:#f7faf9;
+  border-radius:12px;
+  padding:12px;
 }
-.total-line{
-  display:flex;
-  justify-content:space-between;
-  padding:7px 0;
+
+.stat-title{
+  font-size:12px;
+  color:#74818a;
 }
-.total-line.final{
-  border-top:1px solid #b9dfd0;
-  margin-top:8px;
-  padding-top:13px;
-  font-size:19px;
+
+.stat-value{
+  font-size:18px;
+  font-weight:900;
+  margin-top:4px;
+}
+
+.money{
   font-weight:900;
 }
-.profit{color:#087f5b}
-.loss{color:#dc3545}
 
-/* LOGIN */
-.login-wrap{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+.green{
+  color:#087f55;
 }
-.login-card{
+
+.red{
+  color:#c62828;
+}
+
+.category-btn{
   width:100%;
-  max-width:430px;
-  background:white;
-  padding:28px 22px;
-  border-radius:28px;
-  box-shadow:0 15px 45px #17203320;
+  border:1px solid #e0e7e4;
+  background:#f9fcfa;
+  padding:14px;
+  border-radius:12px;
+  text-align:left;
+  margin-bottom:9px;
+  font-weight:800;
+  color:#20332b;
 }
-.login-logo{
-  width:75px;
-  height:75px;
-  margin:auto;
-  border-radius:25px;
-  background:linear-gradient(135deg,#087f5b,#11a873);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:40px;
-  color:white;
-}
-.login-card h1{text-align:center;margin:15px 0 5px}
-.login-card p{text-align:center;color:#718096}
 
-.notice{
-  padding:13px 15px;
-  border-radius:14px;
-  margin-bottom:12px;
-  background:#fff5db;
-  color:#8a5a00;
+.category-btn small{
+  display:block;
+  color:#7b878d;
+  font-weight:500;
+  margin-top:4px;
 }
+
+.material-row,
+.payment-row,
+.expense-row,
+.mistri-row{
+  border-bottom:1px solid #edf0f2;
+  padding:12px 2px;
+}
+
+.material-row:last-child,
+.payment-row:last-child,
+.expense-row:last-child,
+.mistri-row:last-child{
+  border-bottom:0;
+}
+
+.row-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.badge{
+  display:inline-block;
+  background:#edf7f2;
+  color:#087f55;
+  padding:4px 8px;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:800;
+}
+
 .empty{
   text-align:center;
-  padding:30px 15px;
-  color:#718096;
+  padding:25px 10px;
+  color:#89949b;
+  font-size:14px;
 }
-.loading{text-align:center;padding:40px;color:#718096}
 
-/* TOAST */
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:25px;
-  transform:translateX(-50%);
-  background:#172033;
-  color:white;
-  padding:13px 20px;
-  border-radius:15px;
-  z-index:9999;
-  display:none;
-  max-width:90%;
+.loading{
   text-align:center;
+  padding:35px 10px;
+  color:#71808d;
 }
-.toast.show{display:block}
 
-/* RESPONSIVE */
-@media(max-width:520px){
-  .grid3{grid-template-columns:repeat(2,1fr)}
-  .action{min-height:105px}
+.alert{
+  padding:11px 12px;
+  border-radius:10px;
+  margin-bottom:12px;
+  font-size:13px;
+}
+
+.alert-error{
+  background:#fff0f0;
+  color:#b42318;
+}
+
+.alert-success{
+  background:#edf9f2;
+  color:#087f55;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.auth-box{
+  max-width:430px;
+  margin:35px auto;
+}
+
+.logo{
+  text-align:center;
+  font-size:42px;
+  margin-bottom:5px;
+}
+
+.auth-title{
+  text-align:center;
+  font-size:21px;
+  font-weight:900;
+}
+
+.auth-sub{
+  text-align:center;
+  color:#71808d;
+  font-size:13px;
+  margin:5px 0 18px;
+}
+
+.link-btn{
+  border:0;
+  background:none;
+  color:#087f55;
+  font-weight:800;
+  margin-top:13px;
+  width:100%;
+}
+
+.confirm-menu{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.42);
+  z-index:500;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.confirm-menu.show{
+  display:flex;
+}
+
+.bottom-menu{
+  background:white;
+  width:100%;
+  max-width:760px;
+  border-radius:20px 20px 0 0;
+  padding:15px;
+}
+
+.bottom-menu button{
+  width:100%;
+  border:0;
+  background:white;
+  padding:14px;
+  text-align:left;
+  border-bottom:1px solid #edf0f2;
+  font-weight:700;
+}
+
+.bottom-menu button:last-child{
+  border-bottom:0;
+}
+
+.header-card{
+  background:linear-gradient(135deg,#087f55,#0b9b69);
+  color:white;
+  border-radius:17px;
+  padding:17px;
+  margin-bottom:13px;
+}
+
+.header-card .muted{
+  color:rgba(255,255,255,.82);
+}
+
+.back-line{
+  margin-bottom:12px;
+}
+
+.back-link{
+  border:0;
+  background:none;
+  color:#087f55;
+  font-weight:800;
+  padding:5px 0;
+}
+
+.table-like{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.table-like td{
+  padding:9px 3px;
+  border-bottom:1px solid #edf0f2;
+  font-size:13px;
+}
+
+.table-like td:last-child{
+  text-align:right;
+  font-weight:800;
+}
+
+@media(max-width:420px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .menu-btn{
+    padding:11px 6px;
+    font-size:12px;
+  }
+
+  .menu-btn span{
+    font-size:21px;
+  }
 }
 </style>
 </head>
 
 <body>
-<div id="app"></div>
-<div id="toast" class="toast"></div>
+
+<div id="app">
+
+  <!-- ================= HEADER ================= -->
+  <div class="topbar" id="topbar">
+    <div class="topbar-row">
+      <div>
+        <div class="brand">🏪 ওমর এস এস ঘর</div>
+        <div class="subtitle">Customer Management Panel</div>
+      </div>
+
+      <button class="back-btn hidden" id="headerBack" onclick="goBack()">
+        ← ফিরে যান
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ================= AUTH ================= -->
+  <section id="authPage" class="page active">
+    <div class="container">
+      <div class="card auth-box">
+
+        <div class="logo">🏪</div>
+
+        <div class="auth-title">
+          ওমর এস এস ঘর
+        </div>
+
+        <div class="auth-sub">
+          Customer Panel
+        </div>
+
+        <div id="authMessage"></div>
+
+        <div id="loginBox">
+
+          <label class="label">ইমেইল</label>
+          <input
+            id="loginEmail"
+            type="email"
+            placeholder="আপনার ইমেইল"
+          >
+
+          <label class="label">পাসওয়ার্ড</label>
+          <input
+            id="loginPassword"
+            type="password"
+            placeholder="পাসওয়ার্ড"
+          >
+
+          <button class="primary" onclick="login()">
+            লগইন
+          </button>
+
+          <button class="link-btn" onclick="showSignup()">
+            নতুন Account তৈরি করুন
+          </button>
+
+        </div>
+
+
+        <div id="signupBox" class="hidden">
+
+          <label class="label">আপনার নাম</label>
+          <input
+            id="signupName"
+            type="text"
+            placeholder="নাম"
+          >
+
+          <label class="label">ফোন নম্বর</label>
+          <input
+            id="signupPhone"
+            type="text"
+            placeholder="ফোন নম্বর"
+          >
+
+          <label class="label">ইমেইল</label>
+          <input
+            id="signupEmail"
+            type="email"
+            placeholder="ইমেইল"
+          >
+
+          <label class="label">পাসওয়ার্ড</label>
+          <input
+            id="signupPassword"
+            type="password"
+            placeholder="কমপক্ষে ৬ অক্ষর"
+          >
+
+          <button class="primary" onclick="signup()">
+            Account তৈরি করুন
+          </button>
+
+          <button class="link-btn" onclick="showLogin()">
+            আগে থেকেই Account আছে? লগইন
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= HOME ================= -->
+  <section id="homePage" class="page">
+
+    <div class="container">
+
+      <div class="header-card">
+        <div class="muted">স্বাগতম</div>
+        <h2 id="homeName">Customer</h2>
+        <div class="muted">
+          আপনার কাজ ও কাস্টমার হিসাব এখান থেকে পরিচালনা করুন।
+        </div>
+      </div>
+
+
+      <div class="card">
+
+        <h2>কাস্টমার</h2>
+
+        <div class="grid">
+
+          <button class="menu-btn" onclick="openPage('customerAdd')">
+            <span>➕</span>
+            Customer Add
+          </button>
+
+          <button class="menu-btn" onclick="openPage('customerList')">
+            <span>👥</span>
+            Customer List
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h2>আমার Account</h2>
+
+        <div class="grid">
+
+          <button class="menu-btn" onclick="openPage('profile')">
+            <span>👤</span>
+            Profile
+          </button>
+
+          <button class="menu-btn" onclick="openPage('services')">
+            <span>⚙️</span>
+            My Services
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <button class="danger" style="width:100%" onclick="logout()">
+          Logout
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CUSTOMER ADD ================= -->
+  <section id="customerAddPage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="goBack()">
+          ← Customer Panel
+        </button>
+      </div>
+
+      <div class="card">
+
+        <h1>নতুন Customer</h1>
+
+        <div class="muted">
+          প্রথমে Customer-এর নাম, ফোন ও ঠিকানা দিন।
+        </div>
+
+        <label class="label">Customer-এর নাম *</label>
+        <input
+          id="newCustomerName"
+          type="text"
+          placeholder="Customer-এর নাম"
+        >
+
+        <label class="label">ফোন নম্বর *</label>
+        <input
+          id="newCustomerPhone"
+          type="text"
+          placeholder="ফোন নম্বর"
+        >
+
+        <label class="label">ঠিকানা</label>
+        <textarea
+          id="newCustomerAddress"
+          placeholder="Customer-এর ঠিকানা"
+        ></textarea>
+
+        <label class="label">কাজের নাম</label>
+        <input
+          id="newCustomerWork"
+          type="text"
+          placeholder="যেমন: SS গেট"
+        >
+
+        <button class="primary" onclick="createCustomer()">
+          💾 Customer Save করুন
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CUSTOMER LIST ================= -->
+  <section id="customerListPage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="goBack()">
+          ← Customer Panel
+        </button>
+      </div>
+
+      <div class="card">
+
+        <div class="row-top">
+          <div>
+            <h1>Customer List</h1>
+            <div class="muted">
+              আপনার সব Customer এখানে থাকবে।
+            </div>
+          </div>
+
+          <button class="small-btn" onclick="openPage('customerAdd')">
+            + Add
+          </button>
+        </div>
+
+        <div id="customerList">
+          <div class="loading">লোড হচ্ছে...</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CUSTOMER DETAIL ================= -->
+  <section id="customerDetailPage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="openPage('customerList')">
+          ← Customer List
+        </button>
+      </div>
+
+      <div class="header-card">
+
+        <div class="muted">Customer</div>
+
+        <h2 id="detailCustomerName">
+          Customer
+        </h2>
+
+        <div id="detailCustomerPhone" class="muted"></div>
+        <div id="detailCustomerAddress" class="muted"></div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h2>কাজের তথ্য</h2>
+
+        <table class="table-like">
+
+          <tr>
+            <td>কাজ</td>
+            <td id="detailWork">—</td>
+          </tr>
+
+          <tr>
+            <td>চুক্তি মূল্য</td>
+            <td id="detailPrice">৳ 0</td>
+          </tr>
+
+          <tr>
+            <td>Delivery Date</td>
+            <td id="detailDelivery">—</td>
+          </tr>
+
+        </table>
+
+        <button
+          class="secondary"
+          style="width:100%;margin-top:12px"
+          onclick="openPage('customerInfo')"
+        >
+          ✏️ Customer Info
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <h2>Customer কাজ</h2>
+
+        <div class="grid">
+
+          <button class="menu-btn" onclick="openPage('paymentAdd')">
+            <span>💰</span>
+            টাকা জমা
+          </button>
+
+          <button class="menu-btn" onclick="openPage('materialAdd')">
+            <span>📦</span>
+            মাল Add
+          </button>
+
+          <button class="menu-btn" onclick="openPage('mistriAdd')">
+            <span>👷</span>
+            মিস্ত্রি Add
+          </button>
+
+          <button class="menu-btn" onclick="openPage('expenseAdd')">
+            <span>💸</span>
+            অন্যান্য খরচ
+          </button>
+
+          <button class="menu-btn" onclick="openPage('addedMaterials')">
+            <span>📋</span>
+            Added Materials
+          </button>
+
+          <button class="menu-btn" onclick="openPage('paymentHistory')">
+            <span>💳</span>
+            Payment History
+          </button>
+
+          <button class="menu-btn" onclick="openPage('profitLoss')">
+            <span>📊</span>
+            লাভ/ক্ষতি
+          </button>
+
+          <button class="menu-btn" onclick="openPage('customerInfo')">
+            <span>👤</span>
+            Customer Info
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CUSTOMER INFO ================= -->
+  <section id="customerInfoPage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="openPage('customerDetail')">
+          ← Customer Details
+        </button>
+      </div>
+
+      <div class="card">
+
+        <h1>Customer Info</h1>
+
+        <label class="label">Customer-এর নাম</label>
+        <input id="infoName">
+
+        <label class="label">ফোন নম্বর</label>
+        <input id="infoPhone">
+
+        <label class="label">ঠিকানা</label>
+        <textarea id="infoAddress"></textarea>
+
+        <label class="label">কাজের নাম</label>
+        <input id="infoWork">
+
+        <label class="label">
+          কাজের মোট চুক্তি মূল্য
+        </label>
+        <input
+          id="infoPrice"
+          type="number"
+          min="0"
+          placeholder="৳"
+        >
+
+        <label class="label">
+          Delivery Date
+        </label>
+        <input
+          id="infoDelivery"
+          type="date"
+        >
+
+        <button class="primary" onclick="saveCustomerInfo()">
+          💾 Save
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PAYMENT ADD ================= -->
+  <section id="paymentAddPage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="openPage('customerDetail')">
+          ← Customer Details
+        </button>
+      </div>
+
+      <div class="card">
+
+        <h1>💰 টাকা জমা</h1>
+
+        <div class="muted">
+          Customer-এর কাছ থেকে পাওয়া টাকা এখানে যোগ করুন।
+        </div>
+
+        <label class="label">তারিখ *</label>
+        <input id="paymentDate" type="date">
+
+        <label class="label">টাকার পরিমাণ *</label>
+        <input
+          id="paymentAmount"
+          type="number"
+          min="0"
+          placeholder="যেমন: 50000"
+        >
+
+        <label class="label">Comment</label>
+        <textarea
+          id="paymentComment"
+          placeholder="যেমন: প্রথম কিস্তি"
+        ></textarea>
+
+        <button class="primary" onclick="savePayment()">
+          💾 টাকা জমা Save করুন
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= MATERIAL CATEGORY ADD ================= -->
+  <section id="materialAddPage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="openPage('customerDetail')">
+          ← Customer Details
+        </button>
+      </div>
+
+      <div class="card">
+
+        <h1>📦 মাল Add</h1>
+
+        <div class="muted">
+          প্রথমে একটি Category তৈরি করুন।
+        </div>
+
+        <label class="label">
+          Category Name *
+        </label>
+
+        <input
+          id="categoryName"
+          type="text"
+          placeholder="যেমন: SS Pipe"
+        >
+
+        <button
+          class="primary"
+          onclick="createMaterialCategory()"
+        >
+          ➕ Category তৈরি করুন
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <h2>এই Customer-এর Category</h2>
+
+        <div id="categoryList">
+          <div class="loading">লোড হচ্ছে...</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= MATERIAL ENTRY ================= -->
+  <section id="materialEntryPage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="openPage('materialAdd')">
+          ← Category List
+        </button>
+      </div>
+
+      <div class="card">
+
+        <h1>📦 Material Add</h1>
+
+        <div class="badge" id="selectedCategoryName">
+          Category
+        </div>
+
+        <label class="label">
+          Material Name *
+        </label>
+
+        <input
+          id="materialName"
+          type="text"
+          placeholder="যেমন: SS Pipe 1 inch"
+        >
+
+        <label class="label">
+          Price / Amount *
+        </label>
+
+        <input
+          id="materialPrice"
+          type="number"
+          min="0"
+          placeholder="যেমন: 2500"
+        >
+
+        <button class="primary" onclick="saveMaterial()">
+          💾 Material Save করুন
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= ADDED MATERIALS ================= -->
+  <section id="addedMaterialsPage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="openPage('customerDetail')">
+          ← Customer Details
+        </button>
+      </div>
+
+      <div class="card">
+
+        <h1>📋 Added Materials</h1>
+
+        <div class="muted">
+          Category অনুযায়ী Customer-এর সব মাল এখানে দেখা যাবে।
+        </div>
+
+      </div>
+
+      <div id="addedMaterialsContainer"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= MISTRI ADD ================= -->
+  <section id="mistriAddPage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="openPage('customerDetail')">
+          ← Customer Details
+        </button>
+      </div>
+
+      <div class="card">
+
+        <h1>👷 মিস্ত্রি Add</h1>
+
+        <label class="label">মিস্ত্রির নাম *</label>
+
+        <input
+          id="mistriName"
+          type="text"
+          placeholder="মিস্ত্রির নাম"
+        >
+
+        <label class="label">তারিখ *</label>
+
+        <input
+          id="mistriDate"
+          type="date"
+        >
+
+        <label class="label">কত দিনের কাজ</label>
+
+        <input
+          id="mistriDays"
+          type="number"
+          step="0.5"
+          min="0"
+          placeholder="যেমন: 1"
+        >
+
+        <label class="label">মিস্ত্রি খরচ *</label>
+
+        <input
+          id="mistriAmount"
+          type="number"
+          min="0"
+          placeholder="৳"
+        >
+
+        <label class="label">Comment</label>
+
+        <textarea
+          id="mistriComment"
+          placeholder="কাজের বিবরণ"
+        ></textarea>
+
+        <button class="primary" onclick="saveMistri()">
+          💾 মিস্ত্রি Save করুন
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= OTHER EXPENSE ================= -->
+  <section id="expenseAddPage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="openPage('customerDetail')">
+          ← Customer Details
+        </button>
+      </div>
+
+      <div class="card">
+
+        <h1>💸 অন্যান্য খরচ</h1>
+
+        <label class="label">খরচের নাম *</label>
+
+        <input
+          id="expenseName"
+          type="text"
+          placeholder="যেমন: গাড়ি ভাড়া"
+        >
+
+        <label class="label">তারিখ *</label>
+
+        <input
+          id="expenseDate"
+          type="date"
+        >
+
+        <label class="label">খরচের পরিমাণ *</label>
+
+        <input
+          id="expenseAmount"
+          type="number"
+          min="0"
+          placeholder="৳"
+        >
+
+        <label class="label">Comment</label>
+
+        <textarea
+          id="expenseComment"
+          placeholder="খরচের বিবরণ"
+        ></textarea>
+
+        <button class="primary" onclick="saveExpense()">
+          💾 খরচ Save করুন
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PAYMENT HISTORY ================= -->
+  <section id="paymentHistoryPage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="openPage('customerDetail')">
+          ← Customer Details
+        </button>
+      </div>
+
+      <div class="card">
+
+        <h1>💳 Payment History</h1>
+
+        <div id="paymentHistoryList">
+          <div class="loading">লোড হচ্ছে...</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PROFIT LOSS ================= -->
+  <section id="profitLossPage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="openPage('customerDetail')">
+          ← Customer Details
+        </button>
+      </div>
+
+      <div class="card">
+
+        <h1>📊 লাভ / ক্ষতি</h1>
+
+        <div id="profitLossContent">
+          <div class="loading">
+            হিসাব করা হচ্ছে...
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PROFILE ================= -->
+  <section id="profilePage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="openPage('home')">
+          ← Customer Panel
+        </button>
+      </div>
+
+      <div class="card">
+
+        <h1>👤 Profile</h1>
+
+        <div id="profileContent">
+          <div class="loading">লোড হচ্ছে...</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= SERVICES ================= -->
+  <section id="servicesPage" class="page">
+
+    <div class="container">
+
+      <div class="back-line">
+        <button class="back-link" onclick="openPage('home')">
+          ← Customer Panel
+        </button>
+      </div>
+
+      <div class="card">
+
+        <h1>⚙️ My Services</h1>
+
+        <div id="servicesContent">
+          <div class="loading">লোড হচ্ছে...</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= 3 DOT MENU ================= -->
+  <div id="customerMenu" class="confirm-menu">
+
+    <div class="bottom-menu">
+
+      <button onclick="menuCustomerDetails()">
+        👤 Details
+      </button>
+
+      <button onclick="menuAddedMaterials()">
+        📋 Added Materials
+      </button>
+
+      <button onclick="menuPaymentHistory()">
+        💳 Payment History
+      </button>
+
+      <button onclick="closeCustomerMenu()">
+        ✕ বন্ধ করুন
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
 
 <script>
-const SUPABASE_URL="https://gzujcqjpxypcoiqhpvvu.supabase.co";
-const SUPABASE_KEY="sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
 
-const supabase=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+/* =========================================================
+   SUPABASE
+========================================================= */
 
-let session=null;
-let user=null;
-let services=[];
-let permissions={};
-let currentCustomer=null;
+const SUPABASE_URL =
+"https://gzujcqjpxypcoiqhpvvu.supabase.co";
 
-const app=document.getElementById("app");
+const SUPABASE_KEY =
+"sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
 
-function toast(msg){
-  const t=document.getElementById("toast");
-  t.textContent=msg;
-  t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"),2500);
+const { createClient } =
+supabase;
+
+const db =
+createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* =========================================================
+   GLOBAL STATE
+========================================================= */
+
+let currentUser = null;
+let currentCustomer = null;
+let currentCategory = null;
+let pageHistory = [];
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function money(value){
+
+  const n = Number(value || 0);
+
+  return "৳ " + n.toLocaleString("en-BD",{
+    minimumFractionDigits:0,
+    maximumFractionDigits:2
+  });
+
 }
 
-function money(n){
-  return Number(n||0).toLocaleString("bn-BD",{minimumFractionDigits:0,maximumFractionDigits:2})+" ৳";
-}
-
-function esc(v){
-  return String(v??"")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
 
 function today(){
-  return new Date().toISOString().slice(0,10);
+
+  const d = new Date();
+
+  const year = d.getFullYear();
+
+  const month =
+    String(d.getMonth()+1).padStart(2,"0");
+
+  const day =
+    String(d.getDate()).padStart(2,"0");
+
+  return `${year}-${month}-${day}`;
+
 }
 
-function pageTitle(title,sub=""){
-  return `
-    <button class="secondary back" onclick="goHome()">← ফিরে যান</button>
-    <div class="section-title">
-      <div class="icon green">📋</div>
-      <div>
-        <h3>${title}</h3>
-        ${sub?`<p>${sub}</p>`:""}
-      </div>
-    </div>
-  `;
-}
 
-function goHome(){
-  location.hash="#/";
-}
+function escapeHTML(value){
 
-function go(hash){
-  location.hash=hash;
-}
-
-async function getAuth(){
-  const {data}=await supabase.auth.getSession();
-  session=data.session;
-  user=session?.user||null;
-}
-
-async function loadServices(){
-  const {data,error}=await supabase
-    .from("platform_services")
-    .select("*")
-    .eq("is_active",true)
-    .order("sort_order");
-
-  if(!error) services=data||[];
-
-  if(user){
-    const {data:p}=await supabase
-      .from("platform_service_permissions")
-      .select("service_id,enabled,platform_services(service_key)")
-      .eq("user_id",user.id);
-
-    permissions={};
-
-    (p||[]).forEach(x=>{
-      if(x.platform_services){
-        permissions[x.platform_services.service_key]=x.enabled;
-      }
-    });
-  }
-}
-
-function serviceEnabled(key){
-  const keys=Object.keys(permissions);
-  if(keys.length===0) return true;
-  return permissions[key]===true;
-}
-
-async function checkAccount(){
-  if(!user) return true;
-
-  const {data}=await supabase
-    .from("platform_customer_accounts")
-    .select("active,blocked_at,name,phone")
-    .eq("user_id",user.id)
-    .maybeSingle();
-
-  if(data && data.active===false){
-    app.innerHTML=`
-      <div class="login-wrap">
-        <div class="login-card">
-          <div class="login-logo">🚫</div>
-          <h1>Account Blocked</h1>
-          <p>আপনার Account বর্তমানে বন্ধ করা হয়েছে।</p>
-          <button class="primary" onclick="logout()">Logout</button>
-        </div>
-      </div>`;
-    return false;
-  }
-  return true;
-}
-
-function loginPage(){
-  app.innerHTML=`
-  <div class="login-wrap">
-    <div class="login-card">
-      <div class="login-logo">🏪</div>
-      <h1>ওমর এস এস ঘর</h1>
-      <p>Customer Management Panel</p>
-
-      <label>Email</label>
-      <input id="loginEmail" type="email" placeholder="আপনার Email">
-
-      <label>Password</label>
-      <input id="loginPassword" type="password" placeholder="Password">
-
-      <button class="primary" onclick="login()">Login</button>
-
-      <div class="notice" style="margin-top:15px">
-        আপনার Customer Account দিয়ে Login করুন।
-      </div>
-    </div>
-  </div>`;
-}
-
-async function login(){
-  const email=document.getElementById("loginEmail").value.trim();
-  const password=document.getElementById("loginPassword").value;
-
-  if(!email||!password){
-    toast("Email এবং Password দিন");
-    return;
+  if(value === null || value === undefined){
+    return "";
   }
 
-  const {error}=await supabase.auth.signInWithPassword({
-    email,password
-  });
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
-  if(error){
-    toast(error.message);
-    return;
-  }
-
-  toast("Login সফল হয়েছে");
-  location.hash="#/";
 }
 
-async function logout(){
-  await supabase.auth.signOut();
-  session=null;
-  user=null;
-  location.hash="#/";
-}
 
-function header(){
- return `
- <div class="header">
-   <div class="header-row">
-     <div class="brand">
-       <div class="brand-icon">🏪</div>
-       <div>
-         <h1>ওমর এস এস ঘর</h1>
-         <p>Customer Management Panel</p>
-       </div>
-     </div>
-     <button class="menu-btn" onclick="go('#/profile')">☰</button>
-   </div>
- </div>`;
-}
+function showMessage(text,type="success"){
 
-function homePage(){
- app.innerHTML=`
- ${header()}
- <div class="content">
+  const el =
+    document.getElementById("authMessage");
 
-   <div class="welcome">
-     <small>স্বাগতম</small>
-     <h2>Customer</h2>
-     <p>আপনার কাজ ও কাস্টমার হিসাব এখান থেকে পরিচালনা করুন।</p>
-   </div>
+  if(!el) return;
 
-   <div class="section">
-     <div class="section-title">
-       <div class="icon blue">👥</div>
-       <div>
-         <h3>কাস্টমার</h3>
-         <p>কাস্টমার যোগ করুন এবং তালিকা দেখুন</p>
-       </div>
-     </div>
-
-     <div class="grid">
-       <button class="action green" onclick="go('#/customer-add')">
-         <span class="ico">➕</span>
-         <b>Customer Add</b>
-         <small>নতুন কাস্টমার যোগ করুন</small>
-       </button>
-
-       <button class="action blue" onclick="go('#/customers')">
-         <span class="ico">👥</span>
-         <b>Customer List</b>
-         <small>সকল কাস্টমারের তালিকা</small>
-       </button>
-     </div>
-   </div>
-
-   <div class="section">
-     <div class="section-title">
-       <div class="icon purple">👤</div>
-       <div>
-         <h3>আমার Account</h3>
-         <p>আপনার প্রোফাইল ও সার্ভিস দেখুন</p>
-       </div>
-     </div>
-
-     <div class="grid">
-       <button class="action purple" onclick="go('#/profile')">
-         <span class="ico">👤</span>
-         <b>Profile</b>
-         <small>আপনার প্রোফাইল</small>
-       </button>
-
-       <button class="action orange" onclick="go('#/services')">
-         <span class="ico">⚙️</span>
-         <b>My Services</b>
-         <small>আমার সার্ভিসসমূহ</small>
-       </button>
-     </div>
-   </div>
-
-   <div class="section">
-     <div class="section-title">
-       <div class="icon teal">📋</div>
-       <div>
-         <h3>কাস্টমার হিসাব</h3>
-         <p>Customer List থেকে একটি Customer খুলুন</p>
-       </div>
-     </div>
-
-     <div class="notice">
-       Customer List → ⋮ → Details চাপলে সম্পূর্ণ হিসাবের Page খুলবে।
-     </div>
-   </div>
-
-   <div class="section">
-     <button class="action red" style="width:100%;min-height:70px;text-align:center" onclick="logout()">
-       <span class="ico">⏻</span>
-       <b>Logout</b>
-     </button>
-   </div>
-
- </div>`;
-}
-
-async function customerAddPage(){
-  const serviceOptions=services.map(s=>
-    `<option value="${esc(s.name)}">${esc(s.name)}</option>`
-  ).join("");
-
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("Customer Add","নতুন Customer তৈরি করুন")}
-
-      <label>Customer Name</label>
-      <input id="cName" placeholder="কাস্টমারের নাম">
-
-      <label>Phone Number</label>
-      <input id="cPhone" type="tel" placeholder="মোবাইল নম্বর">
-
-      <label>Address</label>
-      <textarea id="cAddress" placeholder="কাস্টমারের ঠিকানা"></textarea>
-
-      <label>কাজ / Service</label>
-      <select id="cService">
-        ${serviceOptions || "<option>SS / Glass Work</option>"}
-      </select>
-
-      <label>Contact Price / Final Price</label>
-      <input id="cPrice" type="number" min="0" placeholder="চুক্তির মোট দাম">
-
-      <label>Delivery Date</label>
-      <input id="cDelivery" type="date" value="${today()}">
-
-      <button class="primary" onclick="saveCustomer()">💾 Customer Save</button>
-    </div>
-  </div>`;
-}
-
-async function saveCustomer(){
-  const name=document.getElementById("cName").value.trim();
-  const phone=document.getElementById("cPhone").value.trim();
-  const address=document.getElementById("cAddress").value.trim();
-  const service=document.getElementById("cService").value;
-  const price=Number(document.getElementById("cPrice").value||0);
-  const delivery=document.getElementById("cDelivery").value;
-
-  if(!name||!phone){
-    toast("Customer Name এবং Phone দিন");
-    return;
-  }
-
-  const {data,error}=await supabase
-    .from("platform_customers")
-    .insert({
-      owner_user_id:user.id,
-      name,
-      phone,
-      address,
-      service_name:service,
-      final_price:price,
-      delivery_date:delivery||null
-    })
-    .select()
-    .single();
-
-  if(error){
-    toast(error.message);
-    return;
-  }
-
-  await supabase.from("platform_customer_history").insert({
-    owner_user_id:user.id,
-    customer_id:data.id,
-    event_type:"customer_created",
-    details:{name,phone,service}
-  });
-
-  toast("Customer তৈরি হয়েছে");
-  go("#/customers");
-}
-
-async function customerListPage(){
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("Customer List","আপনার সকল Customer")}
-      <div id="customerList" class="loading">লোড হচ্ছে...</div>
-    </div>
-  </div>`;
-
-  const {data,error}=await supabase
-    .from("platform_customers")
-    .select("*")
-    .eq("owner_user_id",user.id)
-    .order("created_at",{ascending:false});
-
-  const box=document.getElementById("customerList");
-
-  if(error){
-    box.innerHTML=`<div class="notice">${esc(error.message)}</div>`;
-    return;
-  }
-
-  if(!data?.length){
-    box.innerHTML=`<div class="empty">এখনও কোনো Customer যোগ করা হয়নি।</div>`;
-    return;
-  }
-
-  box.innerHTML=data.map(c=>`
-    <div class="customer-item">
-      <div class="avatar">${esc((c.name||"C").charAt(0))}</div>
-
-      <div class="customer-info">
-        <b>${esc(c.name)}</b>
-        <small>📞 ${esc(c.phone)}</small>
-        <small>💰 ${money(c.final_price)} · 📅 ${esc(c.delivery_date||"নির্ধারিত নয়")}</small>
-      </div>
-
-      <button class="more" onclick="customerMenu('${c.id}')">⋮</button>
-    </div>
-  `).join("");
-}
-
-function customerMenu(id){
-  const old=document.getElementById("customerMenu");
-  if(old) old.remove();
-
-  const d=document.createElement("div");
-  d.id="customerMenu";
-  d.style.cssText=`
-    position:fixed;inset:0;background:#17203355;
-    z-index:5000;display:flex;align-items:flex-end;
-    justify-content:center;padding:15px;
-  `;
-
-  d.innerHTML=`
-    <div style="background:white;width:100%;max-width:500px;border-radius:25px;padding:20px">
-      <h3 style="margin-top:0">Customer Options</h3>
-
-      <button class="action green" style="width:100%;min-height:70px;margin-bottom:10px"
-        onclick="closeMenu();go('#/customer/${id}')">
-        📋 Details
-      </button>
-
-      <button class="secondary" style="width:100%" onclick="closeMenu()">Cancel</button>
+  el.innerHTML =
+    `<div class="alert alert-${type}">
+      ${escapeHTML(text)}
     </div>`;
 
-  document.body.appendChild(d);
+  setTimeout(()=>{
+    el.innerHTML="";
+  },5000);
+
 }
 
-function closeMenu(){
-  document.getElementById("customerMenu")?.remove();
-}
 
-async function loadCustomer(id){
-  const {data,error}=await supabase
-    .from("platform_customers")
-    .select("*")
-    .eq("id",id)
-    .eq("owner_user_id",user.id)
-    .single();
+function setDefaultDates(){
 
-  if(error||!data){
-    toast("Customer পাওয়া যায়নি");
-    go("#/customers");
-    return null;
-  }
+  const ids = [
+    "paymentDate",
+    "mistriDate",
+    "expenseDate"
+  ];
 
-  currentCustomer=data;
-  return data;
-}
+  ids.forEach(id=>{
 
-async function customerDetailsPage(id){
-  const c=await loadCustomer(id);
-  if(!c)return;
+    const el =
+      document.getElementById(id);
 
-  const buttons=[];
+    if(el && !el.value){
+      el.value=today();
+    }
 
-  if(serviceEnabled("payment")){
-    buttons.push(`
-      <button class="action green" onclick="go('#/customer/${id}/payment-add')">
-        <span class="ico">💰</span>
-        <b>টাকা জমা</b>
-        <small>Customer থেকে পাওয়া টাকা</small>
-      </button>`);
-  }
-
-  if(serviceEnabled("material")){
-    buttons.push(`
-      <button class="action blue" onclick="go('#/customer/${id}/material-add')">
-        <span class="ico">📦</span>
-        <b>মাল Add</b>
-        <small>Category ও মাল যোগ করুন</small>
-      </button>
-
-      <button class="action purple" onclick="go('#/customer/${id}/materials')">
-        <span class="ico">🧱</span>
-        <b>Added Materials</b>
-        <small>যোগ করা মাল দেখুন</small>
-      </button>`);
-  }
-
-  if(serviceEnabled("mistri")){
-    buttons.push(`
-      <button class="action purple" onclick="go('#/customer/${id}/mistri-add')">
-        <span class="ico">👷</span>
-        <b>মিস্ত্রি Add</b>
-        <small>মিস্ত্রির কাজ ও খরচ</small>
-      </button>
-
-      <button class="action red" onclick="go('#/customer/${id}/mistri-payment')">
-        <span class="ico">💳</span>
-        <b>মিস্ত্রি Payment</b>
-        <small>মিস্ত্রিকে টাকা দিন</small>
-      </button>
-
-      <button class="action teal" onclick="go('#/customer/${id}/mistri-history')">
-        <span class="ico">🕘</span>
-        <b>মিস্ত্রি Payment History</b>
-        <small>মিস্ত্রির পেমেন্ট ইতিহাস</small>
-      </button>`);
-  }
-
-  buttons.push(`
-    <button class="action orange" onclick="go('#/customer/${id}/expense')">
-      <span class="ico">🧾</span>
-      <b>অন্যান্য খরচ</b>
-      <small>অন্যান্য খরচ যোগ করুন</small>
-    </button>
-
-    <button class="action indigo" onclick="go('#/customer/${id}/payments')">
-      <span class="ico">📜</span>
-      <b>Payment History</b>
-      <small>Customer-এর টাকা জমার ইতিহাস</small>
-    </button>
-
-    <button class="action pink" onclick="go('#/customer/${id}/summary')">
-      <span class="ico">📊</span>
-      <b>লাভ/ক্ষতি</b>
-      <small>মোট খরচ ও লাভ/ক্ষতি</small>
-    </button>
-
-    <button class="action dark" onclick="go('#/customer/${id}/info')">
-      <span class="ico">👤</span>
-      <b>Customer Info</b>
-      <small>Customer-এর বিস্তারিত</small>
-    </button>
-  `);
-
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-
-    <div class="hero-customer">
-      <h2>👤 ${esc(c.name)}</h2>
-      <p>📞 ${esc(c.phone)}</p>
-      <p>🛠️ ${esc(c.service_name||"Service")}</p>
-
-      <div class="info-row">
-        <div class="info-box">
-          <small>Final Price</small>
-          <b>${money(c.final_price)}</b>
-        </div>
-        <div class="info-box">
-          <small>Delivery</small>
-          <b>${esc(c.delivery_date||"—")}</b>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-title">
-        <div class="icon teal">📋</div>
-        <div>
-          <h3>Customer Details</h3>
-          <p>এই Customer-এর সম্পূর্ণ হিসাব</p>
-        </div>
-      </div>
-
-      <div class="grid3">
-        ${buttons.join("")}
-      </div>
-    </div>
-
-    <button class="secondary" style="width:100%" onclick="go('#/customers')">
-      ← Customer List
-    </button>
-  </div>`;
-}
-
-/* CUSTOMER INFO */
-async function customerInfoPage(id){
-  const c=await loadCustomer(id);
-  if(!c)return;
-
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("Customer Info")}
-
-      <div class="item">
-        <b>Customer Name</b>
-        <div class="muted">${esc(c.name)}</div>
-      </div>
-
-      <div class="item">
-        <b>Phone</b>
-        <div class="muted">${esc(c.phone)}</div>
-      </div>
-
-      <div class="item">
-        <b>Address</b>
-        <div class="muted">${esc(c.address||"—")}</div>
-      </div>
-
-      <div class="item">
-        <b>Service</b>
-        <div class="muted">${esc(c.service_name||"—")}</div>
-      </div>
-
-      <div class="item">
-        <b>Final Price</b>
-        <div class="amount">${money(c.final_price)}</div>
-      </div>
-
-      <div class="item">
-        <b>Delivery Date</b>
-        <div class="muted">${esc(c.delivery_date||"—")}</div>
-      </div>
-    </div>
-  </div>`;
-}
-
-/* PAYMENT */
-async function paymentAddPage(id){
-  const c=await loadCustomer(id);
-  if(!c)return;
-
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("টাকা জমা","Customer-এর কাছ থেকে টাকা জমা")}
-
-      <div class="notice">Customer: <b>${esc(c.name)}</b></div>
-
-      <label>Date</label>
-      <input id="payDate" type="date" value="${today()}">
-
-      <label>Amount</label>
-      <input id="payAmount" type="number" min="0" placeholder="কত টাকা জমা হয়েছে">
-
-      <label>Comment</label>
-      <textarea id="payComment" placeholder="যেমন: অগ্রিম / দ্বিতীয় কিস্তি"></textarea>
-
-      <button class="primary" onclick="savePayment('${id}')">
-        💰 টাকা জমা Save
-      </button>
-    </div>
-  </div>`;
-}
-
-async function savePayment(id){
-  const date=document.getElementById("payDate").value;
-  const amount=Number(document.getElementById("payAmount").value||0);
-  const comment=document.getElementById("payComment").value.trim();
-
-  if(amount<=0){
-    toast("Amount দিন");
-    return;
-  }
-
-  const {error}=await supabase.from("platform_customer_payments").insert({
-    owner_user_id:user.id,
-    customer_id:id,
-    payment_date:date||today(),
-    amount,
-    comment
   });
 
-  if(error){
-    toast(error.message);
-    return;
-  }
-
-  toast("টাকা জমা হয়েছে");
-  go("#/customer/"+id+"/payments");
 }
 
-async function paymentHistoryPage(id){
-  const c=await loadCustomer(id);
-  if(!c)return;
 
-  const {data,error}=await supabase
-    .from("platform_customer_payments")
-    .select("*")
-    .eq("customer_id",id)
-    .eq("owner_user_id",user.id)
-    .order("payment_date",{ascending:false});
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
 
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("Payment History",c.name)}
+function pageElement(name){
 
-      <button class="primary" onclick="go('#/customer/${id}/payment-add')">
-        ➕ নতুন টাকা জমা
-      </button>
+  return document.getElementById(
+    name + "Page"
+  );
 
-      <div style="margin-top:18px">
-        ${
-          error
-          ? `<div class="notice">${esc(error.message)}</div>`
-          : !data?.length
-          ? `<div class="empty">কোনো Payment History নেই।</div>`
-          : data.map(p=>`
-            <div class="item">
-              <div class="item-top">
-                <b>💰 ${money(p.amount)}</b>
-                <span class="muted">${esc(p.payment_date)}</span>
-              </div>
-              <div class="muted">${esc(p.comment||"কোনো মন্তব্য নেই")}</div>
-            </div>
-          `).join("")
-        }
-      </div>
-    </div>
-  </div>`;
 }
 
-/* MATERIAL CATEGORY */
-async function materialAddPage(id){
-  const c=await loadCustomer(id);
-  if(!c)return;
 
-  const {data:cats}=await supabase
-    .from("platform_material_categories")
-    .select("*")
-    .eq("customer_id",id)
-    .eq("owner_user_id",user.id)
-    .order("created_at");
+function openPage(name,saveHistory=true){
 
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("মাল Add",c.name)}
-
-      <label>নতুন Category</label>
-      <input id="categoryName" placeholder="যেমন: SS Pipe / Glass / Fitting">
-
-      <button class="primary" onclick="saveCategory('${id}')">
-        ➕ Category Save
-      </button>
-
-      <div style="margin-top:22px">
-        <h3>Material Category</h3>
-
-        ${
-          !cats?.length
-          ? `<div class="empty">এখনও কোনো Category নেই।</div>`
-          : cats.map(cat=>`
-            <button class="category"
-              onclick="go('#/customer/${id}/category/${cat.id}')">
-              <span>📦 ${esc(cat.name)}</span>
-              <span>›</span>
-            </button>
-          `).join("")
-        }
-      </div>
-    </div>
-  </div>`;
-}
-
-async function saveCategory(id){
-  const name=document.getElementById("categoryName").value.trim();
-
-  if(!name){
-    toast("Category Name দিন");
-    return;
-  }
-
-  const {data,error}=await supabase
-    .from("platform_material_categories")
-    .insert({
-      owner_user_id:user.id,
-      customer_id:id,
-      name
-    })
-    .select()
-    .single();
-
-  if(error){
-    toast(error.message);
-    return;
-  }
-
-  toast("Category তৈরি হয়েছে");
-  go("#/customer/"+id+"/category/"+data.id);
-}
-
-/* CATEGORY MATERIAL ENTRY */
-async function categoryPage(customerId,categoryId){
-  const c=await loadCustomer(customerId);
-  if(!c)return;
-
-  const {data:cat,error}=await supabase
-    .from("platform_material_categories")
-    .select("*")
-    .eq("id",categoryId)
-    .eq("customer_id",customerId)
-    .eq("owner_user_id",user.id)
-    .single();
-
-  if(error||!cat){
-    toast("Category পাওয়া যায়নি");
-    go("#/customer/"+customerId+"/material-add");
-    return;
-  }
-
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("Material Add",cat.name)}
-
-      <div class="notice">
-        Category: <b>${esc(cat.name)}</b>
-      </div>
-
-      <label>Material Name</label>
-      <input id="matName" placeholder="মালের নাম লিখুন">
-
-      <label>Quantity</label>
-      <input id="matQty" type="number" min="0.001" step="0.001" value="1"
-        oninput="calcMaterial()">
-
-      <label>Unit Price</label>
-      <input id="matPrice" type="number" min="0" step="0.01"
-        placeholder="একক দাম" oninput="calcMaterial()">
-
-      <div class="total-box">
-        <div class="total-line">
-          <span>মোট দাম</span>
-          <b id="matTotal">0 ৳</b>
-        </div>
-      </div>
-
-      <button class="primary" onclick="saveMaterial('${customerId}','${categoryId}')">
-        📦 Material Save
-      </button>
-    </div>
-  </div>`;
-}
-
-function calcMaterial(){
-  const qty=Number(document.getElementById("matQty")?.value||0);
-  const price=Number(document.getElementById("matPrice")?.value||0);
-  const total=qty*price;
-
-  const el=document.getElementById("matTotal");
-  if(el)el.textContent=money(total);
-}
-
-async function saveMaterial(customerId,categoryId){
-  const name=document.getElementById("matName").value.trim();
-  const qty=Number(document.getElementById("matQty").value||0);
-  const price=Number(document.getElementById("matPrice").value||0);
-  const total=qty*price;
-
-  if(!name){
-    toast("Material Name দিন");
-    return;
-  }
-
-  if(qty<=0||price<0){
-    toast("Quantity ও Price সঠিকভাবে দিন");
-    return;
-  }
-
-  const {error}=await supabase
-    .from("platform_materials")
-    .insert({
-      owner_user_id:user.id,
-      customer_id:customerId,
-      category_id:categoryId,
-      name,
-      price,
-      quantity:qty,
-      total
+  document.querySelectorAll(".page")
+    .forEach(p=>{
+      p.classList.remove("active");
     });
 
-  if(error){
-    toast(error.message);
+  const page =
+    pageElement(name);
+
+  if(!page){
+
+    console.error(
+      "Page not found:",
+      name
+    );
+
     return;
   }
 
-  toast("Material যোগ হয়েছে");
-  go("#/customer/"+customerId+"/materials");
+  page.classList.add("active");
+
+  if(saveHistory){
+
+    pageHistory.push(name);
+
+  }
+
+  const back =
+    document.getElementById("headerBack");
+
+  if(back){
+
+    if(name==="home" || name==="auth"){
+
+      back.classList.add("hidden");
+
+    }else{
+
+      back.classList.remove("hidden");
+
+    }
+
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+
+  if(name==="customerList"){
+    loadCustomers();
+  }
+
+  if(name==="customerDetail"){
+    loadCustomerDetail();
+  }
+
+  if(name==="customerInfo"){
+    loadCustomerInfo();
+  }
+
+  if(name==="materialAdd"){
+    loadCategories();
+  }
+
+  if(name==="materialEntry"){
+    loadMaterialEntry();
+  }
+
+  if(name==="addedMaterials"){
+    loadAddedMaterials();
+  }
+
+  if(name==="paymentHistory"){
+    loadPaymentHistory();
+  }
+
+  if(name==="profitLoss"){
+    loadProfitLoss();
+  }
+
+  if(name==="profile"){
+    loadProfile();
+  }
+
+  if(name==="services"){
+    loadServices();
+  }
+
+  setDefaultDates();
+
 }
 
-/* ADDED MATERIALS */
-async function materialsPage(id){
-  const c=await loadCustomer(id);
-  if(!c)return;
 
-  const {data,error}=await supabase
-    .from("platform_materials")
-    .select("*,platform_material_categories(name)")
-    .eq("customer_id",id)
-    .eq("owner_user_id",user.id)
-    .order("created_at",{ascending:false});
+function goBack(){
 
-  const grouped={};
+  if(pageHistory.length > 1){
 
-  (data||[]).forEach(m=>{
-    const cat=m.platform_material_categories?.name||"অন্যান্য";
-    if(!grouped[cat])grouped[cat]=[];
-    grouped[cat].push(m);
-  });
+    pageHistory.pop();
+
+    const previous =
+      pageHistory[pageHistory.length-1];
+
+    openPage(previous,false);
+
+  }else{
+
+    openPage("home",false);
+
+  }
+
+}
+
+
+/* =========================================================
+   AUTH UI
+========================================================= */
+
+function showSignup(){
+
+  document
+    .getElementById("loginBox")
+    .classList.add("hidden");
+
+  document
+    .getElementById("signupBox")
+    .classList.remove("hidden");
+
+}
+
+
+function showLogin(){
+
+  document
+    .getElementById("signupBox")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loginBox")
+    .classList.remove("hidden");
+
+}
+
+
+/* =========================================================
+   SIGNUP
+========================================================= */
+
+async function signup(){
+
+  const name =
+    document
+      .getElementById("signupName")
+      .value.trim();
+
+  const phone =
+    document
+      .getElementById("signupPhone")
+      .value.trim();
+
+  const email =
+    document
+      .getElementById("signupEmail")
+      .value.trim();
+
+  const password =
+    document
+      .getElementById("signupPassword")
+      .value;
+
+  if(!name){
+
+    showMessage(
+      "নাম দিন।",
+      "error"
+    );
+
+    return;
+  }
+
+  if(!email){
+
+    showMessage(
+      "ইমেইল দিন।",
+      "error"
+    );
+
+    return;
+  }
+
+  if(password.length < 6){
+
+    showMessage(
+      "পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const {data,error} =
+    await db.auth.signUp({
+
+      email,
+      password,
+
+      options:{
+        data:{
+          name,
+          phone
+        }
+      }
+
+    });
+
+
+  if(error){
+
+    showMessage(
+      error.message,
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(data.user){
+
+    /*
+      Customer account profile তৈরি
+    */
+
+    const {error:profileError} =
+      await db
+        .from("platform_customer_accounts")
+        .upsert({
+
+          user_id:data.user.id,
+          name:name,
+          phone:phone,
+          active:true
+
+        });
+
+
+    if(profileError){
+
+      console.log(
+        profileError
+      );
+
+    }
+
+  }
+
+
+  showMessage(
+    "Account তৈরি হয়েছে। এখন লগইন করুন।"
+  );
+
+  showLogin();
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function login(){
+
+  const email =
+    document
+      .getElementById("loginEmail")
+      .value.trim();
+
+  const password =
+    document
+      .getElementById("loginPassword")
+      .value;
+
+
+  if(!email || !password){
+
+    showMessage(
+      "ইমেইল এবং পাসওয়ার্ড দিন।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const {data,error} =
+    await db.auth.signInWithPassword({
+
+      email,
+      password
+
+    });
+
+
+  if(error){
+
+    showMessage(
+      "ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  currentUser =
+    data.user;
+
+  await loadAccount();
+
+}
+
+
+/* =========================================================
+   LOAD ACCOUNT
+========================================================= */
+
+async function loadAccount(){
+
+  if(!currentUser){
+    return;
+  }
+
+
+  const {data,error} =
+    await db
+      .from("platform_customer_accounts")
+      .select("*")
+      .eq("user_id",currentUser.id)
+      .maybeSingle();
+
+
+  if(error){
+
+    console.error(error);
+
+  }
+
+
+  if(!data){
+
+    const name =
+      currentUser.user_metadata?.name ||
+      "Customer";
+
+    const phone =
+      currentUser.user_metadata?.phone ||
+      "";
+
+
+    await db
+      .from("platform_customer_accounts")
+      .upsert({
+
+        user_id:currentUser.id,
+        name,
+        phone,
+        active:true
+
+      });
+
+  }
+
+
+  const {data:account} =
+    await db
+      .from("platform_customer_accounts")
+      .select("*")
+      .eq("user_id",currentUser.id)
+      .maybeSingle();
+
+
+  if(account && account.active===false){
+
+    alert(
+      "আপনার Account বর্তমানে বন্ধ করা হয়েছে।"
+    );
+
+    await db.auth.signOut();
+
+    currentUser=null;
+
+    showAuth();
+
+    return;
+  }
+
+
+  currentUser =
+    (await db.auth.getUser()).data.user;
+
+
+  document
+    .getElementById("homeName")
+    .textContent =
+      account?.name ||
+      currentUser?.user_metadata?.name ||
+      "Customer";
+
+
+  pageHistory=[];
+
+  openPage(
+    "home",
+    false
+  );
+
+  pageHistory=["home"];
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logout(){
+
+  await db.auth.signOut();
+
+  currentUser=null;
+  currentCustomer=null;
+
+  pageHistory=[];
+
+  showAuth();
+
+}
+
+
+function showAuth(){
+
+  document
+    .querySelectorAll(".page")
+    .forEach(p=>{
+      p.classList.remove("active");
+    });
+
+  document
+    .getElementById("authPage")
+    .classList.add("active");
+
+  document
+    .getElementById("headerBack")
+    .classList.add("hidden");
+
+}
+
+
+/* =========================================================
+   CUSTOMER CREATE
+========================================================= */
+
+async function createCustomer(){
+
+  if(!currentUser){
+
+    alert("আগে Login করুন।");
+
+    return;
+  }
+
+
+  const name =
+    document
+      .getElementById("newCustomerName")
+      .value.trim();
+
+  const phone =
+    document
+      .getElementById("newCustomerPhone")
+      .value.trim();
+
+  const address =
+    document
+      .getElementById("newCustomerAddress")
+      .value.trim();
+
+  const work =
+    document
+      .getElementById("newCustomerWork")
+      .value.trim();
+
+
+  if(!name){
+
+    alert("Customer-এর নাম দিন।");
+
+    return;
+  }
+
+  if(!phone){
+
+    alert("Customer-এর ফোন নম্বর দিন।");
+
+    return;
+  }
+
+
+  const {data,error} =
+    await db
+      .from("platform_customers")
+      .insert({
+
+        owner_user_id:currentUser.id,
+        name:name,
+        phone:phone,
+        address:address,
+        service_name:work || null
+
+      })
+      .select()
+      .single();
+
+
+  if(error){
+
+    alert(
+      "Customer Save হয়নি:\n" +
+      error.message
+    );
+
+    return;
+  }
+
+
+  currentCustomer =
+    data;
+
+
+  /*
+    History
+  */
+
+  await db
+    .from("platform_customer_history")
+    .insert({
+
+      owner_user_id:currentUser.id,
+      customer_id:data.id,
+      event_type:"customer_created",
+      details:{
+        name,
+        phone,
+        address,
+        work
+      }
+
+    });
+
+
+  /*
+    Form পরিষ্কার
+  */
+
+  document
+    .getElementById("newCustomerName")
+    .value="";
+
+  document
+    .getElementById("newCustomerPhone")
+    .value="";
+
+  document
+    .getElementById("newCustomerAddress")
+    .value="";
+
+  document
+    .getElementById("newCustomerWork")
+    .value="";
+
+
+  alert(
+    "Customer তৈরি হয়েছে।"
+  );
+
+
+  openPage("customerList");
+
+}
+
+
+/* =========================================================
+   CUSTOMER LIST
+========================================================= */
+
+async function loadCustomers(){
+
+  const box =
+    document.getElementById(
+      "customerList"
+    );
+
+
+  box.innerHTML =
+    `<div class="loading">
+      Customer লোড হচ্ছে...
+    </div>`;
+
+
+  const {data,error} =
+    await db
+      .from("platform_customers")
+      .select("*")
+      .eq("owner_user_id",currentUser.id)
+      .order("created_at",{
+        ascending:false
+      });
+
+
+  if(error){
+
+    box.innerHTML =
+      `<div class="alert alert-error">
+        ${escapeHTML(error.message)}
+      </div>`;
+
+    return;
+  }
+
+
+  if(!data || data.length===0){
+
+    box.innerHTML =
+      `<div class="empty">
+        এখনো কোনো Customer নেই।
+        <br><br>
+        <button
+          class="small-btn"
+          onclick="openPage('customerAdd')"
+        >
+          + প্রথম Customer যোগ করুন
+        </button>
+      </div>`;
+
+    return;
+  }
+
+
+  box.innerHTML =
+    data.map(customer=>{
+
+      const initial =
+        (customer.name || "C")
+          .trim()
+          .charAt(0);
+
+
+      return `
+
+        <div class="customer-row">
+
+          <div class="avatar">
+            ${escapeHTML(initial)}
+          </div>
+
+          <div
+            class="customer-main"
+            onclick="openCustomer('${customer.id}')"
+          >
+
+            <div class="customer-name">
+              ${escapeHTML(customer.name)}
+            </div>
+
+            <div class="customer-phone">
+              ${escapeHTML(customer.phone || "ফোন নেই")}
+            </div>
+
+          </div>
+
+          <button
+            class="dots"
+            onclick="showCustomerMenu('${customer.id}')"
+          >
+            ⋮
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   OPEN CUSTOMER
+========================================================= */
+
+async function openCustomer(id){
+
+  const {data,error} =
+    await db
+      .from("platform_customers")
+      .select("*")
+      .eq("id",id)
+      .eq("owner_user_id",currentUser.id)
+      .single();
+
+
+  if(error){
+
+    alert(
+      "Customer পাওয়া যায়নি।"
+    );
+
+    return;
+  }
+
+
+  currentCustomer=data;
+
+  openPage("customerDetail");
+
+}
+
+
+/* =========================================================
+   CUSTOMER DETAIL
+========================================================= */
+
+async function loadCustomerDetail(){
+
+  if(!currentCustomer){
+    return;
+  }
+
+
+  document
+    .getElementById("detailCustomerName")
+    .textContent =
+      currentCustomer.name || "Customer";
+
+
+  document
+    .getElementById("detailCustomerPhone")
+    .textContent =
+      "📞 " +
+      (currentCustomer.phone || "ফোন নেই");
+
+
+  document
+    .getElementById("detailCustomerAddress")
+    .textContent =
+      "📍 " +
+      (currentCustomer.address || "ঠিকানা নেই");
+
+
+  document
+    .getElementById("detailWork")
+    .textContent =
+      currentCustomer.service_name ||
+      "—";
+
+
+  document
+    .getElementById("detailPrice")
+    .textContent =
+      money(currentCustomer.final_price);
+
+
+  document
+    .getElementById("detailDelivery")
+    .textContent =
+      currentCustomer.delivery_date ||
+      "—";
+
+}
+
+
+/* =========================================================
+   CUSTOMER INFO
+========================================================= */
+
+async function loadCustomerInfo(){
+
+  if(!currentCustomer){
+    return;
+  }
+
+
+  document
+    .getElementById("infoName")
+    .value =
+      currentCustomer.name || "";
+
+
+  document
+    .getElementById("infoPhone")
+    .value =
+      currentCustomer.phone || "";
+
+
+  document
+    .getElementById("infoAddress")
+    .value =
+      currentCustomer.address || "";
+
+
+  document
+    .getElementById("infoWork")
+    .value =
+      currentCustomer.service_name || "";
+
+
+  document
+    .getElementById("infoPrice")
+    .value =
+      currentCustomer.final_price || "";
+
+
+  document
+    .getElementById("infoDelivery")
+    .value =
+      currentCustomer.delivery_date || "";
+
+}
+
+
+async function saveCustomerInfo(){
+
+  if(!currentCustomer){
+    return;
+  }
+
+
+  const name =
+    document
+      .getElementById("infoName")
+      .value.trim();
+
+  const phone =
+    document
+      .getElementById("infoPhone")
+      .value.trim();
+
+  const address =
+    document
+      .getElementById("infoAddress")
+      .value.trim();
+
+  const work =
+    document
+      .getElementById("infoWork")
+      .value.trim();
+
+  const price =
+    document
+      .getElementById("infoPrice")
+      .value;
+
+  const delivery =
+    document
+      .getElementById("infoDelivery")
+      .value;
+
+
+  if(!name){
+
+    alert("Customer-এর নাম দিন।");
+
+    return;
+  }
+
+
+  const {data,error} =
+    await db
+      .from("platform_customers")
+      .update({
+
+        name,
+        phone,
+        address,
+        service_name:work || null,
+        final_price:
+          price==="" ? null : Number(price),
+        delivery_date:
+          delivery || null,
+        updated_at:new Date().toISOString()
+
+      })
+      .eq("id",currentCustomer.id)
+      .eq("owner_user_id",currentUser.id)
+      .select()
+      .single();
+
+
+  if(error){
+
+    alert(
+      "তথ্য Save হয়নি:\n" +
+      error.message
+    );
+
+    return;
+  }
+
+
+  currentCustomer=data;
+
+
+  await db
+    .from("platform_customer_history")
+    .insert({
+
+      owner_user_id:currentUser.id,
+      customer_id:currentCustomer.id,
+      event_type:"customer_info_updated",
+      details:{
+        name,
+        phone,
+        address,
+        work,
+        final_price:price,
+        delivery_date:delivery
+      }
+
+    });
+
+
+  alert(
+    "Customer Info Save হয়েছে।"
+  );
+
+
+  openPage("customerDetail");
+
+}
+
+
+/* =========================================================
+   PAYMENT
+========================================================= */
+
+async function savePayment(){
+
+  if(!currentCustomer){
+    return;
+  }
+
+
+  const date =
+    document
+      .getElementById("paymentDate")
+      .value;
+
+  const amount =
+    Number(
+      document
+        .getElementById("paymentAmount")
+        .value
+    );
+
+  const comment =
+    document
+      .getElementById("paymentComment")
+      .value.trim();
+
+
+  if(!date){
+
+    alert("তারিখ দিন।");
+
+    return;
+  }
+
+
+  if(!amount || amount<=0){
+
+    alert("টাকার পরিমাণ দিন।");
+
+    return;
+  }
+
+
+  const {error} =
+    await db
+      .from("platform_customer_payments")
+      .insert({
+
+        owner_user_id:currentUser.id,
+        customer_id:currentCustomer.id,
+        payment_date:date,
+        amount:amount,
+        comment:comment || null
+
+      });
+
+
+  if(error){
+
+    alert(
+      "Payment Save হয়নি:\n" +
+      error.message
+    );
+
+    return;
+  }
+
+
+  await db
+    .from("platform_customer_history")
+    .insert({
+
+      owner_user_id:currentUser.id,
+      customer_id:currentCustomer.id,
+      event_type:"payment_added",
+      details:{
+        amount,
+        payment_date:date,
+        comment
+      }
+
+    });
+
+
+  document
+    .getElementById("paymentAmount")
+    .value="";
+
+  document
+    .getElementById("paymentComment")
+    .value="";
+
+
+  alert(
+    "টাকা জমা হয়েছে।"
+  );
+
+
+  openPage("customerDetail");
+
+}
+
+
+/* =========================================================
+   MATERIAL CATEGORY
+========================================================= */
+
+async function createMaterialCategory(){
+
+  if(!currentCustomer){
+    return;
+  }
+
+
+  const name =
+    document
+      .getElementById("categoryName")
+      .value.trim();
+
+
+  if(!name){
+
+    alert(
+      "Category-এর নাম দিন।"
+    );
+
+    return;
+  }
+
+
+  const {data,error} =
+    await db
+      .from("platform_material_categories")
+      .insert({
+
+        owner_user_id:currentUser.id,
+        customer_id:currentCustomer.id,
+        name:name
+
+      })
+      .select()
+      .single();
+
+
+  if(error){
+
+    alert(
+      "Category তৈরি হয়নি:\n" +
+      error.message
+    );
+
+    return;
+  }
+
+
+  document
+    .getElementById("categoryName")
+    .value="";
+
+
+  await db
+    .from("platform_customer_history")
+    .insert({
+
+      owner_user_id:currentUser.id,
+      customer_id:currentCustomer.id,
+      event_type:"material_category_created",
+      details:{
+        category_id:data.id,
+        name
+      }
+
+    });
+
+
+  loadCategories();
+
+}
+
+
+/* =========================================================
+   LOAD CATEGORIES
+========================================================= */
+
+async function loadCategories(){
+
+  if(!currentCustomer){
+    return;
+  }
+
+
+  const box =
+    document
+      .getElementById("categoryList");
+
+
+  box.innerHTML =
+    `<div class="loading">
+      Category লোড হচ্ছে...
+    </div>`;
+
+
+  const {data,error} =
+    await db
+      .from("platform_material_categories")
+      .select("*")
+      .eq("customer_id",currentCustomer.id)
+      .eq("owner_user_id",currentUser.id)
+      .order("created_at",{
+        ascending:true
+      });
+
+
+  if(error){
+
+    box.innerHTML =
+      `<div class="alert alert-error">
+        ${escapeHTML(error.message)}
+      </div>`;
+
+    return;
+  }
+
+
+  if(!data || data.length===0){
+
+    box.innerHTML =
+      `<div class="empty">
+        এখনো কোনো Category নেই।
+        <br>
+        উপরে Category তৈরি করুন।
+      </div>`;
+
+    return;
+  }
+
+
+  box.innerHTML =
+    data.map(category=>`
+
+      <button
+        class="category-btn"
+        onclick="openCategory('${category.id}')"
+      >
+
+        📦 ${escapeHTML(category.name)}
+
+        <small>
+          Category-তে ঢুকে Material ও Price যোগ করুন
+        </small>
+
+      </button>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   OPEN CATEGORY
+========================================================= */
+
+async function openCategory(id){
+
+  const {data,error} =
+    await db
+      .from("platform_material_categories")
+      .select("*")
+      .eq("id",id)
+      .eq("customer_id",currentCustomer.id)
+      .eq("owner_user_id",currentUser.id)
+      .single();
+
+
+  if(error){
+
+    alert(
+      "Category পাওয়া যায়নি।"
+    );
+
+    return;
+  }
+
+
+  currentCategory=data;
+
+  openPage("materialEntry");
+
+}
+
+
+/* =========================================================
+   MATERIAL ENTRY PAGE
+========================================================= */
+
+function loadMaterialEntry(){
+
+  if(!currentCategory){
+    return;
+  }
+
+
+  document
+    .getElementById(
+      "selectedCategoryName"
+    )
+    .textContent =
+      currentCategory.name;
+
+
+  document
+    .getElementById("materialName")
+    .value="";
+
+  document
+    .getElementById("materialPrice")
+    .value="";
+
+}
+
+
+/* =========================================================
+   SAVE MATERIAL
+========================================================= */
+
+async function saveMaterial(){
+
+  if(!currentCategory || !currentCustomer){
+    return;
+  }
+
+
+  const name =
+    document
+      .getElementById("materialName")
+      .value.trim();
+
+  const price =
+    Number(
+      document
+        .getElementById("materialPrice")
+        .value
+    );
+
+
+  if(!name){
+
+    alert(
+      "Material Name দিন।"
+    );
+
+    return;
+  }
+
+
+  if(price<0 || isNaN(price)){
+
+    alert(
+      "সঠিক Price দিন।"
+    );
+
+    return;
+  }
+
+
+  const {data,error} =
+    await db
+      .from("platform_materials")
+      .insert({
+
+        owner_user_id:currentUser.id,
+        customer_id:currentCustomer.id,
+        category_id:currentCategory.id,
+        name:name,
+        price:price
+
+      })
+      .select()
+      .single();
+
+
+  if(error){
+
+    alert(
+      "Material Save হয়নি:\n" +
+      error.message
+    );
+
+    return;
+  }
+
+
+  await db
+    .from("platform_customer_history")
+    .insert({
+
+      owner_user_id:currentUser.id,
+      customer_id:currentCustomer.id,
+      event_type:"material_added",
+      details:{
+        material_id:data.id,
+        category_id:currentCategory.id,
+        category_name:currentCategory.name,
+        material_name:name,
+        price:price
+      }
+
+    });
+
+
+  document
+    .getElementById("materialName")
+    .value="";
+
+  document
+    .getElementById("materialPrice")
+    .value="";
+
+
+  alert(
+    "Material যোগ হয়েছে।"
+  );
+
+}
+
+
+/* =========================================================
+   ADDED MATERIALS
+========================================================= */
+
+async function loadAddedMaterials(){
+
+  if(!currentCustomer){
+    return;
+  }
+
+
+  const box =
+    document
+      .getElementById(
+        "addedMaterialsContainer"
+      );
+
+
+  box.innerHTML =
+    `<div class="loading">
+      Material লোড হচ্ছে...
+    </div>`;
+
+
+  const {data:categories,error} =
+    await db
+      .from("platform_material_categories")
+      .select("*")
+      .eq("customer_id",currentCustomer.id)
+      .eq("owner_user_id",currentUser.id)
+      .order("created_at",{
+        ascending:true
+      });
+
+
+  if(error){
+
+    box.innerHTML =
+      `<div class="alert alert-error">
+        ${escapeHTML(error.message)}
+      </div>`;
+
+    return;
+  }
+
+
+  if(!categories || categories.length===0){
+
+    box.innerHTML =
+      `<div class="card">
+        <div class="empty">
+          এখনো কোনো Material যোগ করা হয়নি।
+        </div>
+      </div>`;
+
+    return;
+  }
+
 
   let html="";
 
-  Object.keys(grouped).forEach(cat=>{
-    html+=`
-      <h3 style="margin-top:20px">📦 ${esc(cat)}</h3>
-      ${grouped[cat].map(m=>`
-        <div class="item">
-          <div class="item-top">
-            <b>${esc(m.name)}</b>
-            <span class="amount">${money(m.total ?? (m.price*m.quantity))}</span>
-          </div>
-          <div class="muted">
-            Quantity: ${esc(m.quantity)} × ${money(m.price)}
-          </div>
-        </div>
-      `).join("")}
+
+  for(const category of categories){
+
+    const {data:materials} =
+      await db
+        .from("platform_materials")
+        .select("*")
+        .eq("category_id",category.id)
+        .eq("customer_id",currentCustomer.id)
+        .eq("owner_user_id",currentUser.id)
+        .order("created_at",{
+          ascending:true
+        });
+
+
+    html += `
+
+      <div class="card">
+
+        <h2>
+          📦 ${escapeHTML(category.name)}
+        </h2>
+
     `;
-  });
 
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("Added Materials",c.name)}
 
-      <button class="primary" onclick="go('#/customer/${id}/material-add')">
-        ➕ আরও মাল Add করুন
-      </button>
+    if(!materials || materials.length===0){
 
-      ${error
-        ? `<div class="notice" style="margin-top:15px">${esc(error.message)}</div>`
-        : html || `<div class="empty">এখনও কোনো মাল যোগ করা হয়নি।</div>`
-      }
-    </div>
-  </div>`;
-}
-
-/* MISTRI ADD */
-async function mistriAddPage(id){
-  const c=await loadCustomer(id);
-  if(!c)return;
-
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("মিস্ত্রি Add","মিস্ত্রির কাজের হিসাব")}
-
-      <label>মিস্ত্রির নাম</label>
-      <input id="mName" placeholder="মিস্ত্রির নাম">
-
-      <label>Date</label>
-      <input id="mDate" type="date" value="${today()}">
-
-      <label>Site / Work</label>
-      <input id="mSite" placeholder="কোন Site বা কাজ">
-
-      <label>Payment Type</label>
-      <select id="mType" onchange="mistriTypeChange()">
-        <option value="daily">দৈনিক হিসাবে</option>
-        <option value="contract">চুক্তি হিসাবে</option>
-      </select>
-
-      <div id="dailyFields">
-        <label>কত দিন</label>
-        <input id="mDays" type="number" min="0" step="0.5" value="1"
-          oninput="calcMistri()">
-
-        <label>প্রতিদিনের টাকা</label>
-        <input id="mRate" type="number" min="0"
-          oninput="calcMistri()">
-      </div>
-
-      <div id="contractField" style="display:none">
-        <label>চুক্তির মোট টাকা</label>
-        <input id="mContract" type="number" min="0"
-          oninput="calcMistri()">
-      </div>
-
-      <div class="total-box">
-        <div class="total-line">
-          <span>মিস্ত্রির মোট খরচ</span>
-          <b id="mTotal">0 ৳</b>
+      html += `
+        <div class="empty">
+          এই Category-তে এখনো কোনো মাল নেই।
         </div>
+      `;
+
+    }else{
+
+      html += materials.map(material=>`
+
+        <div class="material-row">
+
+          <div class="row-top">
+
+            <div>
+              <strong>
+                ${escapeHTML(material.name)}
+              </strong>
+
+              <div class="muted">
+                ${new Date(
+                  material.created_at
+                ).toLocaleDateString("bn-BD")}
+              </div>
+            </div>
+
+            <div class="money">
+              ${money(material.price)}
+            </div>
+
+          </div>
+
+        </div>
+
+      `).join("");
+
+    }
+
+
+    html += `
       </div>
+    `;
 
-      <label>Comment</label>
-      <textarea id="mComment" placeholder="অতিরিক্ত তথ্য"></textarea>
+  }
 
-      <button class="primary" onclick="saveMistri('${id}')">
-        👷 মিস্ত্রি Save
-      </button>
-    </div>
-  </div>`;
+
+  box.innerHTML=html;
+
 }
 
-function mistriTypeChange(){
-  const type=document.getElementById("mType").value;
 
-  document.getElementById("dailyFields").style.display=
-    type==="daily"?"block":"none";
+/* =========================================================
+   MISTRI
+========================================================= */
 
-  document.getElementById("contractField").style.display=
-    type==="contract"?"block":"none";
+async function saveMistri(){
 
-  calcMistri();
+  if(!currentCustomer){
+    return;
+  }
+
+
+  const name =
+    document
+      .getElementById("mistriName")
+      .value.trim();
+
+  const date =
+    document
+      .getElementById("mistriDate")
+      .value;
+
+  const days =
+    Number(
+      document
+        .getElementById("mistriDays")
+        .value || 0
+    );
+
+  const amount =
+    Number(
+      document
+        .getElementById("mistriAmount")
+        .value
+    );
+
+  const comment =
+    document
+      .getElementById("mistriComment")
+      .value.trim();
+
+
+  if(!name){
+
+    alert(
+      "মিস্ত্রির নাম দিন।"
+    );
+
+    return;
+  }
+
+
+  if(!date){
+
+    alert(
+      "তারিখ দিন।"
+    );
+
+    return;
+  }
+
+
+  if(!amount || amount<0){
+
+    alert(
+      "মিস্ত্রি খরচ দিন।"
+    );
+
+    return;
+  }
+
+
+  const {data,error} =
+    await db
+      .from("platform_mistri_entries")
+      .insert({
+
+        owner_user_id:currentUser.id,
+        customer_id:currentCustomer.id,
+        mistri_name:name,
+        entry_date:date,
+        work_days:days,
+        amount:amount,
+        comment:comment || null
+
+      })
+      .select()
+      .single();
+
+
+  if(error){
+
+    alert(
+      "মিস্ত্রি Save হয়নি:\n" +
+      error.message
+    );
+
+    return;
+  }
+
+
+  await db
+    .from("platform_customer_history")
+    .insert({
+
+      owner_user_id:currentUser.id,
+      customer_id:currentCustomer.id,
+      event_type:"mistri_added",
+      details:{
+        mistri_name:name,
+        entry_date:date,
+        work_days:days,
+        amount,
+        comment
+      }
+
+    });
+
+
+  document
+    .getElementById("mistriName")
+    .value="";
+
+  document
+    .getElementById("mistriDays")
+    .value="";
+
+  document
+    .getElementById("mistriAmount")
+    .value="";
+
+  document
+    .getElementById("mistriComment")
+    .value="";
+
+
+  alert(
+    "মিস্ত্রি যোগ হয়েছে।"
+  );
+
+
+  openPage("customerDetail");
+
 }
 
-function calcMistri(){
-  const type=document.getElementById("mType")?.value;
+
+/* =========================================================
+   OTHER EXPENSE
+========================================================= */
+
+async function saveExpense(){
+
+  if(!currentCustomer){
+    return;
+  }
+
+
+  const name =
+    document
+      .getElementById("expenseName")
+      .value.trim();
+
+  const date =
+    document
+      .getElementById("expenseDate")
+      .value;
+
+  const amount =
+    Number(
+      document
+        .getElementById("expenseAmount")
+        .value
+    );
+
+  const comment =
+    document
+      .getElementById("expenseComment")
+      .value.trim();
+
+
+  if(!name){
+
+    alert(
+      "খরচের নাম দিন।"
+    );
+
+    return;
+  }
+
+
+  if(!date){
+
+    alert(
+      "তারিখ দিন।"
+    );
+
+    return;
+  }
+
+
+  if(!amount || amount<0){
+
+    alert(
+      "খরচের পরিমাণ দিন।"
+    );
+
+    return;
+  }
+
+
+  const {error} =
+    await db
+      .from("platform_other_expenses")
+      .insert({
+
+        owner_user_id:currentUser.id,
+        customer_id:currentCustomer.id,
+        expense_date:date,
+        name:name,
+        amount:amount,
+        comment:comment || null
+
+      });
+
+
+  if(error){
+
+    alert(
+      "খরচ Save হয়নি:\n" +
+      error.message
+    );
+
+    return;
+  }
+
+
+  await db
+    .from("platform_customer_history")
+    .insert({
+
+      owner_user_id:currentUser.id,
+      customer_id:currentCustomer.id,
+      event_type:"other_expense_added",
+      details:{
+        name,
+        expense_date:date,
+        amount,
+        comment
+      }
+
+    });
+
+
+  document
+    .getElementById("expenseName")
+    .value="";
+
+  document
+    .getElementById("expenseAmount")
+    .value="";
+
+  document
+    .getElementById("expenseComment")
+    .value="";
+
+
+  alert(
+    "অন্যান্য খরচ যোগ হয়েছে।"
+  );
+
+
+  openPage("customerDetail");
+
+}
+
+
+/* =========================================================
+   PAYMENT HISTORY
+========================================================= */
+
+async function loadPaymentHistory(){
+
+  if(!currentCustomer){
+    return;
+  }
+
+
+  const box =
+    document
+      .getElementById(
+        "paymentHistoryList"
+      );
+
+
+  box.innerHTML =
+    `<div class="loading">
+      Payment History লোড হচ্ছে...
+    </div>`;
+
+
+  const {data,error} =
+    await db
+      .from("platform_customer_payments")
+      .select("*")
+      .eq("customer_id",currentCustomer.id)
+      .eq("owner_user_id",currentUser.id)
+      .order("payment_date",{
+        ascending:false
+      });
+
+
+  if(error){
+
+    box.innerHTML =
+      `<div class="alert alert-error">
+        ${escapeHTML(error.message)}
+      </div>`;
+
+    return;
+  }
+
+
+  if(!data || data.length===0){
+
+    box.innerHTML =
+      `<div class="empty">
+        এখনো কোনো Payment নেই।
+      </div>`;
+
+    return;
+  }
+
+
   let total=0;
 
-  if(type==="daily"){
-    total=
-      Number(document.getElementById("mDays")?.value||0) *
-      Number(document.getElementById("mRate")?.value||0);
-  }else{
-    total=Number(document.getElementById("mContract")?.value||0);
-  }
 
-  const el=document.getElementById("mTotal");
-  if(el)el.textContent=money(total);
-}
+  box.innerHTML =
+    data.map(payment=>{
 
-async function saveMistri(id){
-  const name=document.getElementById("mName").value.trim();
-  const date=document.getElementById("mDate").value;
-  const site=document.getElementById("mSite").value.trim();
-  const type=document.getElementById("mType").value;
+      total +=
+        Number(payment.amount || 0);
 
-  let days=0;
-  let amount=0;
 
-  if(type==="daily"){
-    days=Number(document.getElementById("mDays").value||0);
-    amount=days*Number(document.getElementById("mRate").value||0);
-  }else{
-    days=1;
-    amount=Number(document.getElementById("mContract").value||0);
-  }
+      return `
 
-  const comment=document.getElementById("mComment").value.trim();
+        <div class="payment-row">
 
-  if(!name||amount<=0){
-    toast("মিস্ত্রির নাম ও টাকা সঠিকভাবে দিন");
-    return;
-  }
+          <div class="row-top">
 
-  const finalComment=[
-    site?`Site: ${site}`:"",
-    type==="daily"?"দৈনিক":"চুক্তি",
-    comment
-  ].filter(Boolean).join(" | ");
+            <div>
 
-  const {error}=await supabase
-    .from("platform_mistri_entries")
-    .insert({
-      owner_user_id:user.id,
-      customer_id:id,
-      mistri_name:name,
-      entry_date:date||today(),
-      work_days:days,
-      amount,
-      comment:finalComment
-    });
+              <strong>
+                ${money(payment.amount)}
+              </strong>
 
-  if(error){
-    toast(error.message);
-    return;
-  }
+              <div class="muted">
+                ${escapeHTML(
+                  payment.payment_date || ""
+                )}
+              </div>
 
-  toast("মিস্ত্রির হিসাব যোগ হয়েছে");
-  go("#/customer/"+id+"/mistri-history");
-}
+              ${
+                payment.comment
+                ?
+                `<div class="muted">
+                  ${escapeHTML(payment.comment)}
+                </div>`
+                :
+                ""
+              }
 
-/* MISTRI PAYMENT */
-async function mistriPaymentPage(id){
-  const c=await loadCustomer(id);
-  if(!c)return;
-
-  const {data}=await supabase
-    .from("platform_mistri_entries")
-    .select("mistri_name")
-    .eq("customer_id",id)
-    .eq("owner_user_id",user.id)
-    .order("created_at",{ascending:false});
-
-  const names=[...new Set((data||[]).map(x=>x.mistri_name).filter(Boolean))];
-
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("মিস্ত্রি Payment","মিস্ত্রিকে টাকা পরিশোধ")}
-
-      <label>মিস্ত্রির নাম</label>
-      <input id="mpName" list="mistriNames" placeholder="মিস্ত্রির নাম">
-      <datalist id="mistriNames">
-        ${names.map(n=>`<option value="${esc(n)}">`).join("")}
-      </datalist>
-
-      <label>Date</label>
-      <input id="mpDate" type="date" value="${today()}">
-
-      <label>Payment Amount</label>
-      <input id="mpAmount" type="number" min="0" placeholder="কত টাকা দিলেন">
-
-      <label>Comment</label>
-      <textarea id="mpComment" placeholder="যেমন: মজুরি / অগ্রিম / বাকি পরিশোধ"></textarea>
-
-      <button class="primary" onclick="saveMistriPayment('${id}')">
-        💳 মিস্ত্রি Payment Save
-      </button>
-
-      <button class="secondary" style="width:100%;margin-top:10px"
-        onclick="go('#/customer/${id}/mistri-history')">
-        🕘 Payment History
-      </button>
-    </div>
-  </div>`;
-}
-
-async function saveMistriPayment(id){
-  const name=document.getElementById("mpName").value.trim();
-  const date=document.getElementById("mpDate").value;
-  const amount=Number(document.getElementById("mpAmount").value||0);
-  const comment=document.getElementById("mpComment").value.trim();
-
-  if(!name||amount<=0){
-    toast("মিস্ত্রির নাম ও Payment Amount দিন");
-    return;
-  }
-
-  const {error}=await supabase
-    .from("platform_mistri_payments")
-    .insert({
-      owner_user_id:user.id,
-      customer_id:id,
-      mistri_name:name,
-      payment_date:date||today(),
-      amount,
-      comment
-    });
-
-  if(error){
-    toast(error.message);
-    return;
-  }
-
-  toast("মিস্ত্রির Payment হয়েছে");
-  go("#/customer/"+id+"/mistri-history");
-}
-
-/* MISTRI HISTORY */
-async function mistriHistoryPage(id){
-  const c=await loadCustomer(id);
-  if(!c)return;
-
-  const [workRes,payRes]=await Promise.all([
-    supabase.from("platform_mistri_entries")
-      .select("*")
-      .eq("customer_id",id)
-      .eq("owner_user_id",user.id)
-      .order("entry_date",{ascending:false}),
-
-    supabase.from("platform_mistri_payments")
-      .select("*")
-      .eq("customer_id",id)
-      .eq("owner_user_id",user.id)
-      .order("payment_date",{ascending:false})
-  ]);
-
-  const works=workRes.data||[];
-  const pays=payRes.data||[];
-
-  const workTotal=works.reduce((s,x)=>s+Number(x.amount||0),0);
-  const paidTotal=pays.reduce((s,x)=>s+Number(x.amount||0),0);
-
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-
-    <div class="card">
-      ${pageTitle("মিস্ত্রি হিসাব",c.name)}
-
-      <div class="grid">
-        <button class="action purple" onclick="go('#/customer/${id}/mistri-add')">
-          <span class="ico">👷</span>
-          <b>মিস্ত্রি Add</b>
-          <small>নতুন কাজ যোগ করুন</small>
-        </button>
-
-        <button class="action red" onclick="go('#/customer/${id}/mistri-payment')">
-          <span class="ico">💳</span>
-          <b>মিস্ত্রি Payment</b>
-          <small>মিস্ত্রিকে টাকা দিন</small>
-        </button>
-      </div>
-
-      <div class="total-box">
-        <div class="total-line">
-          <span>মিস্ত্রির মোট কাজের খরচ</span>
-          <b>${money(workTotal)}</b>
-        </div>
-        <div class="total-line">
-          <span>মিস্ত্রিকে মোট Payment</span>
-          <b>${money(paidTotal)}</b>
-        </div>
-        <div class="total-line final">
-          <span>বাকি Payment</span>
-          <b>${money(Math.max(0,workTotal-paidTotal))}</b>
-        </div>
-      </div>
-
-      <h3 style="margin-top:25px">👷 কাজের হিসাব</h3>
-
-      ${
-        !works.length
-        ? `<div class="empty">কোনো মিস্ত্রি কাজ যোগ করা হয়নি।</div>`
-        : works.map(w=>`
-          <div class="item">
-            <div class="item-top">
-              <b>${esc(w.mistri_name)}</b>
-              <span class="amount">${money(w.amount)}</span>
             </div>
-            <div class="muted">
-              📅 ${esc(w.entry_date)} · ${esc(w.work_days)} দিন
-            </div>
-            <div class="muted">${esc(w.comment||"")}</div>
+
+            <span class="badge">
+              জমা
+            </span>
+
           </div>
-        `).join("")
-      }
 
-      <h3 style="margin-top:25px">💳 Payment History</h3>
+        </div>
 
-      ${
-        !pays.length
-        ? `<div class="empty">কোনো মিস্ত্রি Payment নেই।</div>`
-        : pays.map(p=>`
-          <div class="item">
-            <div class="item-top">
-              <b>${esc(p.mistri_name)}</b>
-              <span class="amount">${money(p.amount)}</span>
-            </div>
-            <div class="muted">📅 ${esc(p.payment_date)}</div>
-            <div class="muted">${esc(p.comment||"")}</div>
-          </div>
-        `).join("")
-      }
+      `;
+
+    }).join("");
+
+
+  box.innerHTML += `
+
+    <div
+      style="
+        margin-top:14px;
+        padding-top:14px;
+        border-top:1px solid #e5e9eb;
+        display:flex;
+        justify-content:space-between;
+      "
+    >
+
+      <strong>
+        মোট জমা
+      </strong>
+
+      <strong class="green">
+        ${money(total)}
+      </strong>
+
     </div>
-  </div>`;
+
+  `;
+
 }
 
-/* OTHER EXPENSE */
-async function expensePage(id){
-  const c=await loadCustomer(id);
-  if(!c)return;
 
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("অন্যান্য খরচ","Customer: "+c.name)}
+/* =========================================================
+   PROFIT LOSS
+========================================================= */
 
-      <label>Date</label>
-      <input id="eDate" type="date" value="${today()}">
+async function loadProfitLoss(){
 
-      <label>খরচের নাম</label>
-      <input id="eName" placeholder="যেমন: Transport / খাবার / অন্যান্য">
-
-      <label>Amount</label>
-      <input id="eAmount" type="number" min="0" placeholder="খরচের টাকা">
-
-      <label>Comment</label>
-      <textarea id="eComment"></textarea>
-
-      <button class="primary" onclick="saveExpense('${id}')">
-        🧾 খরচ Save
-      </button>
-    </div>
-  </div>`;
-}
-
-async function saveExpense(id){
-  const date=document.getElementById("eDate").value;
-  const name=document.getElementById("eName").value.trim();
-  const amount=Number(document.getElementById("eAmount").value||0);
-  const comment=document.getElementById("eComment").value.trim();
-
-  if(!name||amount<=0){
-    toast("খরচের নাম ও Amount দিন");
+  if(!currentCustomer){
     return;
   }
 
-  const {error}=await supabase
-    .from("platform_other_expenses")
-    .insert({
-      owner_user_id:user.id,
-      customer_id:id,
-      expense_date:date||today(),
-      name,
-      amount,
-      comment
-    });
 
-  if(error){
-    toast(error.message);
-    return;
-  }
+  const box =
+    document
+      .getElementById(
+        "profitLossContent"
+      );
 
-  toast("অন্যান্য খরচ যোগ হয়েছে");
-  go("#/customer/"+id+"/summary");
-}
 
-/* SUMMARY */
-async function summaryPage(id){
-  const c=await loadCustomer(id);
-  if(!c)return;
-
-  const {data,error}=await supabase
-    .rpc("platform_customer_summary",{p_customer_id:id});
-
-  const s=data?.[0];
-
-  if(error||!s){
-    app.innerHTML=`
-    ${header()}
-    <div class="content">
-      <div class="card">
-        ${pageTitle("লাভ / ক্ষতি")}
-        <div class="notice">${esc(error?.message||"হিসাব পাওয়া যায়নি")}</div>
-      </div>
+  box.innerHTML =
+    `<div class="loading">
+      হিসাব করা হচ্ছে...
     </div>`;
-    return;
-  }
 
-  const profit=Number(s.profit||0);
 
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("লাভ / ক্ষতি",c.name)}
+  const {data,error} =
+    await db.rpc(
+      "platform_customer_summary",
+      {
+        p_customer_id:
+          currentCustomer.id
+      }
+    );
 
-      <div class="total-box">
 
-        <div class="total-line">
-          <span>Customer Final Price</span>
-          <b>${money(s.final_price)}</b>
-        </div>
+  if(error){
 
-        <div class="total-line">
-          <span>Customer থেকে জমা</span>
-          <b>${money(s.paid)}</b>
-        </div>
-
-        <div class="total-line">
-          <span>মাল খরচ</span>
-          <b>${money(s.material_cost)}</b>
-        </div>
-
-        <div class="total-line">
-          <span>মিস্ত্রি খরচ</span>
-          <b>${money(s.mistri_cost)}</b>
-        </div>
-
-        <div class="total-line">
-          <span>অন্যান্য খরচ</span>
-          <b>${money(s.other_cost)}</b>
-        </div>
-
-        <div class="total-line">
-          <span>মোট খরচ</span>
-          <b>${money(s.total_cost)}</b>
-        </div>
-
-        <div class="total-line final">
-          <span>${profit>=0?"লাভ":"ক্ষতি"}</span>
-          <b class="${profit>=0?"profit":"loss"}">${money(Math.abs(profit))}</b>
-        </div>
-
-      </div>
-
-      <div class="notice" style="margin-top:15px">
-        লাভ/ক্ষতি হিসাব = Final Price − (মাল + মিস্ত্রি + অন্যান্য খরচ)
-      </div>
-
-      <button class="action blue" style="width:100%;min-height:70px;margin-top:10px"
-        onclick="go('#/customer/${id}')">
-        ← Customer Details
-      </button>
-    </div>
-  </div>`;
-}
-
-/* PROFILE */
-async function profilePage(){
-  const {data}=await supabase
-    .from("platform_customer_accounts")
-    .select("*")
-    .eq("user_id",user.id)
-    .maybeSingle();
-
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("Profile")}
-
-      <div class="item">
-        <b>Name</b>
-        <div class="muted">${esc(data?.name||user.user_metadata?.name||"—")}</div>
-      </div>
-
-      <div class="item">
-        <b>Email</b>
-        <div class="muted">${esc(user.email||"—")}</div>
-      </div>
-
-      <div class="item">
-        <b>Phone</b>
-        <div class="muted">${esc(data?.phone||"—")}</div>
-      </div>
-
-      <div class="item">
-        <b>Account Status</b>
-        <div class="amount">${data?.active===false?"Blocked":"Active"}</div>
-      </div>
-
-      <button class="primary" onclick="logout()">Logout</button>
-    </div>
-  </div>`;
-}
-
-/* SERVICES */
-async function servicesPage(){
-  const rows=services.map(s=>{
-    const enabled=serviceEnabled(s.service_key);
-    return `
-      <div class="item">
-        <div class="item-top">
-          <b>${esc(s.name)}</b>
-          <span class="${enabled?"amount":"loss"}">
-            ${enabled?"ON":"OFF"}
-          </span>
-        </div>
-        <div class="muted">${esc(s.description||"")}</div>
+    box.innerHTML =
+      `<div class="alert alert-error">
+        হিসাব পাওয়া যায়নি:<br>
+        ${escapeHTML(error.message)}
       </div>`;
-  }).join("");
 
-  app.innerHTML=`
-  ${header()}
-  <div class="content">
-    <div class="card">
-      ${pageTitle("My Services","Admin যে Service চালু করেছেন")}
+    return;
+  }
 
-      ${rows||`<div class="empty">কোনো Service পাওয়া যায়নি।</div>`}
 
-      <div class="notice">
-        Service ON থাকলে সেটি Customer Details-এ ব্যবহার করা যাবে।
+  const summary =
+    Array.isArray(data)
+      ? data[0]
+      : data;
+
+
+  if(!summary){
+
+    box.innerHTML =
+      `<div class="empty">
+        এখনো কোনো হিসাব নেই।
+      </div>`;
+
+    return;
+  }
+
+
+  const profit =
+    Number(summary.profit || 0);
+
+
+  const profitClass =
+    profit >= 0
+      ? "green"
+      : "red";
+
+
+  box.innerHTML = `
+
+    <div class="stat-grid">
+
+      <div class="stat">
+
+        <div class="stat-title">
+          মোট চুক্তি মূল্য
+        </div>
+
+        <div class="stat-value">
+          ${money(summary.final_price)}
+        </div>
+
       </div>
+
+
+      <div class="stat">
+
+        <div class="stat-title">
+          টাকা জমা
+        </div>
+
+        <div class="stat-value">
+          ${money(summary.paid)}
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-title">
+          মাল কত গেল
+        </div>
+
+        <div class="stat-value">
+          ${money(summary.material_cost)}
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-title">
+          মিস্ত্রি কত গেল
+        </div>
+
+        <div class="stat-value">
+          ${money(summary.mistri_cost)}
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-title">
+          অন্যান্য খরচ
+        </div>
+
+        <div class="stat-value">
+          ${money(summary.other_cost)}
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-title">
+          মোট খরচ
+        </div>
+
+        <div class="stat-value">
+          ${money(summary.total_cost)}
+        </div>
+
+      </div>
+
     </div>
-  </div>`;
+
+
+    <div
+      style="
+        margin-top:13px;
+        padding:17px;
+        background:#f7faf9;
+        border-radius:14px;
+        text-align:center;
+      "
+    >
+
+      <div class="stat-title">
+        ${profit >= 0 ? "লাভ" : "ক্ষতি"}
+      </div>
+
+      <div
+        style="
+          font-size:28px;
+          font-weight:900;
+        "
+        class="${profitClass}"
+      >
+        ${money(Math.abs(profit))}
+      </div>
+
+    </div>
+
+  `;
+
 }
 
-/* ROUTER */
-async function router(){
-  await getAuth();
 
-  if(!user){
-    loginPage();
+/* =========================================================
+   PROFILE
+========================================================= */
+
+async function loadProfile(){
+
+  if(!currentUser){
     return;
   }
 
-  const ok=await checkAccount();
-  if(!ok)return;
 
-  await loadServices();
+  const {data} =
+    await db
+      .from("platform_customer_accounts")
+      .select("*")
+      .eq("user_id",currentUser.id)
+      .maybeSingle();
 
-  const path=location.hash.replace(/^#/,"")||"/";
-  const parts=path.split("/").filter(Boolean);
 
-  if(parts.length===0){
-    homePage();
-    return;
-  }
+  const box =
+    document
+      .getElementById(
+        "profileContent"
+      );
 
-  if(parts[0]==="customer-add"){
-    customerAddPage();
-    return;
-  }
 
-  if(parts[0]==="customers"){
-    customerListPage();
-    return;
-  }
+  box.innerHTML = `
 
-  if(parts[0]==="profile"){
-    profilePage();
-    return;
-  }
+    <table class="table-like">
 
-  if(parts[0]==="services"){
-    servicesPage();
-    return;
-  }
+      <tr>
+        <td>নাম</td>
+        <td>
+          ${escapeHTML(data?.name || "—")}
+        </td>
+      </tr>
 
-  if(parts[0]==="customer" && parts[1]){
-    const id=parts[1];
+      <tr>
+        <td>ফোন</td>
+        <td>
+          ${escapeHTML(data?.phone || "—")}
+        </td>
+      </tr>
 
-    if(parts.length===2){
-      customerDetailsPage(id);
-      return;
-    }
+      <tr>
+        <td>ইমেইল</td>
+        <td>
+          ${escapeHTML(currentUser.email || "—")}
+        </td>
+      </tr>
 
-    if(parts[2]==="info"){
-      customerInfoPage(id);
-      return;
-    }
+      <tr>
+        <td>Account</td>
+        <td>
+          ${
+            data?.active !== false
+              ? "Active"
+              : "Blocked"
+          }
+        </td>
+      </tr>
 
-    if(parts[2]==="payment-add"){
-      paymentAddPage(id);
-      return;
-    }
+    </table>
 
-    if(parts[2]==="payments"){
-      paymentHistoryPage(id);
-      return;
-    }
+  `;
 
-    if(parts[2]==="material-add"){
-      materialAddPage(id);
-      return;
-    }
-
-    if(parts[2]==="materials"){
-      materialsPage(id);
-      return;
-    }
-
-    if(parts[2]==="category" && parts[3]){
-      categoryPage(id,parts[3]);
-      return;
-    }
-
-    if(parts[2]==="mistri-add"){
-      mistriAddPage(id);
-      return;
-    }
-
-    if(parts[2]==="mistri-payment"){
-      mistriPaymentPage(id);
-      return;
-    }
-
-    if(parts[2]==="mistri-history"){
-      mistriHistoryPage(id);
-      return;
-    }
-
-    if(parts[2]==="expense"){
-      expensePage(id);
-      return;
-    }
-
-    if(parts[2]==="summary"){
-      summaryPage(id);
-      return;
-    }
-  }
-
-  homePage();
 }
 
-window.addEventListener("hashchange",router);
 
-supabase.auth.onAuthStateChange((_event,_session)=>{
-  session=_session;
-  user=_session?.user||null;
-});
+/* =========================================================
+   SERVICES
+========================================================= */
 
-router();
+async function loadServices(){
+
+  if(!currentUser){
+    return;
+  }
+
+
+  const box =
+    document
+      .getElementById(
+        "servicesContent"
+      );
+
+
+  const {data,error} =
+    await db
+      .from("platform_service_permissions")
+      .select(`
+        enabled,
+        platform_services(
+          name,
+          description,
+          service_key
+        )
+      `)
+      .eq("user_id",currentUser.id)
+      .eq("enabled",true);
+
+
+  if(error){
+
+    box.innerHTML =
+      `<div class="alert alert-error">
+        Service লোড হয়নি।
+      </div>`;
+
+    return;
+  }
+
+
+  if(!data || data.length===0){
+
+    box.innerHTML =
+      `<div class="empty">
+        বর্তমানে কোনো Service চালু নেই।
+      </div>`;
+
+    return;
+  }
+
+
+  box.innerHTML =
+    data.map(item=>{
+
+      const service =
+        item.platform_services;
+
+
+      return `
+
+        <div class="card">
+
+          <h3>
+            ${escapeHTML(
+              service?.name || "Service"
+            )}
+          </h3>
+
+          <div class="muted">
+            ${escapeHTML(
+              service?.description || ""
+            )}
+          </div>
+
+          <div
+            class="badge"
+            style="margin-top:9px"
+          >
+            চালু
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   3 DOT CUSTOMER MENU
+========================================================= */
+
+function showCustomerMenu(id){
+
+  currentCustomerIdForMenu=id;
+
+  document
+    .getElementById("customerMenu")
+    .classList.add("show");
+
+}
+
+
+let currentCustomerIdForMenu=null;
+
+
+async function menuCustomerDetails(){
+
+  closeCustomerMenu();
+
+  if(!currentCustomerIdForMenu){
+    return;
+  }
+
+  await openCustomer(
+    currentCustomerIdForMenu
+  );
+
+}
+
+
+async function menuAddedMaterials(){
+
+  closeCustomerMenu();
+
+  if(!currentCustomerIdForMenu){
+    return;
+  }
+
+
+  await openCustomer(
+    currentCustomerIdForMenu
+  );
+
+  openPage("addedMaterials");
+
+}
+
+
+async function menuPaymentHistory(){
+
+  closeCustomerMenu();
+
+  if(!currentCustomerIdForMenu){
+    return;
+  }
+
+
+  await openCustomer(
+    currentCustomerIdForMenu
+  );
+
+  openPage("paymentHistory");
+
+}
+
+
+function closeCustomerMenu(){
+
+  document
+    .getElementById("customerMenu")
+    .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   SESSION CHECK
+========================================================= */
+
+async function checkSession(){
+
+  const {data} =
+    await db.auth.getSession();
+
+
+  if(data.session){
+
+    currentUser =
+      data.session.user;
+
+    await loadAccount();
+
+  }else{
+
+    showAuth();
+
+  }
+
+}
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+db.auth.onAuthStateChange(
+  async (event,session)=>{
+
+    if(session){
+
+      currentUser =
+        session.user;
+
+    }else{
+
+      currentUser=null;
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INITIAL START
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  ()=>{
+
+    setDefaultDates();
+
+    checkSession();
+
+  }
+);
+
 </script>
+
 </body>
 </html>
