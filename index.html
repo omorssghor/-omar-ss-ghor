@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>সহায় | মানুষ মানুষের পাশে</title>
+  <title>সহায় — মানুষ মানুষের পাশে</title>
 
-  <meta
-    name="description"
-    content="সহায় — মানুষ মানুষের পাশে। সাহায্য চাইুন, সাহায্য করুন এবং প্রয়োজনের সময় উপযুক্ত মানুষের সঙ্গে যুক্ত হোন।"
-  >
+  <meta name="description"
+        content="সহায় — মানুষ মানুষের পাশে। প্রয়োজনের সময় মানুষের পাশে দাঁড়ানোর একটি সহজ প্ল্যাটফর্ম।">
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     * {
@@ -19,374 +20,342 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans Bengali",
-                   "Noto Sans", Arial, sans-serif;
-      background: #f5f7fb;
-      color: #17202a;
+      font-family: Arial, "Noto Sans Bengali", sans-serif;
+      background: #f5f7fa;
+      color: #222;
       line-height: 1.6;
     }
 
-    button {
-      font-family: inherit;
-    }
-
-    /* HEADER */
     header {
-      background: #ffffff;
-      border-bottom: 1px solid #e8ebf0;
+      background: linear-gradient(135deg, #087f5b, #12b886);
+      color: white;
+      padding: 16px 20px;
       position: sticky;
       top: 0;
       z-index: 100;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.15);
     }
 
     .header-inner {
       max-width: 1100px;
       margin: auto;
-      padding: 14px 18px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 15px;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: #eaf8ef;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-    }
-
-    .logo-text h1 {
-      font-size: 22px;
-      line-height: 1.2;
-      color: #15803d;
-    }
-
-    .logo-text p {
-      font-size: 12px;
-      color: #777;
-    }
-
-    .login-btn {
-      border: none;
-      background: #15803d;
-      color: white;
-      padding: 10px 17px;
-      border-radius: 10px;
-      font-size: 14px;
+    .logo-area {
       cursor: pointer;
     }
 
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, #15803d, #16a34a);
-      color: white;
-      padding: 55px 18px 60px;
-      text-align: center;
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
     }
 
-    .hero-inner {
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: rgba(255,255,255,.15);
-      padding: 7px 14px;
-      border-radius: 30px;
+    .tagline {
       font-size: 13px;
-      margin-bottom: 17px;
+      opacity: 0.95;
     }
 
-    .hero h2 {
-      font-size: 34px;
+    .header-buttons {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .login-btn,
+    .logout-btn,
+    .profile-btn {
+      background: white;
+      color: #087f5b;
+      padding: 9px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    .logout-btn {
+      color: #c92a2a;
+    }
+
+    .profile-btn {
+      color: #1864ab;
+    }
+
+    .hero {
+      background: white;
+      text-align: center;
+      padding: 50px 20px 40px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      color: #087f5b;
       margin-bottom: 10px;
     }
 
     .hero p {
+      color: #555;
       max-width: 650px;
       margin: auto;
-      color: rgba(255,255,255,.92);
       font-size: 16px;
     }
 
-    /* MAIN */
-    main {
+    .container {
       max-width: 1100px;
       margin: auto;
-      padding: 35px 18px 60px;
+      padding: 25px 15px 50px;
     }
 
     .section-title {
       text-align: center;
-      margin-bottom: 25px;
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #222;
     }
 
-    .section-title h3 {
-      font-size: 25px;
-      margin-bottom: 5px;
-    }
-
-    .section-title p {
-      color: #777;
-      font-size: 14px;
-    }
-
-    /* ACTION BUTTONS */
-    .actions {
+    .categories {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 15px;
-      max-width: 850px;
-      margin: auto;
     }
 
-    .action-card {
+    .category {
       background: white;
-      border: 1px solid #e8ebf0;
-      border-radius: 18px;
-      padding: 22px 16px;
-      text-align: center;
-      cursor: pointer;
-      transition: .2s;
-      box-shadow: 0 5px 20px rgba(0,0,0,.04);
-    }
-
-    .action-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,0,0,.08);
-    }
-
-    .action-icon {
-      width: 55px;
-      height: 55px;
-      margin: auto auto 10px;
       border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 27px;
-      background: #f1f5f9;
-    }
-
-    .action-card h4 {
-      font-size: 17px;
-      margin-bottom: 4px;
-    }
-
-    .action-card p {
-      font-size: 12px;
-      color: #777;
-    }
-
-    /* SPECIAL BOX */
-    .special-box {
-      max-width: 850px;
-      margin: 35px auto 0;
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      border: 1px solid #e8ebf0;
+      padding: 25px 18px;
       text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+      transition: 0.2s;
     }
 
-    .special-box h3 {
-      font-size: 22px;
+    .category:hover {
+      transform: translateY(-3px);
+    }
+
+    .category-icon {
+      font-size: 38px;
+      margin-bottom: 8px;
+    }
+
+    .category h3 {
       margin-bottom: 7px;
     }
 
-    .special-box p {
+    .category p {
+      font-size: 14px;
       color: #666;
-      font-size: 14px;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
-    .find-btn {
-      border: none;
-      background: #15803d;
+    .category button {
+      background: #087f5b;
       color: white;
-      padding: 12px 22px;
-      border-radius: 11px;
-      font-size: 15px;
-      cursor: pointer;
+      padding: 9px 17px;
+      border-radius: 20px;
+      font-weight: bold;
     }
 
-    /* PRIVACY */
+    .location-box {
+      margin-top: 30px;
+      background: #e7f5ef;
+      border-radius: 16px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .location-box button {
+      margin-top: 12px;
+      background: #1864ab;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 22px;
+      font-weight: bold;
+    }
+
     .privacy {
-      margin-top: 35px;
-      background: #eefbf2;
-      border: 1px solid #d7f2df;
-      border-radius: 18px;
-      padding: 22px;
+      margin-top: 30px;
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
       text-align: center;
     }
 
-    .privacy h3 {
-      color: #15803d;
-      margin-bottom: 6px;
+    .privacy h2 {
+      margin-bottom: 10px;
+      color: #087f5b;
     }
 
-    .privacy p {
-      color: #5d6b61;
-      font-size: 14px;
-    }
-
-    /* FOOTER */
     footer {
-      background: #17202a;
-      color: white;
+      background: #212529;
+      color: #ddd;
       text-align: center;
-      padding: 28px 18px;
-    }
-
-    footer h3 {
-      color: #86efac;
-      margin-bottom: 5px;
-    }
-
-    footer p {
-      color: #b9c0c7;
-      font-size: 13px;
-    }
-
-    .admin-note {
-      margin-top: 15px;
-      font-size: 11px;
-      color: #68737d;
+      padding: 25px 15px;
+      font-size: 14px;
     }
 
     /* MODAL */
+
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.55);
-      z-index: 500;
+      background: rgba(0,0,0,0.65);
+      z-index: 1000;
       padding: 20px;
-      align-items: center;
-      justify-content: center;
+      overflow-y: auto;
     }
 
     .modal-box {
       background: white;
-      width: 100%;
-      max-width: 430px;
-      border-radius: 20px;
+      max-width: 480px;
+      margin: 30px auto;
+      border-radius: 18px;
       padding: 25px;
       position: relative;
-      animation: popup .2s ease;
-    }
-
-    @keyframes popup {
-      from {
-        transform: scale(.95);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
+      box-shadow: 0 10px 35px rgba(0,0,0,0.25);
     }
 
     .close {
       position: absolute;
-      right: 17px;
-      top: 13px;
-      border: none;
-      background: none;
+      right: 15px;
+      top: 10px;
+      font-size: 28px;
+      color: #777;
+      cursor: pointer;
+    }
+
+    .modal-title {
+      text-align: center;
+      color: #087f5b;
+      margin-bottom: 20px;
       font-size: 25px;
-      cursor: pointer;
-      color: #777;
     }
 
-    .modal-box h3 {
-      margin-bottom: 7px;
-      font-size: 22px;
+    .form-group {
+      margin-bottom: 13px;
     }
 
-    .modal-box p {
-      color: #777;
-      font-size: 13px;
-      margin-bottom: 18px;
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
     }
 
-    .login-input {
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
       width: 100%;
-      padding: 12px;
-      margin-bottom: 11px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      outline: none;
+      padding: 11px;
+      border: 1px solid #ced4da;
+      border-radius: 9px;
       font-family: inherit;
-    }
-
-    .login-submit {
-      width: 100%;
-      border: none;
-      background: #15803d;
-      color: white;
-      padding: 12px;
-      border-radius: 10px;
-      cursor: pointer;
       font-size: 15px;
+      outline: none;
     }
 
-    /* MOBILE */
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #12b886;
+    }
+
+    .main-form-btn {
+      width: 100%;
+      padding: 12px;
+      background: #087f5b;
+      color: white;
+      border-radius: 9px;
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+
+    .switch-text {
+      text-align: center;
+      margin-top: 15px;
+      color: #555;
+    }
+
+    .switch-text button {
+      background: none;
+      color: #1864ab;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .message {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+      display: none;
+      font-size: 14px;
+    }
+
+    .success {
+      background: #d3f9d8;
+      color: #2b8a3e;
+    }
+
+    .error {
+      background: #ffe3e3;
+      color: #c92a2a;
+    }
+
+    .user-info {
+      background: #f1f3f5;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .user-info div {
+      margin: 7px 0;
+    }
+
+    .logged-in {
+      display: none;
+    }
+
     @media (max-width: 600px) {
-      .hero {
-        padding: 42px 16px 48px;
+
+      .header-inner {
+        align-items: flex-start;
       }
 
-      .hero h2 {
-        font-size: 27px;
+      .logo {
+        font-size: 21px;
       }
 
-      .hero p {
-        font-size: 14px;
-      }
-
-      .actions {
-        grid-template-columns: 1fr 1fr;
-        gap: 11px;
-      }
-
-      .action-card {
-        padding: 18px 10px;
-        border-radius: 15px;
-      }
-
-      .action-icon {
-        width: 48px;
-        height: 48px;
-        font-size: 23px;
-      }
-
-      .action-card h4 {
-        font-size: 14px;
-      }
-
-      .action-card p {
+      .tagline {
         font-size: 11px;
       }
 
-      .logo-text h1 {
-        font-size: 19px;
+      .header-buttons {
+        flex-wrap: wrap;
+        justify-content: flex-end;
       }
 
-      .login-btn {
-        padding: 8px 12px;
-        font-size: 13px;
+      .login-btn,
+      .logout-btn,
+      .profile-btn {
+        padding: 7px 10px;
+        font-size: 12px;
+      }
+
+      .hero h1 {
+        font-size: 27px;
+      }
+
+      .hero {
+        padding-top: 35px;
       }
     }
   </style>
@@ -394,306 +363,1089 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="header-inner">
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
 
-      <div class="logo">
-        <div class="logo-icon">🤝</div>
-
-        <div class="logo-text">
-          <h1>সহায়</h1>
-          <p>মানুষ মানুষের পাশে</p>
-        </div>
-      </div>
-
-      <button class="login-btn" onclick="openLogin()">
-        লগইন
-      </button>
-
-    </div>
-  </header>
-
-
-  <!-- HERO -->
-  <section class="hero">
-
-    <div class="hero-inner">
-
-      <div class="hero-badge">
-        ❤️ ভালো কাজে একসাথে
-      </div>
-
-      <h2>আপনার কী সাহায্য প্রয়োজন?</h2>
-
-      <p>
-        প্রয়োজনের সময় সঠিক মানুষের সঙ্গে যুক্ত হতে
-        “সহায়” আপনার পাশে আছে।
-      </p>
-
+    <div class="logo-area" onclick="goHome()">
+      <div class="logo">🤝 সহায়</div>
+      <div class="tagline">মানুষ মানুষের পাশে</div>
     </div>
 
-  </section>
-
-
-  <!-- MAIN -->
-  <main>
-
-    <div class="section-title">
-      <h3>কী করতে চান?</h3>
-      <p>নিচের প্রয়োজনীয় অপশনটি নির্বাচন করুন</p>
-    </div>
-
-
-    <div class="actions">
-
-      <!-- HELP -->
-      <div class="action-card" onclick="showMessage('সাহায্য চাই')">
-
-        <div class="action-icon">🆘</div>
-
-        <h4>সাহায্য চাই</h4>
-
-        <p>
-          আপনার প্রয়োজনের কথা জানান
-        </p>
-
-      </div>
-
-
-      <!-- VOLUNTEER -->
-      <div class="action-card" onclick="showMessage('আমি সাহায্য করতে চাই')">
-
-        <div class="action-icon">🤝</div>
-
-        <h4>আমি সাহায্য করতে চাই</h4>
-
-        <p>
-          অন্যকে সাহায্য করার সুযোগ
-        </p>
-
-      </div>
-
-
-      <!-- BLOOD -->
-      <div class="action-card" onclick="showMessage('রক্ত প্রয়োজন')">
-
-        <div class="action-icon">🩸</div>
-
-        <h4>রক্ত প্রয়োজন</h4>
-
-        <p>
-          রক্তের জন্য সাহায্য খুঁজুন
-        </p>
-
-      </div>
-
-
-      <!-- LOST FOUND -->
-      <div class="action-card" onclick="showMessage('হারানো / পাওয়া')">
-
-        <div class="action-icon">🔎</div>
-
-        <h4>হারানো / পাওয়া</h4>
-
-        <p>
-          হারানো বা পাওয়া জিনিসের তথ্য
-        </p>
-
-      </div>
-
-
-      <!-- EMERGENCY -->
-      <div class="action-card" onclick="showMessage('জরুরি সহায়তা')">
-
-        <div class="action-icon">🚑</div>
-
-        <h4>জরুরি সহায়তা</h4>
-
-        <p>
-          জরুরি প্রয়োজনে সাহায্য
-        </p>
-
-      </div>
-
-
-      <!-- TECHNICAL -->
-      <div class="action-card" onclick="showMessage('কারিগরি সহায়তা')">
-
-        <div class="action-icon">🛠️</div>
-
-        <h4>কারিগরি সহায়তা</h4>
-
-        <p>
-          প্রয়োজনীয় দক্ষ মানুষ খুঁজুন
-        </p>
-
-      </div>
-
-
-      <!-- AREA PROBLEM -->
-      <div class="action-card" onclick="showMessage('এলাকার সমস্যা')">
-
-        <div class="action-icon">📢</div>
-
-        <h4>এলাকার সমস্যা</h4>
-
-        <p>
-          এলাকার সমস্যা জানান
-        </p>
-
-      </div>
-
-
-      <!-- TRANSPORT -->
-      <div class="action-card" onclick="showMessage('জরুরি যাতায়াত')">
-
-        <div class="action-icon">🚗</div>
-
-        <h4>জরুরি যাতায়াত</h4>
-
-        <p>
-          প্রয়োজনীয় পরিবহন খুঁজুন
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <!-- FIND HELP -->
-    <div class="special-box">
-
-      <h3>📍 কাছাকাছি সাহায্য খুঁজুন</h3>
-
-      <p>
-        আপনার প্রয়োজনের ধরন নির্বাচন করলে
-        উপযুক্ত সাহায্যকারী খুঁজে দেওয়া হবে।
-      </p>
-
-      <button class="find-btn" onclick="showMessage('কাছাকাছি সাহায্য খুঁজুন')">
-        সাহায্যকারী খুঁজুন
-      </button>
-
-    </div>
-
-
-    <!-- PRIVACY -->
-    <div class="privacy">
-
-      <h3>🔐 আপনার তথ্য আপনারই</h3>
-
-      <p>
-        আপনার ব্যক্তিগত তথ্য অনুমতি ছাড়া
-        অন্যের কাছে প্রকাশ করা হবে না।
-        নিরাপত্তা ও গোপনীয়তাকে আমরা সর্বোচ্চ গুরুত্ব দেব।
-      </p>
-
-    </div>
-
-  </main>
-
-
-  <!-- FOOTER -->
-  <footer>
-
-    <h3>🤝 সহায়</h3>
-
-    <p>
-      মানুষ মানুষের পাশে
-    </p>
-
-    <p class="admin-note">
-      © 2026 সহায় — জনসেবামূলক উদ্যোগ
-    </p>
-
-  </footer>
-
-
-  <!-- LOGIN MODAL -->
-  <div class="modal" id="loginModal">
-
-    <div class="modal-box">
-
-      <button class="close" onclick="closeLogin()">
-        ×
-      </button>
-
-      <h3>লগইন করুন</h3>
-
-      <p>
-        আপনার অ্যাকাউন্টে প্রবেশ করুন।
-      </p>
-
-      <input
-        class="login-input"
-        type="text"
-        placeholder="নাম / মোবাইল নম্বর"
-      >
-
-      <input
-        class="login-input"
-        type="password"
-        placeholder="পাসওয়ার্ড"
-      >
+    <div class="header-buttons">
 
       <button
-        class="login-submit"
-        onclick="loginDemo()"
-      >
-        লগইন
+        id="profileButton"
+        class="profile-btn"
+        style="display:none;"
+        onclick="openProfile()">
+        👤 আমার প্রোফাইল
+      </button>
+
+      <button
+        id="logoutButton"
+        class="logout-btn"
+        style="display:none;"
+        onclick="logoutUser()">
+        🚪 Logout
+      </button>
+
+      <button
+        id="loginButton"
+        class="login-btn"
+        onclick="openLogin()">
+        🔐 Login
+      </button>
+
+    </div>
+
+  </div>
+</header>
+
+
+<!-- HERO -->
+<section class="hero">
+
+  <h1>আপনার কী সাহায্য প্রয়োজন?</h1>
+
+  <p>
+    সহায় এমন একটি প্ল্যাটফর্ম যেখানে প্রয়োজনের সময়
+    মানুষ মানুষের পাশে দাঁড়াবে।
+  </p>
+
+</section>
+
+
+<!-- MAIN -->
+<main class="container">
+
+  <h2 class="section-title">
+    কী ধরনের সাহায্য প্রয়োজন?
+  </h2>
+
+  <div class="categories">
+
+    <div class="category">
+      <div class="category-icon">🆘</div>
+      <h3>সাহায্য চাই</h3>
+      <p>
+        আপনার কোনো সাহায্যের প্রয়োজন হলে এখানে জানান।
+      </p>
+      <button onclick="needLogin('সাহায্য চাই')">
+        সাহায্য চাই
+      </button>
+    </div>
+
+
+    <div class="category">
+      <div class="category-icon">🤝</div>
+      <h3>আমি সাহায্য করতে চাই</h3>
+      <p>
+        আপনি অন্য মানুষকে কীভাবে সাহায্য করতে পারেন তা জানান।
+      </p>
+      <button onclick="needLogin('আমি সাহায্য করতে চাই')">
+        সাহায্য করতে চাই
+      </button>
+    </div>
+
+
+    <div class="category">
+      <div class="category-icon">🩸</div>
+      <h3>রক্ত প্রয়োজন</h3>
+      <p>
+        জরুরি রক্তের প্রয়োজন হলে অনুরোধ তৈরি করুন।
+      </p>
+      <button onclick="needLogin('রক্ত প্রয়োজন')">
+        রক্ত চাই
+      </button>
+    </div>
+
+
+    <div class="category">
+      <div class="category-icon">🔎</div>
+      <h3>হারানো / পাওয়া</h3>
+      <p>
+        হারানো বা পাওয়া জিনিসের তথ্য শেয়ার করুন।
+      </p>
+      <button onclick="needLogin('হারানো / পাওয়া')">
+        বিস্তারিত
+      </button>
+    </div>
+
+
+    <div class="category">
+      <div class="category-icon">🚑</div>
+      <h3>জরুরি সহায়তা</h3>
+      <p>
+        জরুরি পরিস্থিতিতে দ্রুত সাহায্যের অনুরোধ করুন।
+      </p>
+      <button onclick="needLogin('জরুরি সহায়তা')">
+        জরুরি সাহায্য
+      </button>
+    </div>
+
+
+    <div class="category">
+      <div class="category-icon">🛠️</div>
+      <h3>কারিগরি সহায়তা</h3>
+      <p>
+        কোনো কাজ বা প্রযুক্তিগত সমস্যায় সাহায্য নিন।
+      </p>
+      <button onclick="needLogin('কারিগরি সহায়তা')">
+        সহায়তা চাই
+      </button>
+    </div>
+
+
+    <div class="category">
+      <div class="category-icon">📢</div>
+      <h3>এলাকার সমস্যা</h3>
+      <p>
+        এলাকার কোনো গুরুত্বপূর্ণ সমস্যা জানাতে পারেন।
+      </p>
+      <button onclick="needLogin('এলাকার সমস্যা')">
+        সমস্যা জানান
+      </button>
+    </div>
+
+
+    <div class="category">
+      <div class="category-icon">🚗</div>
+      <h3>জরুরি যাতায়াত</h3>
+      <p>
+        জরুরি প্রয়োজনে যাতায়াতের সহায়তা খুঁজুন।
+      </p>
+      <button onclick="needLogin('জরুরি যাতায়াত')">
+        সাহায্য চাই
+      </button>
+    </div>
+
+  </div>
+
+
+  <!-- LOCATION -->
+  <div class="location-box">
+
+    <h2>📍 কাছাকাছি সাহায্য খুঁজুন</h2>
+
+    <p>
+      আপনার এলাকার কাছাকাছি সাহায্যকারী খুঁজে পাওয়ার
+      ব্যবস্থা পরবর্তী ধাপে যুক্ত হবে।
+    </p>
+
+    <button onclick="needLogin('কাছাকাছি সাহায্য')">
+      কাছাকাছি সাহায্য খুঁজুন
+    </button>
+
+  </div>
+
+
+  <!-- PRIVACY -->
+  <div class="privacy">
+
+    <h2>🔒 আপনার তথ্যের নিরাপত্তা</h2>
+
+    <p>
+      প্রত্যেক ব্যবহারকারীর ব্যক্তিগত তথ্য আলাদাভাবে
+      সংরক্ষণ করা হবে। অনুমতি ছাড়া অন্য ব্যবহারকারী
+      আপনার ব্যক্তিগত তথ্য দেখতে পারবে না।
+    </p>
+
+  </div>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+
+  <p>
+    🤝 সহায় — মানুষ মানুষের পাশে
+  </p>
+
+  <p>
+    মানুষের প্রয়োজনে মানুষ এগিয়ে আসুক।
+  </p>
+
+  <p style="margin-top:8px;">
+    © 2026 সহায়
+  </p>
+
+</footer>
+
+
+
+<!-- ================= LOGIN MODAL ================= -->
+
+<div id="loginModal" class="modal">
+
+  <div class="modal-box">
+
+    <span class="close" onclick="closeModal('loginModal')">
+      ×
+    </span>
+
+    <h2 class="modal-title">
+      🔐 Login
+    </h2>
+
+    <div id="loginMessage" class="message"></div>
+
+    <form id="loginForm">
+
+      <div class="form-group">
+
+        <label>
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="loginEmail"
+          placeholder="আপনার Email লিখুন"
+          required>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="আপনার Password লিখুন"
+          required>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="main-form-btn">
+        Login
+      </button>
+
+    </form>
+
+
+    <div class="switch-text">
+
+      অ্যাকাউন্ট নেই?
+
+      <button onclick="switchToRegister()">
+        Registration করুন
       </button>
 
     </div>
 
   </div>
 
+</div>
 
-  <script>
 
-    /* LOGIN */
-    function openLogin() {
-      document.getElementById("loginModal").style.display = "flex";
+
+<!-- ================= REGISTER MODAL ================= -->
+
+<div id="registerModal" class="modal">
+
+  <div class="modal-box">
+
+    <span class="close" onclick="closeModal('registerModal')">
+      ×
+    </span>
+
+    <h2 class="modal-title">
+      📝 Registration
+    </h2>
+
+    <div id="registerMessage" class="message"></div>
+
+    <form id="registerForm">
+
+      <div class="form-group">
+
+        <label>
+          আপনার নাম
+        </label>
+
+        <input
+          type="text"
+          id="registerName"
+          placeholder="পূর্ণ নাম লিখুন"
+          required>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          মোবাইল নম্বর
+        </label>
+
+        <input
+          type="tel"
+          id="registerPhone"
+          placeholder="01XXXXXXXXX"
+          required>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="registerEmail"
+          placeholder="আপনার Email লিখুন"
+          required>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="registerPassword"
+          placeholder="কমপক্ষে ৬ অক্ষর"
+          minlength="6"
+          required>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          আপনার এলাকা
+        </label>
+
+        <input
+          type="text"
+          id="registerArea"
+          placeholder="যেমন: বিরামপুর, দিনাজপুর"
+          required>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          আপনি কী ধরনের সাহায্য করতে পারেন?
+        </label>
+
+        <textarea
+          id="registerHelpTypes"
+          rows="3"
+          placeholder="যেমন: রক্তদান, যাতায়াত, কারিগরি কাজ, জরুরি সহায়তা ইত্যাদি"></textarea>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="main-form-btn">
+        📝 Account তৈরি করুন
+      </button>
+
+    </form>
+
+
+    <div class="switch-text">
+
+      আগে থেকেই Account আছে?
+
+      <button onclick="switchToLogin()">
+        Login করুন
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ================= PROFILE MODAL ================= -->
+
+<div id="profileModal" class="modal">
+
+  <div class="modal-box">
+
+    <span class="close" onclick="closeModal('profileModal')">
+      ×
+    </span>
+
+    <h2 class="modal-title">
+      👤 আমার প্রোফাইল
+    </h2>
+
+    <div id="profileInfo" class="user-info">
+      তথ্য লোড হচ্ছে...
+    </div>
+
+    <button
+      class="main-form-btn"
+      onclick="closeModal('profileModal')">
+      বন্ধ করুন
+    </button>
+
+  </div>
+
+</div>
+
+
+
+<script>
+
+  /* =========================================
+     SUPABASE CONNECTION
+     ========================================= */
+
+  const SUPABASE_URL =
+    "https://gzujcqjpxypcoiqhpvvu.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  /* =========================================
+     BASIC FUNCTIONS
+     ========================================= */
+
+  function openLogin() {
+
+    document.getElementById("loginModal").style.display = "block";
+
+    clearMessage("loginMessage");
+  }
+
+
+  function openRegister() {
+
+    document.getElementById("registerModal").style.display = "block";
+
+    clearMessage("registerMessage");
+  }
+
+
+  function closeModal(id) {
+
+    document.getElementById(id).style.display = "none";
+
+  }
+
+
+  function switchToRegister() {
+
+    closeModal("loginModal");
+
+    openRegister();
+
+  }
+
+
+  function switchToLogin() {
+
+    closeModal("registerModal");
+
+    openLogin();
+
+  }
+
+
+  function goHome() {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  function showMessage(elementId, text, type) {
+
+    const element =
+      document.getElementById(elementId);
+
+    element.innerText = text;
+
+    element.className =
+      "message " + type;
+
+    element.style.display = "block";
+
+  }
+
+
+  function clearMessage(elementId) {
+
+    const element =
+      document.getElementById(elementId);
+
+    if (element) {
+
+      element.style.display = "none";
+
+      element.innerText = "";
+
     }
 
-    function closeLogin() {
-      document.getElementById("loginModal").style.display = "none";
-    }
+  }
 
 
-    /* DEMO LOGIN */
-    function loginDemo() {
-      alert(
-        "লগইন সিস্টেম পরবর্তী ধাপে Supabase-এর সঙ্গে যুক্ত করা হবে।"
-      );
-      closeLogin();
-    }
+  /* =========================================
+     REGISTRATION
+     ========================================= */
+
+  document
+    .getElementById("registerForm")
+    .addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      clearMessage("registerMessage");
 
 
-    /* DEMO BUTTON */
-    function showMessage(name) {
+      const name =
+        document.getElementById("registerName").value.trim();
 
-      alert(
-        "আপনি নির্বাচন করেছেন: " +
-        name +
-        "\n\nএই ফিচারটি পরবর্তী ধাপে চালু করা হবে।"
-      );
+      const phone =
+        document.getElementById("registerPhone").value.trim();
 
-    }
+      const email =
+        document.getElementById("registerEmail").value.trim();
+
+      const password =
+        document.getElementById("registerPassword").value;
+
+      const area =
+        document.getElementById("registerArea").value.trim();
+
+      const helpTypes =
+        document.getElementById("registerHelpTypes").value.trim();
 
 
-    /* MODAL OUTSIDE CLICK */
-    window.onclick = function(event) {
+      if (password.length < 6) {
 
-      const modal = document.getElementById("loginModal");
+        showMessage(
+          "registerMessage",
+          "Password কমপক্ষে ৬ অক্ষরের হতে হবে।",
+          "error"
+        );
 
-      if (event.target === modal) {
-        closeLogin();
+        return;
       }
 
-    };
 
-  </script>
+      showMessage(
+        "registerMessage",
+        "Account তৈরি হচ্ছে...",
+        "success"
+      );
+
+
+      try {
+
+        const {
+          data,
+          error
+        } = await supabaseClient.auth.signUp({
+
+          email: email,
+
+          password: password,
+
+          options: {
+
+            data: {
+
+              full_name: name,
+
+              phone: phone,
+
+              area: area,
+
+              help_types: helpTypes
+
+            }
+
+          }
+
+        });
+
+
+        if (error) {
+
+          showMessage(
+            "registerMessage",
+            error.message,
+            "error"
+          );
+
+          return;
+        }
+
+
+        if (!data.user) {
+
+          showMessage(
+            "registerMessage",
+            "Account তৈরি করা যায়নি। আবার চেষ্টা করুন।",
+            "error"
+          );
+
+          return;
+        }
+
+
+        /* PROFILE SAVE */
+
+        const {
+          error: profileError
+        } = await supabaseClient
+          .from("profiles")
+          .upsert({
+
+            id: data.user.id,
+
+            full_name: name,
+
+            phone: phone,
+
+            area: area,
+
+            help_types: helpTypes
+
+          });
+
+
+        if (profileError) {
+
+          console.error(profileError);
+
+          showMessage(
+            "registerMessage",
+            "Account তৈরি হয়েছে, কিন্তু Profile তথ্য সংরক্ষণে সমস্যা হয়েছে।",
+            "error"
+          );
+
+          return;
+        }
+
+
+        /*
+          Supabase-এ Email Confirmation চালু থাকলে
+          ব্যবহারকারীকে Email verify করতে হতে পারে।
+        */
+
+        showMessage(
+          "registerMessage",
+          "✅ Registration সফল হয়েছে। আপনার Email verify করতে বলা হলে Email verify করে Login করুন।",
+          "success"
+        );
+
+
+        document
+          .getElementById("registerForm")
+          .reset();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "registerMessage",
+          "একটি সমস্যা হয়েছে। আবার চেষ্টা করুন।",
+          "error"
+        );
+
+      }
+
+    });
+
+
+
+  /* =========================================
+     LOGIN
+     ========================================= */
+
+  document
+    .getElementById("loginForm")
+    .addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      clearMessage("loginMessage");
+
+
+      const email =
+        document.getElementById("loginEmail").value.trim();
+
+      const password =
+        document.getElementById("loginPassword").value;
+
+
+      showMessage(
+        "loginMessage",
+        "Login হচ্ছে...",
+        "success"
+      );
+
+
+      try {
+
+        const {
+          data,
+          error
+        } = await supabaseClient.auth.signInWithPassword({
+
+          email: email,
+
+          password: password
+
+        });
+
+
+        if (error) {
+
+          showMessage(
+            "loginMessage",
+            "Email অথবা Password সঠিক নয়।",
+            "error"
+          );
+
+          return;
+        }
+
+
+        if (data.session) {
+
+          closeModal("loginModal");
+
+          document
+            .getElementById("loginForm")
+            .reset();
+
+          updateHeader();
+
+          alert("✅ Login সফল হয়েছে।");
+
+        }
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "loginMessage",
+          "Login করতে সমস্যা হয়েছে।",
+          "error"
+        );
+
+      }
+
+    });
+
+
+
+  /* =========================================
+     LOGOUT
+     ========================================= */
+
+  async function logoutUser() {
+
+    const {
+      error
+    } = await supabaseClient.auth.signOut();
+
+
+    if (error) {
+
+      alert("Logout করতে সমস্যা হয়েছে।");
+
+      return;
+
+    }
+
+
+    updateHeader();
+
+    alert("আপনি Logout করেছেন।");
+
+  }
+
+
+
+  /* =========================================
+     CHECK LOGIN
+     ========================================= */
+
+  async function getCurrentUser() {
+
+    const {
+      data
+    } = await supabaseClient.auth.getUser();
+
+    return data.user;
+
+  }
+
+
+
+  /* =========================================
+     UPDATE HEADER
+     ========================================= */
+
+  async function updateHeader() {
+
+    const user =
+      await getCurrentUser();
+
+
+    const loginButton =
+      document.getElementById("loginButton");
+
+    const logoutButton =
+      document.getElementById("logoutButton");
+
+    const profileButton =
+      document.getElementById("profileButton");
+
+
+    if (user) {
+
+      loginButton.style.display = "none";
+
+      logoutButton.style.display = "inline-block";
+
+      profileButton.style.display = "inline-block";
+
+    } else {
+
+      loginButton.style.display = "inline-block";
+
+      logoutButton.style.display = "none";
+
+      profileButton.style.display = "none";
+
+    }
+
+  }
+
+
+
+  /* =========================================
+     PROFILE
+     ========================================= */
+
+  async function openProfile() {
+
+    const user =
+      await getCurrentUser();
+
+
+    if (!user) {
+
+      openLogin();
+
+      return;
+
+    }
+
+
+    const profileInfo =
+      document.getElementById("profileInfo");
+
+
+    profileInfo.innerHTML =
+      "তথ্য লোড হচ্ছে...";
+
+
+    document
+      .getElementById("profileModal")
+      .style.display = "block";
+
+
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .single();
+
+
+    if (error) {
+
+      console.error(error);
+
+      profileInfo.innerHTML =
+        "<p>Profile তথ্য পাওয়া যায়নি।</p>";
+
+      return;
+
+    }
+
+
+    profileInfo.innerHTML = `
+
+      <div>
+        <strong>👤 নাম:</strong>
+        ${escapeHtml(data.full_name || "")}
+      </div>
+
+      <div>
+        <strong>📱 মোবাইল:</strong>
+        ${escapeHtml(data.phone || "")}
+      </div>
+
+      <div>
+        <strong>📧 Email:</strong>
+        ${escapeHtml(user.email || "")}
+      </div>
+
+      <div>
+        <strong>📍 এলাকা:</strong>
+        ${escapeHtml(data.area || "দেওয়া হয়নি")}
+      </div>
+
+      <div>
+        <strong>🤝 সাহায্য করতে পারি:</strong>
+        ${escapeHtml(data.help_types || "দেওয়া হয়নি")}
+      </div>
+
+    `;
+
+  }
+
+
+
+  /* =========================================
+     SECURITY: HTML ESCAPE
+     ========================================= */
+
+  function escapeHtml(value) {
+
+    return String(value)
+
+      .replace(/&/g, "&amp;")
+
+      .replace(/</g, "&lt;")
+
+      .replace(/>/g, "&gt;")
+
+      .replace(/"/g, "&quot;")
+
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+
+  /* =========================================
+     CATEGORY LOGIN CHECK
+     ========================================= */
+
+  async function needLogin(category) {
+
+    const user =
+      await getCurrentUser();
+
+
+    if (!user) {
+
+      alert(
+        "এই সুবিধাটি ব্যবহার করতে আগে Registration/Login করতে হবে।"
+      );
+
+      openLogin();
+
+      return;
+
+    }
+
+
+    alert(
+      "আপনি Login করেছেন।\n\n" +
+      category +
+      " বিভাগটি পরের ধাপে চালু করা হবে।"
+    );
+
+  }
+
+
+
+  /* =========================================
+     CLOSE MODAL WHEN CLICK OUTSIDE
+     ========================================= */
+
+  window.addEventListener("click", function(event) {
+
+    const modals =
+      document.querySelectorAll(".modal");
+
+
+    modals.forEach(function(modal) {
+
+      if (event.target === modal) {
+
+        modal.style.display = "none";
+
+      }
+
+    });
+
+  });
+
+
+
+  /* =========================================
+     AUTH STATE LISTENER
+     ========================================= */
+
+  supabaseClient.auth.onAuthStateChange(
+    function(event, session) {
+
+      updateHeader();
+
+    }
+  );
+
+
+
+  /* =========================================
+     START
+     ========================================= */
+
+  updateHeader();
+
+</script>
 
 </body>
 </html>
