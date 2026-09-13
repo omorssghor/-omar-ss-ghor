@@ -1,997 +1,378 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>সহায় — মানুষ মানুষের পাশে</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans Bengali","Noto Sans",Arial,sans-serif;
-  background:#f4f7f9;
-  color:#17202a;
-  line-height:1.6;
-}
-
-button,input,select{font-family:inherit}
-button{cursor:pointer}
-
-header{
-  background:#fff;
-  border-bottom:1px solid #e5e7eb;
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-
-.header-inner{
-  max-width:1100px;
-  margin:auto;
-  padding:13px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-
-.logo{
-  color:#0f766e;
-  text-decoration:none;
-  font-size:24px;
-  font-weight:800;
-}
-
-.logo small{
-  display:block;
-  font-size:11px;
-  color:#64748b;
-  margin-top:-5px;
-}
-
-.header-actions{
-  display:flex;
-  gap:7px;
-}
-
-.btn{
-  border:0;
-  border-radius:10px;
-  padding:10px 15px;
-  font-size:14px;
-  font-weight:700;
-}
-
-.btn-primary{
-  background:#0f766e;
-  color:#fff;
-}
-
-.btn-light{
-  background:#eef2f3;
-  color:#334155;
-}
-
-.btn-danger{
-  background:#dc2626;
-  color:#fff;
-}
-
-.hero{
-  max-width:1100px;
-  margin:25px auto;
-  padding:38px 20px;
-  background:linear-gradient(135deg,#0f766e,#14b8a6);
-  color:white;
-  border-radius:22px;
-  text-align:center;
-}
-
-.hero h1{
-  font-size:34px;
-  margin-bottom:8px;
-}
-
-.hero p{
-  font-size:17px;
-}
-
-.hero small{
-  display:block;
-  margin-top:8px;
-  opacity:.9;
-}
-
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:0 18px 40px;
-}
-
-.section-title{
-  text-align:center;
-  margin:30px 0 20px;
-}
-
-.section-title h2{
-  font-size:25px;
-}
-
-.section-title p{
-  color:#64748b;
-  font-size:14px;
-}
-
-.categories{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-}
-
-.category{
-  background:#fff;
-  border:1px solid #e5e7eb;
-  border-radius:16px;
-  padding:20px 10px;
-  text-align:center;
-  box-shadow:0 4px 12px rgba(0,0,0,.04);
-}
-
-.category-icon{
-  font-size:34px;
-  margin-bottom:7px;
-}
-
-.category h3{
-  font-size:15px;
-  margin-bottom:10px;
-}
-
-.category button{
-  border:0;
-  background:#ecfdf5;
-  color:#047857;
-  border-radius:8px;
-  padding:7px 12px;
-  font-weight:700;
-}
-
-.privacy{
-  margin-top:30px;
-  background:#fff;
-  border:1px solid #e5e7eb;
-  border-radius:18px;
-  padding:22px;
-}
-
-.privacy p{
-  color:#64748b;
-  font-size:14px;
-}
-
-footer{
-  background:#0f172a;
-  color:#fff;
-  text-align:center;
-  padding:25px 15px;
-}
-
-footer p{
-  font-size:13px;
-  color:#cbd5e1;
-}
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  z-index:1000;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-}
-
-.modal.active{
-  display:flex;
-}
-
-.modal-box{
-  width:100%;
-  max-width:530px;
-  max-height:92vh;
-  overflow-y:auto;
-  background:#fff;
-  border-radius:18px;
-  padding:24px;
-}
-
-.modal-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
-}
-
-.close{
-  width:34px;
-  height:34px;
-  border:0;
-  border-radius:50%;
-  background:#f1f5f9;
-  font-size:20px;
-}
-
-.form-group{
-  margin-bottom:15px;
-}
-
-.form-group label{
-  display:block;
-  font-size:14px;
-  font-weight:700;
-  margin-bottom:6px;
-  color:#334155;
-}
-
-.form-control{
-  width:100%;
-  padding:12px 13px;
-  border:1px solid #cbd5e1;
-  border-radius:10px;
-  outline:none;
-  background:#fff;
-  font-size:14px;
-}
-
-.form-control:focus{
-  border-color:#0f766e;
-  box-shadow:0 0 0 3px rgba(15,118,110,.1);
-}
-
-.location-title{
-  background:#ecfdf5;
-  color:#047857;
-  padding:10px 12px;
-  border-radius:10px;
-  margin-bottom:12px;
-  font-size:13px;
-  font-weight:700;
-}
-
-.step-number{
-  display:inline-flex;
-  width:25px;
-  height:25px;
-  align-items:center;
-  justify-content:center;
-  background:#0f766e;
-  color:#fff;
-  border-radius:50%;
-  margin-right:6px;
-}
-
-.help-select{
-  position:relative;
-}
-
-.help-select-button{
-  width:100%;
-  min-height:48px;
-  background:#fff;
-  border:1px solid #cbd5e1;
-  border-radius:10px;
-  padding:12px 38px 12px 13px;
-  text-align:left;
-  font-size:14px;
-  position:relative;
-}
-
-.help-select-button:after{
-  content:"▼";
-  position:absolute;
-  right:14px;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:10px;
-}
-
-.help-dropdown{
-  display:none;
-  position:absolute;
-  left:0;
-  right:0;
-  top:calc(100% + 5px);
-  background:#fff;
-  border:1px solid #cbd5e1;
-  border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,.13);
-  z-index:50;
-  padding:7px;
-  max-height:280px;
-  overflow-y:auto;
-}
-
-.help-select.open .help-dropdown{
-  display:block;
-}
-
-.help-option{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  padding:10px;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:14px;
-}
-
-.help-option:hover{
-  background:#f0fdfa;
-}
-
-.help-option input{
-  width:18px;
-  height:18px;
-  accent-color:#0f766e;
-}
-
-.help-hint{
-  color:#64748b;
-  font-size:12px;
-  margin-top:6px;
-}
-
-.message{
-  display:none;
-  padding:10px 12px;
-  border-radius:9px;
-  margin-bottom:15px;
-  font-size:13px;
-}
-
-.message.show{
-  display:block;
-}
-
-.message.error{
-  background:#fef2f2;
-  color:#b91c1c;
-}
-
-.message.success{
-  background:#ecfdf5;
-  color:#047857;
-}
-
-.profile-card{
-  background:#f8fafc;
-  border:1px solid #e2e8f0;
-  border-radius:14px;
-  padding:18px;
-}
-
-.profile-item{
-  padding:11px 0;
-  border-bottom:1px solid #e2e8f0;
-}
-
-.profile-item:last-child{
-  border-bottom:0;
-}
-
-.profile-label{
-  color:#64748b;
-  font-size:12px;
-}
-
-.profile-value{
-  font-weight:700;
-  color:#1e293b;
-}
-
-@media(max-width:800px){
-  .categories{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .hero h1{
-    font-size:28px;
-  }
-}
-
-@media(max-width:550px){
-  .logo{
-    font-size:20px;
-  }
-
-  .header-actions .btn{
-    padding:8px 9px;
-    font-size:12px;
-  }
-
-  .hero{
-    margin:15px 10px 25px;
-    padding:28px 15px;
-  }
-
-  .hero h1{
-    font-size:25px;
-  }
-
-  .categories{
-    gap:9px;
-  }
-
-  .category{
-    padding:15px 7px;
-  }
-
-  .category-icon{
-    font-size:28px;
-  }
-
-  .category h3{
-    font-size:13px;
-  }
-
-  .modal-box{
-    padding:18px;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>সহায় — মানুষ মানুষের পাশে</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, "Noto Sans Bengali", sans-serif;
+    }
+
+    body {
+      background: #f4f7f8;
+      color: #17202a;
+    }
+
+    header {
+      background: linear-gradient(135deg, #087f5b, #0ca678);
+      color: white;
+      padding: 22px 15px;
+      text-align: center;
+      box-shadow: 0 3px 12px rgba(0,0,0,.15);
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 15px;
+      opacity: .95;
+    }
+
+    .container {
+      width: 94%;
+      max-width: 1000px;
+      margin: 25px auto;
+    }
+
+    .welcome {
+      background: white;
+      padding: 25px 18px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 3px 15px rgba(0,0,0,.08);
+      margin-bottom: 22px;
+    }
+
+    .welcome h2 {
+      color: #087f5b;
+      margin-bottom: 10px;
+    }
+
+    .welcome p {
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px;
+    }
+
+    .help-btn {
+      border: none;
+      border-radius: 15px;
+      padding: 20px 10px;
+      background: white;
+      color: #123;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(0,0,0,.08);
+      transition: .2s;
+    }
+
+    .help-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,.14);
+    }
+
+    .top-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .top-btn {
+      border: none;
+      padding: 11px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      background: white;
+      color: #087f5b;
+      font-weight: bold;
+    }
+
+    .user-box {
+      display: none;
+      background: rgba(255,255,255,.18);
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      overflow-y: auto;
+      padding: 20px 10px;
+    }
+
+    .modal-box {
+      background: white;
+      width: 100%;
+      max-width: 550px;
+      margin: 20px auto;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.25);
+    }
+
+    .modal-box h2 {
+      color: #087f5b;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    .close {
+      float: right;
+      font-size: 28px;
+      cursor: pointer;
+      color: #777;
+    }
+
+    label {
+      display: block;
+      margin: 13px 0 6px;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      outline: none;
+      font-size: 15px;
+      background: white;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #0ca678;
+    }
+
+    .main-submit {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 11px;
+      background: #087f5b;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .main-submit:hover {
+      background: #066b4d;
+    }
+
+    .multi-select {
+      position: relative;
+    }
+
+    .multi-select-display {
+      width: 100%;
+      min-height: 50px;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: white;
+      cursor: pointer;
+      color: #555;
+    }
+
+    .multi-options {
+      display: none;
+      position: absolute;
+      z-index: 20;
+      left: 0;
+      right: 0;
+      top: 55px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 8px;
+      max-height: 320px;
+      overflow-y: auto;
+      box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    }
+
+    .multi-options label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      margin: 0;
+      cursor: pointer;
+      font-weight: normal;
+      border-radius: 8px;
+    }
+
+    .multi-options label:hover {
+      background: #f1fdf8;
+    }
+
+    .multi-options input {
+      width: auto;
+    }
+
+    .selected-text {
+      color: #087f5b;
+      font-weight: bold;
+    }
+
+    .location-title {
+      background: #eefaf5;
+      padding: 10px;
+      border-radius: 10px;
+      color: #087f5b;
+      margin-top: 18px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .message {
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      display: none;
+      text-align: center;
+    }
+
+    .success {
+      background: #d3f9d8;
+      color: #176b2c;
+    }
+
+    .error {
+      background: #ffe3e3;
+      color: #a61e1e;
+    }
+
+    .logged-in {
+      display: none;
+    }
+
+    .empty-note {
+      text-align: center;
+      color: #777;
+      padding: 25px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 10px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 25px;
+      }
+
+      .buttons {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .help-btn {
+        font-size: 14px;
+        padding: 18px 7px;
+      }
+
+      .modal-box {
+        padding: 18px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-  <div class="header-inner">
+  <h1>🤝 সহায়</h1>
+  <p>মানুষ মানুষের পাশে</p>
 
-    <a href="#" class="logo">
-      🤝 সহায়
-      <small>মানুষ মানুষের পাশে</small>
-    </a>
-
-    <div class="header-actions" id="headerActions">
-
-      <button class="btn btn-light" onclick="openLogin()">
-        লগইন
-      </button>
-
-      <button class="btn btn-primary" onclick="openRegister()">
-        নিবন্ধন
-      </button>
-
-    </div>
-
+  <div class="top-buttons">
+    <button class="top-btn" id="loginButton" onclick="openLogin()">🔐 লগইন</button>
+    <button class="top-btn" id="registerButton" onclick="openRegister()">📝 রেজিস্ট্রেশন</button>
+    <button class="top-btn logged-in" id="logoutButton" onclick="logout()">🚪 লগআউট</button>
   </div>
+
+  <div class="user-box" id="userBox"></div>
 </header>
 
 
-<section class="hero">
+<div class="container">
 
-  <h1>মানুষ মানুষের পাশে 🤝</h1>
-
-  <p>
-    প্রয়োজনের সময় সাহায্য খুঁজুন,
-    অথবা অন্যের পাশে দাঁড়ান।
-  </p>
-
-  <small>
-    সমস্যার পোস্ট নয় — সমস্যার সমাধান করা।
-  </small>
-
-</section>
-
-
-<main class="container">
-
-  <div class="section-title">
-
-    <h2>আপনার কী সাহায্য প্রয়োজন?</h2>
-
+  <div class="welcome">
+    <h2>মানুষ মানুষের পাশে ❤️</h2>
     <p>
-      নিচের একটি বিভাগ নির্বাচন করুন
+      আপনার প্রয়োজনের সাহায্য খুঁজুন অথবা আপনার সামর্থ্য অনুযায়ী
+      অন্য একজন মানুষের পাশে দাঁড়ান।
     </p>
-
   </div>
 
-
-  <div class="categories">
-
-    <div class="category">
-      <div class="category-icon">🆘</div>
-      <h3>সাহায্য চাই</h3>
-      <button onclick="needLogin('সাহায্য চাই')">সাহায্য চাই</button>
-    </div>
-
-    <div class="category">
-      <div class="category-icon">🤝</div>
-      <h3>আমি সাহায্য করতে চাই</h3>
-      <button onclick="needLogin('আমি সাহায্য করতে চাই')">সাহায্য করতে চাই</button>
-    </div>
-
-    <div class="category">
-      <div class="category-icon">🩸</div>
-      <h3>রক্ত প্রয়োজন</h3>
-      <button onclick="needLogin('রক্ত প্রয়োজন')">বিস্তারিত</button>
-    </div>
-
-    <div class="category">
-      <div class="category-icon">🔎</div>
-      <h3>হারানো / পাওয়া</h3>
-      <button onclick="needLogin('হারানো / পাওয়া')">বিস্তারিত</button>
-    </div>
-
-    <div class="category">
-      <div class="category-icon">🚑</div>
-      <h3>জরুরি সহায়তা</h3>
-      <button onclick="needLogin('জরুরি সহায়তা')">বিস্তারিত</button>
-    </div>
-
-    <div class="category">
-      <div class="category-icon">🛠️</div>
-      <h3>কারিগরি সহায়তা</h3>
-      <button onclick="needLogin('কারিগরি সহায়তা')">বিস্তারিত</button>
-    </div>
-
-    <div class="category">
-      <div class="category-icon">📢</div>
-      <h3>এলাকার সমস্যা</h3>
-      <button onclick="needLogin('এলাকার সমস্যা')">বিস্তারিত</button>
-    </div>
-
-    <div class="category">
-      <div class="category-icon">🚗</div>
-      <h3>জরুরি যাতায়াত</h3>
-      <button onclick="needLogin('জরুরি যাতায়াত')">বিস্তারিত</button>
-    </div>
-
-  </div>
-
-
-  <div class="privacy">
-
-    <h3>🔒 আপনার তথ্যের নিরাপত্তা</h3>
-
-    <p>
-      আপনার ব্যক্তিগত তথ্য অন্য ব্যবহারকারীর কাছে
-      সরাসরি প্রকাশ করা হবে না।
-    </p>
-
-  </div>
-
-</main>
-
-
-<footer>
-
-  <p>🤝 সহায় — মানুষ মানুষের পাশে</p>
-
-  <p>মানুষের জন্য, মানুষের পাশে।</p>
-
-</footer>
-
-
-
-<!-- LOGIN -->
-
-<div class="modal" id="loginModal">
-
-  <div class="modal-box">
-
-    <div class="modal-header">
-
-      <h2>🔐 লগইন</h2>
-
-      <button class="close" onclick="closeModal('loginModal')">×</button>
-
-    </div>
-
-    <div id="loginMessage" class="message"></div>
-
-    <form id="loginForm">
-
-      <div class="form-group">
-
-        <label>ইমেইল</label>
-
-        <input
-          id="loginEmail"
-          type="email"
-          class="form-control"
-          required
-          placeholder="আপনার ইমেইল"
-        >
-
-      </div>
-
-      <div class="form-group">
-
-        <label>পাসওয়ার্ড</label>
-
-        <input
-          id="loginPassword"
-          type="password"
-          class="form-control"
-          required
-          placeholder="পাসওয়ার্ড"
-        >
-
-      </div>
-
-      <button class="btn btn-primary" style="width:100%">
-        লগইন
-      </button>
-
-    </form>
-
-  </div>
-
-</div>
-
-
-
-<!-- REGISTER -->
-
-<div class="modal" id="registerModal">
-
-  <div class="modal-box">
-
-    <div class="modal-header">
-
-      <h2>📝 নিবন্ধন</h2>
-
-      <button class="close" onclick="closeModal('registerModal')">×</button>
-
-    </div>
-
-    <div id="registerMessage" class="message"></div>
-
-
-    <form id="registerForm">
-
-      <div class="form-group">
-
-        <label>আপনার নাম</label>
-
-        <input
-          id="regName"
-          type="text"
-          class="form-control"
-          required
-          placeholder="আপনার নাম"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>মোবাইল নম্বর</label>
-
-        <input
-          id="regPhone"
-          type="tel"
-          class="form-control"
-          required
-          placeholder="01XXXXXXXXX"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>পাসওয়ার্ড</label>
-
-        <input
-          id="regPassword"
-          type="password"
-          class="form-control"
-          minlength="6"
-          required
-          placeholder="কমপক্ষে ৬ অক্ষর"
-        >
-
-      </div>
-
-
-
-      <!-- LOCATION -->
-
-      <div class="location-title">
-        📍 আপনার ঠিকানা — ধাপে ধাপে নির্বাচন করুন
-      </div>
-
-
-      <div class="form-group">
-
-        <label>
-          <span class="step-number">১</span>
-          বিভাগ
-        </label>
-
-        <select
-          id="division"
-          class="form-control"
-          required
-        >
-
-          <option value="">
-            বিভাগ নির্বাচন করুন
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>
-          <span class="step-number">২</span>
-          জেলা
-        </label>
-
-        <select
-          id="district"
-          class="form-control"
-          required
-          disabled
-        >
-
-          <option value="">
-            আগে বিভাগ নির্বাচন করুন
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>
-          <span class="step-number">৩</span>
-          উপজেলা / থানা
-        </label>
-
-        <select
-          id="upazila"
-          class="form-control"
-          required
-          disabled
-        >
-
-          <option value="">
-            আগে জেলা নির্বাচন করুন
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>
-          <span class="step-number">৪</span>
-          ইউনিয়ন
-        </label>
-
-        <select
-          id="union"
-          class="form-control"
-          required
-          disabled
-        >
-
-          <option value="">
-            আগে উপজেলা / থানা নির্বাচন করুন
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <!-- গ্রাম এবং ওয়ার্ড -->
-
-      <div class="form-group">
-
-        <label>
-          <span class="step-number">৫</span>
-          গ্রাম
-        </label>
-
-        <select
-          id="village"
-          class="form-control"
-          required
-          disabled
-        >
-
-          <option value="">
-            আগে ইউনিয়ন নির্বাচন করুন
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>
-          <span class="step-number">৬</span>
-          ওয়ার্ড
-        </label>
-
-        <select
-          id="ward"
-          class="form-control"
-          required
-          disabled
-        >
-
-          <option value="">
-            আগে গ্রাম নির্বাচন করুন
-          </option>
-
-        </select>
-
-      </div>
-
-
-
-      <!-- HELP TYPE -->
-
-      <div class="form-group">
-
-        <label>
-          আপনি কী ধরনের সাহায্য করতে পারবেন?
-        </label>
-
-
-        <div class="help-select" id="helpSelect">
-
-          <button
-            type="button"
-            class="help-select-button"
-            id="helpSelectButton"
-          >
-
-            <span id="helpSelectedText">
-              সাহায্যের ধরন নির্বাচন করুন
-            </span>
-
-          </button>
-
-
-          <div
-            class="help-dropdown"
-            id="helpDropdown"
-          >
-
-            <label class="help-option">
-              <input type="checkbox" value="🩸 রক্তদান">
-              <span>🩸 রক্তদান</span>
-            </label>
-
-            <label class="help-option">
-              <input type="checkbox" value="🚗 জরুরি যাতায়াত">
-              <span>🚗 জরুরি যাতায়াত</span>
-            </label>
-
-            <label class="help-option">
-              <input type="checkbox" value="🏥 হাসপাতালে সহায়তা">
-              <span>🏥 হাসপাতালে সহায়তা</span>
-            </label>
-
-            <label class="help-option">
-              <input type="checkbox" value="🛠️ কারিগরি সহায়তা">
-              <span>🛠️ কারিগরি সহায়তা</span>
-            </label>
-
-            <label class="help-option">
-              <input type="checkbox" value="🔧 মেরামতের কাজ">
-              <span>🔧 মেরামতের কাজ</span>
-            </label>
-
-            <label class="help-option">
-              <input type="checkbox" value="📚 পড়াশোনায় সহায়তা">
-              <span>📚 পড়াশোনায় সহায়তা</span>
-            </label>
-
-            <label class="help-option">
-              <input type="checkbox" value="💻 প্রযুক্তি সহায়তা">
-              <span>💻 প্রযুক্তি সহায়তা</span>
-            </label>
-
-            <label class="help-option">
-              <input type="checkbox" value="🛒 বাজার/ওষুধ">
-              <span>🛒 বাজার/ওষুধ</span>
-            </label>
-
-            <label class="help-option">
-              <input type="checkbox" value="🚨 জরুরি সহায়তা">
-              <span>🚨 জরুরি সহায়তা</span>
-            </label>
-
-            <label class="help-option">
-              <input type="checkbox" value="💰 আর্থিক সহায়তা">
-              <span>💰 আর্থিক সহায়তা</span>
-            </label>
-
-            <label class="help-option">
-              <input type="checkbox" value="🤝 অন্যান্য">
-              <span>🤝 অন্যান্য</span>
-            </label>
-
-            <label class="help-option">
-              <input type="checkbox" value="💰 যাকাতের টাকা দিতে চাই">
-              <span>💰 যাকাতের টাকা দিতে চাই</span>
-            </label>
-
-            <label class="help-option">
-              <input type="checkbox" value="🤲 যাকাতের টাকা নিতে চাই">
-              <span>🤲 যাকাতের টাকা নিতে চাই</span>
-            </label>
-
-          </div>
-
-        </div>
-
-        <div class="help-hint">
-          ঘরে চাপ দিয়ে তালিকা খুলুন। একাধিক নির্বাচন করা যাবে।
-        </div>
-
-      </div>
-
-
-      <button
-        type="submit"
-        class="btn btn-primary"
-        style="width:100%;margin-top:5px"
-      >
-        ✅ নিবন্ধন সম্পন্ন করুন
-      </button>
-
-    </form>
-
-  </div>
-
-</div>
-
-
-
-<!-- PROFILE -->
-
-<div class="modal" id="profileModal">
-
-  <div class="modal-box">
-
-    <div class="modal-header">
-
-      <h2>👤 আমার প্রোফাইল</h2>
-
-      <button class="close" onclick="closeModal('profileModal')">×</button>
-
-    </div>
-
-    <div id="profileContent"></div>
-
-    <button
-      class="btn btn-danger"
-      style="width:100%;margin-top:15px"
-      onclick="logout()"
-    >
-      🚪 লগআউট
+  <!-- ঠিক ১০টি বাটন -->
+  <div class="buttons">
+
+    <button class="help-btn" onclick="selectHelp('🆘 সাহায্য চাই')">
+      🆘 সাহায্য চাই
+    </button>
+
+    <button class="help-btn" onclick="selectHelp('🤝 আমি সাহায্য করতে চাই')">
+      🤝 আমি সাহায্য করতে চাই
+    </button>
+
+    <button class="help-btn" onclick="selectHelp('🩸 রক্ত প্রয়োজন')">
+      🩸 রক্ত প্রয়োজন
+    </button>
+
+    <button class="help-btn" onclick="selectHelp('🔎 হারানো / পাওয়া')">
+      🔎 হারানো / পাওয়া
+    </button>
+
+    <button class="help-btn" onclick="selectHelp('🚑 জরুরি সহায়তা')">
+      🚑 জরুরি সহায়তা
+    </button>
+
+    <button class="help-btn" onclick="selectHelp('🛠️ কারিগরি সহায়তা')">
+      🛠️ কারিগরি সহায়তা
+    </button>
+
+    <button class="help-btn" onclick="selectHelp('📢 এলাকার সমস্যা')">
+      📢 এলাকার সমস্যা
+    </button>
+
+    <button class="help-btn" onclick="selectHelp('🚗 জরুরি যাতায়াত')">
+      🚗 জরুরি যাতায়াত
+    </button>
+
+    <button class="help-btn" onclick="selectHelp('💰 যাকাতের টাকা দিতে চাই')">
+      💰 যাকাতের টাকা দিতে চাই
+    </button>
+
+    <button class="help-btn" onclick="selectHelp('🤲 যাকাতের টাকা নিতে চাই')">
+      🤲 যাকাতের টাকা নিতে চাই
     </button>
 
   </div>
@@ -999,1108 +380,1213 @@ footer p{
 </div>
 
 
+<!-- LOGIN MODAL -->
+<div class="modal" id="loginModal">
+  <div class="modal-box">
 
-<script>
+    <span class="close" onclick="closeLogin()">×</span>
 
-/* =====================================
-   SUPABASE
-===================================== */
+    <h2>🔐 লগইন</h2>
 
-const SUPABASE_URL =
-"https://gzujcqjpxypcoiqhpvvu.supabase.co";
+    <label>ইমেইল</label>
+    <input type="email" id="loginEmail" placeholder="আপনার ইমেইল">
 
-const SUPABASE_KEY =
-"sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
+    <label>পাসওয়ার্ড</label>
+    <input type="password" id="loginPassword" placeholder="পাসওয়ার্ড">
 
-const supabaseClient =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+    <button class="main-submit" onclick="loginUser()">
+      লগইন
+    </button>
 
+    <div class="message" id="loginMessage"></div>
 
-/* =====================================
-   BD LOCATION API
-===================================== */
-
-const GEO_API =
-"https://bdapis.com/geo/v2.0";
+  </div>
+</div>
 
 
-/* =====================================
-   MODAL
-===================================== */
+<!-- REGISTER MODAL -->
+<div class="modal" id="registerModal">
 
-function openLogin(){
-  document
-    .getElementById("loginModal")
-    .classList.add("active");
-}
+  <div class="modal-box">
 
-function openRegister(){
-  document
-    .getElementById("registerModal")
-    .classList.add("active");
+    <span class="close" onclick="closeRegister()">×</span>
 
-  loadDivisions();
-}
+    <h2>📝 নতুন অ্যাকাউন্ট</h2>
 
-function closeModal(id){
-  document
-    .getElementById(id)
-    .classList.remove("active");
-}
+    <label>আপনার নাম</label>
+    <input
+      type="text"
+      id="regName"
+      placeholder="আপনার পুরো নাম"
+    >
 
+    <label>মোবাইল নম্বর</label>
+    <input
+      type="tel"
+      id="regPhone"
+      placeholder="01XXXXXXXXX"
+    >
 
-/* =====================================
-   HELP SELECT
-===================================== */
-
-const helpSelect =
-document.getElementById("helpSelect");
-
-document
-.getElementById("helpSelectButton")
-.addEventListener("click",function(e){
-
-  e.stopPropagation();
-
-  helpSelect.classList.toggle("open");
-
-});
-
-document
-.getElementById("helpDropdown")
-.addEventListener("click",function(e){
-
-  e.stopPropagation();
-
-});
-
-document.addEventListener("click",function(){
-
-  helpSelect.classList.remove("open");
-
-});
+    <label>পাসওয়ার্ড</label>
+    <input
+      type="password"
+      id="regPassword"
+      placeholder="কমপক্ষে ৬ অক্ষর"
+    >
 
 
-document
-.querySelectorAll(".help-option input")
-.forEach(function(input){
+    <!-- সাহায্যের ধরন -->
+    <label>
+      আপনি কী ধরনের সাহায্য করতে পারবেন?
+    </label>
 
-  input.addEventListener(
-    "change",
-    updateHelpText
-  );
+    <div class="multi-select">
 
-});
+      <div
+        class="multi-select-display"
+        id="helpTypeDisplay"
+        onclick="toggleHelpOptions()"
+      >
+        সাহায্যের ধরন নির্বাচন করুন
+      </div>
+
+      <div class="multi-options" id="helpOptions">
+
+        <!-- ঠিক ১০টি অপশন -->
+
+        <label>
+          <input type="checkbox" value="🆘 সাহায্য চাই">
+          🆘 সাহায্য চাই
+        </label>
+
+        <label>
+          <input type="checkbox" value="🤝 আমি সাহায্য করতে চাই">
+          🤝 আমি সাহায্য করতে চাই
+        </label>
+
+        <label>
+          <input type="checkbox" value="🩸 রক্ত প্রয়োজন">
+          🩸 রক্ত প্রয়োজন
+        </label>
+
+        <label>
+          <input type="checkbox" value="🔎 হারানো / পাওয়া">
+          🔎 হারানো / পাওয়া
+        </label>
+
+        <label>
+          <input type="checkbox" value="🚑 জরুরি সহায়তা">
+          🚑 জরুরি সহায়তা
+        </label>
+
+        <label>
+          <input type="checkbox" value="🛠️ কারিগরি সহায়তা">
+          🛠️ কারিগরি সহায়তা
+        </label>
+
+        <label>
+          <input type="checkbox" value="📢 এলাকার সমস্যা">
+          📢 এলাকার সমস্যা
+        </label>
+
+        <label>
+          <input type="checkbox" value="🚗 জরুরি যাতায়াত">
+          🚗 জরুরি যাতায়াত
+        </label>
+
+        <label>
+          <input type="checkbox" value="💰 যাকাতের টাকা দিতে চাই">
+          💰 যাকাতের টাকা দিতে চাই
+        </label>
+
+        <label>
+          <input type="checkbox" value="🤲 যাকাতের টাকা নিতে চাই">
+          🤲 যাকাতের টাকা নিতে চাই
+        </label>
+
+      </div>
+    </div>
 
 
-function getHelpTypes(){
+    <!-- LOCATION -->
+    <div class="location-title">
+      📍 আপনার ঠিকানা নির্বাচন করুন
+    </div>
 
-  return [
-    ...document.querySelectorAll(
-      ".help-option input:checked"
-    )
-  ].map(
-    input => input.value
-  );
+    <label>বিভাগ</label>
+    <select id="division">
+      <option value="">বিভাগ নির্বাচন করুন</option>
+    </select>
 
-}
+    <label>জেলা</label>
+    <select id="district" disabled>
+      <option value="">আগে বিভাগ নির্বাচন করুন</option>
+    </select>
 
+    <label>থানা / উপজেলা</label>
+    <select id="upazila" disabled>
+      <option value="">আগে জেলা নির্বাচন করুন</option>
+    </select>
 
-function updateHelpText(){
-
-  const selected =
-    getHelpTypes();
-
-  const text =
-    document.getElementById(
-      "helpSelectedText"
-    );
-
-  if(selected.length === 0){
-
-    text.textContent =
-      "সাহায্যের ধরন নির্বাচন করুন";
-
-    return;
-  }
-
-  if(selected.length === 1){
-
-    text.textContent =
-      selected[0];
-
-    return;
-  }
-
-  text.textContent =
-    selected.length +
-    "টি সাহায্যের ধরন নির্বাচন করা হয়েছে";
-
-}
+    <label>ইউনিয়ন</label>
+    <select id="union" disabled>
+      <option value="">আগে থানা / উপজেলা নির্বাচন করুন</option>
+    </select>
 
 
-/* =====================================
-   DIVISION
-===================================== */
+    <button class="main-submit" onclick="registerUser()">
+      ✅ রেজিস্ট্রেশন সম্পন্ন করুন
+    </button>
 
-async function loadDivisions(){
+    <div class="message" id="registerMessage"></div>
 
-  const select =
+  </div>
+</div>
+
+
+<footer>
+  <p>সহায় — মানুষ মানুষের পাশে 🤝</p>
+  <p>সমস্যা পোস্ট করা নয়, সমস্যার সমাধান করা।</p>
+</footer>
+
+
+<script type="module">
+
+  /* =========================
+     SUPABASE
+  ========================= */
+
+  import {
+    createClient
+  } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+  const SUPABASE_URL =
+    "https://gzujcqjpxypcoiqhpvvu.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
+
+  const supabase =
+    createClient(SUPABASE_URL, SUPABASE_KEY);
+
+
+  /* =========================
+     BANGLADESH LOCATION
+     সব ৮টি বিভাগ নিশ্চিত করা
+  ========================= */
+
+  const divisions = [
+    {
+      id: "1",
+      name: "ঢাকা"
+    },
+    {
+      id: "2",
+      name: "চট্টগ্রাম"
+    },
+    {
+      id: "3",
+      name: "রাজশাহী"
+    },
+    {
+      id: "4",
+      name: "খুলনা"
+    },
+    {
+      id: "5",
+      name: "বরিশাল"
+    },
+    {
+      id: "6",
+      name: "সিলেট"
+    },
+    {
+      id: "7",
+      name: "রংপুর"
+    },
+    {
+      id: "8",
+      name: "ময়মনসিংহ"
+    }
+  ];
+
+
+  const GEO_API =
+    "https://bdapis.com/geo/v2.0";
+
+
+  const divisionSelect =
     document.getElementById("division");
 
-  if(select.options.length > 1){
-    return;
-  }
+  const districtSelect =
+    document.getElementById("district");
 
-  try{
+  const upazilaSelect =
+    document.getElementById("upazila");
 
-    const response =
-      await fetch(
-        GEO_API + "/divisions"
-      );
+  const unionSelect =
+    document.getElementById("union");
 
-    const result =
-      await response.json();
 
-    const data =
-      result.data || result;
-
-    data.forEach(function(item){
-
-      const option =
-        document.createElement("option");
-
-      option.value =
-        item.id;
-
-      option.textContent =
-        item.bn_name ||
-        item.name ||
-        item.division ||
-        "";
-
-      select.appendChild(option);
-
-    });
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      "registerMessage",
-      "বিভাগের তালিকা লোড করা যাচ্ছে না।",
-      "error"
-    );
-
-  }
-
-}
-
-
-/* =====================================
-   DISTRICT
-===================================== */
-
-document
-.getElementById("division")
-.addEventListener(
-  "change",
-  async function(){
-
-    const divisionId =
-      this.value;
-
-    resetSelect(
-      "district",
-      "আগে বিভাগ নির্বাচন করুন"
-    );
-
-    resetSelect(
-      "upazila",
-      "আগে জেলা নির্বাচন করুন"
-    );
-
-    resetSelect(
-      "union",
-      "আগে উপজেলা / থানা নির্বাচন করুন"
-    );
-
-    resetSelect(
-      "village",
-      "আগে ইউনিয়ন নির্বাচন করুন"
-    );
-
-    resetSelect(
-      "ward",
-      "আগে গ্রাম নির্বাচন করুন"
-    );
-
-    if(!divisionId){
-      return;
-    }
-
-    try{
-
-      const response =
-        await fetch(
-          GEO_API +
-          "/districts/" +
-          divisionId
-        );
-
-      const result =
-        await response.json();
-
-      const data =
-        result.data || result;
-
-      fillSelect(
-        "district",
-        data,
-        "জেলা নির্বাচন করুন"
-      );
-
-    }catch(error){
-
-      console.error(error);
-
-      showMessage(
-        "registerMessage",
-        "জেলার তালিকা পাওয়া যাচ্ছে না।",
-        "error"
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   UPAZILA / THANA
-===================================== */
-
-document
-.getElementById("district")
-.addEventListener(
-  "change",
-  async function(){
-
-    const districtId =
-      this.value;
-
-    resetSelect(
-      "upazila",
-      "আগে জেলা নির্বাচন করুন"
-    );
-
-    resetSelect(
-      "union",
-      "আগে উপজেলা / থানা নির্বাচন করুন"
-    );
-
-    resetSelect(
-      "village",
-      "আগে ইউনিয়ন নির্বাচন করুন"
-    );
-
-    resetSelect(
-      "ward",
-      "আগে গ্রাম নির্বাচন করুন"
-    );
-
-    if(!districtId){
-      return;
-    }
-
-    try{
-
-      const response =
-        await fetch(
-          GEO_API +
-          "/upazilas/" +
-          districtId
-        );
-
-      const result =
-        await response.json();
-
-      const data =
-        result.data || result;
-
-      fillSelect(
-        "upazila",
-        data,
-        "উপজেলা / থানা নির্বাচন করুন"
-      );
-
-    }catch(error){
-
-      console.error(error);
-
-      showMessage(
-        "registerMessage",
-        "উপজেলা / থানার তালিকা পাওয়া যাচ্ছে না।",
-        "error"
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   UNION
-===================================== */
-
-document
-.getElementById("upazila")
-.addEventListener(
-  "change",
-  async function(){
-
-    const upazilaId =
-      this.value;
-
-    resetSelect(
-      "union",
-      "আগে উপজেলা / থানা নির্বাচন করুন"
-    );
-
-    resetSelect(
-      "village",
-      "আগে ইউনিয়ন নির্বাচন করুন"
-    );
-
-    resetSelect(
-      "ward",
-      "আগে গ্রাম নির্বাচন করুন"
-    );
-
-    if(!upazilaId){
-      return;
-    }
-
-    try{
-
-      const response =
-        await fetch(
-          GEO_API +
-          "/unions/" +
-          upazilaId
-        );
-
-      const result =
-        await response.json();
-
-      const data =
-        result.data || result;
-
-      fillSelect(
-        "union",
-        data,
-        "ইউনিয়ন নির্বাচন করুন"
-      );
-
-    }catch(error){
-
-      console.error(error);
-
-      showMessage(
-        "registerMessage",
-        "ইউনিয়নের তালিকা পাওয়া যাচ্ছে না।",
-        "error"
-      );
-
-    }
-
-  }
-);
-
-
-/*
-  গ্রাম/ওয়ার্ড:
-
-  ইউনিয়ন API-তে গ্রাম/ওয়ার্ডের পূর্ণ
-  নির্ভরযোগ্য তালিকা না থাকলে আমরা
-  ভুল বা বানানো নাম দেখাব না।
-
-  তাই আপাতত ইউনিয়ন পর্যন্ত সম্পূর্ণ
-  নির্বাচন হবে।
-
-  নিচের দুটি Select পরবর্তী লোকেশন
-  ডাটাবেস যুক্ত হলে স্বয়ংক্রিয়ভাবে
-  চালু করা যাবে।
-*/
-
-
-/* =====================================
-   SELECT HELPERS
-===================================== */
-
-function resetSelect(
-  id,
-  placeholder
-){
-
-  const select =
-    document.getElementById(id);
-
-  select.innerHTML =
-    `<option value="">
-      ${placeholder}
-    </option>`;
-
-  select.disabled = true;
-}
-
-
-function fillSelect(
-  id,
-  data,
-  placeholder
-){
-
-  const select =
-    document.getElementById(id);
-
-  select.innerHTML =
-    `<option value="">
-      ${placeholder}
-    </option>`;
-
-  data.forEach(function(item){
+  function addOption(select, value, text) {
 
     const option =
       document.createElement("option");
 
-    option.value =
-      item.id ||
-      item.code ||
-      item.value ||
-      "";
+    option.value = value;
+    option.textContent = text;
 
-    option.textContent =
-      item.bn_name ||
-      item.name ||
-      item.union ||
-      item.upazila ||
-      "";
+    select.appendChild(option);
+  }
 
-    if(option.value){
-      select.appendChild(option);
-    }
+
+  /* প্রথমে সব ৮ বিভাগ দেখাবে */
+
+  divisions.forEach(item => {
+
+    addOption(
+      divisionSelect,
+      item.name,
+      item.name
+    );
 
   });
 
-  select.disabled = false;
 
-}
+  /* বিভাগ পরিবর্তন */
 
+  divisionSelect.addEventListener(
+    "change",
+    async () => {
 
-/* =====================================
-   REGISTER
-===================================== */
+      districtSelect.innerHTML =
+        '<option value="">জেলা নির্বাচন করুন</option>';
 
-document
-.getElementById("registerForm")
-.addEventListener(
-  "submit",
-  async function(e){
+      upazilaSelect.innerHTML =
+        '<option value="">আগে জেলা নির্বাচন করুন</option>';
 
-    e.preventDefault();
+      unionSelect.innerHTML =
+        '<option value="">আগে থানা / উপজেলা নির্বাচন করুন</option>';
 
-    const name =
-      document.getElementById(
-        "regName"
-      ).value.trim();
-
-    const phone =
-      document.getElementById(
-        "regPhone"
-      ).value.trim();
-
-    const password =
-      document.getElementById(
-        "regPassword"
-      ).value;
-
-    const division =
-      document.getElementById(
-        "division"
-      );
-
-    const district =
-      document.getElementById(
-        "district"
-      );
-
-    const upazila =
-      document.getElementById(
-        "upazila"
-      );
-
-    const union =
-      document.getElementById(
-        "union"
-      );
-
-    const helpTypes =
-      getHelpTypes();
+      districtSelect.disabled = true;
+      upazilaSelect.disabled = true;
+      unionSelect.disabled = true;
 
 
-    if(
-      !name ||
-      !phone ||
-      !password ||
-      !division.value ||
-      !district.value ||
-      !upazila.value ||
-      !union.value
-    ){
+      const divisionName =
+        divisionSelect.value;
 
-      showMessage(
-        "registerMessage",
-        "দয়া করে সব লোকেশন ধাপ সম্পূর্ণ করুন।",
-        "error"
-      );
+      if (!divisionName) return;
 
-      return;
+
+      try {
+
+        const response =
+          await fetch(
+            GEO_API +
+            "/districts/" +
+            encodeURIComponent(divisionName)
+          );
+
+        const data =
+          await response.json();
+
+
+        const districts =
+          Array.isArray(data)
+            ? data
+            : (
+              data.data ||
+              data.districts ||
+              []
+            );
+
+
+        districts.forEach(item => {
+
+          const name =
+            item.name ||
+            item.district ||
+            item.bn_name ||
+            item.title;
+
+          const id =
+            item.id ||
+            item.district_id ||
+            name;
+
+          if (name) {
+
+            addOption(
+              districtSelect,
+              id,
+              name
+            );
+
+          }
+
+        });
+
+        districtSelect.disabled = false;
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "registerMessage",
+          "জেলার তালিকা আনতে সমস্যা হয়েছে। আবার চেষ্টা করুন।",
+          "error"
+        );
+
+      }
+
     }
+  );
 
 
-    if(helpTypes.length === 0){
+  /* জেলা পরিবর্তন */
 
-      showMessage(
-        "registerMessage",
-        "অন্তত একটি সাহায্যের ধরন নির্বাচন করুন।",
-        "error"
-      );
+  districtSelect.addEventListener(
+    "change",
+    async () => {
 
-      return;
+      upazilaSelect.innerHTML =
+        '<option value="">থানা / উপজেলা নির্বাচন করুন</option>';
+
+      unionSelect.innerHTML =
+        '<option value="">আগে থানা / উপজেলা নির্বাচন করুন</option>';
+
+      upazilaSelect.disabled = true;
+      unionSelect.disabled = true;
+
+
+      const district =
+        districtSelect.value;
+
+      if (!district) return;
+
+
+      try {
+
+        const response =
+          await fetch(
+            GEO_API +
+            "/upazilas/" +
+            encodeURIComponent(district)
+          );
+
+        const data =
+          await response.json();
+
+
+        const upazilas =
+          Array.isArray(data)
+            ? data
+            : (
+              data.data ||
+              data.upazilas ||
+              []
+            );
+
+
+        upazilas.forEach(item => {
+
+          const name =
+            item.name ||
+            item.upazila ||
+            item.bn_name ||
+            item.title;
+
+          const id =
+            item.id ||
+            item.upazila_id ||
+            name;
+
+          if (name) {
+
+            addOption(
+              upazilaSelect,
+              id,
+              name
+            );
+
+          }
+
+        });
+
+        upazilaSelect.disabled = false;
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "registerMessage",
+          "থানা/উপজেলার তালিকা আনতে সমস্যা হয়েছে।",
+          "error"
+        );
+
+      }
+
     }
+  );
 
 
-    if(password.length < 6){
+  /* উপজেলা পরিবর্তন */
 
-      showMessage(
-        "registerMessage",
-        "পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।",
-        "error"
-      );
+  upazilaSelect.addEventListener(
+    "change",
+    async () => {
 
-      return;
+      unionSelect.innerHTML =
+        '<option value="">ইউনিয়ন নির্বাচন করুন</option>';
+
+      unionSelect.disabled = true;
+
+
+      const upazila =
+        upazilaSelect.value;
+
+      if (!upazila) return;
+
+
+      try {
+
+        const response =
+          await fetch(
+            GEO_API +
+            "/unions/" +
+            encodeURIComponent(upazila)
+          );
+
+        const data =
+          await response.json();
+
+
+        const unions =
+          Array.isArray(data)
+            ? data
+            : (
+              data.data ||
+              data.unions ||
+              []
+            );
+
+
+        unions.forEach(item => {
+
+          const name =
+            item.name ||
+            item.union ||
+            item.bn_name ||
+            item.title;
+
+          const id =
+            item.id ||
+            item.union_id ||
+            name;
+
+          if (name) {
+
+            addOption(
+              unionSelect,
+              id,
+              name
+            );
+
+          }
+
+        });
+
+        unionSelect.disabled = false;
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "registerMessage",
+          "ইউনিয়নের তালিকা আনতে সমস্যা হয়েছে।",
+          "error"
+        );
+
+      }
+
     }
+  );
 
 
-    showMessage(
-      "registerMessage",
-      "অ্যাকাউন্ট তৈরি হচ্ছে...",
-      "success"
+  /* =========================
+     HELP TYPE DROPDOWN
+  ========================= */
+
+  window.toggleHelpOptions =
+    function () {
+
+      const box =
+        document.getElementById(
+          "helpOptions"
+        );
+
+      box.style.display =
+        box.style.display === "block"
+          ? "none"
+          : "block";
+
+    };
+
+
+  document.querySelectorAll(
+    "#helpOptions input[type=checkbox]"
+  ).forEach(check => {
+
+    check.addEventListener(
+      "change",
+      updateHelpText
     );
 
-
-    /*
-      Supabase Auth-এর জন্য
-      ফোন নম্বর থেকে অভ্যন্তরীণ
-      email তৈরি করা হচ্ছে।
-    */
-
-    const email =
-      phone.replace(
-        /[^0-9]/g,
-        ""
-      ) +
-      "@sohay-user.local";
+  });
 
 
-    try{
+  function updateHelpText() {
 
-      const {
-        data,
-        error
-      } =
-      await supabaseClient.auth.signUp({
-
-        email:email,
-
-        password:password,
-
-        options:{
-          data:{
-            full_name:name,
-            phone:phone,
-            division:
-              division.options[
-                division.selectedIndex
-              ].text,
-            district:
-              district.options[
-                district.selectedIndex
-              ].text,
-            upazila:
-              upazila.options[
-                upazila.selectedIndex
-              ].text,
-            union:
-              union.options[
-                union.selectedIndex
-              ].text,
-            help_types:helpTypes
-          }
-        }
-
-      });
+    const selected =
+      [...document.querySelectorAll(
+        "#helpOptions input:checked"
+      )].map(
+        item => item.value
+      );
 
 
-      if(error){
-        throw error;
+    const display =
+      document.getElementById(
+        "helpTypeDisplay"
+      );
+
+
+    if (selected.length === 0) {
+
+      display.textContent =
+        "সাহায্যের ধরন নির্বাচন করুন";
+
+      display.classList.remove(
+        "selected-text"
+      );
+
+    } else {
+
+      display.textContent =
+        selected.join(" • ");
+
+      display.classList.add(
+        "selected-text"
+      );
+
+    }
+
+  }
+
+
+  /* বাইরে চাপ দিলে dropdown বন্ধ */
+
+  document.addEventListener(
+    "click",
+    function(event) {
+
+      const area =
+        document.querySelector(
+          ".multi-select"
+        );
+
+      if (
+        area &&
+        !area.contains(event.target)
+      ) {
+
+        document.getElementById(
+          "helpOptions"
+        ).style.display = "none";
+
+      }
+
+    }
+  );
+
+
+  /* =========================
+     MODAL
+  ========================= */
+
+  window.openLogin =
+    function () {
+
+      document.getElementById(
+        "loginModal"
+      ).style.display = "block";
+
+    };
+
+
+  window.closeLogin =
+    function () {
+
+      document.getElementById(
+        "loginModal"
+      ).style.display = "none";
+
+    };
+
+
+  window.openRegister =
+    function () {
+
+      document.getElementById(
+        "registerModal"
+      ).style.display = "block";
+
+    };
+
+
+  window.closeRegister =
+    function () {
+
+      document.getElementById(
+        "registerModal"
+      ).style.display = "none";
+
+    };
+
+
+  /* =========================
+     MESSAGE
+  ========================= */
+
+  function showMessage(
+    id,
+    text,
+    type
+  ) {
+
+    const box =
+      document.getElementById(id);
+
+    box.textContent = text;
+
+    box.className =
+      "message " + type;
+
+    box.style.display = "block";
+
+  }
+
+
+  /* =========================
+     REGISTRATION
+  ========================= */
+
+  window.registerUser =
+    async function () {
+
+      const name =
+        document.getElementById(
+          "regName"
+        ).value.trim();
+
+      const phone =
+        document.getElementById(
+          "regPhone"
+        ).value.trim();
+
+      const password =
+        document.getElementById(
+          "regPassword"
+        ).value;
+
+
+      const selectedHelp =
+        [...document.querySelectorAll(
+          "#helpOptions input:checked"
+        )].map(
+          item => item.value
+        );
+
+
+      const division =
+        divisionSelect.value;
+
+      const district =
+        districtSelect.options[
+          districtSelect.selectedIndex
+        ]?.text || "";
+
+      const upazila =
+        upazilaSelect.options[
+          upazilaSelect.selectedIndex
+        ]?.text || "";
+
+      const union =
+        unionSelect.options[
+          unionSelect.selectedIndex
+        ]?.text || "";
+
+
+      if (!name) {
+
+        showMessage(
+          "registerMessage",
+          "আপনার নাম লিখুন।",
+          "error"
+        );
+
+        return;
+
       }
 
 
-      if(!data.user){
+      if (!phone) {
 
-        throw new Error(
-          "অ্যাকাউন্ট তৈরি করা যায়নি।"
+        showMessage(
+          "registerMessage",
+          "মোবাইল নম্বর দিন।",
+          "error"
         );
+
+        return;
+
+      }
+
+
+      if (password.length < 6) {
+
+        showMessage(
+          "registerMessage",
+          "পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (selectedHelp.length === 0) {
+
+        showMessage(
+          "registerMessage",
+          "কমপক্ষে একটি সাহায্যের ধরন নির্বাচন করুন।",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        !division ||
+        !district ||
+        !upazila ||
+        !union
+      ) {
+
+        showMessage(
+          "registerMessage",
+          "বিভাগ, জেলা, থানা/উপজেলা ও ইউনিয়ন নির্বাচন করুন।",
+          "error"
+        );
+
+        return;
 
       }
 
 
       /*
-        Existing profiles table-এ
-        location একটি combined text
-        হিসেবে রাখা হচ্ছে।
+        ফোন নম্বরকে Supabase Auth-এর
+        জন্য অভ্যন্তরীণ email হিসেবে ব্যবহার করা হচ্ছে।
+        ব্যবহারকারীকে আলাদা email দিতে হচ্ছে না।
       */
 
-      const locationText =
-        division.options[
-          division.selectedIndex
-        ].text +
-        " / " +
-        district.options[
-          district.selectedIndex
-        ].text +
-        " / " +
-        upazila.options[
-          upazila.selectedIndex
-        ].text +
-        " / " +
-        union.options[
-          union.selectedIndex
-        ].text;
+      const cleanPhone =
+        phone.replace(
+          /[^0-9]/g,
+          ""
+        );
+
+      const internalEmail =
+        cleanPhone +
+        "@sohay-user.local";
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabase.auth.signUp({
+
+            email: internalEmail,
+
+            password: password
+
+          });
+
+
+        if (error) {
+
+          showMessage(
+            "registerMessage",
+            error.message,
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (!data.user) {
+
+          showMessage(
+            "registerMessage",
+            "অ্যাকাউন্ট তৈরি করা যায়নি।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const location =
+          division +
+          " / " +
+          district +
+          " / " +
+          upazila +
+          " / " +
+          union;
+
+
+        const {
+          error: profileError
+        } =
+          await supabase
+            .from("profiles")
+            .insert({
+
+              id: data.user.id,
+
+              full_name: name,
+
+              phone: phone,
+
+              area: location,
+
+              help_types:
+                selectedHelp.join(", ")
+
+            });
+
+
+        if (profileError) {
+
+          console.error(
+            profileError
+          );
+
+          showMessage(
+            "registerMessage",
+            "অ্যাকাউন্ট তৈরি হয়েছে, কিন্তু প্রোফাইল তথ্য সংরক্ষণে সমস্যা হয়েছে।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        showMessage(
+          "registerMessage",
+          "✅ রেজিস্ট্রেশন সফল হয়েছে। এখন লগইন করুন।",
+          "success"
+        );
+
+
+        document.getElementById(
+          "regName"
+        ).value = "";
+
+        document.getElementById(
+          "regPhone"
+        ).value = "";
+
+        document.getElementById(
+          "regPassword"
+        ).value = "";
+
+
+        document.querySelectorAll(
+          "#helpOptions input"
+        ).forEach(
+          item => item.checked = false
+        );
+
+
+        updateHelpText();
+
+
+        setTimeout(
+          () => {
+
+            closeRegister();
+
+            openLogin();
+
+          },
+          1500
+        );
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "registerMessage",
+          "রেজিস্ট্রেশনের সময় সমস্যা হয়েছে।",
+          "error"
+        );
+
+      }
+
+    };
+
+
+  /* =========================
+     LOGIN
+  ========================= */
+
+  window.loginUser =
+    async function () {
+
+      const email =
+        document.getElementById(
+          "loginEmail"
+        ).value.trim();
+
+      const password =
+        document.getElementById(
+          "loginPassword"
+        ).value;
+
+
+      if (!email || !password) {
+
+        showMessage(
+          "loginMessage",
+          "ইমেইল ও পাসওয়ার্ড দিন।",
+          "error"
+        );
+
+        return;
+
+      }
 
 
       const {
-        error:profileError
+        data,
+        error
       } =
-      await supabaseClient
-      .from("profiles")
-      .upsert({
+        await supabase.auth.signInWithPassword({
 
-        id:data.user.id,
+          email: email,
 
-        full_name:name,
+          password: password
 
-        phone:phone,
-
-        area:locationText,
-
-        help_types:
-          helpTypes.join(", ")
-
-      });
+        });
 
 
-      if(profileError){
+      if (error) {
 
-        console.error(
-          profileError
+        showMessage(
+          "loginMessage",
+          "লগইন করা যায়নি। তথ্য সঠিক কিনা দেখুন।",
+          "error"
         );
+
+        return;
 
       }
 
 
       showMessage(
-        "registerMessage",
-        "নিবন্ধন সফল হয়েছে।",
+        "loginMessage",
+        "✅ লগইন সফল হয়েছে।",
         "success"
       );
 
 
-      setTimeout(function(){
+      setTimeout(
+        () => {
 
-        closeModal(
-          "registerModal"
+          closeLogin();
+
+          updateLoginState(
+            data.user
+          );
+
+        },
+        800
+      );
+
+    };
+
+
+  /* =========================
+     LOGIN STATE
+  ========================= */
+
+  async function updateLoginState(user) {
+
+    if (!user) return;
+
+
+    document.getElementById(
+      "loginButton"
+    ).style.display = "none";
+
+    document.getElementById(
+      "registerButton"
+    ).style.display = "none";
+
+    document.getElementById(
+      "logoutButton"
+    ).style.display = "inline-block";
+
+
+    const {
+      data
+    } =
+      await supabase
+        .from("profiles")
+        .select("full_name")
+        .eq("id", user.id)
+        .single();
+
+
+    const userBox =
+      document.getElementById(
+        "userBox"
+      );
+
+
+    if (data) {
+
+      userBox.textContent =
+        "👤 " + data.full_name;
+
+    } else {
+
+      userBox.textContent =
+        "👤 ব্যবহারকারী";
+
+    }
+
+
+    userBox.style.display =
+      "inline-block";
+
+  }
+
+
+  /* =========================
+     LOGOUT
+  ========================= */
+
+  window.logout =
+    async function () {
+
+      await supabase.auth.signOut();
+
+      location.reload();
+
+    };
+
+
+  /* =========================
+     HOME 10 BUTTON ACTION
+  ========================= */
+
+  window.selectHelp =
+    async function (helpType) {
+
+      const {
+        data
+      } =
+        await supabase.auth.getUser();
+
+
+      if (!data.user) {
+
+        alert(
+          "এই সুবিধাটি ব্যবহার করতে আগে লগইন বা রেজিস্ট্রেশন করুন।"
         );
 
         openLogin();
 
-      },1200);
+        return;
 
-
-    }catch(error){
-
-      console.error(error);
-
-      showMessage(
-        "registerMessage",
-        error.message ||
-        "নিবন্ধন করতে সমস্যা হয়েছে।",
-        "error"
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   LOGIN
-===================================== */
-
-document
-.getElementById("loginForm")
-.addEventListener(
-  "submit",
-  async function(e){
-
-    e.preventDefault();
-
-    const email =
-      document.getElementById(
-        "loginEmail"
-      ).value.trim();
-
-    const password =
-      document.getElementById(
-        "loginPassword"
-      ).value;
-
-
-    try{
-
-      const {
-        error
-      } =
-      await supabaseClient.auth
-      .signInWithPassword({
-
-        email:email,
-
-        password:password
-
-      });
-
-
-      if(error){
-        throw error;
       }
 
 
-      closeModal(
-        "loginModal"
+      /*
+        এখন ১০টি বাটনই ব্যবহারকারীর জন্য
+        নির্বাচিত কাজ হিসেবে দেখানো হচ্ছে।
+        পরের ধাপে প্রতিটি বাটনের নিজস্ব
+        কাজ/পেজ তৈরি করা যাবে।
+      */
+
+      alert(
+        "আপনি নির্বাচন করেছেন:\n\n" +
+        helpType
       );
 
-      updateHeader();
+    };
 
 
-    }catch(error){
+  /* =========================
+     CURRENT SESSION
+  ========================= */
 
-      showMessage(
-        "loginMessage",
-        error.message ||
-        "লগইন করা যাচ্ছে না।",
-        "error"
-      );
+  const {
+    data: sessionData
+  } =
+    await supabase.auth.getSession();
+
+
+  if (sessionData.session) {
+
+    updateLoginState(
+      sessionData.session.user
+    );
+
+  }
+
+
+  supabase.auth.onAuthStateChange(
+    (event, session) => {
+
+      if (session) {
+
+        updateLoginState(
+          session.user
+        );
+
+      }
 
     }
-
-  }
-);
-
-
-/* =====================================
-   HEADER
-===================================== */
-
-async function updateHeader(){
-
-  const {
-    data
-  } =
-  await supabaseClient.auth.getUser();
-
-
-  const header =
-    document.getElementById(
-      "headerActions"
-    );
-
-
-  if(data.user){
-
-    header.innerHTML = `
-
-      <button
-        class="btn btn-light"
-        onclick="openProfile()"
-      >
-        👤 আমার প্রোফাইল
-      </button>
-
-      <button
-        class="btn btn-danger"
-        onclick="logout()"
-      >
-        লগআউট
-      </button>
-
-    `;
-
-  }else{
-
-    header.innerHTML = `
-
-      <button
-        class="btn btn-light"
-        onclick="openLogin()"
-      >
-        লগইন
-      </button>
-
-      <button
-        class="btn btn-primary"
-        onclick="openRegister()"
-      >
-        নিবন্ধন
-      </button>
-
-    `;
-
-  }
-
-}
-
-
-/* =====================================
-   PROFILE
-===================================== */
-
-async function openProfile(){
-
-  document
-    .getElementById("profileModal")
-    .classList.add("active");
-
-
-  const content =
-    document.getElementById(
-      "profileContent"
-    );
-
-
-  content.innerHTML =
-    "তথ্য লোড হচ্ছে...";
-
-
-  const {
-    data:userData
-  } =
-  await supabaseClient.auth.getUser();
-
-
-  if(!userData.user){
-
-    closeModal(
-      "profileModal"
-    );
-
-    openLogin();
-
-    return;
-  }
-
-
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-  .from("profiles")
-  .select("*")
-  .eq(
-    "id",
-    userData.user.id
-  )
-  .single();
-
-
-  if(error){
-
-    content.innerHTML =
-      "প্রোফাইল তথ্য পাওয়া যাচ্ছে না।";
-
-    return;
-  }
-
-
-  content.innerHTML = `
-
-    <div class="profile-card">
-
-      <div class="profile-item">
-        <div class="profile-label">নাম</div>
-        <div class="profile-value">
-          ${escapeHTML(data.full_name || "")}
-        </div>
-      </div>
-
-      <div class="profile-item">
-        <div class="profile-label">মোবাইল</div>
-        <div class="profile-value">
-          ${escapeHTML(data.phone || "")}
-        </div>
-      </div>
-
-      <div class="profile-item">
-        <div class="profile-label">ঠিকানা</div>
-        <div class="profile-value">
-          ${escapeHTML(data.area || "")}
-        </div>
-      </div>
-
-      <div class="profile-item">
-        <div class="profile-label">
-          আমি যেসব সাহায্য করতে পারি
-        </div>
-
-        <div class="profile-value">
-          ${escapeHTML(data.help_types || "")}
-        </div>
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-/* =====================================
-   LOGOUT
-===================================== */
-
-async function logout(){
-
-  await supabaseClient.auth.signOut();
-
-  closeModal(
-    "profileModal"
   );
-
-  updateHeader();
-
-}
-
-
-/* =====================================
-   CATEGORY
-===================================== */
-
-async function needLogin(category){
-
-  const {
-    data
-  } =
-  await supabaseClient.auth.getUser();
-
-
-  if(!data.user){
-
-    showMessage(
-      "loginMessage",
-      "এই সুবিধাটি ব্যবহার করতে আগে লগইন করুন।",
-      "error"
-    );
-
-    openLogin();
-
-    return;
-  }
-
-
-  alert(
-    category +
-    " — এই অংশটি পরবর্তী ধাপে তৈরি হবে।"
-  );
-
-}
-
-
-/* =====================================
-   MESSAGE
-===================================== */
-
-function showMessage(
-  id,
-  text,
-  type
-){
-
-  const el =
-    document.getElementById(id);
-
-  el.textContent =
-    text;
-
-  el.className =
-    "message show " +
-    type;
-
-}
-
-
-/* =====================================
-   ESCAPE
-===================================== */
-
-function escapeHTML(value){
-
-  return String(value)
-
-    .replace(/&/g,"&amp;")
-
-    .replace(/</g,"&lt;")
-
-    .replace(/>/g,"&gt;")
-
-    .replace(/"/g,"&quot;")
-
-    .replace(/'/g,"&#039;");
-
-}
-
-
-/* =====================================
-   AUTH STATE
-===================================== */
-
-supabaseClient.auth
-.onAuthStateChange(function(){
-
-  updateHeader();
-
-});
-
-
-updateHeader();
 
 </script>
 
