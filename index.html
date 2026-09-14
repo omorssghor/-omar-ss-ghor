@@ -7,8 +7,6 @@
 
 <title>সহায় — মানুষ মানুষের পাশে</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
 *{
     box-sizing:border-box;
@@ -28,7 +26,10 @@ body{
     padding-bottom:78px;
 }
 
-button,input,select,textarea{
+button,
+input,
+select,
+textarea{
     font:inherit;
 }
 
@@ -44,33 +45,44 @@ textarea:focus-visible{
     outline-offset:2px;
 }
 
-/* TOP */
+/* =========================
+   TOP BAR
+========================= */
 
 .topbar{
     position:sticky;
     top:0;
     z-index:1000;
+
     height:64px;
-    background:#fff;
+
+    background:#ffffff;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     padding:8px 14px;
+
     box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
 .menu-btn{
     width:46px;
     height:46px;
+
     border:0;
     border-radius:50%;
+
     background:#f0f2f5;
+
     font-size:24px;
 }
 
 .profile-btn{
     width:46px;
     height:46px;
+
     border:0;
     background:none;
     border-radius:50%;
@@ -79,17 +91,25 @@ textarea:focus-visible{
 .profile-photo{
     width:46px;
     height:46px;
+
     border-radius:50%;
+
     object-fit:cover;
+
     border:2px solid #087f5b;
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero{
-    background:#fff;
+    background:#ffffff;
+
     padding:24px 16px 20px;
+
     text-align:center;
+
     border-bottom:1px solid #e5e7eb;
 }
 
@@ -108,16 +128,24 @@ textarea:focus-visible{
 .tagline{
     max-width:600px;
     margin:16px auto 0;
+
     padding:14px;
+
     border-radius:15px;
+
     background:#e8f7f0;
+
     color:#087f5b;
+
     font-size:17px;
     font-weight:800;
+
     line-height:1.6;
 }
 
-/* FEED */
+/* =========================
+   FEED
+========================= */
 
 .feed{
     max-width:700px;
@@ -126,15 +154,20 @@ textarea:focus-visible{
 
 .feed-title{
     padding:16px 14px 7px;
+
     font-size:19px;
     font-weight:900;
 }
 
 .post{
-    background:#fff;
+    background:#ffffff;
+
     margin:8px 10px;
+
     border-radius:15px;
+
     overflow:hidden;
+
     box-shadow:0 1px 6px rgba(0,0,0,.08);
 }
 
@@ -142,13 +175,16 @@ textarea:focus-visible{
     display:flex;
     align-items:center;
     gap:10px;
+
     padding:14px;
 }
 
 .post-user-photo{
     width:46px;
     height:46px;
+
     border-radius:50%;
+
     object-fit:cover;
 }
 
@@ -159,23 +195,33 @@ textarea:focus-visible{
 
 .post-time{
     margin-top:3px;
+
     color:#777;
+
     font-size:12px;
 }
 
 .post-content{
     padding:0 14px 14px;
+
     font-size:16px;
+
     line-height:1.7;
 }
 
 .post-status{
     margin:0 14px 13px;
+
     display:inline-block;
+
     padding:5px 9px;
+
     border-radius:20px;
+
     background:#fff4d6;
+
     color:#805b00;
+
     font-size:12px;
     font-weight:700;
 }
@@ -187,52 +233,99 @@ textarea:focus-visible{
 .help-btn,
 .primary-btn{
     width:100%;
+
     border:0;
+
     border-radius:10px;
+
     padding:12px;
+
     background:#087f5b;
-    color:#fff;
+
+    color:#ffffff;
+
     font-size:16px;
+
     font-weight:800;
 }
 
 .secondary-btn{
     border:1px solid #d4d9dd;
-    background:#fff;
+
+    background:#ffffff;
+
     color:#344054;
+
     border-radius:9px;
+
     padding:10px 14px;
 }
 
-/* BOTTOM */
+.empty{
+    margin:10px;
+
+    padding:45px 20px;
+
+    background:#ffffff;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    color:#777;
+}
+
+/* =========================
+   FIXED BOTTOM
+========================= */
 
 .bottom-nav{
     position:fixed;
+
     left:0;
     right:0;
     bottom:0;
+
     height:68px;
-    background:#fff;
+
+    background:#ffffff;
+
     border-top:1px solid #ddd;
+
     box-shadow:0 -3px 12px rgba(0,0,0,.09);
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-around;
+
     z-index:2000;
 }
 
 .bottom-item{
     min-width:60px;
+
     border:0;
+
     background:none;
+
     padding:5px 7px;
+
     border-radius:10px;
+
     color:#555;
+
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
+
     gap:3px;
+
     font-size:11px;
 }
 
@@ -245,13 +338,19 @@ textarea:focus-visible{
     font-weight:900;
 }
 
-/* MENU */
+/* =========================
+   MENU
+========================= */
 
 .menu-overlay{
     position:fixed;
+
     inset:0;
+
     background:rgba(0,0,0,.45);
+
     display:none;
+
     z-index:3000;
 }
 
@@ -261,48 +360,72 @@ textarea:focus-visible{
 
 .side-menu{
     width:min(340px,90vw);
+
     height:100%;
-    background:#fff;
+
+    background:#ffffff;
+
     overflow-y:auto;
+
     box-shadow:5px 0 20px rgba(0,0,0,.25);
+
     animation:slideMenu .2s ease;
 }
 
 @keyframes slideMenu{
-    from{transform:translateX(-100%);}
-    to{transform:translateX(0);}
+    from{
+        transform:translateX(-100%);
+    }
+
+    to{
+        transform:translateX(0);
+    }
 }
 
 .menu-head{
     background:#087f5b;
-    color:#fff;
+
+    color:#ffffff;
+
     padding:20px 16px;
 }
 
 .menu-close{
     float:right;
+
     width:36px;
     height:36px;
+
     border:0;
+
     border-radius:50%;
+
     background:rgba(255,255,255,.18);
-    color:#fff;
+
+    color:#ffffff;
+
     font-size:22px;
 }
 
 .menu-profile{
     display:flex;
+
     align-items:center;
+
     gap:12px;
+
     padding-top:8px;
 }
 
 .menu-profile img{
     width:58px;
     height:58px;
+
     border-radius:50%;
+
     object-fit:cover;
-    border:3px solid #fff;
+
+    border:3px solid #ffffff;
 }
 
 .menu-name{
@@ -316,21 +439,33 @@ textarea:focus-visible{
 
 .menu-label{
     padding:9px 8px;
+
     color:#888;
+
     font-size:12px;
+
     font-weight:900;
 }
 
 .menu-item{
     width:100%;
+
     border:0;
-    background:#fff;
+
+    background:#ffffff;
+
     padding:13px 10px;
+
     border-radius:10px;
+
     display:flex;
+
     align-items:center;
+
     gap:12px;
+
     text-align:left;
+
     font-size:15px;
 }
 
@@ -340,19 +475,29 @@ textarea:focus-visible{
 
 .menu-icon{
     width:30px;
+
     text-align:center;
+
     font-size:20px;
 }
 
-/* MODAL */
+/* =========================
+   MODAL
+========================= */
 
 .modal-overlay{
     position:fixed;
+
     inset:0;
+
     z-index:4000;
+
     background:rgba(0,0,0,.45);
+
     display:none;
+
     padding:18px;
+
     overflow-y:auto;
 }
 
@@ -362,34 +507,50 @@ textarea:focus-visible{
 
 .modal{
     width:min(650px,100%);
+
     margin:4vh auto 30px;
-    background:#fff;
+
+    background:#ffffff;
+
     border-radius:16px;
+
     overflow:hidden;
+
     box-shadow:0 15px 40px rgba(0,0,0,.25);
 }
 
 .modal-header{
     background:#087f5b;
-    color:#fff;
+
+    color:#ffffff;
+
     padding:15px 17px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 }
 
 .modal-title{
     font-size:19px;
+
     font-weight:900;
 }
 
 .modal-close{
     width:36px;
     height:36px;
+
     border:0;
+
     border-radius:50%;
+
     background:rgba(255,255,255,.18);
-    color:#fff;
+
+    color:#ffffff;
+
     font-size:22px;
 }
 
@@ -399,16 +560,19 @@ textarea:focus-visible{
 
 .form-grid{
     display:grid;
+
     gap:13px;
 }
 
 .form-group{
     display:grid;
+
     gap:6px;
 }
 
 .form-group label{
     font-size:14px;
+
     font-weight:800;
 }
 
@@ -416,21 +580,29 @@ textarea:focus-visible{
 .form-group select,
 .form-group textarea{
     width:100%;
+
     border:1px solid #ccd3d9;
+
     border-radius:9px;
+
     padding:11px;
-    background:#fff;
+
+    background:#ffffff;
 }
 
 .form-group textarea{
     min-height:110px;
+
     resize:vertical;
 }
 
 .form-actions{
     display:flex;
+
     gap:10px;
+
     justify-content:flex-end;
+
     margin-top:16px;
 }
 
@@ -440,11 +612,17 @@ textarea:focus-visible{
 
 .form-message{
     display:none;
+
     margin-top:13px;
+
     padding:11px;
+
     border-radius:9px;
+
     background:#e8f7f0;
+
     color:#087f5b;
+
     line-height:1.5;
 }
 
@@ -452,31 +630,73 @@ textarea:focus-visible{
     display:block;
 }
 
+/* =========================
+   CARDS
+========================= */
+
 .panel-list{
     display:grid;
+
     gap:10px;
 }
 
 .panel-card{
     padding:14px;
+
     border:1px solid #e0e4e7;
+
     border-radius:11px;
+
     background:#fafbfc;
+
     line-height:1.6;
 }
 
 .panel-card strong{
     display:block;
+
     margin-bottom:5px;
 }
 
+.profile-summary{
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    margin-bottom:18px;
+}
+
+.profile-summary img{
+    width:65px;
+    height:65px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+}
+
+/* =========================
+   SETTINGS
+========================= */
+
 .setting-row{
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     gap:15px;
+
     padding:13px 0;
+
     border-bottom:1px solid #edf0f2;
+}
+
+.setting-row:last-child{
+    border-bottom:0;
 }
 
 .setting-info{
@@ -485,6 +705,7 @@ textarea:focus-visible{
 
 .setting-info strong{
     display:block;
+
     margin-bottom:3px;
 }
 
@@ -494,11 +715,16 @@ textarea:focus-visible{
 
 .switch{
     appearance:none;
+
     width:46px;
     height:25px;
+
     border-radius:20px;
+
     background:#cbd2d8;
+
     position:relative;
+
     flex-shrink:0;
 }
 
@@ -508,13 +734,19 @@ textarea:focus-visible{
 
 .switch::before{
     content:"";
+
     position:absolute;
+
     width:19px;
     height:19px;
+
     left:3px;
     top:3px;
+
     border-radius:50%;
-    background:#fff;
+
+    background:#ffffff;
+
     transition:.2s;
 }
 
@@ -522,26 +754,45 @@ textarea:focus-visible{
     transform:translateX(21px);
 }
 
+/* =========================
+   SERVICE SELECT
+========================= */
+
 .service-grid{
     display:grid;
+
     gap:9px;
 }
 
 .service-card{
     width:100%;
+
     border:1px solid #e1e5e8;
-    background:#fff;
+
+    background:#ffffff;
+
     border-radius:11px;
+
     padding:13px;
+
     display:flex;
+
     align-items:center;
+
     gap:12px;
+
     text-align:left;
+}
+
+.service-card:hover{
+    background:#f5f8f7;
 }
 
 .service-card .emoji{
     font-size:23px;
+
     width:34px;
+
     text-align:center;
 }
 
@@ -549,408 +800,585 @@ textarea:focus-visible{
     display:block;
 }
 
+/* =========================
+   PHOTO
+========================= */
+
 .photo-box{
     text-align:center;
+
     margin-bottom:15px;
 }
 
 .profile-big{
     width:90px;
     height:90px;
+
     border-radius:50%;
+
     object-fit:cover;
+
     border:3px solid #087f5b;
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media(max-width:400px){
-    .logo-title{font-size:26px;}
-    .bottom-item{min-width:55px;}
-    .bottom-item span:first-child{font-size:20px;}
+
+    .logo-title{
+        font-size:26px;
+    }
+
+    .bottom-item{
+        min-width:55px;
+    }
+
+    .bottom-item span:first-child{
+        font-size:20px;
+    }
 }
 </style>
 </head>
 
 <body>
 
+<!-- =====================================================
+     TOP
+===================================================== -->
+
 <header class="topbar">
 
-<button type="button" class="menu-btn" onclick="openMenu()">☰</button>
+    <button
+        type="button"
+        class="menu-btn"
+        onclick="openMenu()"
+        aria-label="Menu"
+    >
+        ☰
+    </button>
 
-<button type="button" class="profile-btn" onclick="openProfile()">
-<img id="topProfilePhoto"
-class="profile-photo"
-src="https://i.pravatar.cc/100?img=12"
-alt="Profile">
-</button>
+    <button
+        type="button"
+        class="profile-btn"
+        onclick="openProfile()"
+        aria-label="Profile"
+    >
+        <img
+            id="topProfilePhoto"
+            class="profile-photo"
+            src="https://i.pravatar.cc/100?img=12"
+            alt="Profile"
+        >
+    </button>
 
 </header>
 
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
 <section class="hero">
 
-<div class="logo-title">সহায়</div>
+    <div class="logo-title">
+        সহায়
+    </div>
 
-<div class="subtitle">মানুষ মানুষের পাশে</div>
+    <div class="subtitle">
+        মানুষ মানুষের পাশে
+    </div>
 
-<div class="tagline">
-সমস্যা পোস্ট করা নয়,<br>
-সমস্যার সমাধান করা।
-</div>
+    <div class="tagline">
+        সমস্যা পোস্ট করা নয়,<br>
+        সমস্যার সমাধান করা।
+    </div>
 
 </section>
 
+
+<!-- =====================================================
+     HOME FEED
+===================================================== -->
+
 <main class="feed">
 
-<h1 class="feed-title">🆘 সাহায্যের পোস্ট</h1>
+    <h1 class="feed-title">
+        🆘 সাহায্যের পোস্ট
+    </h1>
 
-<article class="post">
 
-<div class="post-header">
+    <!-- FIRST POST -->
 
-<img class="post-user-photo"
-src="https://i.pravatar.cc/100?img=12">
+    <article class="post">
 
-<div>
+        <div class="post-header">
 
-<div class="post-user-name">মোঃ রাকিব</div>
+            <img
+                class="post-user-photo"
+                src="https://i.pravatar.cc/100?img=12"
+                alt="মোঃ রাকিব"
+            >
 
-<div class="post-time">
-কিছুক্ষণ আগে · 📍 বিরামপুর
-</div>
+            <div>
 
-</div>
+                <div class="post-user-name">
+                    মোঃ রাকিব
+                </div>
 
-</div>
+                <div class="post-time">
+                    কিছুক্ষণ আগে · 📍 বিরামপুর
+                </div>
 
-<span class="post-status">
-🆕 সাহায্য প্রয়োজন
-</span>
+            </div>
 
-<div class="post-content">
+        </div>
 
-আমার জরুরি কিছু রক্ত প্রয়োজন।
-কেউ সাহায্য করতে পারলে দয়া করে যোগাযোগ করুন।
+        <span class="post-status">
+            🆕 সাহায্য প্রয়োজন
+        </span>
 
-</div>
+        <div class="post-content">
 
-<div class="post-action">
+            আমার জরুরি কিছু রক্ত প্রয়োজন।
+            কেউ সাহায্য করতে পারলে দয়া করে
+            যোগাযোগ করুন।
 
-<button class="help-btn"
-onclick="helpPost('মোঃ রাকিব','রক্ত প্রয়োজন')">
+        </div>
 
-🤝 সাহায্য করুন
+        <div class="post-action">
 
-</button>
+            <button
+                class="help-btn"
+                onclick="helpPost('মোঃ রাকিব','রক্ত প্রয়োজন')"
+            >
+                🤝 সাহায্য করুন
+            </button>
 
-</div>
+        </div>
 
-</article>
+    </article>
 
-<article class="post">
 
-<div class="post-header">
+    <!-- SECOND POST -->
 
-<img class="post-user-photo"
-src="https://i.pravatar.cc/100?img=32">
+    <article class="post">
 
-<div>
+        <div class="post-header">
 
-<div class="post-user-name">সুমাইয়া</div>
+            <img
+                class="post-user-photo"
+                src="https://i.pravatar.cc/100?img=32"
+                alt="সুমাইয়া"
+            >
 
-<div class="post-time">
-১ ঘণ্টা আগে · 📍 দিনাজপুর
-</div>
+            <div>
 
-</div>
+                <div class="post-user-name">
+                    সুমাইয়া
+                </div>
 
-</div>
+                <div class="post-time">
+                    ১ ঘণ্টা আগে · 📍 দিনাজপুর
+                </div>
 
-<span class="post-status">
-🔎 যাচাই হচ্ছে
-</span>
+            </div>
 
-<div class="post-content">
+        </div>
 
-একজন অসুস্থ মানুষের হাসপাতালে
-যাওয়ার জন্য জরুরি যাতায়াত সহায়তা প্রয়োজন।
+        <span class="post-status">
+            🔎 যাচাই হচ্ছে
+        </span>
 
-</div>
+        <div class="post-content">
 
-<div class="post-action">
+            একজন অসুস্থ মানুষের হাসপাতালে
+            যাওয়ার জন্য জরুরি যাতায়াত
+            সহায়তা প্রয়োজন।
 
-<button class="help-btn"
-onclick="helpPost('সুমাইয়া','জরুরি যাতায়াত')">
+        </div>
 
-🚗 সাহায্য করুন
+        <div class="post-action">
 
-</button>
+            <button
+                class="help-btn"
+                onclick="helpPost('সুমাইয়া','জরুরি যাতায়াত')"
+            >
+                🚗 সাহায্য করুন
+            </button>
 
-</div>
+        </div>
 
-</article>
+    </article>
 
-<article class="post">
 
-<div class="post-header">
+    <!-- THIRD POST -->
 
-<img class="post-user-photo"
-src="https://i.pravatar.cc/100?img=45">
+    <article class="post">
 
-<div>
+        <div class="post-header">
 
-<div class="post-user-name">আব্দুল্লাহ</div>
+            <img
+                class="post-user-photo"
+                src="https://i.pravatar.cc/100?img=45"
+                alt="আব্দুল্লাহ"
+            >
 
-<div class="post-time">
-২ ঘণ্টা আগে · 📍 বিরামপুর
-</div>
+            <div>
 
-</div>
+                <div class="post-user-name">
+                    আব্দুল্লাহ
+                </div>
 
-</div>
+                <div class="post-time">
+                    ২ ঘণ্টা আগে · 📍 বিরামপুর
+                </div>
 
-<span class="post-status">
-🤝 সাহায্যকারী পাওয়া গেছে
-</span>
+            </div>
 
-<div class="post-content">
+        </div>
 
-একজন অসহায় পরিবারের জন্য
-প্রয়োজনীয় সহায়তা দরকার।
+        <span class="post-status">
+            🤝 সাহায্যকারী পাওয়া গেছে
+        </span>
 
-</div>
+        <div class="post-content">
 
-<div class="post-action">
+            একজন অসহায় পরিবারের জন্য
+            প্রয়োজনীয় সহায়তা দরকার।
 
-<button class="help-btn"
-onclick="helpPost('আব্দুল্লাহ','সাধারণ সহায়তা')">
+        </div>
 
-🤝 সাহায্য করুন
+        <div class="post-action">
 
-</button>
+            <button
+                class="help-btn"
+                onclick="helpPost('আব্দুল্লাহ','সাধারণ সহায়তা')"
+            >
+                🤝 সাহায্য করুন
+            </button>
 
-</div>
+        </div>
 
-</article>
+    </article>
 
 </main>
 
+
+<!-- =====================================================
+     FIXED BOTTOM NAVIGATION
+===================================================== -->
+
 <nav class="bottom-nav">
 
-<button class="bottom-item active" onclick="goHome()">
-<span>🏠</span>
-<span>হোম</span>
-</button>
+    <button
+        class="bottom-item active"
+        onclick="goHome()"
+    >
+        <span>🏠</span>
+        <span>হোম</span>
+    </button>
 
-<button class="bottom-item" onclick="openHelp()">
-<span>🤝</span>
-<span>Help করুন</span>
-</button>
+    <button
+        class="bottom-item"
+        onclick="openHelp()"
+    >
+        <span>🤝</span>
+        <span>Help করুন</span>
+    </button>
 
-<button class="bottom-item" onclick="openSolved()">
-<span>✅</span>
-<span>সমাধান</span>
-</button>
+    <button
+        class="bottom-item"
+        onclick="openSolved()"
+    >
+        <span>✅</span>
+        <span>সমাধান</span>
+    </button>
 
-<button class="bottom-item" onclick="openZakat()">
-<span>💰</span>
-<span>যাকাত</span>
-</button>
+    <button
+        class="bottom-item"
+        onclick="openZakat()"
+    >
+        <span>💰</span>
+        <span>যাকাত</span>
+    </button>
 
-<button class="bottom-item" onclick="openProfile()">
-<span>👤</span>
-<span>Profile</span>
-</button>
+    <button
+        class="bottom-item"
+        onclick="openProfile()"
+    >
+        <span>👤</span>
+        <span>Profile</span>
+    </button>
 
 </nav>
 
-<div id="menuOverlay"
-class="menu-overlay"
-onclick="closeMenu(event)">
 
-<aside class="side-menu"
-onclick="event.stopPropagation()">
+<!-- =====================================================
+     MENU
+===================================================== -->
 
-<div class="menu-head">
+<div
+    id="menuOverlay"
+    class="menu-overlay"
+    onclick="closeMenu(event)"
+>
 
-<button class="menu-close"
-onclick="closeMenu()">×</button>
+    <aside
+        class="side-menu"
+        onclick="event.stopPropagation()"
+    >
 
-<div class="menu-profile">
+        <div class="menu-head">
 
-<img id="menuProfilePhoto"
-src="https://i.pravatar.cc/100?img=12">
+            <button
+                class="menu-close"
+                onclick="closeMenu()"
+            >
+                ×
+            </button>
 
-<div>
+            <div class="menu-profile">
 
-<div id="menuName" class="menu-name">
-আমার প্রোফাইল
+                <img
+                    id="menuProfilePhoto"
+                    src="https://i.pravatar.cc/100?img=12"
+                    alt="Profile"
+                >
+
+                <div>
+
+                    <div
+                        id="menuName"
+                        class="menu-name"
+                    >
+                        আমার প্রোফাইল
+                    </div>
+
+                    <div>
+                        সহায় ব্যবহারকারী
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ১০টি সেবা -->
+
+        <div class="menu-section">
+
+            <div class="menu-label">
+                ১০টি সাহায্যের সেবা
+            </div>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🆘 সাহায্য চাই')"
+            >
+                <span class="menu-icon">🆘</span>
+                সাহায্য চাই
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🤝 আমি সাহায্য করতে চাই')"
+            >
+                <span class="menu-icon">🤝</span>
+                আমি সাহায্য করতে চাই
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🩸 রক্ত প্রয়োজন')"
+            >
+                <span class="menu-icon">🩸</span>
+                রক্ত প্রয়োজন
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🔎 হারানো / পাওয়া')"
+            >
+                <span class="menu-icon">🔎</span>
+                হারানো / পাওয়া
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🚑 জরুরি সহায়তা')"
+            >
+                <span class="menu-icon">🚑</span>
+                জরুরি সহায়তা
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🛠️ কারিগরি সহায়তা')"
+            >
+                <span class="menu-icon">🛠️</span>
+                কারিগরি সহায়তা
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('📢 এলাকার সমস্যা')"
+            >
+                <span class="menu-icon">📢</span>
+                এলাকার সমস্যা
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🚗 জরুরি যাতায়াত')"
+            >
+                <span class="menu-icon">🚗</span>
+                জরুরি যাতায়াত
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('💰 যাকাতের টাকা দিতে চাই')"
+            >
+                <span class="menu-icon">💰</span>
+                যাকাতের টাকা দিতে চাই
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🤲 যাকাতের টাকা নিতে চাই')"
+            >
+                <span class="menu-icon">🤲</span>
+                যাকাতের টাকা নিতে চাই
+            </button>
+
+        </div>
+
+
+        <!-- ACCOUNT -->
+
+        <div class="menu-section">
+
+            <div class="menu-label">
+                আমার অ্যাকাউন্ট
+            </div>
+
+
+            <button
+                class="menu-item"
+                onclick="openProfile()"
+            >
+                <span class="menu-icon">👤</span>
+                Profile
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="openReports()"
+            >
+                <span class="menu-icon">📋</span>
+                আমার Reports
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="openSettings()"
+            >
+                <span class="menu-icon">⚙️</span>
+                Settings
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="logout()"
+            >
+                <span class="menu-icon">🚪</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
 </div>
 
-<div>সহায় ব্যবহারকারী</div>
+
+<!-- =====================================================
+     MODAL
+===================================================== -->
+
+<div
+    id="modalOverlay"
+    class="modal-overlay"
+    onclick="closeModal(event)"
+>
+
+    <div
+        class="modal"
+        onclick="event.stopPropagation()"
+    >
+
+        <div class="modal-header">
+
+            <h2
+                id="modalTitle"
+                class="modal-title"
+            >
+                সহায়
+            </h2>
+
+            <button
+                class="modal-close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div
+            id="modalBody"
+            class="modal-body"
+        ></div>
+
+    </div>
 
 </div>
 
-</div>
-
-</div>
-
-<div class="menu-section">
-
-<div class="menu-label">
-১০টি সাহায্যের সেবা
-</div>
-
-<button class="menu-item"
-onclick="service('🆘 সাহায্য চাই')">
-<span class="menu-icon">🆘</span>
-সাহায্য চাই
-</button>
-
-<button class="menu-item"
-onclick="service('🤝 আমি সাহায্য করতে চাই')">
-<span class="menu-icon">🤝</span>
-আমি সাহায্য করতে চাই
-</button>
-
-<button class="menu-item"
-onclick="service('🩸 রক্ত প্রয়োজন')">
-<span class="menu-icon">🩸</span>
-রক্ত প্রয়োজন
-</button>
-
-<button class="menu-item"
-onclick="service('🔎 হারানো / পাওয়া')">
-<span class="menu-icon">🔎</span>
-হারানো / পাওয়া
-</button>
-
-<button class="menu-item"
-onclick="service('🚑 জরুরি সহায়তা')">
-<span class="menu-icon">🚑</span>
-জরুরি সহায়তা
-</button>
-
-<button class="menu-item"
-onclick="service('🛠️ কারিগরি সহায়তা')">
-<span class="menu-icon">🛠️</span>
-কারিগরি সহায়তা
-</button>
-
-<button class="menu-item"
-onclick="service('📢 এলাকার সমস্যা')">
-<span class="menu-icon">📢</span>
-এলাকার সমস্যা
-</button>
-
-<button class="menu-item"
-onclick="service('🚗 জরুরি যাতায়াত')">
-<span class="menu-icon">🚗</span>
-জরুরি যাতায়াত
-</button>
-
-<button class="menu-item"
-onclick="service('💰 যাকাতের টাকা দিতে চাই')">
-<span class="menu-icon">💰</span>
-যাকাতের টাকা দিতে চাই
-</button>
-
-<button class="menu-item"
-onclick="service('🤲 যাকাতের টাকা নিতে চাই')">
-<span class="menu-icon">🤲</span>
-যাকাতের টাকা নিতে চাই
-</button>
-
-</div>
-
-<div class="menu-section">
-
-<div class="menu-label">
-আমার অ্যাকাউন্ট
-</div>
-
-<button class="menu-item" onclick="openProfile()">
-<span class="menu-icon">👤</span>
-Profile
-</button>
-
-<button class="menu-item" onclick="openReports()">
-<span class="menu-icon">📋</span>
-আমার Reports
-</button>
-
-<button class="menu-item" onclick="openSettings()">
-<span class="menu-icon">⚙️</span>
-Settings
-</button>
-
-<button class="menu-item" onclick="logout()">
-<span class="menu-icon">🚪</span>
-Logout
-</button>
-
-</div>
-
-</aside>
-</div>
-
-<div id="modalOverlay"
-class="modal-overlay"
-onclick="closeModal(event)">
-
-<div class="modal"
-onclick="event.stopPropagation()">
-
-<div class="modal-header">
-
-<h2 id="modalTitle" class="modal-title">
-সহায়
-</h2>
-
-<button class="modal-close"
-onclick="closeModal()">×</button>
-
-</div>
-
-<div id="modalBody"
-class="modal-body"></div>
-
-</div>
-
-</div>
 
 <script>
-
-/* =====================================================
-   SUPABASE
-===================================================== */
-
-const SUPABASE_URL =
-"https://gzujcqjpxypcoiqhpvvu.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
-
-const supabaseClient =
-window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
 
 /* =====================================================
    BASIC
 ===================================================== */
 
 const menuOverlay =
-document.getElementById("menuOverlay");
+    document.getElementById("menuOverlay");
 
 const modalOverlay =
-document.getElementById("modalOverlay");
+    document.getElementById("modalOverlay");
 
 const modalTitle =
-document.getElementById("modalTitle");
+    document.getElementById("modalTitle");
 
 const modalBody =
-document.getElementById("modalBody");
+    document.getElementById("modalBody");
 
 
 /* =====================================================
@@ -959,28 +1387,28 @@ document.getElementById("modalBody");
 
 function openMenu(){
 
-menuOverlay.classList.add("show");
+    menuOverlay.classList.add("show");
 
-document.body.style.overflow="hidden";
+    document.body.style.overflow="hidden";
 
 }
+
 
 function closeMenu(event){
 
-if(event &&
-event.target === menuOverlay){
+    if(event &&
+       event.target === menuOverlay){
 
-menuOverlay.classList.remove("show");
+        menuOverlay.classList.remove("show");
 
-document.body.style.overflow="";
+        document.body.style.overflow="";
 
-return;
+        return;
+    }
 
-}
+    menuOverlay.classList.remove("show");
 
-menuOverlay.classList.remove("show");
-
-document.body.style.overflow="";
+    document.body.style.overflow="";
 
 }
 
@@ -991,32 +1419,32 @@ document.body.style.overflow="";
 
 function openModal(title,html){
 
-modalTitle.textContent=title;
+    modalTitle.textContent=title;
 
-modalBody.innerHTML=html;
+    modalBody.innerHTML=html;
 
-modalOverlay.classList.add("show");
+    modalOverlay.classList.add("show");
 
-document.body.style.overflow="hidden";
+    document.body.style.overflow="hidden";
 
 }
+
 
 function closeModal(event){
 
-if(event &&
-event.target === modalOverlay){
+    if(event &&
+       event.target === modalOverlay){
 
-modalOverlay.classList.remove("show");
+        modalOverlay.classList.remove("show");
 
-document.body.style.overflow="";
+        document.body.style.overflow="";
 
-return;
+        return;
+    }
 
-}
+    modalOverlay.classList.remove("show");
 
-modalOverlay.classList.remove("show");
-
-document.body.style.overflow="";
+    document.body.style.overflow="";
 
 }
 
@@ -1027,222 +1455,285 @@ document.body.style.overflow="";
 
 function openProfile(){
 
-closeMenu();
+    closeMenu();
 
-openModal(
+    openModal(
+        "আমার Profile",
 
-"আমার Profile",
+        `
+        <div class="photo-box">
 
-`
+            <img
+                id="profilePreview"
+                class="profile-big"
+                src="https://i.pravatar.cc/100?img=12"
+                alt="Profile"
+            >
 
-<div class="photo-box">
+        </div>
 
-<img id="profilePreview"
-class="profile-big"
-src="https://i.pravatar.cc/100?img=12">
 
-</div>
+        <form
+            class="form-grid"
+            onsubmit="saveProfile(event)"
+        >
 
-<form class="form-grid"
-onsubmit="saveProfile(event)">
+            <div class="form-group">
 
-<div class="form-group">
+                <label>
+                    প্রোফাইল ছবি
+                </label>
 
-<label>প্রোফাইল ছবি</label>
+                <input
+                    type="file"
+                    id="profilePhotoInput"
+                    accept="image/*"
+                    onchange="previewProfilePhoto(event)"
+                >
 
-<input
-type="file"
-id="profilePhotoInput"
-accept="image/*"
-onchange="previewProfilePhoto(event)">
+            </div>
 
-</div>
 
-<div class="form-group">
+            <div class="form-group">
 
-<label>নাম</label>
+                <label>
+                    নাম
+                </label>
 
-<input
-id="profileName"
-placeholder="আপনার নাম"
-required>
+                <input
+                    id="profileName"
+                    value="সহায় ব্যবহারকারী"
+                    required
+                >
 
-</div>
+            </div>
 
-<div class="form-group">
 
-<label>ফোন নম্বর</label>
+            <div class="form-group">
 
-<input
-id="profilePhone"
-type="tel"
-placeholder="০১XXXXXXXXX">
+                <label>
+                    ফোন নম্বর
+                </label>
 
-</div>
+                <input
+                    id="profilePhone"
+                    type="tel"
+                    placeholder="০১XXXXXXXXX"
+                >
 
-<div class="form-group">
+            </div>
 
-<label>Email</label>
 
-<input
-id="profileEmail"
-type="email"
-placeholder="example@email.com">
+            <div class="form-group">
 
-</div>
+                <label>
+                    Email
+                </label>
 
-<div class="form-group">
+                <input
+                    id="profileEmail"
+                    type="email"
+                    placeholder="example@email.com"
+                >
 
-<label>জন্ম তারিখ</label>
+            </div>
 
-<input
-id="profileBirth"
-type="date">
 
-</div>
+            <div class="form-group">
 
-<div class="form-group">
+                <label>
+                    জন্ম তারিখ
+                </label>
 
-<label>বিভাগ</label>
+                <input
+                    id="profileBirth"
+                    type="date"
+                >
 
-<select id="profileDivision">
+            </div>
 
-<option value="">
-বিভাগ নির্বাচন করুন
-</option>
 
-<option>ঢাকা</option>
-<option>চট্টগ্রাম</option>
-<option>রাজশাহী</option>
-<option>খুলনা</option>
-<option>বরিশাল</option>
-<option>সিলেট</option>
-<option>রংপুর</option>
-<option>ময়মনসিংহ</option>
+            <div class="form-group">
 
-</select>
+                <label>
+                    বিভাগ
+                </label>
 
-</div>
+                <select id="profileDivision">
 
-<div class="form-group">
+                    <option>
+                        বিভাগ নির্বাচন করুন
+                    </option>
 
-<label>ঠিকানা</label>
+                    <option>
+                        ঢাকা
+                    </option>
 
-<input
-id="profileAddress"
-placeholder="জেলা / উপজেলা / ইউনিয়ন">
+                    <option>
+                        চট্টগ্রাম
+                    </option>
 
-</div>
+                    <option>
+                        রাজশাহী
+                    </option>
 
-<div class="setting-row">
+                    <option>
+                        খুলনা
+                    </option>
 
-<div class="setting-info">
+                    <option>
+                        বরিশাল
+                    </option>
 
-<strong>নাম Public</strong>
+                    <option>
+                        সিলেট
+                    </option>
 
-<small>
-অন্যরা আপনার নাম দেখতে পারবে
-</small>
+                    <option>
+                        রংপুর
+                    </option>
 
-</div>
+                    <option>
+                        ময়মনসিংহ
+                    </option>
 
-<input
-id="namePublic"
-class="switch"
-type="checkbox"
-checked>
+                </select>
 
-</div>
+            </div>
 
-<div class="setting-row">
 
-<div class="setting-info">
+            <div class="form-group">
 
-<strong>ফোন Public</strong>
+                <label>
+                    ঠিকানা
+                </label>
 
-<small>
-ফোন নম্বর অন্যদের দেখাবেন কি না
-</small>
+                <input
+                    id="profileAddress"
+                    placeholder="জেলা / উপজেলা / ইউনিয়ন"
+                >
 
-</div>
+            </div>
 
-<input
-id="phonePublic"
-class="switch"
-type="checkbox">
 
-</div>
+            <div class="setting-row">
 
-<div class="setting-row">
+                <div class="setting-info">
 
-<div class="setting-info">
+                    <strong>
+                        নাম Public
+                    </strong>
 
-<strong>Email Public</strong>
+                    <small>
+                        অন্যরা আপনার নাম দেখতে পারবে
+                    </small>
 
-<small>
-Email অন্যদের দেখাবেন কি না
-</small>
+                </div>
 
-</div>
+                <input
+                    class="switch"
+                    type="checkbox"
+                    checked
+                >
 
-<input
-id="emailPublic"
-class="switch"
-type="checkbox">
+            </div>
 
-</div>
 
-<div class="setting-row">
+            <div class="setting-row">
 
-<div class="setting-info">
+                <div class="setting-info">
 
-<strong>Address Public</strong>
+                    <strong>
+                        ফোন Public
+                    </strong>
 
-<small>
-ঠিকানা অন্যদের দেখাবেন কি না
-</small>
+                    <small>
+                        ফোন নম্বর অন্যদের দেখাবেন কি না
+                    </small>
 
-</div>
+                </div>
 
-<input
-id="addressPublic"
-class="switch"
-type="checkbox"
-checked>
+                <input
+                    class="switch"
+                    type="checkbox"
+                >
 
-</div>
+            </div>
 
-<div class="form-actions">
 
-<button
-type="button"
-class="secondary-btn"
-onclick="closeModal()">
+            <div class="setting-row">
 
-বাতিল
+                <div class="setting-info">
 
-</button>
+                    <strong>
+                        Email Public
+                    </strong>
 
-<button
-type="submit"
-class="primary-btn">
+                    <small>
+                        Email অন্যদের দেখাবেন কি না
+                    </small>
 
-Profile Save
+                </div>
 
-</button>
+                <input
+                    class="switch"
+                    type="checkbox"
+                >
 
-</div>
+            </div>
 
-<div
-id="formMessage"
-class="form-message">
-</div>
 
-</form>
+            <div class="setting-row">
 
-`
+                <div class="setting-info">
 
-);
+                    <strong>
+                        Address Public
+                    </strong>
+
+                    <small>
+                        ঠিকানা অন্যদের দেখাবেন কি না
+                    </small>
+
+                </div>
+
+                <input
+                    class="switch"
+                    type="checkbox"
+                    checked
+                >
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="closeModal()"
+                >
+                    বাতিল
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-btn"
+                >
+                    Profile Save
+                </button>
+
+            </div>
+
+
+            <div
+                id="formMessage"
+                class="form-message"
+            ></div>
+
+        </form>
+        `
+    );
 
 }
 
@@ -1253,288 +1744,60 @@ class="form-message">
 
 function previewProfilePhoto(event){
 
-const file =
-event.target.files[0];
+    const file =
+        event.target.files[0];
 
-if(!file) return;
+    if(!file) return;
 
-const reader =
-new FileReader();
+    const reader =
+        new FileReader();
 
-reader.onload=function(){
+    reader.onload=function(){
 
-document.getElementById(
-"profilePreview"
-).src=reader.result;
+        document.getElementById(
+            "profilePreview"
+        ).src=reader.result;
 
-};
+    };
 
-reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
 
 }
 
 
 /* =====================================================
-   PROFILE SAVE
+   SAVE PROFILE
 ===================================================== */
 
-async function saveProfile(event){
+function saveProfile(event){
 
-event.preventDefault();
+    event.preventDefault();
 
+    const name =
+        document.getElementById(
+            "profileName"
+        ).value.trim();
 
-const message =
-document.getElementById(
-"formMessage"
-);
+    if(!name){
 
+        alert("নাম লিখুন।");
 
-const name =
-document.getElementById(
-"profileName"
-).value.trim();
+        return;
+    }
 
+    document.getElementById(
+        "menuName"
+    ).textContent=name;
 
-const phone =
-document.getElementById(
-"profilePhone"
-).value.trim();
+    const message =
+        document.getElementById(
+            "formMessage"
+        );
 
+    message.textContent =
+        "Profile-এর তথ্য প্রস্তুত হয়েছে। Supabase যুক্ত হলে এটি স্থায়ীভাবে সংরক্ষণ হবে।";
 
-const email =
-document.getElementById(
-"profileEmail"
-).value.trim();
-
-
-const birthDate =
-document.getElementById(
-"profileBirth"
-).value || null;
-
-
-const division =
-document.getElementById(
-"profileDivision"
-).value || null;
-
-
-const address =
-document.getElementById(
-"profileAddress"
-).value.trim();
-
-
-const namePublic =
-document.getElementById(
-"namePublic"
-).checked;
-
-
-const phonePublic =
-document.getElementById(
-"phonePublic"
-).checked;
-
-
-const emailPublic =
-document.getElementById(
-"emailPublic"
-).checked;
-
-
-const addressPublic =
-document.getElementById(
-"addressPublic"
-).checked;
-
-
-if(!name){
-
-message.textContent=
-"নাম লিখুন।";
-
-message.classList.add("show");
-
-return;
-
-}
-
-
-if(!phone){
-
-message.textContent=
-"ফোন নম্বর লিখুন।";
-
-message.classList.add("show");
-
-return;
-
-}
-
-
-message.textContent=
-"Profile Supabase-এ সংরক্ষণ করা হচ্ছে...";
-
-message.classList.add("show");
-
-
-try{
-
-/*
-   আগে ফোন নম্বর দিয়ে
-   ব্যবহারকারী খোঁজা হবে।
-*/
-
-const { data: existingUser, error: findError } =
-await supabaseClient
-.from("app_users")
-.select("id")
-.eq("phone",phone)
-.maybeSingle();
-
-
-if(findError){
-
-console.error(findError);
-
-message.textContent=
-"Profile খুঁজতে সমস্যা হয়েছে।";
-
-return;
-
-}
-
-
-/*
-   আগে থেকেই থাকলে UPDATE
-*/
-
-if(existingUser){
-
-const { error } =
-await supabaseClient
-.from("app_users")
-.update({
-
-full_name:name,
-
-email:email || null,
-
-birth_date:birthDate,
-
-division:division,
-
-union_name:address || null,
-
-name_public:namePublic,
-
-phone_public:phonePublic,
-
-email_public:emailPublic,
-
-birth_date_public:false,
-
-address_public:addressPublic,
-
-updated_at:new Date().toISOString()
-
-})
-.eq("id",existingUser.id);
-
-
-if(error){
-
-console.error(error);
-
-message.textContent=
-"Profile Update করা যায়নি।";
-
-return;
-
-}
-
-
-/*
-   নতুন Profile হলে INSERT
-*/
-
-const { data, error } =
-await supabaseClient
-.from("app_users")
-.insert({
-
-full_name:name,
-
-phone:phone,
-
-email:email || null,
-
-birth_date:birthDate,
-
-division:division,
-
-union_name:address || null,
-
-name_public:namePublic,
-
-phone_public:phonePublic,
-
-email_public:emailPublic,
-
-birth_date_public:false,
-
-address_public:addressPublic
-
-})
-.select()
-.single();
-
-
-if(error){
-
-console.error(error);
-
-message.textContent=
-"Profile Save করা যায়নি। Supabase Error: "
-+ error.message;
-
-return;
-
-}
-
-
-/*
-   নতুন User ID মনে রাখা
-*/
-
-if(data && data.id){
-
-localStorage.setItem(
-"app_user_id",
-data.id
-);
-
-}
-
-
-document.getElementById(
-"menuName"
-).textContent=name;
-
-
-message.textContent=
-"✅ Profile সফলভাবে Supabase-এ সংরক্ষণ হয়েছে।";
-
-
-}catch(error){
-
-console.error(error);
-
-message.textContent=
-"❌ Profile Save করার সময় সমস্যা হয়েছে।";
-
-}
+    message.classList.add("show");
 
 }
 
@@ -1545,374 +1808,470 @@ message.textContent=
 
 function helpForm(serviceName="সাধারণ সহায়"){
 
-return `
+    return `
 
-<form class="form-grid"
-onsubmit="submitHelpForm(event)">
+    <form
+        class="form-grid"
+        onsubmit="submitHelpForm(event)"
+    >
 
-<div class="form-group">
+        <div class="form-group">
 
-<label>সাহায্যের ধরন</label>
+            <label>
+                সাহায্যের ধরন
+            </label>
 
-<input value="${serviceName}" readonly>
+            <input
+                value="${serviceName}"
+                readonly
+            >
 
-</div>
+        </div>
 
-<div class="form-group">
 
-<label>শিরোনাম</label>
+        <div class="form-group">
 
-<input id="helpTitle"
-placeholder="আপনার সমস্যার সংক্ষিপ্ত নাম"
-required>
+            <label>
+                শিরোনাম
+            </label>
 
-</div>
+            <input
+                id="helpTitle"
+                placeholder="আপনার সমস্যার সংক্ষিপ্ত নাম"
+                required
+            >
 
-<div class="form-group">
+        </div>
 
-<label>বিস্তারিত</label>
 
-<textarea id="helpDetails"
-placeholder="আপনার সমস্যাটি বিস্তারিত লিখুন"
-required></textarea>
+        <div class="form-group">
 
-</div>
+            <label>
+                বিস্তারিত
+            </label>
 
-<div class="form-group">
+            <textarea
+                id="helpDetails"
+                placeholder="আপনার সমস্যাটি বিস্তারিত লিখুন"
+                required
+            ></textarea>
 
-<label>এলাকা</label>
+        </div>
 
-<input id="helpLocation"
-placeholder="বিভাগ / জেলা / উপজেলা / ইউনিয়ন"
-required>
 
-</div>
+        <div class="form-group">
 
-<div class="form-group">
+            <label>
+                এলাকা
+            </label>
 
-<label>পোস্ট কে দেখবে?</label>
+            <input
+                id="helpLocation"
+                placeholder="বিভাগ / জেলা / উপজেলা / ইউনিয়ন"
+                required
+            >
 
-<select id="helpVisibility">
+        </div>
 
-<option value="public">
-Public — সবাই দেখতে পারবে
-</option>
 
-<option value="only_me">
-Only Me — শুধু আমি দেখতে পারব
-</option>
+        <div class="form-group">
 
-</select>
+            <label>
+                পোস্ট কে দেখবে?
+            </label>
 
-</div>
+            <select id="helpVisibility">
 
-<div class="form-actions">
+                <option value="public">
+                    Public — সবাই দেখতে পারবে
+                </option>
 
-<button type="button"
-class="secondary-btn"
-onclick="closeModal()">
+                <option value="only_me">
+                    Only Me — শুধু আমি দেখতে পারব
+                </option>
 
-বাতিল
+            </select>
 
-</button>
+        </div>
 
-<button class="primary-btn"
-type="submit">
 
-পোস্ট করুন
+        <div class="form-actions">
 
-</button>
+            <button
+                type="button"
+                class="secondary-btn"
+                onclick="closeModal()"
+            >
+                বাতিল
+            </button>
 
-</div>
+            <button
+                class="primary-btn"
+                type="submit"
+            >
+                পোস্ট করুন
+            </button>
 
-<div id="formMessage"
-class="form-message">
-</div>
+        </div>
 
-</form>
 
-`;
+        <div
+            id="formMessage"
+            class="form-message"
+        ></div>
+
+    </form>
+
+    `;
 
 }
 
+
 function submitHelpForm(event){
 
-event.preventDefault();
+    event.preventDefault();
 
-const message =
-document.getElementById("formMessage");
+    const message =
+        document.getElementById(
+            "formMessage"
+        );
 
-message.textContent=
-"পোস্ট তৈরি করার জন্য প্রস্তুত হয়েছে।";
+    message.textContent =
+        "পোস্ট তৈরি করার জন্য প্রস্তুত হয়েছে। Supabase যুক্ত হলে এটি অনলাইনে প্রকাশ হবে।";
 
-message.classList.add("show");
+    message.classList.add("show");
 
 }
 
 
 /* =====================================================
-   HELP
+   OPEN HELP
 ===================================================== */
 
 function openHelp(){
 
-openModal(
+    openModal(
+        "সাহায্য চাই / সাহায্য করুন",
 
-"সাহায্য চাই / সাহায্য করুন",
+        `
 
-`
+        <div class="service-grid">
 
-<div class="service-grid">
+            <button
+                class="service-card"
+                onclick="service('🆘 সাহায্য চাই')"
+            >
+                <span class="emoji">🆘</span>
 
-<button class="service-card"
-onclick="service('🆘 সাহায্য চাই')">
+                <span>
+                    <strong>সাহায্য চাই</strong>
+                    নিজের সমস্যার পোস্ট করুন
+                </span>
 
-<span class="emoji">🆘</span>
+            </button>
 
-<span>
-<strong>সাহায্য চাই</strong>
-নিজের সমস্যার পোস্ট করুন
-</span>
 
-</button>
+            <button
+                class="service-card"
+                onclick="service('🤝 আমি সাহায্য করতে চাই')"
+            >
+                <span class="emoji">🤝</span>
 
-<button class="service-card"
-onclick="service('🤝 আমি সাহায্য করতে চাই')">
+                <span>
+                    <strong>আমি সাহায্য করতে চাই</strong>
+                    অন্যের পোস্টে সাহায্য করুন
+                </span>
 
-<span class="emoji">🤝</span>
+            </button>
 
-<span>
-<strong>আমি সাহায্য করতে চাই</strong>
-অন্যের পোস্টে সাহায্য করুন
-</span>
 
-</button>
+            <button
+                class="service-card"
+                onclick="service('🩸 রক্ত প্রয়োজন')"
+            >
+                <span class="emoji">🩸</span>
 
-<button class="service-card"
-onclick="service('🩸 রক্ত প্রয়োজন')">
+                <span>
+                    <strong>রক্ত প্রয়োজন</strong>
+                    রক্তের জন্য সাহায্য
+                </span>
 
-<span class="emoji">🩸</span>
+            </button>
 
-<span>
-<strong>রক্ত প্রয়োজন</strong>
-রক্তের জন্য সাহায্য
-</span>
 
-</button>
+            <button
+                class="service-card"
+                onclick="service('🚑 জরুরি সহায়তা')"
+            >
+                <span class="emoji">🚑</span>
 
-<button class="service-card"
-onclick="service('🚑 জরুরি সহায়তা')">
+                <span>
+                    <strong>জরুরি সহায়তা</strong>
+                    জরুরি সমস্যায় সাহায্য
+                </span>
 
-<span class="emoji">🚑</span>
+            </button>
 
-<span>
-<strong>জরুরি সহায়তা</strong>
-জরুরি সমস্যায় সাহায্য
-</span>
+        </div>
 
-</button>
-
-</div>
-
-`
-
-);
+        `
+    );
 
 }
 
 
 /* =====================================================
-   SERVICES
+   10 SERVICES
 ===================================================== */
 
 function service(name){
 
-closeModal();
+    closeModal();
 
-closeMenu();
-
-
-if(name.includes("যাকাতের টাকা দিতে")){
-
-openZakatDonor();
-
-return;
-
-}
+    closeMenu();
 
 
-if(name.includes("যাকাতের টাকা নিতে")){
+    if(
+        name.includes(
+            "যাকাতের টাকা দিতে"
+        )
+    ){
 
-openZakatReceiver();
+        openZakatDonor();
 
-return;
-
-}
-
-
-if(name.includes("আমি সাহায্য করতে চাই")){
-
-openHelperForm();
-
-return;
-
-}
+        return;
+    }
 
 
-openModal(
-name,
-helpForm(name)
-);
+    if(
+        name.includes(
+            "যাকাতের টাকা নিতে"
+        )
+    ){
+
+        openZakatReceiver();
+
+        return;
+    }
+
+
+    if(
+        name.includes(
+            "আমি সাহায্য করতে চাই"
+        )
+    ){
+
+        openHelperForm();
+
+        return;
+    }
+
+
+    openModal(
+        name,
+        helpForm(name)
+    );
 
 }
 
 
 /* =====================================================
-   HELPER
+   HELPER FORM
 ===================================================== */
 
 function openHelperForm(){
 
-openModal(
+    openModal(
 
-"আমি সাহায্য করতে চাই",
+        "আমি সাহায্য করতে চাই",
 
-`
+        `
 
-<form class="form-grid"
-onsubmit="submitHelper(event)">
+        <form
+            class="form-grid"
+            onsubmit="submitHelper(event)"
+        >
 
-<div class="form-group">
+            <div class="form-group">
 
-<label>
-আপনি কোন ধরনের সাহায্য করতে পারবেন?
-</label>
+                <label>
+                    আপনি কোন ধরনের সাহায্য করতে পারবেন?
+                </label>
 
-<select required>
+                <select required>
 
-<option>রক্ত সহায়তা</option>
-<option>জরুরি যাতায়াত</option>
-<option>কারিগরি সহায়তা</option>
-<option>সাধারণ সহায়তা</option>
-<option>এলাকার সমস্যা সমাধান</option>
+                    <option>
+                        রক্ত সহায়তা
+                    </option>
 
-</select>
+                    <option>
+                        জরুরি যাতায়াত
+                    </option>
 
-</div>
+                    <option>
+                        কারিগরি সহায়তা
+                    </option>
 
-<div class="form-group">
+                    <option>
+                        সাধারণ সহায়তা
+                    </option>
 
-<label>আপনার এলাকা</label>
+                    <option>
+                        এলাকার সমস্যা সমাধান
+                    </option>
 
-<input required
-placeholder="জেলা / উপজেলা / ইউনিয়ন">
+                </select>
 
-</div>
+            </div>
 
-<div class="form-group">
 
-<label>বিস্তারিত</label>
+            <div class="form-group">
 
-<textarea required
-placeholder="আপনি কীভাবে সাহায্য করতে পারবেন?">
-</textarea>
+                <label>
+                    আপনার এলাকা
+                </label>
 
-</div>
+                <input
+                    required
+                    placeholder="জেলা / উপজেলা / ইউনিয়ন"
+                >
 
-<button
-class="primary-btn"
-type="submit">
+            </div>
 
-সাহায্য করার তথ্য দিন
 
-</button>
+            <div class="form-group">
 
-<div id="formMessage"
-class="form-message">
-</div>
+                <label>
+                    বিস্তারিত
+                </label>
 
-</form>
+                <textarea
+                    required
+                    placeholder="আপনি কীভাবে সাহায্য করতে পারবেন?"
+                ></textarea>
 
-`
+            </div>
 
-);
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="closeModal()"
+                >
+                    বাতিল
+                </button>
+
+                <button
+                    class="primary-btn"
+                    type="submit"
+                >
+                    সাহায্য করার তথ্য দিন
+                </button>
+
+            </div>
+
+
+            <div
+                id="formMessage"
+                class="form-message"
+            ></div>
+
+        </form>
+
+        `
+    );
 
 }
 
+
 function submitHelper(event){
 
-event.preventDefault();
+    event.preventDefault();
 
-const message=
-document.getElementById("formMessage");
+    const message =
+        document.getElementById(
+            "formMessage"
+        );
 
-message.textContent=
-"আপনার সাহায্য করার তথ্য প্রস্তুত হয়েছে।";
+    message.textContent =
+        "আপনার সাহায্য করার তথ্য প্রস্তুত হয়েছে।";
 
-message.classList.add("show");
+    message.classList.add("show");
 
 }
 
 
 /* =====================================================
-   POST HELP
+   HELP POST BUTTON
 ===================================================== */
 
 function helpPost(name,type){
 
-openModal(
+    openModal(
 
-name+"-কে সাহায্য করুন",
+        name+"-কে সাহায্য করুন",
 
-`
+        `
 
-<div class="panel-list">
+        <div class="panel-list">
 
-<div class="panel-card">
+            <div class="panel-card">
 
-<strong>${type}</strong>
+                <strong>
+                    ${type}
+                </strong>
 
-${name} সাহায্য চাইছেন।
+                ${name}
+                সাহায্য চাইছেন।
 
-</div>
+            </div>
 
-<button
-class="primary-btn"
-onclick="offerHelp('${name}')">
 
-🤝 আমি সাহায্য করতে চাই
+            <button
+                class="primary-btn"
+                onclick="offerHelp('${name}')"
+            >
+                🤝 আমি সাহায্য করতে চাই
+            </button>
 
-</button>
+        </div>
 
-</div>
-
-`
-
-);
+        `
+    );
 
 }
 
+
 function offerHelp(name){
 
-openModal(
+    openModal(
 
-"সাহায্য করার আবেদন",
+        "সাহায্য করার আবেদন",
 
-`
+        `
 
-<div class="panel-card">
+        <div class="panel-card">
 
-<strong>${name}</strong>
+            <strong>
+                ${name}
+            </strong>
 
-<p>
-আপনার সাহায্য করার ইচ্ছা নথিভুক্ত হয়েছে।
-</p>
+            <p>
+                আপনার সাহায্য করার ইচ্ছা
+                নথিভুক্ত হয়েছে।
+            </p>
 
-</div>
+            <br>
 
-`
+            পরবর্তী ধাপে পোস্টের মালিক
+            আপনার সাহায্যের আবেদন গ্রহণ করতে পারবেন।
 
-);
+        </div>
+
+        `
+    );
 
 }
 
@@ -1923,39 +2282,51 @@ openModal(
 
 function openSolved(){
 
-openModal(
+    openModal(
 
-"✅ সমাধান হয়েছে",
+        "✅ সমাধান হয়েছে",
 
-`
+        `
 
-<div class="panel-list">
+        <div class="panel-list">
 
-<div class="panel-card">
+            <div class="panel-card">
 
-<strong>
-❤️ রক্ত সহায়তা সম্পন্ন
-</strong>
+                <strong>
+                    ❤️ রক্ত সহায়তা সম্পন্ন
+                </strong>
 
-একজন রক্তদাতা সাহায্য করেছেন।
+                একজন রক্তদাতা সাহায্য করেছেন।
 
-</div>
+            </div>
 
-<div class="panel-card">
 
-<strong>
-✅ যাতায়াত সমস্যার সমাধান
-</strong>
+            <div class="panel-card">
 
-প্রয়োজনীয় যাতায়াতের ব্যবস্থা হয়েছে।
+                <strong>
+                    ✅ যাতায়াত সমস্যার সমাধান
+                </strong>
 
-</div>
+                প্রয়োজনীয় যাতায়াতের ব্যবস্থা হয়েছে।
 
-</div>
+            </div>
 
-`
 
-);
+            <div class="panel-card">
+
+                <strong>
+                    ❤️ সহায়তা সম্পন্ন
+                </strong>
+
+                পোস্টের মালিক জানিয়েছেন
+                যে সমস্যার সমাধান হয়েছে।
+
+            </div>
+
+        </div>
+
+        `
+    );
 
 }
 
@@ -1966,224 +2337,343 @@ openModal(
 
 function openReports(){
 
-closeMenu();
+    closeMenu();
 
-openModal(
+    openModal(
 
-"📋 আমার Reports",
+        "📋 আমার Reports",
 
-`
+        `
 
-<div class="panel-list">
+        <div class="panel-list">
 
-<div class="panel-card">
+            <div class="panel-card">
 
-<strong>
-🩸 রক্ত প্রয়োজন
-</strong>
+                <strong>
+                    🩸 রক্ত প্রয়োজন
+                </strong>
 
-<div>
-Status: 🔎 যাচাই হচ্ছে
-</div>
+                <div>
+                    Status: 🔎 যাচাই হচ্ছে
+                </div>
 
-<br>
+                <br>
 
-<button
-class="secondary-btn"
-onclick="editReport('রক্ত প্রয়োজন')">
+                <button
+                    class="secondary-btn"
+                    onclick="editReport('রক্ত প্রয়োজন')"
+                >
+                    Edit
+                </button>
 
-Edit
+            </div>
 
-</button>
 
-</div>
+            <div class="panel-card">
 
-</div>
+                <strong>
+                    🚗 জরুরি যাতায়াত
+                </strong>
 
-`
+                <div>
+                    Status: ❤️ সাহায্য হয়েছে
+                </div>
 
-);
+                <br>
+
+                <button
+                    class="secondary-btn"
+                    onclick="editReport('জরুরি যাতায়াত')"
+                >
+                    Update
+                </button>
+
+            </div>
+
+
+            <div class="panel-card">
+
+                <strong>
+                    📌 পোস্টের Update
+                </strong>
+
+                আপনি চাইলে নিজের পোস্টে
+                পরে জানাতে পারবেন—
+
+                <br><br>
+
+                <b>
+                    "আমি সাহায্য পেয়েছি"
+                </b>
+
+                অথবা
+
+                <b>
+                    "সমস্যার সমাধান হয়েছে"
+                </b>
+
+            </div>
+
+        </div>
+
+        `
+    );
 
 }
+
 
 function editReport(name){
 
-openModal(
+    openModal(
 
-"Report Update",
+        "Report Update",
 
-`
+        `
 
-<form class="form-grid"
-onsubmit="saveReportUpdate(event)">
+        <form
+            class="form-grid"
+            onsubmit="saveReportUpdate(event)"
+        >
 
-<div class="form-group">
+            <div class="form-group">
 
-<label>Report</label>
+                <label>
+                    Report
+                </label>
 
-<input value="${name}" readonly>
+                <input
+                    value="${name}"
+                    readonly
+                >
 
-</div>
+            </div>
 
-<div class="form-group">
 
-<label>নতুন Status</label>
+            <div class="form-group">
 
-<select>
+                <label>
+                    নতুন Status
+                </label>
 
-<option>নতুন</option>
-<option>যাচাই হচ্ছে</option>
-<option>সাহায্যকারী পাওয়া গেছে</option>
-<option>সাহায্য হয়েছে</option>
-<option>সমাধান হয়েছে</option>
+                <select>
 
-</select>
+                    <option>
+                        নতুন
+                    </option>
 
-</div>
+                    <option>
+                        যাচাই হচ্ছে
+                    </option>
 
-<div class="form-group">
+                    <option>
+                        সাহায্যকারী পাওয়া গেছে
+                    </option>
 
-<label>Update লিখুন</label>
+                    <option>
+                        সাহায্য হয়েছে
+                    </option>
 
-<textarea required
-placeholder="কী হয়েছে তা লিখুন">
-</textarea>
+                    <option>
+                        সমাধান হয়েছে
+                    </option>
 
-</div>
+                </select>
 
-<button class="primary-btn"
-type="submit">
+            </div>
 
-Update পোস্ট করুন
 
-</button>
+            <div class="form-group">
 
-<div id="formMessage"
-class="form-message">
-</div>
+                <label>
+                    Update লিখুন
+                </label>
 
-</form>
+                <textarea
+                    required
+                    placeholder="কী হয়েছে তা লিখুন"
+                ></textarea>
 
-`
+            </div>
 
-);
+
+            <button
+                class="primary-btn"
+                type="submit"
+            >
+                Update পোস্ট করুন
+            </button>
+
+
+            <div
+                id="formMessage"
+                class="form-message"
+            ></div>
+
+        </form>
+
+        `
+    );
 
 }
 
+
 function saveReportUpdate(event){
 
-event.preventDefault();
+    event.preventDefault();
 
-const message=
-document.getElementById("formMessage");
+    const message =
+        document.getElementById(
+            "formMessage"
+        );
 
-message.textContent=
-"আপনার Report Update প্রস্তুত হয়েছে।";
+    message.textContent =
+        "আপনার Report Update প্রস্তুত হয়েছে।";
 
-message.classList.add("show");
+    message.classList.add("show");
 
 }
 
 
 /* =====================================================
-   SETTINGS
+   PROFILE SETTINGS
 ===================================================== */
 
 function openSettings(){
 
-closeMenu();
+    closeMenu();
 
-openModal(
+    openModal(
 
-"⚙️ Settings",
+        "⚙️ Settings",
 
-`
+        `
 
-<div class="setting-row">
+        <div class="setting-row">
 
-<div class="setting-info">
+            <div class="setting-info">
 
-<strong>Profile Public</strong>
+                <strong>
+                    Profile Public
+                </strong>
 
-<small>
-অন্যরা আপনার Public তথ্য দেখতে পারবে।
-</small>
+                <small>
+                    অন্যরা আপনার Public তথ্য দেখতে পারবে।
+                </small>
 
-</div>
+            </div>
 
-<input class="switch"
-type="checkbox"
-checked>
+            <input
+                class="switch"
+                type="checkbox"
+                checked
+            >
 
-</div>
+        </div>
 
-<div class="setting-row">
 
-<div class="setting-info">
+        <div class="setting-row">
 
-<strong>Phone Public</strong>
+            <div class="setting-info">
 
-<small>
-ফোন নম্বর প্রকাশ করবেন কি না।
-</small>
+                <strong>
+                    Phone Public
+                </strong>
 
-</div>
+                <small>
+                    ফোন নম্বর প্রকাশ করবেন কি না।
+                </small>
 
-<input class="switch"
-type="checkbox">
+            </div>
 
-</div>
+            <input
+                class="switch"
+                type="checkbox"
+            >
 
-<div class="setting-row">
+        </div>
 
-<div class="setting-info">
 
-<strong>Email Public</strong>
+        <div class="setting-row">
 
-<small>
-Email প্রকাশ করবেন কি না।
-</small>
+            <div class="setting-info">
 
-</div>
+                <strong>
+                    Email Public
+                </strong>
 
-<input class="switch"
-type="checkbox">
+                <small>
+                    Email প্রকাশ করবেন কি না।
+                </small>
 
-</div>
+            </div>
 
-<div class="setting-row">
+            <input
+                class="switch"
+                type="checkbox"
+            >
 
-<div class="setting-info">
+        </div>
 
-<strong>Post Default: Public</strong>
 
-<small>
-নতুন পোস্ট Public হবে।
-</small>
+        <div class="setting-row">
 
-</div>
+            <div class="setting-info">
 
-<input class="switch"
-type="checkbox"
-checked>
+                <strong>
+                    Post Default: Public
+                </strong>
 
-</div>
+                <small>
+                    নতুন পোস্ট Public হবে।
+                </small>
 
-<div class="form-actions">
+            </div>
 
-<button
-class="primary-btn"
-onclick="closeModal()">
+            <input
+                class="switch"
+                type="checkbox"
+                checked
+            >
 
-Settings Save
+        </div>
 
-</button>
 
-</div>
+        <div class="setting-row">
 
-`
+            <div class="setting-info">
 
-);
+                <strong>
+                    Help Update
+                </strong>
+
+                <small>
+                    সাহায্যের Status পরিবর্তনের খবর।
+                </small>
+
+            </div>
+
+            <input
+                class="switch"
+                type="checkbox"
+                checked
+            >
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                class="primary-btn"
+                onclick="closeModal()"
+            >
+                Settings Save
+            </button>
+
+        </div>
+
+        `
+    );
 
 }
 
@@ -2194,215 +2684,313 @@ Settings Save
 
 function openZakat(){
 
-openModal(
+    openModal(
 
-"💰 যাকাত",
+        "💰 যাকাত",
 
-`
+        `
 
-<div class="panel-list">
+        <div class="panel-list">
 
-<div class="panel-card">
+            <div class="panel-card">
 
-<strong>💰 যাকাত দিন</strong>
+                <strong>
+                    💰 যাকাত দিন
+                </strong>
 
-<p>
-যারা যাকাতের জন্য অপেক্ষা করছেন
-তাদের তালিকা এখানে থাকবে।
-</p>
+                <p>
+                    যারা যাকাতের জন্য অপেক্ষা করছেন
+                    তাদের তালিকা এখানে থাকবে।
+                </p>
 
-<br>
+                <br>
 
-<button class="primary-btn"
-onclick="openZakatDonor()">
+                <button
+                    class="primary-btn"
+                    onclick="openZakatDonor()"
+                >
+                    যাকাত দিতে চাই
+                </button>
 
-যাকাত দিতে চাই
+            </div>
 
-</button>
 
-</div>
+            <div class="panel-card">
 
-<div class="panel-card">
+                <strong>
+                    🤲 যাকাত নিতে চাই
+                </strong>
 
-<strong>🤲 যাকাত নিতে চাই</strong>
+                <p>
+                    যাদের প্রয়োজন তারা
+                    যাকাতের জন্য নিবন্ধন করতে পারবেন।
+                </p>
 
-<p>
-যাদের প্রয়োজন তারা
-যাকাতের জন্য নিবন্ধন করতে পারবেন।
-</p>
+                <br>
 
-<br>
+                <button
+                    class="primary-btn"
+                    onclick="openZakatReceiver()"
+                >
+                    যাকাত নিতে চাই
+                </button>
 
-<button class="primary-btn"
-onclick="openZakatReceiver()">
+            </div>
 
-যাকাত নিতে চাই
 
-</button>
+            <div class="panel-card">
 
-</div>
+                <strong>
+                    ✅ যাকাত পেয়েছেন
+                </strong>
 
-</div>
+                <p>
+                    সফলভাবে যাকাত পাওয়া ব্যক্তিদের
+                    তালিকা এখানে থাকবে।
+                </p>
 
-`
+            </div>
 
-);
+        </div>
+
+        `
+    );
 
 }
+
+
+/* =====================================================
+   ZAKAT DONOR
+===================================================== */
 
 function openZakatDonor(){
 
-openModal(
+    openModal(
 
-"💰 যাকাত দিতে চাই",
+        "💰 যাকাত দিতে চাই",
 
-`
+        `
 
-<form class="form-grid"
-onsubmit="submitZakatDonor(event)">
+        <form
+            class="form-grid"
+            onsubmit="submitZakatDonor(event)"
+        >
 
-<div class="form-group">
+            <div class="form-group">
 
-<label>যাকাত গ্রহীতা</label>
+                <label>
+                    যাকাত গ্রহীতা
+                </label>
 
-<select required>
+                <select required>
 
-<option>
-গ্রহীতা নির্বাচন করুন
-</option>
+                    <option>
+                        গ্রহীতা নির্বাচন করুন
+                    </option>
 
-<option>
-উদাহরণ গ্রহীতা — বিরামপুর
-</option>
+                    <option>
+                        উদাহরণ গ্রহীতা — বিরামপুর
+                    </option>
 
-</select>
+                    <option>
+                        উদাহরণ গ্রহীতা — দিনাজপুর
+                    </option>
 
-</div>
+                </select>
 
-<div class="form-group">
+            </div>
 
-<label>যাকাতের পরিমাণ</label>
 
-<input type="number"
-min="1"
-placeholder="টাকার পরিমাণ"
-required>
+            <div class="form-group">
 
-</div>
+                <label>
+                    যাকাতের পরিমাণ
+                </label>
 
-<div class="form-group">
+                <input
+                    type="number"
+                    min="1"
+                    placeholder="টাকার পরিমাণ"
+                    required
+                >
 
-<label>দাতার নাম</label>
+            </div>
 
-<input placeholder="আপনার নাম"
-required>
 
-</div>
+            <div class="form-group">
 
-<button
-class="primary-btn"
-type="submit">
+                <label>
+                    দাতার নাম
+                </label>
 
-যাকাত দেওয়ার আবেদন করুন
+                <input
+                    placeholder="আপনার নাম"
+                    required
+                >
 
-</button>
+            </div>
 
-<div id="formMessage"
-class="form-message">
-</div>
 
-</form>
+            <div class="form-group">
 
-`
+                <label>
+                    দাতার ID / ফোন
+                </label>
 
-);
+                <input
+                    placeholder="আপনার ID বা ফোন"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                type="submit"
+            >
+                যাকাত দেওয়ার আবেদন করুন
+            </button>
+
+
+            <div
+                id="formMessage"
+                class="form-message"
+            ></div>
+
+        </form>
+
+        `
+    );
 
 }
+
 
 function submitZakatDonor(event){
 
-event.preventDefault();
+    event.preventDefault();
 
-const message=
-document.getElementById("formMessage");
+    const message =
+        document.getElementById(
+            "formMessage"
+        );
 
-message.textContent=
-"যাকাতের Transaction Pending অবস্থায় প্রস্তুত হয়েছে।";
+    message.textContent =
+        "যাকাতের Transaction Pending অবস্থায় তৈরি করার জন্য প্রস্তুত। গ্রহীতা নিশ্চিত করলে এটি Success হবে।";
 
-message.classList.add("show");
+    message.classList.add("show");
 
 }
+
+
+/* =====================================================
+   ZAKAT RECEIVER
+===================================================== */
 
 function openZakatReceiver(){
 
-openModal(
+    openModal(
 
-"🤲 যাকাতের টাকা নিতে চাই",
+        "🤲 যাকাতের টাকা নিতে চাই",
 
-`
+        `
 
-<form class="form-grid"
-onsubmit="submitZakatReceiver(event)">
+        <form
+            class="form-grid"
+            onsubmit="submitZakatReceiver(event)"
+        >
 
-<div class="form-group">
+            <div class="form-group">
 
-<label>আপনার নাম</label>
+                <label>
+                    আপনার নাম
+                </label>
 
-<input required
-placeholder="নাম লিখুন">
+                <input
+                    required
+                    placeholder="নাম লিখুন"
+                >
 
-</div>
+            </div>
 
-<div class="form-group">
 
-<label>আপনার এলাকা</label>
+            <div class="form-group">
 
-<input required
-placeholder="বিভাগ / জেলা / উপজেলা / ইউনিয়ন">
+                <label>
+                    আপনার এলাকা
+                </label>
 
-</div>
+                <input
+                    required
+                    placeholder="বিভাগ / জেলা / উপজেলা / ইউনিয়ন"
+                >
 
-<div class="form-group">
+            </div>
 
-<label>প্রয়োজনের কারণ</label>
 
-<textarea required
-placeholder="কেন যাকাত প্রয়োজন তা লিখুন">
-</textarea>
+            <div class="form-group">
 
-</div>
+                <label>
+                    প্রয়োজনের কারণ
+                </label>
 
-<button
-class="primary-btn"
-type="submit">
+                <textarea
+                    required
+                    placeholder="কেন যাকাত প্রয়োজন তা লিখুন"
+                ></textarea>
 
-যাকাতের জন্য নিবন্ধন করুন
+            </div>
 
-</button>
 
-<div id="formMessage"
-class="form-message">
-</div>
+            <div class="form-group">
 
-</form>
+                <label>
+                    যোগাযোগ
+                </label>
 
-`
+                <input
+                    type="tel"
+                    required
+                    placeholder="ফোন নম্বর"
+                >
 
-);
+            </div>
+
+
+            <button
+                class="primary-btn"
+                type="submit"
+            >
+                যাকাতের জন্য নিবন্ধন করুন
+            </button>
+
+
+            <div
+                id="formMessage"
+                class="form-message"
+            ></div>
+
+        </form>
+
+        `
+    );
 
 }
 
+
 function submitZakatReceiver(event){
 
-event.preventDefault();
+    event.preventDefault();
 
-const message=
-document.getElementById("formMessage");
+    const message =
+        document.getElementById(
+            "formMessage"
+        );
 
-message.textContent=
-"আপনার যাকাত গ্রহণের আবেদন প্রস্তুত হয়েছে।";
+    message.textContent =
+        "আপনার যাকাত গ্রহণের আবেদন প্রস্তুত হয়েছে। একই বছরে একজন ব্যক্তি দ্বিতীয়বার নিবন্ধন করতে পারবে না—Supabase-এ এটি নিয়ম হিসেবে রাখা হবে।";
 
-message.classList.add("show");
+    message.classList.add("show");
 
 }
 
@@ -2413,14 +3001,14 @@ message.classList.add("show");
 
 function goHome(){
 
-closeModal();
+    closeModal();
 
-closeMenu();
+    closeMenu();
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
 
@@ -2431,74 +3019,74 @@ behavior:"smooth"
 
 function logout(){
 
-closeMenu();
+    closeMenu();
 
-openModal(
+    openModal(
 
-"🚪 Logout",
+        "🚪 Logout",
 
-`
+        `
 
-<div class="panel-card">
+        <div class="panel-card">
 
-আপনি কি Logout করতে চান?
+            আপনি কি Logout করতে চান?
 
-</div>
+        </div>
 
-<div class="form-actions">
 
-<button
-class="secondary-btn"
-onclick="closeModal()">
+        <div class="form-actions">
 
-না
+            <button
+                class="secondary-btn"
+                onclick="closeModal()"
+            >
+                না
+            </button>
 
-</button>
 
-<button
-class="primary-btn"
-onclick="completeLogout()">
+            <button
+                class="primary-btn"
+                onclick="completeLogout()"
+            >
+                হ্যাঁ, Logout
+            </button>
 
-হ্যাঁ, Logout
+        </div>
 
-</button>
-
-</div>
-
-`
-
-);
+        `
+    );
 
 }
 
+
 function completeLogout(){
 
-localStorage.removeItem("app_user_id");
+    closeModal();
 
-closeModal();
-
-alert("Logout সম্পন্ন হয়েছে।");
+    alert(
+        "Logout সম্পন্ন হয়েছে।"
+    );
 
 }
 
 
 /* =====================================================
-   ESC
+   ESC KEY
 ===================================================== */
 
 document.addEventListener(
-"keydown",
-function(event){
+    "keydown",
+    function(event){
 
-if(event.key==="Escape"){
+        if(event.key==="Escape"){
 
-closeMenu();
+            closeMenu();
 
-closeModal();
+            closeModal();
 
-}
+        }
 
-}
+    }
 );
 
 </script>
