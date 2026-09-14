@@ -18,179 +18,158 @@ body{
   color:#222;
 }
 
+/* ================= HEADER ================= */
+
 header{
   background:#087443;
   color:white;
-  padding:15px 12px;
   position:sticky;
   top:0;
   z-index:1000;
-  box-shadow:0 2px 8px #0002;
+  box-shadow:0 2px 8px #0003;
 }
 
 .header-inner{
-  max-width:900px;
+  max-width:950px;
   margin:auto;
-  text-align:center;
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 12px;
+}
+
+.logo-area{
+  text-align:left;
 }
 
 .logo{
-  font-size:24px;
+  font-size:23px;
   font-weight:bold;
 }
 
 .subtitle{
-  font-size:14px;
-  margin-top:4px;
+  font-size:12px;
+  margin-top:2px;
 }
 
-.top-buttons{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  margin-top:12px;
+/* ================= MENU ================= */
+
+.menu-wrap{
+  position:relative;
 }
 
-.top-buttons button,
 .menu-btn{
   border:0;
-  border-radius:8px;
-  padding:9px 15px;
+  background:white;
+  color:#087443;
+  border-radius:9px;
+  padding:10px 15px;
+  font-size:15px;
   font-weight:bold;
   cursor:pointer;
 }
 
-.top-buttons button{
-  background:white;
-  color:#087443;
-}
-
-/* USER MENU */
-
-.menu-wrap{
-  display:none;
-  position:relative;
-  justify-content:center;
-  margin-top:12px;
-}
-
-.menu-btn{
-  background:white;
-  color:#087443;
-  font-size:15px;
-}
-
-.dropdown-menu{
+.menu-panel{
   display:none;
   position:absolute;
-  top:48px;
-  right:10px;
-  min-width:230px;
+  top:52px;
+  right:0;
+  width:290px;
+  max-height:80vh;
+  overflow-y:auto;
   background:white;
-  border-radius:12px;
-  box-shadow:0 5px 22px #0003;
-  overflow:hidden;
-  z-index:2000;
-  text-align:left;
+  color:#222;
+  border-radius:14px;
+  box-shadow:0 5px 25px #0004;
+  padding:8px;
 }
 
-.dropdown-menu.show{
+.menu-panel.show{
   display:block;
 }
 
 .menu-user{
-  padding:15px;
+  padding:12px;
   color:#087443;
   font-weight:bold;
   border-bottom:1px solid #eee;
+  margin-bottom:5px;
+}
+
+.menu-title{
+  padding:9px 12px;
+  color:#666;
+  font-size:13px;
+  font-weight:bold;
 }
 
 .menu-item{
   width:100%;
   border:0;
   background:white;
-  padding:14px;
+  color:#222;
   text-align:left;
-  font-size:15px;
+  padding:12px;
+  border-radius:8px;
+  font-size:14px;
   cursor:pointer;
 }
 
 .menu-item:hover{
-  background:#f2f7f4;
+  background:#edf8f2;
+}
+
+.help-menu-item{
+  color:#075f38;
+  font-weight:bold;
 }
 
 .logout-item{
   color:#b00020;
+  border-top:1px solid #eee;
+  margin-top:5px;
 }
 
-/* MAIN */
+/* ================= MAIN ================= */
 
 main{
-  max-width:900px;
+  max-width:950px;
   margin:auto;
-  padding:20px 12px 50px;
+  padding:22px 12px 50px;
 }
 
 .hero{
   background:white;
-  border-radius:15px;
-  padding:25px 18px;
+  border-radius:16px;
+  padding:35px 20px;
   text-align:center;
   box-shadow:0 2px 10px #0001;
 }
 
 .hero h1{
   color:#087443;
-  margin:0 0 10px;
+  font-size:30px;
+  margin:0 0 12px;
 }
 
 .hero p{
+  line-height:1.8;
   margin:6px 0;
-  line-height:1.7;
 }
 
 .user-box{
   display:none;
-  background:#e5f6ed;
-  border:1px solid #bce5cf;
-  color:#075f38;
+  margin-top:18px;
+  background:#e4f5ec;
+  border:1px solid #b8dfca;
   border-radius:12px;
-  padding:15px;
-  margin:18px 0;
+  padding:14px;
   text-align:center;
-}
-
-/* HELP BUTTONS */
-
-.section-title{
-  text-align:center;
-  color:#087443;
-  margin:28px 0 15px;
-}
-
-.help-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.help-btn{
-  background:white;
-  border:1px solid #d8e8df;
-  border-radius:13px;
-  padding:18px 10px;
-  font-size:15px;
-  font-weight:bold;
   color:#075f38;
-  cursor:pointer;
-  box-shadow:0 2px 7px #0001;
 }
 
-.help-btn:hover{
-  background:#eaf8f0;
-}
-
-/* PROFILE */
+/* ================= PROFILE ================= */
 
 .profile-card{
   display:none;
@@ -221,7 +200,7 @@ main{
 
 .profile-info{
   margin-top:15px;
-  line-height:1.8;
+  line-height:1.9;
 }
 
 .profile-actions{
@@ -235,13 +214,46 @@ main{
   border:0;
   border-radius:8px;
   padding:11px;
-  cursor:pointer;
-  font-weight:bold;
   background:#087443;
   color:white;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-/* MODAL */
+/* ================= REPORT ================= */
+
+.report-card{
+  display:none;
+  background:white;
+  border-radius:15px;
+  padding:20px;
+  margin-top:20px;
+  box-shadow:0 2px 10px #0001;
+}
+
+.report-title{
+  color:#087443;
+  text-align:center;
+}
+
+.empty{
+  text-align:center;
+  color:#777;
+  line-height:1.8;
+  padding:15px;
+}
+
+.status{
+  display:inline-block;
+  background:#e1f5e9;
+  color:#087443;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+/* ================= MODAL ================= */
 
 .modal{
   display:none;
@@ -255,8 +267,8 @@ main{
 
 .modal-box{
   max-width:500px;
-  background:white;
   margin:20px auto;
+  background:white;
   border-radius:15px;
   padding:20px;
   position:relative;
@@ -265,17 +277,24 @@ main{
 .close{
   position:absolute;
   right:12px;
-  top:8px;
+  top:7px;
   border:0;
   background:none;
-  font-size:27px;
+  font-size:28px;
   cursor:pointer;
 }
 
 .modal-box h2{
-  color:#087443;
   text-align:center;
+  color:#087443;
   margin-top:5px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  font-size:14px;
+  margin-top:10px;
 }
 
 input,
@@ -283,71 +302,18 @@ select,
 textarea{
   width:100%;
   padding:12px;
-  margin-top:7px;
-  margin-bottom:13px;
+  margin-top:6px;
+  margin-bottom:8px;
   border:1px solid #ccd8d1;
   border-radius:8px;
   font-size:15px;
   background:white;
 }
 
-label{
-  font-weight:bold;
-  font-size:14px;
+textarea{
+  min-height:90px;
+  resize:vertical;
 }
-
-/* HELP SELECT */
-
-.help-select{
-  border:1px solid #ccd8d1;
-  border-radius:8px;
-  padding:12px;
-  margin-top:7px;
-  margin-bottom:13px;
-  cursor:pointer;
-  background:white;
-}
-
-.help-options{
-  display:none;
-  border:1px solid #ddd;
-  border-radius:8px;
-  margin-top:-8px;
-  margin-bottom:13px;
-  overflow:hidden;
-}
-
-.help-options.show{
-  display:block;
-}
-
-.help-option{
-  padding:11px;
-  border-bottom:1px solid #eee;
-  cursor:pointer;
-}
-
-.help-option:last-child{
-  border-bottom:0;
-}
-
-.help-option:hover{
-  background:#f1f8f4;
-}
-
-.help-option.selected{
-  background:#dff4e8;
-  color:#075f38;
-  font-weight:bold;
-}
-
-.selected-help{
-  color:#087443;
-  font-size:13px;
-  margin-top:5px;
-}
-
-/* MODAL BUTTON */
 
 .primary-btn{
   width:100%;
@@ -359,6 +325,7 @@ label{
   font-size:16px;
   font-weight:bold;
   cursor:pointer;
+  margin-top:8px;
 }
 
 .secondary-btn{
@@ -386,54 +353,81 @@ label{
   color:#c00020;
 }
 
-/* REPORT */
+/* ================= HELP SELECT ================= */
 
-.report-list{
-  margin-top:15px;
+.help-select{
+  border:1px solid #ccd8d1;
+  border-radius:8px;
+  padding:12px;
+  margin-top:6px;
+  cursor:pointer;
+  background:white;
+  color:#555;
 }
 
-.report-card{
+.help-options{
+  display:none;
   border:1px solid #ddd;
-  border-radius:10px;
-  padding:13px;
-  margin-bottom:10px;
-  background:#fafafa;
+  border-radius:8px;
+  margin-top:4px;
+  overflow:hidden;
 }
 
-.status{
-  display:inline-block;
-  background:#e1f5e9;
-  color:#087443;
-  padding:5px 9px;
-  border-radius:20px;
-  font-size:12px;
+.help-options.show{
+  display:block;
+}
+
+.help-option{
+  padding:11px;
+  border-bottom:1px solid #eee;
+  cursor:pointer;
+}
+
+.help-option:last-child{
+  border-bottom:0;
+}
+
+.help-option.selected{
+  background:#dff4e8;
+  color:#075f38;
   font-weight:bold;
 }
 
-.empty{
-  text-align:center;
-  color:#777;
-  padding:20px;
-}
-
-/* FOOTER */
-
-footer{
-  text-align:center;
-  background:#075f38;
-  color:white;
-  padding:20px 10px;
-  margin-top:30px;
+.selected-help{
+  color:#087443;
+  font-size:13px;
   line-height:1.7;
 }
 
+/* ================= FOOTER ================= */
+
+footer{
+  background:#075f38;
+  color:white;
+  text-align:center;
+  padding:22px 10px;
+  line-height:1.8;
+}
+
+/* ================= MOBILE ================= */
+
 @media(max-width:600px){
-  .help-grid{
-    grid-template-columns:1fr;
-  }
 
   .logo{
-    font-size:21px;
+    font-size:20px;
+  }
+
+  .subtitle{
+    font-size:11px;
+  }
+
+  .menu-panel{
+    width:285px;
+    right:-5px;
+  }
+
+  .hero h1{
+    font-size:25px;
   }
 
   .profile-actions{
@@ -445,46 +439,174 @@ footer{
 
 <body>
 
+<!-- ================= HEADER ================= -->
+
 <header>
 
   <div class="header-inner">
 
-    <div class="logo">🤝 সহায়</div>
-
-    <div class="subtitle">মানুষ মানুষের পাশে</div>
-
-    <!-- লগইন না করা অবস্থায় -->
-    <div class="top-buttons" id="guestButtons">
-      <button onclick="openLogin()">🔐 লগইন</button>
-      <button onclick="openRegister()">📝 রেজিস্ট্রেশন</button>
+    <div class="logo-area">
+      <div class="logo">🤝 সহায়</div>
+      <div class="subtitle">মানুষ মানুষের পাশে</div>
     </div>
 
-    <!-- লগইন করা অবস্থায় -->
-    <div class="menu-wrap" id="userMenu">
+    <!-- একমাত্র Menu Button -->
+    <div class="menu-wrap">
 
-      <button class="menu-btn" onclick="toggleUserMenu()">
+      <button class="menu-btn" onclick="toggleMenu()">
         ☰ Menu
       </button>
 
-      <div class="dropdown-menu" id="dropdownMenu">
+      <div class="menu-panel" id="menuPanel">
 
-        <div class="menu-user" id="headerUserName">
+        <!-- LOGIN অবস্থায় User Name -->
+        <div
+          class="menu-user"
+          id="menuUser"
+          style="display:none;"
+        >
           👤 ব্যবহারকারী
         </div>
 
-        <button class="menu-item" onclick="openProfile()">
+        <!-- ================= HELP ================= -->
+
+        <div class="menu-title">
+          🫂 সাহায্যের সুবিধা
+        </div>
+
+        <button
+          class="menu-item help-menu-item"
+          onclick="chooseHelp('🆘 সাহায্য চাই')"
+        >
+          🆘 সাহায্য চাই
+        </button>
+
+        <button
+          class="menu-item help-menu-item"
+          onclick="chooseHelp('🤝 আমি সাহায্য করতে চাই')"
+        >
+          🤝 আমি সাহায্য করতে চাই
+        </button>
+
+        <button
+          class="menu-item help-menu-item"
+          onclick="chooseHelp('🩸 রক্ত প্রয়োজন')"
+        >
+          🩸 রক্ত প্রয়োজন
+        </button>
+
+        <button
+          class="menu-item help-menu-item"
+          onclick="chooseHelp('🔎 হারানো / পাওয়া')"
+        >
+          🔎 হারানো / পাওয়া
+        </button>
+
+        <button
+          class="menu-item help-menu-item"
+          onclick="chooseHelp('🚑 জরুরি সহায়তা')"
+        >
+          🚑 জরুরি সহায়তা
+        </button>
+
+        <button
+          class="menu-item help-menu-item"
+          onclick="chooseHelp('🛠️ কারিগরি সহায়তা')"
+        >
+          🛠️ কারিগরি সহায়তা
+        </button>
+
+        <button
+          class="menu-item help-menu-item"
+          onclick="chooseHelp('📢 এলাকার সমস্যা')"
+        >
+          📢 এলাকার সমস্যা
+        </button>
+
+        <button
+          class="menu-item help-menu-item"
+          onclick="chooseHelp('🚗 জরুরি যাতায়াত')"
+        >
+          🚗 জরুরি যাতায়াত
+        </button>
+
+        <button
+          class="menu-item help-menu-item"
+          onclick="chooseHelp('💰 যাকাতের টাকা দিতে চাই')"
+        >
+          💰 যাকাতের টাকা দিতে চাই
+        </button>
+
+        <button
+          class="menu-item help-menu-item"
+          onclick="chooseHelp('🤲 যাকাতের টাকা নিতে চাই')"
+        >
+          🤲 যাকাতের টাকা নিতে চাই
+        </button>
+
+        <!-- ================= USER ================= -->
+
+        <div
+          class="menu-title"
+          id="userMenuTitle"
+          style="display:none;"
+        >
+          👤 আমার অ্যাকাউন্ট
+        </div>
+
+        <button
+          class="menu-item"
+          id="profileMenuBtn"
+          style="display:none;"
+          onclick="openProfile()"
+        >
           👤 আমার প্রোফাইল
         </button>
 
-        <button class="menu-item" onclick="openEditProfile()">
+        <button
+          class="menu-item"
+          id="editMenuBtn"
+          style="display:none;"
+          onclick="openEditProfile()"
+        >
           ✏️ প্রোফাইল Edit
         </button>
 
-        <button class="menu-item" onclick="openReports()">
+        <button
+          class="menu-item"
+          id="reportMenuBtn"
+          style="display:none;"
+          onclick="openReports()"
+        >
           📊 আমার রিপোর্ট
         </button>
 
-        <button class="menu-item logout-item" onclick="logout()">
+        <!-- ================= GUEST ================= -->
+
+        <button
+          class="menu-item"
+          id="loginMenuBtn"
+          onclick="openLogin()"
+        >
+          🔐 লগইন
+        </button>
+
+        <button
+          class="menu-item"
+          id="registerMenuBtn"
+          onclick="openRegister()"
+        >
+          📝 রেজিস্ট্রেশন
+        </button>
+
+        <!-- ================= LOGOUT ================= -->
+
+        <button
+          class="menu-item logout-item"
+          id="logoutMenuBtn"
+          style="display:none;"
+          onclick="logout()"
+        >
           🚪 লগআউট
         </button>
 
@@ -497,6 +619,8 @@ footer{
 </header>
 
 
+<!-- ================= MAIN ================= -->
+
 <main>
 
   <section class="hero">
@@ -504,77 +628,37 @@ footer{
     <h1>মানুষ মানুষের পাশে</h1>
 
     <p>
-      এখানে সমস্যা পোস্ট করাই শেষ কথা নয়—
-      <b>সমস্যার সমাধান করাই আমাদের লক্ষ্য।</b>
+      <b>সহায়</b> একটি মানুষের জন্য মানুষের পাশে দাঁড়ানোর প্ল্যাটফর্ম।
     </p>
 
     <p>
-      প্রয়োজন অনুযায়ী সাহায্য চান অথবা
-      অন্য মানুষকে সাহায্য করুন।
+      প্রয়োজনের সময় সাহায্য পাওয়া এবং
+      অন্য মানুষকে সাহায্য করাই আমাদের উদ্দেশ্য।
+    </p>
+
+    <p>
+      <b>সমস্যা পোস্ট করা নয়, সমস্যার সমাধান করা।</b>
     </p>
 
   </section>
 
 
+  <!-- USER WELCOME -->
+
   <div class="user-box" id="userBox">
-    👋 স্বাগতম, <b id="userBoxName"></b>
-  </div>
 
-
-  <!-- ১০টি সাহায্যের অপশন -->
-
-  <h2 class="section-title">
-    🫂 কীভাবে সাহায্য করবেন?
-  </h2>
-
-  <div class="help-grid">
-
-    <button class="help-btn" onclick="chooseHelp('🆘 সাহায্য চাই')">
-      🆘 সাহায্য চাই
-    </button>
-
-    <button class="help-btn" onclick="chooseHelp('🤝 আমি সাহায্য করতে চাই')">
-      🤝 আমি সাহায্য করতে চাই
-    </button>
-
-    <button class="help-btn" onclick="chooseHelp('🩸 রক্ত প্রয়োজন')">
-      🩸 রক্ত প্রয়োজন
-    </button>
-
-    <button class="help-btn" onclick="chooseHelp('🔎 হারানো / পাওয়া')">
-      🔎 হারানো / পাওয়া
-    </button>
-
-    <button class="help-btn" onclick="chooseHelp('🚑 জরুরি সহায়তা')">
-      🚑 জরুরি সহায়তা
-    </button>
-
-    <button class="help-btn" onclick="chooseHelp('🛠️ কারিগরি সহায়তা')">
-      🛠️ কারিগরি সহায়তা
-    </button>
-
-    <button class="help-btn" onclick="chooseHelp('📢 এলাকার সমস্যা')">
-      📢 এলাকার সমস্যা
-    </button>
-
-    <button class="help-btn" onclick="chooseHelp('🚗 জরুরি যাতায়াত')">
-      🚗 জরুরি যাতায়াত
-    </button>
-
-    <button class="help-btn" onclick="chooseHelp('💰 যাকাতের টাকা দিতে চাই')">
-      💰 যাকাতের টাকা দিতে চাই
-    </button>
-
-    <button class="help-btn" onclick="chooseHelp('🤲 যাকাতের টাকা নিতে চাই')">
-      🤲 যাকাতের টাকা নিতে চাই
-    </button>
+    👋 স্বাগতম,
+    <b id="userBoxName"></b>
 
   </div>
 
 
   <!-- PROFILE -->
 
-  <section class="profile-card" id="profileCard">
+  <section
+    class="profile-card"
+    id="profileCard"
+  >
 
     <img
       id="profilePhoto"
@@ -583,16 +667,22 @@ footer{
       alt="Profile"
     >
 
-    <div class="profile-name" id="profileName">
+    <div
+      class="profile-name"
+      id="profileName"
+    >
       ব্যবহারকারী
     </div>
 
-    <div class="profile-info" id="profileInfo"></div>
+    <div
+      class="profile-info"
+      id="profileInfo"
+    ></div>
 
     <div class="profile-actions">
 
       <button onclick="openEditProfile()">
-        ✏️ Edit Profile
+        ✏️ Profile Edit
       </button>
 
       <button onclick="openPhotoPicker()">
@@ -606,60 +696,90 @@ footer{
 
   <!-- REPORT -->
 
-  <section class="profile-card" id="reportCard">
+  <section
+    class="report-card"
+    id="reportCard"
+  >
 
-    <h2 class="section-title">📊 আমার রিপোর্ট</h2>
+    <h2 class="report-title">
+      📊 আমার রিপোর্ট
+    </h2>
 
-    <div class="report-list" id="reportList"></div>
+    <div id="reportList"></div>
 
   </section>
 
 </main>
 
 
+<!-- ================= FOOTER ================= -->
+
 <footer>
 
-  <b>সহায় — মানুষ মানুষের পাশে</b><br>
+  <b>সহায় — মানুষ মানুষের পাশে</b>
 
-  সমস্যার সমাধানে আমরা একসাথে।
+  <br>
+
+  মানুষের প্রয়োজনে মানুষ পাশে দাঁড়াবে।
 
 </footer>
 
 
-<!-- LOGIN MODAL -->
+<!-- ================= LOGIN ================= -->
 
-<div class="modal" id="loginModal">
+<div
+  class="modal"
+  id="loginModal"
+>
 
   <div class="modal-box">
 
-    <button class="close" onclick="closeModal('loginModal')">
+    <button
+      class="close"
+      onclick="closeModal('loginModal')"
+    >
       ×
     </button>
 
     <h2>🔐 লগইন</h2>
 
-    <label>মোবাইল নম্বর</label>
+    <label>
+      মোবাইল নম্বর
+    </label>
+
     <input
       type="tel"
       id="loginPhone"
       placeholder="মোবাইল নম্বর লিখুন"
     >
 
-    <label>পাসওয়ার্ড</label>
+    <label>
+      পাসওয়ার্ড
+    </label>
+
     <input
       type="password"
       id="loginPassword"
       placeholder="পাসওয়ার্ড"
     >
 
-    <div class="message" id="loginMessage"></div>
+    <div
+      class="message"
+      id="loginMessage"
+    ></div>
 
-    <button class="primary-btn" onclick="login()">
+    <button
+      class="primary-btn"
+      onclick="login()"
+    >
       লগইন
     </button>
 
-    <button class="secondary-btn" onclick="switchToRegister()">
-      নতুন অ্যাকাউন্ট তৈরি করুন
+    <button
+      class="secondary-btn"
+      onclick="switchToRegister()"
+    >
+      📝 নতুন অ্যাকাউন্ট তৈরি করুন
     </button>
 
   </div>
@@ -667,19 +787,27 @@ footer{
 </div>
 
 
-<!-- REGISTER MODAL -->
+<!-- ================= REGISTER ================= -->
 
-<div class="modal" id="registerModal">
+<div
+  class="modal"
+  id="registerModal"
+>
 
   <div class="modal-box">
 
-    <button class="close" onclick="closeModal('registerModal')">
+    <button
+      class="close"
+      onclick="closeModal('registerModal')"
+    >
       ×
     </button>
 
     <h2>📝 রেজিস্ট্রেশন</h2>
 
-    <label>আপনার নাম</label>
+    <label>
+      আপনার নাম
+    </label>
 
     <input
       type="text"
@@ -687,8 +815,9 @@ footer{
       placeholder="আপনার নাম লিখুন"
     >
 
-
-    <label>মোবাইল নম্বর</label>
+    <label>
+      মোবাইল নম্বর
+    </label>
 
     <input
       type="tel"
@@ -696,8 +825,9 @@ footer{
       placeholder="মোবাইল নম্বর লিখুন"
     >
 
-
-    <label>পাসওয়ার্ড</label>
+    <label>
+      পাসওয়ার্ড
+    </label>
 
     <input
       type="password"
@@ -705,102 +835,176 @@ footer{
       placeholder="কমপক্ষে ৬ অক্ষর"
     >
 
-
     <label>
       আপনি কী ধরনের সাহায্য করতে পারবেন?
     </label>
 
     <div
       class="help-select"
-      onclick="toggleHelpOptions()"
       id="helpSelectBox"
+      onclick="toggleHelpOptions()"
     >
       সাহায্যের ধরন নির্বাচন করুন
     </div>
 
-    <div class="help-options" id="helpOptions">
+    <div
+      class="help-options"
+      id="helpOptions"
+    >
 
-      <div class="help-option" onclick="selectHelp(event,1)">
+      <div
+        class="help-option"
+        onclick="selectHelp(event,1)"
+      >
         🆘 সাহায্য চাই
       </div>
 
-      <div class="help-option" onclick="selectHelp(event,2)">
+      <div
+        class="help-option"
+        onclick="selectHelp(event,2)"
+      >
         🤝 আমি সাহায্য করতে চাই
       </div>
 
-      <div class="help-option" onclick="selectHelp(event,3)">
+      <div
+        class="help-option"
+        onclick="selectHelp(event,3)"
+      >
         🩸 রক্ত প্রয়োজন
       </div>
 
-      <div class="help-option" onclick="selectHelp(event,4)">
+      <div
+        class="help-option"
+        onclick="selectHelp(event,4)"
+      >
         🔎 হারানো / পাওয়া
       </div>
 
-      <div class="help-option" onclick="selectHelp(event,5)">
+      <div
+        class="help-option"
+        onclick="selectHelp(event,5)"
+      >
         🚑 জরুরি সহায়তা
       </div>
 
-      <div class="help-option" onclick="selectHelp(event,6)">
+      <div
+        class="help-option"
+        onclick="selectHelp(event,6)"
+      >
         🛠️ কারিগরি সহায়তা
       </div>
 
-      <div class="help-option" onclick="selectHelp(event,7)">
+      <div
+        class="help-option"
+        onclick="selectHelp(event,7)"
+      >
         📢 এলাকার সমস্যা
       </div>
 
-      <div class="help-option" onclick="selectHelp(event,8)">
+      <div
+        class="help-option"
+        onclick="selectHelp(event,8)"
+      >
         🚗 জরুরি যাতায়াত
       </div>
 
-      <div class="help-option" onclick="selectHelp(event,9)">
+      <div
+        class="help-option"
+        onclick="selectHelp(event,9)"
+      >
         💰 যাকাতের টাকা দিতে চাই
       </div>
 
-      <div class="help-option" onclick="selectHelp(event,10)">
+      <div
+        class="help-option"
+        onclick="selectHelp(event,10)"
+      >
         🤲 যাকাতের টাকা নিতে চাই
       </div>
 
     </div>
 
-    <div class="selected-help" id="selectedHelpText"></div>
+    <div
+      class="selected-help"
+      id="selectedHelpText"
+    ></div>
 
 
-    <label>বিভাগ</label>
+    <label>
+      বিভাগ
+    </label>
 
-    <select id="divisionSelect" onchange="loadDistricts()">
-      <option value="">বিভাগ নির্বাচন করুন</option>
+    <select
+      id="divisionSelect"
+      onchange="loadDistricts()"
+    >
+      <option value="">
+        বিভাগ নির্বাচন করুন
+      </option>
     </select>
 
 
-    <label>জেলা</label>
+    <label>
+      জেলা
+    </label>
 
-    <select id="districtSelect" onchange="loadUpazilas()" disabled>
-      <option value="">জেলা নির্বাচন করুন</option>
+    <select
+      id="districtSelect"
+      onchange="loadUpazilas()"
+      disabled
+    >
+      <option value="">
+        জেলা নির্বাচন করুন
+      </option>
     </select>
 
 
-    <label>থানা / উপজেলা</label>
+    <label>
+      থানা / উপজেলা
+    </label>
 
-    <select id="upazilaSelect" onchange="loadUnions()" disabled>
-      <option value="">থানা / উপজেলা নির্বাচন করুন</option>
+    <select
+      id="upazilaSelect"
+      onchange="loadUnions()"
+      disabled
+    >
+      <option value="">
+        থানা / উপজেলা নির্বাচন করুন
+      </option>
     </select>
 
 
-    <label>ইউনিয়ন</label>
+    <label>
+      ইউনিয়ন
+    </label>
 
-    <select id="unionSelect" disabled>
-      <option value="">ইউনিয়ন নির্বাচন করুন</option>
+    <select
+      id="unionSelect"
+      disabled
+    >
+      <option value="">
+        ইউনিয়ন নির্বাচন করুন
+      </option>
     </select>
 
 
-    <div class="message" id="registerMessage"></div>
+    <div
+      class="message"
+      id="registerMessage"
+    ></div>
 
-    <button class="primary-btn" onclick="register()">
-      রেজিস্ট্রেশন করুন
+    <button
+      class="primary-btn"
+      onclick="register()"
+    >
+      📝 রেজিস্ট্রেশন করুন
     </button>
 
-    <button class="secondary-btn" onclick="switchToLogin()">
-      আগে থেকেই অ্যাকাউন্ট আছে
+    <button
+      class="secondary-btn"
+      onclick="switchToLogin()"
+    >
+      🔐 আগে থেকেই অ্যাকাউন্ট আছে
     </button>
 
   </div>
@@ -808,19 +1012,27 @@ footer{
 </div>
 
 
-<!-- EDIT PROFILE MODAL -->
+<!-- ================= EDIT PROFILE ================= -->
 
-<div class="modal" id="editProfileModal">
+<div
+  class="modal"
+  id="editProfileModal"
+>
 
   <div class="modal-box">
 
-    <button class="close" onclick="closeModal('editProfileModal')">
+    <button
+      class="close"
+      onclick="closeModal('editProfileModal')"
+    >
       ×
     </button>
 
     <h2>✏️ প্রোফাইল Edit</h2>
 
-    <label>নাম</label>
+    <label>
+      নাম
+    </label>
 
     <input
       type="text"
@@ -828,7 +1040,9 @@ footer{
       placeholder="আপনার নাম"
     >
 
-    <label>মোবাইল নম্বর</label>
+    <label>
+      মোবাইল নম্বর
+    </label>
 
     <input
       type="tel"
@@ -836,14 +1050,18 @@ footer{
       placeholder="মোবাইল নম্বর"
     >
 
-    <label>সাহায্যের ধরন</label>
+    <label>
+      আপনি কী ধরনের সাহায্য করতে পারেন?
+    </label>
 
     <textarea
       id="editHelpTypes"
-      placeholder="আপনি কী ধরনের সাহায্য করতে পারেন?"
+      placeholder="সাহায্যের ধরন"
     ></textarea>
 
-    <label>প্রোফাইল ছবি</label>
+    <label>
+      প্রোফাইল ছবি
+    </label>
 
     <input
       type="file"
@@ -859,9 +1077,15 @@ footer{
       alt="Preview"
     >
 
-    <div class="message" id="editMessage"></div>
+    <div
+      class="message"
+      id="editMessage"
+    ></div>
 
-    <button class="primary-btn" onclick="saveProfile()">
+    <button
+      class="primary-btn"
+      onclick="saveProfile()"
+    >
       💾 পরিবর্তন সংরক্ষণ করুন
     </button>
 
@@ -872,9 +1096,9 @@ footer{
 
 <script>
 
-/* ================================
-   SUPABASE CONFIG
-================================ */
+/* =====================================================
+   SUPABASE
+===================================================== */
 
 const SUPABASE_URL =
 "https://gzujcqjpxypcoiqhpvvu.supabase.co";
@@ -883,28 +1107,29 @@ const SUPABASE_KEY =
 "sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
 
 
-/* ================================
-   SUPABASE RPC
-================================ */
+async function supabaseRPC(functionName,body){
 
-async function supabaseRPC(functionName, body){
+  const response =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/rpc/" +
+      functionName,
+      {
+        method:"POST",
 
-  const response = await fetch(
-    SUPABASE_URL + "/rest/v1/rpc/" + functionName,
-    {
-      method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "apikey":SUPABASE_KEY,
+          "Authorization":
+            "Bearer " + SUPABASE_KEY
+        },
 
-      headers:{
-        "Content-Type":"application/json",
-        "apikey":SUPABASE_KEY,
-        "Authorization":"Bearer " + SUPABASE_KEY
-      },
+        body:JSON.stringify(body)
+      }
+    );
 
-      body:JSON.stringify(body)
-    }
-  );
-
-  const text = await response.text();
+  const text =
+    await response.text();
 
   let data;
 
@@ -915,27 +1140,32 @@ async function supabaseRPC(functionName, body){
   }
 
   if(!response.ok){
+
     throw new Error(
       typeof data === "string"
       ? data
       : JSON.stringify(data)
     );
+
   }
 
   return data;
+
 }
 
 
-/* ================================
-   USER SESSION
-================================ */
+/* =====================================================
+   USER
+===================================================== */
 
 function getUser(){
 
   try{
 
     return JSON.parse(
-      localStorage.getItem("sohay_user")
+      localStorage.getItem(
+        "sohay_user"
+      )
     );
 
   }catch{
@@ -943,6 +1173,7 @@ function getUser(){
     return null;
 
   }
+
 }
 
 
@@ -958,125 +1189,236 @@ function saveUser(user){
 
 function clearUser(){
 
-  localStorage.removeItem("sohay_user");
+  localStorage.removeItem(
+    "sohay_user"
+  );
 
 }
 
 
-/* ================================
+/* =====================================================
+   MENU
+===================================================== */
+
+function toggleMenu(){
+
+  document
+    .getElementById("menuPanel")
+    .classList.toggle("show");
+
+}
+
+
+function closeMenu(){
+
+  document
+    .getElementById("menuPanel")
+    .classList.remove("show");
+
+}
+
+
+document.addEventListener(
+  "click",
+  function(event){
+
+    const menu =
+      document.querySelector(
+        ".menu-wrap"
+      );
+
+    if(
+      menu &&
+      !menu.contains(event.target)
+    ){
+
+      closeMenu();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
    LOGIN UI
-================================ */
+===================================================== */
 
 function updateLoginUI(){
 
-  const user = getUser();
+  const user =
+    getUser();
 
-  const guestButtons =
-    document.getElementById("guestButtons");
+  const menuUser =
+    document.getElementById(
+      "menuUser"
+    );
 
-  const userMenu =
-    document.getElementById("userMenu");
+  const userMenuTitle =
+    document.getElementById(
+      "userMenuTitle"
+    );
 
-  const headerUserName =
-    document.getElementById("headerUserName");
+  const profileBtn =
+    document.getElementById(
+      "profileMenuBtn"
+    );
+
+  const editBtn =
+    document.getElementById(
+      "editMenuBtn"
+    );
+
+  const reportBtn =
+    document.getElementById(
+      "reportMenuBtn"
+    );
+
+  const loginBtn =
+    document.getElementById(
+      "loginMenuBtn"
+    );
+
+  const registerBtn =
+    document.getElementById(
+      "registerMenuBtn"
+    );
+
+  const logoutBtn =
+    document.getElementById(
+      "logoutMenuBtn"
+    );
 
   const userBox =
-    document.getElementById("userBox");
+    document.getElementById(
+      "userBox"
+    );
 
   const userBoxName =
-    document.getElementById("userBoxName");
+    document.getElementById(
+      "userBoxName"
+    );
 
 
   if(user){
 
-    guestButtons.style.display = "none";
+    menuUser.style.display =
+      "block";
 
-    userMenu.style.display = "flex";
+    menuUser.textContent =
+      "👤 " +
+      (user.full_name ||
+       "ব্যবহারকারী");
 
-    headerUserName.textContent =
-      "👤 " + (user.full_name || "ব্যবহারকারী");
+    userMenuTitle.style.display =
+      "block";
 
-    userBox.style.display = "block";
+    profileBtn.style.display =
+      "block";
+
+    editBtn.style.display =
+      "block";
+
+    reportBtn.style.display =
+      "block";
+
+    loginBtn.style.display =
+      "none";
+
+    registerBtn.style.display =
+      "none";
+
+    logoutBtn.style.display =
+      "block";
+
+    userBox.style.display =
+      "block";
 
     userBoxName.textContent =
-      user.full_name || "ব্যবহারকারী";
+      user.full_name ||
+      "ব্যবহারকারী";
 
   }else{
 
-    guestButtons.style.display = "flex";
+    menuUser.style.display =
+      "none";
 
-    userMenu.style.display = "none";
+    userMenuTitle.style.display =
+      "none";
 
-    userBox.style.display = "none";
+    profileBtn.style.display =
+      "none";
 
-    closeUserMenu();
+    editBtn.style.display =
+      "none";
+
+    reportBtn.style.display =
+      "none";
+
+    loginBtn.style.display =
+      "block";
+
+    registerBtn.style.display =
+      "block";
+
+    logoutBtn.style.display =
+      "none";
+
+    userBox.style.display =
+      "none";
 
   }
 
 }
 
 
-/* ================================
-   MENU
-================================ */
-
-function toggleUserMenu(){
-
-  document
-    .getElementById("dropdownMenu")
-    .classList.toggle("show");
-
-}
-
-
-function closeUserMenu(){
-
-  document
-    .getElementById("dropdownMenu")
-    .classList.remove("show");
-
-}
-
-
-/* ================================
-   MODAL
-================================ */
+/* =====================================================
+   MODALS
+===================================================== */
 
 function openModal(id){
 
-  document.getElementById(id).style.display = "block";
+  document.getElementById(id)
+    .style.display = "block";
 
 }
 
 
 function closeModal(id){
 
-  document.getElementById(id).style.display = "none";
+  document.getElementById(id)
+    .style.display = "none";
 
 }
 
 
 function openLogin(){
 
-  closeUserMenu();
+  closeMenu();
 
-  openModal("loginModal");
+  openModal(
+    "loginModal"
+  );
 
 }
 
 
 function openRegister(){
 
-  closeUserMenu();
+  closeMenu();
 
-  openModal("registerModal");
+  openModal(
+    "registerModal"
+  );
 
 }
 
 
 function switchToRegister(){
 
-  closeModal("loginModal");
+  closeModal(
+    "loginModal"
+  );
 
   openRegister();
 
@@ -1085,37 +1427,45 @@ function switchToRegister(){
 
 function switchToLogin(){
 
-  closeModal("registerModal");
+  closeModal(
+    "registerModal"
+  );
 
   openLogin();
 
 }
 
 
-/* ================================
+/* =====================================================
    LOGOUT
-================================ */
+===================================================== */
 
 function logout(){
 
   clearUser();
 
-  closeUserMenu();
+  closeMenu();
 
-  document.getElementById("profileCard").style.display = "none";
+  document.getElementById(
+    "profileCard"
+  ).style.display = "none";
 
-  document.getElementById("reportCard").style.display = "none";
+  document.getElementById(
+    "reportCard"
+  ).style.display = "none";
 
   updateLoginUI();
 
-  alert("আপনি লগআউট করেছেন।");
+  alert(
+    "আপনি সফলভাবে লগআউট করেছেন।"
+  );
 
 }
 
 
-/* ================================
-   HELP TYPES
-================================ */
+/* =====================================================
+   10 HELP TYPES
+===================================================== */
 
 const helpTypes = [
 
@@ -1148,8 +1498,12 @@ let selectedHelpTypes = [];
 function toggleHelpOptions(){
 
   document
-    .getElementById("helpOptions")
-    .classList.toggle("show");
+    .getElementById(
+      "helpOptions"
+    )
+    .classList.toggle(
+      "show"
+    );
 
 }
 
@@ -1158,26 +1512,36 @@ function selectHelp(event,index){
 
   event.stopPropagation();
 
-  const option =
-    event.currentTarget;
-
   const value =
     helpTypes[index - 1];
 
-  if(selectedHelpTypes.includes(value)){
+  const option =
+    event.currentTarget;
+
+
+  if(
+    selectedHelpTypes
+      .includes(value)
+  ){
 
     selectedHelpTypes =
       selectedHelpTypes.filter(
         x => x !== value
       );
 
-    option.classList.remove("selected");
+    option.classList.remove(
+      "selected"
+    );
 
   }else{
 
-    selectedHelpTypes.push(value);
+    selectedHelpTypes.push(
+      value
+    );
 
-    option.classList.add("selected");
+    option.classList.add(
+      "selected"
+    );
 
   }
 
@@ -1186,15 +1550,49 @@ function selectHelp(event,index){
     "selectedHelpText"
   ).textContent =
     selectedHelpTypes.length
-    ? "নির্বাচিত: " + selectedHelpTypes.join(" | ")
+    ? "নির্বাচিত: " +
+      selectedHelpTypes.join(" | ")
     : "";
 
 }
 
 
-/* ================================
+/* =====================================================
+   HELP CLICK
+===================================================== */
+
+function chooseHelp(type){
+
+  closeMenu();
+
+  const user =
+    getUser();
+
+  if(!user){
+
+    alert(
+      "এই সুবিধা ব্যবহার করতে আগে লগইন বা রেজিস্ট্রেশন করুন।"
+    );
+
+    openLogin();
+
+    return;
+
+  }
+
+
+  alert(
+    "আপনি নির্বাচন করেছেন:\n\n" +
+    type +
+    "\n\nপরবর্তী ধাপে এই সাহায্যের রিপোর্ট তৈরি হবে।"
+  );
+
+}
+
+
+/* =====================================================
    BANGLADESH LOCATION
-================================ */
+===================================================== */
 
 const GEO_URL =
 "https://iqbalhasandev.github.io/bangladesh-geo-json/bangladesh-geo.json";
@@ -1216,7 +1614,10 @@ async function loadGeoData(){
 
   }catch(error){
 
-    console.log(error);
+    console.error(
+      "Location data error:",
+      error
+    );
 
   }
 
@@ -1237,23 +1638,31 @@ function loadDivisions(){
 
 
   const divisions =
-    geoData.divisions || geoData;
+    geoData.divisions ||
+    geoData;
 
 
-  divisions.forEach((division,index)=>{
+  divisions.forEach(
+    (division,index)=>{
 
-    const option =
-      document.createElement("option");
+      const option =
+        document.createElement(
+          "option"
+        );
 
-    option.value = index;
+      option.value =
+        index;
 
-    option.textContent =
-      division.bn_name ||
-      division.name;
+      option.textContent =
+        division.bn_name ||
+        division.name;
 
-    select.appendChild(option);
+      select.appendChild(
+        option
+      );
 
-  });
+    }
+  );
 
 }
 
@@ -1295,12 +1704,19 @@ function loadDistricts(){
   union.disabled = true;
 
 
-  if(divisionIndex === "" || !geoData)
+  if(
+    divisionIndex === "" ||
+    !geoData
+  ){
+
     return;
+
+  }
 
 
   const divisions =
-    geoData.divisions || geoData;
+    geoData.divisions ||
+    geoData;
 
   const division =
     divisions[divisionIndex];
@@ -1309,20 +1725,28 @@ function loadDistricts(){
     division.districts || [];
 
 
-  districts.forEach((item,index)=>{
+  districts.forEach(
+    (item,index)=>{
 
-    const option =
-      document.createElement("option");
+      const option =
+        document.createElement(
+          "option"
+        );
 
-    option.value = index;
+      option.value =
+        index;
 
-    option.textContent =
-      item.bn_name ||
-      item.name;
+      option.textContent =
+        item.bn_name ||
+        item.name;
 
-    district.appendChild(option);
+      district.appendChild(
+        option
+      );
 
-  });
+    }
+  );
+
 
   district.disabled = false;
 
@@ -1366,39 +1790,50 @@ function loadUpazilas(){
     divisionIndex === "" ||
     districtIndex === "" ||
     !geoData
-  ) return;
+  ){
+
+    return;
+
+  }
 
 
   const divisions =
-    geoData.divisions || geoData;
+    geoData.divisions ||
+    geoData;
 
   const division =
     divisions[divisionIndex];
 
-  const districts =
-    division.districts || [];
-
   const district =
-    districts[districtIndex];
+    (division.districts || [])
+    [districtIndex];
 
   const upazilas =
     district.upazilas || [];
 
 
-  upazilas.forEach((item,index)=>{
+  upazilas.forEach(
+    (item,index)=>{
 
-    const option =
-      document.createElement("option");
+      const option =
+        document.createElement(
+          "option"
+        );
 
-    option.value = index;
+      option.value =
+        index;
 
-    option.textContent =
-      item.bn_name ||
-      item.name;
+      option.textContent =
+        item.bn_name ||
+        item.name;
 
-    upazila.appendChild(option);
+      upazila.appendChild(
+        option
+      );
 
-  });
+    }
+  );
+
 
   upazila.disabled = false;
 
@@ -1439,11 +1874,16 @@ function loadUnions(){
     districtIndex === "" ||
     upazilaIndex === "" ||
     !geoData
-  ) return;
+  ){
+
+    return;
+
+  }
 
 
   const divisions =
-    geoData.divisions || geoData;
+    geoData.divisions ||
+    geoData;
 
   const division =
     divisions[divisionIndex];
@@ -1460,29 +1900,33 @@ function loadUnions(){
     upazila.unions || [];
 
 
-  unions.forEach((item,index)=>{
+  unions.forEach(
+    (item,index)=>{
 
-    const option =
-      document.createElement("option");
+      const option =
+        document.createElement(
+          "option"
+        );
 
-    option.value = index;
+      option.value =
+        index;
 
-    option.textContent =
-      item.bn_name ||
-      item.name;
+      option.textContent =
+        item.bn_name ||
+        item.name;
 
-    union.appendChild(option);
+      union.appendChild(
+        option
+      );
 
-  });
+    }
+  );
+
 
   union.disabled = false;
 
 }
 
-
-/* ================================
-   GET LOCATION TEXT
-================================ */
 
 function getSelectedArea(){
 
@@ -1521,22 +1965,30 @@ function getSelectedArea(){
 
   return [
 
-    d.options[d.selectedIndex].text,
+    d.options[
+      d.selectedIndex
+    ].text,
 
-    di.options[di.selectedIndex].text,
+    di.options[
+      di.selectedIndex
+    ].text,
 
-    u.options[u.selectedIndex].text,
+    u.options[
+      u.selectedIndex
+    ].text,
 
-    un.options[un.selectedIndex].text
+    un.options[
+      un.selectedIndex
+    ].text
 
   ].join(" → ");
 
 }
 
 
-/* ================================
+/* =====================================================
    REGISTER
-================================ */
+===================================================== */
 
 async function register(){
 
@@ -1555,7 +2007,6 @@ async function register(){
       "registerPassword"
     ).value;
 
-
   const message =
     document.getElementById(
       "registerMessage"
@@ -1565,7 +2016,11 @@ async function register(){
   message.textContent = "";
 
 
-  if(!name || !phone || !password){
+  if(
+    !name ||
+    !phone ||
+    !password
+  ){
 
     message.className =
       "message error";
@@ -1591,7 +2046,9 @@ async function register(){
   }
 
 
-  if(selectedHelpTypes.length === 0){
+  if(
+    selectedHelpTypes.length === 0
+  ){
 
     message.className =
       "message error";
@@ -1627,7 +2084,7 @@ async function register(){
       "message";
 
     message.textContent =
-      "অ্যাকাউন্ট তৈরি হচ্ছে...";
+      "রেজিস্ট্রেশন হচ্ছে...";
 
 
     const result =
@@ -1638,12 +2095,16 @@ async function register(){
           p_phone:phone,
           p_password:password,
           p_area:area,
-          p_help_types:selectedHelpTypes.join(" | ")
+          p_help_types:
+            selectedHelpTypes.join(" | ")
         }
       );
 
 
-    if(result && result.ok === false){
+    if(
+      result &&
+      result.ok === false
+    ){
 
       throw new Error(
         result.message ||
@@ -1654,19 +2115,21 @@ async function register(){
 
 
     const user =
-      result.user || result;
+      result.user ||
+      result;
 
 
     saveUser(user);
 
-    closeModal("registerModal");
+    closeModal(
+      "registerModal"
+    );
 
     updateLoginUI();
 
     alert(
       "রেজিস্ট্রেশন সফল হয়েছে।"
     );
-
 
   }catch(error){
 
@@ -1676,7 +2139,7 @@ async function register(){
       "message error";
 
     message.textContent =
-      "রেজিস্ট্রেশন করা যায়নি। " +
+      "রেজিস্ট্রেশন করা যায়নি: " +
       error.message;
 
   }
@@ -1684,9 +2147,9 @@ async function register(){
 }
 
 
-/* ================================
+/* =====================================================
    LOGIN
-================================ */
+===================================================== */
 
 async function login(){
 
@@ -1706,10 +2169,10 @@ async function login(){
     );
 
 
-  message.textContent = "";
-
-
-  if(!phone || !password){
+  if(
+    !phone ||
+    !password
+  ){
 
     message.className =
       "message error";
@@ -1741,30 +2204,35 @@ async function login(){
       );
 
 
-    if(!result || result.ok === false){
+    if(
+      !result ||
+      result.ok === false
+    ){
 
       throw new Error(
         result?.message ||
-        "নাম অথবা পাসওয়ার্ড সঠিক নয়।"
+        "মোবাইল নম্বর অথবা পাসওয়ার্ড সঠিক নয়।"
       );
 
     }
 
 
     const user =
-      result.user || result;
+      result.user ||
+      result;
 
 
     saveUser(user);
 
-    closeModal("loginModal");
+    closeModal(
+      "loginModal"
+    );
 
     updateLoginUI();
 
     alert(
       "সফলভাবে লগইন হয়েছে।"
     );
-
 
   }catch(error){
 
@@ -1782,44 +2250,13 @@ async function login(){
 }
 
 
-/* ================================
-   CHOOSE HELP
-================================ */
-
-function chooseHelp(type){
-
-  const user = getUser();
-
-
-  if(!user){
-
-    alert(
-      "এই সুবিধা ব্যবহার করতে আগে লগইন করুন।"
-    );
-
-    openLogin();
-
-    return;
-
-  }
-
-
-  alert(
-    "আপনি নির্বাচন করেছেন:\n\n" +
-    type +
-    "\n\nপরবর্তী ধাপে এই সাহায্যের রিপোর্ট তৈরি করা হবে।"
-  );
-
-}
-
-
-/* ================================
+/* =====================================================
    PROFILE
-================================ */
+===================================================== */
 
 function openProfile(){
 
-  closeUserMenu();
+  closeMenu();
 
   const user =
     getUser();
@@ -1833,54 +2270,50 @@ function openProfile(){
   }
 
 
-  const card =
-    document.getElementById(
-      "profileCard"
-    );
-
-  const photo =
-    document.getElementById(
-      "profilePhoto"
-    );
-
-  const name =
-    document.getElementById(
-      "profileName"
-    );
-
-  const info =
-    document.getElementById(
-      "profileInfo"
-    );
-
-
-  name.textContent =
+  document.getElementById(
+    "profileName"
+  ).textContent =
     user.full_name ||
     "ব্যবহারকারী";
 
 
-  photo.src =
+  document.getElementById(
+    "profilePhoto"
+  ).src =
     user.photo_url ||
     makeDefaultAvatar(
       user.full_name
     );
 
 
-  info.innerHTML =
+  document.getElementById(
+    "profileInfo"
+  ).innerHTML =
 
     "<b>📞 মোবাইল:</b> " +
-    escapeHTML(user.phone || "") +
+    escapeHTML(
+      user.phone || ""
+    ) +
 
     "<br><b>📍 এলাকা:</b> " +
-    escapeHTML(user.area || "তথ্য নেই") +
+    escapeHTML(
+      user.area || "তথ্য নেই"
+    ) +
 
     "<br><b>🤝 সাহায্যের ধরন:</b> " +
     escapeHTML(
-      user.help_types || "তথ্য নেই"
+      user.help_types ||
+      "তথ্য নেই"
     );
 
 
-  card.style.display = "block";
+  const card =
+    document.getElementById(
+      "profileCard"
+    );
+
+  card.style.display =
+    "block";
 
   card.scrollIntoView({
     behavior:"smooth"
@@ -1889,9 +2322,13 @@ function openProfile(){
 }
 
 
+/* =====================================================
+   EDIT PROFILE
+===================================================== */
+
 function openEditProfile(){
 
-  closeUserMenu();
+  closeMenu();
 
   const user =
     getUser();
@@ -1939,21 +2376,24 @@ function openEditProfile(){
 }
 
 
-/* ================================
+/* =====================================================
    PHOTO
-================================ */
+===================================================== */
 
 function openPhotoPicker(){
 
   openEditProfile();
 
-  setTimeout(()=>{
+  setTimeout(
+    function(){
 
-    document.getElementById(
-      "photoInput"
-    ).click();
+      document.getElementById(
+        "photoInput"
+      ).click();
 
-  },300);
+    },
+    300
+  );
 
 }
 
@@ -1964,6 +2404,22 @@ function previewPhoto(event){
     event.target.files[0];
 
   if(!file) return;
+
+
+  if(
+    file.size >
+    5 * 1024 * 1024
+  ){
+
+    alert(
+      "ছবির সাইজ ৫ MB-এর বেশি হতে পারবে না।"
+    );
+
+    event.target.value = "";
+
+    return;
+
+  }
 
 
   const reader =
@@ -1986,9 +2442,9 @@ function previewPhoto(event){
 }
 
 
-/* ================================
+/* =====================================================
    SAVE PROFILE
-================================ */
+===================================================== */
 
 async function saveProfile(){
 
@@ -2019,7 +2475,6 @@ async function saveProfile(){
       "editHelpTypes"
     ).value.trim();
 
-
   const message =
     document.getElementById(
       "editMessage"
@@ -2049,29 +2504,12 @@ async function saveProfile(){
     ).files[0];
 
 
-  /*
-    বর্তমানে ছবিটি localStorage-এ রাখা হচ্ছে।
-    পরে Supabase Storage যুক্ত করলে
-    এখান থেকে সরাসরি server-এ ছবি আপলোড করা যাবে।
-  */
-
   if(photoFile){
 
-    if(photoFile.size > 5 * 1024 * 1024){
-
-      message.className =
-        "message error";
-
-      message.textContent =
-        "ছবির সাইজ ৫ MB-এর বেশি হতে পারবে না।";
-
-      return;
-
-    }
-
-
     photoUrl =
-      await fileToDataURL(photoFile);
+      await fileToDataURL(
+        photoFile
+      );
 
   }
 
@@ -2091,7 +2529,9 @@ async function saveProfile(){
   };
 
 
-  saveUser(updatedUser);
+  saveUser(
+    updatedUser
+  );
 
   updateLoginUI();
 
@@ -2102,15 +2542,18 @@ async function saveProfile(){
     "প্রোফাইল পরিবর্তন সংরক্ষণ হয়েছে।";
 
 
-  setTimeout(()=>{
+  setTimeout(
+    function(){
 
-    closeModal(
-      "editProfileModal"
-    );
+      closeModal(
+        "editProfileModal"
+      );
 
-    openProfile();
+      openProfile();
 
-  },800);
+    },
+    700
+  );
 
 }
 
@@ -2124,12 +2567,16 @@ function fileToDataURL(file){
         new FileReader();
 
       reader.onload =
-        ()=>resolve(reader.result);
+        () => resolve(
+          reader.result
+        );
 
       reader.onerror =
         reject;
 
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(
+        file
+      );
 
     }
   );
@@ -2137,13 +2584,13 @@ function fileToDataURL(file){
 }
 
 
-/* ================================
+/* =====================================================
    REPORTS
-================================ */
+===================================================== */
 
 function openReports(){
 
-  closeUserMenu();
+  closeMenu();
 
   const user =
     getUser();
@@ -2168,23 +2615,17 @@ function openReports(){
     );
 
 
-  /*
-    আপাতত নিজের রিপোর্টের জায়গা প্রস্তুত রাখা হয়েছে।
-    পরে reports table যুক্ত হলে এখানে
-    Supabase থেকে শুধু নিজের রিপোর্ট আসবে।
-  */
-
   list.innerHTML = `
 
     <div class="empty">
 
-      📊 আপনার রিপোর্ট এখানে দেখা যাবে।
+      📊 আপনার রিপোর্ট এখানে থাকবে।
 
       <br><br>
 
       আপনি যে সাহায্য চাইবেন,
       সাহায্য করবেন অথবা কোনো সমস্যা রিপোর্ট করবেন—
-      সেগুলোর তথ্য এখানে থাকবে।
+      সেগুলোর তথ্য এখানে দেখা যাবে।
 
       <br><br>
 
@@ -2197,7 +2638,8 @@ function openReports(){
   `;
 
 
-  card.style.display = "block";
+  card.style.display =
+    "block";
 
   card.scrollIntoView({
     behavior:"smooth"
@@ -2206,40 +2648,43 @@ function openReports(){
 }
 
 
-/* ================================
-   DEFAULT AVATAR
-================================ */
+/* =====================================================
+   DEFAULT PHOTO
+===================================================== */
 
 function makeDefaultAvatar(name){
 
   const first =
     (name || "U")
-    .trim()
-    .charAt(0)
-    .toUpperCase();
+      .trim()
+      .charAt(0)
+      .toUpperCase();
 
 
   const svg = `
 
-  <svg xmlns="http://www.w3.org/2000/svg"
-       width="200"
-       height="200">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="200"
+    height="200"
+  >
 
-    <rect width="100%"
-          height="100%"
-          rx="100"
-          fill="#087443"/>
+    <rect
+      width="100%"
+      height="100%"
+      rx="100"
+      fill="#087443"
+    />
 
     <text
       x="50%"
-      y="56%"
+      y="58%"
       text-anchor="middle"
       font-size="90"
       fill="white"
-      font-family="Arial">
-
+      font-family="Arial"
+    >
       ${first}
-
     </text>
 
   </svg>
@@ -2247,65 +2692,48 @@ function makeDefaultAvatar(name){
   `;
 
 
-  return "data:image/svg+xml;charset=UTF-8," +
-    encodeURIComponent(svg);
+  return (
+    "data:image/svg+xml;charset=UTF-8," +
+    encodeURIComponent(svg)
+  );
 
 }
 
 
-/* ================================
-   ESCAPE HTML
-================================ */
+/* =====================================================
+   SECURITY DISPLAY
+===================================================== */
 
 function escapeHTML(value){
 
   return String(value || "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
-/* ================================
-   OUTSIDE CLICK
-================================ */
-
-document.addEventListener(
-  "click",
-  function(event){
-
-    const menu =
-      document.getElementById(
-        "userMenu"
-      );
-
-    const dropdown =
-      document.getElementById(
-        "dropdownMenu"
-      );
-
-
-    if(
-      menu &&
-      !menu.contains(event.target)
-    ){
-
-      dropdown.classList.remove(
-        "show"
-      );
-
-    }
-
-  }
-);
-
-
-/* ================================
+/* =====================================================
    START
-================================ */
+===================================================== */
 
 loadGeoData();
 
