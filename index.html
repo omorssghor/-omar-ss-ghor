@@ -3,1323 +3,1382 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>সহায় — মানুষ মানুষের পাশে</title>
+<meta name="theme-color" content="#087f5b">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<title>সহায় — মানুষ মানুষের পাশে</title>
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:
-    system-ui,
-    -apple-system,
-    "Noto Sans Bengali",
-    "Noto Sans",
-    sans-serif;
-  background:#f4f7f8;
-  color:#17202a;
-  line-height:1.6;
+    font-family:-apple-system,BlinkMacSystemFont,
+    "Noto Sans Bengali","Noto Sans",sans-serif;
+    background:#f1f3f5;
+    color:#17202a;
+    padding-bottom:78px;
 }
 
 button,
 input,
-textarea,
-select{
-  font:inherit;
+select,
+textarea{
+    font:inherit;
 }
 
 button{
-  cursor:pointer;
+    cursor:pointer;
 }
 
-.header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:#ffffff;
-  border-bottom:1px solid #e5e7eb;
-  height:64px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 14px;
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+    outline:3px solid #ffb703;
+    outline-offset:2px;
 }
 
-.logo{
-  font-size:20px;
-  font-weight:800;
-  color:#087f5b;
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    height:64px;
+
+    background:#ffffff;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:8px 14px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
 .menu-btn{
-  width:44px;
-  height:44px;
-  border:0;
-  border-radius:12px;
-  background:#087f5b;
-  color:white;
-  font-size:25px;
+    width:46px;
+    height:46px;
+
+    border:0;
+    border-radius:50%;
+
+    background:#f0f2f5;
+
+    font-size:24px;
 }
 
-.container{
-  width:min(900px,94%);
-  margin:auto;
+.profile-btn{
+    width:46px;
+    height:46px;
+
+    border:0;
+    background:none;
+    border-radius:50%;
 }
+
+.profile-photo{
+    width:46px;
+    height:46px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid #087f5b;
+}
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
-  margin-top:15px;
-  padding:28px 18px;
-  border-radius:20px;
-  background:linear-gradient(135deg,#087f5b,#0b9b70);
-  color:white;
-  text-align:center;
-  box-shadow:0 8px 25px rgba(0,0,0,.08);
+    background:#ffffff;
+
+    padding:24px 16px 20px;
+
+    text-align:center;
+
+    border-bottom:1px solid #e5e7eb;
 }
 
-.hero h1{
-  font-size:30px;
-  margin-bottom:8px;
+.logo-title{
+    font-size:30px;
+    font-weight:900;
+    color:#087f5b;
 }
 
-.hero p{
-  font-size:16px;
+.subtitle{
+    margin-top:5px;
+    color:#606a73;
+    font-size:15px;
 }
 
-.hero strong{
-  display:block;
-  margin-top:10px;
-  font-size:18px;
+.tagline{
+    max-width:600px;
+    margin:16px auto 0;
+
+    padding:14px;
+
+    border-radius:15px;
+
+    background:#e8f7f0;
+
+    color:#087f5b;
+
+    font-size:17px;
+    font-weight:800;
+
+    line-height:1.6;
 }
 
-.section-title{
-  margin:22px 0 12px;
-  font-size:21px;
+/* =========================
+   FEED
+========================= */
+
+.feed{
+    max-width:700px;
+    margin:0 auto;
 }
 
-.quick-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
+.feed-title{
+    padding:16px 14px 7px;
 
-.quick-actions button{
-  border:0;
-  background:white;
-  padding:14px 8px;
-  border-radius:14px;
-  box-shadow:0 2px 10px rgba(0,0,0,.06);
-  color:#17202a;
-  font-weight:700;
+    font-size:19px;
+    font-weight:900;
 }
 
 .post{
-  background:white;
-  margin:13px 0;
-  padding:17px;
-  border-radius:17px;
-  box-shadow:0 2px 12px rgba(0,0,0,.06);
+    background:#ffffff;
+
+    margin:8px 10px;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:0 1px 6px rgba(0,0,0,.08);
 }
 
-.post-top{
-  display:flex;
-  align-items:center;
-  gap:10px;
+.post-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:14px;
 }
 
-.avatar{
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#dfeee9;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:21px;
-  overflow:hidden;
+.post-user-photo{
+    width:46px;
+    height:46px;
+
+    border-radius:50%;
+
+    object-fit:cover;
 }
 
-.avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.post-user-name{
+    font-weight:800;
+    font-size:15px;
 }
 
-.post-name{
-  font-weight:800;
+.post-time{
+    margin-top:3px;
+
+    color:#777;
+
+    font-size:12px;
 }
 
-.post-date{
-  color:#78818a;
-  font-size:12px;
+.post-content{
+    padding:0 14px 14px;
+
+    font-size:16px;
+
+    line-height:1.7;
 }
 
-.type-badge{
-  display:inline-block;
-  margin-top:12px;
-  background:#e8f7f1;
-  color:#087f5b;
-  padding:5px 10px;
-  border-radius:20px;
-  font-size:13px;
-  font-weight:700;
+.post-status{
+    margin:0 14px 13px;
+
+    display:inline-block;
+
+    padding:5px 9px;
+
+    border-radius:20px;
+
+    background:#fff4d6;
+
+    color:#805b00;
+
+    font-size:12px;
+    font-weight:700;
 }
 
-.status{
-  display:inline-block;
-  margin-left:5px;
-  background:#fff4d6;
-  color:#8a6100;
-  padding:5px 10px;
-  border-radius:20px;
-  font-size:13px;
-  font-weight:700;
+.post-action{
+    padding:0 14px 15px;
 }
 
-.post h3{
-  margin-top:12px;
-  font-size:19px;
+.help-btn,
+.primary-btn{
+    width:100%;
+
+    border:0;
+
+    border-radius:10px;
+
+    padding:12px;
+
+    background:#087f5b;
+
+    color:#ffffff;
+
+    font-size:16px;
+
+    font-weight:800;
 }
 
-.post p{
-  margin-top:6px;
-  color:#4b5563;
-}
+.secondary-btn{
+    border:1px solid #d4d9dd;
 
-.location{
-  margin-top:10px;
-  font-size:13px;
-  color:#65727e;
-}
+    background:#ffffff;
 
-.post-actions{
-  display:flex;
-  gap:8px;
-  margin-top:15px;
-}
+    color:#344054;
 
-.post-actions button{
-  flex:1;
-  border:1px solid #e3e7ea;
-  background:white;
-  border-radius:10px;
-  padding:10px 6px;
-  font-weight:700;
-}
+    border-radius:9px;
 
-.help-btn{
-  background:#087f5b !important;
-  color:white !important;
-  border-color:#087f5b !important;
-}
-
-.menu-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  z-index:2000;
-  display:none;
-}
-
-.menu-overlay.show{
-  display:block;
-}
-
-.side-menu{
-  width:min(390px,88%);
-  height:100%;
-  background:white;
-  position:absolute;
-  right:0;
-  top:0;
-  overflow-y:auto;
-  padding:18px;
-}
-
-.menu-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:15px;
-}
-
-.close-btn{
-  border:0;
-  background:#f0f2f3;
-  width:40px;
-  height:40px;
-  border-radius:10px;
-  font-size:20px;
-}
-
-.user-box{
-  background:#e9f7f2;
-  padding:15px;
-  border-radius:15px;
-  margin-bottom:15px;
-}
-
-.menu-item{
-  width:100%;
-  border:0;
-  background:white;
-  padding:13px 10px;
-  border-bottom:1px solid #edf0f2;
-  text-align:left;
-  font-weight:700;
-  border-radius:8px;
-}
-
-.menu-item:hover{
-  background:#f5f7f8;
-}
-
-.service-title{
-  margin:18px 5px 6px;
-  font-size:14px;
-  color:#68737d;
-}
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:3000;
-  background:rgba(0,0,0,.55);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  width:min(600px,100%);
-  max-height:92vh;
-  overflow-y:auto;
-  background:white;
-  border-radius:20px;
-  padding:20px;
-}
-
-.modal-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:15px;
-}
-
-.form-group{
-  margin-bottom:13px;
-}
-
-.form-group label{
-  display:block;
-  font-weight:700;
-  margin-bottom:5px;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select{
-  width:100%;
-  border:1px solid #d8dee3;
-  border-radius:11px;
-  padding:11px;
-  outline:none;
-  background:white;
-}
-
-.form-group textarea{
-  min-height:110px;
-  resize:vertical;
-}
-
-.primary{
-  width:100%;
-  border:0;
-  background:#087f5b;
-  color:white;
-  padding:13px;
-  border-radius:11px;
-  font-weight:800;
-}
-
-.secondary{
-  width:100%;
-  border:1px solid #d8dee3;
-  background:white;
-  padding:12px;
-  border-radius:11px;
-  font-weight:700;
-  margin-top:8px;
-}
-
-.message{
-  padding:11px;
-  border-radius:10px;
-  margin-bottom:12px;
-  display:none;
-}
-
-.message.show{
-  display:block;
-}
-
-.message.error{
-  background:#ffe8e8;
-  color:#a30000;
-}
-
-.message.success{
-  background:#e6f7ee;
-  color:#087f5b;
-}
-
-.service-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:7px;
-}
-
-.service-option{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  border:1px solid #e0e5e8;
-  padding:11px;
-  border-radius:11px;
-  background:#fafafa;
-}
-
-.service-option input{
-  width:18px;
-  height:18px;
-}
-
-.dropdown{
-  position:relative;
-}
-
-.dropdown-display{
-  width:100%;
-  border:1px solid #d8dee3;
-  border-radius:11px;
-  padding:11px;
-  background:white;
-  min-height:45px;
-}
-
-.dropdown-options{
-  display:none;
-  margin-top:5px;
-  border:1px solid #d8dee3;
-  border-radius:11px;
-  background:white;
-  padding:8px;
-}
-
-.dropdown-options.show{
-  display:block;
-}
-
-.photo-preview{
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#e7ecef;
-  display:block;
-  margin-bottom:8px;
-}
-
-.privacy-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  padding:9px 0;
-  border-bottom:1px solid #edf0f2;
-}
-
-.privacy-row select{
-  width:130px;
-  padding:7px;
-}
-
-.zakat-card{
-  background:white;
-  padding:15px;
-  border-radius:15px;
-  margin-bottom:10px;
-  box-shadow:0 2px 10px rgba(0,0,0,.06);
-}
-
-.zakat-person{
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
-
-.zakat-person img,
-.zakat-placeholder{
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#e2eee9;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.footer{
-  text-align:center;
-  color:#7a848c;
-  padding:30px 10px;
-  font-size:13px;
-}
-
-.loading{
-  text-align:center;
-  padding:25px;
-  color:#68737d;
+    padding:10px 14px;
 }
 
 .empty{
-  background:white;
-  border-radius:15px;
-  padding:25px;
-  text-align:center;
-  color:#68737d;
+    margin:10px;
+
+    padding:45px 20px;
+
+    background:#ffffff;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    color:#777;
 }
 
-.hidden{
-  display:none !important;
+/* =========================
+   FIXED BOTTOM
+========================= */
+
+.bottom-nav{
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:68px;
+
+    background:#ffffff;
+
+    border-top:1px solid #ddd;
+
+    box-shadow:0 -3px 12px rgba(0,0,0,.09);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-around;
+
+    z-index:2000;
 }
 
-@media(max-width:600px){
-  .logo{
-    font-size:17px;
-  }
+.bottom-item{
+    min-width:60px;
 
-  .hero h1{
-    font-size:25px;
-  }
+    border:0;
 
-  .quick-actions{
-    grid-template-columns:1fr;
-  }
+    background:none;
+
+    padding:5px 7px;
+
+    border-radius:10px;
+
+    color:#555;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:3px;
+
+    font-size:11px;
+}
+
+.bottom-item span:first-child{
+    font-size:21px;
+}
+
+.bottom-item.active{
+    color:#087f5b;
+    font-weight:900;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu-overlay{
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    display:none;
+
+    z-index:3000;
+}
+
+.menu-overlay.show{
+    display:block;
+}
+
+.side-menu{
+    width:min(340px,90vw);
+
+    height:100%;
+
+    background:#ffffff;
+
+    overflow-y:auto;
+
+    box-shadow:5px 0 20px rgba(0,0,0,.25);
+
+    animation:slideMenu .2s ease;
+}
+
+@keyframes slideMenu{
+    from{
+        transform:translateX(-100%);
+    }
+
+    to{
+        transform:translateX(0);
+    }
+}
+
+.menu-head{
+    background:#087f5b;
+
+    color:#ffffff;
+
+    padding:20px 16px;
+}
+
+.menu-close{
+    float:right;
+
+    width:36px;
+    height:36px;
+
+    border:0;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.18);
+
+    color:#ffffff;
+
+    font-size:22px;
+}
+
+.menu-profile{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding-top:8px;
+}
+
+.menu-profile img{
+    width:58px;
+    height:58px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:3px solid #ffffff;
+}
+
+.menu-name{
+    font-size:18px;
+    font-weight:900;
+}
+
+.menu-section{
+    padding:10px 12px;
+}
+
+.menu-label{
+    padding:9px 8px;
+
+    color:#888;
+
+    font-size:12px;
+
+    font-weight:900;
+}
+
+.menu-item{
+    width:100%;
+
+    border:0;
+
+    background:#ffffff;
+
+    padding:13px 10px;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    text-align:left;
+
+    font-size:15px;
+}
+
+.menu-item:hover{
+    background:#f1f4f3;
+}
+
+.menu-icon{
+    width:30px;
+
+    text-align:center;
+
+    font-size:20px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay{
+    position:fixed;
+
+    inset:0;
+
+    z-index:4000;
+
+    background:rgba(0,0,0,.45);
+
+    display:none;
+
+    padding:18px;
+
+    overflow-y:auto;
+}
+
+.modal-overlay.show{
+    display:block;
+}
+
+.modal{
+    width:min(650px,100%);
+
+    margin:4vh auto 30px;
+
+    background:#ffffff;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+.modal-header{
+    background:#087f5b;
+
+    color:#ffffff;
+
+    padding:15px 17px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+}
+
+.modal-title{
+    font-size:19px;
+
+    font-weight:900;
+}
+
+.modal-close{
+    width:36px;
+    height:36px;
+
+    border:0;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.18);
+
+    color:#ffffff;
+
+    font-size:22px;
+}
+
+.modal-body{
+    padding:18px;
+}
+
+.form-grid{
+    display:grid;
+
+    gap:13px;
+}
+
+.form-group{
+    display:grid;
+
+    gap:6px;
+}
+
+.form-group label{
+    font-size:14px;
+
+    font-weight:800;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+
+    border:1px solid #ccd3d9;
+
+    border-radius:9px;
+
+    padding:11px;
+
+    background:#ffffff;
+}
+
+.form-group textarea{
+    min-height:110px;
+
+    resize:vertical;
+}
+
+.form-actions{
+    display:flex;
+
+    gap:10px;
+
+    justify-content:flex-end;
+
+    margin-top:16px;
+}
+
+.form-actions .primary-btn{
+    width:auto;
+}
+
+.form-message{
+    display:none;
+
+    margin-top:13px;
+
+    padding:11px;
+
+    border-radius:9px;
+
+    background:#e8f7f0;
+
+    color:#087f5b;
+
+    line-height:1.5;
+}
+
+.form-message.show{
+    display:block;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.panel-list{
+    display:grid;
+
+    gap:10px;
+}
+
+.panel-card{
+    padding:14px;
+
+    border:1px solid #e0e4e7;
+
+    border-radius:11px;
+
+    background:#fafbfc;
+
+    line-height:1.6;
+}
+
+.panel-card strong{
+    display:block;
+
+    margin-bottom:5px;
+}
+
+.profile-summary{
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    margin-bottom:18px;
+}
+
+.profile-summary img{
+    width:65px;
+    height:65px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+}
+
+/* =========================
+   SETTINGS
+========================= */
+
+.setting-row{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:13px 0;
+
+    border-bottom:1px solid #edf0f2;
+}
+
+.setting-row:last-child{
+    border-bottom:0;
+}
+
+.setting-info{
+    flex:1;
+}
+
+.setting-info strong{
+    display:block;
+
+    margin-bottom:3px;
+}
+
+.setting-info small{
+    color:#777;
+}
+
+.switch{
+    appearance:none;
+
+    width:46px;
+    height:25px;
+
+    border-radius:20px;
+
+    background:#cbd2d8;
+
+    position:relative;
+
+    flex-shrink:0;
+}
+
+.switch:checked{
+    background:#087f5b;
+}
+
+.switch::before{
+    content:"";
+
+    position:absolute;
+
+    width:19px;
+    height:19px;
+
+    left:3px;
+    top:3px;
+
+    border-radius:50%;
+
+    background:#ffffff;
+
+    transition:.2s;
+}
+
+.switch:checked::before{
+    transform:translateX(21px);
+}
+
+/* =========================
+   SERVICE SELECT
+========================= */
+
+.service-grid{
+    display:grid;
+
+    gap:9px;
+}
+
+.service-card{
+    width:100%;
+
+    border:1px solid #e1e5e8;
+
+    background:#ffffff;
+
+    border-radius:11px;
+
+    padding:13px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    text-align:left;
+}
+
+.service-card:hover{
+    background:#f5f8f7;
+}
+
+.service-card .emoji{
+    font-size:23px;
+
+    width:34px;
+
+    text-align:center;
+}
+
+.service-card strong{
+    display:block;
+}
+
+/* =========================
+   PHOTO
+========================= */
+
+.photo-box{
+    text-align:center;
+
+    margin-bottom:15px;
+}
+
+.profile-big{
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:3px solid #087f5b;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:400px){
+
+    .logo-title{
+        font-size:26px;
+    }
+
+    .bottom-item{
+        min-width:55px;
+    }
+
+    .bottom-item span:first-child{
+        font-size:20px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header class="header">
-  <div class="logo">🤝 সহায় — মানুষ মানুষের পাশে</div>
-  <button class="menu-btn" onclick="openMenu()">☰</button>
+<!-- =====================================================
+     TOP
+===================================================== -->
+
+<header class="topbar">
+
+    <button
+        type="button"
+        class="menu-btn"
+        onclick="openMenu()"
+        aria-label="Menu"
+    >
+        ☰
+    </button>
+
+    <button
+        type="button"
+        class="profile-btn"
+        onclick="openProfile()"
+        aria-label="Profile"
+    >
+        <img
+            id="topProfilePhoto"
+            class="profile-photo"
+            src="https://i.pravatar.cc/100?img=12"
+            alt="Profile"
+        >
+    </button>
+
 </header>
 
-<main class="container">
 
-  <section class="hero">
-    <h1>মানুষ মানুষের পাশে</h1>
-    <p>আপনার ছোট্ট সহযোগিতা কারও জীবনে বড় পরিবর্তন আনতে পারে।</p>
-    <strong>সমস্যা পোস্ট করা নয়, সমস্যার সমাধান করা।</strong>
-  </section>
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-  <div class="quick-actions">
-    <button onclick="showActiveHelp()">🤝 Help করুন</button>
-    <button onclick="showSolved()">✅ সমাধান হয়েছে</button>
-    <button onclick="showZakat()">💰 যাকাতের তালিকা</button>
-    <button onclick="openPostModal()">🆘 সাহায্য চাই</button>
-  </div>
+<section class="hero">
 
-  <h2 class="section-title" id="feedTitle">সাহায্যের পোস্ট</h2>
+    <div class="logo-title">
+        সহায়
+    </div>
 
-  <div id="feed">
-    <div class="loading">পোস্ট লোড হচ্ছে...</div>
-  </div>
+    <div class="subtitle">
+        মানুষ মানুষের পাশে
+    </div>
+
+    <div class="tagline">
+        সমস্যা পোস্ট করা নয়,<br>
+        সমস্যার সমাধান করা।
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     HOME FEED
+===================================================== -->
+
+<main class="feed">
+
+    <h1 class="feed-title">
+        🆘 সাহায্যের পোস্ট
+    </h1>
+
+
+    <!-- FIRST POST -->
+
+    <article class="post">
+
+        <div class="post-header">
+
+            <img
+                class="post-user-photo"
+                src="https://i.pravatar.cc/100?img=12"
+                alt="মোঃ রাকিব"
+            >
+
+            <div>
+
+                <div class="post-user-name">
+                    মোঃ রাকিব
+                </div>
+
+                <div class="post-time">
+                    কিছুক্ষণ আগে · 📍 বিরামপুর
+                </div>
+
+            </div>
+
+        </div>
+
+        <span class="post-status">
+            🆕 সাহায্য প্রয়োজন
+        </span>
+
+        <div class="post-content">
+
+            আমার জরুরি কিছু রক্ত প্রয়োজন।
+            কেউ সাহায্য করতে পারলে দয়া করে
+            যোগাযোগ করুন।
+
+        </div>
+
+        <div class="post-action">
+
+            <button
+                class="help-btn"
+                onclick="helpPost('মোঃ রাকিব','রক্ত প্রয়োজন')"
+            >
+                🤝 সাহায্য করুন
+            </button>
+
+        </div>
+
+    </article>
+
+
+    <!-- SECOND POST -->
+
+    <article class="post">
+
+        <div class="post-header">
+
+            <img
+                class="post-user-photo"
+                src="https://i.pravatar.cc/100?img=32"
+                alt="সুমাইয়া"
+            >
+
+            <div>
+
+                <div class="post-user-name">
+                    সুমাইয়া
+                </div>
+
+                <div class="post-time">
+                    ১ ঘণ্টা আগে · 📍 দিনাজপুর
+                </div>
+
+            </div>
+
+        </div>
+
+        <span class="post-status">
+            🔎 যাচাই হচ্ছে
+        </span>
+
+        <div class="post-content">
+
+            একজন অসুস্থ মানুষের হাসপাতালে
+            যাওয়ার জন্য জরুরি যাতায়াত
+            সহায়তা প্রয়োজন।
+
+        </div>
+
+        <div class="post-action">
+
+            <button
+                class="help-btn"
+                onclick="helpPost('সুমাইয়া','জরুরি যাতায়াত')"
+            >
+                🚗 সাহায্য করুন
+            </button>
+
+        </div>
+
+    </article>
+
+
+    <!-- THIRD POST -->
+
+    <article class="post">
+
+        <div class="post-header">
+
+            <img
+                class="post-user-photo"
+                src="https://i.pravatar.cc/100?img=45"
+                alt="আব্দুল্লাহ"
+            >
+
+            <div>
+
+                <div class="post-user-name">
+                    আব্দুল্লাহ
+                </div>
+
+                <div class="post-time">
+                    ২ ঘণ্টা আগে · 📍 বিরামপুর
+                </div>
+
+            </div>
+
+        </div>
+
+        <span class="post-status">
+            🤝 সাহায্যকারী পাওয়া গেছে
+        </span>
+
+        <div class="post-content">
+
+            একজন অসহায় পরিবারের জন্য
+            প্রয়োজনীয় সহায়তা দরকার।
+
+        </div>
+
+        <div class="post-action">
+
+            <button
+                class="help-btn"
+                onclick="helpPost('আব্দুল্লাহ','সাধারণ সহায়তা')"
+            >
+                🤝 সাহায্য করুন
+            </button>
+
+        </div>
+
+    </article>
 
 </main>
 
-<footer class="footer">
-  🤝 সহায় — মানুষ মানুষের পাশে
-  <br>
-  মানুষের জন্য, মানুষের পাশে।
-</footer>
 
+<!-- =====================================================
+     FIXED BOTTOM NAVIGATION
+===================================================== -->
 
-<!-- ================= MENU ================= -->
+<nav class="bottom-nav">
 
-<div id="menuOverlay" class="menu-overlay" onclick="closeMenu(event)">
-  <div class="side-menu" onclick="event.stopPropagation()">
-
-    <div class="menu-header">
-      <h2>☰ মেনু</h2>
-      <button class="close-btn" onclick="closeMenu()">✕</button>
-    </div>
-
-    <div id="menuUserBox"></div>
-
-    <div class="service-title">১০টি সাহায্যের সুবিধা</div>
-
-    <button class="menu-item" onclick="selectService('🆘 সাহায্য চাই')">
-      🆘 সাহায্য চাই
+    <button
+        class="bottom-item active"
+        onclick="goHome()"
+    >
+        <span>🏠</span>
+        <span>হোম</span>
     </button>
 
-    <button class="menu-item" onclick="selectService('🤝 আমি সাহায্য করতে চাই')">
-      🤝 আমি সাহায্য করতে চাই
+    <button
+        class="bottom-item"
+        onclick="openHelp()"
+    >
+        <span>🤝</span>
+        <span>Help করুন</span>
     </button>
 
-    <button class="menu-item" onclick="selectService('🩸 রক্ত প্রয়োজন')">
-      🩸 রক্ত প্রয়োজন
+    <button
+        class="bottom-item"
+        onclick="openSolved()"
+    >
+        <span>✅</span>
+        <span>সমাধান</span>
     </button>
 
-    <button class="menu-item" onclick="selectService('🔎 হারানো / পাওয়া')">
-      🔎 হারানো / পাওয়া
+    <button
+        class="bottom-item"
+        onclick="openZakat()"
+    >
+        <span>💰</span>
+        <span>যাকাত</span>
     </button>
 
-    <button class="menu-item" onclick="selectService('🚑 জরুরি সহায়তা')">
-      🚑 জরুরি সহায়তা
+    <button
+        class="bottom-item"
+        onclick="openProfile()"
+    >
+        <span>👤</span>
+        <span>Profile</span>
     </button>
 
-    <button class="menu-item" onclick="selectService('🛠️ কারিগরি সহায়তা')">
-      🛠️ কারিগরি সহায়তা
-    </button>
-
-    <button class="menu-item" onclick="selectService('📢 এলাকার সমস্যা')">
-      📢 এলাকার সমস্যা
-    </button>
-
-    <button class="menu-item" onclick="selectService('🚗 জরুরি যাতায়াত')">
-      🚗 জরুরি যাতায়াত
-    </button>
-
-    <button class="menu-item" onclick="selectService('💰 যাকাতের টাকা দিতে চাই')">
-      💰 যাকাতের টাকা দিতে চাই
-    </button>
-
-    <button class="menu-item" onclick="selectService('🤲 যাকাতের টাকা নিতে চাই')">
-      🤲 যাকাতের টাকা নিতে চাই
-    </button>
-
-    <div class="service-title">আমার সহায়</div>
-
-    <button class="menu-item" onclick="openProfile()">
-      👤 আমার Profile
-    </button>
-
-    <button class="menu-item" onclick="openProfileEdit()">
-      ✏️ Profile Edit
-    </button>
-
-    <button class="menu-item" onclick="openMyReports()">
-      📋 আমার Reports
-    </button>
-
-    <button class="menu-item" onclick="openSettings()">
-      ⚙️ Settings
-    </button>
-
-    <button class="menu-item" onclick="openZakatHistory()">
-      💰 আমার যাকাতের তথ্য
-    </button>
-
-    <div id="authMenuArea"></div>
-
-  </div>
-</div>
+</nav>
 
 
-<!-- ================= LOGIN MODAL ================= -->
+<!-- =====================================================
+     MENU
+===================================================== -->
 
-<div id="loginModal" class="modal">
-  <div class="modal-box">
+<div
+    id="menuOverlay"
+    class="menu-overlay"
+    onclick="closeMenu(event)"
+>
 
-    <div class="modal-header">
-      <h2>🔐 লগইন</h2>
-      <button class="close-btn" onclick="closeModal('loginModal')">✕</button>
-    </div>
+    <aside
+        class="side-menu"
+        onclick="event.stopPropagation()"
+    >
 
-    <div id="loginMessage" class="message"></div>
+        <div class="menu-head">
 
-    <div class="form-group">
-      <label>মোবাইল নম্বর</label>
-      <input id="loginPhone" type="tel" placeholder="মোবাইল নম্বর">
-    </div>
+            <button
+                class="menu-close"
+                onclick="closeMenu()"
+            >
+                ×
+            </button>
 
-    <div class="form-group">
-      <label>পাসওয়ার্ড</label>
-      <input id="loginPassword" type="password" placeholder="পাসওয়ার্ড">
-    </div>
+            <div class="menu-profile">
 
-    <button class="primary" onclick="loginUser()">লগইন করুন</button>
+                <img
+                    id="menuProfilePhoto"
+                    src="https://i.pravatar.cc/100?img=12"
+                    alt="Profile"
+                >
 
-    <button class="secondary" onclick="switchToRegister()">
-      নতুন অ্যাকাউন্ট তৈরি করুন
-    </button>
+                <div>
 
-  </div>
-</div>
+                    <div
+                        id="menuName"
+                        class="menu-name"
+                    >
+                        আমার প্রোফাইল
+                    </div>
 
+                    <div>
+                        সহায় ব্যবহারকারী
+                    </div>
 
-<!-- ================= REGISTER MODAL ================= -->
+                </div>
 
-<div id="registerModal" class="modal">
-  <div class="modal-box">
-
-    <div class="modal-header">
-      <h2>📝 নিবন্ধন</h2>
-      <button class="close-btn" onclick="closeModal('registerModal')">✕</button>
-    </div>
-
-    <div id="registerMessage" class="message"></div>
-
-    <div class="form-group">
-      <label>আপনার নাম *</label>
-      <input id="regName" type="text" placeholder="পূর্ণ নাম">
-    </div>
-
-    <div class="form-group">
-      <label>মোবাইল নম্বর *</label>
-      <input id="regPhone" type="tel" placeholder="মোবাইল নম্বর">
-    </div>
-
-    <div class="form-group">
-      <label>পাসওয়ার্ড *</label>
-      <input id="regPassword" type="password" placeholder="কমপক্ষে ৪ অক্ষর">
-    </div>
-
-    <div class="form-group">
-      <label>আপনি কী ধরনের সাহায্য করতে পারবেন?</label>
-
-      <div class="dropdown">
-
-        <button
-          type="button"
-          class="dropdown-display"
-          id="helpTypeDisplay"
-          onclick="toggleHelpTypes()">
-          সাহায্যের ধরন নির্বাচন করুন
-        </button>
-
-        <div id="helpTypeOptions" class="dropdown-options">
-
-          <label class="service-option">
-            <input type="checkbox" value="🆘 সাহায্য চাই">
-            🆘 সাহায্য চাই
-          </label>
-
-          <label class="service-option">
-            <input type="checkbox" value="🤝 আমি সাহায্য করতে চাই">
-            🤝 আমি সাহায্য করতে চাই
-          </label>
-
-          <label class="service-option">
-            <input type="checkbox" value="🩸 রক্ত প্রয়োজন">
-            🩸 রক্ত প্রয়োজন
-          </label>
-
-          <label class="service-option">
-            <input type="checkbox" value="🔎 হারানো / পাওয়া">
-            🔎 হারানো / পাওয়া
-          </label>
-
-          <label class="service-option">
-            <input type="checkbox" value="🚑 জরুরি সহায়তা">
-            🚑 জরুরি সহায়তা
-          </label>
-
-          <label class="service-option">
-            <input type="checkbox" value="🛠️ কারিগরি সহায়তা">
-            🛠️ কারিগরি সহায়তা
-          </label>
-
-          <label class="service-option">
-            <input type="checkbox" value="📢 এলাকার সমস্যা">
-            📢 এলাকার সমস্যা
-          </label>
-
-          <label class="service-option">
-            <input type="checkbox" value="🚗 জরুরি যাতায়াত">
-            🚗 জরুরি যাতায়াত
-          </label>
-
-          <label class="service-option">
-            <input type="checkbox" value="💰 যাকাতের টাকা দিতে চাই">
-            💰 যাকাতের টাকা দিতে চাই
-          </label>
-
-          <label class="service-option">
-            <input type="checkbox" value="🤲 যাকাতের টাকা নিতে চাই">
-            🤲 যাকাতের টাকা নিতে চাই
-          </label>
+            </div>
 
         </div>
-      </div>
-    </div>
 
 
-    <div class="form-group">
-      <label>বিভাগ *</label>
-      <select id="regDivision" onchange="loadDistricts()">
-        <option value="">বিভাগ নির্বাচন করুন</option>
-      </select>
-    </div>
+        <!-- ১০টি সেবা -->
 
-    <div class="form-group">
-      <label>জেলা *</label>
-      <select id="regDistrict" onchange="loadUpazilas()" disabled>
-        <option value="">জেলা নির্বাচন করুন</option>
-      </select>
-    </div>
+        <div class="menu-section">
 
-    <div class="form-group">
-      <label>থানা / উপজেলা *</label>
-      <select id="regUpazila" onchange="loadUnions()" disabled>
-        <option value="">থানা / উপজেলা নির্বাচন করুন</option>
-      </select>
-    </div>
+            <div class="menu-label">
+                ১০টি সাহায্যের সেবা
+            </div>
 
-    <div class="form-group">
-      <label>ইউনিয়ন *</label>
-      <select id="regUnion" disabled>
-        <option value="">ইউনিয়ন নির্বাচন করুন</option>
-      </select>
-    </div>
 
-    <button class="primary" onclick="registerUser()">
-      নিবন্ধন করুন
-    </button>
+            <button
+                class="menu-item"
+                onclick="service('🆘 সাহায্য চাই')"
+            >
+                <span class="menu-icon">🆘</span>
+                সাহায্য চাই
+            </button>
 
-    <button class="secondary" onclick="switchToLogin()">
-      আগে থেকেই অ্যাকাউন্ট আছে? লগইন
-    </button>
 
-  </div>
+            <button
+                class="menu-item"
+                onclick="service('🤝 আমি সাহায্য করতে চাই')"
+            >
+                <span class="menu-icon">🤝</span>
+                আমি সাহায্য করতে চাই
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🩸 রক্ত প্রয়োজন')"
+            >
+                <span class="menu-icon">🩸</span>
+                রক্ত প্রয়োজন
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🔎 হারানো / পাওয়া')"
+            >
+                <span class="menu-icon">🔎</span>
+                হারানো / পাওয়া
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🚑 জরুরি সহায়তা')"
+            >
+                <span class="menu-icon">🚑</span>
+                জরুরি সহায়তা
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🛠️ কারিগরি সহায়তা')"
+            >
+                <span class="menu-icon">🛠️</span>
+                কারিগরি সহায়তা
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('📢 এলাকার সমস্যা')"
+            >
+                <span class="menu-icon">📢</span>
+                এলাকার সমস্যা
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🚗 জরুরি যাতায়াত')"
+            >
+                <span class="menu-icon">🚗</span>
+                জরুরি যাতায়াত
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('💰 যাকাতের টাকা দিতে চাই')"
+            >
+                <span class="menu-icon">💰</span>
+                যাকাতের টাকা দিতে চাই
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="service('🤲 যাকাতের টাকা নিতে চাই')"
+            >
+                <span class="menu-icon">🤲</span>
+                যাকাতের টাকা নিতে চাই
+            </button>
+
+        </div>
+
+
+        <!-- ACCOUNT -->
+
+        <div class="menu-section">
+
+            <div class="menu-label">
+                আমার অ্যাকাউন্ট
+            </div>
+
+
+            <button
+                class="menu-item"
+                onclick="openProfile()"
+            >
+                <span class="menu-icon">👤</span>
+                Profile
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="openReports()"
+            >
+                <span class="menu-icon">📋</span>
+                আমার Reports
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="openSettings()"
+            >
+                <span class="menu-icon">⚙️</span>
+                Settings
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="logout()"
+            >
+                <span class="menu-icon">🚪</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
 </div>
 
 
-<!-- ================= POST MODAL ================= -->
+<!-- =====================================================
+     MODAL
+===================================================== -->
 
-<div id="postModal" class="modal">
-  <div class="modal-box">
+<div
+    id="modalOverlay"
+    class="modal-overlay"
+    onclick="closeModal(event)"
+>
 
-    <div class="modal-header">
-      <h2>📝 সাহায্যের পোস্ট</h2>
-      <button class="close-btn" onclick="closeModal('postModal')">✕</button>
+    <div
+        class="modal"
+        onclick="event.stopPropagation()"
+    >
+
+        <div class="modal-header">
+
+            <h2
+                id="modalTitle"
+                class="modal-title"
+            >
+                সহায়
+            </h2>
+
+            <button
+                class="modal-close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div
+            id="modalBody"
+            class="modal-body"
+        ></div>
+
     </div>
 
-    <div id="postMessage" class="message"></div>
-
-    <div class="form-group">
-      <label>সাহায্যের ধরন</label>
-      <select id="postType">
-        <option>🆘 সাহায্য চাই</option>
-        <option>🤝 আমি সাহায্য করতে চাই</option>
-        <option>🩸 রক্ত প্রয়োজন</option>
-        <option>🔎 হারানো / পাওয়া</option>
-        <option>🚑 জরুরি সহায়তা</option>
-        <option>🛠️ কারিগরি সহায়তা</option>
-        <option>📢 এলাকার সমস্যা</option>
-        <option>🚗 জরুরি যাতায়াত</option>
-        <option>💰 যাকাতের টাকা দিতে চাই</option>
-        <option>🤲 যাকাতের টাকা নিতে চাই</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>শিরোনাম *</label>
-      <input id="postTitle" placeholder="আপনার সমস্যার সংক্ষিপ্ত শিরোনাম">
-    </div>
-
-    <div class="form-group">
-      <label>বিস্তারিত *</label>
-      <textarea id="postDescription"
-        placeholder="আপনার সমস্যাটি বিস্তারিত লিখুন"></textarea>
-    </div>
-
-    <div class="form-group">
-      <label>বিভাগ</label>
-      <select id="postDivision" onchange="loadPostDistricts()">
-        <option value="">বিভাগ নির্বাচন করুন</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>জেলা</label>
-      <select id="postDistrict" onchange="loadPostUpazilas()" disabled>
-        <option value="">জেলা নির্বাচন করুন</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>থানা / উপজেলা</label>
-      <select id="postUpazila" onchange="loadPostUnions()" disabled>
-        <option value="">থানা / উপজেলা নির্বাচন করুন</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>ইউনিয়ন</label>
-      <select id="postUnion" disabled>
-        <option value="">ইউনিয়ন নির্বাচন করুন</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>পোস্ট কে দেখতে পারবে?</label>
-      <select id="postVisibility">
-        <option value="public">🌍 সবাই দেখতে পারবে</option>
-        <option value="only_me">🔒 শুধু আমি দেখতে পারব</option>
-      </select>
-    </div>
-
-    <button class="primary" onclick="createPost()">
-      পোস্ট করুন
-    </button>
-
-  </div>
-</div>
-
-
-<!-- ================= PROFILE MODAL ================= -->
-
-<div id="profileModal" class="modal">
-  <div class="modal-box">
-
-    <div class="modal-header">
-      <h2>👤 আমার Profile</h2>
-      <button class="close-btn" onclick="closeModal('profileModal')">✕</button>
-    </div>
-
-    <div id="profileContent"></div>
-
-  </div>
-</div>
-
-
-<!-- ================= PROFILE EDIT ================= -->
-
-<div id="profileEditModal" class="modal">
-  <div class="modal-box">
-
-    <div class="modal-header">
-      <h2>✏️ Profile Edit</h2>
-      <button class="close-btn" onclick="closeModal('profileEditModal')">✕</button>
-    </div>
-
-    <div id="profileEditMessage" class="message"></div>
-
-    <div class="form-group">
-      <label>নাম</label>
-      <input id="editName">
-    </div>
-
-    <div class="form-group">
-      <label>মোবাইল</label>
-      <input id="editPhone">
-    </div>
-
-    <div class="form-group">
-      <label>Email</label>
-      <input id="editEmail" type="email">
-    </div>
-
-    <div class="form-group">
-      <label>জন্ম তারিখ</label>
-      <input id="editBirthDate" type="date">
-    </div>
-
-    <div class="form-group">
-      <label>Profile Photo URL</label>
-      <input id="editPhoto" placeholder="ছবির URL">
-    </div>
-
-    <div class="form-group">
-      <label>বিভাগ</label>
-      <select id="editDivision" onchange="loadEditDistricts()">
-        <option value="">বিভাগ নির্বাচন করুন</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>জেলা</label>
-      <select id="editDistrict" onchange="loadEditUpazilas()">
-        <option value="">জেলা নির্বাচন করুন</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>থানা / উপজেলা</label>
-      <select id="editUpazila" onchange="loadEditUnions()">
-        <option value="">থানা / উপজেলা নির্বাচন করুন</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>ইউনিয়ন</label>
-      <select id="editUnion">
-        <option value="">ইউনিয়ন নির্বাচন করুন</option>
-      </select>
-    </div>
-
-    <h3 style="margin:18px 0 8px;">🔒 Privacy Settings</h3>
-
-    <div class="privacy-row">
-      <span>নাম</span>
-      <select id="privacyName">
-        <option value="true">Public</option>
-        <option value="false">Only Me</option>
-      </select>
-    </div>
-
-    <div class="privacy-row">
-      <span>মোবাইল</span>
-      <select id="privacyPhone">
-        <option value="true">Public</option>
-        <option value="false">Only Me</option>
-      </select>
-    </div>
-
-    <div class="privacy-row">
-      <span>Email</span>
-      <select id="privacyEmail">
-        <option value="true">Public</option>
-        <option value="false">Only Me</option>
-      </select>
-    </div>
-
-    <div class="privacy-row">
-      <span>জন্ম তারিখ</span>
-      <select id="privacyBirth">
-        <option value="true">Public</option>
-        <option value="false">Only Me</option>
-      </select>
-    </div>
-
-    <div class="privacy-row">
-      <span>ঠিকানা</span>
-      <select id="privacyAddress">
-        <option value="true">Public</option>
-        <option value="false">Only Me</option>
-      </select>
-    </div>
-
-    <div class="privacy-row">
-      <span>Profile Photo</span>
-      <select id="privacyPhoto">
-        <option value="true">Public</option>
-        <option value="false">Only Me</option>
-      </select>
-    </div>
-
-    <br>
-
-    <button class="primary" onclick="saveProfile()">
-      পরিবর্তন সংরক্ষণ করুন
-    </button>
-
-  </div>
-</div>
-
-
-<!-- ================= SETTINGS ================= -->
-
-<div id="settingsModal" class="modal">
-  <div class="modal-box">
-
-    <div class="modal-header">
-      <h2>⚙️ Settings</h2>
-      <button class="close-btn" onclick="closeModal('settingsModal')">✕</button>
-    </div>
-
-    <p>
-      আপনার Profile-এর কোন তথ্য অন্যরা দেখতে পারবে তা এখান থেকে
-      নিয়ন্ত্রণ করতে পারবেন।
-    </p>
-
-    <br>
-
-    <button class="primary" onclick="openProfileEdit();closeModal('settingsModal')">
-      🔒 Privacy Settings পরিবর্তন
-    </button>
-
-  </div>
-</div>
-
-
-<!-- ================= MY REPORTS ================= -->
-
-<div id="reportsModal" class="modal">
-  <div class="modal-box">
-
-    <div class="modal-header">
-      <h2>📋 আমার Reports</h2>
-      <button class="close-btn" onclick="closeModal('reportsModal')">✕</button>
-    </div>
-
-    <div id="reportsContent">
-      <div class="loading">লোড হচ্ছে...</div>
-    </div>
-
-  </div>
-</div>
-
-
-<!-- ================= EDIT REPORT ================= -->
-
-<div id="editPostModal" class="modal">
-  <div class="modal-box">
-
-    <div class="modal-header">
-      <h2>✏️ Report Edit</h2>
-      <button class="close-btn" onclick="closeModal('editPostModal')">✕</button>
-    </div>
-
-    <div id="editPostMessage" class="message"></div>
-
-    <input type="hidden" id="editPostId">
-
-    <div class="form-group">
-      <label>শিরোনাম</label>
-      <input id="editPostTitle">
-    </div>
-
-    <div class="form-group">
-      <label>বিস্তারিত</label>
-      <textarea id="editPostDescription"></textarea>
-    </div>
-
-    <div class="form-group">
-      <label>Visibility</label>
-      <select id="editPostVisibility">
-        <option value="public">🌍 Public</option>
-        <option value="only_me">🔒 Only Me</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Status</label>
-      <select id="editPostStatus">
-        <option value="নতুন">🆕 সাহায্য প্রয়োজন</option>
-        <option value="যাচাই হচ্ছে">🔎 যাচাই হচ্ছে</option>
-        <option value="সাহায্যকারী পাওয়া গেছে">🤝 সাহায্যকারী পাওয়া গেছে</option>
-        <option value="সাহায্য হয়েছে">❤️ সাহায্য হয়েছে</option>
-        <option value="সমাধান হয়েছে">✅ সমাধান হয়েছে</option>
-      </select>
-    </div>
-
-    <button class="primary" onclick="saveEditedPost()">
-      সংরক্ষণ করুন
-    </button>
-
-  </div>
-</div>
-
-
-<!-- ================= ZAKAT ================= -->
-
-<div id="zakatModal" class="modal">
-  <div class="modal-box">
-
-    <div class="modal-header">
-      <h2>💰 যাকাতের তালিকা</h2>
-      <button class="close-btn" onclick="closeModal('zakatModal')">✕</button>
-    </div>
-
-    <div id="zakatMessage" class="message"></div>
-
-    <div style="margin-bottom:15px;">
-      <button class="primary" onclick="registerAsZakatReceiver()">
-        🤲 আমি যাকাত নিতে চাই
-      </button>
-    </div>
-
-    <div id="zakatList">
-      <div class="loading">তালিকা লোড হচ্ছে...</div>
-    </div>
-
-  </div>
-</div>
-
-
-<!-- ================= GIVE ZAKAT ================= -->
-
-<div id="giveZakatModal" class="modal">
-  <div class="modal-box">
-
-    <div class="modal-header">
-      <h2>💰 যাকাত দিন</h2>
-      <button class="close-btn" onclick="closeModal('giveZakatModal')">✕</button>
-    </div>
-
-    <div id="giveZakatMessage" class="message"></div>
-
-    <div id="zakatReceiverInfo"></div>
-
-    <input type="hidden" id="zakatRequestId">
-
-    <div class="form-group">
-      <label>যাকাতের পরিমাণ (টাকা)</label>
-      <input id="zakatAmount" type="number" min="1" placeholder="যেমন: 5000">
-    </div>
-
-    <button class="primary" onclick="giveZakat()">
-      যাকাত দেওয়ার তথ্য পাঠান
-    </button>
-
-  </div>
-</div>
-
-
-<!-- ================= ZAKAT HISTORY ================= -->
-
-<div id="zakatHistoryModal" class="modal">
-  <div class="modal-box">
-
-    <div class="modal-header">
-      <h2>💰 আমার যাকাতের তথ্য</h2>
-      <button class="close-btn" onclick="closeModal('zakatHistoryModal')">✕</button>
-    </div>
-
-    <div id="zakatHistoryContent">
-      <div class="loading">লোড হচ্ছে...</div>
-    </div>
-
-  </div>
 </div>
 
 
 <script>
 
 /* =====================================================
-   SUPABASE
+   BASIC
 ===================================================== */
 
-const SUPABASE_URL =
-  "https://gzujcqjpxypcoiqhpvvu.supabase.co";
+const menuOverlay =
+    document.getElementById("menuOverlay");
 
-const SUPABASE_KEY =
-  "sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
+const modalOverlay =
+    document.getElementById("modalOverlay");
 
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+const modalTitle =
+    document.getElementById("modalTitle");
 
-
-/* =====================================================
-   APP STATE
-===================================================== */
-
-let currentUser = null;
-let geoData = null;
-let allPublicPosts = [];
-let currentZakatReceiver = null;
-
-
-/* =====================================================
-   10 SERVICES
-===================================================== */
-
-const SERVICES = [
-  "🆘 সাহায্য চাই",
-  "🤝 আমি সাহায্য করতে চাই",
-  "🩸 রক্ত প্রয়োজন",
-  "🔎 হারানো / পাওয়া",
-  "🚑 জরুরি সহায়তা",
-  "🛠️ কারিগরি সহায়তা",
-  "📢 এলাকার সমস্যা",
-  "🚗 জরুরি যাতায়াত",
-  "💰 যাকাতের টাকা দিতে চাই",
-  "🤲 যাকাতের টাকা নিতে চাই"
-];
-
-
-/* =====================================================
-   INITIAL
-===================================================== */
-
-document.addEventListener("DOMContentLoaded", async () => {
-
-  loadSavedUser();
-
-  await loadGeoData();
-
-  await loadPublicPosts();
-
-  updateMenu();
-
-});
-
-
-/* =====================================================
-   LOCAL USER SESSION
-===================================================== */
-
-function loadSavedUser(){
-
-  try{
-
-    const saved =
-      localStorage.getItem("sohay_user");
-
-    if(saved){
-
-      currentUser =
-        JSON.parse(saved);
-
-    }
-
-  }catch(e){
-
-    currentUser = null;
-
-  }
-
-}
-
-
-function saveUser(user){
-
-  currentUser = user;
-
-  localStorage.setItem(
-    "sohay_user",
-    JSON.stringify(user)
-  );
-
-  updateMenu();
-
-}
-
-
-function logout(){
-
-  currentUser = null;
-
-  localStorage.removeItem(
-    "sohay_user"
-  );
-
-  closeMenu();
-
-  updateMenu();
-
-  alert("আপনি লগআউট করেছেন।");
-
-}
+const modalBody =
+    document.getElementById("modalBody");
 
 
 /* =====================================================
@@ -1328,791 +1387,64 @@ function logout(){
 
 function openMenu(){
 
-  updateMenu();
+    menuOverlay.classList.add("show");
 
-  document
-    .getElementById("menuOverlay")
-    .classList.add("show");
+    document.body.style.overflow="hidden";
 
 }
 
 
 function closeMenu(event){
 
-  if(event && event.target !== event.currentTarget){
+    if(event &&
+       event.target === menuOverlay){
 
-    return;
+        menuOverlay.classList.remove("show");
 
-  }
+        document.body.style.overflow="";
 
-  document
-    .getElementById("menuOverlay")
-    .classList.remove("show");
-
-}
-
-
-function updateMenu(){
-
-  const userBox =
-    document.getElementById("menuUserBox");
-
-  const authArea =
-    document.getElementById("authMenuArea");
-
-  if(currentUser){
-
-    userBox.innerHTML = `
-      <div style="font-weight:800;font-size:18px;">
-        👋 ${escapeHtml(currentUser.full_name || "ব্যবহারকারী")}
-      </div>
-      <div style="font-size:13px;color:#667;">
-        ${escapeHtml(currentUser.phone || "")}
-      </div>
-    `;
-
-    authArea.innerHTML = `
-      <button class="menu-item" onclick="logout()">
-        🚪 Logout
-      </button>
-    `;
-
-  }else{
-
-    userBox.innerHTML = `
-      <div style="font-weight:800;">
-        সহায়-এ স্বাগতম
-      </div>
-      <div style="font-size:13px;color:#667;">
-        সাহায্য করতে বা সাহায্য পেতে লগইন করুন।
-      </div>
-    `;
-
-    authArea.innerHTML = `
-      <button class="menu-item" onclick="openLogin()">
-        🔐 Login
-      </button>
-
-      <button class="menu-item" onclick="openRegister()">
-        📝 Registration
-      </button>
-    `;
-
-  }
-
-}
-
-
-/* =====================================================
-   MODALS
-===================================================== */
-
-function openModal(id){
-
-  document
-    .getElementById(id)
-    .classList.add("show");
-
-}
-
-
-function closeModal(id){
-
-  document
-    .getElementById(id)
-    .classList.remove("show");
-
-}
-
-
-function openLogin(){
-
-  closeMenu();
-
-  openModal("loginModal");
-
-}
-
-
-function openRegister(){
-
-  closeMenu();
-
-  openModal("registerModal");
-
-}
-
-
-function switchToRegister(){
-
-  closeModal("loginModal");
-
-  openRegister();
-
-}
-
-
-function switchToLogin(){
-
-  closeModal("registerModal");
-
-  openLogin();
-
-}
-
-
-/* =====================================================
-   GEO DATA
-===================================================== */
-
-async function loadGeoData(){
-
-  try{
-
-    const response =
-      await fetch(
-        "https://iqbalhasandev.github.io/bangladesh-geo-json/bangladesh-geo.json"
-      );
-
-    geoData =
-      await response.json();
-
-    populateDivisions(
-      "regDivision"
-    );
-
-    populateDivisions(
-      "postDivision"
-    );
-
-    populateDivisions(
-      "editDivision"
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    alert(
-      "বাংলাদেশের ঠিকানার তথ্য লোড করা যায়নি।"
-    );
-
-  }
-
-}
-
-
-function populateDivisions(selectId){
-
-  const select =
-    document.getElementById(selectId);
-
-  if(!select || !geoData) return;
-
-  select.innerHTML =
-    `<option value="">বিভাগ নির্বাচন করুন</option>`;
-
-  const divisions =
-    getDivisions();
-
-  divisions.forEach(d => {
-
-    const option =
-      document.createElement("option");
-
-    option.value =
-      d.name;
-
-    option.textContent =
-      d.name;
-
-    select.appendChild(option);
-
-  });
-
-}
-
-
-function getDivisions(){
-
-  if(!geoData) return [];
-
-  if(Array.isArray(geoData)){
-
-    return geoData;
-
-  }
-
-  if(Array.isArray(geoData.divisions)){
-
-    return geoData.divisions;
-
-  }
-
-  if(geoData.data &&
-     Array.isArray(geoData.data)){
-
-    return geoData.data;
-
-  }
-
-  return [];
-
-}
-
-
-function getDivision(name){
-
-  return getDivisions()
-    .find(d =>
-      d.name === name ||
-      d.division_name === name
-    );
-
-}
-
-
-function getDistricts(division){
-
-  if(!division) return [];
-
-  return division.districts ||
-         division.data ||
-         [];
-
-}
-
-
-function getUpazilas(district){
-
-  if(!district) return [];
-
-  return district.upazilas ||
-         district.data ||
-         [];
-
-}
-
-
-function getUnions(upazila){
-
-  if(!upazila) return [];
-
-  return upazila.unions ||
-         upazila.data ||
-         [];
-
-}
-
-
-function itemName(item){
-
-  return item.name ||
-         item.district_name ||
-         item.upazila_name ||
-         item.union_name ||
-         "";
-
-}
-
-
-/* =====================================================
-   REGISTRATION ADDRESS
-===================================================== */
-
-function loadDistricts(){
-
-  const division =
-    getDivision(
-      document.getElementById(
-        "regDivision"
-      ).value
-    );
-
-  const select =
-    document.getElementById(
-      "regDistrict"
-    );
-
-  const upazila =
-    document.getElementById(
-      "regUpazila"
-    );
-
-  const union =
-    document.getElementById(
-      "regUnion"
-    );
-
-  select.innerHTML =
-    `<option value="">জেলা নির্বাচন করুন</option>`;
-
-  upazila.innerHTML =
-    `<option value="">থানা / উপজেলা নির্বাচন করুন</option>`;
-
-  union.innerHTML =
-    `<option value="">ইউনিয়ন নির্বাচন করুন</option>`;
-
-  upazila.disabled = true;
-  union.disabled = true;
-
-  if(!division) return;
-
-  getDistricts(division)
-    .forEach(d => {
-
-      const option =
-        document.createElement("option");
-
-      option.value =
-        itemName(d);
-
-      option.textContent =
-        itemName(d);
-
-      select.appendChild(option);
-
-    });
-
-  select.disabled = false;
-
-}
-
-
-function loadUpazilas(){
-
-  const division =
-    getDivision(
-      document.getElementById(
-        "regDivision"
-      ).value
-    );
-
-  const districtName =
-    document.getElementById(
-      "regDistrict"
-    ).value;
-
-  const district =
-    getDistricts(division)
-      .find(d =>
-        itemName(d) === districtName
-      );
-
-  const select =
-    document.getElementById(
-      "regUpazila"
-    );
-
-  const union =
-    document.getElementById(
-      "regUnion"
-    );
-
-  select.innerHTML =
-    `<option value="">থানা / উপজেলা নির্বাচন করুন</option>`;
-
-  union.innerHTML =
-    `<option value="">ইউনিয়ন নির্বাচন করুন</option>`;
-
-  union.disabled = true;
-
-  if(!district){
-
-    select.disabled = true;
-
-    return;
-
-  }
-
-  getUpazilas(district)
-    .forEach(u => {
-
-      const option =
-        document.createElement("option");
-
-      option.value =
-        itemName(u);
-
-      option.textContent =
-        itemName(u);
-
-      select.appendChild(option);
-
-    });
-
-  select.disabled = false;
-
-}
-
-
-function loadUnions(){
-
-  const division =
-    getDivision(
-      document.getElementById(
-        "regDivision"
-      ).value
-    );
-
-  const district =
-    getDistricts(division)
-      .find(d =>
-        itemName(d) ===
-        document.getElementById(
-          "regDistrict"
-        ).value
-      );
-
-  const upazila =
-    getUpazilas(district)
-      .find(u =>
-        itemName(u) ===
-        document.getElementById(
-          "regUpazila"
-        ).value
-      );
-
-  const select =
-    document.getElementById(
-      "regUnion"
-    );
-
-  select.innerHTML =
-    `<option value="">ইউনিয়ন নির্বাচন করুন</option>`;
-
-  if(!upazila){
-
-    select.disabled = true;
-
-    return;
-
-  }
-
-  getUnions(upazila)
-    .forEach(u => {
-
-      const option =
-        document.createElement("option");
-
-      option.value =
-        itemName(u);
-
-      option.textContent =
-        itemName(u);
-
-      select.appendChild(option);
-
-    });
-
-  select.disabled = false;
-
-}
-
-
-/* =====================================================
-   HELP TYPE DROPDOWN
-===================================================== */
-
-function toggleHelpTypes(){
-
-  document
-    .getElementById(
-      "helpTypeOptions"
-    )
-    .classList.toggle("show");
-
-}
-
-
-function getSelectedHelpTypes(){
-
-  return Array.from(
-    document.querySelectorAll(
-      "#helpTypeOptions input[type=checkbox]:checked"
-    )
-  ).map(
-    input => input.value
-  );
-
-}
-
-
-function updateHelpTypeText(){
-
-  const selected =
-    getSelectedHelpTypes();
-
-  const display =
-    document.getElementById(
-      "helpTypeDisplay"
-    );
-
-  if(selected.length === 0){
-
-    display.textContent =
-      "সাহায্যের ধরন নির্বাচন করুন";
-
-  }else if(selected.length <= 2){
-
-    display.textContent =
-      selected.join(" • ");
-
-  }else{
-
-    display.textContent =
-      `${selected.length}টি সাহায্যের ধরন নির্বাচিত`;
-
-  }
-
-}
-
-
-document.addEventListener(
-  "change",
-  function(e){
-
-    if(
-      e.target.closest(
-        "#helpTypeOptions"
-      )
-    ){
-
-      updateHelpTypeText();
-
+        return;
     }
 
-  }
-);
+    menuOverlay.classList.remove("show");
 
-
-/* =====================================================
-   REGISTER
-===================================================== */
-
-async function registerUser(){
-
-  const name =
-    document.getElementById(
-      "regName"
-    ).value.trim();
-
-  const phone =
-    document.getElementById(
-      "regPhone"
-    ).value.trim();
-
-  const password =
-    document.getElementById(
-      "regPassword"
-    ).value;
-
-  const helpTypes =
-    getSelectedHelpTypes();
-
-  const division =
-    document.getElementById(
-      "regDivision"
-    ).value;
-
-  const district =
-    document.getElementById(
-      "regDistrict"
-    ).value;
-
-  const upazila =
-    document.getElementById(
-      "regUpazila"
-    ).value;
-
-  const unionName =
-    document.getElementById(
-      "regUnion"
-    ).value;
-
-  const message =
-    document.getElementById(
-      "registerMessage"
-    );
-
-  if(!name ||
-     !phone ||
-     !password){
-
-    showMessage(
-      message,
-      "নাম, মোবাইল ও পাসওয়ার্ড দিন",
-      "error"
-    );
-
-    return;
-
-  }
-
-  if(!division ||
-     !district ||
-     !upazila ||
-     !unionName){
-
-    showMessage(
-      message,
-      "সম্পূর্ণ ঠিকানা নির্বাচন করুন",
-      "error"
-    );
-
-    return;
-
-  }
-
-  try{
-
-    const {data,error} =
-      await supabaseClient.rpc(
-        "register_app_user",
-        {
-          p_full_name:name,
-          p_phone:phone,
-          p_password:password,
-          p_help_types:helpTypes,
-          p_division:division,
-          p_district:district,
-          p_upazila:upazila,
-          p_union_name:unionName
-        }
-      );
-
-    if(error) throw error;
-
-    if(!data.success){
-
-      showMessage(
-        message,
-        data.message,
-        "error"
-      );
-
-      return;
-
-    }
-
-    showMessage(
-      message,
-      "নিবন্ধন সফল হয়েছে। এখন লগইন করুন।",
-      "success"
-    );
-
-    setTimeout(() => {
-
-      closeModal(
-        "registerModal"
-      );
-
-      openLogin();
-
-    },1000);
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      message,
-      error.message ||
-      "নিবন্ধন করা যায়নি",
-      "error"
-    );
-
-  }
+    document.body.style.overflow="";
 
 }
 
 
 /* =====================================================
-   LOGIN
+   MODAL
 ===================================================== */
 
-async function loginUser(){
+function openModal(title,html){
 
-  const phone =
-    document.getElementById(
-      "loginPhone"
-    ).value.trim();
+    modalTitle.textContent=title;
 
-  const password =
-    document.getElementById(
-      "loginPassword"
-    ).value;
+    modalBody.innerHTML=html;
 
-  const message =
-    document.getElementById(
-      "loginMessage"
-    );
+    modalOverlay.classList.add("show");
 
-  if(!phone || !password){
+    document.body.style.overflow="hidden";
 
-    showMessage(
-      message,
-      "মোবাইল নম্বর ও পাসওয়ার্ড দিন",
-      "error"
-    );
+}
 
-    return;
 
-  }
+function closeModal(event){
 
-  try{
+    if(event &&
+       event.target === modalOverlay){
 
-    const {data,error} =
-      await supabaseClient.rpc(
-        "login_app_user",
-        {
-          p_phone:phone,
-          p_password:password
-        }
-      );
+        modalOverlay.classList.remove("show");
 
-    if(error) throw error;
+        document.body.style.overflow="";
 
-    if(!data.success){
-
-      showMessage(
-        message,
-        data.message,
-        "error"
-      );
-
-      return;
-
+        return;
     }
 
-    saveUser(data.user);
+    modalOverlay.classList.remove("show");
 
-    showMessage(
-      message,
-      "লগইন সফল হয়েছে",
-      "success"
-    );
-
-    setTimeout(() => {
-
-      closeModal(
-        "loginModal"
-      );
-
-    },600);
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      message,
-      error.message ||
-      "লগইন করা যায়নি",
-      "error"
-    );
-
-  }
+    document.body.style.overflow="";
 
 }
 
@@ -2123,1120 +1455,1225 @@ async function loginUser(){
 
 function openProfile(){
 
-  if(!requireLogin()) return;
+    closeMenu();
 
-  closeMenu();
+    openModal(
+        "আমার Profile",
 
-  const u =
-    currentUser;
+        `
+        <div class="photo-box">
 
-  document.getElementById(
-    "profileContent"
-  ).innerHTML = `
+            <img
+                id="profilePreview"
+                class="profile-big"
+                src="https://i.pravatar.cc/100?img=12"
+                alt="Profile"
+            >
 
-    <div style="text-align:center;margin-bottom:18px;">
-      ${
-        u.profile_photo
-        ?
-        `<img src="${escapeAttr(u.profile_photo)}"
-              class="photo-preview"
-              style="margin:auto;">`
-        :
-        `<div class="zakat-placeholder"
-              style="margin:auto;width:90px;height:90px;font-size:30px;">
-              👤
-         </div>`
-      }
-    </div>
-
-    <div class="post">
-      <strong>নাম</strong>
-      <p>${escapeHtml(u.full_name || "—")}</p>
-    </div>
-
-    <div class="post">
-      <strong>মোবাইল</strong>
-      <p>${
-        u.phone_public
-        ? escapeHtml(u.phone || "—")
-        : "🔒 গোপন"
-      }</p>
-    </div>
-
-    <div class="post">
-      <strong>Email</strong>
-      <p>${
-        u.email_public
-        ? escapeHtml(u.email || "—")
-        : "🔒 গোপন"
-      }</p>
-    </div>
-
-    <div class="post">
-      <strong>জন্ম তারিখ</strong>
-      <p>${
-        u.birth_date_public
-        ? escapeHtml(u.birth_date || "—")
-        : "🔒 গোপন"
-      }</p>
-    </div>
-
-    <div class="post">
-      <strong>ঠিকানা</strong>
-      <p>${
-        u.address_public
-        ?
-        [
-          u.division,
-          u.district,
-          u.upazila,
-          u.union_name
-        ].filter(Boolean).map(escapeHtml).join(" → ")
-        :
-        "🔒 গোপন"
-      }</p>
-    </div>
-
-    <button class="primary"
-      onclick="closeModal('profileModal');openProfileEdit();">
-      ✏️ Profile Edit
-    </button>
-  `;
-
-  openModal(
-    "profileModal"
-  );
-
-}
+        </div>
 
 
-function openProfileEdit(){
+        <form
+            class="form-grid"
+            onsubmit="saveProfile(event)"
+        >
 
-  if(!requireLogin()) return;
+            <div class="form-group">
 
-  closeMenu();
+                <label>
+                    প্রোফাইল ছবি
+                </label>
 
-  const u =
-    currentUser;
+                <input
+                    type="file"
+                    id="profilePhotoInput"
+                    accept="image/*"
+                    onchange="previewProfilePhoto(event)"
+                >
 
-  document.getElementById(
-    "editName"
-  ).value =
-    u.full_name || "";
+            </div>
 
-  document.getElementById(
-    "editPhone"
-  ).value =
-    u.phone || "";
 
-  document.getElementById(
-    "editEmail"
-  ).value =
-    u.email || "";
+            <div class="form-group">
 
-  document.getElementById(
-    "editBirthDate"
-  ).value =
-    u.birth_date || "";
+                <label>
+                    নাম
+                </label>
 
-  document.getElementById(
-    "editPhoto"
-  ).value =
-    u.profile_photo || "";
+                <input
+                    id="profileName"
+                    value="সহায় ব্যবহারকারী"
+                    required
+                >
 
-  document.getElementById(
-    "privacyName"
-  ).value =
-    String(
-      u.name_public !== false
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    ফোন নম্বর
+                </label>
+
+                <input
+                    id="profilePhone"
+                    type="tel"
+                    placeholder="০১XXXXXXXXX"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    id="profileEmail"
+                    type="email"
+                    placeholder="example@email.com"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    জন্ম তারিখ
+                </label>
+
+                <input
+                    id="profileBirth"
+                    type="date"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    বিভাগ
+                </label>
+
+                <select id="profileDivision">
+
+                    <option>
+                        বিভাগ নির্বাচন করুন
+                    </option>
+
+                    <option>
+                        ঢাকা
+                    </option>
+
+                    <option>
+                        চট্টগ্রাম
+                    </option>
+
+                    <option>
+                        রাজশাহী
+                    </option>
+
+                    <option>
+                        খুলনা
+                    </option>
+
+                    <option>
+                        বরিশাল
+                    </option>
+
+                    <option>
+                        সিলেট
+                    </option>
+
+                    <option>
+                        রংপুর
+                    </option>
+
+                    <option>
+                        ময়মনসিংহ
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    ঠিকানা
+                </label>
+
+                <input
+                    id="profileAddress"
+                    placeholder="জেলা / উপজেলা / ইউনিয়ন"
+                >
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <strong>
+                        নাম Public
+                    </strong>
+
+                    <small>
+                        অন্যরা আপনার নাম দেখতে পারবে
+                    </small>
+
+                </div>
+
+                <input
+                    class="switch"
+                    type="checkbox"
+                    checked
+                >
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <strong>
+                        ফোন Public
+                    </strong>
+
+                    <small>
+                        ফোন নম্বর অন্যদের দেখাবেন কি না
+                    </small>
+
+                </div>
+
+                <input
+                    class="switch"
+                    type="checkbox"
+                >
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <strong>
+                        Email Public
+                    </strong>
+
+                    <small>
+                        Email অন্যদের দেখাবেন কি না
+                    </small>
+
+                </div>
+
+                <input
+                    class="switch"
+                    type="checkbox"
+                >
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <strong>
+                        Address Public
+                    </strong>
+
+                    <small>
+                        ঠিকানা অন্যদের দেখাবেন কি না
+                    </small>
+
+                </div>
+
+                <input
+                    class="switch"
+                    type="checkbox"
+                    checked
+                >
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="closeModal()"
+                >
+                    বাতিল
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-btn"
+                >
+                    Profile Save
+                </button>
+
+            </div>
+
+
+            <div
+                id="formMessage"
+                class="form-message"
+            ></div>
+
+        </form>
+        `
     );
-
-  document.getElementById(
-    "privacyPhone"
-  ).value =
-    String(
-      u.phone_public === true
-    );
-
-  document.getElementById(
-    "privacyEmail"
-  ).value =
-    String(
-      u.email_public === true
-    );
-
-  document.getElementById(
-    "privacyBirth"
-  ).value =
-    String(
-      u.birth_date_public === true
-    );
-
-  document.getElementById(
-    "privacyAddress"
-  ).value =
-    String(
-      u.address_public !== false
-    );
-
-  document.getElementById(
-    "privacyPhoto"
-  ).value =
-    String(
-      u.photo_public !== false
-    );
-
-  const division =
-    document.getElementById(
-      "editDivision"
-    );
-
-  division.value =
-    u.division || "";
-
-  loadEditDistricts();
-
-  setTimeout(() => {
-
-    document.getElementById(
-      "editDistrict"
-    ).value =
-      u.district || "";
-
-    loadEditUpazilas();
-
-    setTimeout(() => {
-
-      document.getElementById(
-        "editUpazila"
-      ).value =
-        u.upazila || "";
-
-      loadEditUnions();
-
-      setTimeout(() => {
-
-        document.getElementById(
-          "editUnion"
-        ).value =
-          u.union_name || "";
-
-      },100);
-
-    },100);
-
-  },100);
-
-  openModal(
-    "profileEditModal"
-  );
-
-}
-
-
-async function saveProfile(){
-
-  const message =
-    document.getElementById(
-      "profileEditMessage"
-    );
-
-  try{
-
-    const helpTypes =
-      currentUser.help_types || [];
-
-    const {data,error} =
-      await supabaseClient.rpc(
-        "update_app_profile",
-        {
-          p_user_id:currentUser.id,
-
-          p_full_name:
-            document.getElementById(
-              "editName"
-            ).value.trim(),
-
-          p_phone:
-            document.getElementById(
-              "editPhone"
-            ).value.trim(),
-
-          p_email:
-            document.getElementById(
-              "editEmail"
-            ).value.trim() || null,
-
-          p_birth_date:
-            document.getElementById(
-              "editBirthDate"
-            ).value || null,
-
-          p_profile_photo:
-            document.getElementById(
-              "editPhoto"
-            ).value.trim() || null,
-
-          p_division:
-            document.getElementById(
-              "editDivision"
-            ).value || null,
-
-          p_district:
-            document.getElementById(
-              "editDistrict"
-            ).value || null,
-
-          p_upazila:
-            document.getElementById(
-              "editUpazila"
-            ).value || null,
-
-          p_union_name:
-            document.getElementById(
-              "editUnion"
-            ).value || null,
-
-          p_help_types:
-            helpTypes,
-
-          p_name_public:
-            document.getElementById(
-              "privacyName"
-            ).value === "true",
-
-          p_phone_public:
-            document.getElementById(
-              "privacyPhone"
-            ).value === "true",
-
-          p_email_public:
-            document.getElementById(
-              "privacyEmail"
-            ).value === "true",
-
-          p_birth_date_public:
-            document.getElementById(
-              "privacyBirth"
-            ).value === "true",
-
-          p_address_public:
-            document.getElementById(
-              "privacyAddress"
-            ).value === "true",
-
-          p_photo_public:
-            document.getElementById(
-              "privacyPhoto"
-            ).value === "true"
-        }
-      );
-
-    if(error) throw error;
-
-    if(!data.success){
-
-      showMessage(
-        message,
-        data.message,
-        "error"
-      );
-
-      return;
-
-    }
-
-    saveUser(data.user);
-
-    showMessage(
-      message,
-      "Profile আপডেট হয়েছে",
-      "success"
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      message,
-      error.message ||
-      "Profile আপডেট করা যায়নি",
-      "error"
-    );
-
-  }
 
 }
 
 
 /* =====================================================
-   SETTINGS
+   PHOTO PREVIEW
+===================================================== */
+
+function previewProfilePhoto(event){
+
+    const file =
+        event.target.files[0];
+
+    if(!file) return;
+
+    const reader =
+        new FileReader();
+
+    reader.onload=function(){
+
+        document.getElementById(
+            "profilePreview"
+        ).src=reader.result;
+
+    };
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =====================================================
+   SAVE PROFILE
+===================================================== */
+
+function saveProfile(event){
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById(
+            "profileName"
+        ).value.trim();
+
+    if(!name){
+
+        alert("নাম লিখুন।");
+
+        return;
+    }
+
+    document.getElementById(
+        "menuName"
+    ).textContent=name;
+
+    const message =
+        document.getElementById(
+            "formMessage"
+        );
+
+    message.textContent =
+        "Profile-এর তথ্য প্রস্তুত হয়েছে। Supabase যুক্ত হলে এটি স্থায়ীভাবে সংরক্ষণ হবে।";
+
+    message.classList.add("show");
+
+}
+
+
+/* =====================================================
+   HELP FORM
+===================================================== */
+
+function helpForm(serviceName="সাধারণ সহায়"){
+
+    return `
+
+    <form
+        class="form-grid"
+        onsubmit="submitHelpForm(event)"
+    >
+
+        <div class="form-group">
+
+            <label>
+                সাহায্যের ধরন
+            </label>
+
+            <input
+                value="${serviceName}"
+                readonly
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                শিরোনাম
+            </label>
+
+            <input
+                id="helpTitle"
+                placeholder="আপনার সমস্যার সংক্ষিপ্ত নাম"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                বিস্তারিত
+            </label>
+
+            <textarea
+                id="helpDetails"
+                placeholder="আপনার সমস্যাটি বিস্তারিত লিখুন"
+                required
+            ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                এলাকা
+            </label>
+
+            <input
+                id="helpLocation"
+                placeholder="বিভাগ / জেলা / উপজেলা / ইউনিয়ন"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                পোস্ট কে দেখবে?
+            </label>
+
+            <select id="helpVisibility">
+
+                <option value="public">
+                    Public — সবাই দেখতে পারবে
+                </option>
+
+                <option value="only_me">
+                    Only Me — শুধু আমি দেখতে পারব
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="secondary-btn"
+                onclick="closeModal()"
+            >
+                বাতিল
+            </button>
+
+            <button
+                class="primary-btn"
+                type="submit"
+            >
+                পোস্ট করুন
+            </button>
+
+        </div>
+
+
+        <div
+            id="formMessage"
+            class="form-message"
+        ></div>
+
+    </form>
+
+    `;
+
+}
+
+
+function submitHelpForm(event){
+
+    event.preventDefault();
+
+    const message =
+        document.getElementById(
+            "formMessage"
+        );
+
+    message.textContent =
+        "পোস্ট তৈরি করার জন্য প্রস্তুত হয়েছে। Supabase যুক্ত হলে এটি অনলাইনে প্রকাশ হবে।";
+
+    message.classList.add("show");
+
+}
+
+
+/* =====================================================
+   OPEN HELP
+===================================================== */
+
+function openHelp(){
+
+    openModal(
+        "সাহায্য চাই / সাহায্য করুন",
+
+        `
+
+        <div class="service-grid">
+
+            <button
+                class="service-card"
+                onclick="service('🆘 সাহায্য চাই')"
+            >
+                <span class="emoji">🆘</span>
+
+                <span>
+                    <strong>সাহায্য চাই</strong>
+                    নিজের সমস্যার পোস্ট করুন
+                </span>
+
+            </button>
+
+
+            <button
+                class="service-card"
+                onclick="service('🤝 আমি সাহায্য করতে চাই')"
+            >
+                <span class="emoji">🤝</span>
+
+                <span>
+                    <strong>আমি সাহায্য করতে চাই</strong>
+                    অন্যের পোস্টে সাহায্য করুন
+                </span>
+
+            </button>
+
+
+            <button
+                class="service-card"
+                onclick="service('🩸 রক্ত প্রয়োজন')"
+            >
+                <span class="emoji">🩸</span>
+
+                <span>
+                    <strong>রক্ত প্রয়োজন</strong>
+                    রক্তের জন্য সাহায্য
+                </span>
+
+            </button>
+
+
+            <button
+                class="service-card"
+                onclick="service('🚑 জরুরি সহায়তা')"
+            >
+                <span class="emoji">🚑</span>
+
+                <span>
+                    <strong>জরুরি সহায়তা</strong>
+                    জরুরি সমস্যায় সাহায্য
+                </span>
+
+            </button>
+
+        </div>
+
+        `
+    );
+
+}
+
+
+/* =====================================================
+   10 SERVICES
+===================================================== */
+
+function service(name){
+
+    closeModal();
+
+    closeMenu();
+
+
+    if(
+        name.includes(
+            "যাকাতের টাকা দিতে"
+        )
+    ){
+
+        openZakatDonor();
+
+        return;
+    }
+
+
+    if(
+        name.includes(
+            "যাকাতের টাকা নিতে"
+        )
+    ){
+
+        openZakatReceiver();
+
+        return;
+    }
+
+
+    if(
+        name.includes(
+            "আমি সাহায্য করতে চাই"
+        )
+    ){
+
+        openHelperForm();
+
+        return;
+    }
+
+
+    openModal(
+        name,
+        helpForm(name)
+    );
+
+}
+
+
+/* =====================================================
+   HELPER FORM
+===================================================== */
+
+function openHelperForm(){
+
+    openModal(
+
+        "আমি সাহায্য করতে চাই",
+
+        `
+
+        <form
+            class="form-grid"
+            onsubmit="submitHelper(event)"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    আপনি কোন ধরনের সাহায্য করতে পারবেন?
+                </label>
+
+                <select required>
+
+                    <option>
+                        রক্ত সহায়তা
+                    </option>
+
+                    <option>
+                        জরুরি যাতায়াত
+                    </option>
+
+                    <option>
+                        কারিগরি সহায়তা
+                    </option>
+
+                    <option>
+                        সাধারণ সহায়তা
+                    </option>
+
+                    <option>
+                        এলাকার সমস্যা সমাধান
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    আপনার এলাকা
+                </label>
+
+                <input
+                    required
+                    placeholder="জেলা / উপজেলা / ইউনিয়ন"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    বিস্তারিত
+                </label>
+
+                <textarea
+                    required
+                    placeholder="আপনি কীভাবে সাহায্য করতে পারবেন?"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="closeModal()"
+                >
+                    বাতিল
+                </button>
+
+                <button
+                    class="primary-btn"
+                    type="submit"
+                >
+                    সাহায্য করার তথ্য দিন
+                </button>
+
+            </div>
+
+
+            <div
+                id="formMessage"
+                class="form-message"
+            ></div>
+
+        </form>
+
+        `
+    );
+
+}
+
+
+function submitHelper(event){
+
+    event.preventDefault();
+
+    const message =
+        document.getElementById(
+            "formMessage"
+        );
+
+    message.textContent =
+        "আপনার সাহায্য করার তথ্য প্রস্তুত হয়েছে।";
+
+    message.classList.add("show");
+
+}
+
+
+/* =====================================================
+   HELP POST BUTTON
+===================================================== */
+
+function helpPost(name,type){
+
+    openModal(
+
+        name+"-কে সাহায্য করুন",
+
+        `
+
+        <div class="panel-list">
+
+            <div class="panel-card">
+
+                <strong>
+                    ${type}
+                </strong>
+
+                ${name}
+                সাহায্য চাইছেন।
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                onclick="offerHelp('${name}')"
+            >
+                🤝 আমি সাহায্য করতে চাই
+            </button>
+
+        </div>
+
+        `
+    );
+
+}
+
+
+function offerHelp(name){
+
+    openModal(
+
+        "সাহায্য করার আবেদন",
+
+        `
+
+        <div class="panel-card">
+
+            <strong>
+                ${name}
+            </strong>
+
+            <p>
+                আপনার সাহায্য করার ইচ্ছা
+                নথিভুক্ত হয়েছে।
+            </p>
+
+            <br>
+
+            পরবর্তী ধাপে পোস্টের মালিক
+            আপনার সাহায্যের আবেদন গ্রহণ করতে পারবেন।
+
+        </div>
+
+        `
+    );
+
+}
+
+
+/* =====================================================
+   SOLVED
+===================================================== */
+
+function openSolved(){
+
+    openModal(
+
+        "✅ সমাধান হয়েছে",
+
+        `
+
+        <div class="panel-list">
+
+            <div class="panel-card">
+
+                <strong>
+                    ❤️ রক্ত সহায়তা সম্পন্ন
+                </strong>
+
+                একজন রক্তদাতা সাহায্য করেছেন।
+
+            </div>
+
+
+            <div class="panel-card">
+
+                <strong>
+                    ✅ যাতায়াত সমস্যার সমাধান
+                </strong>
+
+                প্রয়োজনীয় যাতায়াতের ব্যবস্থা হয়েছে।
+
+            </div>
+
+
+            <div class="panel-card">
+
+                <strong>
+                    ❤️ সহায়তা সম্পন্ন
+                </strong>
+
+                পোস্টের মালিক জানিয়েছেন
+                যে সমস্যার সমাধান হয়েছে।
+
+            </div>
+
+        </div>
+
+        `
+    );
+
+}
+
+
+/* =====================================================
+   REPORTS
+===================================================== */
+
+function openReports(){
+
+    closeMenu();
+
+    openModal(
+
+        "📋 আমার Reports",
+
+        `
+
+        <div class="panel-list">
+
+            <div class="panel-card">
+
+                <strong>
+                    🩸 রক্ত প্রয়োজন
+                </strong>
+
+                <div>
+                    Status: 🔎 যাচাই হচ্ছে
+                </div>
+
+                <br>
+
+                <button
+                    class="secondary-btn"
+                    onclick="editReport('রক্ত প্রয়োজন')"
+                >
+                    Edit
+                </button>
+
+            </div>
+
+
+            <div class="panel-card">
+
+                <strong>
+                    🚗 জরুরি যাতায়াত
+                </strong>
+
+                <div>
+                    Status: ❤️ সাহায্য হয়েছে
+                </div>
+
+                <br>
+
+                <button
+                    class="secondary-btn"
+                    onclick="editReport('জরুরি যাতায়াত')"
+                >
+                    Update
+                </button>
+
+            </div>
+
+
+            <div class="panel-card">
+
+                <strong>
+                    📌 পোস্টের Update
+                </strong>
+
+                আপনি চাইলে নিজের পোস্টে
+                পরে জানাতে পারবেন—
+
+                <br><br>
+
+                <b>
+                    "আমি সাহায্য পেয়েছি"
+                </b>
+
+                অথবা
+
+                <b>
+                    "সমস্যার সমাধান হয়েছে"
+                </b>
+
+            </div>
+
+        </div>
+
+        `
+    );
+
+}
+
+
+function editReport(name){
+
+    openModal(
+
+        "Report Update",
+
+        `
+
+        <form
+            class="form-grid"
+            onsubmit="saveReportUpdate(event)"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Report
+                </label>
+
+                <input
+                    value="${name}"
+                    readonly
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    নতুন Status
+                </label>
+
+                <select>
+
+                    <option>
+                        নতুন
+                    </option>
+
+                    <option>
+                        যাচাই হচ্ছে
+                    </option>
+
+                    <option>
+                        সাহায্যকারী পাওয়া গেছে
+                    </option>
+
+                    <option>
+                        সাহায্য হয়েছে
+                    </option>
+
+                    <option>
+                        সমাধান হয়েছে
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Update লিখুন
+                </label>
+
+                <textarea
+                    required
+                    placeholder="কী হয়েছে তা লিখুন"
+                ></textarea>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                type="submit"
+            >
+                Update পোস্ট করুন
+            </button>
+
+
+            <div
+                id="formMessage"
+                class="form-message"
+            ></div>
+
+        </form>
+
+        `
+    );
+
+}
+
+
+function saveReportUpdate(event){
+
+    event.preventDefault();
+
+    const message =
+        document.getElementById(
+            "formMessage"
+        );
+
+    message.textContent =
+        "আপনার Report Update প্রস্তুত হয়েছে।";
+
+    message.classList.add("show");
+
+}
+
+
+/* =====================================================
+   PROFILE SETTINGS
 ===================================================== */
 
 function openSettings(){
 
-  if(!requireLogin()) return;
+    closeMenu();
 
-  closeMenu();
+    openModal(
 
-  openModal(
-    "settingsModal"
-  );
+        "⚙️ Settings",
 
-}
-
-
-/* =====================================================
-   CREATE POST
-===================================================== */
-
-function openPostModal(){
-
-  if(!requireLogin()) return;
-
-  closeMenu();
-
-  document.getElementById(
-    "postTitle"
-  ).value = "";
-
-  document.getElementById(
-    "postDescription"
-  ).value = "";
-
-  openModal(
-    "postModal"
-  );
-
-}
-
-
-async function createPost(){
-
-  const message =
-    document.getElementById(
-      "postMessage"
-    );
-
-  const type =
-    document.getElementById(
-      "postType"
-    ).value;
-
-  const title =
-    document.getElementById(
-      "postTitle"
-    ).value.trim();
-
-  const description =
-    document.getElementById(
-      "postDescription"
-    ).value.trim();
-
-  if(!title || !description){
-
-    showMessage(
-      message,
-      "শিরোনাম ও বিস্তারিত লিখুন",
-      "error"
-    );
-
-    return;
-
-  }
-
-  try{
-
-    const {data,error} =
-      await supabaseClient.rpc(
-        "create_help_post",
-        {
-          p_user_id:
-            currentUser.id,
-
-          p_help_type:
-            type,
-
-          p_title:
-            title,
-
-          p_description:
-            description,
-
-          p_division:
-            document.getElementById(
-              "postDivision"
-            ).value || null,
-
-          p_district:
-            document.getElementById(
-              "postDistrict"
-            ).value || null,
-
-          p_upazila:
-            document.getElementById(
-              "postUpazila"
-            ).value || null,
-
-          p_union_name:
-            document.getElementById(
-              "postUnion"
-            ).value || null,
-
-          p_visibility:
-            document.getElementById(
-              "postVisibility"
-            ).value
-        }
-      );
-
-    if(error) throw error;
-
-    if(!data.success){
-
-      showMessage(
-        message,
-        data.message,
-        "error"
-      );
-
-      return;
-
-    }
-
-    showMessage(
-      message,
-      "আপনার সাহায্যের পোস্ট প্রকাশ হয়েছে",
-      "success"
-    );
-
-    setTimeout(async () => {
-
-      closeModal(
-        "postModal"
-      );
-
-      await loadPublicPosts();
-
-    },700);
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      message,
-      error.message ||
-      "পোস্ট তৈরি করা যায়নি",
-      "error"
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   PUBLIC FEED
-===================================================== */
-
-async function loadPublicPosts(){
-
-  const feed =
-    document.getElementById(
-      "feed"
-    );
-
-  feed.innerHTML =
-    `<div class="loading">পোস্ট লোড হচ্ছে...</div>`;
-
-  try{
-
-    const {data,error} =
-      await supabaseClient.rpc(
-        "get_public_help_posts"
-      );
-
-    if(error) throw error;
-
-    allPublicPosts =
-      Array.isArray(data)
-      ? data
-      : [];
-
-    renderPosts(
-      allPublicPosts
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    feed.innerHTML = `
-      <div class="empty">
-        পোস্ট লোড করা যায়নি।
-        <br>
-        ${escapeHtml(error.message || "")}
-      </div>
-    `;
-
-  }
-
-}
-
-
-function renderPosts(posts){
-
-  const feed =
-    document.getElementById(
-      "feed"
-    );
-
-  if(!posts.length){
-
-    feed.innerHTML = `
-      <div class="empty">
-        এখনো কোনো Public সাহায্যের পোস্ট নেই।
-      </div>
-    `;
-
-    return;
-
-  }
-
-  feed.innerHTML =
-    posts.map(
-      post => renderPost(post)
-    ).join("");
-
-}
-
-
-function renderPost(post){
-
-  const user =
-    post.user || {};
-
-  const canHelp =
-    post.status !== "সমাধান হয়েছে";
-
-  const location =
-    [
-      post.division,
-      post.district,
-      post.upazila,
-      post.union_name
-    ]
-    .filter(Boolean)
-    .map(escapeHtml)
-    .join(" → ");
-
-  const date =
-    formatDate(post.created_at);
-
-  return `
-    <article class="post">
-
-      <div class="post-top">
-
-        <div class="avatar">
-          ${
-            user.profile_photo
-            ?
-            `<img src="${escapeAttr(user.profile_photo)}">`
-            :
-            "👤"
-          }
-        </div>
-
-        <div>
-          <div class="post-name">
-            ${escapeHtml(
-              user.full_name ||
-              "সহায় ব্যবহারকারী"
-            )}
-          </div>
-
-          <div class="post-date">
-            ${date}
-          </div>
-        </div>
-
-      </div>
-
-      <div>
-        <span class="type-badge">
-          ${escapeHtml(post.help_type || "")}
-        </span>
-
-        <span class="status">
-          ${escapeHtml(post.status || "নতুন")}
-        </span>
-      </div>
-
-      <h3>
-        ${escapeHtml(post.title || "")}
-      </h3>
-
-      <p>
-        ${escapeHtml(post.description || "")}
-      </p>
-
-      ${
-        location
-        ?
-        `<div class="location">
-          📍 ${location}
-        </div>`
-        :
-        ""
-      }
-
-      ${
-        canHelp
-        ?
         `
-        <div class="post-actions">
-          <button class="help-btn"
-            onclick="offerHelp('${post.id}')">
-            🤝 সাহায্য করুন
-          </button>
 
-          <button
-            onclick="openPostDetails('${post.id}')">
-            বিস্তারিত
-          </button>
+        <div class="setting-row">
+
+            <div class="setting-info">
+
+                <strong>
+                    Profile Public
+                </strong>
+
+                <small>
+                    অন্যরা আপনার Public তথ্য দেখতে পারবে।
+                </small>
+
+            </div>
+
+            <input
+                class="switch"
+                type="checkbox"
+                checked
+            >
+
         </div>
-        `
-        :
-        `
-        <div class="post-actions">
-          <button disabled>
-            ✅ সমাধান হয়েছে
-          </button>
+
+
+        <div class="setting-row">
+
+            <div class="setting-info">
+
+                <strong>
+                    Phone Public
+                </strong>
+
+                <small>
+                    ফোন নম্বর প্রকাশ করবেন কি না।
+                </small>
+
+            </div>
+
+            <input
+                class="switch"
+                type="checkbox"
+            >
+
         </div>
-        `
-      }
-
-    </article>
-  `;
-
-}
 
 
-/* =====================================================
-   HELP OFFER
-===================================================== */
+        <div class="setting-row">
 
-async function offerHelp(postId){
+            <div class="setting-info">
 
-  if(!requireLogin()) return;
+                <strong>
+                    Email Public
+                </strong>
 
-  if(!confirm(
-    "আপনি কি এই সমস্যায় সাহায্য করতে চান?"
-  )){
+                <small>
+                    Email প্রকাশ করবেন কি না।
+                </small>
 
-    return;
+            </div>
 
-  }
+            <input
+                class="switch"
+                type="checkbox"
+            >
 
-  try{
-
-    const {data,error} =
-      await supabaseClient.rpc(
-        "offer_help",
-        {
-          p_post_id:
-            postId,
-
-          p_helper_user_id:
-            currentUser.id
-        }
-      );
-
-    if(error) throw error;
-
-    alert(
-      data.message ||
-      "সাহায্যের প্রস্তাব পাঠানো হয়েছে"
-    );
-
-    await loadPublicPosts();
-
-  }catch(error){
-
-    console.error(error);
-
-    alert(
-      error.message ||
-      "সাহায্যের প্রস্তাব পাঠানো যায়নি"
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   POST DETAILS
-===================================================== */
-
-function openPostDetails(postId){
-
-  const post =
-    allPublicPosts.find(
-      p => String(p.id) === String(postId)
-    );
-
-  if(!post) return;
-
-  alert(
-    `সাহায্যের ধরন: ${post.help_type}\n\n` +
-    `শিরোনাম: ${post.title}\n\n` +
-    `বিস্তারিত: ${post.description}\n\n` +
-    `Status: ${post.status}`
-  );
-
-}
-
-
-/* =====================================================
-   MY REPORTS
-===================================================== */
-
-async function openMyReports(){
-
-  if(!requireLogin()) return;
-
-  closeMenu();
-
-  openModal(
-    "reportsModal"
-  );
-
-  const content =
-    document.getElementById(
-      "reportsContent"
-    );
-
-  content.innerHTML =
-    `<div class="loading">লোড হচ্ছে...</div>`;
-
-  try{
-
-    const {data,error} =
-      await supabaseClient.rpc(
-        "get_my_help_posts",
-        {
-          p_user_id:
-            currentUser.id
-        }
-      );
-
-    if(error) throw error;
-
-    const posts =
-      Array.isArray(data)
-      ? data
-      : [];
-
-    if(!posts.length){
-
-      content.innerHTML = `
-        <div class="empty">
-          আপনার কোনো Report নেই।
         </div>
-      `;
 
-      return;
 
-    }
+        <div class="setting-row">
 
-    content.innerHTML =
-      posts.map(post => `
+            <div class="setting-info">
 
-        <div class="post">
+                <strong>
+                    Post Default: Public
+                </strong>
 
-          <span class="type-badge">
-            ${escapeHtml(post.help_type)}
-          </span>
+                <small>
+                    নতুন পোস্ট Public হবে।
+                </small>
 
-          <span class="status">
-            ${escapeHtml(post.status)}
-          </span>
+            </div>
 
-          <h3>
-            ${escapeHtml(post.title)}
-          </h3>
+            <input
+                class="switch"
+                type="checkbox"
+                checked
+            >
 
-          <p>
-            ${escapeHtml(post.description)}
-          </p>
+        </div>
 
-          <div class="post-actions">
+
+        <div class="setting-row">
+
+            <div class="setting-info">
+
+                <strong>
+                    Help Update
+                </strong>
+
+                <small>
+                    সাহায্যের Status পরিবর্তনের খবর।
+                </small>
+
+            </div>
+
+            <input
+                class="switch"
+                type="checkbox"
+                checked
+            >
+
+        </div>
+
+
+        <div class="form-actions">
 
             <button
-              onclick='openEditPost(${JSON.stringify(post)})'>
-              ✏️ Edit
+                class="primary-btn"
+                onclick="closeModal()"
+            >
+                Settings Save
             </button>
-
-            ${
-              post.status !== "সমাধান হয়েছে"
-              ?
-              `<button
-                class="help-btn"
-                onclick="markSolved('${post.id}')">
-                ✅ সমাধান হয়েছে
-              </button>`
-              :
-              `<button disabled>
-                ✅ সমাধান হয়েছে
-              </button>`
-            }
-
-          </div>
 
         </div>
 
-      `).join("");
-
-  }catch(error){
-
-    console.error(error);
-
-    content.innerHTML = `
-      <div class="empty">
-        Report লোড করা যায়নি।
-        <br>
-        ${escapeHtml(error.message || "")}
-      </div>
-    `;
-
-  }
-
-}
-
-
-function openEditPost(post){
-
-  document.getElementById(
-    "editPostId"
-  ).value =
-    post.id;
-
-  document.getElementById(
-    "editPostTitle"
-  ).value =
-    post.title || "";
-
-  document.getElementById(
-    "editPostDescription"
-  ).value =
-    post.description || "";
-
-  document.getElementById(
-    "editPostVisibility"
-  ).value =
-    post.visibility || "public";
-
-  document.getElementById(
-    "editPostStatus"
-  ).value =
-    post.status || "নতুন";
-
-  openModal(
-    "editPostModal"
-  );
-
-}
-
-
-async function saveEditedPost(){
-
-  const message =
-    document.getElementById(
-      "editPostMessage"
+        `
     );
-
-  try{
-
-    const {data,error} =
-      await supabaseClient.rpc(
-        "update_my_help_post",
-        {
-          p_user_id:
-            currentUser.id,
-
-          p_post_id:
-            document.getElementById(
-              "editPostId"
-            ).value,
-
-          p_title:
-            document.getElementById(
-              "editPostTitle"
-            ).value.trim(),
-
-          p_description:
-            document.getElementById(
-              "editPostDescription"
-            ).value.trim(),
-
-          p_visibility:
-            document.getElementById(
-              "editPostVisibility"
-            ).value,
-
-          p_status:
-            document.getElementById(
-              "editPostStatus"
-            ).value
-        }
-      );
-
-    if(error) throw error;
-
-    if(!data.success){
-
-      showMessage(
-        message,
-        data.message,
-        "error"
-      );
-
-      return;
-
-    }
-
-    showMessage(
-      message,
-      "Report আপডেট হয়েছে",
-      "success"
-    );
-
-    await loadPublicPosts();
-
-    setTimeout(() => {
-
-      closeModal(
-        "editPostModal"
-      );
-
-      openMyReports();
-
-    },600);
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      message,
-      error.message ||
-      "আপডেট করা যায়নি",
-      "error"
-    );
-
-  }
-
-}
-
-
-async function markSolved(postId){
-
-  if(!confirm(
-    "আপনি কি নিশ্চিত যে সমস্যাটির সমাধান হয়েছে?"
-  )){
-
-    return;
-
-  }
-
-  try{
-
-    const {data,error} =
-      await supabaseClient.rpc(
-        "update_my_help_post",
-        {
-          p_user_id:
-            currentUser.id,
-
-          p_post_id:
-            postId,
-
-          p_title:null,
-
-          p_description:null,
-
-          p_visibility:null,
-
-          p_status:
-            "সমাধান হয়েছে"
-        }
-      );
-
-    if(error) throw error;
-
-    alert(
-      data.message ||
-      "সমস্যাটি সমাধান হয়েছে হিসেবে চিহ্নিত করা হয়েছে।"
-    );
-
-    await loadPublicPosts();
-
-    openMyReports();
-
-  }catch(error){
-
-    alert(
-      error.message ||
-      "Status পরিবর্তন করা যায়নি"
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   FILTER BUTTONS
-===================================================== */
-
-function showActiveHelp(){
-
-  document.getElementById(
-    "feedTitle"
-  ).textContent =
-    "🤝 সাহায্য প্রয়োজন";
-
-  const active =
-    allPublicPosts.filter(
-      p =>
-        p.status !==
-        "সমাধান হয়েছে"
-    );
-
-  renderPosts(active);
-
-}
-
-
-function showSolved(){
-
-  document.getElementById(
-    "feedTitle"
-  ).textContent =
-    "✅ সমাধান হয়েছে";
-
-  const solved =
-    allPublicPosts.filter(
-      p =>
-        p.status ===
-        "সমাধান হয়েছে"
-    );
-
-  renderPosts(solved);
 
 }
 
@@ -3245,938 +2682,412 @@ function showSolved(){
    ZAKAT
 ===================================================== */
 
-async function showZakat(){
+function openZakat(){
 
-  closeMenu();
+    openModal(
 
-  openModal(
-    "zakatModal"
-  );
+        "💰 যাকাত",
 
-  await loadZakatReceivers();
+        `
 
-}
+        <div class="panel-list">
 
+            <div class="panel-card">
 
-async function loadZakatReceivers(){
+                <strong>
+                    💰 যাকাত দিন
+                </strong>
 
-  const list =
-    document.getElementById(
-      "zakatList"
-    );
+                <p>
+                    যারা যাকাতের জন্য অপেক্ষা করছেন
+                    তাদের তালিকা এখানে থাকবে।
+                </p>
 
-  list.innerHTML =
-    `<div class="loading">তালিকা লোড হচ্ছে...</div>`;
+                <br>
 
-  try{
-
-    const year =
-      new Date().getFullYear();
-
-    const {data,error} =
-      await supabaseClient.rpc(
-        "get_zakat_receivers",
-        {
-          p_year:year
-        }
-      );
-
-    if(error) throw error;
-
-    const receivers =
-      Array.isArray(data)
-      ? data
-      : [];
-
-    if(!receivers.length){
-
-      list.innerHTML = `
-        <div class="empty">
-          এই বছরে বর্তমানে যাকাতের জন্য কোনো
-          প্রাপক তালিকায় নেই।
-        </div>
-      `;
-
-      return;
-
-    }
-
-    list.innerHTML =
-      receivers.map(
-        receiver => `
-
-        <div class="zakat-card">
-
-          <div class="zakat-person">
-
-            ${
-              receiver.profile_photo
-              ?
-              `<img src="${escapeAttr(receiver.profile_photo)}">`
-              :
-              `<div class="zakat-placeholder">
-                👤
-              </div>`
-            }
-
-            <div style="flex:1;">
-
-              <strong>
-                ${escapeHtml(
-                  receiver.full_name ||
-                  "গোপন ব্যবহারকারী"
-                )}
-              </strong>
-
-              <div style="font-size:13px;color:#667;">
-                ${
-                  [
-                    receiver.division,
-                    receiver.district,
-                    receiver.upazila,
-                    receiver.union_name
-                  ]
-                  .filter(Boolean)
-                  .map(escapeHtml)
-                  .join(" → ")
-                  ||
-                  "ঠিকানা গোপন"
-                }
-              </div>
+                <button
+                    class="primary-btn"
+                    onclick="openZakatDonor()"
+                >
+                    যাকাত দিতে চাই
+                </button>
 
             </div>
 
-          </div>
 
-          ${
-            currentUser &&
-            currentUser.id !== receiver.user_id
-            ?
-            `<button
-              class="primary"
-              style="margin-top:12px;"
-              onclick='openGiveZakat(${JSON.stringify(receiver)})'>
-              💰 যাকাত দিন
-            </button>`
-            :
-            ""
-          }
+            <div class="panel-card">
+
+                <strong>
+                    🤲 যাকাত নিতে চাই
+                </strong>
+
+                <p>
+                    যাদের প্রয়োজন তারা
+                    যাকাতের জন্য নিবন্ধন করতে পারবেন।
+                </p>
+
+                <br>
+
+                <button
+                    class="primary-btn"
+                    onclick="openZakatReceiver()"
+                >
+                    যাকাত নিতে চাই
+                </button>
+
+            </div>
+
+
+            <div class="panel-card">
+
+                <strong>
+                    ✅ যাকাত পেয়েছেন
+                </strong>
+
+                <p>
+                    সফলভাবে যাকাত পাওয়া ব্যক্তিদের
+                    তালিকা এখানে থাকবে।
+                </p>
+
+            </div>
 
         </div>
 
-      `
-      ).join("");
-
-  }catch(error){
-
-    console.error(error);
-
-    list.innerHTML = `
-      <div class="empty">
-        যাকাতের তালিকা লোড করা যায়নি।
-        <br>
-        ${escapeHtml(error.message || "")}
-      </div>
-    `;
-
-  }
+        `
+    );
 
 }
 
 
-async function registerAsZakatReceiver(){
+/* =====================================================
+   ZAKAT DONOR
+===================================================== */
 
-  if(!requireLogin()) return;
+function openZakatDonor(){
 
-  const year =
-    new Date().getFullYear();
+    openModal(
 
-  try{
+        "💰 যাকাত দিতে চাই",
 
-    const {data,error} =
-      await supabaseClient.rpc(
-        "register_zakat_receiver",
-        {
-          p_user_id:
-            currentUser.id,
+        `
 
-          p_year:
-            year
-        }
-      );
+        <form
+            class="form-grid"
+            onsubmit="submitZakatDonor(event)"
+        >
 
-    if(error) throw error;
+            <div class="form-group">
+
+                <label>
+                    যাকাত গ্রহীতা
+                </label>
+
+                <select required>
+
+                    <option>
+                        গ্রহীতা নির্বাচন করুন
+                    </option>
+
+                    <option>
+                        উদাহরণ গ্রহীতা — বিরামপুর
+                    </option>
+
+                    <option>
+                        উদাহরণ গ্রহীতা — দিনাজপুর
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    যাকাতের পরিমাণ
+                </label>
+
+                <input
+                    type="number"
+                    min="1"
+                    placeholder="টাকার পরিমাণ"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    দাতার নাম
+                </label>
+
+                <input
+                    placeholder="আপনার নাম"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    দাতার ID / ফোন
+                </label>
+
+                <input
+                    placeholder="আপনার ID বা ফোন"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                type="submit"
+            >
+                যাকাত দেওয়ার আবেদন করুন
+            </button>
+
+
+            <div
+                id="formMessage"
+                class="form-message"
+            ></div>
+
+        </form>
+
+        `
+    );
+
+}
+
+
+function submitZakatDonor(event){
+
+    event.preventDefault();
 
     const message =
-      document.getElementById(
-        "zakatMessage"
-      );
-
-    showMessage(
-      message,
-      data.message,
-      data.success
-      ? "success"
-      : "error"
-    );
-
-    if(data.success){
-
-      await loadZakatReceivers();
-
-    }
-
-  }catch(error){
-
-    console.error(error);
-
-    alert(
-      error.message ||
-      "যাকাতের তালিকায় যোগ করা যায়নি"
-    );
-
-  }
-
-}
-
-
-function openGiveZakat(receiver){
-
-  if(!requireLogin()) return;
-
-  currentZakatReceiver =
-    receiver;
-
-  document.getElementById(
-    "zakatRequestId"
-  ).value =
-    receiver.request_id;
-
-  document.getElementById(
-    "zakatAmount"
-  ).value = "";
-
-  document.getElementById(
-    "zakatReceiverInfo"
-  ).innerHTML = `
-
-    <div class="zakat-card">
-
-      <div class="zakat-person">
-
-        ${
-          receiver.profile_photo
-          ?
-          `<img src="${escapeAttr(receiver.profile_photo)}">`
-          :
-          `<div class="zakat-placeholder">
-            👤
-          </div>`
-        }
-
-        <div>
-          <strong>
-            ${escapeHtml(receiver.full_name)}
-          </strong>
-
-          <div style="font-size:13px;color:#667;">
-            যাকাতের প্রাপক
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  `;
-
-  closeModal(
-    "zakatModal"
-  );
-
-  openModal(
-    "giveZakatModal"
-  );
-
-}
-
-
-async function giveZakat(){
-
-  const message =
-    document.getElementById(
-      "giveZakatMessage"
-    );
-
-  const amount =
-    Number(
-      document.getElementById(
-        "zakatAmount"
-      ).value
-    );
-
-  const requestId =
-    document.getElementById(
-      "zakatRequestId"
-    ).value;
-
-  if(!amount || amount <= 0){
-
-    showMessage(
-      message,
-      "সঠিক টাকার পরিমাণ দিন",
-      "error"
-    );
-
-    return;
-
-  }
-
-  try{
-
-    const {data,error} =
-      await supabaseClient.rpc(
-        "give_zakat",
-        {
-          p_donor_user_id:
-            currentUser.id,
-
-          p_zakat_request_id:
-            requestId,
-
-          p_amount:
-            amount
-        }
-      );
-
-    if(error) throw error;
-
-    showMessage(
-      message,
-      data.message,
-      data.success
-      ? "success"
-      : "error"
-    );
-
-    if(data.success){
-
-      setTimeout(() => {
-
-        closeModal(
-          "giveZakatModal"
+        document.getElementById(
+            "formMessage"
         );
 
-      },1000);
+    message.textContent =
+        "যাকাতের Transaction Pending অবস্থায় তৈরি করার জন্য প্রস্তুত। গ্রহীতা নিশ্চিত করলে এটি Success হবে।";
 
-    }
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      message,
-      error.message ||
-      "যাকাতের তথ্য পাঠানো যায়নি",
-      "error"
-    );
-
-  }
+    message.classList.add("show");
 
 }
 
 
 /* =====================================================
-   ZAKAT HISTORY
+   ZAKAT RECEIVER
 ===================================================== */
 
-async function openZakatHistory(){
+function openZakatReceiver(){
 
-  if(!requireLogin()) return;
+    openModal(
 
-  closeMenu();
+        "🤲 যাকাতের টাকা নিতে চাই",
 
-  openModal(
-    "zakatHistoryModal"
-  );
+        `
 
-  const content =
-    document.getElementById(
-      "zakatHistoryContent"
-    );
+        <form
+            class="form-grid"
+            onsubmit="submitZakatReceiver(event)"
+        >
 
-  content.innerHTML =
-    `<div class="loading">লোড হচ্ছে...</div>`;
+            <div class="form-group">
 
-  try{
+                <label>
+                    আপনার নাম
+                </label>
 
-    const {data,error} =
-      await supabaseClient.rpc(
-        "get_zakat_history",
-        {
-          p_user_id:
-            currentUser.id
-        }
-      );
+                <input
+                    required
+                    placeholder="নাম লিখুন"
+                >
 
-    if(error) throw error;
+            </div>
 
-    const list =
-      Array.isArray(data)
-      ? data
-      : [];
 
-    if(!list.length){
+            <div class="form-group">
 
-      content.innerHTML = `
-        <div class="empty">
-          এখনো কোনো যাকাতের লেনদেন নেই।
-        </div>
-      `;
+                <label>
+                    আপনার এলাকা
+                </label>
 
-      return;
+                <input
+                    required
+                    placeholder="বিভাগ / জেলা / উপজেলা / ইউনিয়ন"
+                >
 
-    }
+            </div>
 
-    content.innerHTML =
-      list.map(item => `
 
-        <div class="zakat-card">
+            <div class="form-group">
 
-          <strong>
-            💰 ${Number(item.amount).toLocaleString("bn-BD")} টাকা
-          </strong>
+                <label>
+                    প্রয়োজনের কারণ
+                </label>
 
-          <p>
-            Status:
-            <strong>
-              ${escapeHtml(item.status)}
-            </strong>
-          </p>
+                <textarea
+                    required
+                    placeholder="কেন যাকাত প্রয়োজন তা লিখুন"
+                ></textarea>
 
-          <p>
-            বছর: ${escapeHtml(String(item.year))}
-          </p>
+            </div>
 
-          <p style="font-size:13px;color:#667;">
-            ${formatDate(item.created_at)}
-          </p>
 
-          ${
-            item.status === "pending" &&
-            String(item.receiver_user_id) ===
-            String(currentUser.id)
-            ?
-            `
+            <div class="form-group">
+
+                <label>
+                    যোগাযোগ
+                </label>
+
+                <input
+                    type="tel"
+                    required
+                    placeholder="ফোন নম্বর"
+                >
+
+            </div>
+
+
             <button
-              class="primary"
-              onclick="confirmZakat('${item.id}')">
-              🤲 আমি যাকাত পেয়েছি
+                class="primary-btn"
+                type="submit"
+            >
+                যাকাতের জন্য নিবন্ধন করুন
             </button>
-            `
-            :
-            ""
-          }
+
+
+            <div
+                id="formMessage"
+                class="form-message"
+            ></div>
+
+        </form>
+
+        `
+    );
+
+}
+
+
+function submitZakatReceiver(event){
+
+    event.preventDefault();
+
+    const message =
+        document.getElementById(
+            "formMessage"
+        );
+
+    message.textContent =
+        "আপনার যাকাত গ্রহণের আবেদন প্রস্তুত হয়েছে। একই বছরে একজন ব্যক্তি দ্বিতীয়বার নিবন্ধন করতে পারবে না—Supabase-এ এটি নিয়ম হিসেবে রাখা হবে।";
+
+    message.classList.add("show");
+
+}
+
+
+/* =====================================================
+   HOME
+===================================================== */
+
+function goHome(){
+
+    closeModal();
+
+    closeMenu();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+    closeMenu();
+
+    openModal(
+
+        "🚪 Logout",
+
+        `
+
+        <div class="panel-card">
+
+            আপনি কি Logout করতে চান?
 
         </div>
 
-      `).join("");
 
-  }catch(error){
+        <div class="form-actions">
 
-    console.error(error);
+            <button
+                class="secondary-btn"
+                onclick="closeModal()"
+            >
+                না
+            </button>
 
-    content.innerHTML = `
-      <div class="empty">
-        তথ্য লোড করা যায়নি।
-        <br>
-        ${escapeHtml(error.message || "")}
-      </div>
-    `;
 
-  }
+            <button
+                class="primary-btn"
+                onclick="completeLogout()"
+            >
+                হ্যাঁ, Logout
+            </button>
+
+        </div>
+
+        `
+    );
 
 }
 
 
-async function confirmZakat(transactionId){
+function completeLogout(){
 
-  if(!confirm(
-    "আপনি কি নিশ্চিত যে আপনি এই যাকাতের টাকা পেয়েছেন?"
-  )){
-
-    return;
-
-  }
-
-  try{
-
-    const {data,error} =
-      await supabaseClient.rpc(
-        "confirm_zakat_received",
-        {
-          p_receiver_user_id:
-            currentUser.id,
-
-          p_transaction_id:
-            transactionId
-        }
-      );
-
-    if(error) throw error;
+    closeModal();
 
     alert(
-      data.message ||
-      "যাকাত গ্রহণ নিশ্চিত হয়েছে"
+        "Logout সম্পন্ন হয়েছে।"
     );
 
-    openZakatHistory();
-
-  }catch(error){
-
-    alert(
-      error.message ||
-      "নিশ্চিত করা যায়নি"
-    );
-
-  }
-
 }
 
 
 /* =====================================================
-   POST ADDRESS
+   ESC KEY
 ===================================================== */
 
-function loadPostDistricts(){
+document.addEventListener(
+    "keydown",
+    function(event){
 
-  loadCascading(
-    "postDivision",
-    "postDistrict",
-    "postUpazila",
-    "postUnion",
-    1
-  );
+        if(event.key==="Escape"){
 
-}
+            closeMenu();
 
+            closeModal();
 
-function loadPostUpazilas(){
-
-  loadCascading(
-    "postDivision",
-    "postDistrict",
-    "postUpazila",
-    "postUnion",
-    2
-  );
-
-}
-
-
-function loadPostUnions(){
-
-  loadCascading(
-    "postDivision",
-    "postDistrict",
-    "postUpazila",
-    "postUnion",
-    3
-  );
-
-}
-
-
-/* =====================================================
-   EDIT ADDRESS
-===================================================== */
-
-function loadEditDistricts(){
-
-  loadCascading(
-    "editDivision",
-    "editDistrict",
-    "editUpazila",
-    "editUnion",
-    1
-  );
-
-}
-
-
-function loadEditUpazilas(){
-
-  loadCascading(
-    "editDivision",
-    "editDistrict",
-    "editUpazila",
-    "editUnion",
-    2
-  );
-
-}
-
-
-function loadEditUnions(){
-
-  loadCascading(
-    "editDivision",
-    "editDistrict",
-    "editUpazila",
-    "editUnion",
-    3
-  );
-
-}
-
-
-/* =====================================================
-   GENERIC CASCADING
-===================================================== */
-
-function loadCascading(
-  divisionId,
-  districtId,
-  upazilaId,
-  unionId,
-  level
-){
-
-  const division =
-    getDivision(
-      document.getElementById(
-        divisionId
-      ).value
-    );
-
-  const districtSelect =
-    document.getElementById(
-      districtId
-    );
-
-  const upazilaSelect =
-    document.getElementById(
-      upazilaId
-    );
-
-  const unionSelect =
-    document.getElementById(
-      unionId
-    );
-
-  if(level === 1){
-
-    districtSelect.innerHTML =
-      `<option value="">জেলা নির্বাচন করুন</option>`;
-
-    upazilaSelect.innerHTML =
-      `<option value="">থানা / উপজেলা নির্বাচন করুন</option>`;
-
-    unionSelect.innerHTML =
-      `<option value="">ইউনিয়ন নির্বাচন করুন</option>`;
-
-    upazilaSelect.disabled = true;
-    unionSelect.disabled = true;
-
-    if(!division) return;
-
-    getDistricts(division)
-      .forEach(d => {
-
-        const option =
-          document.createElement("option");
-
-        option.value =
-          itemName(d);
-
-        option.textContent =
-          itemName(d);
-
-        districtSelect.appendChild(option);
-
-      });
-
-    districtSelect.disabled = false;
-
-  }
-
-  if(level === 2){
-
-    const district =
-      getDistricts(division)
-        .find(d =>
-          itemName(d) ===
-          districtSelect.value
-        );
-
-    upazilaSelect.innerHTML =
-      `<option value="">থানা / উপজেলা নির্বাচন করুন</option>`;
-
-    unionSelect.innerHTML =
-      `<option value="">ইউনিয়ন নির্বাচন করুন</option>`;
-
-    unionSelect.disabled = true;
-
-    if(!district){
-
-      upazilaSelect.disabled = true;
-
-      return;
-
-    }
-
-    getUpazilas(district)
-      .forEach(u => {
-
-        const option =
-          document.createElement("option");
-
-        option.value =
-          itemName(u);
-
-        option.textContent =
-          itemName(u);
-
-        upazilaSelect.appendChild(option);
-
-      });
-
-    upazilaSelect.disabled = false;
-
-  }
-
-  if(level === 3){
-
-    const district =
-      getDistricts(division)
-        .find(d =>
-          itemName(d) ===
-          districtSelect.value
-        );
-
-    const upazila =
-      getUpazilas(district)
-        .find(u =>
-          itemName(u) ===
-          upazilaSelect.value
-        );
-
-    unionSelect.innerHTML =
-      `<option value="">ইউনিয়ন নির্বাচন করুন</option>`;
-
-    if(!upazila){
-
-      unionSelect.disabled = true;
-
-      return;
-
-    }
-
-    getUnions(upazila)
-      .forEach(u => {
-
-        const option =
-          document.createElement("option");
-
-        option.value =
-          itemName(u);
-
-        option.textContent =
-          itemName(u);
-
-        unionSelect.appendChild(option);
-
-      });
-
-    unionSelect.disabled = false;
-
-  }
-
-}
-
-
-/* =====================================================
-   HELP SERVICE MENU
-===================================================== */
-
-function selectService(service){
-
-  closeMenu();
-
-  if(
-    service ===
-    "💰 যাকাতের টাকা দিতে চাই"
-    ||
-    service ===
-    "🤲 যাকাতের টাকা নিতে চাই"
-  ){
-
-    showZakat();
-
-    return;
-
-  }
-
-  if(
-    service ===
-    "🤝 আমি সাহায্য করতে চাই"
-  ){
-
-    showActiveHelp();
-
-    return;
-
-  }
-
-  if(
-    service ===
-    "🆘 সাহায্য চাই"
-  ){
-
-    openPostModal();
-
-    return;
-
-  }
-
-  if(!requireLogin()) return;
-
-  document.getElementById(
-    "postType"
-  ).value =
-    service;
-
-  openModal(
-    "postModal"
-  );
-
-}
-
-
-/* =====================================================
-   REQUIRE LOGIN
-===================================================== */
-
-function requireLogin(){
-
-  if(currentUser){
-
-    return true;
-
-  }
-
-  openLogin();
-
-  return false;
-
-}
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-function showMessage(
-  element,
-  text,
-  type
-){
-
-  element.textContent =
-    text || "";
-
-  element.className =
-    `message show ${type}`;
-
-}
-
-
-/* =====================================================
-   DATE
-===================================================== */
-
-function formatDate(date){
-
-  if(!date) return "";
-
-  try{
-
-    return new Date(date)
-      .toLocaleString(
-        "bn-BD",
-        {
-          year:"numeric",
-          month:"long",
-          day:"numeric",
-          hour:"numeric",
-          minute:"2-digit"
         }
-      );
-
-  }catch(e){
-
-    return "";
-
-  }
-
-}
-
-
-/* =====================================================
-   SECURITY / HTML ESCAPE
-===================================================== */
-
-function escapeHtml(value){
-
-  if(value === null ||
-     value === undefined){
-
-    return "";
-
-  }
-
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-
-function escapeAttr(value){
-
-  return escapeHtml(value);
-
-}
-
-
-/* =====================================================
-   CLOSE MODALS ON BACKGROUND
-===================================================== */
-
-document.querySelectorAll(
-  ".modal"
-).forEach(modal => {
-
-  modal.addEventListener(
-    "click",
-    function(e){
-
-      if(e.target === modal){
-
-        modal.classList.remove(
-          "show"
-        );
-
-      }
 
     }
-  );
-
-});
-
+);
 
 </script>
 
