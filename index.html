@@ -15,1090 +15,767 @@ body{
   margin:0;
   font-family:Arial,"Noto Sans Bengali",sans-serif;
   background:#f3f7f5;
-  color:#222;
+  color:#17231d;
 }
 
-/* ================= HEADER ================= */
-
 header{
-  background:#087443;
-  color:white;
   position:sticky;
   top:0;
   z-index:1000;
-  box-shadow:0 2px 8px #0003;
-}
-
-.header-inner{
-  max-width:950px;
-  margin:auto;
-  min-height:68px;
+  background:#087f5b;
+  color:white;
+  padding:13px 15px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  padding:10px 12px;
-}
-
-.logo-area{
-  text-align:left;
+  align-items:center;
+  box-shadow:0 2px 8px #0002;
 }
 
 .logo{
-  font-size:23px;
+  font-size:21px;
   font-weight:bold;
 }
 
-.subtitle{
-  font-size:12px;
+.logo small{
+  display:block;
+  font-size:11px;
+  font-weight:normal;
   margin-top:2px;
-}
-
-/* ================= MENU ================= */
-
-.menu-wrap{
-  position:relative;
 }
 
 .menu-btn{
   border:0;
   background:white;
-  color:#087443;
-  border-radius:9px;
-  padding:10px 15px;
-  font-size:15px;
+  color:#087f5b;
+  padding:9px 14px;
+  border-radius:10px;
+  font-size:17px;
   font-weight:bold;
   cursor:pointer;
 }
 
-.menu-panel{
+.menu{
   display:none;
-  position:absolute;
-  top:52px;
-  right:0;
-  width:290px;
-  max-height:80vh;
-  overflow-y:auto;
+  position:fixed;
+  right:10px;
+  top:67px;
+  width:310px;
+  max-width:calc(100% - 20px);
+  max-height:calc(100vh - 80px);
+  overflow:auto;
   background:white;
-  color:#222;
-  border-radius:14px;
-  box-shadow:0 5px 25px #0004;
-  padding:8px;
+  border-radius:15px;
+  box-shadow:0 8px 30px #0003;
+  z-index:2000;
+  padding:10px;
 }
 
-.menu-panel.show{
+.menu.show{
   display:block;
 }
 
-.menu-user{
-  padding:12px;
-  color:#087443;
+.menu-title{
+  font-size:16px;
   font-weight:bold;
+  padding:9px;
   border-bottom:1px solid #eee;
   margin-bottom:5px;
-}
-
-.menu-title{
-  padding:9px 12px;
-  color:#666;
-  font-size:13px;
-  font-weight:bold;
 }
 
 .menu-item{
   width:100%;
   border:0;
-  background:white;
-  color:#222;
-  text-align:left;
+  background:#f7faf8;
   padding:12px;
-  border-radius:8px;
-  font-size:14px;
+  margin:4px 0;
+  border-radius:10px;
+  text-align:left;
+  font-size:15px;
   cursor:pointer;
 }
 
 .menu-item:hover{
-  background:#edf8f2;
+  background:#e5f5ee;
 }
 
-.help-menu-item{
-  color:#075f38;
-  font-weight:bold;
-}
-
-.logout-item{
-  color:#b00020;
-  border-top:1px solid #eee;
-  margin-top:5px;
-}
-
-/* ================= MAIN ================= */
-
-main{
-  max-width:950px;
-  margin:auto;
-  padding:22px 12px 50px;
+.account{
+  border-top:1px solid #ddd;
+  margin-top:8px;
+  padding-top:8px;
 }
 
 .hero{
-  background:white;
-  border-radius:16px;
-  padding:35px 20px;
+  padding:45px 18px 30px;
   text-align:center;
-  box-shadow:0 2px 10px #0001;
+  background:linear-gradient(135deg,#e7f8f0,#ffffff);
 }
 
 .hero h1{
-  color:#087443;
+  margin:0;
   font-size:30px;
-  margin:0 0 12px;
+  color:#087f5b;
 }
 
 .hero p{
-  line-height:1.8;
-  margin:6px 0;
+  font-size:16px;
+  line-height:1.7;
 }
 
-.user-box{
-  display:none;
-  margin-top:18px;
-  background:#e4f5ec;
-  border:1px solid #b8dfca;
-  border-radius:12px;
-  padding:14px;
-  text-align:center;
-  color:#075f38;
-}
-
-/* ================= PROFILE ================= */
-
-.profile-card{
-  display:none;
-  background:white;
-  border-radius:15px;
-  padding:20px;
-  margin-top:20px;
-  box-shadow:0 2px 10px #0001;
-}
-
-.profile-photo{
-  width:110px;
-  height:110px;
-  border-radius:50%;
-  object-fit:cover;
-  display:block;
-  margin:0 auto 12px;
-  border:4px solid #087443;
-  background:#e8f4ed;
-}
-
-.profile-name{
-  text-align:center;
-  color:#087443;
-  font-size:21px;
-  font-weight:bold;
-}
-
-.profile-info{
-  margin-top:15px;
-  line-height:1.9;
-}
-
-.profile-actions{
-  display:flex;
-  gap:8px;
-  margin-top:15px;
-}
-
-.profile-actions button{
-  flex:1;
-  border:0;
-  border-radius:8px;
-  padding:11px;
-  background:#087443;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* ================= REPORT ================= */
-
-.report-card{
-  display:none;
-  background:white;
-  border-radius:15px;
-  padding:20px;
-  margin-top:20px;
-  box-shadow:0 2px 10px #0001;
-}
-
-.report-title{
-  color:#087443;
-  text-align:center;
-}
-
-.empty{
-  text-align:center;
-  color:#777;
-  line-height:1.8;
+.container{
+  width:100%;
+  max-width:850px;
+  margin:auto;
   padding:15px;
 }
 
-.status{
-  display:inline-block;
-  background:#e1f5e9;
-  color:#087443;
-  padding:5px 10px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:bold;
+.card{
+  background:white;
+  border-radius:15px;
+  padding:18px;
+  margin:15px 0;
+  box-shadow:0 2px 10px #00000010;
 }
 
-/* ================= MODAL ================= */
+.card h2{
+  margin-top:0;
+  color:#087f5b;
+}
 
-.modal{
+.hidden{
+  display:none!important;
+}
+
+button.primary{
+  width:100%;
+  border:0;
+  background:#087f5b;
+  color:white;
+  padding:13px;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button.primary:hover{
+  background:#066a4c;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  padding:12px;
+  margin:6px 0 12px;
+  border:1px solid #ccd8d2;
+  border-radius:9px;
+  font-size:15px;
+  outline:none;
+  background:white;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+label{
+  font-weight:bold;
+  font-size:14px;
+}
+
+.modal-bg{
   display:none;
   position:fixed;
   inset:0;
   background:#0008;
-  z-index:5000;
+  z-index:3000;
+  padding:15px;
   overflow:auto;
-  padding:20px 10px;
 }
 
-.modal-box{
-  max-width:500px;
-  margin:20px auto;
+.modal-bg.show{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal{
   background:white;
-  border-radius:15px;
+  width:100%;
+  max-width:600px;
+  max-height:92vh;
+  overflow:auto;
+  border-radius:16px;
   padding:20px;
-  position:relative;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .close{
-  position:absolute;
-  right:12px;
-  top:7px;
-  border:0;
-  background:none;
-  font-size:28px;
-  cursor:pointer;
-}
-
-.modal-box h2{
-  text-align:center;
-  color:#087443;
-  margin-top:5px;
-}
-
-label{
-  display:block;
-  font-weight:bold;
-  font-size:14px;
-  margin-top:10px;
-}
-
-input,
-select,
-textarea{
-  width:100%;
-  padding:12px;
-  margin-top:6px;
-  margin-bottom:8px;
-  border:1px solid #ccd8d1;
-  border-radius:8px;
-  font-size:15px;
-  background:white;
-}
-
-textarea{
-  min-height:90px;
-  resize:vertical;
-}
-
-.primary-btn{
-  width:100%;
-  border:0;
-  background:#087443;
-  color:white;
-  padding:13px;
-  border-radius:8px;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-  margin-top:8px;
-}
-
-.secondary-btn{
-  width:100%;
   border:0;
   background:#eee;
-  color:#333;
-  padding:11px;
-  border-radius:8px;
-  margin-top:8px;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  font-size:20px;
   cursor:pointer;
 }
 
-.message{
-  text-align:center;
+.help-box{
+  background:#eef9f4;
+  border:1px solid #cdeadd;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+.status{
+  display:inline-block;
+  padding:5px 9px;
+  background:#fff3cd;
+  color:#735b00;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.report{
+  border:1px solid #e1e7e3;
+  border-radius:12px;
+  padding:14px;
   margin:10px 0;
-  font-weight:bold;
+}
+
+.report h3{
+  margin:0 0 7px;
+}
+
+.empty{
+  text-align:center;
+  padding:25px;
+  color:#68736d;
+}
+
+footer{
+  text-align:center;
+  padding:30px 15px;
+  color:#667;
+  font-size:13px;
+}
+
+/* Custom help selector */
+.custom-select{
+  position:relative;
+  margin-bottom:15px;
+}
+
+.select-display{
+  border:1px solid #ccd8d2;
+  border-radius:9px;
+  padding:12px;
+  background:white;
+  cursor:pointer;
+  min-height:46px;
+}
+
+.select-options{
+  display:none;
+  position:absolute;
+  z-index:100;
+  width:100%;
+  background:white;
+  border:1px solid #ccd8d2;
+  border-radius:9px;
+  margin-top:4px;
+  padding:6px;
+  box-shadow:0 5px 20px #0002;
+  max-height:300px;
+  overflow:auto;
+}
+
+.select-options.show{
+  display:block;
+}
+
+.option{
+  padding:10px;
+  border-radius:8px;
+}
+
+.option:hover{
+  background:#eef9f4;
+}
+
+.option input{
+  width:auto;
+  margin:0 8px 0 0;
+}
+
+.profile-photo{
+  width:90px;
+  height:90px;
+  object-fit:cover;
+  border-radius:50%;
+  display:block;
+  margin:0 auto 10px;
+  background:#e7eee9;
 }
 
 .success{
-  color:#087443;
+  background:#e7f8ee;
+  color:#09643f;
+  padding:12px;
+  border-radius:10px;
+  margin:10px 0;
 }
 
 .error{
-  color:#c00020;
-}
-
-/* ================= HELP SELECT ================= */
-
-.help-select{
-  border:1px solid #ccd8d1;
-  border-radius:8px;
+  background:#fdeaea;
+  color:#a11919;
   padding:12px;
-  margin-top:6px;
-  cursor:pointer;
-  background:white;
-  color:#555;
-}
-
-.help-options{
-  display:none;
-  border:1px solid #ddd;
-  border-radius:8px;
-  margin-top:4px;
-  overflow:hidden;
-}
-
-.help-options.show{
-  display:block;
-}
-
-.help-option{
-  padding:11px;
-  border-bottom:1px solid #eee;
-  cursor:pointer;
-}
-
-.help-option:last-child{
-  border-bottom:0;
-}
-
-.help-option.selected{
-  background:#dff4e8;
-  color:#075f38;
-  font-weight:bold;
-}
-
-.selected-help{
-  color:#087443;
-  font-size:13px;
-  line-height:1.7;
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-  background:#075f38;
-  color:white;
-  text-align:center;
-  padding:22px 10px;
-  line-height:1.8;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:600px){
-
-  .logo{
-    font-size:20px;
-  }
-
-  .subtitle{
-    font-size:11px;
-  }
-
-  .menu-panel{
-    width:285px;
-    right:-5px;
-  }
-
-  .hero h1{
-    font-size:25px;
-  }
-
-  .profile-actions{
-    flex-direction:column;
-  }
+  border-radius:10px;
+  margin:10px 0;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
 <header>
-
-  <div class="header-inner">
-
-    <div class="logo-area">
-      <div class="logo">🤝 সহায়</div>
-      <div class="subtitle">মানুষ মানুষের পাশে</div>
-    </div>
-
-    <!-- একমাত্র Menu Button -->
-    <div class="menu-wrap">
-
-      <button class="menu-btn" onclick="toggleMenu()">
-        ☰ Menu
-      </button>
-
-      <div class="menu-panel" id="menuPanel">
-
-        <!-- LOGIN অবস্থায় User Name -->
-        <div
-          class="menu-user"
-          id="menuUser"
-          style="display:none;"
-        >
-          👤 ব্যবহারকারী
-        </div>
-
-        <!-- ================= HELP ================= -->
-
-        <div class="menu-title">
-          🫂 সাহায্যের সুবিধা
-        </div>
-
-        <button
-          class="menu-item help-menu-item"
-          onclick="chooseHelp('🆘 সাহায্য চাই')"
-        >
-          🆘 সাহায্য চাই
-        </button>
-
-        <button
-          class="menu-item help-menu-item"
-          onclick="chooseHelp('🤝 আমি সাহায্য করতে চাই')"
-        >
-          🤝 আমি সাহায্য করতে চাই
-        </button>
-
-        <button
-          class="menu-item help-menu-item"
-          onclick="chooseHelp('🩸 রক্ত প্রয়োজন')"
-        >
-          🩸 রক্ত প্রয়োজন
-        </button>
-
-        <button
-          class="menu-item help-menu-item"
-          onclick="chooseHelp('🔎 হারানো / পাওয়া')"
-        >
-          🔎 হারানো / পাওয়া
-        </button>
-
-        <button
-          class="menu-item help-menu-item"
-          onclick="chooseHelp('🚑 জরুরি সহায়তা')"
-        >
-          🚑 জরুরি সহায়তা
-        </button>
-
-        <button
-          class="menu-item help-menu-item"
-          onclick="chooseHelp('🛠️ কারিগরি সহায়তা')"
-        >
-          🛠️ কারিগরি সহায়তা
-        </button>
-
-        <button
-          class="menu-item help-menu-item"
-          onclick="chooseHelp('📢 এলাকার সমস্যা')"
-        >
-          📢 এলাকার সমস্যা
-        </button>
-
-        <button
-          class="menu-item help-menu-item"
-          onclick="chooseHelp('🚗 জরুরি যাতায়াত')"
-        >
-          🚗 জরুরি যাতায়াত
-        </button>
-
-        <button
-          class="menu-item help-menu-item"
-          onclick="chooseHelp('💰 যাকাতের টাকা দিতে চাই')"
-        >
-          💰 যাকাতের টাকা দিতে চাই
-        </button>
-
-        <button
-          class="menu-item help-menu-item"
-          onclick="chooseHelp('🤲 যাকাতের টাকা নিতে চাই')"
-        >
-          🤲 যাকাতের টাকা নিতে চাই
-        </button>
-
-        <!-- ================= USER ================= -->
-
-        <div
-          class="menu-title"
-          id="userMenuTitle"
-          style="display:none;"
-        >
-          👤 আমার অ্যাকাউন্ট
-        </div>
-
-        <button
-          class="menu-item"
-          id="profileMenuBtn"
-          style="display:none;"
-          onclick="openProfile()"
-        >
-          👤 আমার প্রোফাইল
-        </button>
-
-        <button
-          class="menu-item"
-          id="editMenuBtn"
-          style="display:none;"
-          onclick="openEditProfile()"
-        >
-          ✏️ প্রোফাইল Edit
-        </button>
-
-        <button
-          class="menu-item"
-          id="reportMenuBtn"
-          style="display:none;"
-          onclick="openReports()"
-        >
-          📊 আমার রিপোর্ট
-        </button>
-
-        <!-- ================= GUEST ================= -->
-
-        <button
-          class="menu-item"
-          id="loginMenuBtn"
-          onclick="openLogin()"
-        >
-          🔐 লগইন
-        </button>
-
-        <button
-          class="menu-item"
-          id="registerMenuBtn"
-          onclick="openRegister()"
-        >
-          📝 রেজিস্ট্রেশন
-        </button>
-
-        <!-- ================= LOGOUT ================= -->
-
-        <button
-          class="menu-item logout-item"
-          id="logoutMenuBtn"
-          style="display:none;"
-          onclick="logout()"
-        >
-          🚪 লগআউট
-        </button>
-
-      </div>
-
-    </div>
-
+  <div class="logo">
+    🤝 সহায়
+    <small>মানুষ মানুষের পাশে</small>
   </div>
 
+  <button class="menu-btn" onclick="toggleMenu()">☰ Menu</button>
 </header>
 
+<!-- MENU -->
+<div id="menu" class="menu">
 
-<!-- ================= MAIN ================= -->
+  <div class="menu-title">সাহায্যের ধরন</div>
 
-<main>
+  <button class="menu-item" onclick="openHelp('🆘 সাহায্য চাই')">
+    🆘 সাহায্য চাই
+  </button>
 
-  <section class="hero">
+  <button class="menu-item" onclick="notReady('🤝 আমি সাহায্য করতে চাই')">
+    🤝 আমি সাহায্য করতে চাই
+  </button>
 
-    <h1>মানুষ মানুষের পাশে</h1>
+  <button class="menu-item" onclick="notReady('🩸 রক্ত প্রয়োজন')">
+    🩸 রক্ত প্রয়োজন
+  </button>
 
-    <p>
-      <b>সহায়</b> একটি মানুষের জন্য মানুষের পাশে দাঁড়ানোর প্ল্যাটফর্ম।
-    </p>
+  <button class="menu-item" onclick="notReady('🔎 হারানো / পাওয়া')">
+    🔎 হারানো / পাওয়া
+  </button>
 
-    <p>
-      প্রয়োজনের সময় সাহায্য পাওয়া এবং
-      অন্য মানুষকে সাহায্য করাই আমাদের উদ্দেশ্য।
-    </p>
+  <button class="menu-item" onclick="notReady('🚑 জরুরি সহায়তা')">
+    🚑 জরুরি সহায়তা
+  </button>
 
-    <p>
-      <b>সমস্যা পোস্ট করা নয়, সমস্যার সমাধান করা।</b>
-    </p>
+  <button class="menu-item" onclick="notReady('🛠️ কারিগরি সহায়তা')">
+    🛠️ কারিগরি সহায়তা
+  </button>
 
-  </section>
+  <button class="menu-item" onclick="notReady('📢 এলাকার সমস্যা')">
+    📢 এলাকার সমস্যা
+  </button>
 
+  <button class="menu-item" onclick="notReady('🚗 জরুরি যাতায়াত')">
+    🚗 জরুরি যাতায়াত
+  </button>
 
-  <!-- USER WELCOME -->
+  <button class="menu-item" onclick="notReady('💰 যাকাতের টাকা দিতে চাই')">
+    💰 যাকাতের টাকা দিতে চাই
+  </button>
 
-  <div class="user-box" id="userBox">
+  <button class="menu-item" onclick="notReady('🤲 যাকাতের টাকা নিতে চাই')">
+    🤲 যাকাতের টাকা নিতে চাই
+  </button>
 
-    👋 স্বাগতম,
-    <b id="userBoxName"></b>
+  <div class="account">
+
+    <div id="loggedOutMenu">
+
+      <button class="menu-item" onclick="openModal('loginModal')">
+        🔐 লগইন
+      </button>
+
+      <button class="menu-item" onclick="openModal('registerModal')">
+        📝 রেজিস্ট্রেশন
+      </button>
+
+    </div>
+
+    <div id="loggedInMenu" class="hidden">
+
+      <button class="menu-item" onclick="showProfile()">
+        👤 আমার প্রোফাইল
+      </button>
+
+      <button class="menu-item" onclick="openEditProfile()">
+        ✏️ প্রোফাইল Edit
+      </button>
+
+      <button class="menu-item" onclick="showReports()">
+        📊 আমার রিপোর্ট
+      </button>
+
+      <button class="menu-item" onclick="logout()">
+        🚪 লগআউট
+      </button>
+
+    </div>
 
   </div>
+</div>
 
+<section class="hero">
+  <h1>সহায়</h1>
+  <p>
+    মানুষ মানুষের পাশে<br>
+    <b>সমস্যা পোস্ট করা নয়, সমস্যার সমাধান করা।</b>
+  </p>
+</section>
 
-  <!-- PROFILE -->
+<div class="container">
 
-  <section
-    class="profile-card"
-    id="profileCard"
-  >
+  <div id="welcomeCard" class="card">
+    <h2>স্বাগতম</h2>
 
-    <img
-      id="profilePhoto"
-      class="profile-photo"
-      src=""
-      alt="Profile"
-    >
+    <p>
+      আপনার প্রয়োজন হলে Menu থেকে
+      <b>🆘 সাহায্য চাই</b> নির্বাচন করুন।
+    </p>
 
-    <div
-      class="profile-name"
-      id="profileName"
-    >
-      ব্যবহারকারী
-    </div>
+    <button class="primary" onclick="openHelp('🆘 সাহায্য চাই')">
+      🆘 সাহায্য চাই
+    </button>
+  </div>
 
-    <div
-      class="profile-info"
-      id="profileInfo"
-    ></div>
+  <div id="userCard" class="card hidden"></div>
 
-    <div class="profile-actions">
+  <div id="reportsCard" class="card hidden">
+    <h2>📊 আমার রিপোর্ট</h2>
+    <div id="reportsList"></div>
+  </div>
 
-      <button onclick="openEditProfile()">
-        ✏️ Profile Edit
-      </button>
-
-      <button onclick="openPhotoPicker()">
-        🖼️ ছবি পরিবর্তন
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- REPORT -->
-
-  <section
-    class="report-card"
-    id="reportCard"
-  >
-
-    <h2 class="report-title">
-      📊 আমার রিপোর্ট
-    </h2>
-
-    <div id="reportList"></div>
-
-  </section>
-
-</main>
-
-
-<!-- ================= FOOTER ================= -->
+</div>
 
 <footer>
-
-  <b>সহায় — মানুষ মানুষের পাশে</b>
-
-  <br>
-
-  মানুষের প্রয়োজনে মানুষ পাশে দাঁড়াবে।
-
+  © 2026 সহায় — মানুষ মানুষের পাশে
 </footer>
 
 
-<!-- ================= LOGIN ================= -->
+<!-- HELP REQUEST MODAL -->
+<div id="helpModal" class="modal-bg">
 
-<div
-  class="modal"
-  id="loginModal"
->
+  <div class="modal">
 
-  <div class="modal-box">
+    <div class="modal-head">
+      <h2>🆘 সাহায্য চাই</h2>
 
-    <button
-      class="close"
-      onclick="closeModal('loginModal')"
+      <button class="close" onclick="closeModal('helpModal')">
+        ×
+      </button>
+    </div>
+
+    <div class="help-box">
+      আপনার প্রয়োজনীয় সাহায্যের তথ্য দিন।
+      তথ্য Submit করার পর এটি আপনার
+      <b>আমার রিপোর্ট</b> অংশে দেখা যাবে।
+    </div>
+
+    <div id="helpMessage"></div>
+
+    <label>সাহায্যের বিষয়</label>
+
+    <input
+      id="helpTitle"
+      type="text"
+      placeholder="যেমন: চিকিৎসার জন্য সাহায্য প্রয়োজন"
     >
-      ×
+
+    <label>বিস্তারিত সমস্যার বিবরণ</label>
+
+    <textarea
+      id="helpDescription"
+      placeholder="আপনার সমস্যাটি বিস্তারিত লিখুন..."
+    ></textarea>
+
+    <label>বিভাগ</label>
+    <select id="helpDivision">
+      <option value="">বিভাগ নির্বাচন করুন</option>
+    </select>
+
+    <label>জেলা</label>
+    <select id="helpDistrict" disabled>
+      <option value="">জেলা নির্বাচন করুন</option>
+    </select>
+
+    <label>থানা / উপজেলা</label>
+    <select id="helpUpazila" disabled>
+      <option value="">থানা / উপজেলা নির্বাচন করুন</option>
+    </select>
+
+    <label>ইউনিয়ন</label>
+    <select id="helpUnion" disabled>
+      <option value="">ইউনিয়ন নির্বাচন করুন</option>
+    </select>
+
+    <button class="primary" onclick="submitHelpRequest()">
+      📨 সাহায্যের আবেদন পাঠান
     </button>
 
-    <h2>🔐 লগইন</h2>
+  </div>
+</div>
 
-    <label>
-      মোবাইল নম্বর
-    </label>
+
+<!-- LOGIN -->
+<div id="loginModal" class="modal-bg">
+
+  <div class="modal">
+
+    <div class="modal-head">
+      <h2>🔐 লগইন</h2>
+
+      <button class="close" onclick="closeModal('loginModal')">
+        ×
+      </button>
+    </div>
+
+    <div id="loginMessage"></div>
+
+    <label>ফোন নম্বর</label>
 
     <input
-      type="tel"
       id="loginPhone"
-      placeholder="মোবাইল নম্বর লিখুন"
+      type="tel"
+      placeholder="ফোন নম্বর"
     >
 
-    <label>
-      পাসওয়ার্ড
-    </label>
+    <label>পাসওয়ার্ড</label>
 
     <input
-      type="password"
       id="loginPassword"
+      type="password"
       placeholder="পাসওয়ার্ড"
     >
 
-    <div
-      class="message"
-      id="loginMessage"
-    ></div>
-
-    <button
-      class="primary-btn"
-      onclick="login()"
-    >
-      লগইন
-    </button>
-
-    <button
-      class="secondary-btn"
-      onclick="switchToRegister()"
-    >
-      📝 নতুন অ্যাকাউন্ট তৈরি করুন
+    <button class="primary" onclick="login()">
+      🔐 লগইন
     </button>
 
   </div>
-
 </div>
 
 
-<!-- ================= REGISTER ================= -->
+<!-- REGISTER -->
+<div id="registerModal" class="modal-bg">
 
-<div
-  class="modal"
-  id="registerModal"
->
+  <div class="modal">
 
-  <div class="modal-box">
+    <div class="modal-head">
+      <h2>📝 রেজিস্ট্রেশন</h2>
 
-    <button
-      class="close"
-      onclick="closeModal('registerModal')"
-    >
-      ×
-    </button>
+      <button class="close" onclick="closeModal('registerModal')">
+        ×
+      </button>
+    </div>
 
-    <h2>📝 রেজিস্ট্রেশন</h2>
+    <div id="registerMessage"></div>
 
-    <label>
-      আপনার নাম
-    </label>
+    <label>আপনার নাম</label>
 
     <input
+      id="regName"
       type="text"
-      id="registerName"
-      placeholder="আপনার নাম লিখুন"
+      placeholder="পূর্ণ নাম"
     >
 
-    <label>
-      মোবাইল নম্বর
-    </label>
+    <label>ফোন নম্বর</label>
 
     <input
+      id="regPhone"
       type="tel"
-      id="registerPhone"
-      placeholder="মোবাইল নম্বর লিখুন"
+      placeholder="ফোন নম্বর"
     >
 
-    <label>
-      পাসওয়ার্ড
-    </label>
+    <label>পাসওয়ার্ড</label>
 
     <input
+      id="regPassword"
       type="password"
-      id="registerPassword"
-      placeholder="কমপক্ষে ৬ অক্ষর"
+      placeholder="পাসওয়ার্ড"
     >
 
-    <label>
-      আপনি কী ধরনের সাহায্য করতে পারবেন?
-    </label>
+    <label>আপনি কী ধরনের সাহায্য করতে পারবেন?</label>
 
-    <div
-      class="help-select"
-      id="helpSelectBox"
-      onclick="toggleHelpOptions()"
-    >
-      সাহায্যের ধরন নির্বাচন করুন
-    </div>
-
-    <div
-      class="help-options"
-      id="helpOptions"
-    >
+    <div class="custom-select">
 
       <div
-        class="help-option"
-        onclick="selectHelp(event,1)"
+        class="select-display"
+        onclick="toggleHelpTypes()"
+        id="helpTypeDisplay"
       >
-        🆘 সাহায্য চাই
+        সাহায্যের ধরন নির্বাচন করুন
       </div>
 
       <div
-        class="help-option"
-        onclick="selectHelp(event,2)"
+        class="select-options"
+        id="helpTypeOptions"
       >
-        🤝 আমি সাহায্য করতে চাই
-      </div>
 
-      <div
-        class="help-option"
-        onclick="selectHelp(event,3)"
-      >
-        🩸 রক্ত প্রয়োজন
-      </div>
+        <label class="option">
+          <input type="checkbox" value="🆘 সাহায্য চাই">
+          🆘 সাহায্য চাই
+        </label>
 
-      <div
-        class="help-option"
-        onclick="selectHelp(event,4)"
-      >
-        🔎 হারানো / পাওয়া
-      </div>
+        <label class="option">
+          <input type="checkbox" value="🤝 আমি সাহায্য করতে চাই">
+          🤝 আমি সাহায্য করতে চাই
+        </label>
 
-      <div
-        class="help-option"
-        onclick="selectHelp(event,5)"
-      >
-        🚑 জরুরি সহায়তা
-      </div>
+        <label class="option">
+          <input type="checkbox" value="🩸 রক্ত প্রয়োজন">
+          🩸 রক্ত প্রয়োজন
+        </label>
 
-      <div
-        class="help-option"
-        onclick="selectHelp(event,6)"
-      >
-        🛠️ কারিগরি সহায়তা
-      </div>
+        <label class="option">
+          <input type="checkbox" value="🔎 হারানো / পাওয়া">
+          🔎 হারানো / পাওয়া
+        </label>
 
-      <div
-        class="help-option"
-        onclick="selectHelp(event,7)"
-      >
-        📢 এলাকার সমস্যা
-      </div>
+        <label class="option">
+          <input type="checkbox" value="🚑 জরুরি সহায়তা">
+          🚑 জরুরি সহায়তা
+        </label>
 
-      <div
-        class="help-option"
-        onclick="selectHelp(event,8)"
-      >
-        🚗 জরুরি যাতায়াত
-      </div>
+        <label class="option">
+          <input type="checkbox" value="🛠️ কারিগরি সহায়তা">
+          🛠️ কারিগরি সহায়তা
+        </label>
 
-      <div
-        class="help-option"
-        onclick="selectHelp(event,9)"
-      >
-        💰 যাকাতের টাকা দিতে চাই
-      </div>
+        <label class="option">
+          <input type="checkbox" value="📢 এলাকার সমস্যা">
+          📢 এলাকার সমস্যা
+        </label>
 
-      <div
-        class="help-option"
-        onclick="selectHelp(event,10)"
-      >
-        🤲 যাকাতের টাকা নিতে চাই
+        <label class="option">
+          <input type="checkbox" value="🚗 জরুরি যাতায়াত">
+          🚗 জরুরি যাতায়াত
+        </label>
+
+        <label class="option">
+          <input type="checkbox" value="💰 যাকাতের টাকা দিতে চাই">
+          💰 যাকাতের টাকা দিতে চাই
+        </label>
+
+        <label class="option">
+          <input type="checkbox" value="🤲 যাকাতের টাকা নিতে চাই">
+          🤲 যাকাতের টাকা নিতে চাই
+        </label>
+
       </div>
 
     </div>
 
-    <div
-      class="selected-help"
-      id="selectedHelpText"
-    ></div>
+    <label>বিভাগ</label>
 
-
-    <label>
-      বিভাগ
-    </label>
-
-    <select
-      id="divisionSelect"
-      onchange="loadDistricts()"
-    >
-      <option value="">
-        বিভাগ নির্বাচন করুন
-      </option>
+    <select id="regDivision">
+      <option value="">বিভাগ নির্বাচন করুন</option>
     </select>
 
+    <label>জেলা</label>
 
-    <label>
-      জেলা
-    </label>
-
-    <select
-      id="districtSelect"
-      onchange="loadUpazilas()"
-      disabled
-    >
-      <option value="">
-        জেলা নির্বাচন করুন
-      </option>
+    <select id="regDistrict" disabled>
+      <option value="">জেলা নির্বাচন করুন</option>
     </select>
 
+    <label>থানা / উপজেলা</label>
 
-    <label>
-      থানা / উপজেলা
-    </label>
-
-    <select
-      id="upazilaSelect"
-      onchange="loadUnions()"
-      disabled
-    >
-      <option value="">
-        থানা / উপজেলা নির্বাচন করুন
-      </option>
+    <select id="regUpazila" disabled>
+      <option value="">থানা / উপজেলা নির্বাচন করুন</option>
     </select>
 
+    <label>ইউনিয়ন</label>
 
-    <label>
-      ইউনিয়ন
-    </label>
-
-    <select
-      id="unionSelect"
-      disabled
-    >
-      <option value="">
-        ইউনিয়ন নির্বাচন করুন
-      </option>
+    <select id="regUnion" disabled>
+      <option value="">ইউনিয়ন নির্বাচন করুন</option>
     </select>
 
-
-    <div
-      class="message"
-      id="registerMessage"
-    ></div>
-
-    <button
-      class="primary-btn"
-      onclick="register()"
-    >
+    <button class="primary" onclick="register()">
       📝 রেজিস্ট্রেশন করুন
     </button>
 
-    <button
-      class="secondary-btn"
-      onclick="switchToLogin()"
-    >
-      🔐 আগে থেকেই অ্যাকাউন্ট আছে
-    </button>
-
   </div>
-
 </div>
 
 
-<!-- ================= EDIT PROFILE ================= -->
+<!-- PROFILE -->
+<div id="profileModal" class="modal-bg">
 
-<div
-  class="modal"
-  id="editProfileModal"
->
+  <div class="modal">
 
-  <div class="modal-box">
+    <div class="modal-head">
 
-    <button
-      class="close"
-      onclick="closeModal('editProfileModal')"
-    >
-      ×
-    </button>
+      <h2>👤 আমার প্রোফাইল</h2>
 
-    <h2>✏️ প্রোফাইল Edit</h2>
+      <button class="close" onclick="closeModal('profileModal')">
+        ×
+      </button>
 
-    <label>
-      নাম
-    </label>
+    </div>
 
-    <input
-      type="text"
-      id="editName"
-      placeholder="আপনার নাম"
-    >
+    <div id="profileContent"></div>
 
-    <label>
-      মোবাইল নম্বর
-    </label>
+  </div>
+</div>
 
-    <input
-      type="tel"
-      id="editPhone"
-      placeholder="মোবাইল নম্বর"
-    >
 
-    <label>
-      আপনি কী ধরনের সাহায্য করতে পারেন?
-    </label>
+<!-- EDIT PROFILE -->
+<div id="editModal" class="modal-bg">
 
-    <textarea
-      id="editHelpTypes"
-      placeholder="সাহায্যের ধরন"
-    ></textarea>
+  <div class="modal">
 
-    <label>
-      প্রোফাইল ছবি
-    </label>
+    <div class="modal-head">
 
-    <input
-      type="file"
-      id="photoInput"
-      accept="image/*"
-      onchange="previewPhoto(event)"
-    >
+      <h2>✏️ প্রোফাইল Edit</h2>
 
-    <img
-      id="photoPreview"
-      class="profile-photo"
-      src=""
-      alt="Preview"
-    >
+      <button class="close" onclick="closeModal('editModal')">
+        ×
+      </button>
 
-    <div
-      class="message"
-      id="editMessage"
-    ></div>
+    </div>
 
-    <button
-      class="primary-btn"
-      onclick="saveProfile()"
-    >
-      💾 পরিবর্তন সংরক্ষণ করুন
+    <div id="editMessage"></div>
+
+    <label>নাম</label>
+
+    <input id="editName" type="text">
+
+    <label>ফোন</label>
+
+    <input id="editPhone" type="tel">
+
+    <button class="primary" onclick="saveProfile()">
+      💾 পরিবর্তন সংরক্ষণ
     </button>
 
   </div>
-
 </div>
 
 
 <script>
 
-/* =====================================================
+/* ==============================
    SUPABASE
-===================================================== */
+============================== */
 
 const SUPABASE_URL =
 "https://gzujcqjpxypcoiqhpvvu.supabase.co";
@@ -1107,44 +784,549 @@ const SUPABASE_KEY =
 "sb_publishable_3A5P427eZte1-uOzytOYSA_4bviRFcF";
 
 
-async function supabaseRPC(functionName,body){
+/* ==============================
+   GEO DATA
+============================== */
+
+const GEO_URL =
+"https://iqbalhasandev.github.io/bangladesh-geo-json/bangladesh-geo.json";
+
+let geoData = null;
+
+
+/* ==============================
+   CURRENT USER
+============================== */
+
+let currentUser = null;
+
+
+/* ==============================
+   MENU
+============================== */
+
+function toggleMenu(){
+
+  document
+    .getElementById("menu")
+    .classList.toggle("show");
+
+}
+
+
+/* ==============================
+   MODAL
+============================== */
+
+function openModal(id){
+
+  document
+    .getElementById(id)
+    .classList.add("show");
+
+}
+
+function closeModal(id){
+
+  document
+    .getElementById(id)
+    .classList.remove("show");
+
+}
+
+
+/* ==============================
+   HELP TYPE
+============================== */
+
+function toggleHelpTypes(){
+
+  document
+    .getElementById("helpTypeOptions")
+    .classList.toggle("show");
+
+  updateHelpTypeDisplay();
+
+}
+
+document.addEventListener("change",function(e){
+
+  if(
+    e.target.matches(
+      '#helpTypeOptions input[type="checkbox"]'
+    )
+  ){
+
+    updateHelpTypeDisplay();
+
+  }
+
+});
+
+
+function updateHelpTypeDisplay(){
+
+  const checks =
+    document.querySelectorAll(
+      '#helpTypeOptions input[type="checkbox"]:checked'
+    );
+
+  const values =
+    Array.from(checks).map(x => x.value);
+
+  const display =
+    document.getElementById("helpTypeDisplay");
+
+  if(values.length === 0){
+
+    display.textContent =
+      "সাহায্যের ধরন নির্বাচন করুন";
+
+  }else{
+
+    display.textContent =
+      values.join(" • ");
+
+  }
+
+}
+
+
+/* ==============================
+   GEO LOAD
+============================== */
+
+async function loadGeo(){
+
+  try{
+
+    const res = await fetch(GEO_URL);
+
+    geoData = await res.json();
+
+    fillDivision(
+      "regDivision"
+    );
+
+    fillDivision(
+      "helpDivision"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* ==============================
+   GEO HELPERS
+============================== */
+
+function getArray(){
+
+  if(!geoData) return [];
+
+  if(Array.isArray(geoData))
+    return geoData;
+
+  if(geoData.divisions)
+    return geoData.divisions;
+
+  if(geoData.data)
+    return geoData.data;
+
+  return [];
+
+}
+
+
+function getName(obj){
+
+  return (
+    obj.name ||
+    obj.bn_name ||
+    obj.name_bn ||
+    obj.title ||
+    ""
+  );
+
+}
+
+
+function getChildren(obj){
+
+  return (
+    obj.districts ||
+    obj.upazilas ||
+    obj.unions ||
+    obj.children ||
+    obj.items ||
+    []
+  );
+
+}
+
+
+/* ==============================
+   DIVISION
+============================== */
+
+function fillDivision(selectId){
+
+  const select =
+    document.getElementById(selectId);
+
+  select.innerHTML =
+    '<option value="">বিভাগ নির্বাচন করুন</option>';
+
+  getArray().forEach((division,index)=>{
+
+    const option =
+      document.createElement("option");
+
+    option.value = index;
+
+    option.textContent =
+      getName(division);
+
+    select.appendChild(option);
+
+  });
+
+}
+
+
+/* ==============================
+   DISTRICT
+============================== */
+
+function fillDistrict(
+  divisionSelectId,
+  districtSelectId
+){
+
+  const dSelect =
+    document.getElementById(
+      divisionSelectId
+    );
+
+  const districtSelect =
+    document.getElementById(
+      districtSelectId
+    );
+
+  const division =
+    getArray()[dSelect.value];
+
+  districtSelect.innerHTML =
+    '<option value="">জেলা নির্বাচন করুন</option>';
+
+  document.getElementById(
+    districtSelectId === "regDistrict"
+      ? "regUpazila"
+      : "helpUpazila"
+  ).innerHTML =
+    '<option value="">থানা / উপজেলা নির্বাচন করুন</option>';
+
+  document.getElementById(
+    districtSelectId === "regDistrict"
+      ? "regUnion"
+      : "helpUnion"
+  ).innerHTML =
+    '<option value="">ইউনিয়ন নির্বাচন করুন</option>';
+
+  if(!division){
+
+    districtSelect.disabled = true;
+
+    return;
+
+  }
+
+  getChildren(division).forEach(
+    (district,index)=>{
+
+      const option =
+        document.createElement("option");
+
+      option.value = index;
+
+      option.textContent =
+        getName(district);
+
+      districtSelect.appendChild(option);
+
+    }
+  );
+
+  districtSelect.disabled = false;
+
+}
+
+
+/* ==============================
+   UPAZILA
+============================== */
+
+function fillUpazila(
+  divisionId,
+  districtId,
+  upazilaId
+){
+
+  const division =
+    getArray()[
+      document.getElementById(divisionId).value
+    ];
+
+  const district =
+    division
+      ? getChildren(division)[
+          document.getElementById(districtId).value
+        ]
+      : null;
+
+  const select =
+    document.getElementById(upazilaId);
+
+  select.innerHTML =
+    '<option value="">থানা / উপজেলা নির্বাচন করুন</option>';
+
+  const unionId =
+    upazilaId === "regUpazila"
+      ? "regUnion"
+      : "helpUnion";
+
+  document.getElementById(unionId).innerHTML =
+    '<option value="">ইউনিয়ন নির্বাচন করুন</option>';
+
+  document.getElementById(unionId).disabled = true;
+
+  if(!district){
+
+    select.disabled = true;
+
+    return;
+
+  }
+
+  getChildren(district).forEach(
+    (upazila,index)=>{
+
+      const option =
+        document.createElement("option");
+
+      option.value = index;
+
+      option.textContent =
+        getName(upazila);
+
+      select.appendChild(option);
+
+    }
+  );
+
+  select.disabled = false;
+
+}
+
+
+/* ==============================
+   UNION
+============================== */
+
+function fillUnion(
+  divisionId,
+  districtId,
+  upazilaId,
+  unionId
+){
+
+  const division =
+    getArray()[
+      document.getElementById(divisionId).value
+    ];
+
+  const district =
+    division
+      ? getChildren(division)[
+          document.getElementById(districtId).value
+        ]
+      : null;
+
+  const upazila =
+    district
+      ? getChildren(district)[
+          document.getElementById(upazilaId).value
+        ]
+      : null;
+
+  const select =
+    document.getElementById(unionId);
+
+  select.innerHTML =
+    '<option value="">ইউনিয়ন নির্বাচন করুন</option>';
+
+  if(!upazila){
+
+    select.disabled = true;
+
+    return;
+
+  }
+
+  getChildren(upazila).forEach(
+    (union,index)=>{
+
+      const option =
+        document.createElement("option");
+
+      option.value = index;
+
+      option.textContent =
+        getName(union);
+
+      select.appendChild(option);
+
+    }
+  );
+
+  select.disabled = false;
+
+}
+
+
+/* ==============================
+   GEO EVENTS
+============================== */
+
+document.getElementById(
+  "regDivision"
+).addEventListener(
+  "change",
+  ()=>{
+    fillDistrict(
+      "regDivision",
+      "regDistrict"
+    );
+  }
+);
+
+document.getElementById(
+  "regDistrict"
+).addEventListener(
+  "change",
+  ()=>{
+    fillUpazila(
+      "regDivision",
+      "regDistrict",
+      "regUpazila"
+    );
+  }
+);
+
+document.getElementById(
+  "regUpazila"
+).addEventListener(
+  "change",
+  ()=>{
+    fillUnion(
+      "regDivision",
+      "regDistrict",
+      "regUpazila",
+      "regUnion"
+    );
+  }
+);
+
+
+document.getElementById(
+  "helpDivision"
+).addEventListener(
+  "change",
+  ()=>{
+    fillDistrict(
+      "helpDivision",
+      "helpDistrict"
+    );
+  }
+);
+
+document.getElementById(
+  "helpDistrict"
+).addEventListener(
+  "change",
+  ()=>{
+    fillUpazila(
+      "helpDivision",
+      "helpDistrict",
+      "helpUpazila"
+    );
+  }
+);
+
+document.getElementById(
+  "helpUpazila"
+).addEventListener(
+  "change",
+  ()=>{
+    fillUnion(
+      "helpDivision",
+      "helpDistrict",
+      "helpUpazila",
+      "helpUnion"
+    );
+  }
+);
+
+
+/* ==============================
+   SUPABASE REQUEST
+============================== */
+
+async function supabaseRequest(
+  path,
+  options={}
+){
 
   const response =
     await fetch(
-      SUPABASE_URL +
-      "/rest/v1/rpc/" +
-      functionName,
+      SUPABASE_URL + path,
       {
-        method:"POST",
+        ...options,
 
         headers:{
-          "Content-Type":"application/json",
           "apikey":SUPABASE_KEY,
           "Authorization":
-            "Bearer " + SUPABASE_KEY
-        },
-
-        body:JSON.stringify(body)
+            "Bearer " + SUPABASE_KEY,
+          "Content-Type":
+            "application/json",
+          ...(options.headers || {})
+        }
       }
     );
 
   const text =
     await response.text();
 
-  let data;
+  let data = null;
 
   try{
-    data = JSON.parse(text);
-  }catch{
+    data = text ? JSON.parse(text) : null;
+  }catch(e){
     data = text;
   }
 
   if(!response.ok){
 
     throw new Error(
-      typeof data === "string"
-      ? data
-      : JSON.stringify(data)
+      data?.message ||
+      data?.error_description ||
+      data?.error ||
+      "Supabase error"
     );
 
   }
@@ -1154,1002 +1336,9 @@ async function supabaseRPC(functionName,body){
 }
 
 
-/* =====================================================
-   USER
-===================================================== */
-
-function getUser(){
-
-  try{
-
-    return JSON.parse(
-      localStorage.getItem(
-        "sohay_user"
-      )
-    );
-
-  }catch{
-
-    return null;
-
-  }
-
-}
-
-
-function saveUser(user){
-
-  localStorage.setItem(
-    "sohay_user",
-    JSON.stringify(user)
-  );
-
-}
-
-
-function clearUser(){
-
-  localStorage.removeItem(
-    "sohay_user"
-  );
-
-}
-
-
-/* =====================================================
-   MENU
-===================================================== */
-
-function toggleMenu(){
-
-  document
-    .getElementById("menuPanel")
-    .classList.toggle("show");
-
-}
-
-
-function closeMenu(){
-
-  document
-    .getElementById("menuPanel")
-    .classList.remove("show");
-
-}
-
-
-document.addEventListener(
-  "click",
-  function(event){
-
-    const menu =
-      document.querySelector(
-        ".menu-wrap"
-      );
-
-    if(
-      menu &&
-      !menu.contains(event.target)
-    ){
-
-      closeMenu();
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   LOGIN UI
-===================================================== */
-
-function updateLoginUI(){
-
-  const user =
-    getUser();
-
-  const menuUser =
-    document.getElementById(
-      "menuUser"
-    );
-
-  const userMenuTitle =
-    document.getElementById(
-      "userMenuTitle"
-    );
-
-  const profileBtn =
-    document.getElementById(
-      "profileMenuBtn"
-    );
-
-  const editBtn =
-    document.getElementById(
-      "editMenuBtn"
-    );
-
-  const reportBtn =
-    document.getElementById(
-      "reportMenuBtn"
-    );
-
-  const loginBtn =
-    document.getElementById(
-      "loginMenuBtn"
-    );
-
-  const registerBtn =
-    document.getElementById(
-      "registerMenuBtn"
-    );
-
-  const logoutBtn =
-    document.getElementById(
-      "logoutMenuBtn"
-    );
-
-  const userBox =
-    document.getElementById(
-      "userBox"
-    );
-
-  const userBoxName =
-    document.getElementById(
-      "userBoxName"
-    );
-
-
-  if(user){
-
-    menuUser.style.display =
-      "block";
-
-    menuUser.textContent =
-      "👤 " +
-      (user.full_name ||
-       "ব্যবহারকারী");
-
-    userMenuTitle.style.display =
-      "block";
-
-    profileBtn.style.display =
-      "block";
-
-    editBtn.style.display =
-      "block";
-
-    reportBtn.style.display =
-      "block";
-
-    loginBtn.style.display =
-      "none";
-
-    registerBtn.style.display =
-      "none";
-
-    logoutBtn.style.display =
-      "block";
-
-    userBox.style.display =
-      "block";
-
-    userBoxName.textContent =
-      user.full_name ||
-      "ব্যবহারকারী";
-
-  }else{
-
-    menuUser.style.display =
-      "none";
-
-    userMenuTitle.style.display =
-      "none";
-
-    profileBtn.style.display =
-      "none";
-
-    editBtn.style.display =
-      "none";
-
-    reportBtn.style.display =
-      "none";
-
-    loginBtn.style.display =
-      "block";
-
-    registerBtn.style.display =
-      "block";
-
-    logoutBtn.style.display =
-      "none";
-
-    userBox.style.display =
-      "none";
-
-  }
-
-}
-
-
-/* =====================================================
-   MODALS
-===================================================== */
-
-function openModal(id){
-
-  document.getElementById(id)
-    .style.display = "block";
-
-}
-
-
-function closeModal(id){
-
-  document.getElementById(id)
-    .style.display = "none";
-
-}
-
-
-function openLogin(){
-
-  closeMenu();
-
-  openModal(
-    "loginModal"
-  );
-
-}
-
-
-function openRegister(){
-
-  closeMenu();
-
-  openModal(
-    "registerModal"
-  );
-
-}
-
-
-function switchToRegister(){
-
-  closeModal(
-    "loginModal"
-  );
-
-  openRegister();
-
-}
-
-
-function switchToLogin(){
-
-  closeModal(
-    "registerModal"
-  );
-
-  openLogin();
-
-}
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-function logout(){
-
-  clearUser();
-
-  closeMenu();
-
-  document.getElementById(
-    "profileCard"
-  ).style.display = "none";
-
-  document.getElementById(
-    "reportCard"
-  ).style.display = "none";
-
-  updateLoginUI();
-
-  alert(
-    "আপনি সফলভাবে লগআউট করেছেন।"
-  );
-
-}
-
-
-/* =====================================================
-   10 HELP TYPES
-===================================================== */
-
-const helpTypes = [
-
-  "🆘 সাহায্য চাই",
-
-  "🤝 আমি সাহায্য করতে চাই",
-
-  "🩸 রক্ত প্রয়োজন",
-
-  "🔎 হারানো / পাওয়া",
-
-  "🚑 জরুরি সহায়তা",
-
-  "🛠️ কারিগরি সহায়তা",
-
-  "📢 এলাকার সমস্যা",
-
-  "🚗 জরুরি যাতায়াত",
-
-  "💰 যাকাতের টাকা দিতে চাই",
-
-  "🤲 যাকাতের টাকা নিতে চাই"
-
-];
-
-
-let selectedHelpTypes = [];
-
-
-function toggleHelpOptions(){
-
-  document
-    .getElementById(
-      "helpOptions"
-    )
-    .classList.toggle(
-      "show"
-    );
-
-}
-
-
-function selectHelp(event,index){
-
-  event.stopPropagation();
-
-  const value =
-    helpTypes[index - 1];
-
-  const option =
-    event.currentTarget;
-
-
-  if(
-    selectedHelpTypes
-      .includes(value)
-  ){
-
-    selectedHelpTypes =
-      selectedHelpTypes.filter(
-        x => x !== value
-      );
-
-    option.classList.remove(
-      "selected"
-    );
-
-  }else{
-
-    selectedHelpTypes.push(
-      value
-    );
-
-    option.classList.add(
-      "selected"
-    );
-
-  }
-
-
-  document.getElementById(
-    "selectedHelpText"
-  ).textContent =
-    selectedHelpTypes.length
-    ? "নির্বাচিত: " +
-      selectedHelpTypes.join(" | ")
-    : "";
-
-}
-
-
-/* =====================================================
-   HELP CLICK
-===================================================== */
-
-function chooseHelp(type){
-
-  closeMenu();
-
-  const user =
-    getUser();
-
-  if(!user){
-
-    alert(
-      "এই সুবিধা ব্যবহার করতে আগে লগইন বা রেজিস্ট্রেশন করুন।"
-    );
-
-    openLogin();
-
-    return;
-
-  }
-
-
-  alert(
-    "আপনি নির্বাচন করেছেন:\n\n" +
-    type +
-    "\n\nপরবর্তী ধাপে এই সাহায্যের রিপোর্ট তৈরি হবে।"
-  );
-
-}
-
-
-/* =====================================================
-   BANGLADESH LOCATION
-===================================================== */
-
-const GEO_URL =
-"https://iqbalhasandev.github.io/bangladesh-geo-json/bangladesh-geo.json";
-
-let geoData = null;
-
-
-async function loadGeoData(){
-
-  try{
-
-    const response =
-      await fetch(GEO_URL);
-
-    geoData =
-      await response.json();
-
-    loadDivisions();
-
-  }catch(error){
-
-    console.error(
-      "Location data error:",
-      error
-    );
-
-  }
-
-}
-
-
-function loadDivisions(){
-
-  const select =
-    document.getElementById(
-      "divisionSelect"
-    );
-
-  select.innerHTML =
-    '<option value="">বিভাগ নির্বাচন করুন</option>';
-
-  if(!geoData) return;
-
-
-  const divisions =
-    geoData.divisions ||
-    geoData;
-
-
-  divisions.forEach(
-    (division,index)=>{
-
-      const option =
-        document.createElement(
-          "option"
-        );
-
-      option.value =
-        index;
-
-      option.textContent =
-        division.bn_name ||
-        division.name;
-
-      select.appendChild(
-        option
-      );
-
-    }
-  );
-
-}
-
-
-function loadDistricts(){
-
-  const divisionIndex =
-    document.getElementById(
-      "divisionSelect"
-    ).value;
-
-  const district =
-    document.getElementById(
-      "districtSelect"
-    );
-
-  const upazila =
-    document.getElementById(
-      "upazilaSelect"
-    );
-
-  const union =
-    document.getElementById(
-      "unionSelect"
-    );
-
-
-  district.innerHTML =
-    '<option value="">জেলা নির্বাচন করুন</option>';
-
-  upazila.innerHTML =
-    '<option value="">থানা / উপজেলা নির্বাচন করুন</option>';
-
-  union.innerHTML =
-    '<option value="">ইউনিয়ন নির্বাচন করুন</option>';
-
-  district.disabled = true;
-  upazila.disabled = true;
-  union.disabled = true;
-
-
-  if(
-    divisionIndex === "" ||
-    !geoData
-  ){
-
-    return;
-
-  }
-
-
-  const divisions =
-    geoData.divisions ||
-    geoData;
-
-  const division =
-    divisions[divisionIndex];
-
-  const districts =
-    division.districts || [];
-
-
-  districts.forEach(
-    (item,index)=>{
-
-      const option =
-        document.createElement(
-          "option"
-        );
-
-      option.value =
-        index;
-
-      option.textContent =
-        item.bn_name ||
-        item.name;
-
-      district.appendChild(
-        option
-      );
-
-    }
-  );
-
-
-  district.disabled = false;
-
-}
-
-
-function loadUpazilas(){
-
-  const divisionIndex =
-    document.getElementById(
-      "divisionSelect"
-    ).value;
-
-  const districtIndex =
-    document.getElementById(
-      "districtSelect"
-    ).value;
-
-  const upazila =
-    document.getElementById(
-      "upazilaSelect"
-    );
-
-  const union =
-    document.getElementById(
-      "unionSelect"
-    );
-
-
-  upazila.innerHTML =
-    '<option value="">থানা / উপজেলা নির্বাচন করুন</option>';
-
-  union.innerHTML =
-    '<option value="">ইউনিয়ন নির্বাচন করুন</option>';
-
-  upazila.disabled = true;
-  union.disabled = true;
-
-
-  if(
-    divisionIndex === "" ||
-    districtIndex === "" ||
-    !geoData
-  ){
-
-    return;
-
-  }
-
-
-  const divisions =
-    geoData.divisions ||
-    geoData;
-
-  const division =
-    divisions[divisionIndex];
-
-  const district =
-    (division.districts || [])
-    [districtIndex];
-
-  const upazilas =
-    district.upazilas || [];
-
-
-  upazilas.forEach(
-    (item,index)=>{
-
-      const option =
-        document.createElement(
-          "option"
-        );
-
-      option.value =
-        index;
-
-      option.textContent =
-        item.bn_name ||
-        item.name;
-
-      upazila.appendChild(
-        option
-      );
-
-    }
-  );
-
-
-  upazila.disabled = false;
-
-}
-
-
-function loadUnions(){
-
-  const divisionIndex =
-    document.getElementById(
-      "divisionSelect"
-    ).value;
-
-  const districtIndex =
-    document.getElementById(
-      "districtSelect"
-    ).value;
-
-  const upazilaIndex =
-    document.getElementById(
-      "upazilaSelect"
-    ).value;
-
-  const union =
-    document.getElementById(
-      "unionSelect"
-    );
-
-
-  union.innerHTML =
-    '<option value="">ইউনিয়ন নির্বাচন করুন</option>';
-
-  union.disabled = true;
-
-
-  if(
-    divisionIndex === "" ||
-    districtIndex === "" ||
-    upazilaIndex === "" ||
-    !geoData
-  ){
-
-    return;
-
-  }
-
-
-  const divisions =
-    geoData.divisions ||
-    geoData;
-
-  const division =
-    divisions[divisionIndex];
-
-  const district =
-    (division.districts || [])
-    [districtIndex];
-
-  const upazila =
-    (district.upazilas || [])
-    [upazilaIndex];
-
-  const unions =
-    upazila.unions || [];
-
-
-  unions.forEach(
-    (item,index)=>{
-
-      const option =
-        document.createElement(
-          "option"
-        );
-
-      option.value =
-        index;
-
-      option.textContent =
-        item.bn_name ||
-        item.name;
-
-      union.appendChild(
-        option
-      );
-
-    }
-  );
-
-
-  union.disabled = false;
-
-}
-
-
-function getSelectedArea(){
-
-  const d =
-    document.getElementById(
-      "divisionSelect"
-    );
-
-  const di =
-    document.getElementById(
-      "districtSelect"
-    );
-
-  const u =
-    document.getElementById(
-      "upazilaSelect"
-    );
-
-  const un =
-    document.getElementById(
-      "unionSelect"
-    );
-
-
-  if(
-    d.value === "" ||
-    di.value === "" ||
-    u.value === "" ||
-    un.value === ""
-  ){
-
-    return "";
-
-  }
-
-
-  return [
-
-    d.options[
-      d.selectedIndex
-    ].text,
-
-    di.options[
-      di.selectedIndex
-    ].text,
-
-    u.options[
-      u.selectedIndex
-    ].text,
-
-    un.options[
-      un.selectedIndex
-    ].text
-
-  ].join(" → ");
-
-}
-
-
-/* =====================================================
-   REGISTER
-===================================================== */
-
-async function register(){
-
-  const name =
-    document.getElementById(
-      "registerName"
-    ).value.trim();
-
-  const phone =
-    document.getElementById(
-      "registerPhone"
-    ).value.trim();
-
-  const password =
-    document.getElementById(
-      "registerPassword"
-    ).value;
-
-  const message =
-    document.getElementById(
-      "registerMessage"
-    );
-
-
-  message.textContent = "";
-
-
-  if(
-    !name ||
-    !phone ||
-    !password
-  ){
-
-    message.className =
-      "message error";
-
-    message.textContent =
-      "সব তথ্য পূরণ করুন।";
-
-    return;
-
-  }
-
-
-  if(password.length < 6){
-
-    message.className =
-      "message error";
-
-    message.textContent =
-      "পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।";
-
-    return;
-
-  }
-
-
-  if(
-    selectedHelpTypes.length === 0
-  ){
-
-    message.className =
-      "message error";
-
-    message.textContent =
-      "কমপক্ষে একটি সাহায্যের ধরন নির্বাচন করুন।";
-
-    return;
-
-  }
-
-
-  const area =
-    getSelectedArea();
-
-
-  if(!area){
-
-    message.className =
-      "message error";
-
-    message.textContent =
-      "বিভাগ, জেলা, উপজেলা ও ইউনিয়ন নির্বাচন করুন।";
-
-    return;
-
-  }
-
-
-  try{
-
-    message.className =
-      "message";
-
-    message.textContent =
-      "রেজিস্ট্রেশন হচ্ছে...";
-
-
-    const result =
-      await supabaseRPC(
-        "register_app_user",
-        {
-          p_full_name:name,
-          p_phone:phone,
-          p_password:password,
-          p_area:area,
-          p_help_types:
-            selectedHelpTypes.join(" | ")
-        }
-      );
-
-
-    if(
-      result &&
-      result.ok === false
-    ){
-
-      throw new Error(
-        result.message ||
-        "রেজিস্ট্রেশন ব্যর্থ হয়েছে।"
-      );
-
-    }
-
-
-    const user =
-      result.user ||
-      result;
-
-
-    saveUser(user);
-
-    closeModal(
-      "registerModal"
-    );
-
-    updateLoginUI();
-
-    alert(
-      "রেজিস্ট্রেশন সফল হয়েছে।"
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    message.className =
-      "message error";
-
-    message.textContent =
-      "রেজিস্ট্রেশন করা যায়নি: " +
-      error.message;
-
-  }
-
-}
-
-
-/* =====================================================
+/* ==============================
    LOGIN
-===================================================== */
+============================== */
 
 async function login(){
 
@@ -2163,302 +1352,687 @@ async function login(){
       "loginPassword"
     ).value;
 
-  const message =
+  const msg =
     document.getElementById(
       "loginMessage"
     );
 
+  if(!phone || !password){
 
-  if(
-    !phone ||
-    !password
-  ){
-
-    message.className =
-      "message error";
-
-    message.textContent =
-      "মোবাইল নম্বর ও পাসওয়ার্ড দিন।";
+    msg.innerHTML =
+      '<div class="error">ফোন নম্বর ও পাসওয়ার্ড দিন।</div>';
 
     return;
 
   }
 
+  msg.innerHTML =
+    '<div class="help-box">লগইন হচ্ছে...</div>';
 
   try{
 
-    message.className =
-      "message";
-
-    message.textContent =
-      "লগইন হচ্ছে...";
-
+    /*
+      এখানে আপনার Supabase RPC
+      login_app_user ব্যবহার করা হচ্ছে।
+    */
 
     const result =
-      await supabaseRPC(
-        "login_app_user",
+      await supabaseRequest(
+        "/rest/v1/rpc/login_app_user",
         {
-          p_phone:phone,
-          p_password:password
+          method:"POST",
+          body:JSON.stringify({
+            p_phone:phone,
+            p_password:password
+          })
         }
       );
 
-
-    if(
-      !result ||
-      result.ok === false
-    ){
+    if(!result){
 
       throw new Error(
-        result?.message ||
-        "মোবাইল নম্বর অথবা পাসওয়ার্ড সঠিক নয়।"
+        "ফোন নম্বর অথবা পাসওয়ার্ড সঠিক নয়।"
       );
 
     }
 
+    currentUser =
+      Array.isArray(result)
+        ? result[0]
+        : result;
 
-    const user =
-      result.user ||
-      result;
-
-
-    saveUser(user);
-
-    closeModal(
-      "loginModal"
+    localStorage.setItem(
+      "sohay_user",
+      JSON.stringify(currentUser)
     );
 
-    updateLoginUI();
+    closeModal("loginModal");
 
-    alert(
-      "সফলভাবে লগইন হয়েছে।"
+    updateUI();
+
+    alert("লগইন সফল হয়েছে।");
+
+  }catch(error){
+
+    console.error(error);
+
+    msg.innerHTML =
+      '<div class="error">' +
+      error.message +
+      '</div>';
+
+  }
+
+}
+
+
+/* ==============================
+   REGISTER
+============================== */
+
+async function register(){
+
+  const name =
+    document.getElementById(
+      "regName"
+    ).value.trim();
+
+  const phone =
+    document.getElementById(
+      "regPhone"
+    ).value.trim();
+
+  const password =
+    document.getElementById(
+      "regPassword"
+    ).value;
+
+  const division =
+    document.getElementById(
+      "regDivision"
+    );
+
+  const district =
+    document.getElementById(
+      "regDistrict"
+    );
+
+  const upazila =
+    document.getElementById(
+      "regUpazila"
+    );
+
+  const union =
+    document.getElementById(
+      "regUnion"
+    );
+
+  const msg =
+    document.getElementById(
+      "registerMessage"
+    );
+
+  const selected =
+    Array.from(
+      document.querySelectorAll(
+        '#helpTypeOptions input:checked'
+      )
+    ).map(x=>x.value);
+
+  if(
+    !name ||
+    !phone ||
+    !password
+  ){
+
+    msg.innerHTML =
+      '<div class="error">সব তথ্য পূরণ করুন।</div>';
+
+    return;
+
+  }
+
+  if(selected.length===0){
+
+    msg.innerHTML =
+      '<div class="error">কমপক্ষে একটি সাহায্যের ধরন নির্বাচন করুন।</div>';
+
+    return;
+
+  }
+
+  if(!division.value ||
+     !district.value ||
+     !upazila.value ||
+     !union.value){
+
+    msg.innerHTML =
+      '<div class="error">বিভাগ, জেলা, থানা/উপজেলা ও ইউনিয়ন নির্বাচন করুন।</div>';
+
+    return;
+
+  }
+
+  const divisionName =
+    division.options[
+      division.selectedIndex
+    ].text;
+
+  const districtName =
+    district.options[
+      district.selectedIndex
+    ].text;
+
+  const upazilaName =
+    upazila.options[
+      upazila.selectedIndex
+    ].text;
+
+  const unionName =
+    union.options[
+      union.selectedIndex
+    ].text;
+
+  const area =
+    [
+      divisionName,
+      districtName,
+      upazilaName,
+      unionName
+    ].join(" → ");
+
+  msg.innerHTML =
+    '<div class="help-box">রেজিস্ট্রেশন হচ্ছে...</div>';
+
+  try{
+
+    const result =
+      await supabaseRequest(
+        "/rest/v1/rpc/register_app_user",
+        {
+          method:"POST",
+          body:JSON.stringify({
+
+            p_full_name:name,
+
+            p_phone:phone,
+
+            p_password:password,
+
+            p_area:area,
+
+            p_help_types:selected.join(", ")
+
+          })
+        }
+      );
+
+    if(!result){
+
+      throw new Error(
+        "রেজিস্ট্রেশন সম্পন্ন হয়নি।"
+      );
+
+    }
+
+    msg.innerHTML =
+      '<div class="success">রেজিস্ট্রেশন সফল হয়েছে। এখন লগইন করুন।</div>';
+
+    setTimeout(
+      ()=>{
+        closeModal("registerModal");
+        openModal("loginModal");
+      },
+      1000
     );
 
   }catch(error){
 
     console.error(error);
 
-    message.className =
-      "message error";
-
-    message.textContent =
-      error.message ||
-      "লগইন করা যায়নি।";
+    msg.innerHTML =
+      '<div class="error">' +
+      error.message +
+      '</div>';
 
   }
 
 }
 
 
-/* =====================================================
-   PROFILE
-===================================================== */
+/* ==============================
+   OPEN HELP
+============================== */
 
-function openProfile(){
+function openHelp(type){
 
-  closeMenu();
+  toggleMenu();
 
-  const user =
-    getUser();
+  if(type !== "🆘 সাহায্য চাই"){
 
-  if(!user){
-
-    openLogin();
+    notReady(type);
 
     return;
 
   }
 
+  if(!currentUser){
+
+    openModal("loginModal");
+
+    document.getElementById(
+      "loginMessage"
+    ).innerHTML =
+      '<div class="help-box">সাহায্যের আবেদন করতে আগে লগইন করুন।</div>';
+
+    return;
+
+  }
 
   document.getElementById(
-    "profileName"
-  ).textContent =
-    user.full_name ||
-    "ব্যবহারকারী";
-
+    "helpTitle"
+  ).value="";
 
   document.getElementById(
-    "profilePhoto"
-  ).src =
-    user.photo_url ||
-    makeDefaultAvatar(
-      user.full_name
+    "helpDescription"
+  ).value="";
+
+  document.getElementById(
+    "helpMessage"
+  ).innerHTML="";
+
+  openModal("helpModal");
+
+}
+
+
+/* ==============================
+   SUBMIT HELP REQUEST
+============================== */
+
+async function submitHelpRequest(){
+
+  if(!currentUser){
+
+    alert(
+      "সাহায্যের আবেদন করতে আগে লগইন করুন।"
     );
 
+    return;
 
-  document.getElementById(
-    "profileInfo"
-  ).innerHTML =
+  }
 
-    "<b>📞 মোবাইল:</b> " +
-    escapeHTML(
-      user.phone || ""
-    ) +
+  const title =
+    document.getElementById(
+      "helpTitle"
+    ).value.trim();
 
-    "<br><b>📍 এলাকা:</b> " +
-    escapeHTML(
-      user.area || "তথ্য নেই"
-    ) +
+  const description =
+    document.getElementById(
+      "helpDescription"
+    ).value.trim();
 
-    "<br><b>🤝 সাহায্যের ধরন:</b> " +
-    escapeHTML(
-      user.help_types ||
-      "তথ্য নেই"
+  const division =
+    document.getElementById(
+      "helpDivision"
     );
 
+  const district =
+    document.getElementById(
+      "helpDistrict"
+    );
+
+  const upazila =
+    document.getElementById(
+      "helpUpazila"
+    );
+
+  const union =
+    document.getElementById(
+      "helpUnion"
+    );
+
+  const msg =
+    document.getElementById(
+      "helpMessage"
+    );
+
+  if(!title || !description){
+
+    msg.innerHTML =
+      '<div class="error">সাহায্যের বিষয় ও বিস্তারিত সমস্যার বিবরণ লিখুন।</div>';
+
+    return;
+
+  }
+
+  if(
+    !division.value ||
+    !district.value ||
+    !upazila.value ||
+    !union.value
+  ){
+
+    msg.innerHTML =
+      '<div class="error">সম্পূর্ণ এলাকা নির্বাচন করুন।</div>';
+
+    return;
+
+  }
+
+  const divisionName =
+    division.options[
+      division.selectedIndex
+    ].text;
+
+  const districtName =
+    district.options[
+      district.selectedIndex
+    ].text;
+
+  const upazilaName =
+    upazila.options[
+      upazila.selectedIndex
+    ].text;
+
+  const unionName =
+    union.options[
+      union.selectedIndex
+    ].text;
+
+  msg.innerHTML =
+    '<div class="help-box">আপনার সাহায্যের আবেদন পাঠানো হচ্ছে...</div>';
+
+  try{
+
+    await supabaseRequest(
+      "/rest/v1/help_requests",
+      {
+        method:"POST",
+
+        headers:{
+          "Prefer":"return=minimal"
+        },
+
+        body:JSON.stringify({
+
+          user_id:
+            currentUser.id,
+
+          help_type:
+            "🆘 সাহায্য চাই",
+
+          title:title,
+
+          description:
+            description,
+
+          division:
+            divisionName,
+
+          district:
+            districtName,
+
+          upazila:
+            upazilaName,
+
+          union_name:
+            unionName,
+
+          status:
+            "নতুন"
+
+        })
+
+      }
+    );
+
+    msg.innerHTML =
+      '<div class="success">✅ আপনার সাহায্যের আবেদন সফলভাবে পাঠানো হয়েছে।</div>';
+
+    setTimeout(
+      ()=>{
+        closeModal("helpModal");
+        showReports();
+      },
+      1200
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    msg.innerHTML =
+      '<div class="error">' +
+      error.message +
+      '</div>';
+
+  }
+
+}
+
+
+/* ==============================
+   REPORTS
+============================== */
+
+async function showReports(){
+
+  toggleMenu();
+
+  if(!currentUser){
+
+    openModal("loginModal");
+
+    return;
+
+  }
 
   const card =
     document.getElementById(
-      "profileCard"
+      "reportsCard"
     );
 
-  card.style.display =
-    "block";
+  card.classList.remove("hidden");
 
   card.scrollIntoView({
     behavior:"smooth"
   });
 
+  const list =
+    document.getElementById(
+      "reportsList"
+    );
+
+  list.innerHTML =
+    '<div class="help-box">রিপোর্ট লোড হচ্ছে...</div>';
+
+  try{
+
+    const reports =
+      await supabaseRequest(
+        "/rest/v1/help_requests" +
+        "?select=*" +
+        "&user_id=eq." +
+        encodeURIComponent(
+          currentUser.id
+        ) +
+        "&order=created_at.desc"
+      );
+
+    if(
+      !reports ||
+      reports.length===0
+    ){
+
+      list.innerHTML =
+        '<div class="empty">আপনার কোনো সাহায্যের রিপোর্ট এখনো নেই।</div>';
+
+      return;
+
+    }
+
+    list.innerHTML =
+      reports.map(
+        report => `
+
+          <div class="report">
+
+            <h3>
+              ${escapeHTML(report.title)}
+            </h3>
+
+            <p>
+              ${escapeHTML(report.description)}
+            </p>
+
+            <p>
+              📍 ${escapeHTML(
+                [
+                  report.division,
+                  report.district,
+                  report.upazila,
+                  report.union_name
+                ].filter(Boolean).join(" → ")
+              )}
+            </p>
+
+            <p>
+              <span class="status">
+                ${escapeHTML(report.status)}
+              </span>
+            </p>
+
+            <small>
+              ${new Date(
+                report.created_at
+              ).toLocaleString("bn-BD")}
+            </small>
+
+          </div>
+
+        `
+      ).join("");
+
+  }catch(error){
+
+    console.error(error);
+
+    list.innerHTML =
+      '<div class="error">' +
+      error.message +
+      '</div>';
+
+  }
+
 }
 
 
-/* =====================================================
-   EDIT PROFILE
-===================================================== */
+/* ==============================
+   PROFILE
+============================== */
 
-function openEditProfile(){
+function showProfile(){
 
-  closeMenu();
+  toggleMenu();
 
-  const user =
-    getUser();
+  if(!currentUser){
 
-  if(!user){
-
-    openLogin();
+    openModal("loginModal");
 
     return;
 
   }
 
+  const profile =
+    document.getElementById(
+      "profileContent"
+    );
+
+  profile.innerHTML = `
+
+    <img
+      class="profile-photo"
+      src="${
+        currentUser.photo_url ||
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Crect width='100%25' height='100%25' fill='%23e7eee9'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-size='35'%3E👤%3C/text%3E%3C/svg%3E"
+      }"
+    >
+
+    <h3 style="text-align:center">
+      ${escapeHTML(
+        currentUser.full_name || ""
+      )}
+    </h3>
+
+    <p>
+      📱 ফোন:
+      ${escapeHTML(
+        currentUser.phone || ""
+      )}
+    </p>
+
+    <p>
+      📍 এলাকা:
+      ${escapeHTML(
+        currentUser.area || ""
+      )}
+    </p>
+
+    <p>
+      🤝 সাহায্যের ধরন:
+      ${escapeHTML(
+        currentUser.help_types || ""
+      )}
+    </p>
+
+  `;
+
+  openModal("profileModal");
+
+}
+
+
+/* ==============================
+   EDIT PROFILE
+============================== */
+
+function openEditProfile(){
+
+  toggleMenu();
+
+  if(!currentUser){
+
+    openModal("loginModal");
+
+    return;
+
+  }
 
   document.getElementById(
     "editName"
   ).value =
-    user.full_name || "";
-
+    currentUser.full_name || "";
 
   document.getElementById(
     "editPhone"
   ).value =
-    user.phone || "";
-
-
-  document.getElementById(
-    "editHelpTypes"
-  ).value =
-    user.help_types || "";
-
+    currentUser.phone || "";
 
   document.getElementById(
-    "photoPreview"
-  ).src =
-    user.photo_url ||
-    makeDefaultAvatar(
-      user.full_name
-    );
+    "editMessage"
+  ).innerHTML="";
 
-
-  openModal(
-    "editProfileModal"
-  );
+  openModal("editModal");
 
 }
 
 
-/* =====================================================
-   PHOTO
-===================================================== */
-
-function openPhotoPicker(){
-
-  openEditProfile();
-
-  setTimeout(
-    function(){
-
-      document.getElementById(
-        "photoInput"
-      ).click();
-
-    },
-    300
-  );
-
-}
-
-
-function previewPhoto(event){
-
-  const file =
-    event.target.files[0];
-
-  if(!file) return;
-
-
-  if(
-    file.size >
-    5 * 1024 * 1024
-  ){
-
-    alert(
-      "ছবির সাইজ ৫ MB-এর বেশি হতে পারবে না।"
-    );
-
-    event.target.value = "";
-
-    return;
-
-  }
-
-
-  const reader =
-    new FileReader();
-
-
-  reader.onload =
-    function(e){
-
-      document.getElementById(
-        "photoPreview"
-      ).src =
-        e.target.result;
-
-    };
-
-
-  reader.readAsDataURL(file);
-
-}
-
-
-/* =====================================================
+/* ==============================
    SAVE PROFILE
-===================================================== */
+============================== */
 
 async function saveProfile(){
-
-  const user =
-    getUser();
-
-  if(!user){
-
-    openLogin();
-
-    return;
-
-  }
-
 
   const name =
     document.getElementById(
@@ -2470,274 +2044,276 @@ async function saveProfile(){
       "editPhone"
     ).value.trim();
 
-  const helpTypes =
-    document.getElementById(
-      "editHelpTypes"
-    ).value.trim();
-
-  const message =
+  const msg =
     document.getElementById(
       "editMessage"
     );
 
+  if(!name || !phone){
 
-  if(!name){
-
-    message.className =
-      "message error";
-
-    message.textContent =
-      "নাম লিখুন।";
+    msg.innerHTML =
+      '<div class="error">নাম ও ফোন নম্বর দিন।</div>';
 
     return;
 
   }
 
+  try{
 
-  let photoUrl =
-    user.photo_url || "";
+    await supabaseRequest(
+      "/rest/v1/profiles" +
+      "?id=eq." +
+      encodeURIComponent(
+        currentUser.id
+      ),
+      {
+        method:"PATCH",
 
+        headers:{
+          "Prefer":"return=minimal"
+        },
 
-  const photoFile =
-    document.getElementById(
-      "photoInput"
-    ).files[0];
+        body:JSON.stringify({
 
+          full_name:name,
 
-  if(photoFile){
+          phone:phone
 
-    photoUrl =
-      await fileToDataURL(
-        photoFile
-      );
+        })
+
+      }
+    );
+
+    currentUser.full_name =
+      name;
+
+    currentUser.phone =
+      phone;
+
+    localStorage.setItem(
+      "sohay_user",
+      JSON.stringify(currentUser)
+    );
+
+    updateUI();
+
+    msg.innerHTML =
+      '<div class="success">প্রোফাইল আপডেট হয়েছে।</div>';
+
+  }catch(error){
+
+    msg.innerHTML =
+      '<div class="error">' +
+      error.message +
+      '</div>';
 
   }
 
-
-  const updatedUser = {
-
-    ...user,
-
-    full_name:name,
-
-    phone:phone,
-
-    help_types:helpTypes,
-
-    photo_url:photoUrl
-
-  };
+}
 
 
-  saveUser(
-    updatedUser
+/* ==============================
+   LOGOUT
+============================== */
+
+function logout(){
+
+  currentUser = null;
+
+  localStorage.removeItem(
+    "sohay_user"
   );
 
-  updateLoginUI();
+  toggleMenu();
 
-  message.className =
-    "message success";
+  updateUI();
 
-  message.textContent =
-    "প্রোফাইল পরিবর্তন সংরক্ষণ হয়েছে।";
-
-
-  setTimeout(
-    function(){
-
-      closeModal(
-        "editProfileModal"
-      );
-
-      openProfile();
-
-    },
-    700
-  );
+  alert("লগআউট হয়েছে।");
 
 }
 
 
-function fileToDataURL(file){
+/* ==============================
+   UI UPDATE
+============================== */
 
-  return new Promise(
-    (resolve,reject)=>{
+function updateUI(){
 
-      const reader =
-        new FileReader();
+  const loggedOut =
+    document.getElementById(
+      "loggedOutMenu"
+    );
 
-      reader.onload =
-        () => resolve(
-          reader.result
-        );
+  const loggedIn =
+    document.getElementById(
+      "loggedInMenu"
+    );
 
-      reader.onerror =
-        reject;
+  const userCard =
+    document.getElementById(
+      "userCard"
+    );
 
-      reader.readAsDataURL(
-        file
-      );
+  if(currentUser){
 
-    }
-  );
+    loggedOut.classList.add(
+      "hidden"
+    );
 
-}
+    loggedIn.classList.remove(
+      "hidden"
+    );
 
+    userCard.classList.remove(
+      "hidden"
+    );
 
-/* =====================================================
-   REPORTS
-===================================================== */
+    userCard.innerHTML = `
 
-function openReports(){
+      <h2>
+        👋 স্বাগতম,
+        ${escapeHTML(
+          currentUser.full_name || ""
+        )}
+      </h2>
 
-  closeMenu();
+      <p>
+        আপনি এখন সহায় প্ল্যাটফর্মে
+        সাহায্যের আবেদন করতে পারবেন।
+      </p>
 
-  const user =
-    getUser();
+      <button
+        class="primary"
+        onclick="openHelp('🆘 সাহায্য চাই')"
+      >
+        🆘 সাহায্য চাই
+      </button>
 
-  if(!user){
+    `;
 
-    openLogin();
+  }else{
 
-    return;
+    loggedOut.classList.remove(
+      "hidden"
+    );
+
+    loggedIn.classList.add(
+      "hidden"
+    );
+
+    userCard.classList.add(
+      "hidden"
+    );
 
   }
 
-
-  const card =
-    document.getElementById(
-      "reportCard"
-    );
-
-  const list =
-    document.getElementById(
-      "reportList"
-    );
-
-
-  list.innerHTML = `
-
-    <div class="empty">
-
-      📊 আপনার রিপোর্ট এখানে থাকবে।
-
-      <br><br>
-
-      আপনি যে সাহায্য চাইবেন,
-      সাহায্য করবেন অথবা কোনো সমস্যা রিপোর্ট করবেন—
-      সেগুলোর তথ্য এখানে দেখা যাবে।
-
-      <br><br>
-
-      <span class="status">
-        নতুন
-      </span>
-
-    </div>
-
-  `;
-
-
-  card.style.display =
-    "block";
-
-  card.scrollIntoView({
-    behavior:"smooth"
-  });
-
 }
 
 
-/* =====================================================
-   DEFAULT PHOTO
-===================================================== */
+/* ==============================
+   NOT READY
+============================== */
 
-function makeDefaultAvatar(name){
+function notReady(type){
 
-  const first =
-    (name || "U")
-      .trim()
-      .charAt(0)
-      .toUpperCase();
+  toggleMenu();
 
-
-  const svg = `
-
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="200"
-    height="200"
-  >
-
-    <rect
-      width="100%"
-      height="100%"
-      rx="100"
-      fill="#087443"
-    />
-
-    <text
-      x="50%"
-      y="58%"
-      text-anchor="middle"
-      font-size="90"
-      fill="white"
-      font-family="Arial"
-    >
-      ${first}
-    </text>
-
-  </svg>
-
-  `;
-
-
-  return (
-    "data:image/svg+xml;charset=UTF-8," +
-    encodeURIComponent(svg)
+  alert(
+    type +
+    "\n\nএই অপশনটি পরবর্তী ধাপে তৈরি করা হবে।"
   );
 
 }
 
 
-/* =====================================================
-   SECURITY DISPLAY
-===================================================== */
+/* ==============================
+   ESCAPE HTML
+============================== */
 
 function escapeHTML(value){
 
-  return String(value || "")
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+  return String(
+    value ?? ""
+  )
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
 
 }
 
 
-/* =====================================================
+/* ==============================
+   LOAD SAVED USER
+============================== */
+
+function loadSavedUser(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(
+        "sohay_user"
+      );
+
+    if(saved){
+
+      currentUser =
+        JSON.parse(saved);
+
+    }
+
+  }catch(error){
+
+    currentUser = null;
+
+  }
+
+  updateUI();
+
+}
+
+
+/* ==============================
+   CLOSE MENU OUTSIDE
+============================== */
+
+document.addEventListener(
+  "click",
+  function(event){
+
+    const menu =
+      document.getElementById(
+        "menu"
+      );
+
+    const button =
+      document.querySelector(
+        ".menu-btn"
+      );
+
+    if(
+      menu.classList.contains("show") &&
+      !menu.contains(event.target) &&
+      !button.contains(event.target)
+    ){
+
+      menu.classList.remove("show");
+
+    }
+
+  }
+);
+
+
+/* ==============================
    START
-===================================================== */
+============================== */
 
-loadGeoData();
+loadGeo();
 
-updateLoginUI();
+loadSavedUser();
 
 </script>
 
